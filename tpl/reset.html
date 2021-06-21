@@ -1,0 +1,21 @@
+<div class="form-sp">
+    <div class="text-center display-3 mb-3  text-light" i18n="product_name">TMP.link</div>
+    <div class="card shadow p-4">
+        <div class="alert alert-warning text-left" style="display: none;" role="alert" id="msg_notice">
+        </div>
+    
+        <label for="email" class="sr-only" i18n="form_email">.</label>
+        <input type="email" id="email" class="form-control form-sp-top" i18n="form_reset_email" placeholder="." required>
+    
+        <button id="submit" class="btn btn-lg btn-primary btn-block mt-2" i18n="form_btn_reset"
+            onclick="TL.password_found();">.</button>
+    </div>
+    <div class="text-right">
+        <a href="/" tmpui-app="true" target="_blank" class=" text-light text-right" i18n="return_index">.</a>
+    </div>
+    <div class=" text-light text-center mt-5" i18n="footer">.</div>
+</div>
+<script>
+    $('title').attr('i18n','title_reset');
+    $('meta[name=description]').attr('i18n','des_reset');
+</script>

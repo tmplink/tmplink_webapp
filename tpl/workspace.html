@@ -1,0 +1,191 @@
+<div id="tpl_header"></div>
+<div class="container d-flex flex-grow-1 flex-column">
+    <div id="download_queue" class="card mt-4 shadow" style="display: none;">
+        <div id="filelist_model" class="card-body">
+            <div id="download_queue_list">
+            </div>
+        </div>
+    </div>
+    <div id="filelist" class="card mt-4 shadow" style="display: none;">
+        <div class="card-header">
+            <div class="d-block d-sm-none">
+                <div class="display-4 d-inline">
+                    <i class="fab fa-mixcloud"></i>
+                    <span i18n="navbar_workspace">.</span>
+                </div>
+            </div>
+            <div class="d-none d-sm-block">
+                <div class="display-4 d-inline">
+                    <i class="fab fa-mixcloud fa-fw"></i>
+                    <span i18n="navbar_workspace">.</span>
+                </div>
+                <div class="lead" i18n="workspace_des">.</div>
+            </div>
+        </div>
+        <div id="filelist_model" class="card-body">
+
+            <!--[搜索栏]-->
+            <form autocomplete="off">
+                <div class="input-group mb-1">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary" type="button" onclick="TL.workspace_filelist(0);"
+                            i18n="search_btn">.</button>
+                    </div>
+                    <input type="search" id="workspace_search" class="form-control" placeholder="." i18n="search_plh"
+                        onkeyup="if(event.keyCode==13)TL.workspace_filelist(0);return false;" 
+                        style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
+                </div>
+                <input style="display:none;">
+            </form>
+
+            <!--[主要控制器]-->
+            <div class="mb-1">
+                <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.workspace_filelist(0);">
+                    <i class="fas fa-sync-alt fa-fw" id="filelist_refresh_icon"></i>
+                </button>
+                <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
+                    id="filelist_filter">
+                    <i class="fa-fw fad fa-sliders-h"></i>
+                    <span i18n="sort_title" class="d-none d-sm-inline">.</span>
+                </button>
+                <button id="ws_btn_file_list" class="btn btn-light text-azure btn-sm mr-1 mt-1"
+                    onclick="TL.workspace_filelist_model('list');">
+                    <i class="fa-fw fad fa-th-list"></i>
+                    <span i18n="model_list" class="d-none d-sm-inline">.</span>
+                </button>
+                <!-- <button id="ws_btn_file_grid" class="btn btn-light text-azure btn-sm mr-2"
+                    onclick="TL.workspace_filelist_model('grid');">
+                    <i class="fa-fw fas fa-th"></i>
+                    <span i18n="model_grid" class="d-none d-sm-inline">.</span>
+                </button> -->
+                <button id="ws_btn_file_photo" class="btn btn-light  text-azure btn-sm mr-1 mt-1"
+                    onclick="TL.workspace_filelist_model('photo');">
+                    <i class="fa-fw far fa-image"></i>
+                    <span i18n="model_photo" class="d-none d-sm-inline">.</span>
+                </button>
+            </div>
+
+            <!--[选择器]-->
+            <div class="mb-2">
+                <button onclick="TL.upload_open(0);" class="btn btn-sm btn-primary mr-1 mt-1">
+                    <i class="fad fa-cloud-upload fa-fw"></i>
+                    <span i18n="nav_upload" class="d-none d-sm-inline">.</span>
+                </button>
+                <button onclick="TL.file_manager.checkbox_select_all();"
+                    class="btn btn-light text-azure btn-sm mr-1 mt-1">
+                    <i class="fas fa-check-square fa-fw"></i>
+                    <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
+                </button>
+                <button onclick="TL.file_manager.checkbox_select_none();"
+                    class="btn btn-light text-azure btn-sm mr-1 mt-1">
+                    <i class="far fa-check-square fa-fw"></i>
+                    <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
+                </button>
+                <div class="dropdown">
+                    <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="far fa-ballot-check fa-fw"></i> <span i18n="on_select">.</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button class="dropdown-item" onclick="TL.file_manager.checkbox_delete()">
+                            <i class="fa-fw fad fa-trash"></i> 
+                            <span i18n="on_select_delete">.</span>
+                        </button>
+                        <button class="dropdown-item" onclick="TL.file_manager.checkbox_download()">
+                            <i class="fa-fw fad fa-download"></i> 
+                            <span i18n="on_select_download">.</span>
+                        </button>
+                        <button class="dropdown-item" onclick="TL.file_manager.checkbox_share()">
+                            <i class="fa-fw fad fa-share-alt"></i>
+                            <span i18n="on_select_share">.</span>
+                        </button>
+                        <button class="dropdown-item" onclick="TL.file_manager.checkbox_move_to_model('workspace')">
+                            <i class="fa-fw fad fa-folder-plus"></i> 
+                            <span i18n="on_select_move">.</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="workspace_filelist"></div>
+
+            <div class="no_photos" style="margin-top: 100px;margin-bottom: 100px;display: none;">
+                <div class="text-center mb-4">
+                    <i class="fa-fw fad fa-4x fa-camera-retro"></i>
+                </div>
+                <div class="text-center" i18n="page_no_photos">.</div>
+            </div>
+            <div class="no_files" style="margin-top: 100px;margin-bottom: 100px;display: none;">
+                <div class="text-center mb-4">
+                    <i class="fa-fw fad fa-folder-open fa-4x"></i>
+                </div>
+                <div class="text-center" i18n="page_no_files">.</div>
+            </div>
+
+            <script type="text/template" id="workspace_filelist_photo_tpl">
+                <% for (var x in obj) { %>
+                    <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
+                        <div class="col-lg-4 col-xl-3 col-md-6 col-12 p-0" id="file_unit_<% obj[x].ukey %>">
+                            <a href="javascript:;" onclick="TL.previewModel('<% obj[x].ukey %>',<% x %>)" class="d-block">
+                                <!-- <div class="ext-img" style="background-image:url('https://tmplinkapp-connect.vx-cdn.com/img-<% obj[x].ukey %>-360x220.jpg');"></div> -->
+                                <div class="text-center">
+                                    <img class='lazyload' data-src="https://tmplinkapp-connect.vx-cdn.com/img-<% obj[x].ukey %>-360x220.jpg" src="/img/load_2.gif" />
+                                </div>
+                                <!-- <div class="ext-img lazyload" data-bg="url(https://tmplinkapp-connect.vx-cdn.com/img-<% obj[x].ukey %>-0x0.jpg)"></div> -->
+                            </a>
+                        </div>
+                    <% } %>
+                <% } %>
+            </script>
+            <script type="text/template" id="workspace_filelist_list_tpl">
+                <% for (var x in obj) { %>
+                    <div class="row p-2 filelist-card shadow-sm mb-2 mx-0" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" id="file_unit_<% obj[x].ukey %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
+                        <div class="col-12 col-md-6 col-lg-8 mb-1 px-0 d-flex align-items-center listfontweight filename">
+                            
+                            <input type="checkbox" name="items_box" class="d-none" onclick="TL.file_manager.checkbox_onclick(this);" />
+                            <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw d-none d-md-block mr-1"></i>
+                            <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" class="text-azure mr-1" target="_blank">
+                                <% obj[x].fname %>
+                            </a>
+                            <% if(obj[x].dir_name!=null){ %>
+                                <a href="/room&mrid=<% obj[x].mrid %>" tmpui-app="true"><i class="far fa-folder fa-fw"></i> <% obj[x].dir_name %></a>
+                            <% } %>
+                            <% if(obj[x].model!=99){ %>
+                                <i class="fa-fw far fa-stopwatch"></i>
+                                <div class="progress" style="width:25px">
+                                    <div class="progress-bar" role="progressbar" style="width: <% obj[x].hp_percent %>%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            <% } %>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 my-1 d-flex align-items-center justify-content-end">
+                            <span class="mr-2"><% obj[x].fsize_formated %></span>
+                            <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fad fa-download"></i></button>
+                            <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-share-alt"></i></button>
+                            <button href="javascript:void(0)" id="btn-rm-file_<% obj[x].ukey %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.workspace_del('<% obj[x].ukey %>')"><i class="fa-fw fad fa-trash"></i></button>
+                        </div>
+                        <div class="col-12 download_progress_bar_<% obj[x].ukey %>" style="display:none">
+                            <div class="progress mt-2" style="height: 2px;">
+                                <div class="progress-bar bg-success download_progress_bar_set_<% obj[x].ukey %>" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="tpl_footer"></div>
+<div id="tpl_model"></div>
+<script>
+    app.ready(function () {
+        TL.workspace_filelist_autoload_enabled();
+        TL.workspace_filelist(0);
+        TL.workspace_navbar();
+        $('title').attr('i18n', 'title_workspace');
+        $('meta[name=description]').attr('i18n', 'des_workspace');
+    });
+    app.onExit(function () {
+        TL.workspace_filelist_autoload_disabled();
+    });
+</script>

@@ -1,0 +1,90 @@
+<div id="tpl_header"></div>
+<div class="container d-flex flex-grow-1 flex-column">
+    <!-- <div class="display-3">欢迎，admin</div> -->
+    <div id="meetroom_list_box" class="card mt-4 shadow">
+        <div class="card-header">
+            <div class="d-block ">
+                <div class="display-4">
+                    <i class="far fa-folder"></i>
+                    <span i18n="navbar_meetingroom">.</span>
+                </div>
+                <div class="lead" i18n="meetroom_des">.</div>
+            </div>
+        </div>
+        <div id="meetroom_list_data" class="card-body">
+            <div class="mb-2">
+                <button class="btn btn-light text-azure btn-sm" onclick="$('#mrCreaterModal').modal('show');">
+                    <i class="fa-fw far fa-plus"></i>
+                    <span i18n="model_addmr">.</span>
+                </button>
+                <button class="btn btn-light text-azure btn-sm ml-2" onclick="TL.mr_list();" id="mr_list_refresh_icon"><i
+                        class="fa-fw fas fa-sync-alt"></i></button>
+            </div>
+            <div class="row" id="meetroom_list"></div>
+
+            <script type="text/template" id="meetroom_list_tpl">
+                <% for (var x in obj) { %>
+                <div class="row p-2 filelist-card shadow-sm mb-2 mx-1" id="meetingroom_id_<% obj[x].mr_id %>">
+                    <div class="col-12 col-md- 6my-1 px-0 d-flex align-items-center listfontweight filename">
+                        <i class="far fa-folder fa-fw d-none d-md-block"></i>
+                        &nbsp
+                        <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true">
+                            <% obj[x].name %> &nbsp&nbsp&nbsp
+                        </a>
+                        <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-share-alt"></i></a>
+                        <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fad fa-trash"></i></a>
+                        <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="btn btn-sm btn-light mx-1"><i class="fad fa-edit"></i></a>
+                    </div>
+                </div>
+                <% } %>
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="tpl_footer"></div>
+<div id="tpl_model"></div>
+
+<div class="modal fade" id="mrCreaterModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_meetingroom_creat">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="notice_meetingroom_create" class="alert alert-info alert-dismissable"
+                    i18n="model_meetingroom_create_notice">
+                    .
+                </div>
+                <div class="form-group">
+                    <label for="modal_meetingroom_create_name" i18n="model_meetingroom_create_name">.</label>
+                    <input type="text" class="form-control" id="modal_meetingroom_create_name"
+                        i18n="model_meetingroom_create_name_placeholder" placeholder=".">
+                </div>
+
+                <label for="modal_meetingroom_create_type" i18n="modal_meetingroom_create_type">.</label>
+                <select class="form-control" id="modal_meetingroom_create_type">
+                    <option value="0" i18n-only="html" i18n="modal_meetingroom_type1" selected>.</option>
+                    <option value="1" i18n-only="html" i18n="modal_meetingroom_type2">.</option>
+                </select>
+                <input type="hidden" id="mr_parent_id" value="0" />
+                <input type="hidden" id="mr_top_id" value="0" />
+                <input type="hidden" id="mr_id" value="0" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+                <button type="button" class="btn btn-primary" id="modal_meetingroom_create_btn" i18n="model_btn_ok"
+                    onclick="TL.mr_add();">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    setTimeout(function () {
+        TL.mr_list();
+        $('title').attr('i18n', 'title_meetingrooom');
+        $('meta[name=description]').attr('i18n', 'des_meetingroom');
+    }, 1000);
+</script>

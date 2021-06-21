@@ -1,0 +1,9 @@
+<ul>
+    <% for (var i = 0; i < obj.users.length; i++) { %>
+    <li>
+        <a href="<%= obj.users[i].url %>">
+            <%= obj.users[i].name %>
+        </a>
+    </li>
+    <% } %>
+</ul>

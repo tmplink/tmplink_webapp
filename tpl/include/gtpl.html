@@ -1,0 +1,49 @@
+<!--[download queue tpl]-->
+<script type="text/template" id="download_list_tpl">
+    <div class="row p-2 filelist-card shadow-sm mb-2 mx-1" id="download_task_<% obj.index %>">
+        <div class="col-12 col-md-7 col-lg-8 my-1 d-flex align-items-center listfontweight filename">
+            <i class="<% TL.fileicon(obj.ftype) %> fa-fw"></i>
+            &nbsp
+            <% obj.fname %>  
+        </div>
+        <div class="col-4 col-md-2 col-lg-2 text-muted my-1 listfontweight d-flex align-items-center justify-content-start justify-content-lg-end"><% obj.fsize_formated %></div>
+        <div class="col-8 col-md-3 col-lg-2 my-1 d-flex align-items-center justify-content-end">
+            <button id="queue_del_id_<% obj.index %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.download_queue_del('<% obj.index %>')"><i class="fa-fw fad fa-trash"></i></button>
+        </div>
+        <div class="col-12">
+            <div class="progress progress-sm mt-2">
+                <div class="progress-bar bg-green" style="width: 0%" id="download_queue_progressbar_<% obj.index %>"></div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--[CLI Uploader List]-->
+<script type="text/template" id="uploadcli_list_tpl">
+    <div class="row p-2 filelist-card shadow-sm mb-2 mx-1">
+        <div class="col-10 my-1 d-flex align-items-center listfontweight filename text-truncate">
+            <% obj.cmd %>
+        </div>
+        <div  class="col-2 my-1 d-flex align-items-center justify-content-end">
+            <a href="javascript:void(0)" data-clipboard-text="#" class="text-azure btn_copy btn btn-sm btn-light mx-1" id="cli_copy_<% obj.utoken %>">
+                <i class="fa-fw far fa-copy"></i>
+            </a>
+        </div>
+    </div>
+</script>
+
+<!--[MX]-->
+<script type="text/template" id="initFail">
+    <div class="container d-flex flex-grow-1">
+        <div  id="file_messenger" class="align-self-center w-100">
+            <div class="card align-self-center mx-auto" style="margin-top: 20px;padding:100px;max-width: 550px;">
+                <div class="text-center">
+                    <i class="fa-4x fad fa-wifi-slash mb-2"></i>
+                </div>
+                <div class="text-center display-4" i18n="init_fail">
+                    .
+                </div> 
+            </div>
+        </div>
+    </div>
+</script>

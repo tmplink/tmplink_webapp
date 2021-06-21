@@ -1,0 +1,606 @@
+<div class="modal fade" id="emailModal" data-backdrop="false">
+    <div class="modal-dialog  modal-lg modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_email_change">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="notice_emailchange" class="alert alert-info alert-dismissable" i18n="model_changeemail_notice">
+                    .
+                </div>
+                <div class="form-group">
+                    <label for="modal_email_new" i18n="model_changeemail_new">.</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="email" i18n="model_changeemail_new_placeholder"
+                            placeholder=".">
+                        <span class="input-group-btn">
+                            <button id="button-reg-checkcode" onclick="TL.cc_send()" class="btn btn-primary"
+                                type="button" i18n="form_checkcode_send">.</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="modal_email_new_checkcode" i18n="form_checkcode">.</label>
+                    <input type="text" name="modal_email_new_checkcode" id="checkcode" class="form-control"
+                        i18n="model_changeemail_code_placeholder" placeholder="." />
+                </div>
+                <div i18n="model_changeemail_est">
+                    .
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+                <button type="button" class="btn btn-primary" id="email_change_confim_btn"
+                    onclick="TL.email_change_confim();" i18n="model_btn_ok">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="passwordModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_reset_password">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="notice_resetpassword" class="alert alert-info alert-dismissable"
+                    i18n="model_resetpassword_notice">
+                    .
+                </div>
+                <div class="form-group">
+                    <label for="modal_password_reset" i18n="model_resetpassword_new">.</label>
+                    <input type="password" class="form-control" id="modal_password_reset"
+                        i18n="model_resetpassword_new_placeholder" placeholder=".">
+                </div>
+                <div class="form-group">
+                    <label for="modal_password_reset_re" i18n="model_resetpassword_re">.</label>
+                    <input type="password" class="form-control" id="modal_password_reset_re"
+                        i18n="model_resetpassword_re_placeholder" placeholder=".">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+                <button type="button" class="btn btn-primary" id="modal_password_reset_btn" i18n="model_btn_ok"
+                    onclick="TL.password_reset_confim();">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="uploadModal" data-backdrop="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content shadow-lg" ondrop="TL.upload_drop(event)">
+            <div class="modal-header">
+                <h4 class="modal-title" id="upload_storage_status">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-none d-sm-block text-left">
+                    <!-- large screen -->
+                    <input type="file" id="fileToUpload" style="display: none;" multiple
+                        onchange="TL.upload_selected();" />
+                    <label for="fileToUpload" class="btn btn-primary mb-1">
+                        <i class="fa-fw fad fa-file-upload"></i>
+                        <span id="uploaderbtn1" i18n="upload_or_drag">.</span>
+                    </label>
+                    <input type="file" id="dirsToUpload" style="display: none;" multiple directory webkitdirectory
+                        mozdirectory onchange="TL.upload_dir_selected();" />
+                    <label for="dirsToUpload" class="btn btn-primary mb-1" id="dirsToUpload_label">
+                        <i class="fa-fw fad fa-folder-upload"></i>
+                        <span id="uploaderbtn1" i18n="upload_dirs">.</span>
+                    </label>
+                    <div class="btn-group  mb-1">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa-fw far fa-stopwatch"></i>
+                            <span class="current_selected"></span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" onclick="TL.upload_model_selected(0)"
+                                i18n="modal_settings_upload_model1">.</a>
+                            <a class="dropdown-item" onclick="TL.upload_model_selected(1)"
+                                i18n="modal_settings_upload_model2">.</a>
+                            <a class="dropdown-item" onclick="TL.upload_model_selected(2)"
+                                i18n="modal_settings_upload_model3">.</a>
+                            <a class="dropdown-item" onclick="TL.upload_model_selected(3)"
+                                i18n="modal_settings_upload_model4">.</a>
+                            <a class="dropdown-item" onclick="TL.upload_model_selected(99)"
+                                i18n="modal_settings_upload_model99">.</a>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success mb-1" data-dismiss="modal"
+                        onclick="$('#uploadModal').modal('hide');setTimeout(TL.storage_buy_modal(),500);">
+                        <i class="fa-fw fad fa-layer-plus"></i>
+                        <span i18n="model_btn_buy_storage">.</span>
+                    </button>
+                    <button type="button" class="btn btn-danger mb-1" data-dismiss="modal" onclick="TL.upload_queue_clean()">
+                        <i class="fa-fw far fa-trash-alt"></i>
+                        <span i18n="model_btn_upload_clean">.</span>
+                    </button>
+                </div>
+                <div class="d-block d-sm-none">
+                    <!-- mobile -->
+                    <input type="file" multiple="multiple" id="fileToUpload" style="display: none;"
+                        onchange="TL.upload_selected();" />
+                    <label for="fileToUpload" class="btn btn-block btn-primary mb-0" id="upload_btn">
+                        <i class="fa-fw fa fa-upload" aria-hidden="true"></i>
+                        <span id="uploaderbtn1" i18n="upload_files">.</span>
+                    </label>
+                    <div class="btn-group btn-block">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa-fw far fa-stopwatch"></i>
+                            <span class="current_selected"></span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" onclick="TL.upload_model_selected(0)"
+                                i18n="modal_settings_upload_model1">.</a>
+                            <a class="dropdown-item" onclick="TL.upload_model_selected(1)"
+                                i18n="modal_settings_upload_model2">.</a>
+                            <a class="dropdown-item" onclick="TL.upload_model_selected(2)"
+                                i18n="modal_settings_upload_model3">.</a>
+                            <a class="dropdown-item" onclick="TL.upload_model_selected(3)"
+                                i18n="modal_settings_upload_model4">.</a>
+                            <a class="dropdown-item" onclick="TL.upload_model_selected(99)"
+                                i18n="modal_settings_upload_model99">.</a>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success btn-block" data-dismiss="modal"
+                        onclick="$('#uploadModal').modal('hide');setTimeout(TL.storage_buy_modal(),500);">
+                        <i class="fa-fw fad fa-layer-plus"></i>
+                        <span i18n="model_btn_buy_storage">.</span>
+                    </button>
+                    <button type="button" class="btn btn-block btn-danger" data-dismiss="modal"
+                        onclick="TL.upload_queue_clean()">
+                        <i class="fa-fw far fa-trash-alt"></i>
+                        <span i18n="model_btn_upload_clean">.</span>
+                    </button>
+                </div>
+                <input type="hidden" id="upload_model" value="0" />
+                <hr />
+                <div id="notice_upload" class="text-center" i18n="model_btn_select">
+                    .
+                </div>
+
+                <script type="text/template" id="upload_storage_status_tpl">
+                    <div class="progress mb-4" style="height: 2rem;background-color: #343a40;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: <% obj.percent %>%;" aria-valuemin="0" aria-valuemax="100">
+                            <small class="justify-content-center d-flex position-absolute w-100"><% app.language_data.model_title_buy_storage %> : <% obj.storage_used_text %> | <% obj.storage_text %></small>
+                        </div>
+                    </div>
+                </script>
+
+                <div id="uploaded_file_box" class="mt-2" style="max-height: 500px;overflow:scroll;"></div>
+
+                <script type="text/template" id="upload_list_wait_tpl">
+                    <div class="row p-2 filelist-card shadow-sm mb-2 mx-0" id="uq_<% obj.id %>">
+                        <div class="col-12 col-md-8 col-lg-9 my-1 d-flex align-items-center listfontweight filename">
+                            <% obj.name %>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-3 text-muted my-1 listfontweight d-flex align-items-center justify-content-end">
+                            <% obj.size %>
+                                &nbsp
+                                <a href="javascript:void(0)" onclick="TL.upload_queue_remove(<% obj.id %>)" id="uq_delete_<% obj.id %>" class="text-red btn btn-sm btn-light mx-1">
+                                    <i class="fa-fw fad fa-trash-alt"></i>
+                                </a>
+                        </div>
+                        <div class="col-12 my-1 d-flex align-items-center text-muted" id="uqm_<% obj.id %>"></div>
+                        <div class="col-12">
+                            <div class="progress progress-sm mt-2">
+                                <div class="progress-bar bg-green" style="width: 0%" id="uqp_<% obj.id %>"></div>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+
+                <script type="text/template" id="upload_list_ok_tpl">
+                    <div class="row p-2 filelist-card shadow-sm mb-2 mx-0 upload_file_ok">
+                        <div class="col-12 col-md-7 col-lg-8 my-1 d-flex align-items-center listfontweight filename">
+                            <% obj.name %>
+                        </div>
+                        <div class="col-6 col-md-2 col-lg-2 text-muted my-1 listfontweight d-flex align-items-center justify-content-start justify-content-lg-end">
+                            <% obj.size %>
+                        </div>
+                        <div class="col-6 col-md-3 col-lg-2 my-1 d-flex align-items-center justify-content-end">
+                            <a href="//tmp.link/f/<% obj.ukey %>" class="text-azure btn btn-sm btn-light mx-1">
+                                <i class="fa-fw fad fa-download"></i>
+                            </a>
+                            <a href="javascript:void(0);" data-clipboard-text="http://tmp.link/f/<% obj.ukey %>" class="text-azure btn btn-sm btn-light mx-1 btn_copy">
+                                <i class="fa-fw fad fa-copy"></i>
+                            </a>
+                        </div>
+                    </div>
+                </script>
+
+                <input type="hidden" id="upload_mr_id" value="0" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="findModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_find">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group form-sp-top">
+                    <label for="ukey" class="sr-only" i18n="form_ukey">.</label>
+                    <input type="text" id="ukey" class="form-control form-sp-mid" i18n="form_ukey_des" placeholder="."
+                        required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-success form-sp-btn" type="button" i18n="form_find"
+                            onclick="TL.find_file()">.</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="reportModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_report">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <select class="form-control" id="report_model">
+                    <option value="." i18n="modal_report_reason1" selected>.</option>
+                    <option value="." i18n="modal_report_reason2">.</option>
+                    <option value="." i18n="modal_report_reason3">.</option>
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" i18n="modal_report_submit" id="reportbtn"
+                    onclick="TL.report();">.</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="speedModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_speed">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p i18n="download_speed1">.</p>
+                <p i18n="download_speed2">.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="qrModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title">QR Code</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <img src="/img/file@2x.png" id="qr_code_url" style="width:100%" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="highspeedModal" data-backdrop="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_buy_highspeed">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p i18n="highspeed_content">.</p>
+                <hr />
+                <div class="form-group">
+                    <label i18n="highspeed_type">.</label>
+                    <select class="form-control" id="highspeed_opt">
+                        <option value="6" i18n-only="html" i18n="highspeed_price_cny1" selected>.</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label i18n="highspeed_times">.</label>
+                    <select id="highspeed_time" class="form-control">
+                        <option value="1" selected="selected" i18n="times_1" i18n-only="html">.</option>
+                        <option value="3" i18n="times_2" i18n-only="html">.</option>
+                        <option value="12" i18n="times_3" i18n-only="html">.</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+                <button type="button" class="btn btn-success" i18n="highspeed_buy_alipay"
+                    onclick="TL.hs_download_buy();">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="storageModal" data-backdrop="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_buy_storage">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p i18n="storage_content">.</p>
+                <p i18n="storage_content2">.</p>
+                <hr />
+                <div class="form-group">
+                    <label for="storage_code" i18n="storage_type">.</label>
+                    <select class="form-control" id="storage_code">
+                        <option value="256GB" i18n-only="html" i18n="storage_price_cny1" selected>.</option>
+                        <option value="1TB" i18n-only="html" i18n="storage_price_cny2">.</option>
+                        <option value="3TB" i18n-only="html" i18n="storage_price_cny3">.</option>
+                        <option value="10TB" i18n-only="html" i18n="storage_price_cny4">.</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="storage_time" i18n="storage_times">.</label>
+                    <select id="storage_time" class="form-control">
+                        <option value="1" selected="selected" i18n="times_1" i18n-only="html">.</option>
+                        <option value="3" i18n="times_2" i18n-only="html">.</option>
+                        <option value="12" i18n="times_3" i18n-only="html">.</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+                <button type="button" class="btn btn-success" i18n="storage_buy_alipay"
+                    onclick="TL.storage_buy();">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="uploadCliModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_upload_cli">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="cli_upload_path" i18n="model_upload_cli_path">.</label>
+                    <input type="text" class="form-control" id="cli_upload_path" value="/root/test.zip">
+                </div>
+
+                <div class="form-group">
+                    <label for="cli_upload_model" i18n="modal_settings_title">.</label>
+                    <select class="form-control" id="cli_upload_model">
+                        <option value="0" i18n-only="html" i18n="modal_settings_upload_model1" selected>.</option>
+                        <option value="1" i18n-only="html" i18n="modal_settings_upload_model2">.</option>
+                        <option value="99" i18n-only="html" i18n="modal_settings_upload_model99">.</option>
+                    </select>
+                </div>
+                <div id="cliuploader_request_list">
+
+                </div>
+                <hr />
+                <p i18n="model_upload_cli_note1">.</p>
+                <p i18n="model_upload_cli_note2">.</p>
+                <p i18n="model_upload_cli_note3">.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success mr-4" data-clipboard-text="not ready" id="cli_copy"
+                    i18n="model_upload_cli_copy" onclick="TL.cli_uploader_generator();">.</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ordersModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_orders">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="orders_loader">
+                    <div class="text-center">
+                        <i class="fa-fw fas fa-spinner fa-spin fa-4x"></i>
+                    </div>
+                </div>
+                <div id="orders_loaded" style="display: none;">
+                    <div id="orders_addon_contents"></div>
+                </div>
+                <script type="text/template" id="order_list_tpl">
+                    <% for (var x in obj) { %>
+                        <div class="row p-2 filelist-card shadow-sm mb-2 mx-1">
+                            <div class="col-12">
+                                <div class="card-p3">
+                                    <div class="d-flex align-items-center">
+                                        <span class="stamp stamp-md bg-blue mr-3">
+                                            <i class="mt-1 <% obj[x].icon %> fa-2x fa-fw"></i>
+                                        </span>
+                                        <div>
+                                            <h4 class="m-0">
+                                                <% obj[x].name %>
+                                            </h4>
+                                            <small class="text-muted">
+                                                <% app.language_data.oders_table3 %>:<% obj[x].etime %>
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <small class="text-muted">
+                                            <% obj[x].des %>
+                                        </small>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                </script>
+                <div id="order_list">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="previewModal">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content shadow-lg" style="max-height: 90%;">
+            <div class="modal-header">
+                <!-- <h4 class="modal-title" i18n="model_title_orders">.</h4> -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <img src="/img/load_2.gif" id="preview_img" />
+                </div>
+                <div id="preview_download_1" class="col-12" style="display:none">
+                    <div class="progress mt-2" style="height: 2px;">
+                        <div id="preview_download_2" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_preview_download" class="btn btn-success" i18n="on_select_download">.</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="sortModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="sort_title">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <select class="form-control" id="sort_by">
+                        <option value="0" i18n-only="html" i18n="sort_by_id">.</option>
+                        <option value="1" i18n-only="html" i18n="sort_by_name">.</option>
+                        <option value="2" i18n-only="html" i18n="sort_by_size">.</option>
+                        <option value="3" i18n-only="html" i18n="sort_by_type">.</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="sort_type">
+                        <option value="0" i18n-only="html" i18n="sort_desc">.</option>
+                        <option value="1" i18n-only="html" i18n="sort_asc">.</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_sort_confirm" class="btn btn-light" onclick="TL.sort_confirm()" i18n="model_btn_ok">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="performanceModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title">文件夹偏好设置</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5>默认的显示模式</h5>
+                <div class="form-group">
+                    <select class="form-control" id="pf_display">
+                        <option value="list" i18n-only="html" >列表</option>
+                        <option value="photo" i18n-only="html" >图片</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_pf_confirm" class="btn btn-light" onclick="TL.room_performance_post()" i18n="model_btn_ok">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="alertModal" data-backdrop="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_alert">提示</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="alert-modal-content">.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="movefileModal" data-backdrop="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_move_to">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="mv_box_0" class="form-check"></div>
+
+                <script type="text/template" id="mv_box_tpl">
+                    <li class="list-unstyled">
+                        <input type="radio" id="target_dir_<% obj.id %>"  name="dir_tree" value="<% obj.id %>">
+                        <% if(obj.children){ %>
+                            <label for="mv_select_box_<% obj.id %>" id="mv_select_box_<% obj.id %>" onclick="TL.dir_tree_display('<% obj.id %>')" style="margin-bottom: 0px">
+                                <i class="fa-fw fas fa-folder-plus"></i> <% obj.name %>
+                            </label>
+                        <% }else{ %>
+                            <label for="mv_select_box_<% obj.id %>" style="margin-bottom: 0px">
+                                <i class="fa-fw fas fa-folder"></i> <% obj.name %>
+                            </label>
+                        <% } %>
+                        <ul id="mv_box_<% obj.id %>" style="display: none;margin-bottom: 0px"></ul>
+                    </li>
+                </script>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+                <button type="button" class="btn btn-success" i18n="model_btn_ok"
+                    onclick="TL.file_manager.checkbox_move_to_dir();">.</button>
+            </div>
+        </div>
+    </div>
+</div>

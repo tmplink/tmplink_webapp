@@ -1,0 +1,41 @@
+<div id="tpl_header"></div>
+<div class="container d-flex flex-grow-1">
+    <div class="align-self-center mb-5 p-4 w-100 card mx-auto" style="max-width: 720px;">
+        <div class="text-center display-4 mb-4 p-4" i18n="product_name">
+            TMP.LINK
+        </div>
+        <p class="lead text-center" i18n="index_a1">
+            .
+        </p>
+
+        <form autocomplete="off" class="mx-auto">
+            <div class="input-group mb-1">
+                <div class="input-group-prepend">
+                    <button class="btn btn-primary" type="button" onclick="TL.upload_open(0);" i18n="nav_upload">
+                        上传文件
+                    </button>
+                </div>
+                <div class="input-group-prepend">
+                    <button class="btn btn-success" type="button" onclick="TL.get_file();" i18n="index_get_file1">
+                        提取文件
+                    </button>
+                </div>
+                <input type="search" id="get_file" class="form-control" placeholder="." i18n="index_get_file2"
+                    onkeyup="if(event.keyCode==13)TL.get_file();return false;" 
+                    style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
+            </div>
+            <input style="display:none;">
+        </form>
+
+        <hr />
+        <div class="text-center text-muted">
+            &hearts; <span i18n="index_dd1">.</span> &hearts; <span i18n="index_dd2">.</span> &hearts; <span i18n="index_dd3">.</span>
+        </div>
+    </div>
+</div>
+<div id="tpl_footer"></div>
+<div id="tpl_model"></div>
+<script>
+    $('title').attr('i18n', 'title_index');
+    $('meta[name=description]').attr('i18n', 'des_index');
+</script>

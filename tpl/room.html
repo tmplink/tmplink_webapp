@@ -1,0 +1,361 @@
+<div id="tpl_header"></div>
+<div class="container d-flex flex-grow-1">
+    <div id="file_messenger" class="align-self-center w-100" style="display: none;">
+        <div class="card align-self-center mx-auto" style="margin-top: 20px;padding:100px;max-width: 550px;">
+            <div class="text-center" id="file_messenger_icon"></div>
+            <div class="text-center display-4" id="file_messenger_msg"></div>
+        </div>
+    </div>
+
+    <div id="room_loaded" class="w-100" style="display: none;">
+        <div id="download_queue" class="card mt-4 shadow" style="display: none;">
+            <div id="filelist_model" class="card-body">
+                <div id="download_queue_list"></div>
+            </div>
+        </div>
+        <div id="room_filelist_box" class="card mt-4 hideOnLoad shadow">
+            <div class="card-header">
+                <div class="text-center h2 d-none d-md-block mx-auto mt-2">
+                    <span class="room_title"></span>
+                </div>
+                <div class="h3 d-block d-md-none mx-auto">
+                    <span class="room_title"></span>
+                </div>
+            </div>
+            <div id="meetroom_filelist_data" class="card-body">
+                <form autocomplete="off">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary" type="button" onclick="TL.mr_file_list(0);"
+                                i18n="search_btn">.</button>
+                        </div>
+                        <input type="search" name="room_search" id="room_search" class="form-control" placeholder="."
+                            i18n="search_plh" onkeyup="if(event.keyCode==13)TL.mr_file_list(0);"
+                            style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
+                    </div>
+                    <input style="display:none;">
+                </form>
+
+                <div class="mb-1">
+                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.mr_file_list(0)">
+                        <i class="fa-fw fas fa-sync-alt" id="mr_filelist_refresh_icon"></i>
+                    </button>
+                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
+                        id="filelist_filter">
+                        <i class="fa-fw fad fa-sliders-h"></i>
+                        <span i18n="sort_title" class="d-none d-sm-inline">.</span>
+                    </button>
+                    <button id="room_btn_file_list" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
+                        onclick="TL.room_filelist_model('list');">
+                        <i class="fa-fw fad fa-th-list"></i>
+                        <span i18n="model_list" class="d-none d-sm-inline">.</span>
+                    </button>
+                    <!-- <button id="room_btn_file_grid" class="btn btn-light btn-sm mr-1 text-azure" onclick="TL.room_filelist_model('grid');">
+                        <i class="fa-fw fas fa-th"></i>
+                        <span i18n="model_grid" class="d-none d-sm-inline">.</span>
+                    </button> -->
+                    <button id="room_btn_file_photo" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
+                        onclick="TL.room_filelist_model('photo');">
+                        <i class="fa-fw far fa-image"></i>
+                        <span i18n="model_photo" class="d-none d-sm-inline">.</span>
+                    </button>
+                    <button id="room_btn_performance" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
+                        onclick="TL.room_performance_open();">
+                        <i class="fa-fw fas fa-heart"></i>
+                        <span class="d-none d-sm-inline">偏好设置</span>
+                    </button>
+                    <button class="btn btn-light btn-sm mr-1 mt-1 btn_copy text-azure" id="mr_copy">
+                        <i class="fa-fw fad fa-share-alt"></i>
+                        <span i18n="model_copy" class="d-none d-sm-inline">.</span>
+                    </button>
+                    <button class="btn btn-light btn-sm mr-2 mt-1 text-pink" onclick="TL.hs_buy_modal();">
+                        <i class="fa-fw fad fa-rocket"></i>
+                        <span i18n="model_rocket" class="d-none d-sm-inline">.</span>
+                    </button>
+                </div>
+                <div class="mb-2">
+                    <span id="room_back_btn"></span>
+                    <button onclick="TL.file_manager.checkbox_select_all();"
+                        class="btn btn-light text-azure btn-sm mr-1  mt-1">
+                        <i class="fas fa-check-square fa-fw"></i>
+                        <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
+                    </button>
+                    <button onclick="TL.file_manager.checkbox_select_none();"
+                        class="btn btn-light text-azure btn-sm mr-1 mt-1">
+                        <i class="far fa-check-square fa-fw"></i>
+                        <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-ballot-check fa-fw"></i> <span i18n="on_select">.</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <button class="dropdown-item not_owner" onclick="TL.file_manager.checkbox_delete()">
+                                <i class="fa-fw fad fa-trash"></i> 
+                                <span i18n="on_select_delete">.</span>
+                            </button>
+                            <button class="dropdown-item" onclick="TL.file_manager.checkbox_download()">
+                                <i class="fa-fw fad fa-download"></i> 
+                                <span i18n="on_select_download">.</span>
+                            </button>
+                            <button class="dropdown-item" onclick="TL.file_manager.checkbox_share()">
+                                <i class="fa-fw fad fa-share-alt"></i>
+                                <span i18n="on_select_share">.</span>
+                            </button>
+                            <button class="dropdown-item not_owner" onclick="TL.file_manager.checkbox_move_to_model('room')">
+                                <i class="fa-fw fad fa-folder-plus"></i> 
+                                <span i18n="on_select_move">.</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/template" id="room_back_btn_tpl">
+                    <% if(TL.room.owner==1){ %>
+                        <button onclick="TL.upload_open('<% TL.room.mr_id %>');" tmpui-app="true" class="btn btn-sm btn-primary  mr-1  mt-1">
+                            <i class="fad fa-cloud-upload fa-fw"></i>
+                            <span i18n="nav_upload" class="d-none d-sm-inline"><% TL.language_data.nav_upload %></span>
+                        </button>
+                    <% } %>
+                    <% if(TL.room.parent != 0){ %>
+                        <a href="/room?mrid=<% TL.room.parent %>" tmpui-app="true" class="btn btn-sm btn-light text-azure mr-1  mt-1">
+                            <i class="fad fa-arrow-square-left"></i>
+                            <span i18n="filelist_dir_parent" class="d-none d-sm-inline"><% TL.language_data.filelist_dir_parent %></span>
+                        </a>
+                    <% } %>
+                    <% if(TL.room.owner==1){ %>
+                        <button class="btn btn-light text-azure btn-sm mr-1  mt-1" onclick="$('#mrCreaterModal').modal('show');$('#mr_id').val('<% TL.room.mr_id %>');$('#mr_parent_id').val('<% TL.room.parent %>');$('#mr_top_id').val('<% TL.room.top %>');">
+                            <i class="fa-fw fad fa-folder-plus"></i>
+                            <span i18n="model_title_folder_title" class="d-none d-sm-inline"><% TL.language_data.model_title_folder_title %></span>
+                        </button>
+                    <% } %>
+                    <button class="btn btn-light text-azure btn-sm mr-1  mt-1" onclick="TL.download_allfile_btn();">
+                        <i class="fa-fw fad fa-download"></i>
+                        <span i18n="file_btn_downloadall" class="d-none d-sm-inline"><% TL.language_data.file_btn_downloadall %></span>
+                    </button>
+                </script>
+
+                <div id="room_filelist"></div>
+                <div class="no_photos" style="margin-top: 100px;margin-bottom: 100px;display: none;">
+                    <div class="text-center mb-4">
+                        <i class="fa-fw fad fa-4x fa-camera-retro"></i>
+                    </div>
+                    <div class="text-center" i18n="page_no_photos">.</div>
+                </div>
+                <div class="no_files" style="margin-top: 100px;margin-bottom: 100px;display: none;">
+                    <div class="text-center mb-4">
+                        <i class="fa-fw fad fa-folder-open fa-4x"></i>
+                    </div>
+                    <div class="text-center" i18n="page_no_files">.</div>
+                </div>
+
+                <script type="text/template" id="room_filelist_photo_tpl">
+                    <div class="row" id="room_file_content">
+                    <% for (var x in obj) { %>
+                        <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
+                            <div class="col-lg-4 col-xl-3 col-md-6 col-12 p-0" id="mrfile-<% obj[x].ukey %>">
+                                <a href="javascript:;" onclick="TL.previewModel('<% obj[x].ukey %>',<% x %>)">
+                                    <!-- <div class="ext-img lazyload" data-bg="url(https://tmplinkapp-connect.vx-cdn.com/img-<% obj[x].ukey %>-360x220.jpg)"></div> -->
+                                    <div class="text-center">
+                                        <img class='lazyload' data-src="https://tmplinkapp-connect.vx-cdn.com/img-<% obj[x].ukey %>-360x220.jpg" src="/img/lazy.gif" />
+                                    </div>
+                                </a>
+                            </div>
+                        <% } %>
+                    <% } %>
+                    </div>
+                </script>
+
+                <script type="text/template" id="room_filelist_list_tpl">
+                    <% for (var x in obj) { %>
+                        <div class="row p-2 filelist-card shadow-sm mb-2 mx-0" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" id="file_unit_<% obj[x].ukey %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
+                            <div class="col-12 col-md-6 col-lg-8 my-1 d-flex align-items-center listfontweight filename">
+                                <input type="checkbox" name="items_box" class="d-none" onclick="TL.file_manager.checkbox_onclick(this);" /> &nbsp
+                                <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw"></i>
+                                &nbsp
+                                <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" target="_blank">
+                                    <% obj[x].fname %>
+                                </a>
+                                <% if(obj[x].model!=99){ %>
+                                    <i class="fa-fw far fa-stopwatch"></i>
+                                    <div class="progress" style="width:25px">
+                                        <div class="progress-bar" role="progressbar" style="width: <% obj[x].hp_percent %>%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                <% } %>
+                            </div>
+                            <div  class="col-12 col-md-6 col-lg-4 my-1 d-flex align-items-center justify-content-end">
+                                <span class="mr-2">
+                                    <% obj[x].fsize_formated %>
+                                </span>
+                                <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>">
+                                    <i class="fa-fw fad fa-download"></i>
+                                </button>
+                                <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1">
+                                    <i class="fa-fw fad fa-share-alt"></i>
+                                </button>
+                                <% if (TL.room.file == 1) { %>
+                                    <button href="javascript:void(0);" class="text-red btn btn-sm btn-light mx-1" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
+                                        <i class="fa-fw fad fa-trash"></i>
+                                    </button>
+                                <% } %>
+                            </div>
+                            <div class="col-12 download_progress_bar_<% obj[x].ukey %>" style="display:none">
+                                <div class="progress mt-2" style="height: 2px;">
+                                    <div class="progress-bar bg-success download_progress_bar_set_<% obj[x].ukey %>" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                </script>
+
+                <script type="text/template" id="meetroom_grid_tpl">
+                <% for (var x in obj) { %>
+                <div class="col-6 col-md-3 col-lg-2 p-2 text-center" id="meetingroom_id_<% obj[x].mr_id %>">
+                    <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true" target="_blank">
+                        <div class="fileicon mx-auto mb-2 shadow-sm">
+                            <i class="far fa-folder fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub"></i>
+                        </div>
+                        <div class="max-width-90 mx-auto">
+                            <div class="text-truncate" alt="<% obj[x].name %>"><% obj[x].name %></div>
+                        </div>
+                    </a>
+                    
+                    <div><% TL.language_data.filelist_dir %></div>
+                    <div>
+                        <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="mt-1 btn_copy"><i class="fa-fw fad fa-share-alt"></i></a>
+                        <% if (obj[x].type === 'owner') { %>
+                            <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-blue mt-1"><i class="fad fa-edit"></i></a>
+                            <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red mt-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fad fa-trash"></i></a>
+                        <% } %>
+                    </div>
+                </div>
+                <% } %>
+                </script>
+
+                <script type="text/template" id="meetroom_list_tpl">
+                    <% for (var x in obj) { %>
+                        <div class="row p-2 filelist-card shadow-sm mb-2 mx-0" id="meetingroom_id_<% obj[x].mr_id %>">
+                            <div class="col-12 col-md-6 col-lg-8 my-1 px-0 d-flex align-items-center listfontweight filename">
+                                <i class="far fa-folder fa-fw d-none d-md-block"></i>
+                                &nbsp
+                                <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true">
+                                    <% obj[x].name %>
+                                </a>
+                            </div>
+                            <div  class="col-12 col-md-6 col-lg-4 my-1 d-flex align-items-center justify-content-end">
+                                <span class="mr-2">
+                                    <% TL.language_data.filelist_dir %>
+                                </span>
+                                <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-share-alt"></i></a>
+                                <% if (obj[x].type === 'owner') { %>
+                                    <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-edit"></i></a>
+                                    <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fad fa-trash"></i></a>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% } %>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="tpl_footer"></div>
+<div id="tpl_model"></div>
+
+<div class="modal fade" id="mrFileModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_room_mrfile">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="mrfile_add_list"></div>
+                <script type="text/template" id="mrfile_add_list_tpl">
+                <% for (var x in obj) { %>
+                    <div class="col-6 col-md-3 p-2 text-center" id="mraddlist-<% obj[x].ukey%>">
+                        <div class="fileicon mx-auto mb-2 shadow-sm <% obj[x].model_color %>">
+                            <i class="<% TL.fileicon(obj[x].ftype) %> fa-4x mx-auto mb-2 fa-fw"></i>
+                        </div>
+                        <div class="max-width-80 mx-auto">
+                            <div class="text-truncate" alt="<% obj[x].fname %>" title="<% obj[x].fname %>"><% obj[x].fname %></div>
+                        </div>
+                        <div>
+                            <a href="javascript:void(0)" id="btn-mraddlist-<% obj[x].ukey%>" class="text-azure mt-1 mr-1" onclick="TL.mr_file_add('<% obj[x].ukey%>')"><i class="fa-fw far fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+                </script>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mrUserModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_room_mruser">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="notice_add_user" class="alert alert-info alert-dismissable" i18n="model_add_user_notice">
+                    .
+                </div>
+                <div class="form-group">
+                    <label for="modal_add_user" i18n="model_add_user">.</label>
+                    <input type="email" class="form-control" id="modal_add_user" i18n="model_adduser_placeholder"
+                        placeholder=".">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+                <button type="button" class="btn btn-primary" id="modal_add_user_btn" i18n="model_btn_ok"
+                    onclick="TL.mr_user_add();">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mrCreaterModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_folder_title">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="modal_meetingroom_create_name"
+                        i18n="model_title_folder_name" placeholder=".">
+                </div>
+                <input type="hidden" id="mr_parent_id" value="0" />
+                <input type="hidden" id="mr_top_id" value="0" />
+                <input type="hidden" id="mr_id" value="0" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+                <button type="button" class="btn btn-primary" id="modal_meetingroom_create_btn" i18n="model_btn_ok"
+                    onclick="TL.mr_add();">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    app.ready(function () {
+        TL.room_filelist_autoload_enabled();
+        TL.room_list(0);
+        $('.nav_upload').attr('disabled', true);
+        $('title').attr('i18n', 'title_rooom');
+        $('meta[name=description]').attr('i18n', 'des_room');
+    });
+    app.onExit(function () {
+        TL.room_filelist_autoload_disabled();
+    });
+</script>

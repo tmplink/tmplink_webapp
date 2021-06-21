@@ -1,0 +1,214 @@
+/* html,
+body {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -ms-overflow-style: scrollbar;
+    -webkit-tap-highlight-color: transparent;
+    line-height: 150%;
+    height: 100%;
+} */
+
+body::-webkit-scrollbar-track {
+    background-clip: padding-box;
+    border: solid transparent;
+    border-width: 0 0 0 4px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .2);
+    background-clip: padding-box;
+    border: solid transparent;
+    min-height: 28px;
+    padding: 100px 0 0;
+    box-shadow: inset 1px 1px 0 rgb(0 0 0 / 10%), inset 0 -1px 0 rgb(0 0 0 / 7%);
+}
+
+body::-webkit-scrollbar {
+    height: 16px;
+    overflow: visible;
+    width: 16px !important;
+}
+
+body::-webkit-scrollbar-button {
+    height: 0;
+    width: 0;
+}
+
+body::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+.glass {
+    background-color: rgba(255, 255, 255, 0.5);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    background-clip: padding-box;
+}
+
+#container {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    position: relative;
+}
+
+#tmpui_body {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    position: relative;
+}
+
+#index-box {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.loading-box {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading {
+    border-radius: 20px;
+    border-width: 1px;
+    text-align: center;
+    height: 60px;
+    width: 60px;
+    background-color: rgba(255, 255, 255, 1);
+    /*文本水平居中*/
+}
+
+#footer {
+    text-align: left;
+    padding: 10px;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    clear: both;
+}
+
+.content-box {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.card-pointer {
+    cursor: pointer;
+}
+
+.max-width-60 {
+    max-width: 60%;
+}
+
+.max-width-70 {
+    max-width: 70%;
+}
+
+.max-width-80 {
+    max-width: 80%;
+}
+
+.max-width-90 {
+    max-width: 90%;
+}
+
+.btn-xs {
+    padding: .25rem;
+    font-size: .275rem;
+    line-height: 0.5rem;
+    border-radius: .5rem;
+}
+
+.hideOnLoad {
+    display: none;
+}
+
+.fileicon {
+    border-radius: 6px;
+    border-width: 1px;
+    padding-top: 5px;
+    max-width: 60px;
+    height: 60px;
+    color: white;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.fileicon-sub {
+    padding-top: 6px;
+    padding-bottom: 5px;
+}
+
+.mricon {
+    border-radius: 6px;
+    border-width: 1px;
+    width: 60px;
+    height: 60px;
+    color: white;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.imgicon {
+    border-radius: 6px;
+    border-width: 1px;
+    max-width: 60px;
+    height: 60px;
+    color: white;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.filename {
+    word-break: break-all;
+}
+
+.circle {
+    display: inline-block;
+    box-sizing: content-box;
+    width: 30px;
+    height: 30px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.xtable-item {
+    display: inline;
+}
+
+.ext-img {
+    height: 180px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% auto;
+}
+
+.listfontweight {
+    font-size: 16px;
+}
+
+.filelist-card {
+    border-radius: 3px;
+    border-width: 1px;
+    background: whitesmoke;
+}
+
+.img-rounded {
+    border-radius: 20px;
+    border-width: 1px;
+}
