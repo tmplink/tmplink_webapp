@@ -171,7 +171,7 @@
                         <div class="row p-2 filelist-card shadow-sm mb-2 mx-0" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" id="file_unit_<% obj[x].ukey %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
                             <div class="col-12 col-md-6 col-lg-8 my-1 d-flex align-items-center listfontweight filename">
                                 <input type="checkbox" name="items_box" class="d-none" onclick="TL.file_manager.checkbox_onclick(this);" /> &nbsp
-                                <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw"></i>
+                                <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw fa-2x text-azure"></i>
                                 &nbsp
                                 <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" target="_blank">
                                     <% obj[x].fname %>
@@ -213,7 +213,7 @@
                 <div class="col-6 col-md-3 col-lg-2 p-2 text-center" id="meetingroom_id_<% obj[x].mr_id %>">
                     <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true" target="_blank">
                         <div class="fileicon mx-auto mb-2 shadow-sm">
-                            <i class="far fa-folder fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub"></i>
+                            <i class="fad fa-folders fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
                         </div>
                         <div class="max-width-90 mx-auto">
                             <div class="text-truncate" alt="<% obj[x].name %>"><% obj[x].name %></div>
@@ -236,7 +236,7 @@
                     <% for (var x in obj) { %>
                         <div class="row p-2 filelist-card shadow-sm mb-2 mx-0" id="meetingroom_id_<% obj[x].mr_id %>">
                             <div class="col-12 col-md-6 col-lg-8 my-1 px-0 d-flex align-items-center listfontweight filename">
-                                <i class="far fa-folder fa-fw d-none d-md-block"></i>
+                                <i class="fad fa-folders text-cyan fa-fw d-none d-md-block fa-2x"></i>
                                 &nbsp
                                 <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true">
                                     <% obj[x].name %>
