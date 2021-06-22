@@ -177,10 +177,8 @@
                                     <% obj[x].fname %>
                                 </a>
                                 <% if(obj[x].model!=99){ %>
-                                    <i class="fa-fw far fa-stopwatch"></i>
-                                    <div class="progress" style="width:25px">
-                                        <div class="progress-bar" role="progressbar" style="width: <% obj[x].hp_percent %>%;" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                    <!--[这里处理剩余时间]-->
+                                    <i class="fa-fw far fa-stopwatch"></i> <% obj[x].hp_time %>
                                 <% } %>
                             </div>
                             <div  class="col-12 col-md-6 col-lg-4 my-1 d-flex align-items-center justify-content-end">
