@@ -629,17 +629,17 @@ class tmplink {
     }
 
     details_file() {
-        if (this.isWeixin()) {
-            $('#file_messenger_icon').html('<i class="fad fa-download fa-fw fa-4x"></i>');
-            $('#file_messenger_msg').removeClass('display-4');
-            $('#file_messenger_msg').html('由于微信的限制，目前无法提供下载。请复制链接后，在外部浏览器打开进行下载。');
-            $('#file_messenger').show();
+        // if (this.isWeixin()) {
+        //     $('#file_messenger_icon').html('<i class="fad fa-download fa-fw fa-4x"></i>');
+        //     $('#file_messenger_msg').removeClass('display-4');
+        //     $('#file_messenger_msg').html('由于微信的限制，目前无法提供下载。请复制链接后，在外部浏览器打开进行下载。');
+        //     $('#file_messenger').show();
 
-            gtag('config', 'UA-96864664-3', {
-                'page_title': 'D-weixinUnavailable',
-            });
-            return false;
-        }
+        //     gtag('config', 'UA-96864664-3', {
+        //         'page_title': 'D-weixinUnavailable',
+        //     });
+        //     return false;
+        // }
         this.loading_box_on();
         this.recaptcha_do('file', (recaptcha) => {
             var params = this.get_url_params();
@@ -737,19 +737,19 @@ class tmplink {
     }
 
     download_check() {
-        if (this.isWeixin()) {
-            return false;
-        }
+        // if (this.isWeixin()) {
+        //     return false;
+        // }
         if (this.isMobile()) {
             return false;
         }
     }
 
     download_queue_add(url, filename, ukey, filesize, filetype) {
-        if (this.isWeixin()) {
-            this.alert(TL.language_data.file_not_allow_in_wechat);
-            return false;
-        }
+        // if (this.isWeixin()) {
+        //     this.alert(TL.language_data.file_not_allow_in_wechat);
+        //     return false;
+        // }
         if (this.isMobile()) {
             window.open(url, '_blank');
             return false;
