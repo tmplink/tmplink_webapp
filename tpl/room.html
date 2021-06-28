@@ -191,7 +191,7 @@
                                 <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1">
                                     <i class="fa-fw fad fa-share-alt"></i>
                                 </button>
-                                <% if (TL.room.file == 1) { %>
+                                <% if (TL.room.owner == 1) { %>
                                     <button href="javascript:void(0);" class="text-red btn btn-sm btn-light mx-1" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
                                         <i class="fa-fw fad fa-trash"></i>
                                     </button>
