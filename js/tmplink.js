@@ -190,7 +190,7 @@ class tmplink {
             if (rsp.status === 1) {
                 this.dir_tree = rsp.data;
             } else {
-                $('#mv_box_0').html(this.language_get.status_error_14);
+                $('#mv_box_0').html(this.language_data.status_error_14);
             }
         });
     }
