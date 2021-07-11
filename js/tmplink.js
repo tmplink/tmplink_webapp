@@ -1011,7 +1011,7 @@ class tmplink {
                     token: this.api_token
                 }, (rsp) => {
                     if (rsp.status == 1) {
-                        location.href = $('#btn_highdownload').attr('x-href');
+                        location.href = $('#btn_download').attr('x-href');
                         $('#btn_highdownload').html(this.language_data.file_btn_download_status2);
                     } else {
                         $('#btn_highdownload').html(this.language_data.file_btn_download_status1);
