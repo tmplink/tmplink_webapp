@@ -802,9 +802,9 @@ class tmplink {
         // if (this.isWeixin()) {
         //     return false;
         // }
-        if (this.isMobile()) {
-            return false;
-        }
+        // if (this.isMobile()) {
+        //     return false;
+        // }
     }
 
     download_queue_add(url, filename, ukey, filesize, filetype) {
@@ -812,10 +812,10 @@ class tmplink {
         //     this.alert(TL.languageData.file_not_allow_in_wechat);
         //     return false;
         // }
-        if (this.isMobile()) {
-            window.open(url, '_blank');
-            return false;
-        }
+        // if (this.isMobile()) {
+        //     window.open(url, '_blank');
+        //     return false;
+        // }
         this.download_queue[ukey] = [url, filename, ukey, ukey];
         // let html = app.tpl('download_list_tpl', {
         //     index: ukey,
