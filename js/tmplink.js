@@ -325,7 +325,7 @@ class tmplink {
                 this.storage_used = rsp.data.storage_used;
                 this.storage = rsp.data.storage;
                 localStorage.setItem('app_lang', rsp.data.lang);
-                app.language_set(rsp.data.lang);
+                app.languageSet(rsp.data.lang);
                 //console.log
                 this.dir_tree_get();
             } else {
@@ -1655,7 +1655,7 @@ class tmplink {
             span_lang = 'Melayu';
         }
         $('.selected_lang').html(span_lang);
-        app.language_set(lang);
+        app.languageSet(lang);
     }
 
     logout() {
@@ -1722,7 +1722,7 @@ class tmplink {
                     action: 'checkcode_send',
                     token: this.api_token,
                     captcha: recaptcha,
-                    lang: app.language_get(),
+                    lang: app.languageGet(),
                     email: email
                 }, (rsp) => {
                     if (rsp.status == 1) {
@@ -2425,4 +2425,3 @@ class tmplink {
         return pwd;
     }
 }
-var TL = new tmplink();

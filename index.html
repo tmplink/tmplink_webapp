@@ -3,24 +3,172 @@
 
 <head>
     <title>钛盘</title>
-    
+
     <meta name="description" content="钛盘，免费 12 GB 空间高速网盘。遍布全球的文件存储服务器可以高速地为跨国办公提供高效支持，并且可以在多人间共享同一份工作目录。">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
     <meta name="renderer" content="webkit" />
 
-    <link rel="stylesheet" href="https://static.vx-cdn.com/project/tmpui/9.2/tmpui.css" />
-    <link rel="stylesheet" href="https://static.vx-cdn.com/project/font-awesome/last/css/all.css" />
     <link rel="icon" href="/img/96.ico" type="image/x-icon" />
     <link rel="apple-touch-icon-precomposed" href="/img/logo.png" />
 
-    <script type="text/javascript" src="https://static.vx-cdn.com/project/tmpui/13/tmpui.min.js"></script>
-
-    <script async src="https://www.recaptcha.net/recaptcha/api.js?render=6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5"></script>
-    
+    <script async
+        src="https://www.recaptcha.net/recaptcha/api.js?render=6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5"></script>
+    <script type="text/javascript" src="https://static.vx-cdn.com/project/tmpui/15/tmpui.js"></script>
     <script type="text/javascript">
-        var app = new tmpUI("./site.config",false);
+        var app = new tmpUI({
+            "version": 383,
+            "siteroot": "/",
+            "loadingIcon": "https://global-tmplink.vx-cdn.com/img/logo.png",
+            "googleAnalytics": "UA-96864664-3",
+            "loadingPage": true,
+            "loadingProgress": true,
+
+            "language": {
+                "en": "/json/en.json",
+                "cn": "/json/cn.json",
+                "jp": "/json/jp.json"
+            },
+
+            "404": "404",
+
+            "preload": {
+                "init": {
+                    "/plugin/bootstrap4/js/jquery.min.js": { "type": "js", "reload": false },
+                    "/js/clipboard.min.js": { "type": "js", "reload": false },
+                    "/js/jquery.cookie.js": { "type": "js", "reload": false },
+                    "/js/tools_file_manager.js": { "type": "js", "reload": false },
+                    "/js/tmplink.js": { "type": "js", "reload": false },
+                    "/js/lazyload.js": { "type": "js", "reload": false },
+                    "/js/sha1.js": { "type": "js", "reload": false },
+                    "/js/jquery.tooltips.js": { "type": "js", "reload": false },
+                    "/plugin/bootstrap4/js/bootstrap.bundle.min.js": { "type": "js", "reload": false },
+                    "/plugin/bootstrap4/css/bootstrap.min.css": { "type": "css", "reload": false },
+                    "/css/reset.css": { "type": "css", "reload": false },
+                    "https://static.vx-cdn.com/project/font-awesome/last/css/all.css": { "type": "css", "reload": false },
+                    "/tpl/include/gtpl.html": { "type": "tpl", "reload": false }
+                }
+            },
+            "append": {
+                "tmplink": {
+                    "/tpl/include/head.html": { "type": "html", "target": { "type": "id", "val": "tpl_header" } },
+                    "/tpl/include/foot.html": { "type": "html", "target": { "type": "id", "val": "tpl_footer" } },
+                    "/tpl/include/model.html": { "type": "html", "target": { "type": "id", "val": "tpl_model" } },
+                    "/js/init.js": { "type": "js" }
+                }
+            },
+            "path": {
+                "/": {
+                    "title": "TMP.link",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/index.css": { "type": "css" },
+                        "/tpl/index.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                },
+                "/reg": {
+                    "title": "TMP.link",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/sp.css": { "type": "css" },
+                        "/tpl/reg.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                },
+                "/login": {
+                    "title": "TMP.link",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/sp.css": { "type": "css" },
+                        "/tpl/login.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                },
+                "/reset": {
+                    "title": "TMP.link",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/sp.css": { "type": "css" },
+                        "/tpl/reset.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                },
+                "/tos": {
+                    "title": "服务条款",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/index.css": { "type": "css" },
+                        "/tpl/tos.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                },
+                "/privacy": {
+                    "title": "隐私条款",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/index.css": { "type": "css" },
+                        "/tpl/privacy.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                },
+                "/about": {
+                    "title": "关于我们",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/index.css": { "type": "css" },
+                        "/tpl/about.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                },
+                "/workspace": {
+                    "title": "工作空间",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/index.css": { "type": "css" },
+                        "/tpl/workspace.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                },
+                "/meetingroom": {
+                    "title": "会议室",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/index.css": { "type": "css" },
+                        "/tpl/meetingroom.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                },
+                "/room": {
+                    "title": "会议室",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/index.css": { "type": "css" },
+                        "/tpl/room.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                },
+                "/503": {
+                    "title": "503",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/sp.css": { "type": "css" },
+                        "/tpl/503.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                },
+                "/file": {
+                    "title": "下载文件",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/index.css": { "type": "css" },
+                        "/tpl/file.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                }
+            }
+        });
     </script>
 
 </head>
