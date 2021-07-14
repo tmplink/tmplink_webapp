@@ -48,7 +48,14 @@
                             
                         </div>
                         <hr />
-                        <div class="btn-group btn-block" role="group"">
+                        <div class="single_download_progress_bar" style="display:none">
+                            <div class="single_download_msg"></div>
+                            <div class="progress mt-2">
+                                <div class="progress-bar progress-bar-striped bg-success single_download_progress_bar_set" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <hr />
+                        </div>
+                        <div class="btn-group btn-block" role="group">
                             <button class="btn btn-success btn-lg" id="btn_download"
                             i18n="file_btn_download" onclick="TL.download_file()">.</button>
                             <button class="btn btn-info btn-lg" id="file_btn_highdownload"
@@ -114,13 +121,3 @@
 </div>
 <div id="tpl_footer"></div>
 <div id="tpl_model"></div>
-<script>
-    app.ready(function () {
-        TL.details_file();
-    });
-</script>
-
-<script>
-    $('title').attr('i18n', 'title_file');
-    $('meta[name=description]').attr('i18n', 'des_file');
-</script>

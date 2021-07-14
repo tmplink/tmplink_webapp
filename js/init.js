@@ -1,7 +1,7 @@
 app.ready(()=>{
     window.TL = new tmplink();
     TL.language(app.languageSetting);
-    TL.language_data_init(app.languageData);
+    TL.languageData_init(app.languageData);
 });
 
 $('.tooltip').tooltipster({

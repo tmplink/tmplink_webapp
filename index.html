@@ -19,7 +19,7 @@
     <script type="text/javascript" src="./tmpui.js"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 383,
+            "version": 388,
             "siteroot": "/",
             "loadingIcon": "https://global-tmplink.vx-cdn.com/img/logo.png",
             "googleAnalytics": "UA-96864664-3",
@@ -48,15 +48,15 @@
                     "/plugin/bootstrap4/css/bootstrap.min.css": { "type": "css", "reload": false },
                     "/css/reset.css": { "type": "css", "reload": false },
                     "https://static.vx-cdn.com/project/font-awesome/last/css/all.css": { "type": "css", "reload": false },
-                    "/tpl/include/gtpl.html": { "type": "tpl", "reload": false }
+                    "/tpl/include/gtpl.html": { "type": "tpl", "reload": false },
+                    "/js/init.js": { "type": "js" }
                 }
             },
             "append": {
                 "tmplink": {
                     "/tpl/include/head.html": { "type": "html", "target": { "type": "id", "val": "tpl_header" } },
                     "/tpl/include/foot.html": { "type": "html", "target": { "type": "id", "val": "tpl_footer" } },
-                    "/tpl/include/model.html": { "type": "html", "target": { "type": "id", "val": "tpl_model" } },
-                    "/js/init.js": { "type": "js" }
+                    "/tpl/include/model.html": { "type": "html", "target": { "type": "id", "val": "tpl_model" } }
                 }
             },
             "path": {
@@ -66,6 +66,7 @@
                     "append": ["tmplink"],
                     "body": {
                         "/css/index.css": { "type": "css" },
+                        "/js/init_index.js": { "type": "js" },
                         "/tpl/index.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
@@ -75,6 +76,7 @@
                     "append": ["tmplink"],
                     "body": {
                         "/css/sp.css": { "type": "css" },
+                        "/js/init_reg.js": { "type": "js" },
                         "/tpl/reg.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
@@ -84,6 +86,7 @@
                     "append": ["tmplink"],
                     "body": {
                         "/css/sp.css": { "type": "css" },
+                        "/js/init_login.js": { "type": "js" },
                         "/tpl/login.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
@@ -93,6 +96,7 @@
                     "append": ["tmplink"],
                     "body": {
                         "/css/sp.css": { "type": "css" },
+                        "/js/init_reset.js": { "type": "js" },
                         "/tpl/reset.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
@@ -102,6 +106,7 @@
                     "append": ["tmplink"],
                     "body": {
                         "/css/index.css": { "type": "css" },
+                        "/js/init_tos.js": { "type": "js" },
                         "/tpl/tos.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
@@ -111,6 +116,7 @@
                     "append": ["tmplink"],
                     "body": {
                         "/css/index.css": { "type": "css" },
+                        "/js/init_privacy.js": { "type": "js" },
                         "/tpl/privacy.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
@@ -129,6 +135,7 @@
                     "append": ["tmplink"],
                     "body": {
                         "/css/index.css": { "type": "css" },
+                        "/js/init_workspace.js": { "type": "js" },
                         "/tpl/workspace.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
@@ -138,6 +145,7 @@
                     "append": ["tmplink"],
                     "body": {
                         "/css/index.css": { "type": "css" },
+                        "/js/init_meetingroom.js": { "type": "js" },
                         "/tpl/meetingroom.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
@@ -147,6 +155,7 @@
                     "append": ["tmplink"],
                     "body": {
                         "/css/index.css": { "type": "css" },
+                        "/js/init_room.js": { "type": "js" },
                         "/tpl/room.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
@@ -165,6 +174,7 @@
                     "append": ["tmplink"],
                     "body": {
                         "/css/index.css": { "type": "css" },
+                        "/js/init_file.js": { "type": "js" },
                         "/tpl/file.html": { "type": "html", "target": { "type": "body" } }
                     }
                 }

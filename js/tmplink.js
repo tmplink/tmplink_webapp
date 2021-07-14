@@ -14,7 +14,7 @@ class tmplink {
     uid = 0
     email = null
     api_language = null
-    language_data = {}
+    languageData = {}
     mr_data = []
     room = []
     room_data = []
@@ -100,8 +100,8 @@ class tmplink {
         });
     }
 
-    language_data_init(lang) {
-        this.language_data = lang;
+    languageData_init(lang) {
+        this.languageData = lang;
     }
 
     bg_load() {
@@ -159,23 +159,23 @@ class tmplink {
         console.log('upload::model::' + model);
         switch (model) {
             case 0:
-                $('.current_selected').html(this.language_data.modal_settings_upload_model1);
+                $('.current_selected').html(this.languageData.modal_settings_upload_model1);
                 $('#upload_model').val(0);
                 break;
             case 1:
-                $('.current_selected').html(this.language_data.modal_settings_upload_model2);
+                $('.current_selected').html(this.languageData.modal_settings_upload_model2);
                 $('#upload_model').val(1);
                 break;
             case 2:
-                $('.current_selected').html(this.language_data.modal_settings_upload_model3);
+                $('.current_selected').html(this.languageData.modal_settings_upload_model3);
                 $('#upload_model').val(2);
                 break;
             case 3:
-                $('.current_selected').html(this.language_data.modal_settings_upload_model3);
+                $('.current_selected').html(this.languageData.modal_settings_upload_model3);
                 $('#upload_model').val(4);
                 break;
             case 99:
-                $('.current_selected').html(this.language_data.modal_settings_upload_model99);
+                $('.current_selected').html(this.languageData.modal_settings_upload_model99);
                 $('#upload_model').val(99);
                 break;
         }
@@ -190,7 +190,7 @@ class tmplink {
             if (rsp.status === 1) {
                 this.dir_tree = rsp.data;
             } else {
-                $('#mv_box_0').html(this.language_data.status_error_14);
+                $('#mv_box_0').html(this.languageData.status_error_14);
             }
         });
     }
@@ -340,10 +340,10 @@ class tmplink {
         var password = $('#modal_password_reset').val();
         var rpassword = $('#modal_password_reset_re').val();
         if (password !== rpassword) {
-            $("#notice_resetpassword").html(this.language_data.model_resetpassword_error_no_match);
+            $("#notice_resetpassword").html(this.languageData.model_resetpassword_error_no_match);
             return false;
         }
-        $("#notice_resetpassword").html(this.language_data.model_resetpassword_msg_processing);
+        $("#notice_resetpassword").html(this.languageData.model_resetpassword_msg_processing);
         $("#modal_password_reset_btn").attr('disabled', true);
         $.post(this.api_user, {
             action: 'passwordreset',
@@ -352,10 +352,10 @@ class tmplink {
             token: this.api_token
         }, (rsp) => {
             if (rsp.status === 1) {
-                $("#notice_resetpassword").html(this.language_data.model_resetpassword_msg_processed);
-                $("#modal_password_reset_btn").html(this.language_data.model_resetpassword_msg_processed);
+                $("#notice_resetpassword").html(this.languageData.model_resetpassword_msg_processed);
+                $("#modal_password_reset_btn").html(this.languageData.model_resetpassword_msg_processed);
             } else {
-                $("#notice_resetpassword").html(this.language_data.model_resetpassword_error_fail);
+                $("#notice_resetpassword").html(this.languageData.model_resetpassword_error_fail);
                 $("#modal_password_reset_btn").removeAttr('disabled');
             }
         });
@@ -364,7 +364,7 @@ class tmplink {
     email_change_confim() {
         var email = $('#email').val();
         var code = $('#checkcode').val();
-        $("#notice_emailchange").html(this.language_data.model_email_change_msg_processing);
+        $("#notice_emailchange").html(this.languageData.model_email_change_msg_processing);
         $("#email_change_confim_btn").attr('disabled', true);
         $.post(this.api_user, {
             action: 'email_change',
@@ -373,8 +373,8 @@ class tmplink {
             token: this.api_token
         }, (rsp) => {
             if (rsp.status === 1) {
-                $("#notice_emailchange").html(this.language_data.model_email_change_msg_processed);
-                $("#email_change_confim_btn").html(this.language_data.model_email_change_msg_processed);
+                $("#notice_emailchange").html(this.languageData.model_email_change_msg_processed);
+                $("#email_change_confim_btn").html(this.languageData.model_email_change_msg_processed);
             } else {
                 $("#notice_emailchange").html(rsp.data);
                 $("#email_change_confim_btn").removeAttr('disabled');
@@ -398,7 +398,7 @@ class tmplink {
         $('#btn_preview_download').attr('data-ukey', ukey);
 
         $('#btn_preview_download').removeAttr('disabled');
-        $('#btn_preview_download').html(this.language_data.on_select_download);
+        $('#btn_preview_download').html(this.languageData.on_select_download);
         $('#btn_preview_download').attr('onclick', 'TL.download_file_btn(\'' + ukey + '\')');
         $('#btn_preview_remove').attr('onclick', "TL.workspace_del('" + ukey + "')");
         $('#previewModal').modal('show');
@@ -412,7 +412,7 @@ class tmplink {
             }
             $('#submit').attr('disabled', true);
             $('#msg_notice').fadeIn();
-            $('#msg_notice').html(this.language_data.form_btn_processing);
+            $('#msg_notice').html(this.languageData.form_btn_processing);
             $.post(this.api_user, {
                 action: 'passwordfound',
                 token: this.api_token,
@@ -421,17 +421,17 @@ class tmplink {
             }, (rsp) => {
                 if (rsp.status == 1) {
                     $('#msg_notice').fadeOut();
-                    $('#submit').html(this.language_data.form_btn_processed);
+                    $('#submit').html(this.languageData.form_btn_processed);
                 } else {
                     switch (rsp.status) {
                         case 13:
-                            $('#msg_notice').html(this.language_data.status_13);
+                            $('#msg_notice').html(this.languageData.status_13);
                             break;
                         case 14:
-                            $('#msg_notice').html(this.language_data.status_14);
+                            $('#msg_notice').html(this.languageData.status_14);
                             break;
                         default:
-                            $('#msg_notice').html(this.language_data.status_unknow);
+                            $('#msg_notice').html(this.languageData.status_unknow);
                     }
                     $('#submit').removeAttr('disabled');
                 }
@@ -666,6 +666,8 @@ class tmplink {
                         });
                         $('#btn_download').attr('x-href', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
                         $('#btn_highdownload').attr('x-href', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
+                        $('.single_download_progress_bar').attr('data-href', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
+                        $('.single_download_progress_bar').attr('data-filename', rsp.data.name);
                         $('.btn_copy_fileurl').attr('data-clipboard-text', 'http://tmp.link/f/' + params.ukey);
                         $('#file_ukey').attr('data-clipboard-text', params.ukey);
                         $('#file_btn_clidownload').attr('data-clipboard-text', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
@@ -700,7 +702,7 @@ class tmplink {
                     //file need to login
                     if (rsp.status === 3) {
                         $('#file_messenger_icon').html('<i class="fad fa-sign-in fa-fw fa-4x"></i>');
-                        $('#file_messenger_msg').html(this.language_data.status_need_login);
+                        $('#file_messenger_msg').html(this.languageData.status_need_login);
                         $('#file_messenger').show();
                         gtag('config', 'UA-96864664-3', {
                             'page_title': 'D-unLogin',
@@ -710,7 +712,7 @@ class tmplink {
 
                     //file unavailable
                     $('#file_messenger_icon').html('<i class="fas fa-folder-times  fa-4x"></i>');
-                    $('#file_messenger_msg').html(this.language_data.file_unavailable);
+                    $('#file_messenger_msg').html(this.languageData.file_unavailable);
                     $('#file_messenger').show();
                     gtag('config', 'UA-96864664-3', {
                         'page_title': 'D-fileUnavailable',
@@ -721,6 +723,66 @@ class tmplink {
             }
             this.loading_box_off();
         });
+    }
+
+    single_download_start(url, filename) {
+        var xhr = new XMLHttpRequest();
+        xhr.addEventListener("progress", (evt) => {
+            this.single_download_progress_on(evt, filename);
+        }, false);
+        xhr.addEventListener("error", (evt) => {
+            this.alert('下载发生错误，请重试。');
+            this.single_download_reset();
+        }, false);
+        xhr.addEventListener("abort", (evt) => {
+            this.alert('下载中断，请重试。');
+            this.single_download_reset();
+        }, false);
+        xhr.open("GET", url);
+        xhr.onload = () => {
+            this.single_download_complete(xhr, filename);
+        };
+        xhr.responseType = 'blob';
+        xhr.send();
+        $('.single_download_msg').html('准备中，正在开始下载...');
+        $('.single_download_progress_bar').fadeIn();
+        $('#btn_download').attr('disabled',true);
+        $('#file_btn_highdownload').attr('disabled',true);
+    }
+
+    single_download_complete(evt, filename) {
+        let blob = new Blob([evt.response], {
+            type: evt.response.type
+        });
+        //ie的下载
+        if (window.navigator.msSaveOrOpenBlob) {
+            navigator.msSaveBlob(blob, filename);
+        } else {
+            //非ie的下载
+            let link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+            window.URL.revokeObjectURL(link.href);
+        }
+        //恢复进度条样式
+        $('.single_download_msg').html('下载完成.');
+        $('.single_download_progress_bar_set').removeClass('progress-bar-animated');
+        $('.single_download_progress_bar_set').removeClass('progress-bar-striped');
+        this.single_download_reset();
+        this.download_queue_run();
+    }
+
+    single_download_progress_on(evt) {
+        $('.single_download_msg').html('已下载... '+ this.bytetoconver(evt.loaded, true) );
+        $('.single_download_progress_bar_set').css('width', (evt.loaded / evt.total) * 100 + '%');
+        $('.single_download_progress_bar_set').addClass('progress-bar-animated');
+        $('.single_download_progress_bar_set').addClass('progress-bar-striped');
+    }
+
+    single_download_reset(){
+        $('#btn_download').removeAttr('disabled');
+        $('#file_btn_highdownload').removeAttr('disabled');
     }
 
     isWeixin() {
@@ -747,7 +809,7 @@ class tmplink {
 
     download_queue_add(url, filename, ukey, filesize, filetype) {
         // if (this.isWeixin()) {
-        //     this.alert(TL.language_data.file_not_allow_in_wechat);
+        //     this.alert(TL.languageData.file_not_allow_in_wechat);
         //     return false;
         // }
         if (this.isMobile()) {
@@ -847,7 +909,7 @@ class tmplink {
     }
 
     download_progress_on(evt, id, filename, index) {
-        //$('#download_queue_' + id).html(TL.language_data.download_run + filename + ' (' + this.bytetoconver(evt.loaded, true) + ' / ' + this.bytetoconver(evt.total, true) + ')');
+        //$('#download_queue_' + id).html(TL.languageData.download_run + filename + ' (' + this.bytetoconver(evt.loaded, true) + ' / ' + this.bytetoconver(evt.total, true) + ')');
         $('.download_progress_bar_set_' + index).css('width', (evt.loaded / evt.total) * 100 + '%');
         if (evt.loaded == evt.total) {
             $('.download_progress_bar_' + index).fadeOut();
@@ -856,22 +918,23 @@ class tmplink {
 
     download_file() {
         this.loading_box_on();
-        $('#btn_download').addClass('disabled');
-        $('#btn_download').html(this.language_data.file_btn_download_status0);
+        // $('#btn_download').addClass('disabled');
+        // $('#btn_download').html(this.languageData.file_btn_download_status0);
         $.post(this.api_file, {
             action: 'download_check',
             token: this.api_token
         }, (rsp) => {
             if (rsp.status == 1) {
-                location.href = $('#btn_download').attr('x-href');
-                $('#btn_download').html(this.language_data.file_btn_download_status2);
+                // location.href = $('#btn_download').attr('x-href');
+                // $('#btn_download').html(this.languageData.file_btn_download_status2);
+                this.single_download_start($('.single_download_progress_bar').attr('data-href'),$('.single_download_progress_bar').attr('data-filename'));
             } else {
-                $('#btn_download').html(this.language_data.file_btn_download_status1);
+                $('#btn_download').html(this.languageData.file_btn_download_status1);
             }
-            setTimeout(() => {
-                $('#btn_download').removeClass('disabled');
-                $('#btn_download').html(this.language_data.file_btn_download);
-            }, 3000);
+            // setTimeout(() => {
+            //     $('#btn_download').removeClass('disabled');
+            //     $('#btn_download').html(this.languageData.file_btn_download);
+            // }, 3000);
             this.loading_box_off();
         }, 'json');
     }
@@ -903,7 +966,7 @@ class tmplink {
         //在移动设备上无法使用全部下载功能
         let room_key = 'app_room_view' + this.room.mr_id;
         if (this.isMobile()) {
-            this.alert(this.language_data.alert_no_support);
+            this.alert(this.languageData.alert_no_support);
             return false;
         }
         this.loading_box_on();
@@ -976,7 +1039,7 @@ class tmplink {
 
     storage_buy_modal() {
         if (this.logined === 0) {
-            this.alert(this.language_data.status_need_login);
+            this.alert(this.languageData.status_need_login);
             return false;
         }
         $('#storageModal').modal('show');
@@ -984,19 +1047,19 @@ class tmplink {
 
     hs_buy_modal() {
         if (this.logined === 0) {
-            this.alert(this.language_data.status_need_login);
+            this.alert(this.languageData.status_need_login);
             return false;
         }
         $('#highspeedModal').modal('show');
     }
 
-    hs_download_file() {
+    hs_download_file(filename) {
         if (this.logined === 0) {
-            this.alert(this.language_data.status_need_login);
+            this.alert(this.languageData.status_need_login);
             return false;
         }
         $('#btn_highdownload').addClass('disabled');
-        $('#btn_highdownload').html(this.language_data.file_btn_download_status0);
+        $('#btn_highdownload').html(this.languageData.file_btn_download_status0);
         $.post(this.api_file, {
             action: 'highspeed_check',
             token: this.api_token
@@ -1004,21 +1067,22 @@ class tmplink {
             if (rsp.status == 0) {
                 $('#highspeedModal').modal('show');
                 $('#btn_highdownload').removeClass('disabled');
-                $('#btn_highdownload').html(this.language_data.file_btn_highdownload);
+                $('#btn_highdownload').html(this.languageData.file_btn_highdownload);
             } else {
                 $.post(this.api_file, {
                     action: 'download_check',
                     token: this.api_token
                 }, (rsp) => {
                     if (rsp.status == 1) {
-                        location.href = $('#btn_download').attr('x-href');
-                        $('#btn_highdownload').html(this.language_data.file_btn_download_status2);
+                        // location.href = $('#btn_download').attr('x-href');
+                        // $('#btn_highdownload').html(this.languageData.file_btn_download_status2);
+                        this.single_download_start($('.single_download_progress_bar').attr('data-href'),$('.single_download_progress_bar').attr('data-filename'));
                     } else {
-                        $('#btn_highdownload').html(this.language_data.file_btn_download_status1);
+                        $('#btn_highdownload').html(this.languageData.file_btn_download_status1);
                     }
                     setTimeout(() => {
                         $('#btn_highdownload').removeClass('disabled');
-                        $('#btn_highdownload').html(this.language_data.file_btn_highdownload);
+                        $('#btn_highdownload').html(this.languageData.file_btn_highdownload);
                     }, 3000);
                 }, 'json');
             }
@@ -1027,7 +1091,7 @@ class tmplink {
 
     hs_download_buy() {
         if (this.logined === 0) {
-            this.alert(this.this.language_data.status_need_login);
+            this.alert(this.this.languageData.status_need_login);
             return false;
         }
         var price = $('#highspeed_opt').val();
@@ -1041,7 +1105,7 @@ class tmplink {
 
     storage_buy() {
         if (this.logined === 0) {
-            this.alert(this.this.language_data.status_need_login);
+            this.alert(this.this.languageData.status_need_login);
             return false;
         }
         var price = 0;
@@ -1097,13 +1161,13 @@ class tmplink {
             r[i].etime = data[i].etime;
             switch (data[i].code) {
                 case 'hs':
-                    r[i].name = this.language_data.service_code_hs;
-                    r[i].des = this.language_data.service_code_hs_des;
+                    r[i].name = this.languageData.service_code_hs;
+                    r[i].des = this.languageData.service_code_hs_des;
                     r[i].icon = 'fas fa-rabbit-fast';
                     break;
                 case 'storage':
-                    r[i].name = this.language_data.service_code_storage + ' (' + this.bytetoconver(data[i].val, true) + ')';
-                    r[i].des = this.language_data.service_code_storage_des;
+                    r[i].name = this.languageData.service_code_storage + ' (' + this.bytetoconver(data[i].val, true) + ')';
+                    r[i].des = this.languageData.service_code_storage_des;
                     r[i].icon = 'fad fa-box-heart';
                     break;
             }
@@ -1338,11 +1402,11 @@ class tmplink {
                 email: email
             }, (rsp) => {
                 $('#notice_add_user').addClass('alert-danger');
-                $('#notice_add_user').html(this.language_data.form_btn_processed);
+                $('#notice_add_user').html(this.languageData.form_btn_processed);
                 this.mr_user_list();
                 setTimeout(() => {
                     $('#notice_add_user').removeClass('alert-danger');
-                    $('#notice_add_user').html(this.language_data.model_add_user_notice);
+                    $('#notice_add_user').html(this.languageData.model_add_user_notice);
                     $('#modal_add_user_btn').fadeIn(300);
                 }, 2000);
             });
@@ -1395,14 +1459,14 @@ class tmplink {
         var parent = $('#mr_parent_id').val();
         var top = $('#mr_top_id').val();
         if (model == '' && name == '') {
-            $('#notice_meetingroom_create').html(this.language_data.notice_meetingroom_status_mrcreat_fail);
+            $('#notice_meetingroom_create').html(this.languageData.notice_meetingroom_status_mrcreat_fail);
             return false;
         }
         if (parent > 0) {
             model = 0;
         }
         $('#modal_meetingroom_create_btn').attr('disabled', true);
-        $('#notice_meetingroom_create').html(this.language_data.notice_meetingroom_status_proccessing);
+        $('#notice_meetingroom_create').html(this.languageData.notice_meetingroom_status_proccessing);
         this.recaptcha_do('mr_add', (recaptcha) => {
             $.post(this.api_mr, {
                 action: 'create',
@@ -1415,7 +1479,7 @@ class tmplink {
                 model: model
             }, (rsp) => {
                 if (rsp.status == 1) {
-                    $('#notice_meetingroom_create').html(this.language_data.notice_meetingroom_status_mrcreated);
+                    $('#notice_meetingroom_create').html(this.languageData.notice_meetingroom_status_mrcreated);
                     if (mr_id == 0) {
                         this.mr_list();
                     } else {
@@ -1423,7 +1487,7 @@ class tmplink {
                     }
                     $('#mrCreaterModal').modal('hide');
                 } else {
-                    $('#notice_meetingroom_create').html(this.language_data.notice_meetingroom_status_mrcreat_fail);
+                    $('#notice_meetingroom_create').html(this.languageData.notice_meetingroom_status_mrcreat_fail);
                 }
                 setTimeout(() => {
                     $('#modal_meetingroom_create_btn').removeAttr('disabled');
@@ -1457,7 +1521,7 @@ class tmplink {
     }
 
     mr_newname(mrid) {
-        var newname = prompt(this.language_data.modal_meetingroom_newname, "none");
+        var newname = prompt(this.languageData.modal_meetingroom_newname, "none");
         this.recaptcha_do('mr_newname', (recaptcha) => {
             $.post(this.api_mr, {
                 action: 'rename',
@@ -1542,7 +1606,7 @@ class tmplink {
                     this.room.ownner = 0;
                     this.room.mr_id = 0;
                     $('#file_messenger_icon').html('<i class="fas fa-folder-times  fa-4x"></i>');
-                    $('#file_messenger_msg').html(this.language_data.room_status_fail);
+                    $('#file_messenger_msg').html(this.languageData.room_status_fail);
                     $('#file_messenger').show();
                     gtag('config', 'UA-96864664-3', {
                         'page_title': 'F-Unavailable',
@@ -1589,8 +1653,8 @@ class tmplink {
         var password = $('#password').val();
         $('#submit').attr('disabled', true);
         $('#msg_notice').fadeIn();
-        $('#submit').html(this.language_data.form_btn_processing);
-        $('#msg_notice').html(this.language_data.form_btn_processing);
+        $('#submit').html(this.languageData.form_btn_processing);
+        $('#msg_notice').html(this.languageData.form_btn_processing);
         this.recaptcha_do('init', (recaptcha) => {
             if (email !== '' && password !== '') {
                 $.post(this.api_user, {
@@ -1601,7 +1665,7 @@ class tmplink {
                     password: password
                 }, (rsp) => {
                     if (rsp.status == 1) {
-                        $('#msg_notice').html(this.language_data.login_ok);
+                        $('#msg_notice').html(this.languageData.login_ok);
                         this.logined = 1;
                         this.get_details(() => {
                             localStorage.setItem('app_login', 1);
@@ -1609,8 +1673,8 @@ class tmplink {
                             //app.open('/workspace');
                         });
                     } else {
-                        $('#msg_notice').html(this.language_data.login_fail);
-                        $('#submit').html(this.language_data.form_btn_login);
+                        $('#msg_notice').html(this.languageData.login_fail);
+                        $('#submit').html(this.languageData.form_btn_login);
                         $('#submit').removeAttr('disabled');
                     }
                 });
@@ -1677,8 +1741,8 @@ class tmplink {
         var rpassword = $('#rpassword').val();
         var code = $('#checkcode').val();
         $('#msg_notice').fadeIn();
-        $('#msg_notice').html(this.language_data.form_btn_processing);
-        $('#submit').html(this.language_data.form_btn_login);
+        $('#msg_notice').html(this.languageData.form_btn_processing);
+        $('#submit').html(this.languageData.form_btn_login);
         $('#submit').attr('disabled', true);
         this.recaptcha_do('init', (recaptcha) => {
             $.post(this.api_user, {
@@ -1691,8 +1755,8 @@ class tmplink {
                 code: code
             }, (rsp) => {
                 if (rsp.status === 1) {
-                    $('#msg_notice').html(this.language_data.reg_finish);
-                    $('#submit').html(this.language_data.reg_finish);
+                    $('#msg_notice').html(this.languageData.reg_finish);
+                    $('#submit').html(this.languageData.reg_finish);
                     this.get_details(() => {
                         gtag('event', 'conversion', {
                             'send_to': 'AW-977119233/7Pa-CNH4qbkBEIHQ9tED'
@@ -1703,7 +1767,7 @@ class tmplink {
                     });
                 } else {
                     $('#msg_notice').html(rsp.data);
-                    $('#submit').html(this.language_data.form_btn_login);
+                    $('#submit').html(this.languageData.form_btn_login);
                     $('#submit').removeAttr('disabled');
                 }
             });
@@ -1713,8 +1777,8 @@ class tmplink {
     cc_send() {
         var email = $('#email').val();
         $('#msg_notice').fadeIn();
-        $('#msg_notice').html(this.language_data.form_btn_processing);
-        $('#button-reg-checkcode').html(this.language_data.form_btn_processing);
+        $('#msg_notice').html(this.languageData.form_btn_processing);
+        $('#button-reg-checkcode').html(this.languageData.form_btn_processing);
         $('#button-reg-checkcode').attr('disabled', true);
         this.recaptcha_do('checkcode', (recaptcha) => {
             if (email !== '') {
@@ -1726,11 +1790,11 @@ class tmplink {
                     email: email
                 }, (rsp) => {
                     if (rsp.status == 1) {
-                        $('#msg_notice').html(this.language_data.form_checkcode_msg_sended);
-                        $('#button-reg-checkcode').html(this.language_data.form_checkcode_sended);
+                        $('#msg_notice').html(this.languageData.form_checkcode_msg_sended);
+                        $('#button-reg-checkcode').html(this.languageData.form_checkcode_sended);
                     } else {
                         $('#msg_notice').html(this.error_text(rsp.status));
-                        $('#button-reg-checkcode').html(this.language_data.form_getcode);
+                        $('#button-reg-checkcode').html(this.languageData.form_getcode);
                         $('#button-reg-checkcode').removeAttr('disabled');
                     }
                 });
@@ -1739,16 +1803,16 @@ class tmplink {
     }
 
     error_text(code) {
-        let msg = this.language_data.status_error_0;
+        let msg = this.languageData.status_error_0;
         switch (code) {
             case 9:
-                msg = this.language_data.status_error_9;
+                msg = this.languageData.status_error_9;
                 break;
             case 11:
-                msg = this.language_data.status_error_11;
+                msg = this.languageData.status_error_11;
                 break;
             case 10:
-                msg = this.language_data.status_error_10;
+                msg = this.languageData.status_error_10;
                 break;
         }
         return msg;
@@ -1769,14 +1833,14 @@ class tmplink {
             $('#uploadCliModal').modal('show');
             $('#upload_cli_token').html(this.api_token);
         } else {
-            this.alert(this.language_data.status_need_login);
+            this.alert(this.languageData.status_need_login);
             app.open('/login');
         }
     }
 
     upload_open(mr_id) {
         if (!this.logined) {
-            this.alert(this.language_data.status_need_login);
+            this.alert(this.languageData.status_need_login);
             return false;
         }
 
@@ -1825,27 +1889,27 @@ class tmplink {
         let id = file_res.id;
         let model = this.upload_model_get();
         if (file.size > this.single_file_size) {
-            this.alert(this.language_data.upload_limit_size);
+            this.alert(this.languageData.upload_limit_size);
             $('#uq_' + id).fadeOut();
             return false;
         }
         if (this.logined === false) {
-            $('#notice_upload').html(this.language_data.upload_model99_needs_login);
+            $('#notice_upload').html(this.languageData.upload_model99_needs_login);
             $('#uq_' + id).fadeOut();
             return false;
         }
         if (this.storage == 0) {
-            $('#notice_upload').html(this.language_data.upload_buy_storage);
+            $('#notice_upload').html(this.languageData.upload_buy_storage);
             $('#uq_' + id).fadeOut();
             return false;
         }
         if (file.size > (this.storage - this.storage_used)) {
-            $('#notice_upload').html(this.language_data.upload_fail_storage);
+            $('#notice_upload').html(this.languageData.upload_fail_storage);
             $('#uq_' + id).fadeOut();
             return false;
         }
         $('#uq_delete_' + id).hide();
-        $('#notice_upload').html(this.language_data.upload_upload_prepare);
+        $('#notice_upload').html(this.languageData.upload_upload_prepare);
         this.upload_prepare(file, id, (f, sha1, id) => {
             //如果sha1不等于0，则调用另外的接口直接发送文件名信息。
             let filename = is_dir ? file.webkitRelativePath : file.name;
@@ -2027,7 +2091,7 @@ class tmplink {
     upload_progress(evt, id) {
         if (evt.lengthComputable) {
             if (evt.total === evt.loaded) {
-                $('#notice_upload').html(this.language_data.upload_sync);
+                $('#notice_upload').html(this.languageData.upload_sync);
                 $('#uqp_' + id).css('width', '100%');
                 $('#uqp_' + id).addClass('progress-bar-striped');
                 $('#uqp_' + id).addClass('progress-bar-animated');
@@ -2065,7 +2129,7 @@ class tmplink {
     upload_failed(evt, id) {
         clearInterval(this.upload_progressbar_counter[id]);
         this.upload_progressbar_counter[id] = null;
-        this.alert(this.language_data.upload_fail);
+        this.alert(this.languageData.upload_fail);
         $('#uq_' + id).fadeOut();
         this.upload_processing = 0;
         this.upload_start();
@@ -2074,7 +2138,7 @@ class tmplink {
     upload_canceled(evt, id) {
         clearInterval(this.upload_progressbar_counter[id]);
         this.upload_progressbar_counter[id] = null;
-        this.alert(this.language_data.upload_cancel);
+        this.alert(this.languageData.upload_cancel);
         $('#uq_' + id).fadeOut();
         this.upload_processing = 0;
         this.upload_start();
@@ -2082,7 +2146,7 @@ class tmplink {
 
     upload_final(rsp, file, id) {
         $('#uq_' + id).fadeOut();
-        $('#nav_upload_btn').html(this.language_data.nav_upload);
+        $('#nav_upload_btn').html(this.languageData.nav_upload);
         if (rsp.status === 1) {
             // $('#uploaded_file_box').append(app.tpl('upload_list_ok_tpl', {
             //     name: file.name,
@@ -2091,7 +2155,7 @@ class tmplink {
             // }));
             this.btn_copy_bind();
         } else {
-            alert(this.language_data.upload_fail);
+            alert(this.languageData.upload_fail);
         }
         if (this.upload_mrid_get() != 0 && this.upload_queue_file.length == 0) {
             this.room_list();
@@ -2099,7 +2163,7 @@ class tmplink {
         if (this.upload_mrid_get() == 0 && this.upload_queue_file.length == 0) {
             this.workspace_filelist();
         }
-        $('#notice_upload').html(this.language_data.upload_ok);
+        $('#notice_upload').html(this.languageData.upload_ok);
         // this.upload_processing = 0;
         // this.upload_start();
     }
@@ -2113,14 +2177,14 @@ class tmplink {
         var ukey = $('#report_ukey').html();
         var reason = $('#report_model').val();
         $('#reportbtn').attr('disabled', true);
-        $('#reportbtn').html(this.language_data.form_btn_processed);
+        $('#reportbtn').html(this.languageData.form_btn_processed);
         $.post(this.api_file, {
             'action': 'report',
             'token': this.api_token,
             'reason': reason,
             'ukey': ukey
         }, (rsp) => {
-            $('#reportbtn').html(this.language_data.form_btn_processed);
+            $('#reportbtn').html(this.languageData.form_btn_processed);
         }, 'json');
     }
 
@@ -2148,7 +2212,7 @@ class tmplink {
         data.storage_text = this.bytetoconver(this.storage, true);
         data.storage_used_text = this.bytetoconver(this.storage_used, true);
         data.percent = (this.storage_used / this.storage) * 100;
-        $('#upload_storage_status').html(this.language_data.model_title_buy_storage + ': ' + data.storage_used_text + ' | ' + data.storage_text);
+        $('#upload_storage_status').html(this.languageData.model_title_buy_storage + ': ' + data.storage_used_text + ' | ' + data.storage_text);
         // $('#upload_storage_status').html(app.tpl('upload_storage_status_tpl', data));
     }
 

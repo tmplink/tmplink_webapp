@@ -114,24 +114,24 @@
                     <% if(TL.room.owner==1){ %>
                         <button onclick="TL.upload_open('<% TL.room.mr_id %>');" tmpui-app="true" class="btn btn-sm btn-primary  mr-1  mt-1">
                             <i class="fad fa-cloud-upload fa-fw"></i>
-                            <span i18n="nav_upload" class="d-none d-sm-inline"><% TL.language_data.nav_upload %></span>
+                            <span i18n="nav_upload" class="d-none d-sm-inline"><% TL.languageData.nav_upload %></span>
                         </button>
                     <% } %>
                     <% if(TL.room.parent != 0){ %>
                         <a href="/room?mrid=<% TL.room.parent %>" tmpui-app="true" class="btn btn-sm btn-light text-azure mr-1  mt-1">
                             <i class="fad fa-arrow-square-left"></i>
-                            <span i18n="filelist_dir_parent" class="d-none d-sm-inline"><% TL.language_data.filelist_dir_parent %></span>
+                            <span i18n="filelist_dir_parent" class="d-none d-sm-inline"><% TL.languageData.filelist_dir_parent %></span>
                         </a>
                     <% } %>
                     <% if(TL.room.owner==1){ %>
                         <button class="btn btn-light text-azure btn-sm mr-1  mt-1" onclick="$('#mrCreaterModal').modal('show');$('#mr_id').val('<% TL.room.mr_id %>');$('#mr_parent_id').val('<% TL.room.parent %>');$('#mr_top_id').val('<% TL.room.top %>');">
                             <i class="fa-fw fad fa-folder-plus"></i>
-                            <span i18n="model_title_folder_title" class="d-none d-sm-inline"><% TL.language_data.model_title_folder_title %></span>
+                            <span i18n="model_title_folder_title" class="d-none d-sm-inline"><% TL.languageData.model_title_folder_title %></span>
                         </button>
                     <% } %>
                     <button class="btn btn-light text-azure btn-sm mr-1  mt-1" onclick="TL.download_allfile_btn();">
                         <i class="fa-fw fad fa-download"></i>
-                        <span i18n="file_btn_downloadall" class="d-none d-sm-inline"><% TL.language_data.file_btn_downloadall %></span>
+                        <span i18n="file_btn_downloadall" class="d-none d-sm-inline"><% TL.languageData.file_btn_downloadall %></span>
                     </button>
                 </script>
 
@@ -218,7 +218,7 @@
                         </div>
                     </a>
                     
-                    <div><% TL.language_data.filelist_dir %></div>
+                    <div><% TL.languageData.filelist_dir %></div>
                     <div>
                         <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="mt-1 btn_copy"><i class="fa-fw fad fa-share-alt"></i></a>
                         <% if (obj[x].type === 'owner') { %>
@@ -242,7 +242,7 @@
                             </div>
                             <div  class="col-12 col-md-6 col-lg-4 my-1 d-flex align-items-center justify-content-end">
                                 <span class="mr-2">
-                                    <% TL.language_data.filelist_dir %>
+                                    <% TL.languageData.filelist_dir %>
                                 </span>
                                 <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-share-alt"></i></a>
                                 <% if (obj[x].type === 'owner') { %>
@@ -344,16 +344,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    app.ready(function () {
-        TL.room_filelist_autoload_enabled();
-        TL.room_list(0);
-        $('.nav_upload').attr('disabled', true);
-        $('title').attr('i18n', 'title_rooom');
-        $('meta[name=description]').attr('i18n', 'des_room');
-    });
-    app.onExit(function () {
-        TL.room_filelist_autoload_disabled();
-    });
-</script>

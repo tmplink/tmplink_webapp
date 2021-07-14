@@ -123,7 +123,7 @@ class tools_file_manager {
             }
         }
 
-        alert(this.parent_op.language_data.status_error_12);
+        alert(this.parent_op.languageData.status_error_12);
         return false;
     }
 

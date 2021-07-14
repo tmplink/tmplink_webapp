@@ -1,8 +1,8 @@
 /**
  * tmpUI.js
- * version: 15
+ * version: 16
  * Github : https://github.com/tmplink/tmpUI
- * Date : 2021-7-14
+ * Date : 2021-7-145
  */
 
 'use strict';
@@ -415,7 +415,6 @@ class tmpUI {
         for (let i in this.config.path[url].res) {
 
             let contentType = this.config.path[url].res[i].type;
-            let content = this.config.path[url].res[i].dom;
             let contentReload = this.config.path[url].res[i].reload;
             let contentReloadTarget = contentReload === false ? 'tmpUIRes_once' : 'tmpUIRes';
 
@@ -777,37 +776,18 @@ class tmpUI {
     htmlAppend(dom, html) {
         this.domSelect(dom, (x) => {
             x.insertAdjacentHTML('beforeEnd', html);
-            this.scriptRewrite(x);
         });
     }
 
     htmlRewrite(dom, html) {
         this.domSelect(dom, (x) => {
             x.innerHTML = html;
-            this.scriptRewrite(x);
         });
     }
 
     htmlReplaceWith(dom, html) {
         this.domSelect(dom, (x) => {
             x.outerHTML = html;
-            this.scriptRewrite(x);
-        });
-    }
-
-    scriptRewrite(dom) {
-        dom.querySelectorAll('script').forEach((x) => {
-            let tag = x.getAttribute('tmpui-js');
-            if(tag==='true')
-            {
-                let script = document.createElement("script");
-                let body = document.querySelector("body");
-                script.type = "text/javascript";
-                script.text = x.text;
-                body.insertAdjacentHTML('beforeEnd', "<!--[runtime]-->");
-                body.appendChild(script);
-                x.setAttribute('tmpui-js','ok');
-            }
         });
     }
 
