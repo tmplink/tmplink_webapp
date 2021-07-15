@@ -140,23 +140,30 @@
             <script type="text/template" id="workspace_filelist_list_tpl">
                 <% for (var x in obj) { %>
                     <div class="row p-2 filelist-card shadow-sm mb-2 mx-0" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" id="file_unit_<% obj[x].ukey %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
-                        <div class="col-12 col-md-6 col-lg-8 mb-1 px-0 d-flex align-items-center listfontweight filename">
-                            
-                            <input type="checkbox" name="items_box" class="d-none" onclick="TL.file_manager.checkbox_onclick(this);" />
-                            <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw d-none d-md-block fa-2x text-azure"></i>
-                            <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" class="text-azure mr-1" target="_blank">
-                                <% obj[x].fname %>
-                            </a>
-                            <% if(obj[x].dir_name!=null){ %>
-                                <i class="fad fa-folder-open fa-fw fa-2x text-cyan"></i>
-                                <a href="/room&mrid=<% obj[x].mrid %>" tmpui-app="true"> <% obj[x].dir_name %></a>
-                            <% } %>
-                            <% if(obj[x].model!=99){ %>
-                                <!--[这里处理剩余时间]-->
-                                <i class="fa-fw far fa-stopwatch"></i> <% obj[x].hp_time %>
-                            <% } %>
+                        
+                        <div class="col-12 col-md-7 col-lg-8 mb-1 px-0 d-flex align-items-center listfontweight filename">
+                            <div class="row">
+                                <div class="col-12 filename">
+                                    <input type="checkbox" name="items_box" class="d-none" onclick="TL.file_manager.checkbox_onclick(this);" />
+                                    <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
+                                    <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" class="text-azure mr-1" target="_blank">
+                                        <% obj[x].fname %>
+                                    </a>
+                                    <% if(obj[x].model!=99){ %>
+                                        <!--[这里处理剩余时间]-->
+                                        <i class="fa-fw far fa-stopwatch"></i> <% obj[x].hp_time %>
+                                    <% } %>
+                                </div>
+
+                                <div class="col-12">
+                                    <% if(obj[x].dir_name!=null){ %>
+                                        <i class="fad fa-folder-open fa-fw text-cyan"></i>
+                                        <a href="/room&mrid=<% obj[x].mrid %>" tmpui-app="true"> <% obj[x].dir_name %></a>
+                                    <% } %>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-4 my-1 d-flex align-items-center justify-content-end">
+                        <div class="col-12 col-md-5 col-lg-4 my-1 d-flex align-items-center justify-content-end">
                             <span class="mr-2"><% obj[x].fsize_formated %></span>
                             <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fad fa-download"></i></button>
                             <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-share-alt"></i></button>

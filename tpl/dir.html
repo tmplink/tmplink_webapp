@@ -24,18 +24,39 @@
 
             <script type="text/template" id="meetroom_list_tpl">
                 <% for (var x in obj) { %>
-                <div class="row p-2 filelist-card shadow-sm mb-2 mx-1" id="meetingroom_id_<% obj[x].mr_id %>">
-                    <div class="col-12 col-md- 6my-1 px-0 d-flex align-items-center listfontweight filename">
-                        <i class="fad fa-folders fa-fw d-none d-md-block text-cyan"></i>
-                        &nbsp
-                        <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true">
-                            <% obj[x].name %> &nbsp&nbsp&nbsp
+                    <div class="col-6 col-md-3 col-lg-2 p-2 text-center dir-icon" id="meetingroom_id_<% obj[x].mr_id %>">
+                        <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true" target="_blank">
+                            <div class="fileicon mx-auto mb-2">
+                                <i class="fad fa-folders fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
+                            </div>
+                            <div class="max-width-90 mx-auto">
+                                <div class="text-truncate" alt="<% obj[x].name %>"><% obj[x].name %></div>
+                            </div>
                         </a>
-                        <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-share-alt"></i></a>
-                        <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fad fa-trash"></i></a>
-                        <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="btn btn-sm btn-light mx-1"><i class="fad fa-edit"></i></a>
+                        <div>
+                            <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="btn_copy btn btn-sm btn-azure"><i class="fa-fw fad fa-share-alt"></i></a>
+                            <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="btn btn-sm btn-azure"><i class="fad fa-edit"></i></a>
+                            <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="btn btn-sm btn-outline-danger" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fad fa-trash"></i></a>
+                        </div>
                     </div>
-                </div>
+                <% } %>
+            </script>
+            <script type="text/template" id="meetroom_list_tpl_list">
+                <% for (var x in obj) { %>
+                    <div class="row p-2 dir-icon filelist-card shadow-sm mb-2 mx-0" id="meetingroom_id_<% obj[x].mr_id %>">
+                        <div class="col-12 col-md-6 col-lg-8 my-1 px-0 d-flex align-items-center listfontweight filename">
+                            <i class="fad fa-folders text-cyan fa-fw d-none d-md-block"></i>
+                            &nbsp
+                            <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true">
+                                <% obj[x].name %>
+                            </a>
+                        </div>
+                        <div  class="col-12 col-md-6 col-lg-4 my-1 d-flex align-items-center justify-content-end">
+                            <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-share-alt"></i></a>
+                            <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fad fa-trash"></i></a>
+                            <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="btn btn-sm btn-light mx-1"><i class="fad fa-edit"></i></a>
+                        </div>
+                    </div>
                 <% } %>
             </script>
         </div>

@@ -503,7 +503,6 @@ class tmpUI {
                 }
             }
         }
-
         if (this.languageConfig !== false) {
             this.languageBuild();
         }
@@ -598,50 +597,65 @@ class tmpUI {
     }
 
     languageSet(lang) {
-        var old = localStorage.getItem('language');
+        this.log("languageSet : " + lang);
+        var old = localStorage.getItem('tmpUI_language');
         if (old === lang) {
             return false;
         } else {
-            localStorage.setItem('language', lang);
+            localStorage.setItem('tmpUI_language', lang);
             this.languageBuild();
         }
     }
 
     languageGet() {
-        return localStorage.getItem('language');
+        return localStorage.getItem('tmpUI_language');
     }
 
     async languageBuild() {
         //init language
-        var lang = localStorage.getItem('language');
-        this.log("language setting...." + lang);
+        var lang = localStorage.getItem('tmpUI_language');
         if (lang === null) {
+            this.log("language auto detect : " + lang);
             var langs = navigator.language;
-            this.languageSetting = 'en';
-            if (langs === 'zh-CN' || langs === 'zh-SG' || langs === 'zh') {
-                this.languageSetting = 'cn';
+            switch (langs) {
+                case 'zh-CN':
+                    this.languageSetting = 'cn';
+                    break;
+                case 'zh-TW':
+                    this.languageSetting = 'hk';
+                    break;
+                case 'zh-SG':
+                    this.languageSetting = 'cn';
+                    break;
+                case 'zh-HK':
+                    this.languageSetting = 'hk';
+                    break;
+                case 'ja-JP':
+                    this.languageSetting = 'jp';
+                    break;
+                case 'ko-KR':
+                    this.languageSetting = 'kr';
+                    break;
+                case 'ru-MI':
+                    this.languageSetting = 'ru';
+                    break;
+                case 'ms':
+                    this.languageSetting = 'ms';
+                    break;
+                case 'de':
+                    this.languageSetting = 'de';
+                    break;
+                case 'fr':
+                    this.languageSetting = 'fr';
+                    break;
+                case 'en-US':
+                    this.languageSetting = 'en';
+                    break;
+                default:
+                    this.languageSetting = 'en';
+                    break;
             }
-
-            if (langs === 'zh-TW' || langs === 'zh-HK') {
-                this.languageSetting = 'hk';
-            }
-
-            if (langs === 'ja' || langs === 'ja-JP') {
-                this.languageSetting = 'jp';
-            }
-
-            if (langs === 'ru' || langs === 'ru-MI') {
-                this.languageSetting = 'ru';
-            }
-
-            if (langs === 'ko') {
-                this.languageSetting = 'kr';
-            }
-
-            if (langs === 'ms') {
-                this.languageSetting = 'my';
-            }
-            localStorage.setItem('language', this.languageSetting);
+            localStorage.setItem('tmpUI_language', this.languageSetting);
         } else {
             this.languageSetting = lang;
         }

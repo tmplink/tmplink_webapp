@@ -946,10 +946,10 @@ class tmplink {
         let type = this.list_data[i].ftype;
         // $('#btn_download_' + ukey).addClass('disabled');
         // $('#btn_download_' + ukey).html('<i class="fas fa-check-circle fa-fw text-green"></i>');
-        if (this.isMobile()) {
-            window.open('https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + ukey);
-            return false;
-        }
+        // if (this.isMobile()) {
+        //     window.open('https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + ukey);
+        //     return false;
+        // }
         this.download_queue_add('https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + ukey, title, ukey, size, type);
         this.download_queue_start();
         //this.download_queue_run();
@@ -965,10 +965,10 @@ class tmplink {
     download_allfile_btn() {
         //在移动设备上无法使用全部下载功能
         let room_key = 'app_room_view' + this.room.mr_id;
-        if (this.isMobile()) {
-            this.alert(this.languageData.alert_no_support);
-            return false;
-        }
+        // if (this.isMobile()) {
+        //     this.alert(this.languageData.alert_no_support);
+        //     return false;
+        // }
         this.loading_box_on();
         let search = $('#room_search').val();
         var params = this.get_url_params();

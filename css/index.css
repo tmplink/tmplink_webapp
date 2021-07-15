@@ -212,3 +212,14 @@ body::-webkit-scrollbar-corner {
     border-radius: 20px;
     border-width: 1px;
 }
+
+.dir-icon:hover {
+    border-radius: 5px;
+    border-width: 1px;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+    background-color: beige;
+}
+
+.dir-icon a{
+    text-decoration: none;
+}
