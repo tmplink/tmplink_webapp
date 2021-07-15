@@ -735,7 +735,9 @@ class tmplink {
         xhr.addEventListener("error", (evt) => {
             if (this.download_retry < this.download_retry_max) {
                 this.download_retry++;
-                this.single_download_start(url, filename);
+                setTimeout(() => {
+                    this.single_download_start(url, filename);
+                }, 3000);
             } else {
                 this.alert('下载发生错误，请重试。');
                 this.single_download_reset();
@@ -879,7 +881,10 @@ class tmplink {
         xhr.addEventListener("error", (evt) => {
             if (this.download_retry < this.download_retry_max) {
                 this.download_retry++;
-                this.download_queue_progress_start(url, filename, id, index);
+                setTimeout(() => {
+                    this.download_queue_progress_start(url, filename, id, index);
+                }, 3000);
+
             } else {
                 delete this.download_queue[index];
                 this.download_queue_start();
@@ -1995,12 +2000,14 @@ class tmplink {
                 }, false);
                 xhr.addEventListener("error", (evt) => {
                     //add retry
-                    if(this.download_retry<this.download_retry_max){
+                    if (this.download_retry < this.download_retry_max) {
                         this.download_retry++;
-                        this.upload_worker(file, id, filename);
-                    }else{
+                        setTimeout(()=>{
+                            this.upload_worker(file, id, filename);
+                        },1000);
+                    } else {
                         this.download_retry = 0;
-                        this.upload_failed(evt, id);   
+                        this.upload_failed(evt, id);
                     }
                 }, false);
                 xhr.addEventListener("abort", (evt) => {
