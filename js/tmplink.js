@@ -37,6 +37,8 @@ class tmplink {
     single_file_size = 10 * 1024 * 1024 * 1024
     file_manager = null
     upload_model_selected_val = 0
+    download_retry = 0
+    download_retry_max = 10
 
     constructor() {
         this.app_init();
@@ -731,8 +733,15 @@ class tmplink {
             this.single_download_progress_on(evt, filename);
         }, false);
         xhr.addEventListener("error", (evt) => {
-            this.alert('下载发生错误，请重试。');
-            this.single_download_reset();
+            if (this.download_retry < this.download_retry_max) {
+                this.download_retry++;
+                this.single_download_start(url, filename);
+            } else {
+                this.alert('下载发生错误，请重试。');
+                this.single_download_reset();
+                //reset download retry
+                this.download_retry = 0;
+            }
         }, false);
         xhr.addEventListener("abort", (evt) => {
             this.alert('下载中断，请重试。');
@@ -746,11 +755,12 @@ class tmplink {
         xhr.send();
         $('.single_download_msg').html('准备中，正在开始下载...');
         $('.single_download_progress_bar').fadeIn();
-        $('#btn_download').attr('disabled',true);
-        $('#file_btn_highdownload').attr('disabled',true);
+        $('#btn_download').attr('disabled', true);
+        $('#file_btn_highdownload').attr('disabled', true);
     }
 
     single_download_complete(evt, filename) {
+        this.download_retry = 0;
         let blob = new Blob([evt.response], {
             type: evt.response.type
         });
@@ -774,13 +784,13 @@ class tmplink {
     }
 
     single_download_progress_on(evt) {
-        $('.single_download_msg').html('已下载... '+ this.bytetoconver(evt.loaded, true) );
+        $('.single_download_msg').html('已下载... ' + this.bytetoconver(evt.loaded, true));
         $('.single_download_progress_bar_set').css('width', (evt.loaded / evt.total) * 100 + '%');
         $('.single_download_progress_bar_set').addClass('progress-bar-animated');
         $('.single_download_progress_bar_set').addClass('progress-bar-striped');
     }
 
-    single_download_reset(){
+    single_download_reset() {
         $('#btn_download').removeAttr('disabled');
         $('#file_btn_highdownload').removeAttr('disabled');
     }
@@ -867,8 +877,15 @@ class tmplink {
             this.download_queue_start();
         }, false);
         xhr.addEventListener("error", (evt) => {
-            delete this.download_queue[index];
-            this.download_queue_start();
+            if (this.download_retry < this.download_retry_max) {
+                this.download_retry++;
+                this.download_queue_progress_start(url, filename, id, index);
+            } else {
+                delete this.download_queue[index];
+                this.download_queue_start();
+                //reset download retry
+                this.download_retry = 0;
+            }
         }, false);
         xhr.addEventListener("abort", (evt) => {
             delete this.download_queue[index];
@@ -883,6 +900,7 @@ class tmplink {
     }
 
     download_queue_complete(evt, filename, id, index) {
+        this.download_retry = 0;
         let blob = new Blob([evt.response], {
             type: evt.response.type
         });
@@ -927,7 +945,7 @@ class tmplink {
             if (rsp.status == 1) {
                 // location.href = $('#btn_download').attr('x-href');
                 // $('#btn_download').html(this.languageData.file_btn_download_status2);
-                this.single_download_start($('.single_download_progress_bar').attr('data-href'),$('.single_download_progress_bar').attr('data-filename'));
+                this.single_download_start($('.single_download_progress_bar').attr('data-href'), $('.single_download_progress_bar').attr('data-filename'));
             } else {
                 $('#btn_download').html(this.languageData.file_btn_download_status1);
             }
@@ -1076,7 +1094,7 @@ class tmplink {
                     if (rsp.status == 1) {
                         // location.href = $('#btn_download').attr('x-href');
                         // $('#btn_highdownload').html(this.languageData.file_btn_download_status2);
-                        this.single_download_start($('.single_download_progress_bar').attr('data-href'),$('.single_download_progress_bar').attr('data-filename'));
+                        this.single_download_start($('.single_download_progress_bar').attr('data-href'), $('.single_download_progress_bar').attr('data-filename'));
                     } else {
                         $('#btn_highdownload').html(this.languageData.file_btn_download_status1);
                     }
@@ -1631,7 +1649,7 @@ class tmplink {
                         this.subroom_data = 0;
                     }
 
-                    if(this.room.owner===0){
+                    if (this.room.owner === 0) {
                         $('.not_owner').hide();
                     }
 
@@ -1976,7 +1994,14 @@ class tmplink {
                     this.upload_complete(evt, file, id)
                 }, false);
                 xhr.addEventListener("error", (evt) => {
-                    this.upload_failed(evt, id)
+                    //add retry
+                    if(this.download_retry<this.download_retry_max){
+                        this.download_retry++;
+                        this.upload_worker(file, id, filename);
+                    }else{
+                        this.download_retry = 0;
+                        this.upload_failed(evt, id);   
+                    }
                 }, false);
                 xhr.addEventListener("abort", (evt) => {
                     this.upload_canceled(evt, id)
@@ -2120,6 +2145,7 @@ class tmplink {
     }
 
     upload_complete(evt, file, id) {
+        this.download_retry = 0;
         clearInterval(this.upload_progressbar_counter[id]);
         this.upload_progressbar_counter[id] = null;
         var data = JSON.parse(evt.target.responseText);
