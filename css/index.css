@@ -220,6 +220,21 @@ body::-webkit-scrollbar-corner {
     background-color: beige;
 }
 
-.dir-icon a{
+.dir-icon a {
     text-decoration: none;
+}
+
+@media (any-hover: none) {
+    .dir-toolbar {
+        opacity: 1;
+    }
+}
+
+@media (any-hover: hover) {
+    .dir-toolbar {
+        opacity: 0;
+    }
+    .dir-toolbar:hover {
+        opacity: 1;
+    }
 }
