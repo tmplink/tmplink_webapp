@@ -1,4 +1,5 @@
 {
+    "model_title_alert": "A problem has occurred",
     "on_select_share":"Copy link", 
     "index_get_file1": "Get File",
     "index_get_file2": "Please enter the file key",
