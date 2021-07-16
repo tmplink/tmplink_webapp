@@ -75,12 +75,101 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content shadow-lg" ondrop="TL.upload_drop(event)">
             <div class="modal-header">
-                <h4 class="modal-title" id="upload_storage_status">.</h4>
+                <h4 class="modal-title">Upload</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="d-none d-sm-block text-left">
-                    <!-- large screen -->
+                <!--[新设计]-->
+                <div>
+                    <div class="select-box-all p-2">
+                        <div class="text-center">
+                            <h5>无限容量</h5>
+                        </div>
+                        <div class="select-box p-2">
+                            <div class="d-flex align-items-center">
+                                <span class="stamp stamp-md bg-blue mr-3">
+                                    <i class="mt-1 fal fa-history fa-2x fa-fw"></i>
+                                </span>
+                                <div>
+                                    <h4 class="m-0">
+                                        有效期：24 小时
+                                    </h4>
+                                    <small class="text-muted">
+                                        这个文件在 24 后将被自动销毁。
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="select-box p-2">
+                            <div class="d-flex align-items-center">
+                                <span class="stamp stamp-md bg-blue mr-3">
+                                    <i class="mt-1 fal fa-history fa-2x fa-fw"></i>
+                                </span>
+                                <div>
+                                    <h4 class="m-0">
+                                        有效期：3 天
+                                    </h4>
+                                    <small class="text-muted">
+                                        将在有人下载时自动延长这个期限。
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="select-box p-2">
+                            <div class="d-flex align-items-center">
+                                <span class="stamp stamp-md bg-blue mr-3">
+                                    <i class="mt-1 fal fa-history fa-2x fa-fw"></i>
+                                </span>
+                                <div>
+                                    <h4 class="m-0">
+                                        有效期：7 天
+                                    </h4>
+                                    <small class="text-muted">
+                                        将在有人下载时自动延长这个期限。
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="select-box-all p-2">
+                        <div class="text-center">
+                            <h5 id="upload_storage_status">无限容量</h5>
+                        </div>
+                        <div class="select-box p-2">
+                            <div class="d-flex align-items-center">
+                                <span class="stamp stamp-md bg-blue mr-3">
+                                    <i class="mt-1 fal fa-history fa-2x fa-fw"></i>
+                                </span>
+                                <div>
+                                    <h4 class="m-0">
+                                        有效期：30 天
+                                    </h4>
+                                    <small class="text-muted">
+                                        将在有人下载时自动延长这个期限。
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="select-box p-2">
+                            <div class="d-flex align-items-center">
+                                <span class="stamp stamp-md bg-blue mr-3">
+                                    <i class="mt-1 far fa-infinity fa-2x fa-fw"></i>
+                                </span>
+                                <div>
+                                    <h4 class="m-0">
+                                        永久
+                                    </h4>
+                                    <small class="text-muted">
+                                        它会一直活着。
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- <div class="d-none d-sm-block text-left">
                     <input type="file" id="fileToUpload" style="display: none;" multiple
                         onchange="TL.upload_selected();" />
                     <label for="fileToUpload" class="btn btn-primary mb-1">
@@ -116,13 +205,13 @@
                         <i class="fa-fw fad fa-layer-plus"></i>
                         <span i18n="model_btn_buy_storage">.</span>
                     </button>
-                    <button type="button" class="btn btn-danger mb-1" data-dismiss="modal" onclick="TL.upload_queue_clean()">
+                    <button type="button" class="btn btn-danger mb-1" data-dismiss="modal"
+                        onclick="TL.upload_queue_clean()">
                         <i class="fa-fw far fa-trash-alt"></i>
                         <span i18n="model_btn_upload_clean">.</span>
                     </button>
                 </div>
                 <div class="d-block d-sm-none">
-                    <!-- mobile -->
                     <input type="file" multiple="multiple" id="fileToUpload" style="display: none;"
                         onchange="TL.upload_selected();" />
                     <label for="fileToUpload" class="btn btn-block btn-primary mb-0" id="upload_btn">
@@ -157,7 +246,7 @@
                         <i class="fa-fw far fa-trash-alt"></i>
                         <span i18n="model_btn_upload_clean">.</span>
                     </button>
-                </div>
+                </div> -->
                 <input type="hidden" id="upload_model" value="0" />
                 <hr />
                 <div id="notice_upload" class="text-center" i18n="model_btn_select">
@@ -487,7 +576,8 @@
                 </div>
                 <div id="preview_download_1" class="col-12" style="display:none">
                     <div class="progress mt-2" style="height: 2px;">
-                        <div id="preview_download_2" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div id="preview_download_2" class="progress-bar bg-success" role="progressbar"
+                            style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
             </div>
@@ -524,7 +614,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="btn_sort_confirm" class="btn btn-light" onclick="TL.sort_confirm()" i18n="model_btn_ok">.</button>
+                <button id="btn_sort_confirm" class="btn btn-light" onclick="TL.sort_confirm()"
+                    i18n="model_btn_ok">.</button>
             </div>
         </div>
     </div>
@@ -541,13 +632,14 @@
                 <h5>默认的显示模式</h5>
                 <div class="form-group">
                     <select class="form-control" id="pf_display">
-                        <option value="list" i18n-only="html" >列表</option>
-                        <option value="photo" i18n-only="html" >图片</option>
+                        <option value="list" i18n-only="html">列表</option>
+                        <option value="photo" i18n-only="html">图片</option>
                     </select>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="btn_pf_confirm" class="btn btn-light" onclick="TL.room_performance_post()" i18n="model_btn_ok">.</button>
+                <button id="btn_pf_confirm" class="btn btn-light" onclick="TL.room_performance_post()"
+                    i18n="model_btn_ok">.</button>
             </div>
         </div>
     </div>
