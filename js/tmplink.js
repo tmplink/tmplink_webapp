@@ -111,7 +111,7 @@ class tmplink {
         let index = Math.floor((Math.random() * bglist.length));
         let img = new Image();
         //img.src = '/img/bg/core/'+bglist[index]+'.jpg';
-        img.src = 'https://global-tmplink.vx-cdn.com/img/bg/s3.jpg';
+        img.src = '/img/bg/s3.jpg';
         img.onload = () => {
             if (img.height >= 1080 && img.width >= 1920) {
                 $('body').append('<div id="background_wrap" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-size: cover;background-repeat: no-repeat;background-attachment: scroll;background-image:url(' + img.src + ');"></div>');
