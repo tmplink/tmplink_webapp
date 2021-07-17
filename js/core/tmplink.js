@@ -138,6 +138,7 @@ class tmplink {
         }
         this.get_details(() => {
             this.get_details_do = true;
+            this.storage_status_update();
             this.head_set();
         });
     }
@@ -161,27 +162,36 @@ class tmplink {
         console.log('upload::model::' + model);
         switch (model) {
             case 0:
-                $('.current_selected').html(this.languageData.modal_settings_upload_model1);
+                $('#seleted_model').html(this.languageData.modal_settings_upload_model1);
                 $('#upload_model').val(0);
                 break;
             case 1:
-                $('.current_selected').html(this.languageData.modal_settings_upload_model2);
+                $('#seleted_model').html(this.languageData.modal_settings_upload_model2);
                 $('#upload_model').val(1);
                 break;
             case 2:
-                $('.current_selected').html(this.languageData.modal_settings_upload_model3);
+                $('#seleted_model').html(this.languageData.modal_settings_upload_model3);
                 $('#upload_model').val(2);
                 break;
             case 3:
-                $('.current_selected').html(this.languageData.modal_settings_upload_model3);
-                $('#upload_model').val(4);
+                $('#seleted_model').html(this.languageData.modal_settings_upload_model4);
+                $('#upload_model').val(3);
                 break;
             case 99:
-                $('.current_selected').html(this.languageData.modal_settings_upload_model99);
+                $('#seleted_model').html(this.languageData.modal_settings_upload_model99);
                 $('#upload_model').val(99);
                 break;
         }
+        $('#select_model_list').hide();
+        $('#upload_select_file').show();
+        $('#selected_model_box').show();
         localStorage.setItem('app_upload_model', model);
+    }
+
+    upload_model_reset(){
+        $('#select_model_list').show();
+        $('#upload_select_file').hide();
+        $('#selected_model_box').hide();
     }
 
     dir_tree_get() {
@@ -1867,13 +1877,12 @@ class tmplink {
             return false;
         }
 
-        this.storage_status_update();
         if (mr_id == 0) {
             $('#dirsToUpload').hide();
             $('#dirsToUpload_label').hide();
         }
 
-        this.upload_model_selected(Number(this.upload_model_selected_val));
+        // this.upload_model_selected(Number(this.upload_model_selected_val));
 
         $('#upload_mr_id').val(mr_id);
         $('#uploadModal').modal('show');
@@ -1917,22 +1926,22 @@ class tmplink {
             return false;
         }
         if (this.logined === false) {
-            $('#notice_upload').html(this.languageData.upload_model99_needs_login);
+            this.alert(this.languageData.upload_model99_needs_login);
             $('#uq_' + id).fadeOut();
             return false;
         }
         if (this.storage == 0) {
-            $('#notice_upload').html(this.languageData.upload_buy_storage);
+            this.alert(this.languageData.upload_buy_storage);
             $('#uq_' + id).fadeOut();
             return false;
         }
         if (file.size > (this.storage - this.storage_used)) {
-            $('#notice_upload').html(this.languageData.upload_fail_storage);
+            this.alert(this.languageData.upload_fail_storage);
             $('#uq_' + id).fadeOut();
             return false;
         }
         $('#uq_delete_' + id).hide();
-        $('#notice_upload').html(this.languageData.upload_upload_prepare);
+        $('#uqnn_' + id).html(this.languageData.upload_upload_prepare);
         this.upload_prepare(file, id, (f, sha1, id) => {
             //如果sha1不等于0，则调用另外的接口直接发送文件名信息。
             let filename = is_dir ? file.webkitRelativePath : file.name;
@@ -2123,10 +2132,11 @@ class tmplink {
     upload_progress(evt, id) {
         if (evt.lengthComputable) {
             if (evt.total === evt.loaded) {
-                $('#notice_upload').html(this.languageData.upload_sync);
+                $('#uqnn_' + id).html(this.languageData.upload_sync);
                 $('#uqp_' + id).css('width', '100%');
                 $('#uqp_' + id).addClass('progress-bar-striped');
                 $('#uqp_' + id).addClass('progress-bar-animated');
+                $('#uqm_' + id).fadeOut();
                 clearInterval(this.upload_progressbar_counter[id]);
                 this.upload_progressbar_counter[id] = null;
                 //执行下一个上传
@@ -2196,7 +2206,7 @@ class tmplink {
         if (this.upload_mrid_get() == 0 && this.upload_queue_file.length == 0) {
             this.workspace_filelist();
         }
-        $('#notice_upload').html(this.languageData.upload_ok);
+        $('#uqnn_' + id).html(this.languageData.upload_ok);
         // this.upload_processing = 0;
         // this.upload_start();
     }

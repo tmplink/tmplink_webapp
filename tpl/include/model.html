@@ -75,20 +75,26 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content shadow-lg" ondrop="TL.upload_drop(event)">
             <div class="modal-header">
-                <h4 class="modal-title">Upload</h4>
+                <h4 class="modal-title">上传文件</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <!--[新设计]-->
-                <div>
+                <div class="select-box-all p-2" id="selected_model_box" style="display: none;">
+                    <button type="button" class="btn btn-primary btn-sm text-right"
+                        onclick="TL.upload_model_reset()">重新设定</button>
+                    <span>上传文件的</span><span id="seleted_model"></span>
+                </div>
+                <div id="select_model_list">
+
                     <div class="select-box-all p-2">
                         <div class="text-center">
                             <h5>无限容量</h5>
                         </div>
-                        <div class="select-box p-2">
+                        <div class="select-box p-2 btn-point" onclick="TL.upload_model_selected(0)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 fal fa-history fa-2x fa-fw"></i>
+                                    <i class="mt-1 fal fa-history fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0">
@@ -100,10 +106,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="select-box p-2">
+                        <div class="select-box p-2 btn-point" onclick="TL.upload_model_selected(1)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 fal fa-history fa-2x fa-fw"></i>
+                                    <i class="mt-1 fal fa-history fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0">
@@ -115,10 +121,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="select-box p-2">
+                        <div class="select-box p-2 btn-point" onclick="TL.upload_model_selected(2)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 fal fa-history fa-2x fa-fw"></i>
+                                    <i class="mt-1 fal fa-history fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0">
@@ -131,15 +137,15 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="select-box-all p-2">
                         <div class="text-center">
                             <h5 id="upload_storage_status">无限容量</h5>
                         </div>
-                        <div class="select-box p-2">
+                        <div class="select-box p-2 btn-point" onclick="TL.upload_model_selected(3)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 fal fa-history fa-2x fa-fw"></i>
+                                    <i class="mt-1 fal fa-history fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0">
@@ -151,10 +157,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="select-box p-2">
+                        <div class="select-box p-2 btn-point" onclick="TL.upload_model_selected(99)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 far fa-infinity fa-2x fa-fw"></i>
+                                    <i class="mt-1 far fa-infinity fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0">
@@ -167,91 +173,50 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
-                </div>
-                <!-- <div class="d-none d-sm-block text-left">
-                    <input type="file" id="fileToUpload" style="display: none;" multiple
-                        onchange="TL.upload_selected();" />
-                    <label for="fileToUpload" class="btn btn-primary mb-1">
-                        <i class="fa-fw fad fa-file-upload"></i>
-                        <span id="uploaderbtn1" i18n="upload_or_drag">.</span>
-                    </label>
-                    <input type="file" id="dirsToUpload" style="display: none;" multiple directory webkitdirectory
-                        mozdirectory onchange="TL.upload_dir_selected();" />
-                    <label for="dirsToUpload" class="btn btn-primary mb-1" id="dirsToUpload_label">
-                        <i class="fa-fw fad fa-folder-upload"></i>
-                        <span id="uploaderbtn1" i18n="upload_dirs">.</span>
-                    </label>
-                    <div class="btn-group  mb-1">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa-fw far fa-stopwatch"></i>
-                            <span class="current_selected"></span>
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" onclick="TL.upload_model_selected(0)"
-                                i18n="modal_settings_upload_model1">.</a>
-                            <a class="dropdown-item" onclick="TL.upload_model_selected(1)"
-                                i18n="modal_settings_upload_model2">.</a>
-                            <a class="dropdown-item" onclick="TL.upload_model_selected(2)"
-                                i18n="modal_settings_upload_model3">.</a>
-                            <a class="dropdown-item" onclick="TL.upload_model_selected(3)"
-                                i18n="modal_settings_upload_model4">.</a>
-                            <a class="dropdown-item" onclick="TL.upload_model_selected(99)"
-                                i18n="modal_settings_upload_model99">.</a>
-                        </div>
+                <div id="upload_select_file" style="display: none;">
+                    <div class="select-box p-2 btn-point">
+                        <input type="file" multiple="multiple" id="fileToUpload" style="display: none;"
+                            onchange="TL.upload_selected();" />
+                        <label for="fileToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
+                            <div class="d-flex align-items-center">
+                                <span class="stamp stamp-md bg-blue mr-3">
+                                    <i class="mt-1 fad fa-file-upload fa-fw"></i>
+                                </span>
+                                <div>
+                                    <h4 class="m-0">
+                                        上传文件
+                                    </h4>
+                                    <small class="text-muted">
+                                        选择你要上传的文件，或者把文件拖动到这里。
+                                    </small>
+                                </div>
+                            </div>
+                        </label>
                     </div>
-                    <button type="button" class="btn btn-success mb-1" data-dismiss="modal"
-                        onclick="$('#uploadModal').modal('hide');setTimeout(TL.storage_buy_modal(),500);">
-                        <i class="fa-fw fad fa-layer-plus"></i>
-                        <span i18n="model_btn_buy_storage">.</span>
-                    </button>
-                    <button type="button" class="btn btn-danger mb-1" data-dismiss="modal"
-                        onclick="TL.upload_queue_clean()">
-                        <i class="fa-fw far fa-trash-alt"></i>
-                        <span i18n="model_btn_upload_clean">.</span>
-                    </button>
-                </div>
-                <div class="d-block d-sm-none">
-                    <input type="file" multiple="multiple" id="fileToUpload" style="display: none;"
-                        onchange="TL.upload_selected();" />
-                    <label for="fileToUpload" class="btn btn-block btn-primary mb-0" id="upload_btn">
-                        <i class="fa-fw fa fa-upload" aria-hidden="true"></i>
-                        <span id="uploaderbtn1" i18n="upload_files">.</span>
-                    </label>
-                    <div class="btn-group btn-block">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa-fw far fa-stopwatch"></i>
-                            <span class="current_selected"></span>
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" onclick="TL.upload_model_selected(0)"
-                                i18n="modal_settings_upload_model1">.</a>
-                            <a class="dropdown-item" onclick="TL.upload_model_selected(1)"
-                                i18n="modal_settings_upload_model2">.</a>
-                            <a class="dropdown-item" onclick="TL.upload_model_selected(2)"
-                                i18n="modal_settings_upload_model3">.</a>
-                            <a class="dropdown-item" onclick="TL.upload_model_selected(3)"
-                                i18n="modal_settings_upload_model4">.</a>
-                            <a class="dropdown-item" onclick="TL.upload_model_selected(99)"
-                                i18n="modal_settings_upload_model99">.</a>
-                        </div>
+                    <div class="select-box p-2 btn-point" id="dirsToUpload_label">
+                        <input type="file" id="dirsToUpload" style="display: none;" multiple directory webkitdirectory
+                            mozdirectory onchange="TL.upload_dir_selected();" />
+                        <label for="dirsToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
+                            <div class="d-flex align-items-center">
+                                <span class="stamp stamp-md bg-blue mr-3">
+                                    <i class="mt-1 fad fa-folder-upload fa-fw"></i>
+                                </span>
+                                <div>
+                                    <h4 class="m-0">
+                                        上传文件夹
+                                    </h4>
+                                    <small class="text-muted">
+                                        点击选择一个文件夹进行上传。
+                                    </small>
+                                </div>
+                            </div>
+                        </label>
                     </div>
-                    <button type="button" class="btn btn-success btn-block" data-dismiss="modal"
-                        onclick="$('#uploadModal').modal('hide');setTimeout(TL.storage_buy_modal(),500);">
-                        <i class="fa-fw fad fa-layer-plus"></i>
-                        <span i18n="model_btn_buy_storage">.</span>
-                    </button>
-                    <button type="button" class="btn btn-block btn-danger" data-dismiss="modal"
-                        onclick="TL.upload_queue_clean()">
-                        <i class="fa-fw far fa-trash-alt"></i>
-                        <span i18n="model_btn_upload_clean">.</span>
-                    </button>
-                </div> -->
+                </div>
+                
                 <input type="hidden" id="upload_model" value="0" />
-                <hr />
-                <div id="notice_upload" class="text-center" i18n="model_btn_select">
-                    .
-                </div>
 
                 <script type="text/template" id="upload_storage_status_tpl">
                     <div class="progress mb-4" style="height: 2rem;background-color: #343a40;">
@@ -261,10 +226,12 @@
                     </div>
                 </script>
 
-                <div id="uploaded_file_box" class="mt-2" style="max-height: 500px;overflow:scroll;"></div>
+                <div id="uploaded_file_box" class="mt-2" style="max-height: 500px;overflow:scroll;">
+                    
+                </div>
 
                 <script type="text/template" id="upload_list_wait_tpl">
-                    <div class="row p-2 filelist-card shadow-sm mb-2 mx-0" id="uq_<% obj.id %>">
+                    <div class="row p-2 mb-2 mx-0 select-box" id="uq_<% obj.id %>">
                         <div class="col-12 col-md-8 col-lg-9 my-1 d-flex align-items-center listfontweight filename">
                             <% obj.name %>
                         </div>
@@ -275,7 +242,8 @@
                                     <i class="fa-fw fad fa-trash-alt"></i>
                                 </a>
                         </div>
-                        <div class="col-12 my-1 d-flex align-items-center text-muted" id="uqm_<% obj.id %>"></div>
+                        <div class="col-12 my-1 text-muted" id="uqnn_<% obj.id %>"></div>
+                        <div class="col-12 text-muted" id="uqm_<% obj.id %>"></div>
                         <div class="col-12">
                             <div class="progress progress-sm mt-2">
                                 <div class="progress-bar bg-green" style="width: 0%" id="uqp_<% obj.id %>"></div>
