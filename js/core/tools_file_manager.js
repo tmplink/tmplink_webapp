@@ -10,16 +10,17 @@ class tools_file_manager {
     }
 
     checkbox_onclick_by_list(node) {
-        let n = node.childNodes[1].childNodes[1];
-        if (n.checked !== true) {
-            this.checkbox_select_on(n);
+        let n = node.getAttribute('data-check');
+        if (n !== 'true') {
+            this.checkbox_select_on(node);
         } else {
-            this.checkbox_select_off(n);
+            this.checkbox_select_off(node);
         }
     }
 
     checkbox_onclick(node) {
-        if (node.checked !== true) {
+        let n = node.getAttribute('data-check');
+        if (n !== 'true') {
             this.checkbox_select_on(node);
         } else {
             this.checkbox_select_off(node);
@@ -27,13 +28,13 @@ class tools_file_manager {
     }
 
     checkbox_select_on(node) {
-        let inode = node.parentNode.parentNode.attributes.id.nodeValue;
+        let inode = node.getAttribute('id');
         $('#' + inode).css('background-color', '#3a3b3c36');
-        node.checked = true;
+        node.setAttribute('data-check', 'true');
     }
 
     checkbox_select_off(node) {
-        let inode = node.parentNode.parentNode.attributes.id.nodeValue;
+        let inode = node.getAttribute('id');
         $('#' + inode).css('background-color', '');
         node.checked = false;
     }
@@ -68,11 +69,12 @@ class tools_file_manager {
         let ukeys = [];
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
-            if (inode.checked == true) {
+            let check = inode.getAttribute('data-check');
+            if (check === 'true') {
                 //do something
                 ukeys.push({
-                    'ukey': inode.parentNode.parentNode.attributes.tldata.nodeValue,
-                    'title': inode.parentNode.parentNode.attributes.tltitle.nodeValue
+                    'ukey': inode.getAttribute('tldata'),
+                    'title': inode.getAttribute('tltitle')
                 });
             }
         }
@@ -91,9 +93,10 @@ class tools_file_manager {
         var node = document.getElementsByName(this.items_name);
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
-            if (inode.checked == true) {
+            let check = inode.getAttribute('data-check');
+            if (check === 'true') {
                 //do something
-                let ukey = inode.parentNode.parentNode.attributes.tldata.nodeValue;
+                let ukey = inode.getAttribute('tldata');
                 this.parent_op.workspace_del(ukey);
             }
         }
@@ -103,9 +106,10 @@ class tools_file_manager {
         var node = document.getElementsByName(this.items_name);
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
-            if (inode.checked == true) {
+            let check = inode.getAttribute('data-check');
+            if (check === 'true') {
                 //do something
-                let ukey = inode.parentNode.parentNode.attributes.tldata.nodeValue;
+                let ukey = inode.getAttribute('tldata');
                 this.parent_op.download_file_btn(ukey);
             }
         }
@@ -116,7 +120,8 @@ class tools_file_manager {
         this.move_place = type;
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
-            if (inode.checked == true) {
+            let check = inode.getAttribute('data-check');
+            if (check === 'true') {
                 this.parent_op.dir_tree_display(0);
                 $('#movefileModal').modal('show');
                 return true;
@@ -132,9 +137,10 @@ class tools_file_manager {
         let ukeys = [];
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
-            if (inode.checked == true) {
+            let check = inode.getAttribute('data-check');
+            if (check === 'true') {
                 //do something
-                ukeys.push(inode.parentNode.parentNode.attributes.tldata.nodeValue);
+                ukeys.push(inode.getAttribute('tldata'));
 
             }
         }

@@ -168,10 +168,9 @@
 
                 <script type="text/template" id="room_filelist_list_tpl">
                     <% for (var x in obj) { %>
-                        <div class="row p-2 filelist-card shadow-sm mb-2 mx-0" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" id="file_unit_<% obj[x].ukey %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
+                        <div class="row p-2 filelist-card shadow-sm mb-2 mx-0" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" id="file_unit_<% obj[x].ukey %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
                             <div class="col-12 col-md-6 col-lg-8 my-1 px-0 d-flex align-items-center listfontweight filename">
                                 <div>
-                                    <input type="checkbox" name="items_box" class="d-none" onclick="TL.file_manager.checkbox_onclick(this);" />
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
                                     <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" target="_blank">
                                         <% obj[x].fname %>
