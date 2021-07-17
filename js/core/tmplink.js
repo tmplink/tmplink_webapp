@@ -114,7 +114,8 @@ class tmplink {
         img.src = '/img/bg/s3.jpg';
         img.onload = () => {
             if (img.height >= 1080 && img.width >= 1920) {
-                $('body').append('<div id="background_wrap" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-size: cover;background-repeat: no-repeat;background-attachment: scroll;background-image:url(' + img.src + ');"></div>');
+                $('body').append('<div id="background_wrap" style="display:none;z-index: -1;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-size: cover;background-repeat: no-repeat;background-attachment: scroll;background-image:url(' + img.src + ');"></div>');
+                $('#background_wrap').fadeIn();
             }
         }
     }
