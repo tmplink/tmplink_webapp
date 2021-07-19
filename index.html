@@ -12,13 +12,22 @@
 
     <link rel="icon" href="/img/96.ico" type="image/x-icon" />
     <link rel="apple-touch-icon-precomposed" href="/img/logo.png" />
-    <link rel="stylesheet" href="https://static.vx-cdn.com/project/font-awesome/last/css/all.css" async>
+    <link rel="stylesheet" href="https://static.vx-cdn.com/project/font-awesome/last/css/all.css">
 
-    <script async src="https://www.recaptcha.net/recaptcha/api.js?render=6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5"></script>
+    <script type="text/javascript">
+        'use strict';
+
+        try {
+            var f = new Function("class tmpUITest{a=0}");
+        } catch (e) {
+            document.write("<p>此应用程序无法运行在比较老的浏览器上，请更新到最新版本的浏览器。通常建议使用 Edge 或者 Firefox 浏览器。</p>");
+            document.write("<p>This App is not available on this browser, please update to the latest version of your browser.</p>");
+        }
+    </script>
     <script type="text/javascript" src="./tmpui.js"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 398,
+            "version": 399,
             "siteroot": "/",
             "loadingIcon": "/img/logo.png",
             "googleAnalytics": "UA-96864664-3",
@@ -182,7 +191,7 @@
 
 </head>
 
-<body style="background-color: rgb(115 147 196);">
+<body>
     <div id="tmpui"></div>
     <div id="tmpui_body" class="d-flex flex-column"></div>
 </body>

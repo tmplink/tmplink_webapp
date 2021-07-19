@@ -107,12 +107,14 @@ class tmplink {
     }
 
     bg_load() {
+        $('body').css('background-color', 'rgb(115 147 196)');
         let bglist = [1, 2, 3, 4, 5];
         let index = Math.floor((Math.random() * bglist.length));
         let img = new Image();
         //img.src = '/img/bg/core/'+bglist[index]+'.jpg';
         img.src = '/img/bg/s3.jpg';
         img.onload = () => {
+            $('body').css('background-color', '');
             if (img.height >= 1080 && img.width >= 1920) {
                 $('body').append('<div id="background_wrap" style="display:none;z-index: -1;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-size: cover;background-repeat: no-repeat;background-attachment: scroll;background-image:url(' + img.src + ');"></div>');
                 $('#background_wrap').fadeIn();

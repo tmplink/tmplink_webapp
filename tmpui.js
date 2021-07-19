@@ -1,18 +1,9 @@
 /**
  * tmpUI.js
- * version: 17
+ * version: 18
  * Github : https://github.com/tmplink/tmpUI
  * Date : 2021-7-19
  */
-
-'use strict';
-
-try {
-    var f = new Function("var fn = x => x * x;");
-} catch (e) {
-    document.write("<p>此应用程序无法运行在比较老的浏览器上，请更新到最新版本的浏览器。</p>");
-    document.write("<p>This App is not available on this browser, please update to the latest version of your browser.</p>");
-}
 
 class tmpUI {
 
