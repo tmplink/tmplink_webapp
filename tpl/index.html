@@ -1,37 +1,94 @@
 <div id="tpl_header"></div>
 <div class="container d-flex flex-grow-1">
-    <div class="align-self-center mb-5 p-4 w-100 card mx-auto shadow-sm" style="max-width: 720px;">
-        <div class="text-center display-4 mb-4 p-4" i18n="product_name">
-            TMP.LINK
+    <div class="align-self-center mx-auto">
+        <div class="text-center display-4 mb-4 p-4">
+            <img src="/img/logo.png" width="64" height="64" alt="tmp.link">
         </div>
-        <p class="lead text-center" i18n="index_a1">
-            .
-        </p>
+        <div class="index-box p-3 glass" style="max-width: 600px;">
+            <p class="h4 text-center" i18n="index_a1">
+                .
+            </p>
 
-        <form autocomplete="off" class="mx-auto">
-            <div class="input-group mb-1">
-                <div class="input-group-prepend">
-                    <button class="btn btn-primary" type="button" onclick="TL.upload_open(0);" i18n="nav_upload">
-                        上传文件
-                    </button>
-                </div>
-                <div class="input-group-prepend">
-                    <button class="btn btn-success" type="button" onclick="TL.get_file();" i18n="index_get_file1">
-                        提取文件
-                    </button>
-                </div>
-                <input type="search" id="get_file" class="form-control" placeholder="." i18n="index_get_file2"
-                    onkeyup="if(event.keyCode==13)TL.get_file();return false;" 
-                    style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
+            <div class="navbar_ready" style="display: none;">
+                <button class="btn btn-danger btn-block workspace-nologin mb-2" type="button"
+                    onclick="app.open('/reg');">
+                    注册账号
+                </button>
+
+                <button class="btn btn-primary btn-block workspace-nologin mb-2" type="button"
+                    onclick="app.open('/login');">
+                    登录账号
+                </button>
+
+                <button class="btn btn-primary btn-block workspace-navbar mb-2" type="button"
+                    onclick="TL.upload_open(0);" i18n="nav_upload">
+                    上传文件
+                </button>
             </div>
-            <input style="display:none;">
-        </form>
 
-        <hr />
-        <div class="text-center text-muted">
-            &hearts; <span i18n="index_dd1">.</span> &hearts; <span i18n="index_dd2">.</span> &hearts; <span i18n="index_dd3">.</span>
+            <form autocomplete="off" class="mx-auto">
+                <div class="input-group mb-1">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-success" type="button" onclick="TL.get_file();" i18n="index_get_file1">
+                            提取文件
+                        </button>
+                    </div>
+                    <input type="search" id="get_file" class="form-control" placeholder="." i18n="index_get_file2"
+                        onkeyup="if(event.keyCode==13)TL.get_file();return false;"
+                        style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
+                </div>
+                <input style="display:none;">
+            </form>
+        </div>
+        <div class="mx-auto" style="max-width: 600px;">
+            <div class="index-box p-2 glass">
+                <div class="d-flex align-items-center">
+                    <span class="mr-3">
+                        <i class="mt-1 fad fa-box-open fa-fw  fa-4x"></i>
+                    </span>
+                    <div>
+                        <h2 class="m-0">
+                            容量
+                        </h2>
+                        <small>
+                            无限制容量，还额外享有 128 GB 私人空间。
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="index-box p-2 glass">
+                <div class="d-flex align-items-center">
+                    <span class="mr-3">
+                        <i class="mt-1 fas fa-tachometer-alt-fastest fa-fw  fa-4x"></i>
+                    </span>
+                    <div>
+                        <h2 class="m-0">
+                            速度
+                        </h2>
+                        <small>
+                            上传不限速，下载也不限速。
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="index-box p-2 glass">
+                <div class="d-flex align-items-center">
+                    <span class="mr-3">
+                        <i class="mt-1 fad fa-browser fa-fw fa-4x"></i>
+                    </span>
+                    <div>
+                        <h2 class="m-0">
+                            易用
+                        </h2>
+                        <small>
+                            不需要安装客户端。
+                        </small>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
 <div id="tpl_footer"></div>
 <div id="tpl_model"></div>
