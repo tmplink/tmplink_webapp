@@ -189,7 +189,7 @@ class tmplink {
         localStorage.setItem('app_upload_model', model);
     }
 
-    upload_model_reset(){
+    upload_model_reset() {
         $('#select_model_list').show();
         $('#upload_select_file').hide();
         $('#selected_model_box').hide();
@@ -1991,40 +1991,46 @@ class tmplink {
             $.post(this.api_url_upload, {
                 'token': this.api_token,
                 'action': 'upload_request_select',
+                'filesize': file.size,
                 'captcha': recaptcha
             }, (rsp) => {
-                var fd = new FormData();
-                fd.append("file", file);
-                fd.append("filename", filename);
-                fd.append("utoken", rsp.data.utoken);
-                fd.append("model", this.upload_model_get());
-                fd.append("mr_id", this.upload_mrid_get());
-                fd.append("token", this.api_token);
-                this.upload_s2_status[id] = 0;
-                var xhr = new XMLHttpRequest();
-                xhr.upload.addEventListener("progress", (evt) => {
-                    this.upload_progress(evt, id)
-                }, false);
-                xhr.addEventListener("load", (evt) => {
-                    this.upload_complete(evt, file, id)
-                }, false);
-                xhr.addEventListener("error", (evt) => {
-                    //add retry
-                    if (this.download_retry < this.download_retry_max) {
-                        this.download_retry++;
-                        setTimeout(()=>{
-                            this.upload_worker(file, id, filename);
-                        },1000);
-                    } else {
-                        this.download_retry = 0;
-                        this.upload_failed(evt, id);
-                    }
-                }, false);
-                xhr.addEventListener("abort", (evt) => {
-                    this.upload_canceled(evt, id)
-                }, false);
-                xhr.open("POST", rsp.data.uploader);
-                xhr.send(fd);
+                if (rsp.status == 1) {
+                    var fd = new FormData();
+                    fd.append("file", file);
+                    fd.append("filename", filename);
+                    fd.append("utoken", rsp.data.utoken);
+                    fd.append("model", this.upload_model_get());
+                    fd.append("mr_id", this.upload_mrid_get());
+                    fd.append("token", this.api_token);
+                    this.upload_s2_status[id] = 0;
+                    var xhr = new XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", (evt) => {
+                        this.upload_progress(evt, id)
+                    }, false);
+                    xhr.addEventListener("load", (evt) => {
+                        this.upload_complete(evt, file, id)
+                    }, false);
+                    xhr.addEventListener("error", (evt) => {
+                        //add retry
+                        if (this.download_retry < this.download_retry_max) {
+                            this.download_retry++;
+                            setTimeout(() => {
+                                this.upload_worker(file, id, filename);
+                            }, 1000);
+                        } else {
+                            this.download_retry = 0;
+                            this.upload_failed(evt, id);
+                        }
+                    }, false);
+                    xhr.addEventListener("abort", (evt) => {
+                        this.upload_canceled(evt, id)
+                    }, false);
+                    xhr.open("POST", rsp.data.uploader);
+                    xhr.send(fd);
+                }else{
+                    //无法获得可用的上传服务器
+                    this.alert('上传失败，无法获得可用的服务器。');
+                }
             });
         });
     }
