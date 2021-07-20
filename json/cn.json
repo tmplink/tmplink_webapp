@@ -294,7 +294,7 @@
     "model_changeemail_notice": "输入新的邮箱，并接收验证码，完成更新。",
     "model_changeemail_new": "新的邮箱地址",
     "model_changeemail_new_placeholder": "请填写您的要设置的新地址",
-    "model_changeemail_est": "* 如果您较长时间没有收到新邮件提醒，请注意查看一下垃圾箱(Spam)。<br>* 建议使用 icloud 邮箱。<br>",
+    "model_changeemail_est": "* 如果您较长时间没有收到新邮件提醒，请注意查看一下垃圾箱(Spam)。<br>",
     "model_changeemail_code_placeholder": "填写您新收到的验证码",
 
     "model_resetpassword_notice": "修改密码无需输入旧密码",
@@ -375,7 +375,7 @@
     "status_14": "重设密码失败，没有这个账号。",
     "status_unknow": "不知道发生了什么，请联系管理员。",
     "status_error_0": "操作失败。",
-    "status_error_9": "不支持的邮箱。建议使用 icloud 邮箱。",
+    "status_error_9": "不支持的邮箱。请使用主流邮箱。",
     "status_error_11": "已经给这个邮箱发送过一次邮件了。",
     "status_error_10": "这个邮箱地址已经被使用了。",
     "status_error_12": "请选择文件。",
