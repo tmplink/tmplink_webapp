@@ -75,21 +75,21 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content shadow-lg" ondrop="TL.upload_drop(event)">
             <div class="modal-header">
-                <h4 class="modal-title">上传文件</h4>
+                <h4 class="modal-title" i18n="model_title_upload">.</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <!--[新设计]-->
                 <div class="select-box-all p-2" id="selected_model_box" style="display: none;">
                     <button type="button" class="btn btn-primary btn-sm text-right"
-                        onclick="TL.upload_model_reset()">重新设定</button>
-                    <span>上传文件的</span><span id="seleted_model"></span>
+                        onclick="TL.upload_model_reset()" i18n="modal_settings_upload_model_reset">.</button>
+                    <span id="seleted_model"></span>
                 </div>
                 <div id="select_model_list">
 
                     <div class="select-box-all p-2">
                         <div class="text-center">
-                            <h5>无限容量</h5>
+                            <h5 i18n="modal_settings_upload_model_unlimited">.</h5>
                         </div>
                         <div class="select-box p-2 btn-point" onclick="TL.upload_model_selected(0)">
                             <div class="d-flex align-items-center">
@@ -97,11 +97,11 @@
                                     <i class="mt-1 fal fa-history fa-fw"></i>
                                 </span>
                                 <div>
-                                    <h4 class="m-0">
-                                        有效期：24 小时
+                                    <h4 class="m-0" i18n="modal_settings_upload_model1">
+                                        .
                                     </h4>
-                                    <small class="text-muted">
-                                        这个文件在 24 后将被自动销毁。
+                                    <small class="text-muted" i18n="modal_settings_upload_model1_des">
+                                        .
                                     </small>
                                 </div>
                             </div>
@@ -112,11 +112,11 @@
                                     <i class="mt-1 fal fa-history fa-fw"></i>
                                 </span>
                                 <div>
-                                    <h4 class="m-0">
-                                        有效期：3 天
+                                    <h4 class="m-0" i18n="modal_settings_upload_model2">
+                                        .
                                     </h4>
-                                    <small class="text-muted">
-                                        将在有人下载时自动延长这个期限。
+                                    <small class="text-muted" i18n="modal_settings_upload_model2_des">
+                                        .
                                     </small>
                                 </div>
                             </div>
@@ -127,11 +127,11 @@
                                     <i class="mt-1 fal fa-history fa-fw"></i>
                                 </span>
                                 <div>
-                                    <h4 class="m-0">
-                                        有效期：7 天
+                                    <h4 class="m-0" i18n="modal_settings_upload_model3">
+                                        .
                                     </h4>
-                                    <small class="text-muted">
-                                        将在有人下载时自动延长这个期限。
+                                    <small class="text-muted" i18n="modal_settings_upload_model3_des">
+                                        .
                                     </small>
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
 
                     <div class="select-box-all p-2">
                         <div class="text-center">
-                            <h5 id="upload_storage_status">无限容量</h5>
+                            <h5 id="upload_storage_status">.</h5>
                         </div>
                         <div class="select-box p-2 btn-point" onclick="TL.upload_model_selected(3)">
                             <div class="d-flex align-items-center">
@@ -148,11 +148,11 @@
                                     <i class="mt-1 fal fa-history fa-fw"></i>
                                 </span>
                                 <div>
-                                    <h4 class="m-0">
-                                        有效期：30 天
+                                    <h4 class="m-0" i18n="modal_settings_upload_model4">
+                                        .
                                     </h4>
-                                    <small class="text-muted">
-                                        将在有人下载时自动延长这个期限。
+                                    <small class="text-muted" i18n="modal_settings_upload_model4_des">
+                                        .
                                     </small>
                                 </div>
                             </div>
@@ -163,11 +163,11 @@
                                     <i class="mt-1 far fa-infinity fa-fw"></i>
                                 </span>
                                 <div>
-                                    <h4 class="m-0">
-                                        永久
+                                    <h4 class="m-0" i18n="modal_settings_upload_model99">
+                                        .
                                     </h4>
-                                    <small class="text-muted">
-                                        它会一直活着。
+                                    <small class="text-muted" i18n="modal_settings_upload_model99_des">
+                                        .
                                     </small>
                                 </div>
                             </div>
@@ -185,11 +185,11 @@
                                     <i class="mt-1 fad fa-file-upload fa-fw"></i>
                                 </span>
                                 <div>
-                                    <h4 class="m-0">
-                                        上传文件
+                                    <h4 class="m-0" i18n="model_title_upload">
+                                        .
                                     </h4>
-                                    <small class="text-muted">
-                                        选择你要上传的文件，或者把文件拖动到这里。
+                                    <small class="text-muted" i18n="model_title_upload_des">
+                                        .
                                     </small>
                                 </div>
                             </div>
@@ -204,11 +204,11 @@
                                     <i class="mt-1 fad fa-folder-upload fa-fw"></i>
                                 </span>
                                 <div>
-                                    <h4 class="m-0">
-                                        上传文件夹
+                                    <h4 class="m-0" i18n="upload_dirs">
+                                        .
                                     </h4>
-                                    <small class="text-muted">
-                                        点击选择一个文件夹进行上传。
+                                    <small class="text-muted" i18n="upload_dirs_des">
+                                        .
                                     </small>
                                 </div>
                             </div>
