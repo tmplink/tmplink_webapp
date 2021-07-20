@@ -78,12 +78,11 @@ class tmplink {
                     this.details_init();
                 }
             });
-        });
 
-        app.ready(() => {
-            this.lazyLoadInstance = new LazyLoad({
-                elements_selector: ".lazyload"
-            });
+        });
+        
+        this.lazyLoadInstance = new LazyLoad({
+            elements_selector: ".lazyload"
         });
 
         $(document).on({

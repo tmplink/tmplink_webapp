@@ -4,41 +4,40 @@
         <div class="text-center display-4 mb-4 p-4">
             <img src="/img/logo.png" width="64" height="64" alt="tmp.link">
         </div>
+        <form autocomplete="off" class="mx-auto mb-2">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button class="btn btn-success" type="button" onclick="TL.get_file();" i18n="index_get_file1">
+                        提取文件
+                    </button>
+                </div>
+                <input type="search" id="get_file" class="form-control" placeholder="." i18n="index_get_file2"
+                    onkeyup="if(event.keyCode==13)TL.get_file();return false;"
+                    style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
+            </div>
+        </form>
         <div class="index-box p-5 glass" style="max-width: 600px;">
+            
             <p class="h4 text-center" i18n="index_a1">
                 .
             </p>
 
             <div class="navbar_ready" style="display: none;">
-                <button class="btn btn-danger btn-block workspace-nologin mb-2" type="button"
+                <button class="btn btn-lg btn-danger btn-block workspace-nologin mb-2" type="button"
                     onclick="app.open('/reg');">
                     注册账号
                 </button>
 
-                <button class="btn btn-primary btn-block workspace-nologin mb-2" type="button"
+                <button class="btn btn-lg btn-primary btn-block workspace-nologin" type="button"
                     onclick="app.open('/login');">
                     登录账号
                 </button>
 
-                <button class="btn btn-primary btn-block workspace-navbar mb-2" type="button"
+                <button class="btn btn-lg btn-primary btn-block workspace-navbar" type="button"
                     onclick="TL.upload_open(0);" i18n="nav_upload">
                     上传文件
                 </button>
             </div>
-
-            <form autocomplete="off" class="mx-auto">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-success" type="button" onclick="TL.get_file();" i18n="index_get_file1">
-                            提取文件
-                        </button>
-                    </div>
-                    <input type="search" id="get_file" class="form-control" placeholder="." i18n="index_get_file2"
-                        onkeyup="if(event.keyCode==13)TL.get_file();return false;"
-                        style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
-                </div>
-                <input style="display:none;">
-            </form>
         </div>
         <div class="mx-auto" style="max-width: 600px;">
             <div class="index-box p-5 glass">
