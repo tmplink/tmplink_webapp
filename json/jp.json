@@ -180,7 +180,7 @@
     "modal_settings_upload_model_unlimited": "容量無制限",
     "modal_settings_upload_model1": "Valid for: 24 hours",
     "modal_settings_upload_model1_des": "このファイルは24時間後に自動的に破棄されます。",
-    "modal_settings_upload_model2": "Expiry date: 3 days となっています。",
+    "modal_settings_upload_model2": "Expiry date: 3 days",
     "modal_settings_upload_model2_des": "誰かがダウンロードすると自動的に拡張されます。",
     "modal_settings_upload_model3": "Expiry date: 7 days",
     "modal_settings_upload_model3_des": "誰かがダウンロードすると自動的にこの期間を延長する",
