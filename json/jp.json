@@ -1,4 +1,6 @@
 {
+    "modal_settings_upload_buy_storage": "拡張されたプライベート空間",
+    "modal_settings_upload_buy_storage_des": "オプションのサイズ: 256GB , 1TB , 3TB , 10TB",
     "model_title_alert": "問題が発生しました",
     "on_select_share": "コピーリンク",
     "index_get_file1": "ファイルを取得",

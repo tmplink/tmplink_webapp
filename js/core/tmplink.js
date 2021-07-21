@@ -80,7 +80,7 @@ class tmplink {
             });
 
         });
-        
+
         this.lazyLoadInstance = new LazyLoad({
             elements_selector: ".lazyload"
         });
@@ -162,6 +162,15 @@ class tmplink {
 
     upload_model_selected(model) {
         console.log('upload::model::' + model);
+
+        //检查账号是否有足够可用的空间
+        if (model == 3 || model == 99) {
+            if (this.storage_used >= this.storage) {
+                alert('私有空间已经用完，请考虑购买私有空间扩展包。');
+                return false;
+            }
+        }
+
         switch (model) {
             case 0:
                 $('#seleted_model').html(this.languageData.modal_settings_upload_model1);
@@ -1887,6 +1896,12 @@ class tmplink {
         // this.upload_model_selected(Number(this.upload_model_selected_val));
 
         $('#upload_mr_id').val(mr_id);
+
+        //如果可用的私有空间补足，则隐藏选项
+        if (this.storage_used >= this.storage) {
+            $('.storage_needs').hide();
+        }
+
         $('#uploadModal').modal('show');
     }
 
@@ -2028,7 +2043,7 @@ class tmplink {
                     }, false);
                     xhr.open("POST", rsp.data.uploader);
                     xhr.send(fd);
-                }else{
+                } else {
                     //无法获得可用的上传服务器
                     this.alert('上传失败，无法获得可用的服务器。');
                 }

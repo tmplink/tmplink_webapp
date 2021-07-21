@@ -82,7 +82,7 @@
 
     "navbar_buy": "商店",
     "navbar_buy_hs": "高速通道",
-    "navbar_buy_storage": "存储空间",
+    "navbar_buy_storage": "私有空间",
     "navbar_settings": "设置",
     "navbar_reset_password": "修改密码",
     "navbar_reset_email": "修改邮箱",
@@ -163,6 +163,8 @@
     "modal_settings_upload_model4_des": "将在有人下载时自动延长这个期限。",
     "modal_settings_upload_model99": "永久",
     "modal_settings_upload_model99_des": "它会一直活着。",
+    "modal_settings_upload_buy_storage": "扩展私有空间",
+    "modal_settings_upload_buy_storage_des": "可选规格：256 GB , 1TB , 3TB , 10TB",
     "modal_settings_submit": "设定",
     "modal_settings_upload": "文件分享模式",
 
@@ -285,7 +287,7 @@
     "service_code_storage_des": "使用存储包可以长期保存上传的文件，不同类型的存储包可以叠加。",
 
     "model_btn_ok": "确定",
-    "model_btn_buy_storage": "购买存储空间",
+    "model_btn_buy_storage": "购买私有空间",
     "model_btn_upload": "开始上传文件",
     "model_btn_upload_cli": "使用命令行上传文件",
     "model_btn_select": "选择要上传的文件(最大 10 GB)",
@@ -315,7 +317,7 @@
     "upload_ready": "等待上传",
     "upload_sync": "正在搬运到存储节点，这可能需要比较长的时间。",
     "upload_buy_storage": "如果要将文件有效期设置为长期有效，请购买存储包。",
-    "upload_fail_storage": "上传失败，该文件的大小超出了可用的存储空间。",
+    "upload_fail_storage": "上传失败，该文件的大小超出了可用的私有空间。",
     "upload_model99_needs_login": "如果要将文件有效期设置为长期有效，请先登录。",
 
     "tos_1": "服务条款",

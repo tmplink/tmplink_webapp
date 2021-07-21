@@ -142,7 +142,7 @@
                         <div class="text-center">
                             <h5 id="upload_storage_status">.</h5>
                         </div>
-                        <div class="select-box p-2 btn-point" onclick="TL.upload_model_selected(3)">
+                        <div class="select-box p-2 btn-point storage_needs" onclick="TL.upload_model_selected(3)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
                                     <i class="mt-1 fal fa-history fa-fw"></i>
@@ -157,7 +157,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="select-box p-2 btn-point" onclick="TL.upload_model_selected(99)">
+                        <div class="select-box p-2 btn-point storage_needs" onclick="TL.upload_model_selected(99)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
                                     <i class="mt-1 far fa-infinity fa-fw"></i>
@@ -167,6 +167,21 @@
                                         .
                                     </h4>
                                     <small class="text-muted" i18n="modal_settings_upload_model99_des">
+                                        .
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="select-box p-2 btn-point" onclick="$('#uploadModal').modal('hide');TL.storage_buy_modal();">
+                            <div class="d-flex align-items-center">
+                                <span class="stamp stamp-md bg-blue mr-3">
+                                    <i class="mt-1 fad fa-usb-drive fa-fw"></i>
+                                </span>
+                                <div>
+                                    <h4 class="m-0" i18n="modal_settings_upload_buy_storage">
+                                        .
+                                    </h4>
+                                    <small class="text-muted" i18n="modal_settings_upload_buy_storage_des">
                                         .
                                     </small>
                                 </div>
