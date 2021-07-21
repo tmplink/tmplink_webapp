@@ -1,8 +1,8 @@
 /**
  * tmpUI.js
- * version: 18
+ * version: 19
  * Github : https://github.com/tmplink/tmpUI
- * Date : 2021-7-19
+ * Date : 2021-7-21
  */
 
 class tmpUI {
@@ -335,10 +335,8 @@ class tmpUI {
             url = params.tmpui_page;
         }
 
-        var element = document.getElementsByClassName('tmpUIRes');
-        while (element.firstChild) {
-            element.removeChild(element.firstChild);
-        }
+        //移除一次性资源
+        document.querySelectorAll(".tmpUIRes").forEach(e => e.parentNode.removeChild(e));
 
         //查找路由
         this.loadpage(true);
