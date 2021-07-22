@@ -1,44 +1,39 @@
-<div id="tpl_header"></div>
+<div style="height: 40px;"></div>
+<div class="loading-box" id="loading_box" style="display: none;">
+    <div class="shadow-sm text-center glass" style="border-radius: 10px;padding: 10px;">
+        <!-- <img src="/img/load_2.gif" height="64" /> -->
+        <div class="text-center">
+            <i class="fa-fw fas fa-spinner fa-spin fa-4x"></i>
+        </div>
+    </div>
+</div>
+
 <div class="container d-flex flex-grow-1">
     <div class="align-self-center w-100">
+        <div id="file_messenger" class="align-self-center mx-auto"
+            style="display: none;margin-top: 20px;max-width: 550px;">
+            <div class="text-center mb-5">
+                <a href="javascript:void(0)" onclick="app.open('/');">
+                    <img src="/img/logo/1.png" alt="tmp.link">
+                </a>
+            </div>
+            <div class="card">
+                <div class="d-none d-md-block" style="margin-top: 120px;"></div>
+                <div class="text-center pt-2" id="file_messenger_icon"></div>
+                <div class="text-center display-4 p-4" id="file_messenger_msg"></div>
+                <div class="d-none d-md-block" style="margin-bottom: 120px;"></div>
+            </div>
 
-        <div id="file_messenger" class="card align-self-center mx-auto" style="display: none;margin-top: 20px;max-width: 550px;">
-            <div class="d-none d-md-block" style="margin-top: 120px;"></div>
-            <div class="text-center pt-2" id="file_messenger_icon"></div>
-            <div class="text-center display-4 p-4" id="file_messenger_msg"></div>
-            <div class="d-none d-md-block" style="margin-bottom: 120px;"></div>
         </div>
 
-        <div class="row pt-5 pb-5" id="file_box" style="display: none;">
-            <div class="col-12 col-lg-6 align-self-center d-none d-lg-block d-xl-block">
-                <div class="card shadow " id="file_info">
-                    <div class="card-body">
-                        <h1>
-                            <i class="fad fa-shipping-fast"></i>
-                            <span i18n="ad_file_1_1">.</span>
-                        </h1>
-                        <div class="lead" i18n="ad_file_1_2">.</div>
-                        <button class="btn btn-purple mt-3" onclick="TL.hs_buy_modal();" i18n="ad_file_1_3">.</button>
-                    </div>
+        <div class="row" id="file_box" style="display: none;">
+            <div class="col-6"></div>
+            <div class="col-lg-6 col-md-12 align-self-center">
+                <div class="text-center mb-5">
+                    <a href="javascript:void(0)" onclick="app.open('/');">
+                        <img src="/img/logo/1.png" alt="tmp.link">
+                    </a>
                 </div>
-                <div class="card shadow " id="file_info">
-                    <div class="card-body">
-                        <h1>
-                            <i class="fad fa-squirrel fa-fw"></i>
-                            <span i18n="ad_file_2_1">.</span>
-                        </h1>
-                        <div class="lead" i18n="ad_file_2_2">.</div>
-                        <ul class="mt-3" >
-                            <li i18n="ad_file_2_3">.</li>
-                            <li i18n="ad_file_2_4">.</li>
-                            <li i18n="ad_file_2_5">.</li>
-                            <li i18n="ad_file_2_6">.</li>
-                        </ul>
-                        <button class="btn btn-purple" onclick="TL.storage_buy_modal();" i18n="ad_file_2_7">.</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-6 align-self-center">
                 <div class="card shadow" id="file_info">
                     <div class="card-body">
                         <div class="alert alert-warning d-block d-md-none" role="alert" i18n="filepage_mobile_notice">
@@ -49,21 +44,22 @@
                         <div class="h2 font-weight-light fc-1 mb-4">
                             <span id="filesize">.</span>
                             &nbsp;
-                            
+
                         </div>
                         <hr />
                         <div class="single_download_progress_bar" style="display:none">
                             <div class="single_download_msg"></div>
                             <div class="progress mt-2">
-                                <div class="progress-bar bg-success single_download_progress_bar_set" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success single_download_progress_bar_set" role="progressbar"
+                                    style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <hr />
                         </div>
                         <div class="btn-group btn-block" role="group">
-                            <button class="btn btn-success btn-lg" id="btn_download"
-                            i18n="file_btn_download" onclick="TL.download_file()">.</button>
-                            <button class="btn btn-info btn-lg" id="file_btn_highdownload"
-                            i18n="file_btn_highdownload" onclick="TL.hs_download_file()">.</button>
+                            <button class="btn btn-success btn-lg" id="btn_download" i18n="file_btn_download"
+                                onclick="TL.download_file()">.</button>
+                            <button class="btn btn-info btn-lg" id="file_btn_highdownload" i18n="file_btn_highdownload"
+                                onclick="TL.hs_download_file()">.</button>
                         </div>
                         <a href="/login" tmpui-app="true" class="btn btn-block btn-outline-success btn-lg user-nologin"
                             i18n="index_b3">.</a>
@@ -71,37 +67,34 @@
                             class="btn btn-block btn-outline-dark btn-lg" i18n="file_btn_qr_mobile">.</a>
                         <a href="javascript:void(0)" class="btn btn-block btn-outline-dark btn-lg"
                             id="btn_add_to_workspace" i18n="file_btn_workspace">.</a>
-                        <!-- <a href="javascript:void(0)" class="btn btn-block btn-outline-dark btn-lg btn_copy"
-                                id="file_btn_clidownload" i18n="file_btn_clidownload">.</a> -->
-                        <a href="javascript:void(0)" class="btn btn-block btn-outline-dark btn-lg btn_copy btn_copy_fileurl" i18n="file_btn_copy">.</a>
-                        <a href="javascript:void(0)" class="btn btn-block btn-outline-dark btn-lg btn_copy" id="file_ukey" i18n="file_key_copy">.</a>
+                        <a href="javascript:void(0)"
+                            class="btn btn-block btn-outline-dark btn-lg btn_copy btn_copy_fileurl"
+                            i18n="file_btn_copy">.</a>
+                        <a href="javascript:void(0)" class="btn btn-block btn-outline-dark btn-lg btn_copy"
+                            id="file_ukey" i18n="file_key_copy">.</a>
                         <hr>
-                        <div class="text-right text-red">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <a href="javascript:void(0)" onclick="$('#reportModal').modal('show')" i18n="file_btn_report">.</a>
+                        <div class="text-right">
+                            <span class="btn-group mr-3">
+                                <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span>
+                                </div>
+                                <div class="dropdown-menu shadow">
+                                    <a class="dropdown-item" href="javascript:void(0)"
+                                        onclick="TL.language('cn');">中文</a>
+                                    <a class="dropdown-item" href="javascript:void(0)"
+                                        onclick="TL.language('en');">English</a>
+                                    <a class="dropdown-item" href="javascript:void(0)"
+                                        onclick="TL.language('jp');">日本語</a>
+                                </div>
+                            </span>
+                            <span class="btn text-red">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <a href="javascript:void(0)" onclick="$('#reportModal').modal('show')"
+                                    i18n="file_btn_report">.</a>
+                            </span>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-6 align-self-center d-block d-lg-none">
-                <div class="card shadow " id="file_info">
-                    <div class="card-body">
-                        <h1 i18n="ad_file_1_1">.</h1>
-                        <div class="lead" i18n="ad_file_1_2">.</div>
-                        <button class="btn btn-purple mt-3" onclick="TL.hs_buy_modal();" i18n="ad_file_1_3">.</button>
-                    </div>
-                </div>
-                <div class="card shadow " id="file_info">
-                    <div class="card-body">
-                        <h1 i18n="ad_file_2_1">.</h1>
-                        <div class="lead" i18n="ad_file_2_2">.</div>
-                        <ul class="mt-3" >
-                            <li i18n="ad_file_2_3">.</li>
-                            <li i18n="ad_file_2_4">.</li>
-                            <li i18n="ad_file_2_5">.</li>
-                            <li i18n="ad_file_2_6">.</li>
-                        </ul>
-                        <button class="btn btn-purple" onclick="TL.storage_buy_modal();" i18n="ad_file_2_7">.</button>
+
                     </div>
                 </div>
             </div>
