@@ -264,7 +264,7 @@ body::-webkit-scrollbar-corner {
 }
 
 .index-box {
-    background-color: #ffffff8f;
+    /* background-color: #ffffff8f; */
     position: relative;
     margin-bottom: 0.5rem;
     width: 100%;
