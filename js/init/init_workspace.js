@@ -8,3 +8,6 @@ app.ready( () =>{
 app.onExit( () => {
     TL.workspace_filelist_autoload_disabled();
 });
+app.ready(()=>{
+    TL.head_set();
+});
