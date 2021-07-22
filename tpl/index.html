@@ -1,91 +1,161 @@
-<div id="tpl_header"></div>
+<div style="height: 40px;"></div>
 <div class="container d-flex flex-grow-1">
-    <div class="align-self-center mx-auto">
-        <div class="text-center display-4 mb-4 p-4">
-            <img src="/img/logo.png" width="64" height="64" alt="tmp.link">
-        </div>
-        <form autocomplete="off" class="mx-auto mb-2">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <button class="btn btn-success" type="button" onclick="TL.get_file();" i18n="index_b1">
-                        .
-                    </button>
+    <div class="align-self-center mx-auto w-100">
+        <div class="row">
+            <div class="col-lg-6">
+
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="text-center mb-5">
+                    <img src="/img/logo/1.png" alt="tmp.link">
                 </div>
-                <input type="search" id="get_file" class="form-control" placeholder="." i18n="index_get_file2"
-                    onkeyup="if(event.keyCode==13)TL.get_file();return false;"
-                    style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
-            </div>
-        </form>
-        <div class="index-box p-5 glass" style="max-width: 600px;">
-            
-            <p class="h4 text-center" i18n="index_a1">
-                .
-            </p>
+                <div class="index-box p-5 bg-white shadow-sm">
+                    <div class="index-box p-5 ">
 
-            <div class="navbar_ready" style="display: none;">
-                <button class="btn btn-lg btn-danger btn-block workspace-nologin mb-2" type="button"
-                    onclick="app.open('/reg');" i18n="index_b2">
-                    .
-                </button>
-
-                <button class="btn btn-lg btn-primary btn-block workspace-nologin" type="button"
-                    onclick="app.open('/login');" i18n="index_b3">
-                    .
-                </button>
-
-                <button class="btn btn-lg btn-primary btn-block workspace-navbar" type="button"
-                    onclick="TL.upload_open(0);" i18n="nav_upload">
-                    .
-                </button>
-            </div>
-        </div>
-        <div class="mx-auto" style="max-width: 600px;">
-            <div class="index-box p-5 glass">
-                <div class="d-flex align-items-center">
-                    <span class="mr-3">
-                        <i class="mt-1 fad fa-box-open fa-fw  fa-4x"></i>
-                    </span>
-                    <div>
-                        <h2 class="m-0" i18n="index_d1">
+                        <p class="h4 text-center" i18n="index_a1">
                             .
-                        </h2>
-                        <small i18n="index_d2">
-                            .
-                        </small>
+                        </p>
+
+                        <div class="navbar_ready mt-5" style="display: none;">
+                            <button class="btn btn-lg btn-danger btn-block workspace-nologin" type="button"
+                                onclick="app.open('/reg');" i18n="index_b2">
+                                .
+                            </button>
+
+                            <button class="btn btn-lg btn-primary btn-block workspace-nologin" type="button"
+                                onclick="app.open('/login');" i18n="index_b3">
+                                .
+                            </button>
+
+                            <button class="btn btn-lg btn-primary btn-block" type="button"
+                                onclick="TL.get_file(prompt(TL.languageData.index_get_file2))" i18n="index_b1">
+                                .
+                            </button>
+
+                            <button class="btn btn-lg btn-primary btn-block workspace-navbar" type="button"
+                                onclick="TL.upload_open(0);" i18n="nav_upload">
+                                .
+                            </button>
+
+                            <div class="btn-group btn-group-lg btn-block">
+                                <button type="button" class=" btn btn-success dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span>
+                                </button>
+                                <div class="dropdown-menu w-100 shadow bg-white">
+                                    <a class="dropdown-item" href="javascript:void(0)"
+                                        onclick="TL.language('cn');">中文</a>
+                                    <a class="dropdown-item" href="javascript:void(0)"
+                                        onclick="TL.language('en');">English</a>
+                                    <a class="dropdown-item" href="javascript:void(0)"
+                                        onclick="TL.language('jp');">日本語</a>
+                                </div>
+                            </div>
+
+                            <div class="row workspace-navbar mt-3">
+                                <div class="col-6">
+                                    <button class="btn btn-lg btn-primary btn-block"
+                                        onclick="app.open('/workspace');">
+                                        <i class="fab fa-mixcloud fa-fw"></i>
+                                        <span i18n="navbar_workspace">.</span>
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-lg btn-primary btn-block" onclick="app.open('/dir');">
+                                        <i class="far fa-folder fa-fw"></i>
+                                        <span i18n="navbar_meetingroom">.</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row workspace-navbar mt-3">
+                                <div class="col-6">
+                                    <div class="btn-group btn-group-lg btn-block">
+                                        <button type="button" class=" btn btn-success dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fad fa-cog fa-fw"></i><span i18n="navbar_settings">.</span>
+                                        </button>
+                                        <div class="dropdown-menu w-100 shadow bg-white">
+                                            <span class="dropdown-item-text">设置项</span>
+                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                onclick="$('#passwordModal').modal('show');"
+                                                i18n="navbar_reset_password">.</a>
+                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                onclick="$('#emailModal').modal('show');"
+                                                i18n="navbar_reset_email">.</a>
+                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                onclick="$('#ordersModal').modal('show');TL.orders_list();"
+                                                i18n="navbar_orders">.</a>
+                                            <hr>
+                                            <span class="dropdown-item-text">增强项</span>
+                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                onclick="TL.hs_buy_modal();" i18n="navbar_buy_hs">.</a>
+                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                onclick="TL.storage_buy_modal();" i18n="navbar_buy_storage">.</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-lg btn-block btn-danger" onclick="TL.logout();">
+                                        <i class="fad fa-power-off fa-fw"></i>
+                                        <span i18n="navbar_exit">.</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    
+                    <div class="index-box">
+                        <div class="d-flex align-items-center">
+                            <span class="mr-3">
+                                <i class="mt-1 fas fa-tachometer-alt-fastest fa-fw  fa-4x"></i>
+                            </span>
+                            <div>
+                                <h2 class="m-0" i18n="index_d3">
+                                    .
+                                </h2>
+                                <small i18n="index_d4">
+                                    .
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="index-box">
+                        <div class="d-flex align-items-center">
+                            <span class="mr-3">
+                                <i class="mt-1 fad fa-browser fa-fw fa-4x"></i>
+                            </span>
+                            <div>
+                                <h2 class="m-0" i18n="index_d5">
+                                    .
+                                </h2>
+                                <small i18n="index_d6">
+                                    .
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="index-box">
+                        <div class="d-flex align-items-center">
+                            <span class="mr-3">
+                                <i class="mt-1 fad fa-box-open fa-fw  fa-4x"></i>
+                            </span>
+                            <div>
+                                <h2 class="m-0" i18n="index_d1">
+                                    .
+                                </h2>
+                                <small i18n="index_d2">
+                                    .
+                                </small>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="index-box p-5 glass">
-                <div class="d-flex align-items-center">
-                    <span class="mr-3">
-                        <i class="mt-1 fas fa-tachometer-alt-fastest fa-fw  fa-4x"></i>
-                    </span>
-                    <div>
-                        <h2 class="m-0" i18n="index_d3">
-                            .
-                        </h2>
-                        <small i18n="index_d4">
-                            .
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="index-box p-5 glass">
-                <div class="d-flex align-items-center">
-                    <span class="mr-3">
-                        <i class="mt-1 fad fa-browser fa-fw fa-4x"></i>
-                    </span>
-                    <div>
-                        <h2 class="m-0" i18n="index_d5">
-                            .
-                        </h2>
-                        <small i18n="index_d6">
-                            .
-                        </small>
-                    </div>
-                </div>
+
             </div>
         </div>
+
     </div>
 
 </div>

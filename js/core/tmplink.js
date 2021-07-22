@@ -110,8 +110,8 @@ class tmplink {
         let bglist = [1, 2, 3, 4, 5];
         let index = Math.floor((Math.random() * bglist.length));
         let img = new Image();
-        //img.src = '/img/bg/core/'+bglist[index]+'.jpg';
-        img.src = '/img/bg/s3.jpg';
+        img.src = '/img/bg/s'+bglist[index]+'.jpg';
+        //img.src = '/img/bg/s5.jpg';
         img.onload = () => {
             $('body').css('background-color', '');
             if (img.height >= 1080 && img.width >= 1920) {
@@ -263,10 +263,9 @@ class tmplink {
         });
     }
 
-    get_file() {
-        let code = $('#get_file').val();
+    get_file(code) {
         if (code.length !== 13) {
-            this.alert(this.language_get.status_error_15);
+            this.alert(this.languageData.status_error_15);
             return false;
         }
         window.open('http://tmp.link/f/' + code);
