@@ -23,7 +23,6 @@
                 <div class="text-center display-4 p-4" id="file_messenger_msg"></div>
                 <div class="d-none d-md-block" style="margin-bottom: 120px;"></div>
             </div>
-
         </div>
 
         <div class="row" id="file_box" style="display: none;">
@@ -49,17 +48,34 @@
                         <hr />
                         <div class="single_download_progress_bar" style="display:none">
                             <div class="single_download_msg"></div>
+                            <div>在下载完成之前请不要关闭这个网页，你可以同时下载其它文件。</div>
                             <div class="progress mt-2">
                                 <div class="progress-bar bg-success single_download_progress_bar_set" role="progressbar"
                                     style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <hr />
                         </div>
-                        <div class="btn-group btn-block" role="group">
-                            <button class="btn btn-success btn-lg" id="btn_download" i18n="file_btn_download"
-                                onclick="TL.download_file()">.</button>
-                            <button class="btn btn-info btn-lg" id="file_btn_highdownload" i18n="file_btn_highdownload"
-                                onclick="TL.hs_download_file()">.</button>
+                        <div class="btn-group btn-block">
+                            <button type="button" class="btn btn-outline-success btn-lg"
+                                onclick="TL.download_file()">快速下载</button>
+                            <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+                                id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" data-reference="parent">
+                                其它选项
+                                <span class="sr-only">其它选项</span>
+                            </button>
+                            <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuReference">
+                                <a class="dropdown-item btn_copy_downloadurl">
+                                    <i class="fad fa-browser fa-fw"></i>
+                                    使用浏览器进行下载
+                                </a>
+                                <button class="dropdown-item btn_copy btn_copy_downloadurl">
+                                    <i class="fad fa-terminal fa-fw"></i>
+                                    复制下载链接，在其它地方下载
+                                </button>
+                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-item" href="#">如果您的账号已购买高速通道，下载时将自动切换到高速通道</div>
+                            </div>
                         </div>
                         <a href="/login" tmpui-app="true" class="btn btn-block btn-outline-success btn-lg user-nologin"
                             i18n="index_b3">.</a>
@@ -77,7 +93,8 @@
                             <span class="btn-group mr-3">
                                 <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span>  <span> / Language</span>
+                                    <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span> <span> /
+                                        Language</span>
                                 </div>
                                 <div class="dropdown-menu shadow">
                                     <a class="dropdown-item" href="javascript:void(0)"
@@ -103,15 +120,6 @@
         <div class="row pt-5 pb-5" id="wx_notice" style="display: none;">
             <div class="col-12 col-md-6 text-light">
                 <h3 i18n="filepage_weixin_notice">.</h3>
-            </div>
-        </div>
-
-        <div class="row pl-5 pr-5">
-            <div class="col-12 align-self-center">
-                <div class="" style="height: 100px;">
-                    <div class="card-body">
-                    </div>
-                </div>
             </div>
         </div>
     </div>

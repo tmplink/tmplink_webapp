@@ -692,6 +692,10 @@ class tmplink {
                         $('#btn_highdownload').attr('x-href', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
                         $('.single_download_progress_bar').attr('data-href', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
                         $('.single_download_progress_bar').attr('data-filename', rsp.data.name);
+
+                        $('.btn_copy_downloadurl').attr('data-clipboard-text', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
+                        $('.btn_copy_downloadurl').attr('href', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
+
                         $('.btn_copy_fileurl').attr('data-clipboard-text', 'http://tmp.link/f/' + params.ukey);
                         $('#file_ukey').attr('data-clipboard-text', params.ukey);
                         $('#file_btn_clidownload').attr('data-clipboard-text', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
@@ -2300,6 +2304,7 @@ class tmplink {
         clipboard.on('success', (e) => {
             let tmp = $(e.trigger).html();
             $(e.trigger).html('<i class="text-green fas fa-check-circle fa-fw"></i>');
+            alert('已复制');
             setTimeout(() => {
                 $(e.trigger).html(tmp);
             }, 3000);
