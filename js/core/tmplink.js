@@ -1068,10 +1068,9 @@ class tmplink {
                 'captcha': recaptcha
             }, (rsp) => {
                 if (rsp.status != 0) {
-                    let path = $('#cli_upload_path').val();
                     let model = $('#cli_upload_model').val();
                     let utoken = rsp.data;
-                    let text = 'curl -k -F "file=@' + path + '" -F "token=' + this.api_token + '" -F "model=' + model + '" -F "utoken=' + utoken + '" -X POST "https://connect.tmp.link/api_v2/cli_uploader2"';
+                    let text = 'curl -k -F "file=@ your file path (etc.. @/root/test.bin)" -F "token=' + this.api_token + '" -F "model=' + model + '" -F "utoken=' + utoken + '" -X POST "https://connect.tmp.link/api_v2/cli_uploader"';
                     let tpl = {
                         utoken: utoken,
                         cmd: text
@@ -1084,6 +1083,16 @@ class tmplink {
                 }
             });
         });
+    }
+
+    cli_uploader_generator2() {
+        let model = localStorage.getItem('app_upload_model');
+        let text = 'curl -k -F "file=@ your file path (etc.. @/root/test.bin)" -F "token=' + this.api_token + '" -F "model=' + model  + '" -X POST "https://connect.tmp.link/api_v2/cli_uploader"';
+
+        $('#cliuploader').show();
+        $('#cliuploader_show').html(text);
+        $('#cliuploader_copy').attr('data-clipboard-text', text);
+        this.btn_copy_bind();
     }
 
     storage_buy_modal() {

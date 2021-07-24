@@ -3101,13 +3101,13 @@ input[type="button"].btn-block {
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
   font-size: 0.9375rem;
-  color: #495057;
+  /* color: #141414; */
   text-align: left;
   list-style: none;
-  background-color: rgba(255, 255, 255, 0.5);
-  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  /* background-color: rgba(255, 255, 255, 0.5); */
+  /* -webkit-backdrop-filter:saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
-  background-clip: padding-box;
+  background-clip: padding-box; */
   /* border: 1px solid rgba(0, 40, 100, 0.12); */
   border: 0px;
   border-radius: 8px;

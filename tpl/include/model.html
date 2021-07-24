@@ -175,7 +175,7 @@
                         <div class="select-box p-2 btn-point" onclick="$('#uploadModal').modal('hide');TL.storage_buy_modal();">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 fad fa-usb-drive fa-fw"></i>
+                                    <i class="mt-1 far fa-layer-plus fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="modal_settings_upload_buy_storage">
@@ -197,7 +197,7 @@
                         <label for="fileToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 fad fa-file-upload fa-fw"></i>
+                                    <i class="mt-1 far fa-file-upload fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="model_title_upload">
@@ -216,7 +216,7 @@
                         <label for="dirsToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 fad fa-folder-upload fa-fw"></i>
+                                    <i class="mt-1 far fa-folder-upload fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="upload_dirs">
@@ -228,6 +228,31 @@
                                 </div>
                             </div>
                         </label>
+                    </div>
+                    <div class="select-box p-2 btn-point" onclick="TL.cli_uploader_generator2();">
+                        <div class="d-flex align-items-center">
+                            <span class="stamp stamp-md bg-blue mr-3">
+                                <i class="mt-1 far fa-terminal fa-fw"></i>
+                            </span>
+                            <div>
+                                <h4 class="m-0">
+                                    命令行上传
+                                </h4>
+                                <small class="text-muted">
+                                    在命令行的环境下，使用 curl 上传文件。
+                                </small>
+                            </div>
+                        </div>
+                        <div id="cliuploader" style="display: none;">
+                            <div class="row p-2 select-box shadow-sm mt-2">
+                                <div id="cliuploader_show" class="col-10 my-1 d-flex align-items-center listfontweight filename text-truncate"></div>
+                                <div class="col-2 my-1 d-flex align-items-center justify-content-end">
+                                    <a id="cliuploader_copy" href="javascript:void(0)" data-clipboard-text="#" class="text-azure btn_copy btn btn-sm btn-light mx-1">
+                                        <i class="fa-fw far fa-copy"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
