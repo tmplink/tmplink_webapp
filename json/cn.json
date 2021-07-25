@@ -94,6 +94,7 @@
     "navbar_orders": "已购项目",
 
     "page_503_content": "当前有下载任务正在进行中，请等待该任务结束后再开始新的下载。",
+    "page_404_content": "无法找到对应的页面。",
     "return_index": "返回首页",
 
     "model_list":"列表",

@@ -27,20 +27,19 @@
     <script type="text/javascript" src="./tmpui.js"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 530,
+            "version": 531,
             "siteroot": "/",
             "loadingIcon": "/img/logo.png",
             "googleAnalytics": "UA-96864664-3",
             "loadingPage": true,
             "loadingProgress": true,
+            "pageNotFound": '/404',
 
             "language": {
                 "en": "/json/en.json",
                 "cn": "/json/cn.json",
                 "jp": "/json/jp.json"
             },
-
-            "404": "404",
 
             "preload": {
                 "init": {
@@ -173,6 +172,15 @@
                     "body": {
                         "/css/sp.css": { "type": "css" },
                         "/tpl/503.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                },
+                "/404": {
+                    "title": "404",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/sp.css": { "type": "css" },
+                        "/tpl/404.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
                 "/file": {

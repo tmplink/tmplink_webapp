@@ -106,6 +106,7 @@
     "title_503": "TMPLINK - 503",
     "des_503": "Flow Control",
     "page_503_content": "A download task is currently in progress. Please wait for the task to finish before starting a new download.",
+    "page_404_content": "Page cannot be found.",
     "return_index": "Return to Home",
     "status_13": "Failed to reset the password. The operation is too frequent. Please try again in one hour.",
     "status_14": "Failed to reset the password. There is no such account.",
