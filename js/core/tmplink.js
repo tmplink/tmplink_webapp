@@ -629,6 +629,11 @@ class tmplink {
             return false;
         }
         $('#workspace_filelist').append(app.tpl('workspace_filelist_list_tpl', data));
+        $('.lefttime-remainder').each(function(){
+            let id = $(this).attr('id');
+            let time = $(this).attr('data-tmplink-lefttime');
+            countDown(id,time);
+        });
         this.btn_copy_bind();
         app.linkRebind();
     }
@@ -688,6 +693,16 @@ class tmplink {
                                 app.open('/login');
                             }
                         });
+
+                        //更换图标
+                        let icon = this.fileicon(rsp.data.type);
+                        $('#file-icon').attr('class','fa-fw text-azure fa-3x '+icon);
+
+                        //剩余时间
+                        if(rsp.data.model!==99){
+                            countDown('lefttime',rsp.data.lefttime_s);
+                        }
+
                         $('#btn_download').attr('x-href', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
                         $('#btn_highdownload').attr('x-href', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
                         $('.single_download_progress_bar').attr('data-href', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
@@ -1404,6 +1419,11 @@ class tmplink {
         }
         if (data.length != 0) {
             $('#room_filelist').append(app.tpl('room_filelist_list_tpl', data));
+            $('.lefttime-remainder').each(function(){
+                let id = $(this).attr('id');
+                let time = $(this).attr('data-tmplink-lefttime');
+                countDown(id,time);
+            });
         }
         this.btn_copy_bind();
         app.linkRebind();

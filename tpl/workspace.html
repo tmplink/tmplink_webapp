@@ -149,7 +149,10 @@
                                     </a>
                                     <% if(obj[x].model!=99){ %>
                                         <!--[这里处理剩余时间]-->
-                                        <i class="fa-fw far fa-stopwatch"></i> <% obj[x].hp_time %>
+                                        <div>
+                                            <i class="fa-fw far fa-stopwatch"></i> 
+                                            <span id="file_unit_r_<% obj[x].ukey %>" class="lefttime-remainder" data-tmplink-lefttime="<% obj[x].lefttime %>"><span>
+                                        </div>
                                     <% } %>
                                 </div>
 
