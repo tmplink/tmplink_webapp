@@ -699,8 +699,11 @@ class tmplink {
                         $('#file-icon').attr('class','fa-fw text-azure fa-3x '+icon);
 
                         //剩余时间
-                        if(rsp.data.model!==99){
+                        if(rsp.data.model!=='99'){
+                            $('#lefttime_show').show();
                             countDown('lefttime',rsp.data.lefttime_s);
+                        }else{
+                            $('#lefttime_show').hide();
                         }
 
                         $('#btn_download').attr('x-href', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
