@@ -1,6 +1,6 @@
 class tmplink {
 
-    api_url = 'https://connect.tmp.link/api_v2'
+    api_url = 'https://tun.tmp.link/api_v2'
     api_url_upload = this.api_url + '/file'
     api_file = this.api_url + '/file'
     api_user = this.api_url + '/user'
