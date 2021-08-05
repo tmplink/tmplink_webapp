@@ -698,6 +698,9 @@ class tmplink {
                         let icon = this.fileicon(rsp.data.type);
                         $('#file-icon').attr('class', 'fa-fw text-azure fa-3x ' + icon);
 
+                        //更新title
+                        document.title = rsp.data.name;
+
                         //剩余时间
                         if (rsp.data.model !== '99') {
                             $('#lefttime_show').show();
@@ -2346,13 +2349,14 @@ class tmplink {
 
     api_init() {
         $.post(this.api_url + '/init', (data) => {
-            this.api_file = data + '/file'
-            this.api_user = data + '/user'
-            this.api_mr = data + '/meetingroom'
+            this.api_file = data + '/file';
+            this.api_user = data + '/user';
+            this.api_url_upload = data + '/file';
+            this.api_mr = data + '/meetingroom';
         }, 'text');
-        $.post(this.api_url + '/init_uploader', (data) => {
-            this.api_url_upload = data + '/file'
-        }, 'text');
+        // $.post(this.api_url + '/init_uploader', (data) => {
+        //     this.api_url_upload = data + '/file'
+        // }, 'text');
     }
 
     fileicon(type) {
