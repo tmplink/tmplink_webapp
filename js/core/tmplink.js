@@ -481,15 +481,11 @@ class tmplink {
     }
 
     workspace_del(ukey) {
-        $('#file_unit_' + ukey).hide();
+        $('.file_unit_' + ukey).hide();
         $.post(this.api_file, {
             action: 'remove_from_workspace',
             token: this.api_token,
             ukey: ukey
-        }, (rsp) => {
-            // $('#btn_add_to_workspace').html('<i class="fas fa-check-circle" aria-hidden="true"></i>');
-            // $('#file_unit_' + ukey).fadeOut();
-            //this.workspace_filelist();
         }, 'json');
     }
 
@@ -793,6 +789,19 @@ class tmplink {
                 this.download_retry = 0;
             }
         }, false);
+        xhr.addEventListener("timeout", (evt) => {
+            if (this.download_retry < this.download_retry_max) {
+                this.download_retry++;
+                setTimeout(() => {
+                    this.single_download_start(url, filename);
+                }, 3000);
+            } else {
+                this.alert('下载发生错误，请重试。');
+                this.single_download_reset();
+                //reset download retry
+                this.download_retry = 0;
+            }
+        }, false);
         xhr.addEventListener("abort", (evt) => {
             this.alert('下载中断，请重试。');
             this.single_download_reset();
@@ -924,13 +933,25 @@ class tmplink {
             delete this.download_queue[index];
             this.download_queue_start();
         }, false);
+        xhr.addEventListener("timeout", (evt) => {
+            if (this.download_retry < this.download_retry_max) {
+                this.download_retry++;
+                setTimeout(() => {
+                    this.download_queue_progress_start(url, filename, id, index);
+                }, 3000);
+            } else {
+                delete this.download_queue[index];
+                this.download_queue_start();
+                //reset download retry
+                this.download_retry = 0;
+            }
+        }, false);
         xhr.addEventListener("error", (evt) => {
             if (this.download_retry < this.download_retry_max) {
                 this.download_retry++;
                 setTimeout(() => {
                     this.download_queue_progress_start(url, filename, id, index);
                 }, 3000);
-
             } else {
                 delete this.download_queue[index];
                 this.download_queue_start();
@@ -1455,7 +1476,7 @@ class tmplink {
 
     mr_file_del(ukey) {
         var params = this.get_url_params();
-        $('#file_unit_' + ukey).hide(300);
+        $('.file_unit_' + ukey).hide(300);
         this.recaptcha_do('mr_del', (recaptcha) => {
             $.post(this.api_mr, {
                 action: 'file_del',
