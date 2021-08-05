@@ -108,7 +108,7 @@ class tmplink {
     bg_load() {
         if (document.querySelector('#background_wrap_preload') == null) {
             $('body').append('<div id="background_wrap_preload" style="z-index: -1;background-color:black; position: fixed;top: 0;left: 0;height: 100%;width: 100%;"></div>');
-            let bglist = [1, 2, 3, 4, 5];
+            let bglist = [1, 2, 3, 4, 5, 6, 7];
             let index = Math.floor((Math.random() * bglist.length));
             let img = new Image();
             img.src = '/img/bg/s' + bglist[index] + '.jpg';
@@ -629,10 +629,10 @@ class tmplink {
             return false;
         }
         $('#workspace_filelist').append(app.tpl('workspace_filelist_list_tpl', data));
-        $('.lefttime-remainder').each(function(){
+        $('.lefttime-remainder').each(function () {
             let id = $(this).attr('id');
             let time = $(this).attr('data-tmplink-lefttime');
-            countDown(id,time);
+            countDown(id, time);
         });
         this.btn_copy_bind();
         app.linkRebind();
@@ -696,13 +696,13 @@ class tmplink {
 
                         //更换图标
                         let icon = this.fileicon(rsp.data.type);
-                        $('#file-icon').attr('class','fa-fw text-azure fa-3x '+icon);
+                        $('#file-icon').attr('class', 'fa-fw text-azure fa-3x ' + icon);
 
                         //剩余时间
-                        if(rsp.data.model!=='99'){
+                        if (rsp.data.model !== '99') {
                             $('#lefttime_show').show();
-                            countDown('lefttime',rsp.data.lefttime_s);
-                        }else{
+                            countDown('lefttime', rsp.data.lefttime_s);
+                        } else {
                             $('#lefttime_show').hide();
                         }
 
@@ -1106,7 +1106,7 @@ class tmplink {
 
     cli_uploader_generator2() {
         let model = localStorage.getItem('app_upload_model');
-        let text = 'curl -k -F "file=@ your file path (etc.. @/root/test.bin)" -F "token=' + this.api_token + '" -F "model=' + model  + '" -X POST "https://connect.tmp.link/api_v2/cli_uploader"';
+        let text = 'curl -k -F "file=@ your file path (etc.. @/root/test.bin)" -F "token=' + this.api_token + '" -F "model=' + model + '" -X POST "https://connect.tmp.link/api_v2/cli_uploader"';
 
         $('#cliuploader').show();
         $('#cliuploader_show').html(text);
@@ -1422,10 +1422,10 @@ class tmplink {
         }
         if (data.length != 0) {
             $('#room_filelist').append(app.tpl('room_filelist_list_tpl', data));
-            $('.lefttime-remainder').each(function(){
+            $('.lefttime-remainder').each(function () {
                 let id = $(this).attr('id');
                 let time = $(this).attr('data-tmplink-lefttime');
-                countDown(id,time);
+                countDown(id, time);
             });
         }
         this.btn_copy_bind();
