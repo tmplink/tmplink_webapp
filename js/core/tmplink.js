@@ -1991,7 +1991,7 @@ class tmplink {
             $('#uq_' + id).fadeOut();
             return false;
         }
-        if (file.size > (this.storage - this.storage_used)) {
+        if (file.size > (this.storage - this.storage_used) && (model==99 || model == 3)) {
             this.alert(this.languageData.upload_fail_storage);
             $('#uq_' + id).fadeOut();
             return false;
