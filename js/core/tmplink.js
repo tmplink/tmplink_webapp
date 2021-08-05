@@ -805,8 +805,7 @@ class tmplink {
         xhr.send();
         $('.single_download_msg').html('准备中，正在开始下载...');
         $('.single_download_progress_bar').fadeIn();
-        $('#btn_download').attr('disabled', true);
-        $('#file_btn_highdownload').attr('disabled', true);
+        $('#btn_quick_download').attr('disabled',true);
     }
 
     single_download_complete(evt, filename) {
@@ -841,8 +840,7 @@ class tmplink {
     }
 
     single_download_reset() {
-        $('#btn_download').removeAttr('disabled');
-        $('#file_btn_highdownload').removeAttr('disabled');
+        $('#btn_quick_download').removeAttr('disabled');
     }
 
     isWeixin() {
