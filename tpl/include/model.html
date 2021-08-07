@@ -79,11 +79,10 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="h4 text-center">
+                <!-- <div class="h4 text-center">
                     系统维护中，暂停提供上传服务。    
-                </div>
+                </div> -->
                 <!--[新设计]-->
-                <!--[
                 <div class="select-box-all p-2" id="selected_model_box" style="display: none;">
                     <button type="button" class="btn btn-primary btn-sm text-right"
                         onclick="TL.upload_model_reset()" i18n="modal_settings_upload_model_reset">.</button>
@@ -110,6 +109,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!--[
                         <div class="select-box p-2 btn-point" onclick="TL.upload_model_selected(1)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
@@ -140,26 +140,12 @@
                                 </div>
                             </div>
                         </div>
+                        ]-->
                     </div>
 
                     <div class="select-box-all p-2">
                         <div class="text-center">
                             <h5 id="upload_storage_status">.</h5>
-                        </div>
-                        <div class="select-box p-2 btn-point storage_needs" onclick="TL.upload_model_selected(3)">
-                            <div class="d-flex align-items-center">
-                                <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 fal fa-history fa-fw"></i>
-                                </span>
-                                <div>
-                                    <h4 class="m-0" i18n="modal_settings_upload_model4">
-                                        .
-                                    </h4>
-                                    <small class="text-muted" i18n="modal_settings_upload_model4_des">
-                                        .
-                                    </small>
-                                </div>
-                            </div>
                         </div>
                         <div class="select-box p-2 btn-point storage_needs" onclick="TL.upload_model_selected(99)">
                             <div class="d-flex align-items-center">
@@ -261,7 +247,6 @@
                 </div>
                 
                 <input type="hidden" id="upload_model" value="0" />
-                ]-->
 
                 <script type="text/template" id="upload_storage_status_tpl">
                     <div class="progress mb-4" style="height: 2rem;background-color: #343a40;">
