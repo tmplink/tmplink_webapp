@@ -1476,7 +1476,7 @@ class tmplink {
 
     mr_file_del(ukey) {
         var params = this.get_url_params();
-        $('.file_unit_' + ukey).hide(300);
+        $('.file_unit_' + ukey).hide();
         this.recaptcha_do('mr_del', (recaptcha) => {
             $.post(this.api_mr, {
                 action: 'file_del',
