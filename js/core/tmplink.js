@@ -293,8 +293,8 @@ class tmplink {
                 return true;
             }
         }
-        // cb(this.randomString(32));
-        // return true;
+        cb(this.randomString(64));
+        return true;
         if (typeof grecaptcha === 'object') {
             grecaptcha.ready(() => {
                 grecaptcha.execute(this.recaptcha, {
