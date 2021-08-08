@@ -2338,13 +2338,13 @@ class tmplink {
         data.storage_text = this.bytetoconver(this.storage, true);
         data.storage_used_text = this.bytetoconver(this.storage_used, true);
         data.percent = (this.storage_used / this.storage) * 100;
-        $('#upload_storage_status').html(this.languageData.model_title_buy_storage + ': ' + data.storage_used_text + ' | ' + data.storage_text);
+        $('#upload_storage_status').html(data.storage_used_text + ' | ' + data.storage_text);
         // $('#upload_storage_status').html(app.tpl('upload_storage_status_tpl', data));
     }
 
     bytetoconver(val, label) {
         if (val == 0)
-            return '0';
+            return '0 GB';
         var s = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
         var e = Math.floor(Math.log(val) / Math.log(1024));
         var value = ((val / Math.pow(1024, Math.floor(e))).toFixed(2));
