@@ -274,7 +274,7 @@ class tmplink {
     }
 
     loading_box_on() {
-        $('#loading_box').fadeIn();
+        $('#loading_box').show();
     }
 
     loading_box_off() {
@@ -435,7 +435,7 @@ class tmplink {
                 return false;
             }
             $('#submit').attr('disabled', true);
-            $('#msg_notice').fadeIn();
+            $('#msg_notice').show();
             $('#msg_notice').html(this.languageData.form_btn_processing);
             $.post(this.api_user, {
                 action: 'passwordfound',
@@ -554,7 +554,7 @@ class tmplink {
                         this.list_data[rsp.data[i].ukey] = rsp.data[i];
                     }
                 }
-                $('#filelist').fadeIn();
+                $('#filelist').show();
                 this.loading_box_off();
                 //cancel
                 if (rsp.status == 0 || rsp.data.length < 50) {
@@ -601,7 +601,7 @@ class tmplink {
         this.workspace_btn_active_reset();
         $('#ws_btn_file_photo').addClass('bg-dark');
         if (page == 0 && data == false) {
-            $('.no_photos').fadeIn();
+            $('.no_photos').show();
         }
         if (data.length == 0) {
             return false;
@@ -619,7 +619,7 @@ class tmplink {
         this.workspace_btn_active_reset();
         $('#ws_btn_file_list').addClass('bg-dark');
         if (page == 0 && data == false) {
-            $('.no_files').fadeIn();
+            $('.no_files').show();
         }
         if (data.length == 0) {
             return false;
@@ -679,7 +679,7 @@ class tmplink {
                         gtag('config', 'UA-96864664-3', {
                             'page_title': 'D-' + rsp.data.name,
                         });
-                        $('#file_box').fadeIn();
+                        $('#file_box').show();
                         $('#filename').html(rsp.data.name);
                         $('#filesize').html(rsp.data.size);
                         $('#btn_add_to_workspace').on('click', () => {
@@ -694,6 +694,9 @@ class tmplink {
                         let icon = this.fileicon(rsp.data.type);
                         $('#file-icon').attr('class', 'fa-fw text-azure fa-3x ' + icon);
 
+                        //设定下载链接
+                        let download_url  = 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey;
+
                         //更新title
                         document.title = rsp.data.name;
 
@@ -705,17 +708,21 @@ class tmplink {
                             $('#lefttime_show').hide();
                         }
 
-                        $('#btn_download').attr('x-href', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
-                        $('#btn_highdownload').attr('x-href', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
-                        $('.single_download_progress_bar').attr('data-href', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
+                        $('#btn_download').attr('x-href', download_url);
+                        $('#btn_highdownload').attr('x-href', download_url);
+                        $('.single_download_progress_bar').attr('data-href', download_url);
                         $('.single_download_progress_bar').attr('data-filename', rsp.data.name);
 
-                        $('.btn_copy_downloadurl').attr('data-clipboard-text', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
-                        $('.btn_copy_downloadurl').attr('href', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
+                        $('.btn_copy_downloadurl').attr('data-clipboard-text', download_url);
+                        $('.btn_copy_downloadurl').attr('href', download_url);
 
                         $('.btn_copy_fileurl').attr('data-clipboard-text', 'http://tmp.link/f/' + params.ukey);
                         $('#file_ukey').attr('data-clipboard-text', params.ukey);
-                        $('#file_btn_clidownload').attr('data-clipboard-text', 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey);
+                        $('#file_btn_clidownload').attr('data-clipboard-text', download_url);
+                        $('.btn_copy_downloadurl_for_curl').attr('data-clipboard-text', `curl -Lo "${rsp.data.name}" ${download_url}`);
+                        $('.btn_copy_downloadurl_for_wget').attr('data-clipboard-text', `wget -O  "${rsp.data.name}" ${download_url}`);
+
+
                         $('#qr_code_url').attr('src', this.api_url + '/qr?code=' + params.ukey);
                         $('#report_ukey').html(params.ukey);
                         this.btn_copy_bind();
@@ -765,7 +772,7 @@ class tmplink {
                     });
                 }, 'json');
             } else {
-                $('#file_unavailable').fadeIn();
+                $('#file_unavailable').show();
             }
             this.loading_box_off();
         });
@@ -813,7 +820,7 @@ class tmplink {
         xhr.responseType = 'blob';
         xhr.send();
         $('.single_download_msg').html('准备中，正在开始下载...');
-        $('.single_download_progress_bar').fadeIn();
+        $('.single_download_progress_bar').show();
         $('#btn_quick_download').attr('disabled',true);
     }
 
@@ -914,7 +921,7 @@ class tmplink {
                 console.log("Downloading:" + data[0]);
                 this.download_queue_processing = true;
                 this.download_queue_progress_start(data[0], data[1], data[2], data[3]);
-                // $('#download_queue').fadeIn();
+                // $('#download_queue').show();
                 return true;
             } else {
                 // $('#download_queue').fadeOut();
@@ -1245,7 +1252,7 @@ class tmplink {
                     $('#order_list').html(app.tpl('order_list_tpl', r));
                 }
                 $('#orders_loader').fadeOut();
-                $('#orders_loaded').fadeIn();
+                $('#orders_loaded').show();
             }, 'json');
         });
     }
@@ -1439,7 +1446,7 @@ class tmplink {
                 $('#room_filelist').append(app.tpl('meetroom_list_tpl', this.subroom_data));
             }
             if (data === false && this.subroom_data == 0) {
-                $('.no_files').fadeIn();
+                $('.no_files').show();
             }
         }
         if (data.length != 0) {
@@ -1463,7 +1470,7 @@ class tmplink {
                 $('#room_filelist').append(app.tpl('meetroom_list_tpl', this.subroom_data));
             }
             if (data === false && this.subroom_data == 0) {
-                $('.no_photos').fadeIn();
+                $('.no_photos').show();
             }
         }
         if (data.length != 0) {
@@ -1745,7 +1752,7 @@ class tmplink {
                     //是否需要设置上级目录返回按钮
                     $('#room_back_btn').html(app.tpl('room_back_btn_tpl', {}));
                     $('#room_loading').hide();
-                    $('#room_loaded').fadeIn();
+                    $('#room_loaded').show();
                     app.linkRebind();
                 }
             });
@@ -1756,7 +1763,7 @@ class tmplink {
         var email = $('#email').val();
         var password = $('#password').val();
         $('#submit').attr('disabled', true);
-        $('#msg_notice').fadeIn();
+        $('#msg_notice').show();
         $('#submit').html(this.languageData.form_btn_processing);
         $('#msg_notice').html(this.languageData.form_btn_processing);
         this.recaptcha_do('init', (recaptcha) => {
@@ -1844,7 +1851,7 @@ class tmplink {
         var password = $('#password').val();
         var rpassword = $('#rpassword').val();
         var code = $('#checkcode').val();
-        $('#msg_notice').fadeIn();
+        $('#msg_notice').show();
         $('#msg_notice').html(this.languageData.form_btn_processing);
         $('#submit').html(this.languageData.form_btn_login);
         $('#submit').attr('disabled', true);
@@ -1880,7 +1887,7 @@ class tmplink {
 
     cc_send() {
         var email = $('#email').val();
-        $('#msg_notice').fadeIn();
+        $('#msg_notice').show();
         $('#msg_notice').html(this.languageData.form_btn_processing);
         $('#button-reg-checkcode').html(this.languageData.form_btn_processing);
         $('#button-reg-checkcode').attr('disabled', true);
