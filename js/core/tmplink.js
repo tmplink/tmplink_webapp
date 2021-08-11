@@ -407,7 +407,7 @@ class tmplink {
     }
 
     previewModel(ukey, id) {
-        let url = 'https://tmplinkapp-connect.vx-cdn.com/img-' + ukey + '-0x0.jpg';
+        let url = 'https://getfile.tmp.link/img-' + ukey + '-0x0.jpg';
         $('#preview_img').attr('src', '/img/lazy.gif');
         $.get(url, () => {
             $('#preview_img').attr('src', url);
@@ -695,7 +695,7 @@ class tmplink {
                         $('#file-icon').attr('class', 'fa-fw text-azure fa-3x ' + icon);
 
                         //设定下载链接
-                        let download_url  = 'https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + params.ukey;
+                        let download_url  = 'https://getfile.tmp.link/connect-' + this.api_token + '-' + params.ukey;
 
                         //更新title
                         document.title = rsp.data.name;
@@ -735,7 +735,7 @@ class tmplink {
                         }
                         //this.btn_copy_bind();
                         // if (rsp.data.type == 'jpg' || rsp.data.type == 'jpeg' || rsp.data.type == 'png' || rsp.data.type == 'gif') {
-                        //     let img_url = 'https://tmplinkapp-connect.vx-cdn.com/img-' + params.ukey + '-0x0.jpg';
+                        //     let img_url = 'https://getfile.tmp.link/img-' + params.ukey + '-0x0.jpg';
                         //     $('.img_great').attr('src', img_url);
                         //     //specail image model
                         //     let img = new Image();
@@ -1044,10 +1044,10 @@ class tmplink {
         // $('#btn_download_' + ukey).addClass('disabled');
         // $('#btn_download_' + ukey).html('<i class="fas fa-check-circle fa-fw text-green"></i>');
         // if (this.isMobile()) {
-        //     window.open('https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + ukey);
+        //     window.open('https://getfile.tmp.link/connect-' + this.api_token + '-' + ukey);
         //     return false;
         // }
-        this.download_queue_add('https://tmplinkapp-connect.vx-cdn.com/connect-' + this.api_token + '-' + ukey, title, ukey, size, type);
+        this.download_queue_add('https://getfile.tmp.link/connect-' + this.api_token + '-' + ukey, title, ukey, size, type);
         this.download_queue_start();
         //this.download_queue_run();
         // setTimeout(() => {
