@@ -77,74 +77,89 @@
                             </div>
                             <hr />
                         </div> -->
-                        <div class="btn-group btn-block">
-                            <!-- <button type="button" class="btn btn-success btn-lg"
-                                onclick="TL.download_file()" id="btn_quick_download">快速下载</button> -->
-                            <a type="button" class="btn btn-success btn-lg btn_copy_downloadurl">快速下载</a>
-                            <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" data-reference="parent">
-                                其它选项
-                                <span class="sr-only">其它选项</span>
-                            </button>
-                            <div class="dropdown-menu w-100 shadow" aria-labelledby="dropdownMenuReference">
-                                <!-- <a class="dropdown-item btn_copy_downloadurl">
-                                    <i class="fad fa-browser fa-fw"></i>
-                                    使用浏览器进行下载
-                                </a> -->
-                                <button class="dropdown-item btn_copy btn_copy_downloadurl">
-                                    <i class="fad fa-terminal fa-fw"></i>
-                                    复制下载链接，到其它地方下载（etc..迅雷）
-                                </button>
-                                <button class="dropdown-item btn_copy btn_copy_downloadurl_for_curl">
-                                    <i class="fad fa-terminal fa-fw"></i>
-                                    复制适用于 <span class="text-red">curl</span> 的下载代码
-                                </button>
-                                <button class="dropdown-item btn_copy btn_copy_downloadurl_for_wget">
-                                    <i class="fad fa-terminal fa-fw"></i>
-                                    复制适用于 <span class="text-red">wget</span> 的下载代码
-                                </button>
-                                <div class="dropdown-divider"></div>
-                                <div class="dropdown-item" href="#">如果您的账号已购买高速通道，下载时将自动切换到高速通道</div>
-                            </div>
-                        </div>
 
                         <div class="row">
-                            <div class="col-md-4 col-6 text-center">
-                                <div class="fileicon mx-auto mb-2">
+                            <div class="col-md-4 col-6 text-center mb-2">
+                                <div class="fileicon mx-auto mb-1">
                                     <i class="fad fa-download fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
                                 </div>
-                                <div>快速下载</div>
+                                <div>
+                                    <a type="button" class="btn btn_copy_downloadurl" i18n="file_btn_download">.</a>
+                                </div>
                             </div>
-                            <div class="col-md-4 col-6 text-center">
-                                <div class="fileicon mx-auto mb-2">
+
+                            <div class="col-md-4 col-6 text-center mb-2">
+                                <div class="fileicon mx-auto mb-1">
                                     <i class="fal fa-download fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
                                 </div>
-                                <div>下载：其它方式</div>
+                                <div>
+                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split"
+                                        id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false" data-reference="parent" i18n="file_btn_download_opt">
+                                        .
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownMenuReference">
+                                        <!-- <a class="dropdown-item btn_copy_downloadurl">
+                                            <i class="fad fa-browser fa-fw"></i>
+                                            使用浏览器进行下载
+                                        </a> -->
+                                        <button class="dropdown-item btn_copy btn_copy_downloadurl">
+                                            <i class="fad fa-terminal fa-fw"></i>
+                                            <span i18n="file_btn_download_opt_link">.</span>
+                                        </button>
+                                        <button class="dropdown-item btn_copy btn_copy_downloadurl_for_curl">
+                                            <i class="fad fa-terminal fa-fw"></i>
+                                            <span i18n="file_btn_download_opt_curl">.</span>
+                                        </button>
+                                        <button class="dropdown-item btn_copy btn_copy_downloadurl_for_wget">
+                                            <i class="fad fa-terminal fa-fw"></i>
+                                            <span i18n="file_btn_download_opt_wget">.</span>
+                                        </button>
+                                        <div class="dropdown-divider"></div>
+                                        <div class="dropdown-item" i18n="file_btn_download_opt_tips">.</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-4 col-6 text-center">
-                                <div class="fileicon mx-auto mb-2">
+
+                            <div class="col-md-4 col-6 text-center mb-2">
+                                <div class="fileicon mx-auto mb-1">
                                     <i class="fas fa-qrcode fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
                                 </div>
-                                <div>二维码</div>
+                                <div>
+                                    <button onclick="$('#qrModal').modal('show');" class="btn "
+                                        i18n="file_btn_qr_mobile">.</button>
+                                </div>
                             </div>
-                            <div class="col-md-4 col-6 text-center">
-                                <div class="fileicon mx-auto mb-2">
+
+                            <div class="col-md-4 col-6 text-center mb-2">
+                                <div class="fileicon mx-auto mb-1">
                                     <i class="far fa-heart fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
                                 </div>
-                                <div>收藏文件</div>
+                                <div>
+                                    <button class="btn" id="btn_add_to_workspace" i18n="file_btn_workspace">.</button>
+                                </div>
                             </div>
-                            <div class="col-md-4 col-6 text-center">
-                                <div class="fileicon mx-auto mb-2">
+
+                            <div class="col-md-4 col-6 text-center mb-2">
+                                <div class="fileicon mx-auto mb-1">
+                                    <i class="fas fa-share-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                                </div>
+                                <div>
+                                    <button class="btn btn_copy btn_copy_fileurl" i18n="file_btn_copy">.</button>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-6 text-center mb-2">
+                                <div class="fileicon mx-auto mb-1">
                                     <i class="fas fa-share-alt-square fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
                                 </div>
                                 <div>
-                                    <a href="javascript:void(0)" class="btn btn-block btn-outline-dark btn-lg btn_copy"
-                                        id="file_ukey" i18n="file_key_copy">.</a>
+                                    <a class="btn btn_copy" id="file_ukey" i18n="file_key_copy">.</a>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-6 text-center">
-                                <div class="fileicon mx-auto mb-2">
+
+                            <div class="col-md-4 col-6 text-center mb-2">
+                                <div class="fileicon mx-auto mb-1">
                                     <i
                                         class="fas fa-exclamation-triangle fa-fw mx-auto my-auto mb-2 fa-3x text-red"></i>
                                 </div>
@@ -154,18 +169,9 @@
                                     </button>
                                 </div>
                             </div>
+
                         </div>
 
-                        <a href="/login" tmpui-app="true" class="btn btn-block btn-outline-success btn-lg user-nologin"
-                            i18n="index_b3">.</a>
-                        <a href="javascript:void(0)" onclick="$('#qrModal').modal('show');"
-                            class="btn btn-block btn-outline-dark btn-lg" i18n="file_btn_qr_mobile">.</a>
-                        <a href="javascript:void(0)" class="btn btn-block btn-outline-dark btn-lg"
-                            id="btn_add_to_workspace" i18n="file_btn_workspace">.</a>
-                        <a href="javascript:void(0)"
-                            class="btn btn-block btn-outline-dark btn-lg btn_copy btn_copy_fileurl"
-                            i18n="file_btn_copy">.</a>
-                        <hr>
                         <div class="text-right">
                             <span class="btn-group mr-3">
                                 <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
