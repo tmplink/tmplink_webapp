@@ -2236,6 +2236,7 @@ class tmplink {
                 this.upload_start();
             } else {
                 //
+                $('#uqnn_' + id).html(this.languageData.upload_sync);
                 this.upload_progressbar_counter_count[id] += evt.loaded - this.upload_s2_status[id];
                 this.upload_s2_status[id] = evt.loaded;
                 //
@@ -2278,17 +2279,20 @@ class tmplink {
     }
 
     upload_final(rsp, file, id) {
-        $('#uq_' + id).fadeOut();
-        $('#nav_upload_btn').html(this.languageData.nav_upload);
+        //$('#nav_upload_btn').html(this.languageData.nav_upload);
         if (rsp.status === 1) {
+            $('#uqnn_' + id).html(this.languageData.upload_ok);
+            setTimeout(()=>{
+                $('#uq_' + id).hide();
+            },3000);
             // $('#uploaded_file_box').append(app.tpl('upload_list_ok_tpl', {
             //     name: file.name,
             //     size: this.bytetoconver(file.size, true),
             //     ukey: rsp.data.ukey
             // }));
-            this.btn_copy_bind();
+            //this.btn_copy_bind();
         } else {
-            alert(this.languageData.upload_fail);
+            $('#uqnn_' + id).html(`<span class="text-red">${this.languageData.upload_fail}</span>`);
         }
         if (this.upload_mrid_get() != 0 && this.upload_queue_file.length == 0) {
             this.room_list();
@@ -2296,7 +2300,6 @@ class tmplink {
         if (this.upload_mrid_get() == 0 && this.upload_queue_file.length == 0) {
             this.workspace_filelist();
         }
-        $('#uqnn_' + id).html(this.languageData.upload_ok);
         // this.upload_processing = 0;
         // this.upload_start();
     }
@@ -2310,7 +2313,7 @@ class tmplink {
         var ukey = $('#report_ukey').html();
         var reason = $('#report_model').val();
         $('#reportbtn').attr('disabled', true);
-        $('#reportbtn').html(this.languageData.form_btn_processed);
+        $('#reportbtn').html(`<span class="text-red">${this.languageData.form_btn_processed}</span>`);
         $.post(this.api_file, {
             'action': 'report',
             'token': this.api_token,
