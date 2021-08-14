@@ -28,15 +28,17 @@ class tools_file_manager {
     }
 
     checkbox_select_on(node) {
-        let inode = node.getAttribute('id');
-        $('#' + inode).css('background-color', '#3a3b3c36');
+        let inode = node.getAttribute('tldata');
+        $('.file_unit_' + inode).css('border-color', 'blue');
+        $('.file_unit_' + inode).css('border-style', 'double');
         node.setAttribute('data-check', 'true');
     }
 
     checkbox_select_off(node) {
-        let inode = node.getAttribute('id');
-        $('#' + inode).css('background-color', '');
-        node.checked = false;
+        let inode = node.getAttribute('tldata');
+        $('.file_unit_' + inode).css('border-color', '');
+        $('.file_unit_' + inode).css('border-style', '');
+        node.setAttribute('data-check', 'false');
     }
 
     checkbox_select_all() {
