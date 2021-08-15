@@ -696,6 +696,7 @@ class tmplink {
 
                         //设定下载链接
                         let download_url  = 'https://getfile.tmp.link/connect-' + this.api_token + '-' + params.ukey;
+                        let download_cmdurl  = 'http://cmd.tmp.link/' + this.api_token + '-' + params.ukey;
 
                         //更新title
                         document.title = rsp.data.name;
@@ -718,9 +719,9 @@ class tmplink {
 
                         $('.btn_copy_fileurl').attr('data-clipboard-text', 'http://tmp.link/f/' + params.ukey);
                         $('#file_ukey').attr('data-clipboard-text', params.ukey);
-                        $('#file_btn_clidownload').attr('data-clipboard-text', download_url);
-                        $('.btn_copy_downloadurl_for_curl').attr('data-clipboard-text', `curl -Lo "${rsp.data.name}" ${download_url}`);
-                        $('.btn_copy_downloadurl_for_wget').attr('data-clipboard-text', `wget -O  "${rsp.data.name}" ${download_url}`);
+                        $('.btn_copy_downloadurl_for_other').attr('data-clipboard-text', download_cmdurl);
+                        $('.btn_copy_downloadurl_for_curl').attr('data-clipboard-text', `curl -Lo "${rsp.data.name}" ${download_cmdurl}`);
+                        $('.btn_copy_downloadurl_for_wget').attr('data-clipboard-text', `wget -O  "${rsp.data.name}" ${download_cmdurl}`);
 
 
                         $('#qr_code_url').attr('src', this.api_url + '/qr?code=' + params.ukey);
