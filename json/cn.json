@@ -125,8 +125,11 @@
     "file_key_copy": "复制提取码",
     "file_btn_copy2": "复制文件",
     "file_btn_report": "举报文件",
+    "file_btn_upup": "下载提速",
     "file_btn_qr_mobile": "扫二维码",
     "file_unavailable": "文件已失效",
+
+
 
     "workspace_title": "文件流",
     "workspace_des": "近期上传的文件都在这里。",
@@ -175,6 +178,14 @@
     "modal_settings_upload_buy_storage_des": "可选规格：256 GB , 1TB , 3TB , 10TB",
     "modal_settings_submit": "设定",
     "modal_settings_upload": "文件分享模式",
+
+    "model_title_upup": "提升下载速度",
+    "model_upup_t1": "启用多线程支持",
+    "model_upup_d1_1": "启用 Chrome 和 Edge 的多线程下载，通常可以获得数倍下载速度提升。您无需安装任何第三方软件，也不需要为此付费。",
+    "model_upup_d1_2": "请在浏览器地址栏输入这个地址，然后将这个浏览器选项设置为 “Enabled”",
+    "model_upup_t2": "启用高速通道",
+    "model_upup_d2_1": "不限速是我们的承诺，但是在下载高峰时段，您可能会遇到下载速度降低的情况，因为下载的人实在太多了。<br>对于愿意额外付出费用支持我们的用户，我们为您准备了额外的服务器以提供更好的下载体验。",
+    "model_upup_d2_2": "若要启用高速通道，请您回到首页，然后在 “设置” - “高速通道” 中进行购买。感谢您的支持！",
 
     "model_title_meetingroom_creat": "新文件夹",
     "model_meetingroom_create_notice": "创建新的文件夹",
