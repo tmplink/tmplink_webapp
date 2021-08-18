@@ -653,7 +653,7 @@ class tmplink {
         });
     }
 
-    details_file() {
+    async details_file() {
         // if (this.isWeixin()) {
         //     $('#file_messenger_icon').html('<i class="fad fa-download fa-fw fa-4x"></i>');
         //     $('#file_messenger_msg').removeClass('display-4');
@@ -672,83 +672,100 @@ class tmplink {
                 $.post(this.api_file, {
                     action: 'details',
                     ukey: params.ukey,
-                    //captcha: recaptcha,
+                    captcha: recaptcha,
                     token: this.api_token
                 }, (rsp) => {
                     if (rsp.status === 1) {
-                        gtag('config', 'UA-96864664-3', {
-                            'page_title': 'D-' + rsp.data.name,
-                        });
-                        $('#file_box').show();
-                        $('#filename').html(rsp.data.name);
-                        $('#filesize').html(rsp.data.size);
-                        $('#btn_add_to_workspace').on('click', () => {
-                            if (this.logined == 1) {
-                                this.workspace_add(params.ukey);
-                            } else {
-                                app.open('/login');
+
+                        $.post(this.api_file, {
+                            action: 'download_req',
+                            ukey: params.ukey,
+                            token: this.api_token
+                        }, (req) => {
+
+                            if (req.status != 1) {
+                                this.alert('加载失败，请刷新页面。');
+                                return false;
                             }
+                            let download_link = req.data;
+
+                            gtag('config', 'UA-96864664-3', {
+                                'page_title': 'D-' + rsp.data.name,
+                            });
+                            $('#file_box').show();
+                            $('#filename').html(rsp.data.name);
+                            $('#filesize').html(rsp.data.size);
+                            $('#btn_add_to_workspace').on('click', () => {
+                                if (this.logined == 1) {
+                                    this.workspace_add(params.ukey);
+                                } else {
+                                    app.open('/login');
+                                }
+                            });
+
+                            //更换图标
+                            let icon = this.fileicon(rsp.data.type);
+                            $('#file-icon').attr('class', 'fa-fw text-azure fa-3x ' + icon);
+
+                            //设定下载链接
+                            let download_url = download_link;
+                            let download_cmdurl = download_link;
+
+                            //更新title
+                            document.title = rsp.data.name;
+
+                            //剩余时间
+                            if (rsp.data.model !== '99') {
+                                $('#lefttime_show').show();
+                                countDown('lefttime', rsp.data.lefttime_s);
+                            } else {
+                                $('#lefttime_show').hide();
+                            }
+
+                            $('#btn_download').attr('x-href', download_url);
+                            $('#btn_highdownload').attr('x-href', download_url);
+                            $('.single_download_progress_bar').attr('data-href', download_url);
+                            $('.single_download_progress_bar').attr('data-filename', rsp.data.name);
+
+                            $('.btn_copy_downloadurl').attr('data-clipboard-text', download_url);
+                            $('.btn_copy_downloadurl').attr('href', download_url);
+
+                            $('.btn_copy_fileurl').attr('data-clipboard-text', 'http://tmp.link/f/' + params.ukey);
+                            $('#file_ukey').attr('data-clipboard-text', params.ukey);
+                            $('.btn_copy_downloadurl_for_other').attr('data-clipboard-text', download_cmdurl);
+                            $('.btn_copy_downloadurl_for_curl').attr('data-clipboard-text', `curl -Lo "${rsp.data.name}" ${download_cmdurl}`);
+                            $('.btn_copy_downloadurl_for_wget').attr('data-clipboard-text', `wget -O  "${rsp.data.name}" ${download_cmdurl}`);
+
+
+                            $('#qr_code_url').attr('src', this.api_url + '/qr?code=' + params.ukey);
+                            $('#report_ukey').html(params.ukey);
+                            this.btn_copy_bind();
+                            if (this.logined) {
+                                $('.user-nologin').hide();
+                                $('.user-login').show();
+                            } else {
+                                $('.user-nologin').show();
+                                $('.user-login').hide();
+                            }
+
+                            //设置背景
+                            //this.btn_copy_bind();
+                            // if (rsp.data.type == 'jpg' || rsp.data.type == 'jpeg' || rsp.data.type == 'png' || rsp.data.type == 'gif') {
+                            //     let img_url = 'https://getfile.tmp.link/img-' + params.ukey + '-0x0.jpg';
+                            //     $('.img_great').attr('src', img_url);
+                            //     //specail image model
+                            //     let img = new Image();
+                            //     img.src = img_url;
+                            //     img.onload = () => {
+                            //         if (img.height >= 1080 && img.width >= 1920) {
+                            //             $('.img_great').fadeOut();
+                            //             $('body').css('background-image', 'url(' + img_url + ')');
+                            //             $('body').css('background-size', '100% auto');
+                            //         }
+                            //     }
+                            // }
+                            return true;
                         });
-
-                        //更换图标
-                        let icon = this.fileicon(rsp.data.type);
-                        $('#file-icon').attr('class', 'fa-fw text-azure fa-3x ' + icon);
-
-                        //设定下载链接
-                        let download_url  = 'https://getfile.tmp.link/connect-' + this.api_token + '-' + params.ukey;
-                        let download_cmdurl  = 'http://cmd.tmp.link/' + this.api_token + '-' + params.ukey;
-
-                        //更新title
-                        document.title = rsp.data.name;
-
-                        //剩余时间
-                        if (rsp.data.model !== '99') {
-                            $('#lefttime_show').show();
-                            countDown('lefttime', rsp.data.lefttime_s);
-                        } else {
-                            $('#lefttime_show').hide();
-                        }
-
-                        $('#btn_download').attr('x-href', download_url);
-                        $('#btn_highdownload').attr('x-href', download_url);
-                        $('.single_download_progress_bar').attr('data-href', download_url);
-                        $('.single_download_progress_bar').attr('data-filename', rsp.data.name);
-
-                        $('.btn_copy_downloadurl').attr('data-clipboard-text', download_url);
-                        $('.btn_copy_downloadurl').attr('href', download_url);
-
-                        $('.btn_copy_fileurl').attr('data-clipboard-text', 'http://tmp.link/f/' + params.ukey);
-                        $('#file_ukey').attr('data-clipboard-text', params.ukey);
-                        $('.btn_copy_downloadurl_for_other').attr('data-clipboard-text', download_cmdurl);
-                        $('.btn_copy_downloadurl_for_curl').attr('data-clipboard-text', `curl -Lo "${rsp.data.name}" ${download_cmdurl}`);
-                        $('.btn_copy_downloadurl_for_wget').attr('data-clipboard-text', `wget -O  "${rsp.data.name}" ${download_cmdurl}`);
-
-
-                        $('#qr_code_url').attr('src', this.api_url + '/qr?code=' + params.ukey);
-                        $('#report_ukey').html(params.ukey);
-                        this.btn_copy_bind();
-                        if (this.logined) {
-                            $('.user-nologin').hide();
-                            $('.user-login').show();
-                        } else {
-                            $('.user-nologin').show();
-                            $('.user-login').hide();
-                        }
-                        //this.btn_copy_bind();
-                        // if (rsp.data.type == 'jpg' || rsp.data.type == 'jpeg' || rsp.data.type == 'png' || rsp.data.type == 'gif') {
-                        //     let img_url = 'https://getfile.tmp.link/img-' + params.ukey + '-0x0.jpg';
-                        //     $('.img_great').attr('src', img_url);
-                        //     //specail image model
-                        //     let img = new Image();
-                        //     img.src = img_url;
-                        //     img.onload = () => {
-                        //         if (img.height >= 1080 && img.width >= 1920) {
-                        //             $('.img_great').fadeOut();
-                        //             $('body').css('background-image', 'url(' + img_url + ')');
-                        //             $('body').css('background-size', '100% auto');
-                        //         }
-                        //     }
-                        // }
                         return true;
                     }
 
@@ -822,7 +839,7 @@ class tmplink {
         xhr.send();
         $('.single_download_msg').html('准备中，正在开始下载...');
         $('.single_download_progress_bar').show();
-        $('#btn_quick_download').attr('disabled',true);
+        $('#btn_quick_download').attr('disabled', true);
     }
 
     single_download_complete(evt, filename) {
@@ -1040,24 +1057,48 @@ class tmplink {
     download_file_btn(i) {
         let ukey = this.list_data[i].ukey;
         let title = this.list_data[i].fname;
-        let size = this.list_data[i].fsize_formated;
-        let type = this.list_data[i].ftype;
+        // let size = this.list_data[i].fsize_formated;
+        // let type = this.list_data[i].ftype;
         // $('#btn_download_' + ukey).addClass('disabled');
         // $('#btn_download_' + ukey).html('<i class="fas fa-check-circle fa-fw text-green"></i>');
         // if (this.isMobile()) {
         //     window.open('https://getfile.tmp.link/connect-' + this.api_token + '-' + ukey);
         //     return false;
         // }
-        this.download_queue_add('https://getfile.tmp.link/connect-' + this.api_token + '-' + ukey, title, ukey, size, type);
-        this.download_queue_start();
+        // this.download_queue_add('https://getfile.tmp.link/queue-' + this.api_token + '-' + ukey, title, ukey, size, type);
+        // this.download_queue_start();
         //this.download_queue_run();
         // setTimeout(() => {
         //     $('#btn_download_' + ukey).removeClass('disabled');
         //     $('#btn_download_' + ukey).html('<i class="fad fa-download"></i>');
         // }, 3000);
-        $('.download_progress_bar_' + ukey).show();
+        // $('.download_progress_bar_' + ukey).show();
+        // $('.btn_download_' + ukey).attr('disabled', 'true');
+        // $('.btn_download_' + ukey).html('<i class="fa-fw fas fa-spinner fa-pulse"></i>');
+
+        //新的方案
         $('.btn_download_' + ukey).attr('disabled', 'true');
         $('.btn_download_' + ukey).html('<i class="fa-fw fas fa-spinner fa-pulse"></i>');
+        $.post(this.api_file, {
+            action: 'download_req',
+            ukey: ukey,
+            token: this.api_token
+        }, (req) => {
+            if (req.status == 1) {
+                window.open(req.data);
+                // var element = document.createElement('a');
+                // element.setAttribute('href',req.data);
+                // element.setAttribute('download', title);
+                // document.body.appendChild(element);
+                // element.click();
+                // document.body.removeChild(element);
+            } else {
+                this.alert('发生了错误，请重试。');
+            }
+
+            $('.btn_download_' + ukey).removeAttr('disabled');
+            $('.btn_download_' + ukey).html('<i class="fa-fw fad fa-download"></i>');
+        });
     }
 
     download_allfile_btn() {
@@ -1092,20 +1133,44 @@ class tmplink {
                     //关闭自动载入功能
                     this.room_filelist_autoload_disabled();
                     //启动下载
-                    setTimeout(() => {
-                        for (let i in rsp.data) {
+                    for (let i in rsp.data) {
+                        this.download_allfile_queue_add(() => {
                             this.download_file_btn(i);
-                        }
-                    }, 1000);
-                    // for (let i in rsp.data) {
-                    //     this.download_file_btn(i);
-                    // }
+                        });
+                    }
+                    this.download_allfile_queue_core();
                 } else {
                     this.autoload = false;
                 }
                 this.loading_box_off();
             });
         });
+    }
+
+    download_allfile_queue = []
+    download_allfile_queue_status = false
+
+    download_allfile_queue_add(fn) {
+        this.download_allfile_queue.push(fn);
+        return true;
+    }
+
+    download_allfile_queue_core() {
+        if (this.download_allfile_queue_status) {
+            return true;
+        }
+
+        this.download_allfile_queue_status = true;
+        if (this.download_allfile_queue.length > 0) {
+            let fn = this.download_allfile_queue.shift();
+            fn();
+            setTimeout(() => {
+                this.download_allfile_queue_status = false;
+                this.download_allfile_queue_core();
+            }, 1000);
+        } else {
+            this.download_allfile_queue_status = false;
+        }
     }
 
     cli_uploader_generator() {
@@ -2020,7 +2085,7 @@ class tmplink {
             $('#uq_' + id).fadeOut();
             return false;
         }
-        if (file.size > (this.storage - this.storage_used) && (model==99 || model == 3)) {
+        if (file.size > (this.storage - this.storage_used) && (model == 99 || model == 3)) {
             this.alert(this.languageData.upload_fail_storage);
             $('#uq_' + id).fadeOut();
             return false;
@@ -2283,9 +2348,9 @@ class tmplink {
         //$('#nav_upload_btn').html(this.languageData.nav_upload);
         if (rsp.status === 1) {
             $('#uqnn_' + id).html(this.languageData.upload_ok);
-            setTimeout(()=>{
+            setTimeout(() => {
                 $('#uq_' + id).hide();
-            },3000);
+            }, 3000);
             // $('#uploaded_file_box').append(app.tpl('upload_list_ok_tpl', {
             //     name: file.name,
             //     size: this.bytetoconver(file.size, true),
