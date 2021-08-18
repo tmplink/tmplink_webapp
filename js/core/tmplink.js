@@ -950,6 +950,7 @@ class tmplink {
     }
 
     download_queue_progress_start(url, filename, id, index) {
+        $('.download_progress_bar_' + index).show();
         var xhr = new XMLHttpRequest();
         xhr.addEventListener("progress", (evt) => {
             this.download_progress_on(evt, id, filename, index);
@@ -1057,47 +1058,27 @@ class tmplink {
     download_file_btn(i) {
         let ukey = this.list_data[i].ukey;
         let title = this.list_data[i].fname;
-        // let size = this.list_data[i].fsize_formated;
-        // let type = this.list_data[i].ftype;
-        // $('#btn_download_' + ukey).addClass('disabled');
-        // $('#btn_download_' + ukey).html('<i class="fas fa-check-circle fa-fw text-green"></i>');
-        // if (this.isMobile()) {
-        //     window.open('https://getfile.tmp.link/connect-' + this.api_token + '-' + ukey);
-        //     return false;
-        // }
-        // this.download_queue_add('https://getfile.tmp.link/queue-' + this.api_token + '-' + ukey, title, ukey, size, type);
-        // this.download_queue_start();
-        //this.download_queue_run();
-        // setTimeout(() => {
-        //     $('#btn_download_' + ukey).removeClass('disabled');
-        //     $('#btn_download_' + ukey).html('<i class="fad fa-download"></i>');
-        // }, 3000);
-        // $('.download_progress_bar_' + ukey).show();
-        // $('.btn_download_' + ukey).attr('disabled', 'true');
-        // $('.btn_download_' + ukey).html('<i class="fa-fw fas fa-spinner fa-pulse"></i>');
+        let size = this.list_data[i].fsize_formated;
+        let type = this.list_data[i].ftype;
 
         //新的方案
         $('.btn_download_' + ukey).attr('disabled', 'true');
         $('.btn_download_' + ukey).html('<i class="fa-fw fas fa-spinner fa-pulse"></i>');
+
         $.post(this.api_file, {
             action: 'download_req',
             ukey: ukey,
             token: this.api_token
         }, (req) => {
             if (req.status == 1) {
-                window.open(req.data);
-                // var element = document.createElement('a');
-                // element.setAttribute('href',req.data);
-                // element.setAttribute('download', title);
-                // document.body.appendChild(element);
-                // element.click();
-                // document.body.removeChild(element);
+                this.download_queue_add(req.data, title, ukey, size, type);
+                this.download_queue_start();
             } else {
                 this.alert('发生了错误，请重试。');
-            }
 
-            $('.btn_download_' + ukey).removeAttr('disabled');
-            $('.btn_download_' + ukey).html('<i class="fa-fw fad fa-download"></i>');
+                $('.btn_download_' + ukey).removeAttr('disabled');
+                $('.btn_download_' + ukey).html('<i class="fa-fw fad fa-download"></i>');
+            }
         });
     }
 
