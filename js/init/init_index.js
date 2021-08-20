@@ -1,5 +1,9 @@
-$('title').attr('i18n', 'title_index');
-$('meta[name=description]').attr('i18n', 'des_index');
-app.ready(()=>{
-    TL.head_set();
+
+app.ready(() => {
+    $('title').attr('i18n', 'title_index');
+    $('meta[name=description]').attr('i18n', 'des_index');
+
+    TL.ready(() => {
+        TL.head_set();
+    })
 });

@@ -7,6 +7,10 @@ class tmplink {
     api_mr = this.api_url + '/meetingroom'
     api_toks = this.api_url + '/token'
     api_token = null
+
+    pageReady = false
+    readyFunction = []
+    
     upload_queue_id = 0
     upload_queue_file = []
     upload_processing = 0
@@ -39,6 +43,7 @@ class tmplink {
     upload_model_selected_val = 0
     download_retry = 0
     download_retry_max = 10
+    recaptcha_op = true
 
     constructor() {
         this.app_init();
@@ -49,32 +54,36 @@ class tmplink {
         this.upload_model_selected_val = localStorage.getItem('app_upload_model') === null ? 0 : localStorage.getItem('app_upload_model');
 
         var token = localStorage.getItem('app_token');
-        this.recaptcha_do('init', (captcha) => {
+        this.recaptcha_do('token_check', (captcha) => {
             $.post(this.api_toks, {
-                'action': 'token_check',
-                'captcha': captcha,
+                action: 'token_check',
+                captcha: captcha,
                 token: token
             }, (rsp) => {
+
                 if (rsp.status == 3) {
-                    //init fail
                     let html = app.tpl('initFail', {});
                     $('#tmpui_body').html(html);
+                    app.languageBuild();
                     return false;
                 }
+
                 if (rsp.status != 1) {
-                    this.recaptcha_do('init', (captcha) => {
+                    this.recaptcha_do('token_init', (captcha) => {
                         $.post(this.api_toks, {
-                            'action': 'token',
-                            'captcha': captcha,
+                            action: 'token',
+                            captcha: captcha,
                             token: token
                         }, (rsp) => {
                             this.api_token = rsp.data;
                             localStorage.setItem('app_token', rsp.data);
+                            this.readyExec();
                             this.details_init();
                         });
                     });
                 } else {
                     this.api_token = token;
+                    this.readyExec();
                     this.details_init();
                 }
             });
@@ -99,6 +108,25 @@ class tmplink {
                 e.preventDefault();
             }
         });
+    }
+
+    ready(cb) {
+        if (this.pageReady) {
+            cb();
+        } else {
+            this.readyFunction.push(cb);
+        }
+
+    }
+
+    readyExec() {
+        this.pageReady = true;
+        if (this.readyFunction.length !== 0) {
+            for (let x in this.readyFunction) {
+                this.readyFunction[x]();
+            }
+            this.readyFunction = [];
+        }
     }
 
     languageData_init(lang) {
@@ -282,31 +310,35 @@ class tmplink {
     }
 
     recaptcha_do(type, cb) {
-        if (type !== 'init') {
-            if (this.api_token === null) {
+        // if (type !== 'init') {
+        //     if (this.api_token === null) {
+        //         setTimeout(() => {
+        //             this.recaptcha_do(type, cb);
+        //         }, 500);
+        //         return false;
+        //     } else {
+        //         cb(Math.floor(Math.random() * 10));
+        //         return true;
+        //     }
+        // }
+
+        if (this.recaptcha_op) {
+            if (typeof grecaptcha === 'object') {
+                grecaptcha.ready(() => {
+                    grecaptcha.execute(this.recaptcha, {
+                        action: type
+                    }).then((token) => {
+                        cb(token);
+                    });
+                });
+            } else {
                 setTimeout(() => {
                     this.recaptcha_do(type, cb);
                 }, 500);
-                return false;
-            } else {
-                cb(Math.floor(Math.random() * 10));
-                return true;
             }
-        }
-        cb(this.randomString(64));
-        return true;
-        if (typeof grecaptcha === 'object') {
-            grecaptcha.ready(() => {
-                grecaptcha.execute(this.recaptcha, {
-                    action: type
-                }).then((token) => {
-                    cb(token);
-                });
-            });
         } else {
-            setTimeout(() => {
-                this.recaptcha_do(type, cb);
-            }, 500);
+            cb(this.randomString(64));
+            return true;
         }
     }
 
@@ -526,41 +558,39 @@ class tmplink {
         $('#filelist_refresh_icon').addClass('fa-spin');
         $('#filelist_refresh_icon').attr('disabled', true);
         this.loading_box_on();
-        this.recaptcha_do('workspace_list', (recaptcha) => {
-            let photo = 0;
-            if (localStorage.getItem('app_workspace_view') == 'photo') {
-                photo = 1;
+        let photo = 0;
+        if (localStorage.getItem('app_workspace_view') == 'photo') {
+            photo = 1;
+        }
+        $.post(this.api_file, {
+            action: 'workspace_filelist_page',
+            page: this.page_number,
+            token: this.api_token,
+            sort_type: this.sort_type,
+            sort_by: this.sort_by,
+            photo: photo,
+            search: search
+        }, (rsp) => {
+            $('#filelist_refresh_icon').removeClass('fa-spin');
+            $('#filelist_refresh_icon').removeAttr('disabled');
+            if (rsp.status === 0) {
+                if (page == 0) {
+                    $('#workspace_filelist').html('<div class="text-center"><i class="fa-fw fad fa-folder-open fa-4x"></i></div>');
+                }
+                this.autoload = false;
+            } else {
+                this.workspace_view(rsp.data, page);
+                this.autoload = true;
+                for (let i in rsp.data) {
+                    this.list_data[rsp.data[i].ukey] = rsp.data[i];
+                }
             }
-            $.post(this.api_file, {
-                action: 'workspace_filelist_page',
-                page: this.page_number,
-                token: this.api_token,
-                sort_type: this.sort_type,
-                sort_by: this.sort_by,
-                photo: photo,
-                search: search
-            }, (rsp) => {
-                $('#filelist_refresh_icon').removeClass('fa-spin');
-                $('#filelist_refresh_icon').removeAttr('disabled');
-                if (rsp.status === 0) {
-                    if (page == 0) {
-                        $('#workspace_filelist').html('<div class="text-center"><i class="fa-fw fad fa-folder-open fa-4x"></i></div>');
-                    }
-                    this.autoload = false;
-                } else {
-                    this.workspace_view(rsp.data, page);
-                    this.autoload = true;
-                    for (let i in rsp.data) {
-                        this.list_data[rsp.data[i].ukey] = rsp.data[i];
-                    }
-                }
-                $('#filelist').show();
-                this.loading_box_off();
-                //cancel
-                if (rsp.status == 0 || rsp.data.length < 50) {
-                    this.room_filelist_autoload_disabled();
-                }
-            });
+            $('#filelist').show();
+            this.loading_box_off();
+            //cancel
+            if (rsp.status == 0 || rsp.data.length < 50) {
+                this.room_filelist_autoload_disabled();
+            }
         });
     }
 
@@ -636,24 +666,22 @@ class tmplink {
 
     file_model_change(ukey, model) {
         this.loading_box_on();
-        this.recaptcha_do('file', (recaptcha) => {
-            $.post(this.api_file, {
-                action: 'change_model',
-                ukey: ukey,
-                //captcha: recaptcha,
-                token: this.api_token,
-                model: model
-            }, (rsp) => {
-                if (rsp.status === 1) {
+        $.post(this.api_file, {
+            action: 'change_model',
+            ukey: ukey,
+            //captcha: recaptcha,
+            token: this.api_token,
+            model: model
+        }, (rsp) => {
+            if (rsp.status === 1) {
 
-                    return true;
-                }
-                this.loading_box_off();
-            }, 'json');
-        });
+                return true;
+            }
+            this.loading_box_off();
+        }, 'json');
     }
 
-    async details_file() {
+    details_file() {
         // if (this.isWeixin()) {
         //     $('#file_messenger_icon').html('<i class="fad fa-download fa-fw fa-4x"></i>');
         //     $('#file_messenger_msg').removeClass('display-4');
@@ -665,22 +693,63 @@ class tmplink {
         //     });
         //     return false;
         // }
-        this.loading_box_on();
-        this.recaptcha_do('file', (recaptcha) => {
-            var params = this.get_url_params();
-            if (params.ukey !== undefined) {
-                $.post(this.api_file, {
-                    action: 'details',
-                    ukey: params.ukey,
-                    captcha: recaptcha,
-                    token: this.api_token
-                }, (rsp) => {
-                    if (rsp.status === 1) {
 
+        this.loading_box_on();
+        var params = this.get_url_params();
+        if (params.ukey !== undefined) {
+            $.post(this.api_file, {
+                action: 'details',
+                ukey: params.ukey,
+                token: this.api_token
+            }, (rsp) => {
+                if (rsp.status === 1) {
+                    gtag('config', 'UA-96864664-3', {
+                        'page_title': 'D-' + rsp.data.name,
+                    });
+                    $('#file_box').show();
+                    $('#filename').html(rsp.data.name);
+                    $('#filesize').html(rsp.data.size);
+                    $('#btn_add_to_workspace').on('click', () => {
+                        if (this.logined == 1) {
+                            this.workspace_add(params.ukey);
+                        } else {
+                            app.open('/login');
+                        }
+                    });
+
+                    //更换图标
+                    let icon = this.fileicon(rsp.data.type);
+                    $('#file-icon').attr('class', 'fa-fw text-azure fa-3x ' + icon);
+
+                    //更新title
+                    document.title = rsp.data.name;
+
+                    //剩余时间
+                    if (rsp.data.model !== '99') {
+                        $('#lefttime_show').show();
+                        countDown('lefttime', rsp.data.lefttime_s);
+                    } else {
+                        $('#lefttime_show').hide();
+                    }
+
+                    $('#qr_code_url').attr('src', this.api_url + '/qr?code=' + params.ukey);
+                    $('#report_ukey').html(params.ukey);
+                    this.btn_copy_bind();
+                    if (this.logined) {
+                        $('.user-nologin').hide();
+                        $('.user-login').show();
+                    } else {
+                        $('.user-nologin').show();
+                        $('.user-login').hide();
+                    }
+
+                    //请求下载地址
+                    this.recaptcha_do('download_req', (recaptcha) => {
                         $.post(this.api_file, {
                             action: 'download_req',
                             ukey: params.ukey,
-                            token: this.api_token
+                            token: this.api_token,
+                            recaptcha: recaptcha
                         }, (req) => {
 
                             if (req.status != 1) {
@@ -688,39 +757,9 @@ class tmplink {
                                 return false;
                             }
                             let download_link = req.data;
-
-                            gtag('config', 'UA-96864664-3', {
-                                'page_title': 'D-' + rsp.data.name,
-                            });
-                            $('#file_box').show();
-                            $('#filename').html(rsp.data.name);
-                            $('#filesize').html(rsp.data.size);
-                            $('#btn_add_to_workspace').on('click', () => {
-                                if (this.logined == 1) {
-                                    this.workspace_add(params.ukey);
-                                } else {
-                                    app.open('/login');
-                                }
-                            });
-
-                            //更换图标
-                            let icon = this.fileicon(rsp.data.type);
-                            $('#file-icon').attr('class', 'fa-fw text-azure fa-3x ' + icon);
-
                             //设定下载链接
                             let download_url = download_link;
                             let download_cmdurl = download_link;
-
-                            //更新title
-                            document.title = rsp.data.name;
-
-                            //剩余时间
-                            if (rsp.data.model !== '99') {
-                                $('#lefttime_show').show();
-                                countDown('lefttime', rsp.data.lefttime_s);
-                            } else {
-                                $('#lefttime_show').hide();
-                            }
 
                             $('#btn_download').attr('x-href', download_url);
                             $('#btn_highdownload').attr('x-href', download_url);
@@ -735,18 +774,6 @@ class tmplink {
                             $('.btn_copy_downloadurl_for_other').attr('data-clipboard-text', download_cmdurl);
                             $('.btn_copy_downloadurl_for_curl').attr('data-clipboard-text', `curl -Lo "${rsp.data.name}" ${download_cmdurl}`);
                             $('.btn_copy_downloadurl_for_wget').attr('data-clipboard-text', `wget -O  "${rsp.data.name}" ${download_cmdurl}`);
-
-
-                            $('#qr_code_url').attr('src', this.api_url + '/qr?code=' + params.ukey);
-                            $('#report_ukey').html(params.ukey);
-                            this.btn_copy_bind();
-                            if (this.logined) {
-                                $('.user-nologin').hide();
-                                $('.user-login').show();
-                            } else {
-                                $('.user-nologin').show();
-                                $('.user-login').hide();
-                            }
 
                             //设置背景
                             //this.btn_copy_bind();
@@ -766,34 +793,35 @@ class tmplink {
                             // }
                             return true;
                         });
-                        return true;
-                    }
+                    });
 
-                    //file need to login
-                    if (rsp.status === 3) {
-                        $('#file_messenger_icon').html('<i class="fad fa-sign-in fa-fw fa-4x"></i>');
-                        $('#file_messenger_msg').html(this.languageData.status_need_login);
-                        $('#file_messenger_msg_login').show();
-                        $('#file_messenger').show();
-                        gtag('config', 'UA-96864664-3', {
-                            'page_title': 'D-unLogin',
-                        });
-                        return false;
-                    }
+                    return true;
+                }
 
-                    //file unavailable
-                    $('#file_messenger_icon').html('<i class="fas fa-folder-times  fa-4x"></i>');
-                    $('#file_messenger_msg').html(this.languageData.file_unavailable);
+                //file need to login
+                if (rsp.status === 3) {
+                    $('#file_messenger_icon').html('<i class="fad fa-sign-in fa-fw fa-4x"></i>');
+                    $('#file_messenger_msg').html(this.languageData.status_need_login);
+                    $('#file_messenger_msg_login').show();
                     $('#file_messenger').show();
                     gtag('config', 'UA-96864664-3', {
-                        'page_title': 'D-fileUnavailable',
+                        'page_title': 'D-unLogin',
                     });
-                }, 'json');
-            } else {
-                $('#file_unavailable').show();
-            }
-            this.loading_box_off();
-        });
+                    return false;
+                }
+
+                //file unavailable
+                $('#file_messenger_icon').html('<i class="fas fa-folder-times  fa-4x"></i>');
+                $('#file_messenger_msg').html(this.languageData.file_unavailable);
+                $('#file_messenger').show();
+                gtag('config', 'UA-96864664-3', {
+                    'page_title': 'D-fileUnavailable',
+                });
+            }, 'json');
+        } else {
+            $('#file_unavailable').show();
+        }
+        this.loading_box_off();
     }
 
     single_download_start(url, filename) {
@@ -1065,20 +1093,23 @@ class tmplink {
         $('.btn_download_' + ukey).attr('disabled', 'true');
         $('.btn_download_' + ukey).html('<i class="fa-fw fas fa-spinner fa-pulse"></i>');
 
-        $.post(this.api_file, {
-            action: 'download_req',
-            ukey: ukey,
-            token: this.api_token
-        }, (req) => {
-            if (req.status == 1) {
-                this.download_queue_add(req.data, title, ukey, size, type);
-                this.download_queue_start();
-            } else {
-                this.alert('发生了错误，请重试。');
+        this.recaptcha_do('download_req_on_list', (recaptcha) => {
+            $.post(this.api_file, {
+                action: 'download_req',
+                ukey: ukey,
+                token: this.api_token,
+                recaptcha: recaptcha
+            }, (req) => {
+                if (req.status == 1) {
+                    this.download_queue_add(req.data, title, ukey, size, type);
+                    this.download_queue_start();
+                } else {
+                    this.alert('发生了错误，请重试。');
 
-                $('.btn_download_' + ukey).removeAttr('disabled');
-                $('.btn_download_' + ukey).html('<i class="fa-fw fad fa-download"></i>');
-            }
+                    $('.btn_download_' + ukey).removeAttr('disabled');
+                    $('.btn_download_' + ukey).html('<i class="fa-fw fad fa-download"></i>');
+                }
+            });
         });
     }
 
@@ -1156,27 +1187,25 @@ class tmplink {
 
     cli_uploader_generator() {
         $('#cli_copy').attr('disabled', true);
-        this.recaptcha_do('upload_cli', (recaptcha) => {
-            $.post(this.api_url_upload, {
-                'token': this.api_token,
-                'action': 'upload_request',
-                'captcha': recaptcha
-            }, (rsp) => {
-                if (rsp.status != 0) {
-                    let model = $('#cli_upload_model').val();
-                    let utoken = rsp.data;
-                    let text = 'curl -k -F "file=@ your file path (etc.. @/root/test.bin)" -F "token=' + this.api_token + '" -F "model=' + model + '" -F "utoken=' + utoken + '" -X POST "https://connect.tmp.link/api_v2/cli_uploader"';
-                    let tpl = {
-                        utoken: utoken,
-                        cmd: text
-                    };
+        $.post(this.api_url_upload, {
+            'token': this.api_token,
+            'action': 'upload_request',
+            'captcha': recaptcha
+        }, (rsp) => {
+            if (rsp.status != 0) {
+                let model = $('#cli_upload_model').val();
+                let utoken = rsp.data;
+                let text = 'curl -k -F "file=@ your file path (etc.. @/root/test.bin)" -F "token=' + this.api_token + '" -F "model=' + model + '" -F "utoken=' + utoken + '" -X POST "https://connect.tmp.link/api_v2/cli_uploader"';
+                let tpl = {
+                    utoken: utoken,
+                    cmd: text
+                };
 
-                    $('#cliuploader_request_list').prepend(app.tpl('uploadcli_list_tpl', tpl));
-                    $('#cli_copy_' + utoken).attr('data-clipboard-text', text);
-                    $('#cli_copy').removeAttr('disabled');
-                    this.btn_copy_bind();
-                }
-            });
+                $('#cliuploader_request_list').prepend(app.tpl('uploadcli_list_tpl', tpl));
+                $('#cli_copy_' + utoken).attr('data-clipboard-text', text);
+                $('#cli_copy').removeAttr('disabled');
+                this.btn_copy_bind();
+            }
         });
     }
 
@@ -1283,25 +1312,23 @@ class tmplink {
     }
 
     orders_list() {
-        this.recaptcha_do('order_list', (recaptcha) => {
-            $.post(this.api_user, {
-                action: 'order_list',
-                token: this.api_token,
-                //captcha: recaptcha
-            }, (rsp) => {
-                if (rsp.data.service == 0) {
-                    $('#orders_addon_contents').html('<div class="text-center"><i class="fa-fw fad fa-folder-open fa-4x"></i></div>');
-                } else {
-                    $('#orders_addon_contents').html('<div class="row" id="orders_services_contents"></div>');
+        $.post(this.api_user, {
+            action: 'order_list',
+            token: this.api_token,
+            //captcha: recaptcha
+        }, (rsp) => {
+            if (rsp.data.service == 0) {
+                $('#orders_addon_contents').html('<div class="text-center"><i class="fa-fw fad fa-folder-open fa-4x"></i></div>');
+            } else {
+                $('#orders_addon_contents').html('<div class="row" id="orders_services_contents"></div>');
 
-                    var service_list = rsp.data.service;
-                    var r = this.service_code(service_list);
-                    $('#order_list').html(app.tpl('order_list_tpl', r));
-                }
-                $('#orders_loader').fadeOut();
-                $('#orders_loaded').show();
-            }, 'json');
-        });
+                var service_list = rsp.data.service;
+                var r = this.service_code(service_list);
+                $('#order_list').html(app.tpl('order_list_tpl', r));
+            }
+            $('#orders_loader').fadeOut();
+            $('#orders_loaded').show();
+        }, 'json');
     }
 
     service_code(data) {
@@ -1331,19 +1358,17 @@ class tmplink {
     mr_file_addlist() {
         var params = this.get_url_params();
         $('#mrfile_add_list').html('<i class="fa-4x fa-fw fad fa-spinner-third fa-spin mx-auto"></i>');
-        this.recaptcha_do('mr_list', (recaptcha) => {
-            $.post(this.api_mr, {
-                action: 'file_addlist',
-                token: this.api_token,
-                //captcha: recaptcha,
-                mr_id: params.mrid
-            }, (rsp) => {
-                if (rsp.status == 0) {
-                    $('#mrfile_add_list').html('<div class="mx-auto"><i class="fa-fw fad fa-folder-open fa-4x"></i></div>');
-                } else {
-                    $('#mrfile_add_list').html(app.tpl('mrfile_add_list_tpl', rsp.data));
-                }
-            });
+        $.post(this.api_mr, {
+            action: 'file_addlist',
+            token: this.api_token,
+            //captcha: recaptcha,
+            mr_id: params.mrid
+        }, (rsp) => {
+            if (rsp.status == 0) {
+                $('#mrfile_add_list').html('<div class="mx-auto"><i class="fa-fw fad fa-folder-open fa-4x"></i></div>');
+            } else {
+                $('#mrfile_add_list').html(app.tpl('mrfile_add_list_tpl', rsp.data));
+            }
         });
     }
 
@@ -1531,82 +1556,14 @@ class tmplink {
     mr_file_del(ukey) {
         var params = this.get_url_params();
         $('.file_unit_' + ukey).hide();
-        this.recaptcha_do('mr_del', (recaptcha) => {
-            $.post(this.api_mr, {
-                action: 'file_del',
-                token: this.api_token,
-                //captcha: recaptcha,
-                mr_id: params.mrid,
-                ukey: ukey
-            }, () => {
-                //this.mr_file_list();
-            });
-        });
-    }
-
-    mr_user_add() {
-        var params = this.get_url_params();
-        var email = $('#modal_add_user').val();
-        if (email == '') {
-            return false;
-        }
-        $('#modal_add_user_btn').fadeOut(300);
-        this.recaptcha_do('mr_add', (recaptcha) => {
-            $.post(this.api_mr, {
-                action: 'user_add',
-                token: this.api_token,
-                //captcha: recaptcha,
-                mr_id: params.mrid,
-                email: email
-            }, (rsp) => {
-                $('#notice_add_user').addClass('alert-danger');
-                $('#notice_add_user').html(this.languageData.form_btn_processed);
-                this.mr_user_list();
-                setTimeout(() => {
-                    $('#notice_add_user').removeClass('alert-danger');
-                    $('#notice_add_user').html(this.languageData.model_add_user_notice);
-                    $('#modal_add_user_btn').fadeIn(300);
-                }, 2000);
-            });
-        });
-    }
-
-    mr_user_list() {
-        $('#room_userlist_box').show();
-        $('#mr_userlist_refresh_icon').html('<i class="fa-fw fad fa-spinner-third fa-spin"></i>');
-        $('#mr_userlist_refresh_icon').attr('disabled', true);
-        var params = this.get_url_params();
-        this.recaptcha_do('mr_addlist', (recaptcha) => {
-            $.post(this.api_mr, {
-                action: 'user_list',
-                token: this.api_token,
-                //captcha: recaptcha,
-                mr_id: params.mrid
-            }, (rsp) => {
-                $('#mr_userlist_refresh_icon').html('<i class="fa-fw fas fa-sync-alt"></i>');
-                $('#mr_userlist_refresh_icon').removeAttr('disabled');
-                if (rsp.status == 0) {
-                    $('#room_userlist').html('<i class="fa-4x fad fa-user-alt-slash mx-auto"></i>');
-                } else {
-                    $('#room_userlist').html(app.tpl('room_userlist_tpl', rsp.data));
-                }
-            });
-        });
-    }
-
-    mr_user_del(id) {
-        var params = this.get_url_params();
-        $('#btn-mrdel-user-' + id).fadeOut(300);
-        this.recaptcha_do('mr_add', (recaptcha) => {
-            $.post(this.api_mr, {
-                action: 'user_del',
-                token: this.api_token,
-                //captcha: recaptcha,
-                mr_id: params.mrid,
-                delete: id
-            }, (rsp) => {
-                $('#mr-user-' + id).fadeOut(500);
-            });
+        $.post(this.api_mr, {
+            action: 'file_del',
+            token: this.api_token,
+            //captcha: recaptcha,
+            mr_id: params.mrid,
+            ukey: ukey
+        }, () => {
+            //this.mr_file_list();
         });
     }
 
@@ -1656,40 +1613,32 @@ class tmplink {
 
     mr_del(mrid) {
         $('#meetingroom_id_' + mrid).fadeOut();
-        this.recaptcha_do('mr_del', (recaptcha) => {
-            $.post(this.api_mr, {
-                action: 'delete',
-                token: this.api_token,
-                //captcha: recaptcha,
-                mr_id: mrid
-            });
+        $.post(this.api_mr, {
+            action: 'delete',
+            token: this.api_token,
+            mr_id: mrid
         });
     }
 
     mr_exit(mrid) {
         $('#meetingroom_id_' + mrid).hide();
-        this.recaptcha_do('mr_del', (recaptcha) => {
-            $.post(this.api_mr, {
-                action: 'exit',
-                token: this.api_token,
-                //captcha: recaptcha,
-                mr_id: mrid
-            });
+        $.post(this.api_mr, {
+            action: 'exit',
+            token: this.api_token,
+            //captcha: recaptcha,
+            mr_id: mrid
         });
     }
 
     mr_newname(mrid) {
         var newname = prompt(this.languageData.modal_meetingroom_newname, "none");
-        this.recaptcha_do('mr_newname', (recaptcha) => {
-            $.post(this.api_mr, {
-                action: 'rename',
-                token: this.api_token,
-                //captcha: recaptcha,
-                name: newname,
-                mr_id: mrid
-            }, (rsp) => {
-                this.room_list();
-            });
+        $.post(this.api_mr, {
+            action: 'rename',
+            token: this.api_token,
+            name: newname,
+            mr_id: mrid
+        }, (rsp) => {
+            this.room_list();
         });
     }
 
@@ -1701,26 +1650,23 @@ class tmplink {
         $('#mr_list_refresh_icon').html('<i class="fa-fw fad fa-spinner-third fa-spin"></i>');
         $('#mr_list_refresh_icon').attr('disabled', true);
         this.loading_box_on();
-        this.recaptcha_do('mr_add', (recaptcha) => {
-            $.post(this.api_mr, {
-                action: 'list',
-                token: this.api_token,
-                //captcha: recaptcha
-            }, (rsp) => {
-                this.loading_box_off();
-                if (rsp.status == 0) {
-                    $('#meetroom_list').html('<div class="mx-auto"><i class="fa-fw fad fa-folder-open fa-4x"></i></div>');
-                    $('#mr_list_refresh_icon').html('<i class="fa-fw fas fa-sync-alt"></i>');
-                    $('#mr_list_refresh_icon').removeAttr('disabled');
-                    return false;
-                } else {
-                    $('#meetroom_list').html(app.tpl('meetroom_list_tpl', rsp.data));
-                    this.btn_copy_bind();
-                }
+        $.post(this.api_mr, {
+            action: 'list',
+            token: this.api_token,
+        }, (rsp) => {
+            this.loading_box_off();
+            if (rsp.status == 0) {
+                $('#meetroom_list').html('<div class="mx-auto"><i class="fa-fw fad fa-folder-open fa-4x"></i></div>');
                 $('#mr_list_refresh_icon').html('<i class="fa-fw fas fa-sync-alt"></i>');
                 $('#mr_list_refresh_icon').removeAttr('disabled');
-                app.linkRebind();
-            });
+                return false;
+            } else {
+                $('#meetroom_list').html(app.tpl('meetroom_list_tpl', rsp.data));
+                this.btn_copy_bind();
+            }
+            $('#mr_list_refresh_icon').html('<i class="fa-fw fas fa-sync-alt"></i>');
+            $('#mr_list_refresh_icon').removeAttr('disabled');
+            app.linkRebind();
         });
     }
 
@@ -1747,62 +1693,60 @@ class tmplink {
         $('.data_loading').show();
         //this.loading_box_on();
         //获取基本信息
-        this.recaptcha_do('room_list', (recaptcha) => {
-            $.post(this.api_mr, {
-                action: 'details',
-                //captcha: recaptcha,
-                token: this.api_token,
-                mr_id: params.mrid
-            }, (rsp) => {
-                this.room_data = rsp.data;
-                $('.data_loading').hide();
-                this.loading_box_off();
-                if (rsp.status === 0) {
-                    //会议室不存在了
-                    this.room.parent = 0;
-                    this.room.top = 0;
-                    this.room.ownner = 0;
-                    this.room.mr_id = 0;
-                    $('#file_messenger_icon').html('<i class="fas fa-folder-times  fa-4x"></i>');
-                    $('#file_messenger_msg').html(this.languageData.room_status_fail);
-                    $('#file_messenger').show();
-                    gtag('config', 'UA-96864664-3', {
-                        'page_title': 'F-Unavailable',
-                    });
-                    return false;
+        $.post(this.api_mr, {
+            action: 'details',
+            //captcha: recaptcha,
+            token: this.api_token,
+            mr_id: params.mrid
+        }, (rsp) => {
+            this.room_data = rsp.data;
+            $('.data_loading').hide();
+            this.loading_box_off();
+            if (rsp.status === 0) {
+                //会议室不存在了
+                this.room.parent = 0;
+                this.room.top = 0;
+                this.room.ownner = 0;
+                this.room.mr_id = 0;
+                $('#file_messenger_icon').html('<i class="fas fa-folder-times  fa-4x"></i>');
+                $('#file_messenger_msg').html(this.languageData.room_status_fail);
+                $('#file_messenger').show();
+                gtag('config', 'UA-96864664-3', {
+                    'page_title': 'F-Unavailable',
+                });
+                return false;
+            } else {
+                gtag('config', 'UA-96864664-3', {
+                    'page_title': 'F-' + rsp.data.name,
+                });
+                this.room.parent = rsp.data.parent;
+                this.room.top = rsp.data.top;
+                this.room.owner = rsp.data.owner;
+                this.room.mr_id = rsp.data.mr_id;
+                this.room.display = rsp.data.display;
+                this.room_performance_init(this.room.mr_id);
+                $('#mr_copy').attr('data-clipboard-text', 'http://tmp.link/room/' + rsp.data.mr_id);
+                $('.room_title').html(rsp.data.name);
+                $('#room_filelist').show();
+                if (rsp.data.sub_rooms !== 0) {
+                    this.subroom_data = rsp.data.sub_rooms;
                 } else {
-                    gtag('config', 'UA-96864664-3', {
-                        'page_title': 'F-' + rsp.data.name,
-                    });
-                    this.room.parent = rsp.data.parent;
-                    this.room.top = rsp.data.top;
-                    this.room.owner = rsp.data.owner;
-                    this.room.mr_id = rsp.data.mr_id;
-                    this.room.display = rsp.data.display;
-                    this.room_performance_init(this.room.mr_id);
-                    $('#mr_copy').attr('data-clipboard-text', 'http://tmp.link/room/' + rsp.data.mr_id);
-                    $('.room_title').html(rsp.data.name);
-                    $('#room_filelist').show();
-                    if (rsp.data.sub_rooms !== 0) {
-                        this.subroom_data = rsp.data.sub_rooms;
-                    } else {
-                        this.subroom_data = 0;
-                    }
-
-                    if (this.room.owner === 0) {
-                        $('.not_owner').hide();
-                    }
-
-                    this.btn_copy_bind();
-                    this.mr_file_list(0);
-
-                    //是否需要设置上级目录返回按钮
-                    $('#room_back_btn').html(app.tpl('room_back_btn_tpl', {}));
-                    $('#room_loading').hide();
-                    $('#room_loaded').show();
-                    app.linkRebind();
+                    this.subroom_data = 0;
                 }
-            });
+
+                if (this.room.owner === 0) {
+                    $('.not_owner').hide();
+                }
+
+                this.btn_copy_bind();
+                this.mr_file_list(0);
+
+                //是否需要设置上级目录返回按钮
+                $('#room_back_btn').html(app.tpl('room_back_btn_tpl', {}));
+                $('#room_loading').hide();
+                $('#room_loaded').show();
+                app.linkRebind();
+            }
         });
     }
 
@@ -1813,7 +1757,7 @@ class tmplink {
         $('#msg_notice').show();
         $('#submit').html(this.languageData.form_btn_processing);
         $('#msg_notice').html(this.languageData.form_btn_processing);
-        this.recaptcha_do('init', (recaptcha) => {
+        this.recaptcha_do('user_login', (recaptcha) => {
             if (email !== '' && password !== '') {
                 $.post(this.api_user, {
                     action: 'login',
@@ -1902,7 +1846,7 @@ class tmplink {
         $('#msg_notice').html(this.languageData.form_btn_processing);
         $('#submit').html(this.languageData.form_btn_login);
         $('#submit').attr('disabled', true);
-        this.recaptcha_do('init', (recaptcha) => {
+        this.recaptcha_do('user_register', (recaptcha) => {
             $.post(this.api_user, {
                 action: 'register',
                 token: this.api_token,
@@ -1938,7 +1882,7 @@ class tmplink {
         $('#msg_notice').html(this.languageData.form_btn_processing);
         $('#button-reg-checkcode').html(this.languageData.form_btn_processing);
         $('#button-reg-checkcode').attr('disabled', true);
-        this.recaptcha_do('checkcode', (recaptcha) => {
+        this.recaptcha_do('user_checkcode', (recaptcha) => {
             if (email !== '') {
                 $.post(this.api_user, {
                     action: 'checkcode_send',
@@ -2117,51 +2061,48 @@ class tmplink {
     }
 
     upload_worker(file, id, filename) {
-        this.recaptcha_do('upload_web', (recaptcha) => {
-            $.post(this.api_url_upload, {
-                'token': this.api_token,
-                'action': 'upload_request_select',
-                'filesize': file.size,
-                'captcha': recaptcha
-            }, (rsp) => {
-                if (rsp.status == 1) {
-                    var fd = new FormData();
-                    fd.append("file", file);
-                    fd.append("filename", filename);
-                    fd.append("utoken", rsp.data.utoken);
-                    fd.append("model", this.upload_model_get());
-                    fd.append("mr_id", this.upload_mrid_get());
-                    fd.append("token", this.api_token);
-                    this.upload_s2_status[id] = 0;
-                    var xhr = new XMLHttpRequest();
-                    xhr.upload.addEventListener("progress", (evt) => {
-                        this.upload_progress(evt, id)
-                    }, false);
-                    xhr.addEventListener("load", (evt) => {
-                        this.upload_complete(evt, file, id)
-                    }, false);
-                    xhr.addEventListener("error", (evt) => {
-                        //add retry
-                        if (this.download_retry < this.download_retry_max) {
-                            this.download_retry++;
-                            setTimeout(() => {
-                                this.upload_worker(file, id, filename);
-                            }, 1000);
-                        } else {
-                            this.download_retry = 0;
-                            this.upload_failed(evt, id);
-                        }
-                    }, false);
-                    xhr.addEventListener("abort", (evt) => {
-                        this.upload_canceled(evt, id)
-                    }, false);
-                    xhr.open("POST", rsp.data.uploader);
-                    xhr.send(fd);
-                } else {
-                    //无法获得可用的上传服务器
-                    this.alert('上传失败，无法获得可用的服务器。');
-                }
-            });
+        $.post(this.api_url_upload, {
+            'token': this.api_token,
+            'action': 'upload_request_select',
+            'filesize': file.size,
+        }, (rsp) => {
+            if (rsp.status == 1) {
+                var fd = new FormData();
+                fd.append("file", file);
+                fd.append("filename", filename);
+                fd.append("utoken", rsp.data.utoken);
+                fd.append("model", this.upload_model_get());
+                fd.append("mr_id", this.upload_mrid_get());
+                fd.append("token", this.api_token);
+                this.upload_s2_status[id] = 0;
+                var xhr = new XMLHttpRequest();
+                xhr.upload.addEventListener("progress", (evt) => {
+                    this.upload_progress(evt, id)
+                }, false);
+                xhr.addEventListener("load", (evt) => {
+                    this.upload_complete(evt, file, id)
+                }, false);
+                xhr.addEventListener("error", (evt) => {
+                    //add retry
+                    if (this.download_retry < this.download_retry_max) {
+                        this.download_retry++;
+                        setTimeout(() => {
+                            this.upload_worker(file, id, filename);
+                        }, 1000);
+                    } else {
+                        this.download_retry = 0;
+                        this.upload_failed(evt, id);
+                    }
+                }, false);
+                xhr.addEventListener("abort", (evt) => {
+                    this.upload_canceled(evt, id)
+                }, false);
+                xhr.open("POST", rsp.data.uploader);
+                xhr.send(fd);
+            } else {
+                //无法获得可用的上传服务器
+                this.alert('上传失败，无法获得可用的服务器。');
+            }
         });
     }
 
