@@ -749,7 +749,7 @@ class tmplink {
                             action: 'download_req',
                             ukey: params.ukey,
                             token: this.api_token,
-                            recaptcha: recaptcha
+                            captcha: recaptcha
                         }, (req) => {
 
                             if (req.status != 1) {
@@ -1098,7 +1098,7 @@ class tmplink {
                 action: 'download_req',
                 ukey: ukey,
                 token: this.api_token,
-                recaptcha: recaptcha
+                captcha: recaptcha
             }, (req) => {
                 if (req.status == 1) {
                     this.download_queue_add(req.data, title, ukey, size, type);
