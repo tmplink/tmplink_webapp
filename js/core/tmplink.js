@@ -754,6 +754,10 @@ class tmplink {
 
                             if (req.status != 1) {
                                 this.alert('加载失败，请刷新页面。');
+
+                                $('#file_download_btn_1').hide();
+                                $('#file_download_btn_2').hide();
+
                                 return false;
                             }
                             let download_link = req.data;
