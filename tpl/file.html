@@ -18,22 +18,24 @@
                 </a>
             </div>
             <div class="card">
-                <div class="d-none d-md-block" style="margin-top: 120px;"></div>
-                <div class="text-center pt-2" id="file_messenger_icon"></div>
-                <div class="text-center display-4 p-4" id="file_messenger_msg"></div>
-
-                <div id="file_messenger_msg_login" class="p-5" style="display: none;">
-                    <button class="btn btn-lg btn-primary btn-block workspace-nologin" type="button"
-                        onclick="app.open('/login');" i18n="index_b3">
-                        .
-                    </button>
-                    <button class="btn btn-lg btn-danger btn-block workspace-nologin" type="button"
-                        onclick="app.open('/reg');" i18n="index_b2">
-                        .
-                    </button>
+                <div class="card-body">
+                    <div class="text-center pt-2" id="file_messenger_icon"></div>
+                    <div class="text-center display-4 p-4" id="file_messenger_msg"></div>
+                    <div class="row p-5" style="display: none;" id="file_messenger_msg_login">
+                        <div class="col-md-6 col-12 text-center">
+                            <button class="btn btn-lg btn-primary btn-block workspace-nologin" type="button"
+                                onclick="app.open('/login');" i18n="index_b3">
+                                .
+                            </button>
+                        </div>
+                        <div class="col-md-6 col-12 text-center">
+                            <button class="btn btn-lg btn-danger btn-block workspace-nologin" type="button"
+                                onclick="app.open('/reg');" i18n="index_b2">
+                                .
+                            </button>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="d-none d-md-block" style="margin-bottom: 120px;"></div>
             </div>
         </div>
 
@@ -98,7 +100,8 @@
                                         aria-expanded="false" data-reference="parent" i18n="file_btn_download_opt">
                                         .
                                     </button>
-                                    <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownMenuReference">
+                                    <div class="dropdown-menu dropdown-menu-right shadow"
+                                        aria-labelledby="dropdownMenuReference">
                                         <!-- <a class="dropdown-item btn_copy_downloadurl">
                                             <i class="fad fa-browser fa-fw"></i>
                                             使用浏览器进行下载

@@ -392,7 +392,7 @@
     "filelist_dir": "文件夹",
     "filelist_dir_parent": "返回上级目录",
 
-    "status_need_login": "您需要先登录才能使用此功能.",
+    "status_need_login": "证明您不是机器人",
     "status_13": "重设密码失败，操作过于频繁，请一小时后再试。",
     "status_14": "重设密码失败，没有这个账号。",
     "status_unknow": "不知道发生了什么，请联系管理员。",
