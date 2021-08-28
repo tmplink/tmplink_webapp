@@ -27,10 +27,14 @@
                     <div class="col-6 col-md-3 col-lg-2 p-2 text-center dir-icon" id="meetingroom_id_<% obj[x].mr_id %>">
                         <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true">
                             <div class="fileicon mx-auto mb-2">
-                                <i class="fad fa-folders fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
+                                <i class="fas fa-folder fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
                             </div>
                             <div class="max-width-90 mx-auto">
-                                <div class="text-truncate" alt="<% obj[x].name %>"><% obj[x].name %></div>
+                                <% if (obj[x].model !== 'public') { %>
+                                    <div class="text-truncate" alt="<% obj[x].name %>"><i class="fas fa-lock"></i> <% obj[x].name %></div>
+                                <% }else{ %>    
+                                    <div class="text-truncate" alt="<% obj[x].name %>"><% obj[x].name %></div>
+                                <% } %>  
                             </div>
                         </a>
                         <div class="dir-toolbar">
