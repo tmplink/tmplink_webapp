@@ -84,8 +84,8 @@
                 </div> -->
                 <!--[新设计]-->
                 <div class="select-box-all p-2" id="selected_model_box" style="display: none;">
-                    <button type="button" class="btn btn-primary btn-sm text-right"
-                        onclick="TL.upload_model_reset()" i18n="modal_settings_upload_model_reset">.</button>
+                    <button type="button" class="btn btn-primary btn-sm text-right" onclick="TL.upload_model_reset()"
+                        i18n="modal_settings_upload_model_reset">.</button>
                     <span id="seleted_model"></span>
                 </div>
                 <div id="select_model_list">
@@ -161,7 +161,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="select-box p-2 btn-point" onclick="$('#uploadModal').modal('hide');TL.storage_buy_modal();">
+                        <div class="select-box p-2 btn-point"
+                            onclick="$('#uploadModal').modal('hide');TL.storage_buy_modal();">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
                                     <i class="mt-1 far fa-layer-plus fa-fw"></i>
@@ -234,17 +235,35 @@
                         </div>
                         <div id="cliuploader" style="display: none;">
                             <div class="row p-2 select-box shadow-sm mt-2 mx-0">
-                                <div id="cliuploader_show" class="col-10 my-1 d-flex align-items-center listfontweight filename text-truncate"></div>
+                                <div id="cliuploader_show"
+                                    class="col-10 my-1 d-flex align-items-center listfontweight filename text-truncate">
+                                </div>
                                 <div class="col-2 my-1 d-flex align-items-center justify-content-end">
-                                    <a id="cliuploader_copy" href="javascript:void(0)" data-clipboard-text="#" class="text-azure btn_copy btn btn-sm btn-light mx-1">
+                                    <a id="cliuploader_copy" href="javascript:void(0)" data-clipboard-text="#"
+                                        class="text-azure btn_copy btn btn-sm btn-light mx-1">
                                         <i class="fa-fw far fa-copy"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="select-box p-2">
+                        <div class="d-flex align-items-center">
+                            <span class="stamp stamp-md bg-blue mr-3">
+                                <i class="mt-1 fal fa-file-archive fa-fw"></i>
+                            </span>
+                            <div>
+                                <h4 class="m-0" i18n="model_title_upload_max">
+                                    .
+                                </h4>
+                                <small class="text-muted" i18n="model_title_upload_max_des">
+                                    .
+                                </small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
+
                 <input type="hidden" id="upload_model" value="0" />
 
                 <script type="text/template" id="upload_storage_status_tpl">
@@ -256,7 +275,7 @@
                 </script>
 
                 <div id="uploaded_file_box" class="mt-2" style="max-height: 500px;overflow:scroll;">
-                    
+
                 </div>
 
                 <script type="text/template" id="upload_list_wait_tpl">
@@ -705,7 +724,7 @@
             <div class="modal-body">
                 <h3 i18n="model_upup_t1">.</h3>
                 <p i18n="model_upup_d1_1"">.</p>
-                <p i18n="model_upup_d1_2"">.</p>
+                <p i18n=" model_upup_d1_2"">.</p>
                 <code>
                     chrome://flags/#enable-parallel-downloading
                 </code>

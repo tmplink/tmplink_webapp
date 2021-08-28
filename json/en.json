@@ -243,6 +243,8 @@
     "model_title_find": "Find files",
     "model_title_upload": "Start sharing",
     "model_title_upload_des": "Select the file you want to upload, or drag the file here.",
+    "model_title_upload_max": "File size",
+    "model_title_upload_max_des": "Single files are supported up to 10GB. To improve the success rate of uploading files, it is recommended to use zip to split the file size to 1GB before uploading.",
     "model_title_report": "Report inappropriate file content",
     "model_title_sr_only": "Close",
     "model_btn_ok": "OK",

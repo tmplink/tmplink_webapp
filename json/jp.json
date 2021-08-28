@@ -246,6 +246,8 @@
     "model_title_find": "ファイルの検索",
     "model_title_upload": "共有を開始",
     "model_title_upload_des": "アップロードしたいファイルを選択するか、ここにファイルをドラッグしてください。",
+    "model_title_upload_max": "最大限の制限",
+    "model_title_upload_max_des": "アップロードの成功率を高めるために、大きなファイルは1GBまでのzipファイルにすることをお勧めします。",
     "model_title_report": "不適切なファイルコンテンツの報告",
     "model_title_sr_only": "閉じる",
     "model_btn_ok": "OK",
