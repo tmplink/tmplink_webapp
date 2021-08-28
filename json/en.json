@@ -353,6 +353,7 @@
     "highspeed_price_cny1": "CNY 6 per month",
     "highspeed_buy_alipay": "Buy with Alipay",
     "model_title_upload_cli": "Upload files using the command line",
+    "model_title_upload_cli_des": "Use curl to upload files in a command line environment.",
     "model_upload_cli_code": "Command",
     "model_upload_cli_params": "Parameters",
     "model_upload_cli_params_1": "Parameters",

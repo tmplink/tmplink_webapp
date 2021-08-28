@@ -285,6 +285,7 @@
     "model_title_report": "报告这个文件",
     "model_title_orders": "已购项目",
     "model_title_upload_cli": "使用命令上传文件",
+    "model_title_upload_cli_des": "在命令行的环境下，使用 curl 上传文件。",
     "model_title_sr_only": "关闭",
     "model_title_upload_max": "最大限制",
     "model_title_upload_max_des": "单个文件最大支持 10GB。为了提高上传文件的成功率，比较大的文件建议使用 zip 分卷至 1GB 的大小再上传。",

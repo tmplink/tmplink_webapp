@@ -356,6 +356,7 @@
     "highspeed_price_cny1": "月額 6 CNY",
     "highspeed_buy_alipay": "Alipayで購入",
     "model_title_upload_cli": "コマンドラインを使用したファイルのアップロード",
+    "model_title_upload_cli_des": "コマンドライン環境でファイルをアップロードするには、curlを使用します。",
     "model_upload_cli_code": "コマンド",
     "model_upload_cli_params": "パラメーター",
     "model_upload_cli_params_1": "パラメーター",
