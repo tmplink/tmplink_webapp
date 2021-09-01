@@ -366,6 +366,7 @@ class tmplink {
             $('.workspace-navbar').hide();
             $('.workspace-nologin').show();
         }
+        $('#index_userinfo_loading').hide();
         $('.navbar_nloading').hide();
         $('.navbar_ready').show();
     }
