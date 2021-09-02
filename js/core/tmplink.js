@@ -732,8 +732,6 @@ class tmplink {
                     } else {
                         $('#lefttime_show').hide();
                     }
-
-                    $('#qr_code_url').attr('src', this.api_url + '/qr?code=' + params.ukey);
                     $('#report_ukey').html(params.ukey);
                     this.btn_copy_bind();
                     if (this.logined) {
@@ -758,6 +756,7 @@ class tmplink {
 
                                 $('#file_download_btn_1').hide();
                                 $('#file_download_btn_2').hide();
+                                $('#file_download_by_qrcode').hide();
 
                                 return false;
                             }
@@ -765,6 +764,9 @@ class tmplink {
                             //设定下载链接
                             let download_url = download_link;
                             let download_cmdurl = download_link;
+
+                            //QR Download
+                            $('#qr_code_url').attr('src', this.api_url + '/qr?code=' + window.btoa(download_link));
 
                             $('#btn_download').attr('x-href', download_url);
                             $('#btn_highdownload').attr('x-href', download_url);
