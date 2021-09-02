@@ -29,7 +29,7 @@ class tools_file_manager {
 
     checkbox_select_on(node) {
         let inode = node.getAttribute('tldata');
-        $('.file_unit_' + inode).css('border-color', 'blue');
+        $('.file_unit_' + inode).css('border-color', '#45aaf2');
         $('.file_unit_' + inode).css('border-style', 'double');
         node.setAttribute('data-check', 'true');
     }

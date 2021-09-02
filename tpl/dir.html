@@ -2,13 +2,9 @@
 <div class="container d-flex flex-grow-1 flex-column">
     <!-- <div class="display-3">欢迎，admin</div> -->
     <div id="meetroom_list_box" class="card mt-4 shadow">
-        <div class="card-header">
-            <div class="d-block ">
-                <div class="display-4">
-                    <i class="far fa-folder"></i>
-                    <span i18n="navbar_meetingroom">.</span>
-                </div>
-                <div class="lead" i18n="meetroom_des">.</div>
+        <div class="card-header pt-3">
+            <div class="mx-auto">
+                <i class="fa-4x far fa-folder"></i>
             </div>
         </div>
         <div id="meetroom_list_data" class="card-body">
@@ -17,8 +13,8 @@
                     <i class="fa-fw far fa-plus"></i>
                     <span i18n="model_addmr">.</span>
                 </button>
-                <button class="btn btn-light text-azure btn-sm ml-2" onclick="TL.mr_list();" id="mr_list_refresh_icon"><i
-                        class="fa-fw fas fa-sync-alt"></i></button>
+                <button class="btn btn-light text-azure btn-sm ml-2" onclick="TL.mr_list();"
+                    id="mr_list_refresh_icon"><i class="fa-fw fas fa-sync-alt"></i></button>
             </div>
             <div class="row" id="meetroom_list"></div>
 
