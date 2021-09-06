@@ -10,7 +10,7 @@ class tmplink {
 
     pageReady = false
     readyFunction = []
-    
+
     upload_queue_id = 0
     upload_queue_file = []
     upload_processing = 0
@@ -32,8 +32,10 @@ class tmplink {
     lazyLoadInstance = null
     get_details_do = false
     upload_s2_status = []
+
     storage = 0
     storage_used = 0
+
     page_number = 1
     autoload = false
     sort_by = 0
@@ -534,6 +536,16 @@ class tmplink {
         });
     }
 
+    workspace_total() {
+        $.post(this.api_file, {
+            action: 'total',
+            token: this.api_token
+        }, (rsp) => {
+            let total_size_text = this.bytetoconver(rsp.data.size, true);
+            $('#workspace_total').html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
+        }, 'json');
+    }
+
     workspace_filelist_autoload_disabled() {
         $(window).off("scroll");
     }
@@ -555,6 +567,10 @@ class tmplink {
         }
         //if search
         let search = $('#workspace_search').val();
+        let total_size_text = this.bytetoconver(this.total_size);
+
+        //更新文件总数
+        this.workspace_total();
 
         $('#filelist_refresh_icon').addClass('fa-spin');
         $('#filelist_refresh_icon').attr('disabled', true);
@@ -1406,6 +1422,12 @@ class tmplink {
         } else {
             this.page_number++;
         }
+
+        //如果是全页加载
+        if (page === 'all') {
+            this.page_number = 'all';
+        }
+
         //if search
         let search = $('#room_search').val();
 
@@ -1447,6 +1469,13 @@ class tmplink {
                 if (rsp.status == 0 || rsp.data.length < 50) {
                     this.room_filelist_autoload_disabled();
                 }
+
+                //如果是全页加载
+                if (page === 'all') {
+                    this.room_filelist_autoload_disabled();
+                    this.autoload = false;
+                }
+                
                 this.loading_box_off();
             });
         });
@@ -1649,6 +1678,7 @@ class tmplink {
         });
     }
 
+
     mr_list() {
         if (localStorage.getItem('app_login') != 1) {
             app.open('/login');
@@ -1691,6 +1721,14 @@ class tmplink {
         }
     }
 
+    room_total(mrid) {
+        $.post(this.api_mr, {
+            action: 'total', mr_id: mrid, token: this.api_token
+        }, (rsp) => {
+            let total_size_text = this.bytetoconver(rsp.data.size, true);
+            $('#room_total').html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
+        }, 'json');
+    }
 
     room_list() {
         var params = this.get_url_params();
@@ -1726,6 +1764,8 @@ class tmplink {
                 gtag('config', 'UA-96864664-3', {
                     'page_title': 'F-' + rsp.data.name,
                 });
+                //更新统计信息、
+                this.room_total(rsp.data.mr_id);
                 this.room.parent = rsp.data.parent;
                 this.room.top = rsp.data.top;
                 this.room.owner = rsp.data.owner;
@@ -1746,7 +1786,8 @@ class tmplink {
                 }
 
                 this.btn_copy_bind();
-                this.mr_file_list(0);
+                //this.mr_file_list(0);
+                this.mr_file_list('all');
 
                 //是否需要设置上级目录返回按钮
                 $('#room_back_btn').html(app.tpl('room_back_btn_tpl', {}));

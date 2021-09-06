@@ -1,4 +1,6 @@
 {
+    "total_units_of_file" : "ファイル",
+    "total_units_of_dirs" : "フォルダ",
     "file_btn_upup": "スピードアップ",
     "model_title_upup": "ダウンロード速度を向上させる",
     "model_upup_t1": "マルチスレッドサポートを有効にする",

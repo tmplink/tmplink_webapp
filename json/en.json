@@ -1,4 +1,6 @@
 {
+    "total_units_of_file" : "Files",
+    "total_units_of_dirs" : "Folders",
     "file_btn_upup": "Accelerator",
     "model_title_upup": "Improve download speed",
     "model_upup_t1": "Enable multi-thread support",
