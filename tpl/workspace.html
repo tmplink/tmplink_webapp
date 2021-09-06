@@ -117,7 +117,7 @@
                 <% for (var x in obj) { %>
                     <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
                         <div class="col-lg-4 col-xl-3 col-md-6 col-12 p-1 file_unit_<% obj[x].ukey %>">
-                            <div class="card shadow-sm" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
+                            <div class="card shadow-sm text-center" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
                                 <div style="height:220px;">
                                     <a href="javascript:;" onclick="TL.previewModel('<% obj[x].ukey %>',<% x %>)">
                                         <img class='lazyload' data-src="https://getfile.tmp.link/img-<% obj[x].ukey %>-360x220.jpg" style="height:220px;" />
