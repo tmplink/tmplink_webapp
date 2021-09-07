@@ -1250,6 +1250,25 @@ class tmplink {
         $('#storageModal').modal('show');
     }
 
+    buy_select_open(type) {
+        this.buy_type = type;
+        $('#buySelectModal').modal('show');
+    }
+
+    bug_select(type) {
+        this.buy_currency = type;
+        $('#buySelectModal').modal('hide');
+        setTimeout(() => {
+            if (this.buy_type == 'hs') {
+                this.hs_buy_modal();
+            }
+            if (this.buy_type == 'storage') {
+                this.storage_buy_modal();
+            }
+        }, 500);
+
+    }
+
     hs_buy_modal() {
         if (this.logined === 0) {
             this.alert(this.languageData.status_need_login);
@@ -1475,7 +1494,7 @@ class tmplink {
                     this.room_filelist_autoload_disabled();
                     this.autoload = false;
                 }
-                
+
                 this.loading_box_off();
             });
         });

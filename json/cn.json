@@ -212,6 +212,12 @@
     "model_add_user": "添加会议成员",
     "model_adduser_placeholder": "请输入用户的邮箱地址",
 
+    "model_title_buy_select": "选择支付方式",
+    "model_buy_select_cny_title": "支付宝",
+    "model_buy_select_cny_des": "使用人民币付款",
+    "model_buy_select_usd_title": "PayPal",
+    "model_buy_select_usd_des": "使用当地货币付款",
+
     "model_title_buy_highspeed": "开通高速通道",
     "highspeed_content": "不限速是我们的承诺，但是在下载高峰时段，您可能会遇到下载速度降低的情况。因此我们为您准备了额外的服务器以提供更好的下载体验。",
     "highspeed_content2": "* 需要注意的是，尽管我们已经提升了服务器给到您的网络带宽，但是实际下载速度仍然取决诸多因素。您与宽带运营商签约的带宽，Wifi连接的网络质量，以及终端设备的性能等因素都可能影响最终下载速度。我们不对最终下载速度作出任何承诺。",
