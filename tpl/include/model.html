@@ -411,6 +411,39 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="buySelectModal" data-backdrop="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_buy_select">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6 text-center dir-icon p-3 btn-point" onclick="TL.bug_select('cny')">
+                        <div class="fileicon mx-auto mb-2">
+                            <i class="fab fa-alipay fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
+                        </div>
+                        <div class="max-width-90 mx-auto" i18n="model_buy_select_cny_title">.</div>
+                        <div class="max-width-90 mx-auto" i18n="model_buy_select_cny_des">.</div>
+                    </div>
+                    <div class="col-6 text-center dir-icon p-3 btn-point" onclick="TL.bug_select('usd')">
+                        <div class="fileicon mx-auto mb-2">
+                            <i class="fab fa-paypal fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
+                        </div>
+                        <div class="max-width-90 mx-auto" i18n="model_buy_select_usd_title">.</div>
+                        <div class="max-width-90 mx-auto" i18n="model_buy_select_usd_des">.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="highspeedModal" data-backdrop="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
@@ -421,10 +454,16 @@
             <div class="modal-body">
                 <p i18n="highspeed_content">.</p>
                 <hr />
-                <div class="form-group">
+                <div class="form-group hs_price_list" id="hs_price_of_cny">
                     <label i18n="highspeed_type">.</label>
-                    <select class="form-control" id="highspeed_opt">
+                    <select class="form-control" id="highspeed_opt_cny">
                         <option value="6" i18n-only="html" i18n="highspeed_price_cny1" selected>.</option>
+                    </select>
+                </div>
+                <div class="form-group hs_price_list" id="hs_price_of_usd">
+                    <label i18n="highspeed_type">.</label>
+                    <select class="form-control" id="highspeed_opt_usd">
+                        <option value="6" i18n-only="html" i18n="highspeed_price_usd1" selected>.</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -438,7 +477,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
-                <button type="button" class="btn btn-success" i18n="highspeed_buy_alipay"
+                <button type="button" class="btn btn-success" i18n="model_buy_btn"
                     onclick="TL.hs_download_buy();">.</button>
             </div>
         </div>
@@ -456,13 +495,22 @@
                 <p i18n="storage_content">.</p>
                 <p i18n="storage_content2">.</p>
                 <hr />
-                <div class="form-group">
+                <div class="form-group storage_price_list" id="storage_price_of_cny">
                     <label for="storage_code" i18n="storage_type">.</label>
-                    <select class="form-control" id="storage_code">
+                    <select class="form-control" id="storage_code_cny">
                         <option value="256GB" i18n-only="html" i18n="storage_price_cny1" selected>.</option>
                         <option value="1TB" i18n-only="html" i18n="storage_price_cny2">.</option>
                         <option value="3TB" i18n-only="html" i18n="storage_price_cny3">.</option>
                         <option value="10TB" i18n-only="html" i18n="storage_price_cny4">.</option>
+                    </select>
+                </div>
+                <div class="form-group storage_price_list" id="storage_price_of_usd">
+                    <label for="storage_code" i18n="storage_type">.</label>
+                    <select class="form-control" id="storage_code_usd">
+                        <option value="256GB-us" i18n-only="html" i18n="storage_price_usd1" selected>.</option>
+                        <option value="1TB-us" i18n-only="html" i18n="storage_price_usd2">.</option>
+                        <option value="3TB-us" i18n-only="html" i18n="storage_price_usd3">.</option>
+                        <option value="10TB-us" i18n-only="html" i18n="storage_price_usd4">.</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -476,7 +524,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
-                <button type="button" class="btn btn-success" i18n="storage_buy_alipay"
+                <button type="button" class="btn btn-success" i18n="model_buy_btn"
                     onclick="TL.storage_buy();">.</button>
             </div>
         </div>

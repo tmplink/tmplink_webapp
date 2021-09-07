@@ -1244,19 +1244,50 @@ class tmplink {
         this.btn_copy_bind();
     }
 
-    storage_buy_modal() {
+    storage_buy_modal(type) {
         if (this.logined === 0) {
             this.alert(this.languageData.status_need_login);
             return false;
         }
+
+        //隐藏不同类型币种的价格列表
+        $('.storage_price_list').hide();
+        //显示当前币种的价格列表
+        $('#storage_price_of_' + type).show();
+
         $('#storageModal').modal('show');
     }
 
-    hs_buy_modal() {
+    buy_select_open(type) {
+        this.buy_type = type;
+        $('#buySelectModal').modal('show');
+    }
+
+    bug_select(type) {
+        this.buy_currency = type;
+        $('#buySelectModal').modal('hide');
+        setTimeout(() => {
+            if (this.buy_type == 'hs') {
+                this.hs_buy_modal(type);
+            }
+            if (this.buy_type == 'storage') {
+                this.storage_buy_modal(type);
+            }
+        }, 500);
+
+    }
+
+    hs_buy_modal(type) {
         if (this.logined === 0) {
             this.alert(this.languageData.status_need_login);
             return false;
         }
+
+        //隐藏不同类型币种的价格列表
+        $('.hs_price_list').hide();
+        //显示当前币种的价格列表
+        $('#hs_price_of_' + type).show();
+
         $('#highspeedModal').modal('show');
     }
 
@@ -1301,13 +1332,24 @@ class tmplink {
             this.alert(this.this.languageData.status_need_login);
             return false;
         }
-        var price = $('#highspeed_opt').val();
-        var time = $('#highspeed_time').val();
-        var code = 'HS';
-        var total_price = price * time;
 
-        var link = "https://pay.vezii.com/id4/pay_v2?price=" + total_price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=addon&prepare_times=" + time;
-        window.open(link, '_blank');
+        let price = 0;
+        let time = $('#highspeed_time').val();
+        let code = 'HS';
+
+        if (this.buy_currency == 'cny') {
+            code  = 'HS';
+            price = 6 * time;
+        } else {
+            code = 'HS-us';
+            price = 1 * time;
+        }
+
+        if (this.buy_currency == 'cny') {
+            window.open("https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=addon&prepare_times=" + time, '_blank');
+        }else{
+            window.open('https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=addon&prepare_code=' + code + '&prepare_times=' + time, '_blank');
+        }
     }
 
     storage_buy() {
@@ -1316,8 +1358,13 @@ class tmplink {
             return false;
         }
         var price = 0;
-        var code = $('#storage_code').val();
-        var time = $('#storage_time').val();
+        let code = 0;
+        if (this.buy_currency == 'cny') {
+            code = $('#storage_code_cny').val();
+        } else {
+            code = $('#storage_code_usd').val();
+        }
+        let time = $('#storage_time').val();
         switch (code) {
             case '256GB':
                 price = 6 * time;
@@ -1331,9 +1378,25 @@ class tmplink {
             case '10TB':
                 price = 98 * time;
                 break;
+
+            case '256GB-us':
+                price = 1 * time;
+                break;
+            case '1TB-us':
+                price = 3 * time;
+                break;
+            case '3TB-us':
+                price = 7 * time;
+                break;
+            case '10TB-us':
+                price = 21 * time;
+                break;
         }
-        var link = "https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=addon&prepare_times=" + time;
-        window.open(link, '_blank');
+        if (this.buy_currency == 'cny') {
+            window.open("https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=addon&prepare_times=" + time, '_blank');
+        }else{
+            window.open('https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=addon&prepare_code=' + code + '&prepare_times=' + time, '_blank');
+        }
     }
 
     orders_list() {
