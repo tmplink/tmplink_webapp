@@ -541,8 +541,10 @@ class tmplink {
             action: 'total',
             token: this.api_token
         }, (rsp) => {
-            let total_size_text = this.bytetoconver(rsp.data.size, true);
-            $('#workspace_total').html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
+            if (rsp.data.nums > 0) {
+                let total_size_text = this.bytetoconver(rsp.data.size, true);
+                $('#workspace_total').html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
+            }
         }, 'json');
     }
 
@@ -1475,7 +1477,7 @@ class tmplink {
                     this.room_filelist_autoload_disabled();
                     this.autoload = false;
                 }
-                
+
                 this.loading_box_off();
             });
         });
@@ -1548,7 +1550,7 @@ class tmplink {
     mr_file_by_list(data, page) {
         this.room_btn_active_reset();
         $('#room_btn_file_list').addClass('bg-dark');
-        if (page == 0) {
+        if (page == 0 || page == 'all') {
             $('#room_filelist').html('');
             if (this.subroom_data.length != 0) {
                 $('#room_filelist').append(app.tpl('meetroom_list_tpl', this.subroom_data));
@@ -1572,7 +1574,7 @@ class tmplink {
     mr_file_by_photo(data, page) {
         this.room_btn_active_reset();
         $('#room_btn_file_photo').addClass('bg-dark');
-        if (page == 0) {
+        if (page == 0 || page == 'all') {
             $('#room_filelist').html('');
             if (this.subroom_data.length != 0) {
                 $('#room_filelist').append(app.tpl('meetroom_list_tpl', this.subroom_data));
@@ -1725,8 +1727,10 @@ class tmplink {
         $.post(this.api_mr, {
             action: 'total', mr_id: mrid, token: this.api_token
         }, (rsp) => {
-            let total_size_text = this.bytetoconver(rsp.data.size, true);
-            $('#room_total').html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
+            if (rsp.data.nums > 0) {
+                let total_size_text = this.bytetoconver(rsp.data.size, true);
+                $('#room_total').html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
+            }
         }, 'json');
     }
 
