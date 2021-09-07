@@ -4,6 +4,20 @@
         <div class="card align-self-center mx-auto" style="margin-top: 20px;padding:100px;max-width: 550px;">
             <div class="text-center" id="file_messenger_icon"></div>
             <div class="text-center display-4" id="file_messenger_msg"></div>
+            <div class="row p-5" style="display: none;" id="file_messenger_msg_login">
+                <div class="col-md-6 col-12 text-center">
+                    <button class="btn btn-lg btn-primary btn-block workspace-nologin" type="button"
+                        onclick="app.open('/login');" i18n="index_b3">
+                        .
+                    </button>
+                </div>
+                <div class="col-md-6 col-12 text-center">
+                    <button class="btn btn-lg btn-danger btn-block workspace-nologin" type="button"
+                        onclick="app.open('/reg');" i18n="index_b2">
+                        .
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 

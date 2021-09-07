@@ -1338,7 +1338,7 @@ class tmplink {
         let code = 'HS';
 
         if (this.buy_currency == 'cny') {
-            code  = 'HS';
+            code = 'HS';
             price = 6 * time;
         } else {
             code = 'HS-us';
@@ -1347,7 +1347,7 @@ class tmplink {
 
         if (this.buy_currency == 'cny') {
             window.open("https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=addon&prepare_times=" + time, '_blank');
-        }else{
+        } else {
             window.open('https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=addon&prepare_code=' + code + '&prepare_times=' + time, '_blank');
         }
     }
@@ -1394,7 +1394,7 @@ class tmplink {
         }
         if (this.buy_currency == 'cny') {
             window.open("https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=addon&prepare_times=" + time, '_blank');
-        }else{
+        } else {
             window.open('https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=addon&prepare_code=' + code + '&prepare_times=' + time, '_blank');
         }
     }
@@ -1827,41 +1827,51 @@ class tmplink {
                     'page_title': 'F-Unavailable',
                 });
                 return false;
-            } else {
-                gtag('config', 'UA-96864664-3', {
-                    'page_title': 'F-' + rsp.data.name,
-                });
-                //更新统计信息、
-                this.room_total(rsp.data.mr_id);
-                this.room.parent = rsp.data.parent;
-                this.room.top = rsp.data.top;
-                this.room.owner = rsp.data.owner;
-                this.room.mr_id = rsp.data.mr_id;
-                this.room.display = rsp.data.display;
-                this.room_performance_init(this.room.mr_id);
-                $('#mr_copy').attr('data-clipboard-text', 'http://tmp.link/room/' + rsp.data.mr_id);
-                $('.room_title').html(rsp.data.name);
-                $('#room_filelist').show();
-                if (rsp.data.sub_rooms !== 0) {
-                    this.subroom_data = rsp.data.sub_rooms;
-                } else {
-                    this.subroom_data = 0;
-                }
-
-                if (this.room.owner === 0) {
-                    $('.not_owner').hide();
-                }
-
-                this.btn_copy_bind();
-                //this.mr_file_list(0);
-                this.mr_file_list('all');
-
-                //是否需要设置上级目录返回按钮
-                $('#room_back_btn').html(app.tpl('room_back_btn_tpl', {}));
-                $('#room_loading').hide();
-                $('#room_loaded').show();
-                app.linkRebind();
             }
+            //room need to login
+            if (rsp.status === 3) {
+                $('#file_messenger_icon').html('<i class="fas fa-robot fa-7x"></i>');
+                $('#file_messenger_msg').html(this.languageData.status_need_login);
+                $('#file_messenger_msg_login').show();
+                $('#file_messenger').show();
+                gtag('config', 'UA-96864664-3', {
+                    'page_title': 'F-unLogin',
+                });
+                return false;
+            }
+            gtag('config', 'UA-96864664-3', {
+                'page_title': 'F-' + rsp.data.name,
+            });
+            //更新统计信息、
+            this.room_total(rsp.data.mr_id);
+            this.room.parent = rsp.data.parent;
+            this.room.top = rsp.data.top;
+            this.room.owner = rsp.data.owner;
+            this.room.mr_id = rsp.data.mr_id;
+            this.room.display = rsp.data.display;
+            this.room_performance_init(this.room.mr_id);
+            $('#mr_copy').attr('data-clipboard-text', 'http://tmp.link/room/' + rsp.data.mr_id);
+            $('.room_title').html(rsp.data.name);
+            $('#room_filelist').show();
+            if (rsp.data.sub_rooms !== 0) {
+                this.subroom_data = rsp.data.sub_rooms;
+            } else {
+                this.subroom_data = 0;
+            }
+
+            if (this.room.owner === 0) {
+                $('.not_owner').hide();
+            }
+
+            this.btn_copy_bind();
+            //this.mr_file_list(0);
+            this.mr_file_list('all');
+
+            //是否需要设置上级目录返回按钮
+            $('#room_back_btn').html(app.tpl('room_back_btn_tpl', {}));
+            $('#room_loading').hide();
+            $('#room_loaded').show();
+            app.linkRebind();
         });
     }
 
