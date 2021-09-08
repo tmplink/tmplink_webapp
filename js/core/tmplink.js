@@ -35,6 +35,7 @@ class tmplink {
 
     storage = 0
     storage_used = 0
+    high_speed_channel = false
 
     page_number = 1
     autoload = false
@@ -383,10 +384,17 @@ class tmplink {
                 this.logined = 1;
                 this.storage_used = rsp.data.storage_used;
                 this.storage = rsp.data.storage;
+                this.high_speed_channel = rsp.data.highspeedchannel;
                 localStorage.setItem('app_lang', rsp.data.lang);
                 app.languageSet(rsp.data.lang);
                 //console.log
                 this.dir_tree_get();
+                //激活标识
+                if(this.high_speed_channel){
+                    $('.hs-enabled').show();
+                }else{
+                    $('.hs-disabled').show();
+                }
             } else {
                 localStorage.setItem('app_login', 0);
                 this.logined = 0;
@@ -1259,6 +1267,10 @@ class tmplink {
     }
 
     buy_select_open(type) {
+        if (this.logined === 0) {
+            this.alert(this.languageData.status_need_login);
+            return false;
+        }
         this.buy_type = type;
         $('#buySelectModal').modal('show');
     }
