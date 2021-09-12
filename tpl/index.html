@@ -10,7 +10,7 @@
                     <img src="/img/logo/1.png" alt="tmp.link">
                 </div>
                 <div class="index-box p-5 bg-white shadow-sm">
-                    <div class="index-box p-5 ">
+                    <div class="index-box pb-0">
 
                         <div class="mt-2" id="index_userinfo_loading">
                             <div class="text-center glass" style="border-radius: 10px;padding: 10px;">
@@ -134,14 +134,24 @@
                                 </div>
                             </div>
 
-                            <div class="text-right mt-3">
-                                <span class="btn-group mr-3">
-                                    <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span>
-                                        <span> / Language</span>
+                            <div class="text-right hs-enabled" style="display: none;">
+                                <div class="badge badge-pill badge-success">
+                                    <span>HS enabled</span>
+                                </div>
+                            </div>
+                            <div class="text-right hs-disabled" style="display: none;">
+                                <div class="badge badge-pill badge-dark btn-point" onclick="TL.buy_select_open('hs')">
+                                    <span>HS disabled</span>
+                                </div>
+                            </div>
+    
+                            <div class="text-right">
+                                <span class="btn-group">
+                                    <div class="dropdown-toggle badge badge-pill badge-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span> <span> /
+                                            Language</span>
                                     </div>
-                                    <div class="dropdown-menu dropdown-menu-right shadow">
+                                    <div class="dropdown-menu shadow">
                                         <a class="dropdown-item" href="javascript:void(0)"
                                             onclick="TL.language('cn');">中文</a>
                                         <a class="dropdown-item" href="javascript:void(0)"
