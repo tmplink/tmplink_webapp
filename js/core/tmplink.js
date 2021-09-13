@@ -32,6 +32,7 @@ class tmplink {
     lazyLoadInstance = null
     get_details_do = false
     upload_s2_status = []
+    countDownID = [];
 
     storage = 0
     storage_used = 0
@@ -390,9 +391,9 @@ class tmplink {
                 //console.log
                 this.dir_tree_get();
                 //激活标识
-                if(this.high_speed_channel){
+                if (this.high_speed_channel) {
                     $('.hs-enabled').show();
-                }else{
+                } else {
                     $('.hs-disabled').show();
                 }
             } else {
@@ -682,10 +683,10 @@ class tmplink {
             return false;
         }
         $('#workspace_filelist').append(app.tpl('workspace_filelist_list_tpl', data));
-        $('.lefttime-remainder').each(function () {
-            let id = $(this).attr('id');
-            let time = $(this).attr('data-tmplink-lefttime');
-            countDown(id, time);
+        $('.lefttime-remainder').each((i, e) => {
+            let id = $(e).attr('id');
+            let time = $(e).attr('data-tmplink-lefttime');
+            this.countTimeDown(id, time);
         });
         this.btn_copy_bind();
         app.linkRebind();
@@ -754,7 +755,7 @@ class tmplink {
                     //剩余时间
                     if (rsp.data.model !== '99') {
                         $('#lefttime_show').show();
-                        countDown('lefttime', rsp.data.lefttime_s);
+                        this.countTimeDown('lefttime', rsp.data.lefttime_s);
                     } else {
                         $('#lefttime_show').hide();
                     }
@@ -1636,10 +1637,10 @@ class tmplink {
         }
         if (data.length != 0) {
             $('#room_filelist').append(app.tpl('room_filelist_list_tpl', data));
-            $('.lefttime-remainder').each(function () {
-                let id = $(this).attr('id');
-                let time = $(this).attr('data-tmplink-lefttime');
-                countDown(id, time);
+            $('.lefttime-remainder').each((i, e) => {
+                let id = $(e).attr('id');
+                let time = $(e).attr('data-tmplink-lefttime');
+                this.countTimeDown(id, time);
             });
         }
         this.btn_copy_bind();
@@ -2750,5 +2751,71 @@ class tmplink {
             pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
         }
         return pwd;
+    }
+
+    countTimeDown(id, time) {
+        if (this.countDownID[id] === undefined) {
+            this.countDownID[id] = setInterval(() => {
+                if (time > 0) {
+                    time--;
+                    //update dom
+                    let dom = document.getElementById(id);
+                    if (dom === null) {
+                        this.countDownTime[id] = undefined;
+                        clearInterval(this.countDownID[id]);
+                        return false;
+                    } else {
+                        dom.innerHTML = this.leftTimeString(time);
+                    }
+                }
+            }, 1000);
+        }
+    }
+
+    leftTimeString(time) {
+        let now = time - 1;
+        let left_time = now;
+
+        let d = '';
+        let h = '';
+        let m = '';
+        let s = '';
+
+        if (now == 0) {
+            return false;
+        }
+
+        if (now > 86400) {
+            d = Math.floor(now / 86400);
+            d = d + ':';
+            left_time = left_time % 86400;
+        }
+
+        if (left_time > 3600) {
+            h = Math.floor(left_time / 3600);
+            h = h < 10 ? "0" + h : h;
+            h = h === "0" ? "00" : h;
+            h = h + ':';
+            left_time = left_time % 3600;
+        }
+
+        if (left_time > 60) {
+            m = Math.floor(left_time / 60);
+            m = m < 10 ? "0" + m : m;
+            m = m === "0" ? "00" : m;
+            m = m + ':';
+            left_time = left_time % 60;
+        }
+
+        if (left_time > 0) {
+            s = left_time;
+            s = s < 10 ? "0" + s : s;
+            s = s === "0" ? "00" : s;
+        }
+        if (left_time === 0 && m !== '') {
+            s = "00";
+        }
+
+        return d + h + m + s;
     }
 }
