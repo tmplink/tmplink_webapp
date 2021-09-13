@@ -166,7 +166,7 @@
                     <div class="row" id="room_file_content">
                     <% for (var x in obj) { %>
                         <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
-                            <div class="col-lg-4 col-xl-3 col-md-6 col-12 p-1 file_unit_<% obj[x].ukey %>">
+                            <div class="col-lg-4 col-xl-3 col-md-6 col-12 file_unit_<% obj[x].ukey %>">
                                 <div class="card text-center" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
                                     <div style="height:220px;">
                                         <a href="javascript:;" onclick="TL.previewModel('<% obj[x].ukey %>',<% x %>)">
@@ -203,8 +203,8 @@
 
                 <script type="text/template" id="room_filelist_list_tpl">
                     <% for (var x in obj) { %>
-                        <div class="row mb-1 mx-0 file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
-                            <div class="col-12 col-md-6 col-lg-8 my-1 px-0 d-flex align-items-center listfontweight filename">
+                        <div class="row mx-0 mb-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
+                            <div class="col-12 col-md-6 col-lg-8 my-1 d-flex align-items-center listfontweight filename">
                                 <div>
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
                                     <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" target="_blank">
@@ -219,18 +219,18 @@
                                     <% } %>  
                                 </div>
                             </div>
-                            <div  class="col-12 col-md-6 col-lg-4 my-1 pr-0 d-flex align-items-center justify-content-end">
+                            <div  class="col-12 col-md-6 col-lg-4 my-1  d-flex align-items-center justify-content-end">
                                 <span class="mr-2">
                                     <% obj[x].fsize_formated %>
                                 </span>
-                                <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>">
+                                <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
                                     <i class="fa-fw fad fa-download"></i>
                                 </button>
-                                <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1">
+                                <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1">
                                     <i class="fa-fw fad fa-share-alt"></i>
                                 </button>
                                 <% if (TL.room.owner == 1) { %>
-                                    <button href="javascript:void(0);" class="text-red btn btn-sm btn-light mx-1" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
+                                    <button href="javascript:void(0);" class="text-red btn btn-sm btn-light" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
                                         <i class="fa-fw fad fa-trash"></i>
                                     </button>
                                 <% } %>
@@ -270,8 +270,8 @@
 
                 <script type="text/template" id="meetroom_list_tpl">
                     <% for (var x in obj) { %>
-                        <div class="row p-2 filelist-card shadow-sm mb-2 mx-0" id="meetingroom_id_<% obj[x].mr_id %>">
-                            <div class="col-12 col-md-6 col-lg-8 my-1 px-0 d-flex align-items-center listfontweight filename">
+                        <div class="row mx-0 list-bar" id="meetingroom_id_<% obj[x].mr_id %>">
+                            <div class="col-12 col-md-6 col-lg-8 my-1 d-flex align-items-center listfontweight filename">
                                 <i class="fad fa-folders text-cyan fa-fw d-none d-md-block"></i>
                                 &nbsp
                                 <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true">
@@ -282,10 +282,10 @@
                                 <span class="mr-2">
                                     <% TL.languageData.filelist_dir %>
                                 </span>
-                                <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-share-alt"></i></a>
+                                <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fad fa-share-alt"></i></a>
                                 <% if (obj[x].type === 'owner') { %>
-                                    <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-edit"></i></a>
-                                    <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fad fa-trash"></i></a>
+                                    <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fad fa-edit"></i></a>
+                                    <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fad fa-trash"></i></a>
                                 <% } %>
                             </div>
                         </div>

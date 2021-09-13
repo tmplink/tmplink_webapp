@@ -269,3 +269,9 @@ body::-webkit-scrollbar-corner {
     width: 100%;
     border-radius: 5px;
 }
+
+.list-bar:hover {
+    border-radius: 5px;
+    border-width: 1px;
+    background-color: rgb(220, 236, 245);
+}

@@ -121,7 +121,7 @@
             <script type="text/template" id="workspace_filelist_photo_tpl">
                 <% for (var x in obj) { %>
                     <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
-                        <div class="col-lg-4 col-xl-3 col-md-6 col-12 p-1 file_unit_<% obj[x].ukey %>">
+                        <div class="col-lg-4 col-xl-3 col-md-6 col-12 file_unit_<% obj[x].ukey %>">
                             <div class="card text-center" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
                                 <div style="height:220px;">
                                     <a href="javascript:;" onclick="TL.previewModel('<% obj[x].ukey %>',<% x %>)">
@@ -146,8 +146,8 @@
             </script>
             <script type="text/template" id="workspace_filelist_list_tpl">
                 <% for (var x in obj) { %>
-                    <div class="row mx-0 file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
-                        <div class="col-12 col-md-7 col-lg-8 mb-1 px-0 d-flex align-items-center listfontweight filename">
+                    <div class="row mx-0 mb-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
+                        <div class="col-12 col-md-7 col-lg-8 d-flex align-items-center listfontweight filename">
                             <div class="row">
                                 <div class="col-12 filename">
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-5 col-lg-4 my-1 pr-0 d-flex align-items-center justify-content-end">
+                        <div class="col-12 col-md-5 col-lg-4 my-1 d-flex align-items-center justify-content-end">
                             <span class="mr-2"><% obj[x].fsize_formated %></span>
                             <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fad fa-download"></i></button>
                             <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-share-alt"></i></button>
