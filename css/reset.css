@@ -11446,11 +11446,9 @@ a.text-dark:hover, a.text-dark:focus {
 html {
   font-size: 16px;
   height: 100%;
-  direction: ltr;
 }
 
 body {
-  direction: ltr;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;

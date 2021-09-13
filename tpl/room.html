@@ -167,13 +167,13 @@
                     <% for (var x in obj) { %>
                         <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
                             <div class="col-lg-4 col-xl-3 col-md-6 col-12 p-1 file_unit_<% obj[x].ukey %>">
-                                <div class="card shadow-sm text-center" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
+                                <div class="card text-center" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
                                     <div style="height:220px;">
                                         <a href="javascript:;" onclick="TL.previewModel('<% obj[x].ukey %>',<% x %>)">
                                             <img class='lazyload' data-src="https://getfile.tmp.link/img-<% obj[x].ukey %>-360x220.jpg" style="height:220px;" />
                                         </a>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body pr-1">
                                         <div class="text-right">
                                             <span class="mr-1">
                                                 <% obj[x].fsize_formated %>
@@ -203,7 +203,7 @@
 
                 <script type="text/template" id="room_filelist_list_tpl">
                     <% for (var x in obj) { %>
-                        <div class="row p-2 filelist-card shadow-sm mb-2 mx-0 file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
+                        <div class="row mb-1 mx-0 file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
                             <div class="col-12 col-md-6 col-lg-8 my-1 px-0 d-flex align-items-center listfontweight filename">
                                 <div>
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
@@ -219,7 +219,7 @@
                                     <% } %>  
                                 </div>
                             </div>
-                            <div  class="col-12 col-md-6 col-lg-4 my-1 d-flex align-items-center justify-content-end">
+                            <div  class="col-12 col-md-6 col-lg-4 my-1 pr-0 d-flex align-items-center justify-content-end">
                                 <span class="mr-2">
                                     <% obj[x].fsize_formated %>
                                 </span>
@@ -236,7 +236,7 @@
                                 <% } %>
                             </div>
                             <div class="col-12 download_progress_bar_<% obj[x].ukey %>" style="display:none">
-                                <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress" style="height: 5px;">
                                     <div class="progress-bar bg-success download_progress_bar_set_<% obj[x].ukey %>" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>

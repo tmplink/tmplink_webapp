@@ -29,6 +29,8 @@ class tools_file_manager {
 
     checkbox_select_on(node) {
         let inode = node.getAttribute('tldata');
+        $('.file_unit_' + inode).css('border-radius', '3px');
+        $('.file_unit_' + inode).css('border-width', '1px');
         $('.file_unit_' + inode).css('border-color', '#45aaf2');
         $('.file_unit_' + inode).css('border-style', 'double');
         node.setAttribute('data-check', 'true');
@@ -38,6 +40,8 @@ class tools_file_manager {
         let inode = node.getAttribute('tldata');
         $('.file_unit_' + inode).css('border-color', '');
         $('.file_unit_' + inode).css('border-style', '');
+        $('.file_unit_' + inode).css('border-radius', '');
+        $('.file_unit_' + inode).css('border-width', '');
         node.setAttribute('data-check', 'false');
     }
 
