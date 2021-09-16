@@ -397,6 +397,7 @@ class tmplink {
                     $('.hs-disabled').show();
                 }
             } else {
+                $('.user-unlogin').show();
                 localStorage.setItem('app_login', 0);
                 this.logined = 0;
             }
