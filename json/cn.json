@@ -412,7 +412,7 @@
     "total_units_of_file" : "个文件",
     "total_units_of_dirs" : "个文件夹",
 
-    "status_need_login": "证明您不是机器人",
+    "status_need_login": "服务器繁忙。请先登陆。",
     "status_13": "重设密码失败，操作过于频繁，请一小时后再试。",
     "status_14": "重设密码失败，没有这个账号。",
     "status_unknow": "不知道发生了什么，请联系管理员。",
