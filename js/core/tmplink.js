@@ -1883,7 +1883,8 @@ class tmplink {
             gtag('config', 'UA-96864664-3', {
                 'page_title': 'F-' + rsp.data.name,
             });
-            //更新统计信息、
+
+            //更新统计信息
             this.room_total(rsp.data.mr_id);
             this.room.parent = rsp.data.parent;
             this.room.top = rsp.data.top;
@@ -1893,9 +1894,20 @@ class tmplink {
             this.room.sort_by = rsp.data.sort_by;
             this.room.sort_type = rsp.data.sort_type;
             this.room_performance_init(this.room.mr_id);
+
+            //如果用户不是文件夹的拥有者，则显示出加入收藏夹的按钮
+            console.log(this.uid);
+            if (this.room.owner == 0 && this.isLogin()) {
+                $('#room_btn_favorate').on('click', () => {
+                    this.favorite_add(rsp.data.mr_id);
+                });
+                $('#room_btn_favorate').show();
+            }
+
             $('#mr_copy').attr('data-clipboard-text', 'http://tmp.link/room/' + rsp.data.mr_id);
             $('.room_title').html(rsp.data.name);
             $('#room_filelist').show();
+
             if (rsp.data.sub_rooms !== 0) {
                 this.subroom_data = rsp.data.sub_rooms;
             } else {
@@ -1915,6 +1927,24 @@ class tmplink {
             $('#room_loading').hide();
             $('#room_loaded').show();
             app.linkRebind();
+        });
+    }
+
+    favorite_add(mr_id){
+        alert(this.languageData.favorite_add_success);
+        $.post(this.api_mr, {
+            action: 'favorite_add',
+            token: this.api_token,
+            mr_id: mr_id,
+        });
+    }
+
+    favorite_del(mr_id){
+        $('#meetingroom_id_'+mr_id).hide();
+        $.post(this.api_mr, {
+            action: 'favorite_del',
+            token: this.api_token,
+            mr_id: mr_id,
         });
     }
 

@@ -90,6 +90,10 @@
                         <i class="fa-fw fad fa-share-alt"></i>
                         <span i18n="model_copy" class="d-none d-sm-inline">.</span>
                     </button>
+                    <button id="room_btn_favorate" class="btn btn-light btn-sm mr-1 mt-1 text-azure" style="display: none;">
+                        <i class="fa-fw fas fa-folder-plus"></i>
+                        <span class="d-none d-sm-inline">收藏</span>
+                    </button>
                 </div>
                 <div class="mb-2">
                     <span id="room_back_btn"></span>
@@ -110,19 +114,20 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <button class="dropdown-item not_owner" onclick="TL.file_manager.checkbox_delete()">
-                                <i class="fa-fw fad fa-trash"></i> 
+                                <i class="fa-fw fad fa-trash"></i>
                                 <span i18n="on_select_delete">.</span>
                             </button>
                             <button class="dropdown-item" onclick="TL.file_manager.checkbox_download()">
-                                <i class="fa-fw fad fa-download"></i> 
+                                <i class="fa-fw fad fa-download"></i>
                                 <span i18n="on_select_download">.</span>
                             </button>
                             <button class="dropdown-item" onclick="TL.file_manager.checkbox_share()">
                                 <i class="fa-fw fad fa-share-alt"></i>
                                 <span i18n="on_select_share">.</span>
                             </button>
-                            <button class="dropdown-item not_owner" onclick="TL.file_manager.checkbox_move_to_model('room')">
-                                <i class="fa-fw fad fa-folder-plus"></i> 
+                            <button class="dropdown-item not_owner"
+                                onclick="TL.file_manager.checkbox_move_to_model('room')">
+                                <i class="fa-fw fad fa-folder-plus"></i>
                                 <span i18n="on_select_move">.</span>
                             </button>
                         </div>

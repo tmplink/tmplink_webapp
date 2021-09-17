@@ -23,7 +23,11 @@
                     <div class="col-6 col-md-3 col-lg-2 p-2 text-center dir-icon" id="meetingroom_id_<% obj[x].mr_id %>">
                         <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true">
                             <div class="fileicon mx-auto mb-2">
-                                <i class="fas fa-folder fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
+                                <% if (obj[x].owner == 1) { %>
+                                    <i class="fas fa-folder fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
+                                <% }else{ %> 
+                                    <i class="fas fa-folder-plus fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
+                                <% } %> 
                             </div>
                             <div class="max-width-90 mx-auto">
                                 <% if (obj[x].model !== 'public') { %>
@@ -34,9 +38,14 @@
                             </div>
                         </a>
                         <div class="dir-toolbar">
-                            <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="btn_copy btn btn-sm btn-azure"><i class="fa-fw fad fa-share-alt"></i></a>
-                            <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="btn btn-sm btn-azure"><i class="fad fa-edit"></i></a>
-                            <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="btn btn-sm btn-outline-danger" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fad fa-trash"></i></a>
+                            <% if (obj[x].owner == 1) { %>
+                                <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="btn_copy btn btn-sm btn-azure"><i class="fa-fw fad fa-share-alt"></i></a>
+                                <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="btn btn-sm btn-azure"><i class="fad fa-edit"></i></a>
+                                <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="btn btn-sm btn-outline-danger" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fad fa-trash"></i></a>
+                            <% }else{ %> 
+                                <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="btn_copy btn btn-sm btn-azure"><i class="fa-fw fad fa-share-alt"></i></a>
+                                <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="btn btn-sm btn-outline-danger" onclick="TL.favorite_del('<% obj[x].mr_id %>')"><i class="fa-fw fad fa-trash"></i></a>
+                            <% } %> 
                         </div>
                     </div>
                 <% } %>
