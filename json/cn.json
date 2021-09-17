@@ -412,6 +412,18 @@
     "total_units_of_file" : "个文件",
     "total_units_of_dirs" : "个文件夹",
 
+    "need_login_of_file": "尚未登陆，登陆后可优先加速下载",
+    "need_login_of_dir": "尚未登陆，登陆后可优先加速下载，并可以收藏文件夹",
+    "btn_performance":"偏好设置",
+    "btn_favorite":"收藏",
+
+    "modal_performance_title":"文件夹偏好设置",
+    "modal_performance_display":"默认的显示模式",
+    "modal_performance_display_0":"列表",
+    "modal_performance_display_1":"图片",
+    "modal_performance_sort":"默认的文件排序方式",
+
+
     "status_need_login": "服务器繁忙。请先登陆。",
     "status_13": "重设密码失败，操作过于频繁，请一小时后再试。",
     "status_14": "重设密码失败，没有这个账号。",

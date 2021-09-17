@@ -39,7 +39,7 @@
                     </div>
                     <div class="text-center user-unlogin" style="display: none;">
                         <div class="badge badge-pill badge-dark btn-point" onclick="app.open('/login')">
-                            <span>尚未登陆，登陆后可免费优先加速下载</span>
+                            <span i18n="need_login_of_dir">.</span>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                     <button id="room_btn_performance" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
                         onclick="TL.room_performance_open();">
                         <i class="fa-fw fas fa-heart"></i>
-                        <span class="d-none d-sm-inline">偏好设置</span>
+                        <span class="d-none d-sm-inline" i18n="btn_performance">.</span>
                     </button>
                     <button class="btn btn-light btn-sm mr-1 mt-1 btn_copy text-azure" id="mr_copy">
                         <i class="fa-fw fad fa-share-alt"></i>
@@ -92,7 +92,7 @@
                     </button>
                     <button id="room_btn_favorate" class="btn btn-light btn-sm mr-1 mt-1 text-azure" style="display: none;">
                         <i class="fa-fw fas fa-folder-plus"></i>
-                        <span class="d-none d-sm-inline">收藏</span>
+                        <span class="d-none d-sm-inline" i18n="btn_favorite">.</span>
                     </button>
                 </div>
                 <div class="mb-2">
@@ -397,19 +397,19 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
-                <h4 class="modal-title">文件夹偏好设置</h4>
+                <h4 class="modal-title" i18n="modal_performance_title">.</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h5>默认的显示模式</h5>
+                <h5 i18n="modal_performance_display">.</h5>
                 <div class="form-group">
                     <select class="form-control" id="pf_display">
-                        <option value="list" i18n-only="html">列表</option>
-                        <option value="photo" i18n-only="html">图片</option>
+                        <option value="list" i18n-only="html" i18n="modal_performance_display_0">.</option>
+                        <option value="photo" i18n-only="html" i18n="modal_performance_display_1">.</option>
                     </select>
                 </div>
 
-                <h5>默认的文件排序方式</h5>
+                <h5 i18n="modal_performance_sort">.</h5>
                 <div class="form-group">
                     <select class="form-control" id="pf_sort_by">
                         <option value="0" i18n-only="html" i18n="sort_by_id">.</option>

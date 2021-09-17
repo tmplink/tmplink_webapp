@@ -1897,7 +1897,7 @@ class tmplink {
 
             //如果用户不是文件夹的拥有者，则显示出加入收藏夹的按钮
             console.log(this.uid);
-            if (this.room.owner == 0 && this.isLogin()) {
+            if (this.room.owner == 0) {
                 $('#room_btn_favorate').on('click', () => {
                     this.favorite_add(rsp.data.mr_id);
                 });
@@ -1931,6 +1931,10 @@ class tmplink {
     }
 
     favorite_add(mr_id){
+        if(!this.isLogin()){
+            app.open('/login');
+            return false;
+        }
         alert(this.languageData.favorite_add_success);
         $.post(this.api_mr, {
             action: 'favorite_add',
