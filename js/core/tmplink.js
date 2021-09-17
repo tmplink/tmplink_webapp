@@ -1939,6 +1939,15 @@ class tmplink {
         });
     }
 
+    favorite_del(mr_id){
+        $('#meetingroom_id_'+mr_id).hide();
+        $.post(this.api_mr, {
+            action: 'favorite_del',
+            token: this.api_token,
+            mr_id: mr_id,
+        });
+    }
+
     login() {
         var email = $('#email').val();
         var password = $('#password').val();
