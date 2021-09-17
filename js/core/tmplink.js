@@ -347,8 +347,8 @@ class tmplink {
     }
 
     sort_show() {
-        $("#sort_by option[value='" + this.sort_by + "']").attr("selected", "selected");
-        $("#sort_type option[value='" + this.sort_type + "']").attr("selected", "selected");
+        // $("#sort_by option[value='" + this.sort_by + "']").attr("selected", "selected");
+        // $("#sort_type option[value='" + this.sort_type + "']").attr("selected", "selected");
         $('#sortModal').modal('show');
     }
 
@@ -1150,7 +1150,7 @@ class tmplink {
 
     download_allfile_btn() {
         //在移动设备上无法使用全部下载功能
-        let room_key = 'app_room_view' + this.room.mr_id;
+        let room_key = 'app_room_view_' + this.room.mr_id;
         // if (this.isMobile()) {
         //     this.alert(this.languageData.alert_no_support);
         //     return false;
@@ -1493,7 +1493,14 @@ class tmplink {
     mr_file_list(page) {
         $('.no_files').fadeOut();
         $('.no_photos').fadeOut();
-        let room_key = 'app_room_view' + this.room.mr_id;
+
+        let room_key = 'app_room_view_' + this.room.mr_id;
+        let room_sort_by_key = 'app_room_view_sort_by_' + this.room.mr_id;
+        let room_sort_type_key = 'app_room_view_sort_type_' + this.room.mr_id;
+
+        let room_sort_by = localStorage.getItem(room_sort_by_key);
+        let room_sort_type = localStorage.getItem(room_sort_type_key);
+
         if (page == 0) {
             this.page_number = 0;
             $('#room_filelist').html('');
@@ -1507,6 +1514,10 @@ class tmplink {
             this.page_number = 'all';
         }
 
+        //初始化排序选项的状态
+        $("#sort_by option[value='" + room_sort_by + "']").attr("selected", "selected");
+        $("#sort_type option[value='" + room_sort_type + "']").attr("selected", "selected");
+
         //if search
         let search = $('#room_search').val();
 
@@ -1517,7 +1528,7 @@ class tmplink {
         var params = this.get_url_params();
         this.recaptcha_do('mr_addlist', (recaptcha) => {
             let photo = 0;
-            if (localStorage.getItem('room_key') == 'photo') {
+            if (localStorage.getItem(room_key) == 'photo') {
                 photo = 1;
             }
             $.post(this.api_mr, {
@@ -1527,8 +1538,8 @@ class tmplink {
                 page: this.page_number,
                 photo: photo,
                 mr_id: params.mrid,
-                sort_by: this.sort_by,
-                sort_type: this.sort_type,
+                sort_by: room_sort_by,
+                sort_type: room_sort_type,
                 search: search
             }, (rsp) => {
                 $('.data_loading').hide();
@@ -1561,11 +1572,23 @@ class tmplink {
     }
 
     room_performance_init(room_id) {
-        let room_key = 'app_room_view' + room_id;
-        let storage_room_display = localStorage.getItem(room_key);
+        let room_key_display = 'app_room_view_' + room_id;
+        let storage_room_display = localStorage.getItem(room_key_display);
         let room_display = storage_room_display === null ? this.room.display : storage_room_display;
-        localStorage.setItem(room_key, room_display);
+        localStorage.setItem(room_key_display, room_display);
         $("#pf_display option[value='" + this.room.display + "']").attr("selected", "selected");
+
+        let room_key_sort_by = 'app_room_view_sort_by_' + room_id;
+        let storage_room_sort_by = localStorage.getItem(room_key_sort_by);
+        let room_sort_by = storage_room_sort_by === null ? this.room.sort_by : storage_room_sort_by;
+        localStorage.setItem(room_key_sort_by, room_sort_by);
+        $("#pf_sort_by option[value='" + this.room.sort_by + "']").attr("selected", "selected");
+
+        let room_key_sort_type = 'app_room_view_sort_type_' + room_id;
+        let storage_room_sort_type = localStorage.getItem(room_key_sort_type);
+        let room_sort_type = storage_room_sort_type === null ? this.room.sort_type : storage_room_sort_type;
+        localStorage.setItem(room_key_sort_type, room_sort_type);
+        $("#pf_sort_type option[value='" + this.room.sort_type + "']").attr("selected", "selected");
     }
 
     room_performance_open() {
@@ -1575,12 +1598,16 @@ class tmplink {
 
     room_performance_post() {
         let pf_display = $('#pf_display').val();
+        let pf_sort_by = $('#pf_sort_by').val();
+        let pf_sort_type = $('#pf_sort_type').val();
         let mrid = this.room.mr_id;
         $('#btn_pf_confirm').attr('disabled', 'disabled');
         $.post(this.api_mr, {
             action: 'pf_set',
             token: this.api_token,
             pf_display: pf_display,
+            sort_by: pf_sort_by,
+            sort_type: pf_sort_type,
             mr_id: mrid
         }, () => {
             $('#performanceModal').modal('hide');
@@ -1588,7 +1615,7 @@ class tmplink {
     }
 
     room_filelist_model(type) {
-        let room_key = 'app_room_view' + this.room.mr_id;
+        let room_key = 'app_room_view_' + this.room.mr_id;
         switch (type) {
             case 'photo':
                 localStorage.setItem(room_key, 'photo');
@@ -1787,7 +1814,7 @@ class tmplink {
     }
 
     mr_file_view(data, page, room_id) {
-        let room_key = 'app_room_view' + room_id;
+        let room_key = 'app_room_view_' + room_id;
         switch (localStorage.getItem(room_key)) {
             case 'photo':
                 this.mr_file_by_photo(data, page);
@@ -1863,6 +1890,8 @@ class tmplink {
             this.room.owner = rsp.data.owner;
             this.room.mr_id = rsp.data.mr_id;
             this.room.display = rsp.data.display;
+            this.room.sort_by = rsp.data.sort_by;
+            this.room.sort_type = rsp.data.sort_type;
             this.room_performance_init(this.room.mr_id);
             $('#mr_copy').attr('data-clipboard-text', 'http://tmp.link/room/' + rsp.data.mr_id);
             $('.room_title').html(rsp.data.name);
