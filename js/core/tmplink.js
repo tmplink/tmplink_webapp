@@ -1904,6 +1904,12 @@ class tmplink {
                 $('#room_btn_favorate').show();
             }
 
+            //如果这个文件夹有人收藏，则显示出收藏数量
+            if (rsp.data.favorites > 0) {
+                $('.fav-enabled').show();
+                $('#favorite_count').html(rsp.data.favorites);
+            }
+
             $('#mr_copy').attr('data-clipboard-text', 'http://tmp.link/room/' + rsp.data.mr_id);
             $('.room_title').html(rsp.data.name);
             $('#room_filelist').show();

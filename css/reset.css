@@ -5173,6 +5173,11 @@ a.badge-warning:focus, a.badge-warning.focus {
   background-color: #cd201f;
 }
 
+.badge-pink {
+  color: #fff;
+  background-color: #ff8beb;
+}
+
 a.badge-danger:hover, a.badge-danger:focus {
   color: #fff;
   background-color: #a11918;
