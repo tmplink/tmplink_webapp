@@ -1,6 +1,6 @@
 {
-    "need_login_of_file": "ログインした後、最初にダウンロードを高速化できます",
-    "need_login_of_dir": "ログイン後、最初にダウンロードを高速化し、フォルダをブックマークできます",
+    "need_login_of_file": "ログイン後にファイルをブックマークできる",
+    "need_login_of_dir": "ログイン後にフォルダをブックマークできる",
     "btn_performance": "設定",
     "btn_favorite": "お気に入り",
     "modal_performance_title": "フォルダ設定",

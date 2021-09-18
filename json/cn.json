@@ -412,8 +412,8 @@
     "total_units_of_file" : "个文件",
     "total_units_of_dirs" : "个文件夹",
 
-    "need_login_of_file": "尚未登陆，登陆后可优先加速下载",
-    "need_login_of_dir": "尚未登陆，登陆后可优先加速下载，并可以收藏文件夹",
+    "need_login_of_file": "登陆后可以收藏文件",
+    "need_login_of_dir": "登陆后可以收藏文件夹",
     "btn_performance":"偏好设置",
     "btn_favorite":"收藏",
 

@@ -1,6 +1,6 @@
 {
-    "need_login_of_file": "After logging in, downloads can be accelerated first",
-    "need_login_of_dir": "After logging in, downloads can be accelerated first, and folders can be bookmarked",
+    "need_login_of_file": "Log in to bookmarked files",
+    "need_login_of_dir": "Folders can be bookmarked after logging in",
     "btn_performance": "Preferences",
     "btn_favorite": "Favorite",
     "modal_performance_title": "Folder Preferences",
