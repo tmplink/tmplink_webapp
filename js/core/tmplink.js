@@ -1138,17 +1138,25 @@ class tmplink {
                 if (req.status == 1) {
                     this.download_queue_add(req.data, title, ukey, size, type);
                     this.download_queue_start();
-                } else {
-                    this.alert('发生了错误，请重试。');
-
-                    $('.btn_download_' + ukey).removeAttr('disabled');
-                    $('.btn_download_' + ukey).html('<i class="fa-fw fad fa-download"></i>');
+                    return true;
                 }
+                if (req.status == 3) {
+                    this.alert(this.languageData.status_need_login);
+                    return false;
+                }
+                this.alert('发生了错误，请重试。');
+                $('.btn_download_' + ukey).removeAttr('disabled');
+                $('.btn_download_' + ukey).html('<i class="fa-fw fad fa-download"></i>');
             });
         });
     }
 
     download_allfile_btn() {
+        //未登录的用户暂时不支持全部下载功能
+        if(!this.isLogin()){
+            this.alert(this.languageData.status_need_login);
+            return false;
+        }
         //在移动设备上无法使用全部下载功能
         let room_key = 'app_room_view_' + this.room.mr_id;
         // if (this.isMobile()) {
