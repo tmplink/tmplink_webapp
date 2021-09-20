@@ -188,20 +188,30 @@
                                     </div>
                                     <div class="card-body pr-1">
                                         <div class="text-right">
-                                            <span class="mr-1">
-                                                <% obj[x].fsize_formated %>
-                                            </span>
-                                            <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
-                                                <i class="fa-fw fad fa-download"></i>
-                                            </button>
-                                            <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1">
-                                                <i class="fa-fw fad fa-share-alt"></i>
-                                            </button>
-                                            <% if (TL.room.owner == 1) { %>
-                                                <button href="javascript:void(0);" class="text-red btn btn-sm btn-light" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
-                                                    <i class="fa-fw fad fa-trash"></i>
+                                            <div>
+                                                <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
+                                                    <i class="fa-fw fad fa-download"></i>
                                                 </button>
-                                            <% } %>
+                                                <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1">
+                                                    <i class="fa-fw fad fa-share-alt"></i>
+                                                </button>
+                                                <% if (TL.room.owner == 1) { %>
+                                                    <button href="javascript:void(0);" class="text-red btn btn-sm btn-light" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
+                                                        <i class="fa-fw fad fa-trash"></i>
+                                                    </button>
+                                                <% } %>
+                                            </div>
+                                            <div class="mt-1">
+                                                <span class="mr-1">
+                                                    <% obj[x].fsize_formated %>
+                                                </span>
+                                                <% if(obj[x].like>0){ %>
+                                                    <span class="badge badge-pill badge-primary">
+                                                        <i class="fa-fw fas fa-star text-yellow"></i>
+                                                        <% obj[x].like %>
+                                                    </span>
+                                                <% } %>
+                                            </div>
                                         </div>
                                         <div class="progress mt-2 download_progress_bar_<% obj[x].ukey %>" style="height: 5px;display:none;">
                                             <div class="progress-bar bg-success download_progress_bar_set_<% obj[x].ukey %>" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
@@ -223,6 +233,12 @@
                                     <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" target="_blank">
                                         <% obj[x].fname %>
                                     </a>
+                                    <% if(obj[x].like>0){ %>
+                                        <span class="badge badge-pill badge-primary">
+                                            <i class="fa-fw fas fa-star text-yellow"></i>
+                                            <% obj[x].like %>
+                                        </span>
+                                    <% } %>
                                     <% if(obj[x].model!=99){ %>
                                         <!--[这里处理剩余时间]-->
                                         <div>
