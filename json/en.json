@@ -385,7 +385,7 @@
     "model_upload_cli_params_2": "value",
     "model_upload_cli_params_3": "File path, such as file=@/root/upload.zip",
     "model_btn_upload_cli": "Upload files using the command line",
-    "status_need_login": "Prove you're not a robot",
+    "status_need_login": "Please sign in first.",
     "navbar_orders": "Purchased Items",
     "highspeed_content2": "* Please note that although we have increased the network bandwidth given to your server, the actual download speed still depends on many factors. The bandwidth you have contracted with your ISP, the network quality of the Wifi connection, and the performance of the terminal device All factors may affect the final download speed. We do not make any commitments on the final download speed. ",
     "model_title_orders": "Purchased Items",

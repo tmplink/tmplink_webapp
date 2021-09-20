@@ -304,7 +304,7 @@
     "model_upload_cli_path": "文件路径",
     "model_upload_cli_copy": "生成上传命令",
     "model_upload_cli_note1": "使用命令行上传文件需要 curl 的支持。",
-    "model_upload_cli_note2": "请注意，在文件上传完成前，请不要在本站退出登陆，否则会导致上传失败。",
+    "model_upload_cli_note2": "请注意，在文件上传完成前，请不要在本站退出登录，否则会导致上传失败。",
     "model_upload_cli_note3": "请不要将 Token 透露其他人，因为 Token 等同于您在本站的身份信息。",
 
     "orders_title_addon": "已购服务",
@@ -411,8 +411,8 @@
     "total_units_of_file" : "个文件",
     "total_units_of_dirs" : "个文件夹",
 
-    "need_login_of_file": "登陆后可以收藏文件",
-    "need_login_of_dir": "登陆后可以收藏文件夹",
+    "need_login_of_file": "登录后可以收藏文件",
+    "need_login_of_dir": "登录后可以收藏文件夹",
     "btn_performance":"偏好设置",
     "btn_favorite":"收藏",
 
@@ -423,7 +423,7 @@
     "modal_performance_sort":"默认的文件排序方式",
 
 
-    "status_need_login": "服务器繁忙。请先登陆。",
+    "status_need_login": "请先登录",
     "status_13": "重设密码失败，操作过于频繁，请一小时后再试。",
     "status_14": "重设密码失败，没有这个账号。",
     "status_unknow": "不知道发生了什么，请联系管理员。",
