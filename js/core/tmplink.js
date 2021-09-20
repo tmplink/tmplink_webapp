@@ -753,6 +753,12 @@ class tmplink {
                     //更新title
                     document.title = rsp.data.name;
 
+                    //更新喜欢
+                    $('#likes').on('click', () => {
+                        this.like_file(params.ukey);
+                    });
+                    $('#likes_count').html(rsp.data.like);
+
                     //剩余时间
                     if (rsp.data.model !== '99') {
                         $('#lefttime_show').show();
@@ -857,6 +863,21 @@ class tmplink {
             $('#file_unavailable').show();
         }
         this.loading_box_off();
+    }
+
+    like_file(ukey){
+        $.post(this.api_file, {
+            action: 'like',
+            ukey: ukey,
+            token: this.api_token
+        }, (rsp) => {
+            let now = parseInt($('#likes_count').html());
+            if(rsp.status==1){
+                $('#likes_count').html(now+1);
+            }else{
+                $('#likes_count').html(now-1);
+            }
+        });
     }
 
     single_download_start(url, filename) {
