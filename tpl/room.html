@@ -97,6 +97,10 @@
                         <i class="fa-fw fas fa-folder-plus"></i>
                         <span class="d-none d-sm-inline" i18n="btn_favorite">.</span>
                     </button>
+                    <button id="room_btn_report" class="btn btn-light text-azure btn-sm mr-1 mt-1" onclick="$('#roomReportModal').modal('show')" style="display: none;">
+                        <i class="fa-fw fas fa-exclamation-triangle text-danger"></i>
+                        <span class="d-none d-sm-inline" i18n="file_btn_report" >.</span>
+                    </button>
                 </div>
                 <div class="mb-2">
                     <span id="room_back_btn"></span>
@@ -478,6 +482,30 @@
             <div class="modal-footer">
                 <button id="btn_sort_confirm" class="btn btn-light" onclick="TL.sort_confirm()"
                     i18n="model_btn_ok">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="roomReportModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_report">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <select class="form-control" id="room_report_model">
+                    <option value="." i18n="modal_report_reason1" selected>.</option>
+                    <option value="." i18n="modal_report_reason2">.</option>
+                    <option value="." i18n="modal_report_reason3">.</option>
+                </select>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" i18n="modal_report_submit" id="room_reportbtn"
+                    onclick="TL.room_report();">.</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
             </div>
         </div>
     </div>

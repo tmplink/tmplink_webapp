@@ -1898,6 +1898,21 @@ class tmplink {
                 });
                 return false;
             }
+            //会议室不可用
+            if (rsp.data.status == 'reported' && rsp.data.owner == 0) {
+                this.room.parent = 0;
+                this.room.top = 0;
+                this.room.ownner = 0;
+                this.room.mr_id = 0;
+                $('#file_messenger_icon').html('<i class="fas fa-folder-times  fa-4x"></i>');
+                $('#file_messenger_msg').html(this.languageData.room_status_fail);
+                $('#file_messenger').show();
+                gtag('config', 'UA-96864664-3', {
+                    'page_title': 'F-Reported',
+                });
+                return false;
+            }
+            
             //room need to login
             if (rsp.status === 3) {
                 $('#file_messenger_icon').html('<i class="fas fa-robot fa-7x"></i>');
@@ -1922,6 +1937,7 @@ class tmplink {
             this.room.display = rsp.data.display;
             this.room.sort_by = rsp.data.sort_by;
             this.room.sort_type = rsp.data.sort_type;
+            this.room.status = rsp.data.status;
             this.room_performance_init(this.room.mr_id);
 
             //如果用户不是文件夹的拥有者，则显示出加入收藏夹的按钮
@@ -1931,6 +1947,11 @@ class tmplink {
                     this.favorite_add(rsp.data.mr_id);
                 });
                 $('#room_btn_favorate').show();
+            }
+
+            //如果用户不是文件夹的拥有者，则显示举报按钮
+            if (this.room.owner == 0) {
+                $('#room_btn_report').show();
             }
 
             //如果这个文件夹有人收藏，则显示出收藏数量
@@ -2546,6 +2567,21 @@ class tmplink {
             'ukey': ukey
         }, (rsp) => {
             $('#reportbtn').html(this.languageData.form_btn_processed);
+        }, 'json');
+    }
+
+    room_report() {
+        var mr_id = this.room.mr_id;
+        var reason = $('#room_report_model').val();
+        $('#room_reportbtn').attr('disabled', true);
+        $('#room_reportbtn').html(`<span class="text-red">${this.languageData.form_btn_processed}</span>`);
+        $.post(this.api_mr, {
+            'action': 'report',
+            'token': this.api_token,
+            'reason': reason,
+            'mr_id': mr_id
+        }, (rsp) => {
+            $('#room_reportbtn').html(this.languageData.form_btn_processed);
         }, 'json');
     }
 
