@@ -1172,6 +1172,24 @@ class tmplink {
         });
     }
 
+    download_file_url(i,cb) {
+        let ukey = this.list_data[i].ukey;
+
+        this.recaptcha_do('download_req_on_list', (recaptcha) => {
+            $.post(this.api_file, {
+                action: 'download_req',
+                ukey: ukey,
+                token: this.api_token,
+                captcha: recaptcha
+            }, (req) => {
+                if (req.status == 1) {
+                    cb(req.data);
+                    return true;
+                }
+            });
+        });
+    }
+
     download_allfile_btn() {
         //未登录的用户暂时不支持全部下载功能
         if(!this.isLogin()){
@@ -1941,7 +1959,6 @@ class tmplink {
             this.room_performance_init(this.room.mr_id);
 
             //如果用户不是文件夹的拥有者，则显示出加入收藏夹的按钮
-            console.log(this.uid);
             if (this.room.owner == 0) {
                 $('#room_btn_favorate').on('click', () => {
                     this.favorite_add(rsp.data.mr_id);
@@ -2629,8 +2646,7 @@ class tmplink {
         var clipboard = new Clipboard('.btn_copy');
         clipboard.on('success', (e) => {
             let tmp = $(e.trigger).html();
-            $(e.trigger).html('<i class="text-green fas fa-check-circle fa-fw"></i>');
-            alert('已复制');
+            $(e.trigger).html('<i class="fas fa-check-circle fa-fw"></i>');
             setTimeout(() => {
                 $(e.trigger).html(tmp);
             }, 3000);
