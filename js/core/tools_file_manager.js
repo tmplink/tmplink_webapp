@@ -121,6 +121,36 @@ class tools_file_manager {
         }
     }
 
+    checkbox_download_url() {
+        //未登录无法使用此功能
+        if (!this.parent_op.isLogin()) {
+            this.parent_op.alert(this.parent_op.languageData.status_need_login);
+            return false;
+        }
+        var node = document.getElementsByName(this.items_name);
+        let check_count = 0;
+        for (let i = 0; i < node.length; i++) {
+            let inode = node[i];
+            let check = inode.getAttribute('data-check');
+            if (check === 'true') {
+                //do something
+                check_count++;
+                let ukey = inode.getAttribute('tldata');
+                this.parent_op.download_file_url(ukey, (download_url) => {
+                    $('#copy-modal-body').html($('#copy-modal-body').html() + `${download_url}\n`);
+                    $('#copy-modal-btn').attr('data-clipboard-text', $('#copy-modal-body').html());
+                    this.parent_op.btn_copy_bind();
+                });
+            }
+        }
+        if(check_count === 0){
+            this.parent_op.alert(this.parent_op.languageData.status_error_12);
+            return false;
+        }
+        //打开复制窗口
+        $('#copyModal').modal('show');
+    }
+
     checkbox_move_to_model(type) {
         var node = document.getElementsByName(this.items_name);
         this.move_place = type;
@@ -150,7 +180,7 @@ class tools_file_manager {
 
             }
         }
-        this.parent_op.move_to_dir(ukeys,this.move_place);
+        this.parent_op.move_to_dir(ukeys, this.move_place);
     }
 
 }

@@ -128,6 +128,10 @@
                                 <i class="fa-fw fad fa-download"></i>
                                 <span i18n="on_select_download">.</span>
                             </button>
+                            <button class="dropdown-item" onclick="TL.file_manager.checkbox_download_url()">
+                                <i class="fa-fw fad fa-download"></i>
+                                <span i18n="on_select_copy_download_url">.</span>
+                            </button>
                             <button class="dropdown-item" onclick="TL.file_manager.checkbox_share()">
                                 <i class="fa-fw fad fa-share-alt"></i>
                                 <span i18n="on_select_share">.</span>
@@ -186,7 +190,7 @@
                             <div class="col-lg-4 col-xl-3 col-md-6 col-12 file_unit_<% obj[x].ukey %>">
                                 <div class="card text-center" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
                                     <div style="height:220px;">
-                                        <a href="javascript:;" onclick="TL.previewModel('<% obj[x].ukey %>',<% x %>)">
+                                        <a href="javascript:;" onclick="TL.previewModel('<% obj[x].ukey %>','<% obj[x].fname %>',<% x %>)">
                                             <img class='lazyload' data-src="https://getfile.tmp.link/img-<% obj[x].ukey %>-360x220.jpg" style="height:220px;" />
                                         </a>
                                     </div>
