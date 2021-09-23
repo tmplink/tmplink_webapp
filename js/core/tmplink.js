@@ -140,10 +140,10 @@ class tmplink {
     bg_load() {
         if (document.querySelector('#background_wrap_preload') == null) {
             $('body').append('<div id="background_wrap_preload" style="z-index: -1;background-color:black; position: fixed;top: 0;left: 0;height: 100%;width: 100%;"></div>');
-            let bglist = [1, 2, 3, 4, 5, 6, 7];
+            let bglist = [1, 2, 3, 4, 5, 6, 7, 8];
             let index = Math.floor((Math.random() * bglist.length));
             let img = new Image();
-            img.src = '/img/bg/s' + bglist[index] + '.jpg';
+            img.src = '/img/bg/' + bglist[index] + '.jpg';
             //img.src = '/img/bg/s5.jpg';
             img.onload = () => {
                 if (img.height >= 1080 && img.width >= 1920) {
@@ -865,17 +865,17 @@ class tmplink {
         this.loading_box_off();
     }
 
-    like_file(ukey){
+    like_file(ukey) {
         $.post(this.api_file, {
             action: 'like',
             ukey: ukey,
             token: this.api_token
         }, (rsp) => {
             let now = parseInt($('#likes_count').html());
-            if(rsp.status==1){
-                $('#likes_count').html(now+1);
-            }else{
-                $('#likes_count').html(now-1);
+            if (rsp.status == 1) {
+                $('#likes_count').html(now + 1);
+            } else {
+                $('#likes_count').html(now - 1);
             }
         });
     }
@@ -1174,7 +1174,7 @@ class tmplink {
 
     download_allfile_btn() {
         //未登录的用户暂时不支持全部下载功能
-        if(!this.isLogin()){
+        if (!this.isLogin()) {
             this.alert(this.languageData.status_need_login);
             return false;
         }
@@ -1912,7 +1912,7 @@ class tmplink {
                 });
                 return false;
             }
-            
+
             //room need to login
             if (rsp.status === 3) {
                 $('#file_messenger_icon').html('<i class="fas fa-robot fa-7x"></i>');
@@ -1986,8 +1986,8 @@ class tmplink {
         });
     }
 
-    favorite_add(mr_id){
-        if(!this.isLogin()){
+    favorite_add(mr_id) {
+        if (!this.isLogin()) {
             app.open('/login');
             return false;
         }
@@ -1999,8 +1999,8 @@ class tmplink {
         });
     }
 
-    favorite_del(mr_id){
-        $('#meetingroom_id_'+mr_id).hide();
+    favorite_del(mr_id) {
+        $('#meetingroom_id_' + mr_id).hide();
         $.post(this.api_mr, {
             action: 'favorite_del',
             token: this.api_token,
