@@ -451,13 +451,14 @@ class tmplink {
         });
     }
 
-    previewModel(ukey, id) {
+    previewModel(ukey, name,id) {
         let url = 'https://getfile.tmp.link/img-' + ukey + '-0x0.jpg';
         $('#preview_img').attr('src', '/img/lazy.gif');
         $.get(url, () => {
             $('#preview_img').attr('src', url);
         });
         let lastukey = $('#btn_preview_download').attr('data-ukey');
+        $('#preview_title').html(name);
         $('#btn_preview_download').removeClass('btn_download_' + lastukey);
         $('#preview_download_1').removeClass('download_progress_bar_' + lastukey);
         $('#preview_download_2').removeClass('download_progress_bar_set_' + lastukey);
