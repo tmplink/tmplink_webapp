@@ -41,109 +41,116 @@
                             <i class="fa-fw fas fa-heart"></i>
                             <span id="favorite_count">0</span>
                         </div>
-                        <div class="badge badge-pill badge-dark btn-point user-unlogin" onclick="app.open('/login')" style="display: none;">
+                        <div class="badge badge-pill badge-dark btn-point user-unlogin" onclick="app.open('/login')"
+                            style="display: none;">
                             <span i18n="need_login_of_dir">.</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="meetroom_filelist_data" class="card-body">
-                <form autocomplete="off">
-                    <div class="input-group mb-1">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-secondary" type="button" onclick="TL.mr_file_list(0);"
-                                i18n="search_btn">.</button>
+                <div class="card shadow-sm p-3">
+                    <form autocomplete="off">
+                        <div class="input-group mb-1">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" type="button" onclick="TL.mr_file_list(0);"
+                                    i18n="search_btn">.</button>
+                            </div>
+                            <input type="search" name="room_search" id="room_search" class="form-control"
+                                placeholder="." i18n="search_plh" onkeyup="if(event.keyCode==13)TL.mr_file_list(0);"
+                                style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
                         </div>
-                        <input type="search" name="room_search" id="room_search" class="form-control" placeholder="."
-                            i18n="search_plh" onkeyup="if(event.keyCode==13)TL.mr_file_list(0);"
-                            style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
-                    </div>
-                    <input style="display:none;">
-                </form>
+                        <input style="display:none;">
+                    </form>
 
-                <div class="mb-1">
-                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.mr_file_list(0)">
-                        <i class="fa-fw fas fa-sync-alt" id="mr_filelist_refresh_icon"></i>
-                    </button>
-                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
-                        id="filelist_filter">
-                        <i class="fa-fw fad fa-sliders-h"></i>
-                        <span i18n="sort_title" class="d-none d-sm-inline">.</span>
-                    </button>
-                    <button id="room_btn_file_list" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
-                        onclick="TL.room_filelist_model('list');">
-                        <i class="fa-fw fad fa-th-list"></i>
-                        <span i18n="model_list" class="d-none d-sm-inline">.</span>
-                    </button>
-                    <!-- <button id="room_btn_file_grid" class="btn btn-light btn-sm mr-1 text-azure" onclick="TL.room_filelist_model('grid');">
+                    <div class="mb-1">
+                        <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.mr_file_list(0)">
+                            <i class="fa-fw fas fa-sync-alt" id="mr_filelist_refresh_icon"></i>
+                        </button>
+                        <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
+                            id="filelist_filter">
+                            <i class="fa-fw fad fa-sliders-h"></i>
+                            <span i18n="sort_title" class="d-none d-sm-inline">.</span>
+                        </button>
+                        <button id="room_btn_file_list" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
+                            onclick="TL.room_filelist_model('list');">
+                            <i class="fa-fw fad fa-th-list"></i>
+                            <span i18n="model_list" class="d-none d-sm-inline">.</span>
+                        </button>
+                        <!-- <button id="room_btn_file_grid" class="btn btn-light btn-sm mr-1 text-azure" onclick="TL.room_filelist_model('grid');">
                         <i class="fa-fw fas fa-th"></i>
                         <span i18n="model_grid" class="d-none d-sm-inline">.</span>
                     </button> -->
-                    <button id="room_btn_file_photo" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
-                        onclick="TL.room_filelist_model('photo');">
-                        <i class="fa-fw far fa-image"></i>
-                        <span i18n="model_photo" class="d-none d-sm-inline">.</span>
-                    </button>
-                    <button id="room_btn_performance" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
-                        onclick="TL.room_performance_open();">
-                        <i class="fa-fw fas fa-heart"></i>
-                        <span class="d-none d-sm-inline" i18n="btn_performance">.</span>
-                    </button>
-                    <button class="btn btn-light btn-sm mr-1 mt-1 btn_copy text-azure" id="mr_copy">
-                        <i class="fa-fw fad fa-share-alt"></i>
-                        <span i18n="model_copy" class="d-none d-sm-inline">.</span>
-                    </button>
-                    <button id="room_btn_favorate" class="btn btn-light btn-sm mr-1 mt-1 text-azure" style="display: none;">
-                        <i class="fa-fw fas fa-folder-plus"></i>
-                        <span class="d-none d-sm-inline" i18n="btn_favorite">.</span>
-                    </button>
-                    <button id="room_btn_report" class="btn btn-light text-azure btn-sm mr-1 mt-1" onclick="$('#roomReportModal').modal('show')" style="display: none;">
-                        <i class="fa-fw fas fa-exclamation-triangle text-danger"></i>
-                        <span class="d-none d-sm-inline" i18n="file_btn_report" >.</span>
-                    </button>
-                </div>
-                <div class="mb-2">
-                    <span id="room_back_btn"></span>
-                    <button onclick="TL.file_manager.checkbox_select_all();"
-                        class="btn btn-light text-azure btn-sm mr-1  mt-1">
-                        <i class="fas fa-check-square fa-fw"></i>
-                        <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
-                    </button>
-                    <button onclick="TL.file_manager.checkbox_select_none();"
-                        class="btn btn-light text-azure btn-sm mr-1 mt-1">
-                        <i class="far fa-check-square fa-fw"></i>
-                        <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
-                    </button>
-                    <div class="dropdown">
-                        <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
-                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="far fa-ballot-check fa-fw"></i> <span i18n="on_select">.</span>
+                        <button id="room_btn_file_photo" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
+                            onclick="TL.room_filelist_model('photo');">
+                            <i class="fa-fw far fa-image"></i>
+                            <span i18n="model_photo" class="d-none d-sm-inline">.</span>
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item not_owner" onclick="TL.file_manager.checkbox_delete()">
-                                <i class="fa-fw fad fa-trash"></i>
-                                <span i18n="on_select_delete">.</span>
+                        <button id="room_btn_performance" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
+                            onclick="TL.room_performance_open();">
+                            <i class="fa-fw fas fa-heart"></i>
+                            <span class="d-none d-sm-inline" i18n="btn_performance">.</span>
+                        </button>
+                        <button class="btn btn-light btn-sm mr-1 mt-1 btn_copy text-azure" id="mr_copy">
+                            <i class="fa-fw fad fa-share-alt"></i>
+                            <span i18n="model_copy" class="d-none d-sm-inline">.</span>
+                        </button>
+                        <button id="room_btn_favorate" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
+                            style="display: none;">
+                            <i class="fa-fw fas fa-folder-plus"></i>
+                            <span class="d-none d-sm-inline" i18n="btn_favorite">.</span>
+                        </button>
+                        <button id="room_btn_report" class="btn btn-light text-azure btn-sm mr-1 mt-1"
+                            onclick="$('#roomReportModal').modal('show')" style="display: none;">
+                            <i class="fa-fw fas fa-exclamation-triangle text-danger"></i>
+                            <span class="d-none d-sm-inline" i18n="file_btn_report">.</span>
+                        </button>
+                    </div>
+                    <div>
+                        <span id="room_back_btn"></span>
+                        <button onclick="TL.file_manager.checkbox_select_all();"
+                            class="btn btn-light text-azure btn-sm mr-1  mt-1">
+                            <i class="fas fa-check-square fa-fw"></i>
+                            <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
+                        </button>
+                        <button onclick="TL.file_manager.checkbox_select_none();"
+                            class="btn btn-light text-azure btn-sm mr-1 mt-1">
+                            <i class="far fa-check-square fa-fw"></i>
+                            <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="far fa-ballot-check fa-fw"></i> <span i18n="on_select">.</span>
                             </button>
-                            <button class="dropdown-item" onclick="TL.file_manager.checkbox_download()">
-                                <i class="fa-fw fad fa-download"></i>
-                                <span i18n="on_select_download">.</span>
-                            </button>
-                            <button class="dropdown-item" onclick="TL.file_manager.checkbox_download_url()">
-                                <i class="fa-fw fad fa-download"></i>
-                                <span i18n="on_select_copy_download_url">.</span>
-                            </button>
-                            <button class="dropdown-item" onclick="TL.file_manager.checkbox_share()">
-                                <i class="fa-fw fad fa-share-alt"></i>
-                                <span i18n="on_select_share">.</span>
-                            </button>
-                            <button class="dropdown-item not_owner"
-                                onclick="TL.file_manager.checkbox_move_to_model('room')">
-                                <i class="fa-fw fad fa-folder-plus"></i>
-                                <span i18n="on_select_move">.</span>
-                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <button class="dropdown-item not_owner" onclick="TL.file_manager.checkbox_delete()">
+                                    <i class="fa-fw fad fa-trash"></i>
+                                    <span i18n="on_select_delete">.</span>
+                                </button>
+                                <button class="dropdown-item" onclick="TL.file_manager.checkbox_download()">
+                                    <i class="fa-fw fad fa-download"></i>
+                                    <span i18n="on_select_download">.</span>
+                                </button>
+                                <button class="dropdown-item" onclick="TL.file_manager.checkbox_download_url()">
+                                    <i class="fa-fw fad fa-download"></i>
+                                    <span i18n="on_select_copy_download_url">.</span>
+                                </button>
+                                <button class="dropdown-item" onclick="TL.file_manager.checkbox_share()">
+                                    <i class="fa-fw fad fa-share-alt"></i>
+                                    <span i18n="on_select_share">.</span>
+                                </button>
+                                <button class="dropdown-item not_owner"
+                                    onclick="TL.file_manager.checkbox_move_to_model('room')">
+                                    <i class="fa-fw fad fa-folder-plus"></i>
+                                    <span i18n="on_select_move">.</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <script type="text/template" id="room_back_btn_tpl">
                     <% if(TL.room.owner==1){ %>
                         <button onclick="TL.upload_open('<% TL.room.mr_id %>');" tmpui-app="true" class="btn btn-sm btn-primary  mr-1  mt-1">

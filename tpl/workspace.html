@@ -20,88 +20,91 @@
         </div>
         <div id="filelist_model" class="card-body">
 
-            <!--[搜索栏]-->
-            <form autocomplete="off">
-                <div class="input-group mb-1">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary" type="button" onclick="TL.workspace_filelist(0);"
-                            i18n="search_btn">.</button>
+            <div class="card shadow-sm p-3">
+                <!--[搜索栏]-->
+                <form autocomplete="off">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary" type="button" onclick="TL.workspace_filelist(0);"
+                                i18n="search_btn">.</button>
+                        </div>
+                        <input type="search" id="workspace_search" class="form-control" placeholder="."
+                            i18n="search_plh" onkeyup="if(event.keyCode==13)TL.workspace_filelist(0);return false;"
+                            style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
                     </div>
-                    <input type="search" id="workspace_search" class="form-control" placeholder="." i18n="search_plh"
-                        onkeyup="if(event.keyCode==13)TL.workspace_filelist(0);return false;"
-                        style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
-                </div>
-                <input style="display:none;">
-            </form>
+                    <input style="display:none;">
+                </form>
 
-            <!--[主要控制器]-->
-            <div class="mb-1">
-                <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.workspace_filelist(0);">
-                    <i class="fas fa-sync-alt fa-fw" id="filelist_refresh_icon"></i>
-                </button>
-                <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
-                    id="filelist_filter">
-                    <i class="fa-fw fad fa-sliders-h"></i>
-                    <span i18n="sort_title" class="d-none d-sm-inline">.</span>
-                </button>
-                <button id="ws_btn_file_list" class="btn btn-light text-azure btn-sm mr-1 mt-1"
-                    onclick="TL.workspace_filelist_model('list');">
-                    <i class="fa-fw fad fa-th-list"></i>
-                    <span i18n="model_list" class="d-none d-sm-inline">.</span>
-                </button>
-                <!-- <button id="ws_btn_file_grid" class="btn btn-light text-azure btn-sm mr-2"
+                <!--[主要控制器]-->
+                <div class="mb-1">
+                    <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.workspace_filelist(0);">
+                        <i class="fas fa-sync-alt fa-fw" id="filelist_refresh_icon"></i>
+                    </button>
+                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
+                        id="filelist_filter">
+                        <i class="fa-fw fad fa-sliders-h"></i>
+                        <span i18n="sort_title" class="d-none d-sm-inline">.</span>
+                    </button>
+                    <button id="ws_btn_file_list" class="btn btn-light text-azure btn-sm mr-1 mt-1"
+                        onclick="TL.workspace_filelist_model('list');">
+                        <i class="fa-fw fad fa-th-list"></i>
+                        <span i18n="model_list" class="d-none d-sm-inline">.</span>
+                    </button>
+                    <!-- <button id="ws_btn_file_grid" class="btn btn-light text-azure btn-sm mr-2"
                     onclick="TL.workspace_filelist_model('grid');">
                     <i class="fa-fw fas fa-th"></i>
                     <span i18n="model_grid" class="d-none d-sm-inline">.</span>
                 </button> -->
-                <button id="ws_btn_file_photo" class="btn btn-light  text-azure btn-sm mr-1 mt-1"
-                    onclick="TL.workspace_filelist_model('photo');">
-                    <i class="fa-fw far fa-image"></i>
-                    <span i18n="model_photo" class="d-none d-sm-inline">.</span>
-                </button>
-            </div>
-
-            <!--[选择器]-->
-            <div class="mb-2">
-                <button onclick="TL.upload_open(0);" class="btn btn-sm btn-primary mr-1 mt-1">
-                    <i class="fad fa-cloud-upload fa-fw"></i>
-                    <span i18n="nav_upload" class="d-none d-sm-inline">.</span>
-                </button>
-                <button onclick="TL.file_manager.checkbox_select_all();"
-                    class="btn btn-light text-azure btn-sm mr-1 mt-1">
-                    <i class="fas fa-check-square fa-fw"></i>
-                    <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
-                </button>
-                <button onclick="TL.file_manager.checkbox_select_none();"
-                    class="btn btn-light text-azure btn-sm mr-1 mt-1">
-                    <i class="far fa-check-square fa-fw"></i>
-                    <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
-                </button>
-                <div class="dropdown">
-                    <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
-                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="far fa-ballot-check fa-fw"></i> <span i18n="on_select">.</span>
+                    <button id="ws_btn_file_photo" class="btn btn-light  text-azure btn-sm mr-1 mt-1"
+                        onclick="TL.workspace_filelist_model('photo');">
+                        <i class="fa-fw far fa-image"></i>
+                        <span i18n="model_photo" class="d-none d-sm-inline">.</span>
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <button class="dropdown-item" onclick="TL.file_manager.checkbox_delete()">
-                            <i class="fa-fw fad fa-trash"></i>
-                            <span i18n="on_select_delete">.</span>
+                </div>
+
+                <!--[选择器]-->
+                <div>
+                    <button onclick="TL.upload_open(0);" class="btn btn-sm btn-primary mr-1 mt-1">
+                        <i class="fad fa-cloud-upload fa-fw"></i>
+                        <span i18n="nav_upload" class="d-none d-sm-inline">.</span>
+                    </button>
+                    <button onclick="TL.file_manager.checkbox_select_all();"
+                        class="btn btn-light text-azure btn-sm mr-1 mt-1">
+                        <i class="fas fa-check-square fa-fw"></i>
+                        <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
+                    </button>
+                    <button onclick="TL.file_manager.checkbox_select_none();"
+                        class="btn btn-light text-azure btn-sm mr-1 mt-1">
+                        <i class="far fa-check-square fa-fw"></i>
+                        <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-ballot-check fa-fw"></i> <span i18n="on_select">.</span>
                         </button>
-                        <button class="dropdown-item" onclick="TL.file_manager.checkbox_download()">
-                            <i class="fa-fw fad fa-download"></i>
-                            <span i18n="on_select_download">.</span>
-                        </button>
-                        <button class="dropdown-item" onclick="TL.file_manager.checkbox_share()">
-                            <i class="fa-fw fad fa-share-alt"></i>
-                            <span i18n="on_select_share">.</span>
-                        </button>
-                        <button class="dropdown-item" onclick="TL.file_manager.checkbox_move_to_model('workspace')">
-                            <i class="fa-fw fad fa-folder-plus"></i>
-                            <span i18n="on_select_move">.</span>
-                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <button class="dropdown-item" onclick="TL.file_manager.checkbox_delete()">
+                                <i class="fa-fw fad fa-trash"></i>
+                                <span i18n="on_select_delete">.</span>
+                            </button>
+                            <button class="dropdown-item" onclick="TL.file_manager.checkbox_download()">
+                                <i class="fa-fw fad fa-download"></i>
+                                <span i18n="on_select_download">.</span>
+                            </button>
+                            <button class="dropdown-item" onclick="TL.file_manager.checkbox_share()">
+                                <i class="fa-fw fad fa-share-alt"></i>
+                                <span i18n="on_select_share">.</span>
+                            </button>
+                            <button class="dropdown-item" onclick="TL.file_manager.checkbox_move_to_model('workspace')">
+                                <i class="fa-fw fad fa-folder-plus"></i>
+                                <span i18n="on_select_move">.</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+
 
             <div id="workspace_filelist"></div>
 
