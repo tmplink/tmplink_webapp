@@ -127,7 +127,7 @@
                         <div class="col-lg-4 col-xl-3 col-md-6 col-12 file_unit_<% obj[x].ukey %>">
                             <div class="card text-center" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
                                 <div style="height:220px;">
-                                    <a href="javascript:;" onclick="TL.previewModel('<% obj[x].ukey %>','<% obj[x].fname %>',<% x %>)">
+                                    <a href="javascript:;" onclick="TL.previewModel('<% obj[x].ukey %>','<% obj[x].fname_ex %>',<% x %>)">
                                         <img class='lazyload' data-src="https://getfile.tmp.link/img-<% obj[x].ukey %>-360x220.jpg" style="height:220px;" />
                                     </a>
                                 </div>
@@ -135,6 +135,7 @@
                                     <div class="text-right">
                                         <div>
                                             <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fad fa-download"></i></button>
+                                            <button href="javascript:void(0)" onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1"><i class="fa-fw fad fa-edit"></i></button>
                                             <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fad fa-share-alt"></i></button>
                                             <button href="javascript:void(0)" id="btn-rm-file_<% obj[x].ukey %>" class="text-red btn btn-sm btn-light" onclick="TL.workspace_del('<% obj[x].ukey %>')"><i class="fa-fw fad fa-trash"></i></button>
                                         </div>
@@ -194,6 +195,7 @@
                         <div class="col-12 col-md-5 col-lg-4 my-1 d-flex align-items-center justify-content-end">
                             <span class="mr-2"><% obj[x].fsize_formated %></span>
                             <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fad fa-download"></i></button>
+                            <button href="javascript:void(0)" onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-edit"></i></button>
                             <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-share-alt"></i></button>
                             <button href="javascript:void(0)" id="btn-rm-file_<% obj[x].ukey %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.workspace_del('<% obj[x].ukey %>')"><i class="fa-fw fad fa-trash"></i></button>
                         </div>

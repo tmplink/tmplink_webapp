@@ -1832,6 +1832,26 @@ class tmplink {
         });
     }
 
+    file_rename(ukey,default_name) {
+        var newname = prompt(this.languageData.modal_meetingroom_newname, default_name);
+        if (newname==null || newname==""){ 
+            return false; 
+        }
+        $.post(this.api_file, {
+            action: 'rename',
+            token: this.api_token,
+            name: newname,
+            ukey: ukey
+        }, (rsp) => {
+            //如果在 workspace 里面，则刷新
+            if (this.get_page_mrid() == undefined) {
+                this.workspace_filelist(0);
+            } else {
+                this.mr_file_list('all')
+            }
+        });
+    }
+
 
     mr_list() {
         if (localStorage.getItem('app_login') != 1) {
@@ -1884,6 +1904,11 @@ class tmplink {
                 $('#room_total').html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
             }
         }, 'json');
+    }
+
+    get_page_mrid(){
+        var params = this.get_url_params();
+        return params.mrid;
     }
 
     room_list() {
@@ -2558,11 +2583,11 @@ class tmplink {
         } else {
             $('#uqnn_' + id).html(`<span class="text-red">${this.languageData.upload_fail}</span>`);
         }
-        if (this.upload_mrid_get() != 0 && this.upload_queue_file.length == 0) {
+        if (this.get_page_mrid() != undefined && this.upload_queue_file.length == 0) {
             this.room_list();
         }
-        if (this.upload_mrid_get() == 0 && this.upload_queue_file.length == 0) {
-            this.workspace_filelist();
+        if (this.get_page_mrid() == undefined && this.upload_queue_file.length == 0) {
+            this.workspace_filelist(0);
         }
         // this.upload_processing = 0;
         // this.upload_start();

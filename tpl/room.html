@@ -211,6 +211,9 @@
                                                     <i class="fa-fw fad fa-share-alt"></i>
                                                 </button>
                                                 <% if (TL.room.owner == 1) { %>
+                                                    <button href="javascript:void(0)" onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1">
+                                                        <i class="fa-fw fad fa-edit"></i>
+                                                    </button>
                                                     <button href="javascript:void(0);" class="text-red btn btn-sm btn-light" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
                                                         <i class="fa-fw fad fa-trash"></i>
                                                     </button>
@@ -274,6 +277,9 @@
                                     <i class="fa-fw fad fa-share-alt"></i>
                                 </button>
                                 <% if (TL.room.owner == 1) { %>
+                                    <button href="javascript:void(0)" onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1">
+                                        <i class="fa-fw fad fa-edit"></i>
+                                    </button>
                                     <button href="javascript:void(0);" class="text-red btn btn-sm btn-light" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
                                         <i class="fa-fw fad fa-trash"></i>
                                     </button>
