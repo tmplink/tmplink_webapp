@@ -451,7 +451,7 @@ class tmplink {
         });
     }
 
-    previewModel(ukey, name,id) {
+    previewModel(ukey, name, id) {
         let url = 'https://getfile.tmp.link/img-' + ukey + '-0x0.jpg';
         $('#preview_img').attr('src', '/img/lazy.gif');
         $.get(url, () => {
@@ -1173,7 +1173,7 @@ class tmplink {
         });
     }
 
-    download_file_url(i,cb) {
+    download_file_url(i, cb) {
         let ukey = this.list_data[i].ukey;
 
         this.recaptcha_do('download_req_on_list', (recaptcha) => {
@@ -1268,33 +1268,21 @@ class tmplink {
         }
     }
 
-    cli_uploader_generator() {
-        $('#cli_copy').attr('disabled', true);
-        $.post(this.api_url_upload, {
-            'token': this.api_token,
-            'action': 'upload_request',
-            'captcha': recaptcha
-        }, (rsp) => {
-            if (rsp.status != 0) {
-                let model = $('#cli_upload_model').val();
-                let utoken = rsp.data;
-                let text = 'curl -k -F "file=@ your file path (etc.. @/root/test.bin)" -F "token=' + this.api_token + '" -F "model=' + model + '" -F "utoken=' + utoken + '" -X POST "https://connect.tmp.link/api_v2/cli_uploader"';
-                let tpl = {
-                    utoken: utoken,
-                    cmd: text
-                };
-
-                $('#cliuploader_request_list').prepend(app.tpl('uploadcli_list_tpl', tpl));
-                $('#cli_copy_' + utoken).attr('data-clipboard-text', text);
-                $('#cli_copy').removeAttr('disabled');
-                this.btn_copy_bind();
-            }
-        });
-    }
-
     cli_uploader_generator2() {
+        //如果有设定文件夹
+        let mrid = this.get_page_mrid();
+        console.log(mrid);
+        let text_mr = '';
+        if (mrid != undefined) {
+            text_mr = `-F "mrid=${mrid}""`;
+        }
         let model = localStorage.getItem('app_upload_model');
-        let text = 'curl -k -F "file=@ your file path (etc.. @/root/test.bin)" -F "token=' + this.api_token + '" -F "model=' + model + '" -X POST "https://connect.tmp.link/api_v2/cli_uploader"';
+
+        let text_path = '-F "file=@ your file path (etc.. @/root/test.bin)"';
+        let text_model = `-F "model=${model}"`;
+        let text_token = `-F "token=${this.api_token}"`;
+
+        let text = `curl -k ${text_path} ${text_token} ${text_model} ${text_mr} -X POST "https://connect.tmp.link/api_v2/cli_uploader"`;
 
         $('#cliuploader').show();
         $('#cliuploader_show').html(text);
@@ -1832,10 +1820,10 @@ class tmplink {
         });
     }
 
-    file_rename(ukey,default_name) {
+    file_rename(ukey, default_name) {
         var newname = prompt(this.languageData.modal_meetingroom_newname, default_name);
-        if (newname==null || newname==""){ 
-            return false; 
+        if (newname == null || newname == "") {
+            return false;
         }
         $.post(this.api_file, {
             action: 'rename',
@@ -1906,7 +1894,7 @@ class tmplink {
         }, 'json');
     }
 
-    get_page_mrid(){
+    get_page_mrid() {
         var params = this.get_url_params();
         return params.mrid;
     }
