@@ -12,12 +12,12 @@
     "title_privacy": "钛盘 - 隐私政策",
     "des_tos": "服务条款",
     "title_tos": "钛盘 - 服务条款",
-    "des_workspace": "文件流",
+    "des_workspace": "流",
     "title_503": "钛盘 - 503",
     "des_503": "流量控制",
-    "title_workspace": "钛盘 - 文件流",
-    "des_meetingroom": "文件夹",
-    "title_meetingroom": "钛盘 - 文件夹",
+    "title_workspace": "钛盘 - 流",
+    "des_meetingroom": "桌面",
+    "title_meetingroom": "钛盘 - 桌面",
     "des_room": "文件夹 - 文件清单",
     "title_room": "钛盘 - 文件夹",
 
@@ -90,8 +90,8 @@
     "navbar_reset_password": "修改密码",
     "navbar_reset_email": "修改邮箱",
     "navbar_exit": "退出",
-    "navbar_workspace": "文件流",
-    "navbar_meetingroom": "文件夹",
+    "navbar_workspace": "流",
+    "navbar_meetingroom": "桌面",
     "navbar_login": "登录",
     "navbar_reg": "注册",
     "navbar_orders": "已购项目",
@@ -132,7 +132,7 @@
 
 
 
-    "workspace_title": "文件流",
+    "workspace_title": "流",
     "workspace_des": "近期上传的文件都在这里。",
     "workspace_table_filename": "文件名",
     "workspace_table_filetype": "类型",

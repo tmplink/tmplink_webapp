@@ -56,14 +56,6 @@
 
                             <div class="row workspace-navbar mt-3">
 
-                                <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="TL.get_file(prompt(TL.languageData.index_get_file2))">
-                                    <div class="fileicon mx-auto mb-1">
-                                        <i class="fad fa-cloud-download-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                    </div>
-                                    <div>
-                                        <button class="btn" i18n="index_b1">.</button>
-                                    </div>
-                                </div>
 
                                 <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="TL.upload_open(0);">
                                     <div class="fileicon mx-auto mb-1">
@@ -76,19 +68,29 @@
 
                                 <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/workspace')">
                                     <div class="fileicon mx-auto mb-1">
-                                        <i class="fab fa-mixcloud fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                                        <i class="far fa-file-search fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
                                     </div>
                                     <div>
                                         <button class="btn" i18n="navbar_workspace">.</button>
                                     </div>
                                 </div>
 
+
                                 <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/dir');">
                                     <div class="fileicon mx-auto mb-1">
-                                        <i class="far fa-folder fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                                        <i class="fal fa-desktop-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
                                     </div>
                                     <div>
                                         <button class="btn" i18n="navbar_meetingroom">.</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="TL.get_file(prompt(TL.languageData.index_get_file2))">
+                                    <div class="fileicon mx-auto mb-1">
+                                        <i class="fad fa-cloud-download-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                                    </div>
+                                    <div>
+                                        <button class="btn" i18n="index_b1">.</button>
                                     </div>
                                 </div>
 
