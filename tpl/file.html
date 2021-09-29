@@ -131,14 +131,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 col-6 text-center mb-2">
-                                <div class="fileicon mx-auto mb-1">
-                                    <i class="far fa-heart fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                </div>
-                                <div>
-                                    <button class="btn" id="btn_add_to_workspace" i18n="file_btn_workspace">.</button>
-                                </div>
-                            </div>
 
                             <div class="col-md-4 col-6 text-center mb-2">
                                 <div class="fileicon mx-auto mb-1">
@@ -155,6 +147,37 @@
                                 </div>
                                 <div>
                                     <a class="btn btn_copy" id="file_ukey" i18n="file_key_copy">.</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/workspace')">
+                                <div class="fileicon mx-auto mb-1">
+                                    <i class="far fa-file-search fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                                </div>
+                                <div>
+                                    <button class="btn">
+                                        <span i18n="navbar_workspace">.</span>
+                                        <span class="badge badge-pill badge-success upload_count" style="display: none;"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/dir');">
+                                <div class="fileicon mx-auto mb-1">
+                                    <i class="fal fa-desktop-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                                </div>
+                                <div>
+                                    <button class="btn" i18n="navbar_meetingroom">.</button>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-6 text-center mb-2">
+                                <div class="fileicon mx-auto mb-1">
+                                    <i class="far fa-heart fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                                </div>
+                                <div>
+                                    <button class="btn" id="btn_add_to_workspace" i18n="file_btn_workspace">.</button>
                                 </div>
                             </div>
 
