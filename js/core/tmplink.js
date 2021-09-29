@@ -11,9 +11,17 @@ class tmplink {
     pageReady = false
     readyFunction = []
 
+    upload_count = 0;
     upload_queue_id = 0
     upload_queue_file = []
     upload_processing = 0
+
+    upload_progressbar_counter_total = []
+    upload_progressbar_counter_loaded = []
+    upload_progressbar_counter_count = []
+    upload_progressbar_counter = []
+
+
     logined = 0
     uid = 0
     email = null
@@ -2395,15 +2403,7 @@ class tmplink {
         });
     }
 
-    upload_progressbar_counter_total = []
-    upload_progressbar_counter_loaded = []
-    upload_progressbar_counter_count = []
-    upload_progressbar_counter = []
-
     upload_progressbar_draw(id) {
-        if (this.upload_progressbar_counter_count[id] == 0) {
-            return false;
-        }
         let speed = this.upload_progressbar_counter_count[id];
         let left_time = this.formatTime(Math.ceil((this.upload_progressbar_counter_total[id] - this.upload_progressbar_counter_loaded[id]) / speed));
         let msg = this.bytetoconver(this.upload_progressbar_counter_loaded[id], true) + ' / ' + this.bytetoconver(this.upload_progressbar_counter_total[id], true);
@@ -2415,6 +2415,10 @@ class tmplink {
         $(uqpid).css('width', percentComplete + '%');
         this.upload_s2_status[id] = this.upload_progressbar_counter_loaded[id];
         this.upload_progressbar_counter_count[id] = 0;
+        //更新上传按钮的速度指示器
+        $('.upload_speed').show();
+        $('.upload_speed').html(this.bytetoconver(speed, true) + '/s');
+
     }
 
     upload_selected() {
@@ -2491,9 +2495,20 @@ class tmplink {
             }));
             $('#uploaded_file_box').show();
             this.upload_queue_id++;
+            //更新状态
+            this.upload_btn_status_update();
             //自动启动上传
             this.upload_start();
         }, 500, f);
+    }
+
+    upload_btn_status_update() {
+        //更新队列数
+        $('.upload_queue').fadeIn();
+        $('.upload_queue').html(this.upload_queue_file.length);
+        //更新已完成📖
+        $('.upload_count').fadeIn();
+        $('.upload_count').html(this.upload_count);
     }
 
     upload_progress(evt, id) {
@@ -2505,6 +2520,8 @@ class tmplink {
                 $('#uqp_' + id).addClass('progress-bar-animated');
                 $('#uqm_' + id).fadeOut();
                 clearInterval(this.upload_progressbar_counter[id]);
+                //移除按钮上的速度指示器
+                $('.upload_speed').hide();
                 this.upload_progressbar_counter[id] = null;
                 //执行下一个上传
                 // delete this.upload_queue_file[id];
@@ -2579,6 +2596,9 @@ class tmplink {
         }
         // this.upload_processing = 0;
         // this.upload_start();
+        //更新上传统计
+        this.upload_count++;
+        this.upload_btn_status_update();
     }
 
     alert(content) {
@@ -2645,14 +2665,17 @@ class tmplink {
     }
 
     bytetoconver(val, label) {
-        if (val == 0)
-            return '0 GB';
+        if (val < 1){
+            return '0 B';
+        }
+            
         var s = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
         var e = Math.floor(Math.log(val) / Math.log(1024));
         var value = ((val / Math.pow(1024, Math.floor(e))).toFixed(2));
         e = (e < 0) ? (-e) : e;
-        if (label)
+        if (label){
             value += ' ' + s[e];
+        }
         return value;
     }
 

@@ -156,6 +156,9 @@
                         <button onclick="TL.upload_open('<% TL.room.mr_id %>');" tmpui-app="true" class="btn btn-sm btn-primary  mr-1  mt-1">
                             <i class="fad fa-cloud-upload fa-fw"></i>
                             <span i18n="nav_upload" class="d-none d-sm-inline"><% TL.languageData.nav_upload %></span>
+                            <span class="badge badge-pill badge-danger upload_queue" style="display: none;"></span>
+                            <span class="badge badge-pill badge-success upload_count" style="display: none;"></span>
+                            <span class="badge badge-pill badge-success upload_speed" style="display: none;"></span>
                         </button>
                     <% } %>
                     <% if(TL.room.parent != 0){ %>
