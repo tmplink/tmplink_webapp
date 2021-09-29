@@ -1701,12 +1701,12 @@ class tmplink {
         }
         if (data.length != 0) {
             $('#room_filelist').append(app.tpl('room_filelist_list_tpl', data));
-            $('.lefttime-remainder').each((i, e) => {
-                let id = $(e).attr('id');
-                let time = $(e).attr('data-tmplink-lefttime');
-                this.countTimeDown(id, time);
-            });
         }
+        $('.lefttime-remainder').each((i, e) => {
+            let id = $(e).attr('id');
+            let time = $(e).attr('data-tmplink-lefttime');
+            this.countTimeDown(id, time);
+        });
         this.btn_copy_bind();
         app.linkRebind();
     }

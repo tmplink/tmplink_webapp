@@ -245,7 +245,7 @@
                 <script type="text/template" id="room_filelist_list_tpl">
                     <% for (var x in obj) { %>
                         <div class="row mx-0 mb-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
-                            <div class="col-12 col-md-6 col-lg-8 my-1 d-flex align-items-center listfontweight filename">
+                            <div class="col-12 col-md-8 col-lg-7 my-1 d-flex align-items-center listfontweight filename">
                                 <div>
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
                                     <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" target="_blank">
@@ -259,14 +259,17 @@
                                     <% } %>
                                     <% if(obj[x].model!=99){ %>
                                         <!--[这里处理剩余时间]-->
-                                        <div>
+                                        <span>
                                             <i class="fa-fw far fa-stopwatch"></i> 
-                                            <span id="file_unit_r_<% obj[x].ukey %>" class="lefttime-remainder" data-tmplink-lefttime="<% obj[x].lefttime %>"><span>
-                                        </div>
+                                            <span class="lefttime-remainder" id="r_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
+                                        </span>
                                     <% } %>  
                                 </div>
                             </div>
-                            <div  class="col-12 col-md-6 col-lg-4 my-1  d-flex align-items-center justify-content-end">
+                            <div class="col-12 col-md-4 col-lg-2 my-1 d-flex align-items-center justify-content-end">
+                                <% obj[x].ctime %>
+                            </div>
+                            <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end">
                                 <span class="mr-2">
                                     <% obj[x].fsize_formated %>
                                 </span>
