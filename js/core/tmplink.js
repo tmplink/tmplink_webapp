@@ -535,14 +535,14 @@ class tmplink {
         }
     }
 
-    workspace_add(ukey) {
-        $('#btn_add_to_workspace').addClass('disabled');
+    workspace_add(id,ukey) {
+        $(id).attr('disabled',true);
         $.post(this.api_file, {
             action: 'add_to_workspace',
             token: this.api_token,
             ukey: ukey
         }, (rsp) => {
-            $('#btn_add_to_workspace').html('<i class="fas fa-check-circle" aria-hidden="true"></i>');
+            $(id).html('<i class="fas fa-check-circle" aria-hidden="true"></i>');
         }, 'json');
     }
 
@@ -574,7 +574,7 @@ class tmplink {
         }, (rsp) => {
             if (rsp.data.nums > 0) {
                 let total_size_text = this.bytetoconver(rsp.data.size, true);
-                $('#workspace_total').html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
+                $(id).html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
             }
         }, 'json');
     }
@@ -732,17 +732,18 @@ class tmplink {
     }
 
     details_file() {
-        // if (this.isWeixin()) {
-        //     $('#file_messenger_icon').html('<i class="fad fa-download fa-fw fa-4x"></i>');
-        //     $('#file_messenger_msg').removeClass('display-4');
-        //     $('#file_messenger_msg').html('由于微信的限制，目前无法提供下载。请复制链接后，在外部浏览器打开进行下载。');
-        //     $('#file_messenger').show();
+        if (this.isWeixin()) {
+            // $('#file_messenger_icon').html('<i class="fad fa-download fa-fw fa-4x"></i>');
+            // $('#file_messenger_msg').removeClass('display-4');
+            // $('#file_messenger_msg').html('由于微信的限制，目前无法提供下载。请复制链接后，在外部浏览器打开进行下载。');
+            // $('#file_messenger').show();
 
-        //     gtag('config', 'UA-96864664-3', {
-        //         'page_title': 'D-weixinUnavailable',
-        //     });
-        //     return false;
-        // }
+            // gtag('config', 'UA-96864664-3', {
+            //     'page_title': 'D-weixinUnavailable',
+            // });
+            // return false;
+            $('#wechat_notice').show();
+        }
 
         this.loading_box_on();
         var params = this.get_url_params();
@@ -759,9 +760,18 @@ class tmplink {
                     $('#file_box').show();
                     $('#filename').html(rsp.data.name);
                     $('#filesize').html(rsp.data.size);
+
                     $('#btn_add_to_workspace').on('click', () => {
                         if (this.logined == 1) {
-                            this.workspace_add(params.ukey);
+                            this.workspace_add('#btn_add_to_workspace',params.ukey);
+                        } else {
+                            app.open('/login');
+                        }
+                    });
+
+                    $('#btn_add_to_workspace_mobile').on('click', () => {
+                        if (this.logined == 1) {
+                            this.workspace_add('#btn_add_to_workspace_mobile',params.ukey);
                         } else {
                             app.open('/login');
                         }
@@ -820,6 +830,9 @@ class tmplink {
                             let download_url = download_link;
                             let download_cmdurl = download_link;
 
+                            //添加下载 src
+                            $('.file_download_url').attr('href', download_url);
+
                             //QR Download
                             $('#qr_code_url').attr('src', this.api_url + '/qr?code=' + Base64.encode(download_link));
 
@@ -832,7 +845,7 @@ class tmplink {
                             $('.btn_copy_downloadurl').attr('href', download_url);
 
                             $('.btn_copy_fileurl').attr('data-clipboard-text', 'http://tmp.link/f/' + params.ukey);
-                            $('#file_ukey').attr('data-clipboard-text', params.ukey);
+                            $('.file_ukey').attr('data-clipboard-text', params.ukey);
                             $('.btn_copy_downloadurl_for_other').attr('data-clipboard-text', download_cmdurl);
                             $('.btn_copy_downloadurl_for_curl').attr('data-clipboard-text', `curl -Lo "${rsp.data.name}" ${download_cmdurl}`);
                             $('.btn_copy_downloadurl_for_wget').attr('data-clipboard-text', `wget -O  "${rsp.data.name}" ${download_cmdurl}`);

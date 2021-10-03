@@ -49,7 +49,8 @@
                 </div>
                 <div class="card shadow" id="file_info">
                     <div class="card-body">
-                        <div class="alert alert-warning d-block d-md-none" role="alert" i18n="filepage_mobile_notice">
+                        <div class="alert alert-warning display-none" id="wechat_notice" role="alert"
+                            i18n="filepage_mobile_notice">
                             .
                         </div>
                         <div class="d-none" id="report_ukey"></div>
@@ -83,7 +84,33 @@
                             </div>
                             <hr />
                         </div> -->
-                        <div class="row">
+
+                        <!--[适用于手持移动设备]-->
+                        <div class="d-block d-sm-none">
+
+                            <a class="btn btn-success btn-lg btn-block file_download_url">
+                                <i class="fad fa-download fa-fw mx-auto my-auto mb-2 fa-3x"></i>
+                                <span i18n="file_btn_download">.</span>
+                            </a>
+
+                            <button class="btn btn-primary btn-lg btn-block" id="btn_add_to_workspace_mobile">
+                                <i class="far fa-heart fa-fw mx-auto my-auto mb-2 fa-3x"></i>
+                                <span i18n="file_btn_workspace">.</span>
+                            </button>
+
+                            <button class="btn btn-primary btn-lg btn-block btn_copy btn_copy_fileurl">
+                                <i class="fas fa-share-alt fa-fw mx-auto my-auto mb-2 fa-3x"></i>
+                                <span i18n="file_btn_copy">.</span>
+                            </button>
+
+                            <button class="btn btn-danger btn-lg btn-block" onclick="$('#reportModal').modal('show')">
+                                <i class="fas fa-exclamation-triangle fa-fw mx-auto my-auto mb-2 fa-3x"></i>
+                                <span i18n="file_btn_report">.</span>
+                            </button>
+                        </div>
+
+                        <!--[适用于桌面设备]-->
+                        <div class="row d-none d-sm-flex">
                             <div class="col-md-4 col-6 text-center mb-2" id="file_download_btn_1">
                                 <div class="fileicon mx-auto mb-1">
                                     <i class="fad fa-download fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
@@ -146,7 +173,7 @@
                                     <i class="fas fa-share-alt-square fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
                                 </div>
                                 <div>
-                                    <a class="btn btn_copy" id="file_ukey" i18n="file_key_copy">.</a>
+                                    <a class="btn btn_copy file_ukey" i18n="file_key_copy">.</a>
                                 </div>
                             </div>
 
@@ -157,7 +184,8 @@
                                 <div>
                                     <button class="btn">
                                         <span i18n="navbar_workspace">.</span>
-                                        <span class="badge badge-pill badge-success upload_count" style="display: none;"></span>
+                                        <span class="badge badge-pill badge-success upload_count"
+                                            style="display: none;"></span>
                                     </button>
                                 </div>
                             </div>
@@ -212,6 +240,16 @@
                             </div>
                         </div>
 
+                        <div class="mt-2"></div>
+                        <div class="d-inline d-sm-none float-right mt-2 mb-2">
+                            <i class="far fa-file-search fa-fw mx-auto my-auto ml-2 text-cyan fa-2x"
+                                onclick="app.open('/workspace')"></i>
+                            <i class="fal fa-desktop-alt fa-fw mx-auto my-auto ml-2 text-cyan fa-2x"
+                                onclick="app.open('/dir')"></i>
+                        </div>
+
+                        <div class="clearfix"></div>
+
                         <div class="text-right hs-enabled" style="display: none;">
                             <div class="badge badge-pill badge-success">
                                 <span>HS enabled</span>
@@ -225,7 +263,8 @@
 
                         <div class="text-right">
                             <span class="btn-group">
-                                <div class="dropdown-toggle badge badge-pill badge-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="dropdown-toggle badge badge-pill badge-dark" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
                                     <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span> <span> /
                                         Language</span>
                                 </div>
