@@ -1534,13 +1534,28 @@ class tmplink {
         });
     }
 
+    room_key_get() {
+        let key = this.get_page_mrid();
+        if (key == undefined) {
+            return false;
+        } else {
+            return {
+                view: 'app_room_view_' + key,
+                sort_by: 'app_room_view_sort_by_' + key,
+                sort_order: 'app_room_view_sort_order_' + key,
+            }
+        }
+
+    }
+
     mr_file_list(page) {
         $('.no_files').fadeOut();
         $('.no_photos').fadeOut();
 
-        let room_key = 'app_room_view_' + this.room.mr_id;
-        let room_sort_by_key = 'app_room_view_sort_by_' + this.room.mr_id;
-        let room_sort_type_key = 'app_room_view_sort_type_' + this.room.mr_id;
+        let storage_key = this.room_key_get();
+        let room_key = storage_key.view;
+        let room_sort_by_key = storage_key.sort_by;
+        let room_sort_type_key = storage_key.sort_order;
 
         let room_sort_by = localStorage.getItem(room_sort_by_key);
         let room_sort_type = localStorage.getItem(room_sort_type_key);
@@ -2665,15 +2680,15 @@ class tmplink {
     }
 
     bytetoconver(val, label) {
-        if (val < 1){
+        if (val < 1) {
             return '0 B';
         }
-            
+
         var s = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
         var e = Math.floor(Math.log(val) / Math.log(1024));
         var value = ((val / Math.pow(1024, Math.floor(e))).toFixed(2));
         e = (e < 0) ? (-e) : e;
-        if (label){
+        if (label) {
             value += ' ' + s[e];
         }
         return value;
