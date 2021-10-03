@@ -51,6 +51,10 @@
   visibility: hidden;
 }
 
+.display-none{
+  display: none;
+}
+
 html {
   font-family: sans-serif;
   line-height: 1.15;

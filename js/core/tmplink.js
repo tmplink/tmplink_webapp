@@ -363,8 +363,20 @@ class tmplink {
     sort_confirm() {
         this.sort_by = $('#sort_by').val();
         this.sort_type = $('#sort_type').val();
+        //设置 workspace
         localStorage.setItem("app_sort_by", this.sort_by);
         localStorage.setItem("app_sort_type", this.sort_type);
+        //如果是在文件夹中，则需要给对应的文件夹进行设定
+        let key = this.room_key_get();
+        if(key!==false){
+            localStorage.setItem(key.sort_by, this.sort_by);
+            localStorage.setItem(key.sort_type, this.sort_type);
+            //刷新文件夹
+            this.mr_file_list(0);
+        }else{
+            //刷新流
+            this.workspace_filelist(0);
+        }
         $('#sortModal').modal('hide');
     }
 
@@ -523,14 +535,14 @@ class tmplink {
         }
     }
 
-    workspace_add(ukey) {
-        $('#btn_add_to_workspace').addClass('disabled');
+    workspace_add(id,ukey) {
+        $(id).attr('disabled',true);
         $.post(this.api_file, {
             action: 'add_to_workspace',
             token: this.api_token,
             ukey: ukey
         }, (rsp) => {
-            $('#btn_add_to_workspace').html('<i class="fas fa-check-circle" aria-hidden="true"></i>');
+            $(id).html('<i class="fas fa-check-circle" aria-hidden="true"></i>');
         }, 'json');
     }
 
@@ -562,7 +574,7 @@ class tmplink {
         }, (rsp) => {
             if (rsp.data.nums > 0) {
                 let total_size_text = this.bytetoconver(rsp.data.size, true);
-                $('#workspace_total').html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
+                $(id).html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
             }
         }, 'json');
     }
@@ -720,17 +732,18 @@ class tmplink {
     }
 
     details_file() {
-        // if (this.isWeixin()) {
-        //     $('#file_messenger_icon').html('<i class="fad fa-download fa-fw fa-4x"></i>');
-        //     $('#file_messenger_msg').removeClass('display-4');
-        //     $('#file_messenger_msg').html('由于微信的限制，目前无法提供下载。请复制链接后，在外部浏览器打开进行下载。');
-        //     $('#file_messenger').show();
+        if (this.isWeixin()) {
+            // $('#file_messenger_icon').html('<i class="fad fa-download fa-fw fa-4x"></i>');
+            // $('#file_messenger_msg').removeClass('display-4');
+            // $('#file_messenger_msg').html('由于微信的限制，目前无法提供下载。请复制链接后，在外部浏览器打开进行下载。');
+            // $('#file_messenger').show();
 
-        //     gtag('config', 'UA-96864664-3', {
-        //         'page_title': 'D-weixinUnavailable',
-        //     });
-        //     return false;
-        // }
+            // gtag('config', 'UA-96864664-3', {
+            //     'page_title': 'D-weixinUnavailable',
+            // });
+            // return false;
+            $('#wechat_notice').show();
+        }
 
         this.loading_box_on();
         var params = this.get_url_params();
@@ -747,9 +760,18 @@ class tmplink {
                     $('#file_box').show();
                     $('#filename').html(rsp.data.name);
                     $('#filesize').html(rsp.data.size);
+
                     $('#btn_add_to_workspace').on('click', () => {
                         if (this.logined == 1) {
-                            this.workspace_add(params.ukey);
+                            this.workspace_add('#btn_add_to_workspace',params.ukey);
+                        } else {
+                            app.open('/login');
+                        }
+                    });
+
+                    $('#btn_add_to_workspace_mobile').on('click', () => {
+                        if (this.logined == 1) {
+                            this.workspace_add('#btn_add_to_workspace_mobile',params.ukey);
                         } else {
                             app.open('/login');
                         }
@@ -808,6 +830,9 @@ class tmplink {
                             let download_url = download_link;
                             let download_cmdurl = download_link;
 
+                            //添加下载 src
+                            $('.file_download_url').attr('href', download_url);
+
                             //QR Download
                             $('#qr_code_url').attr('src', this.api_url + '/qr?code=' + Base64.encode(download_link));
 
@@ -820,7 +845,7 @@ class tmplink {
                             $('.btn_copy_downloadurl').attr('href', download_url);
 
                             $('.btn_copy_fileurl').attr('data-clipboard-text', 'http://tmp.link/f/' + params.ukey);
-                            $('#file_ukey').attr('data-clipboard-text', params.ukey);
+                            $('.file_ukey').attr('data-clipboard-text', params.ukey);
                             $('.btn_copy_downloadurl_for_other').attr('data-clipboard-text', download_cmdurl);
                             $('.btn_copy_downloadurl_for_curl').attr('data-clipboard-text', `curl -Lo "${rsp.data.name}" ${download_cmdurl}`);
                             $('.btn_copy_downloadurl_for_wget').attr('data-clipboard-text', `wget -O  "${rsp.data.name}" ${download_cmdurl}`);
@@ -1534,16 +1559,28 @@ class tmplink {
         });
     }
 
+    room_key_get() {
+        let key = this.get_page_mrid();
+        if (key == undefined) {
+            return false;
+        } else {
+            return {
+                view: 'app_room_view_' + key,
+                sort_by: 'app_room_view_sort_by_' + key,
+                sort_type: 'app_room_view_sort_type_' + key,
+            }
+        }
+
+    }
+
     mr_file_list(page) {
         $('.no_files').fadeOut();
         $('.no_photos').fadeOut();
 
-        let room_key = 'app_room_view_' + this.room.mr_id;
-        let room_sort_by_key = 'app_room_view_sort_by_' + this.room.mr_id;
-        let room_sort_type_key = 'app_room_view_sort_type_' + this.room.mr_id;
+        let key = this.room_key_get();
 
-        let room_sort_by = localStorage.getItem(room_sort_by_key);
-        let room_sort_type = localStorage.getItem(room_sort_type_key);
+        let room_sort_by = localStorage.getItem(key.sort_by);
+        let room_sort_type = localStorage.getItem(key.sort_type);
 
         if (page == 0) {
             this.page_number = 0;
@@ -1572,7 +1609,7 @@ class tmplink {
         var params = this.get_url_params();
         this.recaptcha_do('mr_addlist', (recaptcha) => {
             let photo = 0;
-            if (localStorage.getItem(room_key) == 'photo') {
+            if (localStorage.getItem(key.view) == 'photo') {
                 photo = 1;
             }
             $.post(this.api_mr, {
@@ -2665,15 +2702,15 @@ class tmplink {
     }
 
     bytetoconver(val, label) {
-        if (val < 1){
+        if (val < 1) {
             return '0 B';
         }
-            
+
         var s = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
         var e = Math.floor(Math.log(val) / Math.log(1024));
         var value = ((val / Math.pow(1024, Math.floor(e))).toFixed(2));
         e = (e < 0) ? (-e) : e;
-        if (label){
+        if (label) {
             value += ' ' + s[e];
         }
         return value;
