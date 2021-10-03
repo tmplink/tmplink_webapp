@@ -363,8 +363,20 @@ class tmplink {
     sort_confirm() {
         this.sort_by = $('#sort_by').val();
         this.sort_type = $('#sort_type').val();
+        //设置 workspace
         localStorage.setItem("app_sort_by", this.sort_by);
         localStorage.setItem("app_sort_type", this.sort_type);
+        //如果是在文件夹中，则需要给对应的文件夹进行设定
+        let key = this.room_key_get();
+        if(key!==false){
+            localStorage.setItem(key.sort_by, this.sort_by);
+            localStorage.setItem(key.sort_type, this.sort_type);
+            //刷新文件夹
+            this.mr_file_list(0);
+        }else{
+            //刷新流
+            this.workspace_filelist(0);
+        }
         $('#sortModal').modal('hide');
     }
 
@@ -1542,7 +1554,7 @@ class tmplink {
             return {
                 view: 'app_room_view_' + key,
                 sort_by: 'app_room_view_sort_by_' + key,
-                sort_order: 'app_room_view_sort_order_' + key,
+                sort_type: 'app_room_view_sort_type_' + key,
             }
         }
 
@@ -1552,13 +1564,10 @@ class tmplink {
         $('.no_files').fadeOut();
         $('.no_photos').fadeOut();
 
-        let storage_key = this.room_key_get();
-        let room_key = storage_key.view;
-        let room_sort_by_key = storage_key.sort_by;
-        let room_sort_type_key = storage_key.sort_order;
+        let key = this.room_key_get();
 
-        let room_sort_by = localStorage.getItem(room_sort_by_key);
-        let room_sort_type = localStorage.getItem(room_sort_type_key);
+        let room_sort_by = localStorage.getItem(key.sort_by);
+        let room_sort_type = localStorage.getItem(key.sort_type);
 
         if (page == 0) {
             this.page_number = 0;
@@ -1587,7 +1596,7 @@ class tmplink {
         var params = this.get_url_params();
         this.recaptcha_do('mr_addlist', (recaptcha) => {
             let photo = 0;
-            if (localStorage.getItem(room_key) == 'photo') {
+            if (localStorage.getItem(key.view) == 'photo') {
                 photo = 1;
             }
             $.post(this.api_mr, {
