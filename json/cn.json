@@ -89,12 +89,16 @@
     "navbar_settings": "设置",
     "navbar_reset_password": "修改密码",
     "navbar_reset_email": "修改邮箱",
+    "navbar_profile": "偏好设定",
     "navbar_exit": "退出",
     "navbar_workspace": "流",
     "navbar_meetingroom": "桌面",
     "navbar_login": "登录",
     "navbar_reg": "注册",
     "navbar_orders": "已购项目",
+
+    "model_profile_title":"偏好设定",
+    "model_profile_confirm_delete":"是否启用删除前确认？",
 
     "page_503_content": "当前有下载任务正在进行中，请等待该任务结束后再开始新的下载。",
     "page_404_content": "无法找到对应的页面。",
@@ -436,6 +440,8 @@
     "status_error_13": "请选择目标文件夹。",
     "status_error_14": "您的账号目前没有文件夹。",
     "status_error_15": "提取码错误。",
+
+    "confirm_delete": "确定要删除吗？",
 
     "upload_or_drag": "拖动文件到此位置，或者选择文件上传",
     "upload_files": "上传文件",

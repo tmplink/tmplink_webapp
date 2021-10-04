@@ -368,12 +368,12 @@ class tmplink {
         localStorage.setItem("app_sort_type", this.sort_type);
         //如果是在文件夹中，则需要给对应的文件夹进行设定
         let key = this.room_key_get();
-        if(key!==false){
+        if (key !== false) {
             localStorage.setItem(key.sort_by, this.sort_by);
             localStorage.setItem(key.sort_type, this.sort_type);
             //刷新文件夹
             this.mr_file_list(0);
-        }else{
+        } else {
             //刷新流
             this.workspace_filelist(0);
         }
@@ -406,6 +406,7 @@ class tmplink {
                 this.storage_used = rsp.data.storage_used;
                 this.storage = rsp.data.storage;
                 this.high_speed_channel = rsp.data.highspeedchannel;
+                this.profile_confirm_delete_set(rsp.data.pf_confirm_delete);
                 localStorage.setItem('app_lang', rsp.data.lang);
                 app.languageSet(rsp.data.lang);
                 //console.log
@@ -535,8 +536,8 @@ class tmplink {
         }
     }
 
-    workspace_add(id,ukey) {
-        $(id).attr('disabled',true);
+    workspace_add(id, ukey) {
+        $(id).attr('disabled', true);
         $.post(this.api_file, {
             action: 'add_to_workspace',
             token: this.api_token,
@@ -546,7 +547,14 @@ class tmplink {
         }, 'json');
     }
 
-    workspace_del(ukey) {
+    workspace_del(ukey, group_delete) {
+        if (group_delete !== false) {
+            if (this.profile_confirm_delete_get()) {
+                if (!confirm(this.languageData.confirm_delete)) {
+                    return false;
+                }
+            }
+        }
         $('.file_unit_' + ukey).hide();
         $.post(this.api_file, {
             action: 'remove_from_workspace',
@@ -574,7 +582,7 @@ class tmplink {
         }, (rsp) => {
             if (rsp.data.nums > 0) {
                 let total_size_text = this.bytetoconver(rsp.data.size, true);
-                $(id).html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
+                $('#workspace_total').html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
             }
         }, 'json');
     }
@@ -763,7 +771,7 @@ class tmplink {
 
                     $('#btn_add_to_workspace').on('click', () => {
                         if (this.logined == 1) {
-                            this.workspace_add('#btn_add_to_workspace',params.ukey);
+                            this.workspace_add('#btn_add_to_workspace', params.ukey);
                         } else {
                             app.open('/login');
                         }
@@ -771,7 +779,7 @@ class tmplink {
 
                     $('#btn_add_to_workspace_mobile').on('click', () => {
                         if (this.logined == 1) {
-                            this.workspace_add('#btn_add_to_workspace_mobile',params.ukey);
+                            this.workspace_add('#btn_add_to_workspace_mobile', params.ukey);
                         } else {
                             app.open('/login');
                         }
@@ -1695,6 +1703,32 @@ class tmplink {
         });
     }
 
+    profile_confirm_delete_post() {
+        let status = ($('#confirm_delete_status').is(':checked')) ? 'yes' : 'no';
+        localStorage.setItem('user_profile_confirm_delete', status);
+        $.post(this.api_user, {
+            action: 'pf_confirm_delete_set',
+            token: this.api_token,
+            status: status
+        });
+    }
+
+    profile_confirm_delete_set(status) {
+        localStorage.setItem('user_profile_confirm_delete', status);
+        if (status == 'yes') {
+            $('#confirm_delete_status').attr('checked', 'checked');
+        }
+    }
+
+    profile_confirm_delete_get() {
+        let status = localStorage.getItem('user_profile_confirm_delete');
+        if (status == 'yes') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     room_filelist_model(type) {
         let room_key = 'app_room_view_' + this.room.mr_id;
         switch (type) {
@@ -1779,6 +1813,11 @@ class tmplink {
     mr_file_del(ukey) {
         var params = this.get_url_params();
         $('.file_unit_' + ukey).hide();
+        if (this.profile_confirm_delete_get()) {
+            if (!confirm(this.languageData.confirm_delete)) {
+                return false;
+            }
+        }
         $.post(this.api_mr, {
             action: 'file_del',
             token: this.api_token,
@@ -1835,6 +1874,11 @@ class tmplink {
     }
 
     mr_del(mrid) {
+        if (this.profile_confirm_delete_get()) {
+            if (!confirm(this.languageData.confirm_delete)) {
+                return false;
+            }
+        }
         $('#meetingroom_id_' + mrid).fadeOut();
         $.post(this.api_mr, {
             action: 'delete',

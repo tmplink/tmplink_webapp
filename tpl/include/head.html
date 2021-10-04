@@ -45,6 +45,7 @@
                 <button type="button" class=" btn btn-success dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i class="far fa-cog fa-fw"></i><span i18n="navbar_settings">.</span>
+                    <span class="badge badge-pill badge-danger">1</span>
                 </button>
                 <div class="dropdown-menu shadow">
                     <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span>
@@ -52,6 +53,10 @@
                         i18n="navbar_reset_password">.</a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#emailModal').modal('show');"
                         i18n="navbar_reset_email">.</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#profileModal').modal('show');">
+                        <span i18n="navbar_profile">.</span>
+                        <span class="badge badge-pill badge-danger">new</span>
+                    </a>
                     <a class="dropdown-item" href="javascript:void(0)"
                         onclick="$('#ordersModal').modal('show');TL.orders_list();" i18n="navbar_orders">.</a>
                     <hr>
