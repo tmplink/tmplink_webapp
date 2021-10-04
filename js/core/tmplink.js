@@ -1812,12 +1812,12 @@ class tmplink {
 
     mr_file_del(ukey) {
         var params = this.get_url_params();
-        $('.file_unit_' + ukey).hide();
         if (this.profile_confirm_delete_get()) {
             if (!confirm(this.languageData.confirm_delete)) {
                 return false;
             }
         }
+        $('.file_unit_' + ukey).hide();
         $.post(this.api_mr, {
             action: 'file_del',
             token: this.api_token,
