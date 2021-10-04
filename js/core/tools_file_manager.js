@@ -96,6 +96,11 @@ class tools_file_manager {
     }
 
     checkbox_delete() {
+        if(this.parent_op.profile_confirm_delete_get()){
+            if(!confirm(this.parent_op.languageData.confirm_delete)){
+                return false;
+            }
+        }
         var node = document.getElementsByName(this.items_name);
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
@@ -103,7 +108,7 @@ class tools_file_manager {
             if (check === 'true') {
                 //do something
                 let ukey = inode.getAttribute('tldata');
-                this.parent_op.workspace_del(ukey);
+                this.parent_op.workspace_del(ukey,false);
             }
         }
     }

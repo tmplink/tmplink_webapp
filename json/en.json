@@ -1,4 +1,8 @@
 {
+    "model_profile_title": "Preferences",
+    "model_profile_confirm_delete": "Do you want to confirm again before deleting?",
+    "navbar_profile": "Preferences",
+    "confirm_delete": "Are you sure you want to delete?",
     "need_login_of_file": "Log in to bookmarked files",
     "need_login_of_dir": "Folders can be bookmarked after logging in",
     "btn_performance": "Preferences",
@@ -51,7 +55,7 @@
     "on_select_all": "Select All",
     "on_select_cancel": "Cancel Select All",
     "on_select_download": "Download",
-    "on_select_copy_download_url":"Copy the download url list",
+    "on_select_copy_download_url": "Copy the download url list",
     "on_select_delete": "Delete",
     "on_select": "Selected item",
     "page_no_photos": "There are currently no pictures available for display. Click <i class=\"fa-fw fad fa-th-list text-azure\"></i> to view all files.",
