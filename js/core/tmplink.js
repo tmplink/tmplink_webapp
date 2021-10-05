@@ -1315,7 +1315,7 @@ class tmplink {
         console.log(mrid);
         let text_mr = '';
         if (mrid != undefined) {
-            text_mr = `-F "mrid=${mrid}""`;
+            text_mr = `-F "mrid=${mrid}"`;
         }
         let model = localStorage.getItem('app_upload_model');
 
