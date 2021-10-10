@@ -1,4 +1,5 @@
 {
+    "upload_sync_onprogress": "In sync",
     "model_profile_title": "Preferences",
     "model_profile_confirm_delete": "Do you want to confirm again before deleting?",
     "navbar_profile": "Preferences",
