@@ -350,6 +350,7 @@
     "upload_limit_size": "目前只能上传小于 10 GB的文件。",
     "upload_cancel": "上传被用户取消或者浏览器断开连接。",
     "upload_ok": "上传完成",
+    "upload_sync_onprogress": "正在传送",
     "upload_upload_prepare": "请稍等，正在预处理。",
     "upload_upload_processing": "正在上传：",
     "upload_ready": "等待上传",

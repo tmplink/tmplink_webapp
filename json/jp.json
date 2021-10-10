@@ -1,4 +1,5 @@
 {
+    "upload_sync_onprogress": "転送中",
     "model_profile_title": "設定",
     "model_profile_confirm_delete": "削除する前にもう一度確認しますか？",
     "navbar_profile": "設定",
