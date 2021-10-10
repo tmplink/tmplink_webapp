@@ -536,14 +536,18 @@ class tmplink {
         }
     }
 
-    workspace_add(id, ukey) {
+    workspace_add(id, ukey,animated) {
         $(id).attr('disabled', true);
         $.post(this.api_file, {
             action: 'add_to_workspace',
             token: this.api_token,
             ukey: ukey
         }, (rsp) => {
-            $(id).html('<i class="fas fa-check-circle" aria-hidden="true"></i>');
+            if(animated===false){
+                return false;
+            }else{
+                $(id).html('<i class="fas fa-check-circle" aria-hidden="true"></i>');
+            }
         }, 'json');
     }
 
@@ -769,13 +773,7 @@ class tmplink {
                     $('#filename').html(rsp.data.name);
                     $('#filesize').html(rsp.data.size);
 
-                    $('#btn_add_to_workspace').on('click', () => {
-                        if (this.logined == 1) {
-                            this.workspace_add('#btn_add_to_workspace', params.ukey);
-                        } else {
-                            app.open('/login');
-                        }
-                    });
+
 
                     $('#btn_add_to_workspace_mobile').on('click', () => {
                         if (this.logined == 1) {
@@ -837,6 +835,8 @@ class tmplink {
                             //设定下载链接
                             let download_url = download_link;
                             let download_cmdurl = download_link;
+                            //分享链接
+                            let share_url = 'http://tmp.link/f/' + params.ukey;
 
                             //添加下载 src
                             $('.file_download_url').attr('href', download_url);
@@ -852,11 +852,85 @@ class tmplink {
                             $('.btn_copy_downloadurl').attr('data-clipboard-text', download_url);
                             $('.btn_copy_downloadurl').attr('href', download_url);
 
-                            $('.btn_copy_fileurl').attr('data-clipboard-text', 'http://tmp.link/f/' + params.ukey);
+                            $('.btn_copy_fileurl').attr('data-clipboard-text', share_url);
                             $('.file_ukey').attr('data-clipboard-text', params.ukey);
                             $('.btn_copy_downloadurl_for_other').attr('data-clipboard-text', download_cmdurl);
                             $('.btn_copy_downloadurl_for_curl').attr('data-clipboard-text', `curl -Lo "${rsp.data.name}" ${download_cmdurl}`);
                             $('.btn_copy_downloadurl_for_wget').attr('data-clipboard-text', `wget -O  "${rsp.data.name}" ${download_cmdurl}`);
+
+                            //开始处理绑定的事件
+                            //下载按钮绑定事件，触发下载
+                            $('#file_download_btn').on('click', () => {
+                                //触发下载
+                                window.open(download_url, '_blank');
+                                return true;
+                            });
+
+                            //扫码下载按钮绑定
+                            $('#file_download_by_qrcode').on('click', () => {
+                                $('#qrModal').modal('show');
+                                return true;
+                            });
+
+                            //复制链接按钮绑定
+                            $('#file_download_url_copy').on('click', () => {
+                                //复制内容到剪贴板
+                                navigator.clipboard.writeText(share_url);
+                                $('#file_download_url_copy_icon').removeClass('text-cyan');
+                                $('#file_download_url_copy_icon').addClass('text-success');
+                                setTimeout(() => {
+                                    $('#file_download_url_copy_icon').addClass('text-cyan');
+                                    $('#file_download_url_copy_icon').removeClass('text-success');
+                                }, 3000);
+                                return true;
+                            });
+
+                            //复制提取码按钮绑定
+                            $('#file_download_ukey_copy').on('click', () => {
+                                //复制内容到剪贴板
+                                navigator.clipboard.writeText(params.ukey);
+                                $('#file_download_ukey_copy_icon').removeClass('text-cyan');
+                                $('#file_download_ukey_copy_icon').addClass('text-success');
+                                setTimeout(() => {
+                                    $('#file_download_ukey_copy_icon').addClass('text-cyan');
+                                    $('#file_download_ukey_copy_icon').removeClass('text-success');
+                                }, 3000);
+                                return true;
+                            });
+
+                            //添加到收藏按钮绑定
+                            $('#btn_add_to_workspace').on('click', () => {
+                                if (this.logined == 1) {
+                                    $('#btn_add_to_workspace_icon').removeClass('text-cyan');
+                                    $('#btn_add_to_workspace_icon').addClass('text-red');
+                                    setTimeout(() => {
+                                        $('#btn_add_to_workspace_icon').addClass('text-cyan');
+                                        $('#btn_add_to_workspace_icon').removeClass('text-red');
+                                    }, 3000);
+                                    this.workspace_add('#btn_add_to_workspace', params.ukey,false);
+                                } else {
+                                    app.open('/login');
+                                }
+                            });
+
+                            //下载提速按钮绑定
+                            $('#btn_highdownload').on('click', () => {
+                                if (this.logined == 1) {
+                                    $('#upupModal').modal('show');
+                                } else {
+                                    app.open('/login');
+                                }
+                            });
+
+                            //举报文件按钮绑定
+                            $('#btn_report_file').on('click', () => {
+                                if (this.logined == 1) {
+                                    $('#reportModal').modal('show');
+                                } else {
+                                    app.open('/login');
+                                }
+                            });
+
 
                             //设置背景
                             //this.btn_copy_bind();
@@ -889,6 +963,17 @@ class tmplink {
                     $('#file_messenger').show();
                     gtag('config', 'UA-96864664-3', {
                         'page_title': 'D-unLogin',
+                    });
+                    return false;
+                }
+
+                //file need to sync
+                if (rsp.status === 2) {
+                    $('#file_messenger_icon').html('<i class="fa-fw fas fa-spinner fa-spin fa-4x"></i>');
+                    $('#file_messenger_msg').html(this.languageData.upload_sync_onprogress);
+                    $('#file_messenger').show();
+                    gtag('config', 'UA-96864664-3', {
+                        'page_title': 'D-sync',
                     });
                     return false;
                 }
@@ -2443,6 +2528,7 @@ class tmplink {
             'token': this.api_token,
             'action': 'upload_request_select',
             'filesize': file.size,
+            'sync': '1'
         }, (rsp) => {
             if (rsp.status == 1) {
                 var fd = new FormData();
@@ -3030,7 +3116,8 @@ class tmplink {
                     //update dom
                     let dom = document.getElementById(id);
                     if (dom === null) {
-                        this.countDownTime[id] = undefined;
+                        //未知的步骤
+                        // this.countDownTime[id] = undefined;
                         clearInterval(this.countDownID[id]);
                         return false;
                     } else {

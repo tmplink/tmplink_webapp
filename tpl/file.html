@@ -111,69 +111,40 @@
 
                         <!--[适用于桌面设备]-->
                         <div class="row d-none d-sm-flex">
-                            <div class="col-md-4 col-6 text-center mb-2" id="file_download_btn_1">
+                            <div class="col-md-4 col-6 text-center mb-2 btn-point" id="file_download_btn">
                                 <div class="fileicon mx-auto mb-1">
                                     <i class="fad fa-download fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
                                 </div>
                                 <div>
-                                    <a class="btn btn_copy_downloadurl" i18n="file_btn_download">.</a>
+                                    <button class="btn" i18n="file_btn_download">.</button>
                                 </div>
                             </div>
 
-                            <div class="col-md-4 col-6 text-center mb-2" id="file_download_btn_2">
-                                <div class="fileicon mx-auto mb-1">
-                                    <i class="fal fa-download fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                </div>
-                                <div>
-                                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split"
-                                        id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false" data-reference="parent" i18n="file_btn_download_opt">
-                                        .
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right shadow"
-                                        aria-labelledby="dropdownMenuReference">
-                                        <button class="dropdown-item btn_copy btn_copy_downloadurl_for_other">
-                                            <i class="fad fa-terminal fa-fw"></i>
-                                            <span i18n="file_btn_download_opt_link">.</span>
-                                        </button>
-                                        <button class="dropdown-item btn_copy btn_copy_downloadurl_for_curl">
-                                            <i class="fad fa-terminal fa-fw"></i>
-                                            <span i18n="file_btn_download_opt_curl">.</span>
-                                        </button>
-                                        <button class="dropdown-item btn_copy btn_copy_downloadurl_for_wget">
-                                            <i class="fad fa-terminal fa-fw"></i>
-                                            <span i18n="file_btn_download_opt_wget">.</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-6 text-center mb-2" id="file_download_by_qrcode">
+                            <div class="col-md-4 col-6 text-center mb-2 btn-point" id="file_download_by_qrcode">
                                 <div class="fileicon mx-auto mb-1">
                                     <i class="fas fa-qrcode fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
                                 </div>
                                 <div>
-                                    <button onclick="$('#qrModal').modal('show');" class="btn "
-                                        i18n="file_btn_qr_mobile">.</button>
+                                    <button class="btn" i18n="file_btn_qr_mobile">.</button>
                                 </div>
                             </div>
 
 
-                            <div class="col-md-4 col-6 text-center mb-2">
+                            <div class="col-md-4 col-6 text-center mb-2 btn-point" id="file_download_url_copy">
                                 <div class="fileicon mx-auto mb-1">
-                                    <i class="fas fa-share-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                                    <i class="fas fa-share-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan" id="file_download_url_copy_icon"></i>
                                 </div>
                                 <div>
-                                    <button class="btn btn_copy btn_copy_fileurl" i18n="file_btn_copy">.</button>
+                                    <button class="btn" i18n="file_btn_copy">.</button>
                                 </div>
                             </div>
 
-                            <div class="col-md-4 col-6 text-center mb-2">
+                            <div class="col-md-4 col-6 text-center mb-2" id="file_download_ukey_copy">
                                 <div class="fileicon mx-auto mb-1">
-                                    <i class="fas fa-share-alt-square fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                                    <i class="fas fa-share-alt-square fa-fw mx-auto my-auto mb-2 fa-3x text-cyan" id="file_download_ukey_copy_icon"></i>
                                 </div>
                                 <div>
-                                    <a class="btn btn_copy file_ukey" i18n="file_key_copy">.</a>
+                                    <a class="btn" i18n="file_key_copy">.</a>
                                 </div>
                             </div>
 
@@ -200,33 +171,33 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 col-6 text-center mb-2">
+                            <div class="col-md-4 col-6 text-center mb-2 btn-point" id="btn_add_to_workspace">
                                 <div class="fileicon mx-auto mb-1">
-                                    <i class="far fa-heart fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                                    <i class="far fa-heart fa-fw mx-auto my-auto mb-2 fa-3x text-cyan" id="btn_add_to_workspace_icon"></i>
                                 </div>
                                 <div>
-                                    <button class="btn" id="btn_add_to_workspace" i18n="file_btn_workspace">.</button>
+                                    <button class="btn" i18n="file_btn_workspace">.</button>
                                 </div>
                             </div>
 
-                            <div class="col-md-4 col-6 text-center mb-2">
+                            <div class="col-md-4 col-6 text-center mb-2 btn-point" id="btn_highdownload">
                                 <div class="fileicon mx-auto mb-1">
                                     <i class="fad fa-rocket-launch fa-fw mx-auto my-auto mb-2 fa-3x text-lime"></i>
                                 </div>
                                 <div>
-                                    <button class="btn" onclick="$('#upupModal').modal('show')">
+                                    <button class="btn">
                                         <span i18n="file_btn_upup">.</span>
                                     </button>
                                 </div>
                             </div>
 
-                            <div class="col-md-4 col-6 text-center mb-2">
+                            <div class="col-md-4 col-6 text-center mb-2 btn-point" id="btn_report_file">
                                 <div class="fileicon mx-auto mb-1">
                                     <i
                                         class="fas fa-exclamation-triangle fa-fw mx-auto my-auto mb-2 fa-3x text-red"></i>
                                 </div>
                                 <div>
-                                    <button class="btn" onclick="$('#reportModal').modal('show')">
+                                    <button class="btn">
                                         <span i18n="file_btn_report">.</span>
                                     </button>
                                 </div>
@@ -264,11 +235,34 @@
                         <div class="text-right">
                             <span class="btn-group">
                                 <div class="dropdown-toggle badge badge-pill badge-dark" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" >
+                                    <i class="fal fa-download fa-fw"></i> <span i18n="file_btn_download_opt">.</span>
+                                </div>
+                                <div class="dropdown-menu dropdown-menu-right shadow">
+                                    <button class="dropdown-item btn_copy btn_copy_downloadurl_for_other">
+                                        <i class="fad fa-terminal fa-fw"></i>
+                                        <span i18n="file_btn_download_opt_link">.</span>
+                                    </button>
+                                    <button class="dropdown-item btn_copy btn_copy_downloadurl_for_curl">
+                                        <i class="fad fa-terminal fa-fw"></i>
+                                        <span i18n="file_btn_download_opt_curl">.</span>
+                                    </button>
+                                    <button class="dropdown-item btn_copy btn_copy_downloadurl_for_wget">
+                                        <i class="fad fa-terminal fa-fw"></i>
+                                        <span i18n="file_btn_download_opt_wget">.</span>
+                                    </button>
+                                </div>
+                            </span>
+                        </div>
+
+                        <div class="text-right">
+                            <span class="btn-group">
+                                <div class="dropdown-toggle badge badge-pill badge-dark" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span> <span> /
                                         Language</span>
                                 </div>
-                                <div class="dropdown-menu shadow">
+                                <div class="dropdown-menu dropdown-menu-right shadow">
                                     <a class="dropdown-item" href="javascript:void(0)"
                                         onclick="TL.language('cn');">中文</a>
                                     <a class="dropdown-item" href="javascript:void(0)"
