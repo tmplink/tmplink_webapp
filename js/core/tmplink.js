@@ -412,11 +412,11 @@ class tmplink {
                 //console.log
                 this.dir_tree_get();
                 //激活标识
-                if (this.high_speed_channel) {
-                    $('.hs-enabled').show();
-                } else {
-                    $('.hs-disabled').show();
-                }
+                // if (this.high_speed_channel) {
+                //     $('.hs-enabled').show();
+                // } else {
+                //     $('.hs-disabled').show();
+                // }
             } else {
                 $('.user-unlogin').show();
                 localStorage.setItem('app_login', 0);
