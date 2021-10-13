@@ -4,6 +4,7 @@ class tools_file_manager {
     parent_op = null
     pre_op_list = null
     move_place = 'workspace'
+    dir_tree_init = false
 
     init(parent_op) {
         this.parent_op = parent_op;
@@ -162,8 +163,11 @@ class tools_file_manager {
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
             let check = inode.getAttribute('data-check');
-            if (check === 'true') {
+            if(this.dir_tree_init===false){
                 this.parent_op.dir_tree_display(0);
+                this.dir_tree_init = true;
+            }
+            if (check === 'true') {
                 $('#movefileModal').modal('show');
                 return true;
             }
