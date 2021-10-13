@@ -1,149 +1,148 @@
 <div style="height: 40px;"></div>
 <div class="container d-flex flex-grow-1">
-    <div class="align-self-center mx-auto w-100">
-        <div class="row">
-            <div class="col-lg-6">
+    <div class="align-self-center mx-auto w-100" style="max-width: 500px;">
+        <div class="text-center mb-5">
+            <img src="/img/logo/1.png" alt="tmp.link">
+        </div>
+        <div class="index-box p-5 bg-white shadow-sm">
+            <div class="index-box pb-0">
 
-            </div>
-            <div class="col-lg-6 col-md-12">
-                <div class="text-center mb-5">
-                    <img src="/img/logo/1.png" alt="tmp.link">
+                <div class="mt-2" id="index_userinfo_loading">
+                    <div class="text-center glass" style="border-radius: 10px;padding: 10px;">
+                        <div class="text-center">
+                            <i class="fa-fw fas fa-spinner fa-spin fa-4x"></i>
+                        </div>
+                    </div>
                 </div>
-                <div class="index-box p-5 bg-white shadow-sm">
-                    <div class="index-box pb-0">
 
-                        <div class="mt-2" id="index_userinfo_loading">
-                            <div class="text-center glass" style="border-radius: 10px;padding: 10px;">
-                                <div class="text-center">
-                                    <i class="fa-fw fas fa-spinner fa-spin fa-4x"></i>
+                <div class="navbar_ready mt-2" style="display: none;">
+
+                    <div class="row workspace-nologin">
+
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/reg');">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="fad fa-user-plus fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                            </div>
+                            <div>
+                                <a class="btn" i18n="index_b2">.</a>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/login');">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="fas fa-sign-in-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                            </div>
+                            <div>
+                                <button class="btn" i18n="index_b3">.</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point"
+                            onclick="TL.get_file(prompt(TL.languageData.index_get_file2))">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="fad fa-cloud-download-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                            </div>
+                            <div>
+                                <button class="btn" i18n="index_b1">.</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row workspace-navbar mt-3">
+
+
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="TL.upload_open(0);">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="far fa-cloud-upload fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                            </div>
+                            <div>
+                                <button class="btn">
+                                    <span i18n="nav_upload">.</span>
+                                    <span class="badge badge-pill badge-success upload_queue"
+                                        style="display: none;"></span>
+                                    <span class="badge badge-pill badge-success upload_speed"
+                                        style="display: none;"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/workspace')">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="far fa-file-search fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                            </div>
+                            <div>
+                                <button class="btn">
+                                    <span i18n="navbar_workspace">.</span>
+                                    <span class="badge badge-pill badge-danger upload_count"
+                                        style="display: none;"></span>
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/dir');">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="fal fa-desktop-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                            </div>
+                            <div>
+                                <button class="btn" i18n="navbar_meetingroom">.</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point"
+                            onclick="TL.get_file(prompt(TL.languageData.index_get_file2))">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="fad fa-cloud-download-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                            </div>
+                            <div>
+                                <button class="btn" i18n="index_b1">.</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-6 text-center mb-2">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="far fa-cog fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                            </div>
+                            <div>
+                                <div class="btn-group">
+                                    <button type="button" class=" btn dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <span i18n="navbar_settings">.</span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right w-100 shadow bg-white">
+                                        <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span>
+                                        <a class="dropdown-item" href="javascript:void(0)"
+                                            onclick="$('#passwordModal').modal('show');"
+                                            i18n="navbar_reset_password">.</a>
+                                        <a class="dropdown-item" href="javascript:void(0)"
+                                            onclick="$('#emailModal').modal('show');" i18n="navbar_reset_email">.</a>
+                                        <a class="dropdown-item" href="javascript:void(0)"
+                                            onclick="$('#ordersModal').modal('show');TL.orders_list();"
+                                            i18n="navbar_orders">.</a>
+                                        <hr>
+                                        <span class="dropdown-item-text" i18n="navbar_hr_shop">.</span>
+                                        <a class="dropdown-item" href="javascript:void(0)"
+                                            onclick="TL.buy_select_open('hs');" i18n="navbar_buy_hs">.</a>
+                                        <a class="dropdown-item" href="javascript:void(0)"
+                                            onclick="TL.buy_select_open('storage');" i18n="navbar_buy_storage">.</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="navbar_ready mt-2" style="display: none;">
-
-                            <div class="row workspace-nologin">
-
-                                <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/reg');">
-                                    <div class="fileicon mx-auto mb-1">
-                                        <i class="fad fa-user-plus fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                    </div>
-                                    <div>
-                                        <a class="btn" i18n="index_b2">.</a>
-                                    </div>
-                                </div>
-                                
-    
-                                <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/login');">
-                                    <div class="fileicon mx-auto mb-1">
-                                        <i class="fas fa-sign-in-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                    </div>
-                                    <div>
-                                        <button class="btn" i18n="index_b3">.</button>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="TL.get_file(prompt(TL.languageData.index_get_file2))">
-                                    <div class="fileicon mx-auto mb-1">
-                                        <i class="fad fa-cloud-download-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                    </div>
-                                    <div>
-                                        <button class="btn" i18n="index_b1">.</button>
-                                    </div>
-                                </div>
-
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="TL.logout();">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="far fa-power-off fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
                             </div>
-
-                            <div class="row workspace-navbar mt-3">
-
-
-                                <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="TL.upload_open(0);">
-                                    <div class="fileicon mx-auto mb-1">
-                                        <i class="far fa-cloud-upload fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                    </div>
-                                    <div>
-                                        <button class="btn">
-                                            <span i18n="nav_upload">.</span>
-                                            <span class="badge badge-pill badge-success upload_queue" style="display: none;"></span>
-                                            <span class="badge badge-pill badge-success upload_speed" style="display: none;"></span>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/workspace')">
-                                    <div class="fileicon mx-auto mb-1">
-                                        <i class="far fa-file-search fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                    </div>
-                                    <div>
-                                        <button class="btn">
-                                            <span i18n="navbar_workspace">.</span>
-                                            <span class="badge badge-pill badge-danger upload_count" style="display: none;"></span>
-                                        </button>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/dir');">
-                                    <div class="fileicon mx-auto mb-1">
-                                        <i class="fal fa-desktop-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                    </div>
-                                    <div>
-                                        <button class="btn" i18n="navbar_meetingroom">.</button>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="TL.get_file(prompt(TL.languageData.index_get_file2))">
-                                    <div class="fileicon mx-auto mb-1">
-                                        <i class="fad fa-cloud-download-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                    </div>
-                                    <div>
-                                        <button class="btn" i18n="index_b1">.</button>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4 col-6 text-center mb-2">
-                                    <div class="fileicon mx-auto mb-1">
-                                        <i class="far fa-cog fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                    </div>
-                                    <div>
-                                        <div class="btn-group">
-                                            <button type="button" class=" btn dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <span i18n="navbar_settings">.</span>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right w-100 shadow bg-white">
-                                                <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span>
-                                                <a class="dropdown-item" href="javascript:void(0)"
-                                                    onclick="$('#passwordModal').modal('show');"
-                                                    i18n="navbar_reset_password">.</a>
-                                                <a class="dropdown-item" href="javascript:void(0)"
-                                                    onclick="$('#emailModal').modal('show');"
-                                                    i18n="navbar_reset_email">.</a>
-                                                <a class="dropdown-item" href="javascript:void(0)"
-                                                    onclick="$('#ordersModal').modal('show');TL.orders_list();"
-                                                    i18n="navbar_orders">.</a>
-                                                <hr>
-                                                <span class="dropdown-item-text" i18n="navbar_hr_shop">.</span>
-                                                <a class="dropdown-item" href="javascript:void(0)"
-                                                    onclick="TL.buy_select_open('hs');" i18n="navbar_buy_hs">.</a>
-                                                <a class="dropdown-item" href="javascript:void(0)"
-                                                    onclick="TL.buy_select_open('storage');" i18n="navbar_buy_storage">.</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="TL.logout();">
-                                    <div class="fileicon mx-auto mb-1">
-                                        <i class="far fa-power-off fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                    </div>
-                                    <div>
-                                        <button class="btn" i18n="navbar_exit">.</button>
-                                    </div>
-                                </div>
+                            <div>
+                                <button class="btn" i18n="navbar_exit">.</button>
                             </div>
+                        </div>
+                    </div>
 
-                            <!-- <div class="text-right hs-enabled" style="display: none;">
+                    <!-- <div class="text-right hs-enabled" style="display: none;">
                                 <div class="badge badge-pill badge-success">
                                     <span>HS enabled</span>
                                 </div>
@@ -153,80 +152,77 @@
                                     <span>HS disabled</span>
                                 </div>
                             </div> -->
-    
-                            <div class="text-right">
-                                <span class="btn-group">
-                                    <div class="dropdown-toggle badge badge-pill badge-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span> <span> /
-                                            Language</span>
-                                    </div>
-                                    <div class="dropdown-menu shadow">
-                                        <a class="dropdown-item" href="javascript:void(0)"
-                                            onclick="TL.language('cn');">中文</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"
-                                            onclick="TL.language('en');">English</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"
-                                            onclick="TL.language('jp');">日本語</a>
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
 
-                    <p class="h4 text-center" i18n="index_a1">
-                        .
-                    </p>
+                    <div class="text-right">
+                        <span class="btn-group">
+                            <div class="dropdown-toggle badge badge-pill badge-dark" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span> <span> /
+                                    Language</span>
+                            </div>
+                            <div class="dropdown-menu shadow">
+                                <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('cn');">中文</a>
+                                <a class="dropdown-item" href="javascript:void(0)"
+                                    onclick="TL.language('en');">English</a>
+                                <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <hr>
 
-                    <div class="index-box mt-2 p-2 card shadow-sm">
-                        <div class="d-flex align-items-center">
-                            <span class="mr-3">
-                                <i class="fas fa-tachometer-alt-fastest fa-fw  fa-4x"></i>
-                            </span>
-                            <div>
-                                <h2 class="m-1" i18n="index_d3">
-                                    .
-                                </h2>
-                                <div class="m-1" i18n="index_d4">
-                                    .
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="index-box mt-2 p-2 card shadow-sm">
-                        <div class="d-flex align-items-center">
-                            <span class="mr-3">
-                                <i class="fad fa-browser fa-fw fa-4x"></i>
-                            </span>
-                            <div>
-                                <h2 class="m-1" i18n="index_d5">
-                                    .
-                                </h2>
-                                <div class="m-1" i18n="index_d6">
-                                    .
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="index-box mt-2 p-2 card shadow-sm">
-                        <div class="d-flex align-items-center">
-                            <span class="mr-3">
-                                <i class="fad fa-box-open fa-fw  fa-4x"></i>
-                            </span>
-                            <div>
-                                <h2 class="m-1" i18n="index_d1">
-                                    .
-                                </h2>
-                                <div class="m-1" i18n="index_d2">
-                                    .
-                                </div>
-                            </div>
+            <p class="h4 text-center" i18n="index_a1">
+                .
+            </p>
+
+            <div class="index-box mt-2 p-2 card shadow-sm">
+                <div class="d-flex align-items-center">
+                    <span class="mr-3">
+                        <i class="fas fa-tachometer-alt-fastest fa-fw  fa-4x"></i>
+                    </span>
+                    <div>
+                        <h2 class="m-1" i18n="index_d3">
+                            .
+                        </h2>
+                        <div class="m-1" i18n="index_d4">
+                            .
                         </div>
                     </div>
                 </div>
-
+            </div>
+            <div class="index-box mt-2 p-2 card shadow-sm">
+                <div class="d-flex align-items-center">
+                    <span class="mr-3">
+                        <i class="fad fa-browser fa-fw fa-4x"></i>
+                    </span>
+                    <div>
+                        <h2 class="m-1" i18n="index_d5">
+                            .
+                        </h2>
+                        <div class="m-1" i18n="index_d6">
+                            .
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="index-box mt-2 p-2 card shadow-sm">
+                <div class="d-flex align-items-center">
+                    <span class="mr-3">
+                        <i class="fad fa-box-open fa-fw  fa-4x"></i>
+                    </span>
+                    <div>
+                        <h2 class="m-1" i18n="index_d1">
+                            .
+                        </h2>
+                        <div class="m-1" i18n="index_d2">
+                            .
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
 
     </div>
 
