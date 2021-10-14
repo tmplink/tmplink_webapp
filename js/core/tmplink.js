@@ -148,7 +148,7 @@ class tmplink {
     bg_load() {
         if (document.querySelector('#background_wrap_preload') == null) {
             $('body').append('<div id="background_wrap_preload" style="z-index: -1;background-color:black; position: fixed;top: 0;left: 0;height: 100%;width: 100%;"></div>');
-            let bglist = [1, 2, 3, 4, 5, 6, 7, 8];
+            let bglist = [1, 2, 3, 4, 5, 6, 7];
             let index = Math.floor((Math.random() * bglist.length));
             let img = new Image();
             img.src = '/img/bg/' + bglist[index] + '.jpg';
