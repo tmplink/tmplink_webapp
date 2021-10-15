@@ -206,7 +206,7 @@ class tmplink {
         console.log('upload::model::' + model);
 
         //检查账号是否有足够可用的空间
-        if (model == 3 || model == 99) {
+        if (model == 99) {
             if (this.storage_used >= this.storage) {
                 alert('私有空间已经用完，请考虑购买私有空间扩展包。');
                 return false;
@@ -2418,7 +2418,7 @@ class tmplink {
 
         $('#upload_mr_id').val(mr_id);
 
-        //如果可用的私有空间补足，则隐藏选项
+        //如果可用的私有空间不足，则隐藏选项
         if (this.storage_used >= this.storage) {
             $('.storage_needs').hide();
         }
@@ -2468,12 +2468,12 @@ class tmplink {
             $('#uq_' + id).fadeOut();
             return false;
         }
-        if (this.storage == 0) {
-            this.alert(this.languageData.upload_buy_storage);
-            $('#uq_' + id).fadeOut();
-            return false;
-        }
-        if (file.size > (this.storage - this.storage_used) && (model == 99 || model == 3)) {
+        // if (this.storage == 0) {
+        //     this.alert(this.languageData.upload_buy_storage);
+        //     $('#uq_' + id).fadeOut();
+        //     return false;
+        // }
+        if (file.size > (this.storage - this.storage_used) && (model == 99)) {
             this.alert(this.languageData.upload_fail_storage);
             $('#uq_' + id).fadeOut();
             return false;
