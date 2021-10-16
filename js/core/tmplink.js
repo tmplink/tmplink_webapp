@@ -164,12 +164,6 @@ class tmplink {
     }
 
     app_init() {
-        let sort_by = localStorage.getItem('app_sort_by');
-        let sort_type = localStorage.getItem('app_sort_by');
-
-        this.sort_by = sort_by === null ? 0 : sort_by;
-        this.sort_type = sort_type === null ? 0 : sort_type;
-
         this.bg_load();
     }
 
@@ -363,14 +357,11 @@ class tmplink {
     sort_confirm() {
         this.sort_by = $('#sort_by').val();
         this.sort_type = $('#sort_type').val();
-        //设置 workspace
-        localStorage.setItem("app_sort_by", this.sort_by);
-        localStorage.setItem("app_sort_type", this.sort_type);
-        //如果是在文件夹中，则需要给对应的文件夹进行设定
         let key = this.room_key_get();
-        if (key !== false) {
-            localStorage.setItem(key.sort_by, this.sort_by);
-            localStorage.setItem(key.sort_type, this.sort_type);
+        localStorage.setItem(key.sort_by, this.sort_by);
+        localStorage.setItem(key.sort_type, this.sort_type);
+
+        if (this.get_page_mrid() !== undefined) {
             //刷新文件夹
             this.mr_file_list(0);
         } else {
@@ -617,6 +608,11 @@ class tmplink {
         //更新文件总数
         this.workspace_total();
 
+        //获取排序
+        let key = this.room_key_get();
+        let sort_by = localStorage.getItem(key.sort_by);
+        let sort_type = localStorage.getItem(key.sort_type);
+
         $('#filelist_refresh_icon').addClass('fa-spin');
         $('#filelist_refresh_icon').attr('disabled', true);
         this.loading_box_on();
@@ -628,8 +624,8 @@ class tmplink {
             action: 'workspace_filelist_page',
             page: this.page_number,
             token: this.api_token,
-            sort_type: this.sort_type,
-            sort_by: this.sort_by,
+            sort_type: sort_type,
+            sort_by: sort_by,
             photo: photo,
             search: search
         }, (rsp) => {
@@ -1655,13 +1651,13 @@ class tmplink {
     room_key_get() {
         let key = this.get_page_mrid();
         if (key == undefined) {
-            return false;
-        } else {
-            return {
-                view: 'app_room_view_' + key,
-                sort_by: 'app_room_view_sort_by_' + key,
-                sort_type: 'app_room_view_sort_type_' + key,
-            }
+            key = 'workspace';
+        } 
+
+        return {
+            view: 'app_room_view_' + key,
+            sort_by: 'app_room_view_sort_by_' + key,
+            sort_type: 'app_room_view_sort_type_' + key,
         }
 
     }
@@ -2588,7 +2584,7 @@ class tmplink {
 
     }
 
-    upload_selected() {
+    upload_selected(dom) {
         let file = document.getElementById('fileToUpload').files;
         let f = null;
         if (file.length > 0) {
@@ -2605,9 +2601,12 @@ class tmplink {
                 }
             }
         }
+
+        //清空文件选择框
+        dom.value = '';
     }
 
-    upload_dir_selected() {
+    upload_dir_selected(e) {
         let file = document.getElementById('dirsToUpload').files;
         let f = null;
         if (file.length > 0) {
@@ -2624,6 +2623,8 @@ class tmplink {
                 }
             }
         }
+        //清空文件选择框
+        dom.value = '';
     }
 
 
@@ -3110,21 +3111,28 @@ class tmplink {
 
     countTimeDown(id, time) {
         if (this.countDownID[id] === undefined) {
-            this.countDownID[id] = setInterval(() => {
-                if (time > 0) {
-                    time--;
-                    //update dom
-                    let dom = document.getElementById(id);
-                    if (dom === null) {
-                        //未知的步骤
-                        // this.countDownTime[id] = undefined;
-                        clearInterval(this.countDownID[id]);
-                        return false;
-                    } else {
-                        dom.innerHTML = this.leftTimeString(time);
+            //update dom
+            let dom = document.getElementById(id);
+            if (dom === null) {
+                return false;
+            } else {
+                dom.innerHTML = this.leftTimeString(time);
+                this.countDownID[id] = setInterval(() => {
+                    if (time > 0) {
+                        time--;
+                        //update dom
+                        let dom = document.getElementById(id);
+                        if (dom === null) {
+                            //todo
+                            //this.countDownTime[id] = null;
+                            //clearInterval(this.countDownID[id]);
+                            return false;
+                        } else {
+                            dom.innerHTML = this.leftTimeString(time);
+                        }
                     }
-                }
-            }, 1000);
+                }, 1000);
+            }
         }
     }
 

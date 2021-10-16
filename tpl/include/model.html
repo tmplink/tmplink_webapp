@@ -183,7 +183,7 @@
                 <div id="upload_select_file" style="display: none;">
                     <div class="select-box p-2 btn-point">
                         <input type="file" multiple="multiple" id="fileToUpload" style="display: none;"
-                            onchange="TL.upload_selected();" />
+                            onchange="TL.upload_selected(this);" />
                         <label for="fileToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
@@ -202,7 +202,7 @@
                     </div>
                     <div class="select-box p-2 btn-point" id="dirsToUpload_label">
                         <input type="file" id="dirsToUpload" style="display: none;" multiple directory webkitdirectory
-                            mozdirectory onchange="TL.upload_dir_selected();" />
+                            mozdirectory onchange="TL.upload_dir_selected(this);" />
                         <label for="dirsToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
