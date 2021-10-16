@@ -3110,21 +3110,28 @@ class tmplink {
 
     countTimeDown(id, time) {
         if (this.countDownID[id] === undefined) {
-            this.countDownID[id] = setInterval(() => {
-                if (time > 0) {
-                    time--;
-                    //update dom
-                    let dom = document.getElementById(id);
-                    if (dom === null) {
-                        //未知的步骤
-                        // this.countDownTime[id] = undefined;
-                        clearInterval(this.countDownID[id]);
-                        return false;
-                    } else {
-                        dom.innerHTML = this.leftTimeString(time);
+            //update dom
+            let dom = document.getElementById(id);
+            if (dom === null) {
+                return false;
+            } else {
+                dom.innerHTML = this.leftTimeString(time);
+                this.countDownID[id] = setInterval(() => {
+                    if (time > 0) {
+                        time--;
+                        //update dom
+                        let dom = document.getElementById(id);
+                        if (dom === null) {
+                            //todo
+                            this.countDownTime[id] = null;
+                            clearInterval(this.countDownID[id]);
+                            return false;
+                        } else {
+                            dom.innerHTML = this.leftTimeString(time);
+                        }
                     }
-                }
-            }, 1000);
+                }, 1000);
+            }
         }
     }
 
