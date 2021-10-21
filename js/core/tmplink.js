@@ -2892,6 +2892,9 @@ class tmplink {
             case 'tar':
                 r = 'fad fa-file-archive';
                 break;
+            case 'msixbundle':
+                r = 'fad fa-file-archive';
+                break;
 
             case 'doc':
                 r = 'fad fa-file-word';
