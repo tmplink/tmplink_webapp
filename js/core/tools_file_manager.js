@@ -30,19 +30,17 @@ class tools_file_manager {
 
     checkbox_select_on(node) {
         let inode = node.getAttribute('tldata');
-        $('.file_unit_' + inode).css('border-radius', '3px');
+        $('.file_unit_' + inode).css('border-radius', '5px');
         $('.file_unit_' + inode).css('border-width', '1px');
-        $('.file_unit_' + inode).css('border-color', '#45aaf2');
-        $('.file_unit_' + inode).css('border-style', 'double');
+        $('.file_unit_' + inode).css('background-color', 'rgb(220, 236, 245)');
         node.setAttribute('data-check', 'true');
     }
 
     checkbox_select_off(node) {
         let inode = node.getAttribute('tldata');
-        $('.file_unit_' + inode).css('border-color', '');
-        $('.file_unit_' + inode).css('border-style', '');
         $('.file_unit_' + inode).css('border-radius', '');
         $('.file_unit_' + inode).css('border-width', '');
+        $('.file_unit_' + inode).css('background-color', '');
         node.setAttribute('data-check', 'false');
     }
 
