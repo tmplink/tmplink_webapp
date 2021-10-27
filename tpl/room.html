@@ -209,8 +209,7 @@
                                         <% } %>
                                     </div>
                                     <div class="card-body pr-1">
-                                        <% if(obj[x].sync=='0'){ %>
-                                        <div class="text-right">
+                                        <div class="text-right file_ok_<% obj[x].ukey %>">
                                             <div>
                                                 <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
                                                     <i class="fa-fw fad fa-download"></i>
@@ -239,13 +238,11 @@
                                                 <% } %>
                                             </div>
                                         </div>
-                                        <% }else{ %>
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
-                                                    <% TL.languageData.upload_sync_onprogress %>:<% obj[x].fsize_formated %>
-                                                </div>
+                                        <div class="progress file_relay_<% obj[x].ukey %>">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
+                                                <% TL.languageData.upload_sync_onprogress %>:<% obj[x].fsize_formated %>
                                             </div>
-                                        <% } %>
+                                        </div>
                                         <div class="progress mt-2 download_progress_bar_<% obj[x].ukey %>" style="height: 5px;display:none;">
                                             <div class="progress-bar bg-success download_progress_bar_set_<% obj[x].ukey %>" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
@@ -263,13 +260,9 @@
                             <div class="col-12 col-md-8 col-lg-7 my-1 d-flex align-items-center listfontweight filename">
                                 <div>
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
-                                    <% if(obj[x].sync=='0'){ %>
                                     <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" target="_blank">
                                         <% obj[x].fname %>
                                     </a>
-                                    <% }else{ %>
-                                        <% obj[x].fname %>
-                                    <% } %>
 
                                     <% if(obj[x].like>0){ %>
                                         <span class="badge badge-pill badge-primary">
@@ -289,37 +282,34 @@
                             <div class="col-12 col-md-4 col-lg-2 my-1 d-flex align-items-center justify-content-end">
                                 <% obj[x].ctime %>
                             </div>
-                            <% if(obj[x].sync=='0'){ %>
-                            <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end">
-                                <span class="mr-2">
-                                    <% obj[x].fsize_formated %>
-                                </span>
-                                <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
-                                    <i class="fa-fw fad fa-download"></i>
-                                </button>
-                                <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1">
-                                    <i class="fa-fw fad fa-share-alt"></i>
-                                </button>
-                                <% if (TL.room.owner == 1) { %>
-                                    <button href="javascript:void(0)" onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1">
-                                        <i class="fa-fw fad fa-edit"></i>
+                            <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].ukey %>">
+                                    <span class="mr-2">
+                                        <% obj[x].fsize_formated %>
+                                    </span>
+                                    <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
+                                        <i class="fa-fw fad fa-download"></i>
                                     </button>
-                                    <button href="javascript:void(0);" class="text-red btn btn-sm btn-light" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
-                                        <i class="fa-fw fad fa-trash"></i>
+                                    <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1">
+                                        <i class="fa-fw fad fa-share-alt"></i>
                                     </button>
-                                <% } %>
+                                    <% if (TL.room.owner == 1) { %>
+                                        <button href="javascript:void(0)" onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1">
+                                            <i class="fa-fw fad fa-edit"></i>
+                                        </button>
+                                        <button href="javascript:void(0);" class="text-red btn btn-sm btn-light" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
+                                            <i class="fa-fw fad fa-trash"></i>
+                                        </button>
+                                    <% } %>    
                             </div>
-                            <% }else{ %>
-                                <div class="col-12 col-md-12 col-lg-3 my-1 d-flex flex-row align-items-center justify-content-center">
-                                    <div class="d-block w-100">
-                                        <div class="progress">
-                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
-                                                <% TL.languageData.upload_sync_onprogress %>:<% obj[x].fsize_formated %>
-                                            </div>
+                            <div class="col-12 col-md-12 col-lg-3 my-1 d-flex flex-row align-items-center justify-content-center file_relay_<% obj[x].ukey %>">
+                                <div class="d-block w-100">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
+                                            <% TL.languageData.upload_sync_onprogress %>:<% obj[x].fsize_formated %>
                                         </div>
                                     </div>
-                                </div>
-                            <% } %>
+                                </div> 
+                            </div>
                             <div class="col-12 download_progress_bar_<% obj[x].ukey %>" style="display:none">
                                 <div class="progress" style="height: 5px;">
                                     <div class="progress-bar bg-success download_progress_bar_set_<% obj[x].ukey %>" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>

@@ -652,6 +652,35 @@ class tmplink {
         });
     }
 
+    is_file_ok(ukey){
+        setTimeout(() => {
+            $.post(this.api_file, {
+                action: 'is_file_ok',
+                token: this.api_token,
+                ukey: ukey
+            }, (rsp) => {
+                if (rsp.status == 1) {
+                    $(`.file_ok_${ukey}`).removeAttr('style');
+                    $(`.file_relay_${ukey}`).attr('style','display: none !important;');
+                }else{
+                    this.is_file_ok(ukey);
+                }
+            }, 'json');
+        }, 5000);
+    }
+
+    is_file_ok_check(data){
+        //prepare file is ok
+        for (let i in data) {
+            if (data[i].sync === 0) {
+                $(`.file_relay_${data[i].ukey}`).attr('style','display: none !important;');
+            }else{
+                $(`.file_ok_${data[i].ukey}`).attr('style','display: none !important;');
+                this.is_file_ok(data[i].ukey);
+            }
+        }
+    }
+
     workspace_filelist_model(type) {
         switch (type) {
             case 'photo':
@@ -677,6 +706,7 @@ class tmplink {
             default:
                 this.workspace_filelist_by_list(data, page);
         }
+
     }
 
     workspace_btn_active_reset() {
@@ -699,6 +729,7 @@ class tmplink {
         }
         $('#filelist_photo').append(app.tpl('workspace_filelist_photo_tpl', data));
         this.btn_copy_bind();
+        this.is_file_ok_check(data);
         app.linkRebind();
         this.lazyLoadInstance.update();
     }
@@ -719,6 +750,7 @@ class tmplink {
             this.countTimeDown(id, time);
         });
         this.btn_copy_bind();
+        this.is_file_ok_check(data);
         app.linkRebind();
     }
 
@@ -1696,7 +1728,7 @@ class tmplink {
         $('#mr_filelist_refresh_icon').attr('disabled', true);
         this.loading_box_on();
         var params = this.get_url_params();
-        this.recaptcha_do('mr_addlist', (recaptcha) => {
+        this.recaptcha_do('mr_list', (recaptcha) => {
             let photo = 0;
             if (localStorage.getItem(key.view) == 'photo') {
                 photo = 1;
@@ -2051,6 +2083,7 @@ class tmplink {
             default:
                 this.mr_file_by_list(data, page);
         }
+        this.is_file_ok_check(data);
     }
 
     room_total(mrid) {
@@ -2890,6 +2923,9 @@ class tmplink {
                 r = 'fad fa-file-archive';
                 break;
             case 'tar':
+                r = 'fad fa-file-archive';
+                break;
+            case 'msixbundle':
                 r = 'fad fa-file-archive';
                 break;
 
