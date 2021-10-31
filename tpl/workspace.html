@@ -11,6 +11,11 @@
             <div class="mx-auto text-center">
                 <i class="fa-4x far fa-file-search"></i>
                 <div class="lead mt-2" id="workspace_total"></div>
+                <div class="mt-1">
+                    <span class="badge badge-pill badge-danger upload_queue" style="display: none;"></span>
+                    <span class="badge badge-pill badge-success upload_count" style="display: none;"></span>
+                    <span class="badge badge-pill badge-success upload_speed" style="display: none;"></span>
+                </div>
                 <!-- <div class="text-center hs-enabled" style="display: none;">
                     <div class="badge badge-pill badge-success">
                         <span>HS enabled</span>
@@ -67,9 +72,6 @@
                     <button onclick="TL.upload_open(0);" class="btn btn-sm btn-primary mr-1 mt-1">
                         <i class="fad fa-cloud-upload fa-fw"></i>
                         <span i18n="nav_upload" class="d-none d-sm-inline">.</span>
-                        <span class="badge badge-pill badge-danger upload_queue" style="display: none;"></span>
-                        <span class="badge badge-pill badge-success upload_count" style="display: none;"></span>
-                        <span class="badge badge-pill badge-success upload_speed" style="display: none;"></span>
                     </button>
                     <button onclick="TL.file_manager.checkbox_select_all();"
                         class="btn btn-light text-azure btn-sm mr-1 mt-1">
@@ -220,10 +222,30 @@
                         </div>
                         <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].ukey %>">
                             <span class="mr-2"><% obj[x].fsize_formated %></span>
-                            <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fad fa-download"></i></button>
-                            <button href="javascript:void(0)" onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-edit"></i></button>
-                            <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-share-alt"></i></button>
-                            <button href="javascript:void(0)" id="btn-rm-file_<% obj[x].ukey %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.workspace_del('<% obj[x].ukey %>')"><i class="fa-fw fad fa-trash"></i></button>
+                            <button onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fad fa-download"></i></button>
+                            <button data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-share-alt"></i></button>
+                            <span class="btn-group">
+                                <div class="dropdown-toggle text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-h fa-fw"></i>
+                                </div>
+                                <div class="dropdown-menu dropdown-menu-right shadow">
+                                    <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="dropdown-item">
+                                        <i class="fa-fw fad fa-edit"></i>
+                                        <span i18n="menu_rename">.</span>
+                                    </button>
+                                    <button id="btn-rm-file_<% obj[x].ukey %>" class="dropdown-item" onclick="TL.workspace_del('<% obj[x].ukey %>')">
+                                        <i class="fa-fw fad fa-trash"></i>
+                                        <span i18n="menu_delete">.</span>
+                                    </button>
+                                    <% if(TL.media.is_allow(obj[x].ftype)){ %>
+                                    <button class="dropdown-item" onclick="TL.media.video_add('<% obj[x].ukey %>')">
+                                        <i class="fa-fw fab fa-youtube"></i>
+                                        <span i18n="menu_add_to_media_video">.</span>
+                                    </button>
+                                    <% } %>
+                                </div>
+                            </span>
                         </div>
                         <div class="col-12 col-md-12 col-lg-3 my-1 d-flex flex-row align-items-center justify-content-center file_relay_<% obj[x].ukey %>">
                             <div class="d-block w-100">
@@ -234,7 +256,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 download_progress_bar_<% obj[x].ukey %>" style="display:none">
+                        <div class="col-12 download_progress_bar_<% obj[x].ukey %> mb-1" style="display:none">
                             <div class="progress" style="height: 5px;">
                                 <div class="progress-bar bg-success download_progress_bar_set_<% obj[x].ukey %>" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
