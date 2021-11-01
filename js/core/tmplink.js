@@ -4,6 +4,7 @@ class tmplink {
     api_url_upload = this.api_url + '/file'
     api_file = this.api_url + '/file'
     api_user = this.api_url + '/user'
+    api_media = this.api_url + '/media'
     api_mr = this.api_url + '/meetingroom'
     api_toks = this.api_url + '/token'
     api_token = null
@@ -62,7 +63,9 @@ class tmplink {
         this.api_init();
         //初始化管理器
         this.file_manager = new tools_file_manager;
+        this.media = new media;
         this.file_manager.init(this);
+        this.media.init(this);
         this.upload_model_selected_val = localStorage.getItem('app_upload_model') === null ? 0 : localStorage.getItem('app_upload_model');
 
         var token = localStorage.getItem('app_token');
@@ -99,7 +102,6 @@ class tmplink {
                     this.details_init();
                 }
             });
-
         });
 
         this.lazyLoadInstance = new LazyLoad({
@@ -146,8 +148,12 @@ class tmplink {
     }
 
     bg_load() {
+        let url = this.get_url_params('tmpui_page');
         if (document.querySelector('#background_wrap_preload') == null) {
-            $('body').append('<div id="background_wrap_preload" style="z-index: -1;background-color:black; position: fixed;top: 0;left: 0;height: 100%;width: 100%;"></div>');
+            $('body').append('<div id="background_wrap_preload" style="z-index: -1;background-color:#383838; position: fixed;top: 0;left: 0;height: 100%;width: 100%;"></div>');
+            if (url.tmpui_page == '/media') {
+                return false;
+            }
             let bglist = [1, 2, 3, 4, 5, 6, 7];
             let index = Math.floor((Math.random() * bglist.length));
             let img = new Image();
@@ -161,6 +167,16 @@ class tmplink {
             }
         }
 
+    }
+
+    lazyload(dom) {
+        $(dom).each((i, e) => {
+            let img = new Image();
+            img.src = $(e).attr('preload-src');;
+            img.onload = () => {
+                $(e).attr('src', img.src);
+            }
+        });
     }
 
     app_init() {
@@ -527,16 +543,16 @@ class tmplink {
         }
     }
 
-    workspace_add(id, ukey,animated) {
+    workspace_add(id, ukey, animated) {
         $(id).attr('disabled', true);
         $.post(this.api_file, {
             action: 'add_to_workspace',
             token: this.api_token,
             ukey: ukey
         }, (rsp) => {
-            if(animated===false){
+            if (animated === false) {
                 return false;
-            }else{
+            } else {
                 $(id).html('<i class="fas fa-check-circle" aria-hidden="true"></i>');
             }
         }, 'json');
@@ -652,7 +668,7 @@ class tmplink {
         });
     }
 
-    is_file_ok(ukey){
+    is_file_ok(ukey) {
         setTimeout(() => {
             $.post(this.api_file, {
                 action: 'is_file_ok',
@@ -661,21 +677,21 @@ class tmplink {
             }, (rsp) => {
                 if (rsp.status == 1) {
                     $(`.file_ok_${ukey}`).removeAttr('style');
-                    $(`.file_relay_${ukey}`).attr('style','display: none !important;');
-                }else{
+                    $(`.file_relay_${ukey}`).attr('style', 'display: none !important;');
+                } else {
                     this.is_file_ok(ukey);
                 }
             }, 'json');
         }, 5000);
     }
 
-    is_file_ok_check(data){
+    is_file_ok_check(data) {
         //prepare file is ok
         for (let i in data) {
             if (data[i].sync === 0) {
-                $(`.file_relay_${data[i].ukey}`).attr('style','display: none !important;');
-            }else{
-                $(`.file_ok_${data[i].ukey}`).attr('style','display: none !important;');
+                $(`.file_relay_${data[i].ukey}`).attr('style', 'display: none !important;');
+            } else {
+                $(`.file_ok_${data[i].ukey}`).attr('style', 'display: none !important;');
                 this.is_file_ok(data[i].ukey);
             }
         }
@@ -706,7 +722,7 @@ class tmplink {
             default:
                 this.workspace_filelist_by_list(data, page);
         }
-
+        app.languageBuild();
     }
 
     workspace_btn_active_reset() {
@@ -727,7 +743,7 @@ class tmplink {
         if (page == 0) {
             $('#workspace_filelist').html('<div class="row" id="filelist_photo"></div>');
         }
-        $('#filelist_photo').append(app.tpl('workspace_filelist_photo_tpl', data));
+        $('#workspace_filelist').append(app.tpl('workspace_filelist_photo_tpl', data));
         this.btn_copy_bind();
         this.is_file_ok_check(data);
         app.linkRebind();
@@ -935,7 +951,7 @@ class tmplink {
                                         $('#btn_add_to_workspace_icon').addClass('text-cyan');
                                         $('#btn_add_to_workspace_icon').removeClass('text-red');
                                     }, 3000);
-                                    this.workspace_add('#btn_add_to_workspace', params.ukey,false);
+                                    this.workspace_add('#btn_add_to_workspace', params.ukey, false);
                                 } else {
                                     app.open('/login');
                                 }
@@ -1684,7 +1700,7 @@ class tmplink {
         let key = this.get_page_mrid();
         if (key == undefined) {
             key = 'workspace';
-        } 
+        }
 
         return {
             view: 'app_room_view_' + key,
@@ -2084,6 +2100,7 @@ class tmplink {
                 this.mr_file_by_list(data, page);
         }
         this.is_file_ok_check(data);
+        app.languageBuild();
     }
 
     room_total(mrid) {

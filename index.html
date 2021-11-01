@@ -59,6 +59,7 @@
                     "/plugin/tabler/min.css": { "type": "css", "reload": false },
                     "/js/core/tools_file_manager.js": { "type": "js", "reload": false },
                     "/js/core/function.js": { "type": "js", "reload": false },
+                    "/js/core/media.js": { "type": "js", "reload": false },
                     "/js/core/tmplink.js": { "type": "js", "reload": false },
                     "/css/reset.css": { "type": "css", "reload": false },
                     "/tpl/include/gtpl.html": { "type": "tpl", "reload": false },
@@ -150,6 +151,16 @@
                         "/css/index.css": { "type": "css" },
                         "/js/init/init_workspace.js": { "type": "js" },
                         "/tpl/workspace.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                },
+                "/media": {
+                    "title": "媒体库",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/index.css": { "type": "css" },
+                        "/js/init/init_media.js": { "type": "js" },
+                        "/tpl/media.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
                 "/dir": {

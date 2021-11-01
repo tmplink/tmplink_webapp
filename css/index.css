@@ -250,7 +250,7 @@ body::-webkit-scrollbar-corner {
     border-radius: 5px;
 }
 
-.select-box:hover{
+.select-box:hover {
     background-color: azure;
 }
 
@@ -274,4 +274,10 @@ body::-webkit-scrollbar-corner {
     border-radius: 5px;
     border-width: 1px;
     background-color: rgb(220, 236, 245);
+}
+
+.media-card{
+    border-radius: 8px;
+    color: azure;
+    background-color: #181818;
 }

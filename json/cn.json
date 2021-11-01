@@ -20,6 +20,10 @@
     "title_meetingroom": "钛盘 - 桌面",
     "des_room": "文件夹 - 文件清单",
     "title_room": "钛盘 - 文件夹",
+    "des_media": "媒体库 - 家庭娱乐宝地",
+    "title_media": "钛盘 - 媒体库",
+
+
 
     "sort_title":"排序方式",
     "sort_asc":"顺序",
@@ -134,7 +138,10 @@
     "file_btn_qr_mobile": "扫码下载",
     "file_unavailable": "文件已失效",
 
-
+    "media_title":"媒体库",
+    "media_leads":"你的宝库",
+    "media_processing":"正在处理",
+    "media_now":"最近抵达",
 
     "workspace_title": "流",
     "workspace_des": "近期上传的文件都在这里。",
@@ -443,6 +450,15 @@
     "status_error_15": "提取码错误。",
 
     "confirm_delete": "确定要删除吗？",
+
+    "menu_delete":"删除文件",
+    "menu_rename":"重命名",
+    "menu_add_to_media_video":"加入到媒体库",
+
+    "status_ok":"完成",
+    "status_media_not_allow":"不支持的文件类型",
+    "status_media_not_found":"无法找到文件",
+    "status_media_added":"已添加",
 
     "upload_or_drag": "拖动文件到此位置，或者选择文件上传",
     "upload_files": "上传文件",
