@@ -6,6 +6,8 @@
         </div>
     </div>
 </div>
+
+
 <nav class="mainNav navbar  navbar-light d-none d-sm-flex">
     <div class="container">
         <a class="navbar-brand" href="javascript:void(0)" onclick="app.open('/');">
@@ -29,6 +31,10 @@
                     <button class="btn btn-primary mt-1 my-sm-0 workspace-navbar" onclick="app.open('/dir');">
                         <i class="fal fa-desktop-alt fa-fw"></i>
                         <span i18n="navbar_meetingroom">.</span>
+                    </button>
+                    <button class="btn btn-primary mt-1 my-sm-0 workspace-navbar" onclick="app.open('/media');">
+                        <i class="fal fa-video fa-fw"></i>
+                        <span i18n="navbar_media">.</span>
                     </button>
                 </div>
                 <button class="btn btn-primary mt-1 mx-1 my-sm-0 workspace-nologin" onclick="app.open('/login');">
@@ -89,53 +95,74 @@
         </div>
     </div>
 </nav>
-<nav class="mainNav navbar  navbar-light fixed-top d-flex d-sm-none">
+
+
+<nav class="mainNav fixed-bottom d-sm-none bg-light p-2">
     <!--[mobile]-->
-    <div class="container justify-content-center">
+    <div class="container text-center">
         <img class="navbar_nloading" src="/img/load_2.gif" style="height:40px;" />
-
-        <div class="form-inline my-1 my-lg-0 navbar_ready text-center" style="display: none;">
-            <button class="mt-1 mr-1 btn-sm btn btn-primary workspace-nologin" onclick="app.open('/login');">
-                <i class="fad fa-sign-in fa-fw"></i>
-            </button>
-            <button class="mt-1 mr-1 btn-sm btn btn-primary workspace-nologin" onclick="app.open('/reg');">
-                <i class="fad fa-user-plus fa-fw"></i>
-            </button>
-            <div class="btn-group mr-1">
-                <button class="mt-1 btn-sm btn btn-primary workspace-navbar" onclick="app.open('/workspace');">
-                    <i class="far fa-file-search fa-fw"></i>
-                </button>
-                <button class="mt-1 btn-sm btn btn-primary workspace-navbar" onclick="app.open('/dir');">
-                    <i class="far fa-folder fa-fw"></i>
-                </button>
-            </div>
-
-            <div class="mt-1 mr-1 btn-group workspace-navbar">
-                <button type="button" class="btn-sm btn btn-success dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="far fa-cog fa-fw"></i>
+    </div>
+    <div class="row text-center">
+        <div class="col-4">
+            <div class="btn-group dropup">
+                <button type="button" class="btn" data-toggle="dropdown">
+                    <div class="d-flex flex-column">
+                        <i class="far fa-cog fa-fw mx-auto" id="navbar_model_icon"></i>
+                        <span id="navbar_model_text"></span>
+                    </div>
                 </button>
                 <div class="dropdown-menu shadow">
-                    <span class="dropdown-item-text" i18n="navbar_settings">.</span>
+                    <button class="dropdown-item" onclick="app.open('/workspace');">
+                        <i class="far fa-file-search fa-fw"></i>
+                        <span i18n="navbar_workspace">.</span>
+                    </button>
+                    <button class="dropdown-item" onclick="app.open('/dir');">
+                        <i class="fal fa-desktop-alt fa-fw"></i>
+                        <span i18n="navbar_meetingroom">.</span>
+                    </button>
+                    <button class="dropdown-item" onclick="app.open('/media');">
+                        <i class="fal fa-video fa-fw"></i>
+                        <span i18n="navbar_media">.</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="btn-group dropup">
+                <button type="button" class="btn" data-toggle="dropdown">
+                    <div class="d-flex flex-column">
+                        <i class="far fa-cog fa-fw mx-auto"></i>
+                        <span i18n="navbar_settings">.</span>
+                    </div>
+                </button>
+                <div class="dropdown-menu shadow">
+                    <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');"
                         i18n="navbar_reset_password">.</a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#emailModal').modal('show');"
                         i18n="navbar_reset_email">.</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#profileModal').modal('show');">
+                        <span i18n="navbar_profile">.</span>
+                        <!-- <span class="badge badge-pill badge-danger">new</span> -->
+                    </a>
                     <a class="dropdown-item" href="javascript:void(0)"
                         onclick="$('#ordersModal').modal('show');TL.orders_list();" i18n="navbar_orders">.</a>
                     <hr>
-                    <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span>
+                    <span class="dropdown-item-text" i18n="navbar_hr_shop">.</span>
                     <!-- <a class="dropdown-item" href="javascript:void(0)" onclick="TL.buy_select_open('hs');"
                         i18n="navbar_buy_hs">.</a> -->
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.buy_select_open('storage');"
                         i18n="navbar_buy_storage">.</a>
                 </div>
             </div>
-
-            <div class="mt-1 mr-1 btn-group">
-                <button type="button" class="btn-sm btn btn-success dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span>
+        </div>
+        <div class="col-4">
+            <div class="btn-group dropup">
+                <button type="button" class="btn" data-toggle="dropdown">
+                    <div class="d-flex flex-column">
+                        <i class="fad fa-language fa-fw mx-auto"></i>
+                        <span class="selected_lang">.</span>
+                    </div>
                 </button>
                 <div class="dropdown-menu shadow">
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('cn');">中文</a>
@@ -143,16 +170,37 @@
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
                 </div>
             </div>
-
-            <button class="mt-1 btn-sm btn btn-danger workspace-navbar" onclick="TL.logout();">
-                <i class="far fa-power-off fa-fw"></i>
-            </button>
         </div>
     </div>
+    <!-- <div id="buttonGroup" class="btn-group selectors" role="group">
+        <button id="home" type="button" class="btn btn-secondary button-inactive">
+            <div class="selector-holder">
+                <i class="far fa-file-search fa-fw mx-auto"></i>
+                <span>流</span>
+            </div>
+        </button>
+        <button id="create" type="button" class="btn btn-secondary button-inactive">
+            <div class="selector-holder text-center">
+                <i class="far fa-cog fa-fw mx-auto"></i>
+                <span>设置</span>
+            </div>
+        </button>
+        <div class="btn-group dropup">
+            <button type="button" class="btn btn-secondary button-inactive selector-holder text-center" data-toggle="dropdown">
+                <i class="fad fa-language fa-fw mx-auto"></i>
+                <span class="selected_lang">.</span>
+            </button>
+            <div class="dropdown-menu shadow">
+                <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('cn');">中文</a>
+                <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('en');">English</a>
+                <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
+            </div>
+        </div>
+    </div> -->
 </nav>
 
 <div class="d-none d-sm-flex" style="height: 20px;"></div>
-<div class="d-flex d-sm-none" style="height: 60px;"></div>
+<!-- <div class="d-flex d-sm-none" style="height: 60px;"></div> -->
 <script>
     TL.head_set_refresh();
 </script>

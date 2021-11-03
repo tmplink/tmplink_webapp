@@ -64,8 +64,13 @@ class tmplink {
         //初始化管理器
         this.file_manager = new tools_file_manager;
         this.media = new media;
+        this.navbar = new navbar;
+
         this.file_manager.init(this);
         this.media.init(this);
+
+        // this.navbar.init(this); //此函数需要等待语言包加载完毕才可执行
+
         this.upload_model_selected_val = localStorage.getItem('app_upload_model') === null ? 0 : localStorage.getItem('app_upload_model');
 
         var token = localStorage.getItem('app_token');
@@ -145,6 +150,7 @@ class tmplink {
 
     languageData_init(lang) {
         this.languageData = lang;
+        this.navbar.init(this);
     }
 
     bg_load() {
@@ -2331,6 +2337,9 @@ class tmplink {
         }
         $('.selected_lang').html(span_lang);
         app.languageSet(lang);
+        //重新初始化导航，目前有一个小问题，无法刷新导航，暂时不管。
+        //this.navbar.init(this);
+        //console.log('navbar reinit');
     }
 
     logout() {
