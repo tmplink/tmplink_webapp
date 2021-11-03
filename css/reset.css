@@ -3037,8 +3037,7 @@ input[type="button"].btn-block {
 
 .fade {
   transition: opacity 0.15s linear;
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
+  background-color: white;
 }
 
 @media (prefers-reduced-motion: reduce) {
