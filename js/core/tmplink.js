@@ -1466,6 +1466,21 @@ class tmplink {
         this.btn_copy_bind();
     }
 
+    media_buy_modal(type) {
+        if (this.logined === 0) {
+            this.alert(this.languageData.status_need_login);
+            return false;
+        }
+
+        //隐藏不同类型币种的价格列表
+        $('.media_price_list').hide();
+        //显示当前币种的价格列表
+        $('#media_price_of_' + type).show();
+
+        $('#mediaModal').modal('show');
+    }
+
+
     storage_buy_modal(type) {
         if (this.logined === 0) {
             this.alert(this.languageData.status_need_login);
@@ -1498,6 +1513,9 @@ class tmplink {
             }
             if (this.buy_type == 'storage') {
                 this.storage_buy_modal(type);
+            }
+            if (this.buy_type == 'media') {
+                this.media_buy_modal(type);
             }
         }, 500);
 
@@ -1596,13 +1614,7 @@ class tmplink {
                 price = 6 * time;
                 break;
             case '1TB':
-                price = 15 * time;
-                break;
-            case '3TB':
-                price = 38 * time;
-                break;
-            case '10TB':
-                price = 98 * time;
+                price = 18 * time;
                 break;
 
             case '256GB-us':
@@ -1611,11 +1623,40 @@ class tmplink {
             case '1TB-us':
                 price = 3 * time;
                 break;
-            case '3TB-us':
-                price = 7 * time;
+        }
+        if (this.buy_currency == 'cny') {
+            window.open("https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=addon&prepare_times=" + time, '_blank');
+        } else {
+            window.open('https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=addon&prepare_code=' + code + '&prepare_times=' + time, '_blank');
+        }
+    }
+
+    media_buy() {
+        if (this.logined === 0) {
+            this.alert(this.this.languageData.status_need_login);
+            return false;
+        }
+        var price = 0;
+        let code = 0;
+        if (this.buy_currency == 'cny') {
+            code = $('#media_code_cny').val();
+        } else {
+            code = $('#media_code_usd').val();
+        }
+        let time = $('#media_time').val();
+        switch (code) {
+            case 'MEDIA-V-P':
+                price = 6 * time;
                 break;
-            case '10TB-us':
-                price = 21 * time;
+            case 'MEDIA-V-H':
+                price = 18 * time;
+                break;
+
+            case 'MEDIA-V-P-us':
+                price = 1 * time;
+                break;
+            case 'MEDIA-V-H-us':
+                price = 3 * time;
                 break;
         }
         if (this.buy_currency == 'cny') {
@@ -1635,7 +1676,6 @@ class tmplink {
                 $('#orders_addon_contents').html('<div class="text-center"><i class="fa-fw fad fa-folder-open fa-4x"></i></div>');
             } else {
                 $('#orders_addon_contents').html('<div class="row" id="orders_services_contents"></div>');
-
                 var service_list = rsp.data.service;
                 var r = this.service_code(service_list);
                 $('#order_list').html(app.tpl('order_list_tpl', r));
@@ -1663,6 +1703,11 @@ class tmplink {
                     r[i].name = this.languageData.service_code_storage + ' (' + this.bytetoconver(data[i].val, true) + ')';
                     r[i].des = this.languageData.service_code_storage_des;
                     r[i].icon = 'fad fa-box-heart';
+                    break;
+                case 'media-video':
+                    r[i].name = this.languageData.service_code_media + ' (' + this.bytetoconver(data[i].val, true) + ')';
+                    r[i].des = this.languageData.service_code_media_des;
+                    r[i].icon = 'fal fa-video';
                     break;
             }
         }

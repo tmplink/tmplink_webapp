@@ -31,6 +31,12 @@ class media {
                 if (rsp.status == 4) {
                     alert(this.parent.languageData.status_media_added);
                 }
+                if (rsp.status == 5) {
+                    alert(this.parent.languageData.status_media_resolution);
+                }
+                if (rsp.status == 6) {
+                    alert(this.parent.languageData.status_media_duration);
+                }
             });
         });
     }
