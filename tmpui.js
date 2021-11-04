@@ -727,7 +727,7 @@ class tmpUI {
 
         if (!this.loadingPageInit) {
 
-            this.htmlAppend('#tmpui', '<div id="tmpui_loading_bg" style="background-color: rgba(255, 255, 255, 0.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter: saturate(180%) blur(20px);"></div>');
+            this.htmlAppend('#tmpui', '<div id="tmpui_loading_bg" style="background-color: rgba(255, 255, 255);"></div>');
             this.htmlAppend('#tmpui_loading_bg', '<div id="tmpui_loading_show"></div>');
             this.htmlAppend('#tmpui_loading_show', '<div style="text-align:center;margin-bottom:20px;" id="tmpui_loading_content"></div>');
 

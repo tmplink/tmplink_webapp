@@ -4,6 +4,7 @@ class tmplink {
     api_url_upload = this.api_url + '/file'
     api_file = this.api_url + '/file'
     api_user = this.api_url + '/user'
+    api_media = this.api_url + '/media'
     api_mr = this.api_url + '/meetingroom'
     api_toks = this.api_url + '/token'
     api_token = null
@@ -62,7 +63,14 @@ class tmplink {
         this.api_init();
         //初始化管理器
         this.file_manager = new tools_file_manager;
+        this.media = new media;
+        this.navbar = new navbar;
+
         this.file_manager.init(this);
+        this.media.init(this);
+
+        // this.navbar.init(this); //此函数需要等待语言包加载完毕才可执行
+
         this.upload_model_selected_val = localStorage.getItem('app_upload_model') === null ? 0 : localStorage.getItem('app_upload_model');
 
         var token = localStorage.getItem('app_token');
@@ -99,7 +107,6 @@ class tmplink {
                     this.details_init();
                 }
             });
-
         });
 
         this.lazyLoadInstance = new LazyLoad({
@@ -143,11 +150,16 @@ class tmplink {
 
     languageData_init(lang) {
         this.languageData = lang;
+        this.navbar.init(this);
     }
 
     bg_load() {
+        // let url = this.get_url_params('tmpui_page');
         if (document.querySelector('#background_wrap_preload') == null) {
-            $('body').append('<div id="background_wrap_preload" style="z-index: -1;background-color:black; position: fixed;top: 0;left: 0;height: 100%;width: 100%;"></div>');
+            $('body').append('<div id="background_wrap_preload" style="z-index: -1;background-color:#383838; position: fixed;top: 0;left: 0;height: 100%;width: 100%;"></div>');
+            // if (url.tmpui_page == '/media') {
+            //     return false;
+            // }
             let bglist = [1, 2, 3, 4, 5, 6, 7];
             let index = Math.floor((Math.random() * bglist.length));
             let img = new Image();
@@ -161,6 +173,20 @@ class tmplink {
             }
         }
 
+    }
+
+    lazyload(dom) {
+        $(dom).each((i, e) => {
+            let img = new Image();
+            let url = $(e).attr('preload-src');
+            if (url !== undefined) {
+                img.src = url;
+                img.onload = () => {
+                    $(e).attr('src', img.src);
+                }
+            }
+
+        });
     }
 
     app_init() {
@@ -527,16 +553,16 @@ class tmplink {
         }
     }
 
-    workspace_add(id, ukey,animated) {
+    workspace_add(id, ukey, animated) {
         $(id).attr('disabled', true);
         $.post(this.api_file, {
             action: 'add_to_workspace',
             token: this.api_token,
             ukey: ukey
         }, (rsp) => {
-            if(animated===false){
+            if (animated === false) {
                 return false;
-            }else{
+            } else {
                 $(id).html('<i class="fas fa-check-circle" aria-hidden="true"></i>');
             }
         }, 'json');
@@ -652,7 +678,7 @@ class tmplink {
         });
     }
 
-    is_file_ok(ukey){
+    is_file_ok(ukey) {
         setTimeout(() => {
             $.post(this.api_file, {
                 action: 'is_file_ok',
@@ -661,21 +687,21 @@ class tmplink {
             }, (rsp) => {
                 if (rsp.status == 1) {
                     $(`.file_ok_${ukey}`).removeAttr('style');
-                    $(`.file_relay_${ukey}`).attr('style','display: none !important;');
-                }else{
+                    $(`.file_relay_${ukey}`).attr('style', 'display: none !important;');
+                } else {
                     this.is_file_ok(ukey);
                 }
             }, 'json');
         }, 5000);
     }
 
-    is_file_ok_check(data){
+    is_file_ok_check(data) {
         //prepare file is ok
         for (let i in data) {
             if (data[i].sync === 0) {
-                $(`.file_relay_${data[i].ukey}`).attr('style','display: none !important;');
-            }else{
-                $(`.file_ok_${data[i].ukey}`).attr('style','display: none !important;');
+                $(`.file_relay_${data[i].ukey}`).attr('style', 'display: none !important;');
+            } else {
+                $(`.file_ok_${data[i].ukey}`).attr('style', 'display: none !important;');
                 this.is_file_ok(data[i].ukey);
             }
         }
@@ -706,7 +732,7 @@ class tmplink {
             default:
                 this.workspace_filelist_by_list(data, page);
         }
-
+        app.languageBuild();
     }
 
     workspace_btn_active_reset() {
@@ -727,7 +753,7 @@ class tmplink {
         if (page == 0) {
             $('#workspace_filelist').html('<div class="row" id="filelist_photo"></div>');
         }
-        $('#filelist_photo').append(app.tpl('workspace_filelist_photo_tpl', data));
+        $('#workspace_filelist').append(app.tpl('workspace_filelist_photo_tpl', data));
         this.btn_copy_bind();
         this.is_file_ok_check(data);
         app.linkRebind();
@@ -935,7 +961,7 @@ class tmplink {
                                         $('#btn_add_to_workspace_icon').addClass('text-cyan');
                                         $('#btn_add_to_workspace_icon').removeClass('text-red');
                                     }, 3000);
-                                    this.workspace_add('#btn_add_to_workspace', params.ukey,false);
+                                    this.workspace_add('#btn_add_to_workspace', params.ukey, false);
                                 } else {
                                     app.open('/login');
                                 }
@@ -1444,6 +1470,21 @@ class tmplink {
         this.btn_copy_bind();
     }
 
+    media_buy_modal(type) {
+        if (this.logined === 0) {
+            this.alert(this.languageData.status_need_login);
+            return false;
+        }
+
+        //隐藏不同类型币种的价格列表
+        $('.media_price_list').hide();
+        //显示当前币种的价格列表
+        $('#media_price_of_' + type).show();
+
+        $('#mediaModal').modal('show');
+    }
+
+
     storage_buy_modal(type) {
         if (this.logined === 0) {
             this.alert(this.languageData.status_need_login);
@@ -1476,6 +1517,9 @@ class tmplink {
             }
             if (this.buy_type == 'storage') {
                 this.storage_buy_modal(type);
+            }
+            if (this.buy_type == 'media') {
+                this.media_buy_modal(type);
             }
         }, 500);
 
@@ -1574,13 +1618,7 @@ class tmplink {
                 price = 6 * time;
                 break;
             case '1TB':
-                price = 15 * time;
-                break;
-            case '3TB':
-                price = 38 * time;
-                break;
-            case '10TB':
-                price = 98 * time;
+                price = 18 * time;
                 break;
 
             case '256GB-us':
@@ -1589,11 +1627,40 @@ class tmplink {
             case '1TB-us':
                 price = 3 * time;
                 break;
-            case '3TB-us':
-                price = 7 * time;
+        }
+        if (this.buy_currency == 'cny') {
+            window.open("https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=addon&prepare_times=" + time, '_blank');
+        } else {
+            window.open('https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=addon&prepare_code=' + code + '&prepare_times=' + time, '_blank');
+        }
+    }
+
+    media_buy() {
+        if (this.logined === 0) {
+            this.alert(this.this.languageData.status_need_login);
+            return false;
+        }
+        var price = 0;
+        let code = 0;
+        if (this.buy_currency == 'cny') {
+            code = $('#media_code_cny').val();
+        } else {
+            code = $('#media_code_usd').val();
+        }
+        let time = $('#media_time').val();
+        switch (code) {
+            case 'MEDIA-V-P':
+                price = 6 * time;
                 break;
-            case '10TB-us':
-                price = 21 * time;
+            case 'MEDIA-V-H':
+                price = 18 * time;
+                break;
+
+            case 'MEDIA-V-P-us':
+                price = 1 * time;
+                break;
+            case 'MEDIA-V-H-us':
+                price = 3 * time;
                 break;
         }
         if (this.buy_currency == 'cny') {
@@ -1613,7 +1680,6 @@ class tmplink {
                 $('#orders_addon_contents').html('<div class="text-center"><i class="fa-fw fad fa-folder-open fa-4x"></i></div>');
             } else {
                 $('#orders_addon_contents').html('<div class="row" id="orders_services_contents"></div>');
-
                 var service_list = rsp.data.service;
                 var r = this.service_code(service_list);
                 $('#order_list').html(app.tpl('order_list_tpl', r));
@@ -1641,6 +1707,11 @@ class tmplink {
                     r[i].name = this.languageData.service_code_storage + ' (' + this.bytetoconver(data[i].val, true) + ')';
                     r[i].des = this.languageData.service_code_storage_des;
                     r[i].icon = 'fad fa-box-heart';
+                    break;
+                case 'media-video':
+                    r[i].name = this.languageData.service_code_media + ' (' + this.bytetoconver(data[i].val, true) + ')';
+                    r[i].des = this.languageData.service_code_media_des;
+                    r[i].icon = 'fal fa-video';
                     break;
             }
         }
@@ -1684,7 +1755,7 @@ class tmplink {
         let key = this.get_page_mrid();
         if (key == undefined) {
             key = 'workspace';
-        } 
+        }
 
         return {
             view: 'app_room_view_' + key,
@@ -2084,6 +2155,7 @@ class tmplink {
                 this.mr_file_by_list(data, page);
         }
         this.is_file_ok_check(data);
+        app.languageBuild();
     }
 
     room_total(mrid) {
@@ -2314,6 +2386,9 @@ class tmplink {
         }
         $('.selected_lang').html(span_lang);
         app.languageSet(lang);
+        //重新初始化导航，目前有一个小问题，无法刷新导航，暂时不管。
+        //this.navbar.init(this);
+        //console.log('navbar reinit');
     }
 
     logout() {
