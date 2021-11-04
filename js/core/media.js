@@ -11,6 +11,39 @@ class media {
         return this.allow_ext.indexOf(ext) > -1;
     }
 
+    is_video_ok(id,sha1) {
+        setTimeout(() => {
+            $.post(this.parent.api_media, {
+                action: 'is_video_ok',
+                token: this.parent.api_token,
+                id: id
+            }, (rsp) => {
+                if (rsp.status == 1) {
+                    $(`.video_ok_${id}`).removeAttr('style');
+                    $(`.video_processing_${id}`).attr('style', 'display: none !important;');
+                    $(`#video_img_ok_${id}`).attr('preload-src', `https://getfile.tmp.link/media_img-${sha1}-360x220.jpg`);
+                    this.parent.lazyload('.lazyload');
+                } else {
+                    this.is_video_ok(id,sha1);
+                }
+            }, 'json');
+        }, 5000);
+    }
+
+    is_video_ok_check(data) {
+        //prepare file is ok
+        for (let i in data) {
+            if (data[i].status !== 'ok') {
+                $(`.video_ok_${data[i].id}`).attr('style', 'display: none !important;');
+                this.is_video_ok(data[i].id,data[i].sha1);
+            } else {
+                $(`.video_processing_${data[i].id}`).attr('style', 'display: none !important;');
+                $(`#video_img_ok_${data[i].id}`).attr('preload-src', `https://getfile.tmp.link/media_img-${data[i].sha1}-360x220.jpg`);
+            }
+        }
+        this.parent.lazyload('.lazyload');
+    }
+
     video_add(ukey) {
         this.parent.recaptcha_do('video_add', (captcha) => {
             $.post(this.parent.api_media, {
@@ -37,6 +70,9 @@ class media {
                 if (rsp.status == 6) {
                     alert(this.parent.languageData.status_media_duration);
                 }
+                if (rsp.status == 7) {
+                    alert(this.parent.languageData.status_media_usage);
+                }
             });
         });
     }
@@ -50,7 +86,7 @@ class media {
                 //处理界面
                 let html = app.tpl('vedio_list_tpl', rsp.data);
                 $('#vedio_list').html(html);
-                this.parent.lazyload('.lazyload');
+                this.is_video_ok_check(rsp.data);
             }
         });
     }

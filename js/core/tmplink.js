@@ -154,12 +154,12 @@ class tmplink {
     }
 
     bg_load() {
-        let url = this.get_url_params('tmpui_page');
+        // let url = this.get_url_params('tmpui_page');
         if (document.querySelector('#background_wrap_preload') == null) {
             $('body').append('<div id="background_wrap_preload" style="z-index: -1;background-color:#383838; position: fixed;top: 0;left: 0;height: 100%;width: 100%;"></div>');
-            if (url.tmpui_page == '/media') {
-                return false;
-            }
+            // if (url.tmpui_page == '/media') {
+            //     return false;
+            // }
             let bglist = [1, 2, 3, 4, 5, 6, 7];
             let index = Math.floor((Math.random() * bglist.length));
             let img = new Image();
@@ -178,10 +178,14 @@ class tmplink {
     lazyload(dom) {
         $(dom).each((i, e) => {
             let img = new Image();
-            img.src = $(e).attr('preload-src');;
-            img.onload = () => {
-                $(e).attr('src', img.src);
+            let url = $(e).attr('preload-src');
+            if (url !== undefined) {
+                img.src = url;
+                img.onload = () => {
+                    $(e).attr('src', img.src);
+                }
             }
+
         });
     }
 
