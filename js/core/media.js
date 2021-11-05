@@ -1,7 +1,7 @@
 class media {
 
     parent = null
-    allow_ext = ['mp4', 'm4v', 'rm', 'rmvb', 'webm', 'mkv', 'avi', 'ts']
+    allow_ext = ['mp4', 'm4v', 'rm', 'rmvb', 'webm', 'mkv', 'avi', 'ts', 'm2ts']
 
     init(parent) {
         this.parent = parent;
