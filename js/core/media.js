@@ -49,7 +49,7 @@ class media {
         this.parent.lazyload('.lazyload');
     }
 
-    video_add(ukey) {
+    video_add(ukey,cb) {
         this.parent.recaptcha_do('video_add', (captcha) => {
             $.post(this.parent.api_media, {
                 action: 'video_add',
@@ -57,26 +57,40 @@ class media {
                 token: this.parent.api_token,
                 ukey: ukey
             }, (rsp) => {
+                let text = '';
+                let status = false;
                 if (rsp.status == 1) {
-                    alert(this.parent.languageData.status_ok);
+                    text = this.parent.languageData.status_ok;
+                    status = true;
                 }
                 if (rsp.status == 2) {
-                    alert(this.parent.languageData.status_media_not_found);
+                    text = this.parent.languageData.status_media_not_found;
+                    status = false;
                 }
                 if (rsp.status == 3) {
-                    alert(this.parent.languageData.status_media_not_allow);
+                    text = this.parent.languageData.status_media_not_allow;
+                    status = false;
                 }
                 if (rsp.status == 4) {
-                    alert(this.parent.languageData.status_media_added);
+                    text = this.parent.languageData.status_media_added;
+                    status = true;
                 }
                 if (rsp.status == 5) {
-                    alert(this.parent.languageData.status_media_resolution);
+                    text = this.parent.languageData.status_media_resolution;
+                    status = false;
                 }
                 if (rsp.status == 6) {
-                    alert(this.parent.languageData.status_media_duration);
+                    text = this.parent.languageData.status_media_duration;
+                    status = false;
                 }
                 if (rsp.status == 7) {
-                    alert(this.parent.languageData.status_media_usage);
+                    text = this.parent.languageData.status_media_usage;
+                    status = false;
+                }
+                if (typeof cb == 'function') {
+                    cb(status,text);
+                }else{
+                    alert(text);
                 }
             });
         });
