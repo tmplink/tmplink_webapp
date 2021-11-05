@@ -837,6 +837,7 @@ class tmplink {
                         }
                     });
 
+
                     //更换图标
                     let icon = this.fileicon(rsp.data.type);
                     $('#file-icon').attr('class', 'fa-fw text-azure fa-3x ' + icon);
@@ -925,6 +926,25 @@ class tmplink {
                                 $('#qrModal').modal('show');
                                 return true;
                             });
+
+                            //如果可以，加入到媒体库
+                            if(this.media.is_allow(rsp.data.name)){
+                                //绑定按钮
+                                $('#btn_add_to_media').on('click', () => {
+                                    if (this.logined == 1) {
+                                        $('#menu_add_to_media_video').html(this.languageData.form_btn_processing);
+                                        this.media.video_add(params.ukey,(status,text)=>{
+                                            if(status){
+                                                $('#btn_add_to_media_icon').removeClass('text-cyan');
+                                                $('#btn_add_to_media_icon').addClass('text-red');
+                                            }
+                                            $('#menu_add_to_media_video').html(text);
+                                            //remove event
+                                            $('#btn_add_to_media').off('click');
+                                        });
+                                    } 
+                                });
+                            }
 
                             //复制链接按钮绑定
                             $('#file_download_url_copy').on('click', () => {
