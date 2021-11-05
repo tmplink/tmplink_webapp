@@ -937,8 +937,10 @@ class tmplink {
                                             if(status){
                                                 $('#btn_add_to_media_icon').removeClass('text-cyan');
                                                 $('#btn_add_to_media_icon').addClass('text-red');
+                                                $('#menu_add_to_media_video').html(text);
+                                            }else{
+                                                alert(text);
                                             }
-                                            $('#menu_add_to_media_video').html(text);
                                             //remove event
                                             $('#btn_add_to_media').off('click');
                                         });
