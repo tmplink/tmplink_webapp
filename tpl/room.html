@@ -317,7 +317,15 @@
                                                 <% } %>   
                                             </div>
                                         </span>
-                                    <% } %>    
+                                    <% } %>
+                                    <% if (TL.room.owner != 1) { %>
+                                        <% if(TL.media.is_allow(obj[x].fname)){ %>
+                                            <button class="text-azure btn_copy btn btn-sm btn-light add-to-media-<% obj[x].ukey %>" onclick="TL.media.video_add_on_list('<% obj[x].ukey %>')">
+                                                <i class="fa-fw fab fa-youtube add-to-media-btn-<% obj[x].ukey %>"></i>
+                                            </button>
+                                        <% } %> 
+                                    <% } %>
+
                             </div>
                             <div class="col-12 col-md-12 col-lg-3 my-1 d-flex flex-row align-items-center justify-content-center file_relay_<% obj[x].ukey %>">
                                 <div class="d-block w-100">

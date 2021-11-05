@@ -49,6 +49,25 @@ class media {
         this.parent.lazyload('.lazyload');
     }
 
+    video_add_on_list(ukey){
+        //锁定按钮
+        let dom = '.add-to-media-'+ukey;
+        let dombtn = '.add-to-media-btn-'+ukey;
+        let dombtnc = 'add-to-media-btn-'+ukey;
+        $(dom).attr('disabled', 'disabled');
+        //修改图标为加载中
+        $(dom).html(`<i class="fa-fw fa fa-spinner fa-spin ${dombtnc}"></i>`);
+        this.video_add(ukey,(status,text)=>{
+            //恢复图标
+            $(dom).html(`<i class="fa-fw fab fa-youtube ${dombtnc}"></i>`);
+            if(status){
+                $(dombtn).addClass('text-red');
+            }else{
+                alert(text);
+            }
+        });
+    }
+
     video_add(ukey,cb) {
         this.parent.recaptcha_do('video_add', (captcha) => {
             $.post(this.parent.api_media, {
