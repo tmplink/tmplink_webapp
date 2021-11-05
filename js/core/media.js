@@ -1,14 +1,19 @@
 class media {
 
     parent = null
-    allow_ext = ['mp4', 'm4v', 'rm', 'rmvb', 'webm', 'mkv', 'avi', 'ts']
+    allow_ext = ['mp4', 'm4v', 'rm', 'rmvb', 'webm', 'mkv', 'avi', 'ts', 'm2ts']
 
     init(parent) {
         this.parent = parent;
     }
 
-    is_allow(ext) {
-        return this.allow_ext.indexOf(ext) > -1;
+    is_allow(filename) {
+        for(let i in this.allow_ext) {
+            if (filename.indexOf(this.allow_ext[i]) > -1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     is_video_ok(id,sha1) {
