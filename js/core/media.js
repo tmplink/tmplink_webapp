@@ -7,8 +7,13 @@ class media {
         this.parent = parent;
     }
 
-    is_allow(ext) {
-        return this.allow_ext.indexOf(ext) > -1;
+    is_allow(filename) {
+        for(let i in this.allow_ext) {
+            if (filename.indexOf(this.allow_ext[i]) > -1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     is_video_ok(id,sha1) {
