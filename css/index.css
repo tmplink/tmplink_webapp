@@ -278,6 +278,6 @@ body::-webkit-scrollbar-corner {
 
 .media-card {
     border-radius: 8px;
-    color: azure;
-    background-color: #181818;
+    color: #343a40;
+    background-color: #f8f9fa;
 }

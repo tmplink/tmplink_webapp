@@ -160,7 +160,7 @@ class tmplink {
             // if (url.tmpui_page == '/media') {
             //     return false;
             // }
-            let bglist = [1, 2, 3];
+            let bglist = [1, 2];
             let index = Math.floor((Math.random() * bglist.length));
             let img = new Image();
             img.src = '/img/bg/' + bglist[index] + '.jpg';

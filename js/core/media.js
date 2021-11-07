@@ -2,13 +2,14 @@ class media {
 
     parent = null
     allow_ext = ['mp4', 'm4v', 'rm', 'rmvb', 'webm', 'mkv', 'avi', 'ts', 'm2ts']
+    waitting_list = []
 
     init(parent) {
         this.parent = parent;
     }
 
     is_allow(filename) {
-        for(let i in this.allow_ext) {
+        for (let i in this.allow_ext) {
             if (filename.indexOf(this.allow_ext[i]) > -1) {
                 return true;
             }
@@ -16,7 +17,7 @@ class media {
         return false;
     }
 
-    is_video_ok(id,sha1) {
+    is_video_ok(id, sha1) {
         setTimeout(() => {
             $.post(this.parent.api_media, {
                 action: 'is_video_ok',
@@ -24,12 +25,12 @@ class media {
                 id: id
             }, (rsp) => {
                 if (rsp.status == 1) {
-                    $(`.video_ok_${id}`).removeAttr('style');
-                    $(`.video_processing_${id}`).attr('style', 'display: none !important;');
-                    $(`#video_img_ok_${id}`).attr('preload-src', `https://getfile.tmp.link/media_img-${sha1}-360x220.jpg`);
+                    //remove form waitting list and refresh list
+                    this.waitting_list.splice(this.waitting_list.indexOf(id), 1);
+                    this.video_list();
                     this.parent.lazyload('.lazyload');
                 } else {
-                    this.is_video_ok(id,sha1);
+                    this.is_video_ok(id, sha1);
                 }
             }, 'json');
         }, 5000);
@@ -40,7 +41,11 @@ class media {
         for (let i in data) {
             if (data[i].status !== 'ok') {
                 $(`.video_ok_${data[i].id}`).attr('style', 'display: none !important;');
-                this.is_video_ok(data[i].id,data[i].sha1);
+                this.is_video_ok(data[i].id, data[i].sha1);
+                //check and add to waitting list
+                if (this.waitting_list.indexOf(data[i].id) == -1) {
+                    this.waitting_list.push(data[i].id);
+                }
             } else {
                 $(`.video_processing_${data[i].id}`).attr('style', 'display: none !important;');
                 $(`#video_img_ok_${data[i].id}`).attr('preload-src', `https://getfile.tmp.link/media_img-${data[i].sha1}-360x220.jpg`);
@@ -49,26 +54,26 @@ class media {
         this.parent.lazyload('.lazyload');
     }
 
-    video_add_on_list(ukey){
+    video_add_on_list(ukey) {
         //锁定按钮
-        let dom = '.add-to-media-'+ukey;
-        let dombtn = '.add-to-media-btn-'+ukey;
-        let dombtnc = 'add-to-media-btn-'+ukey;
+        let dom = '.add-to-media-' + ukey;
+        let dombtn = '.add-to-media-btn-' + ukey;
+        let dombtnc = 'add-to-media-btn-' + ukey;
         $(dom).attr('disabled', 'disabled');
         //修改图标为加载中
         $(dom).html(`<i class="fa-fw fa fa-spinner fa-spin ${dombtnc}"></i>`);
-        this.video_add(ukey,(status,text)=>{
+        this.video_add(ukey, (status, text) => {
             //恢复图标
             $(dom).html(`<i class="fa-fw fab fa-youtube ${dombtnc}"></i>`);
-            if(status){
+            if (status) {
                 $(dombtn).addClass('text-red');
-            }else{
+            } else {
                 alert(text);
             }
         });
     }
 
-    video_add(ukey,cb) {
+    video_add(ukey, cb) {
         this.parent.recaptcha_do('video_add', (captcha) => {
             $.post(this.parent.api_media, {
                 action: 'video_add',
@@ -107,8 +112,8 @@ class media {
                     status = false;
                 }
                 if (typeof cb == 'function') {
-                    cb(status,text);
-                }else{
+                    cb(status, text);
+                } else {
                     alert(text);
                 }
             });
@@ -166,7 +171,7 @@ class media {
                 token: this.parent.api_token,
                 id: id
             }, () => {
-                $('.video_unit_'+id).remove();
+                $('.video_unit_' + id).remove();
             });
         });
     }
@@ -180,7 +185,7 @@ class media {
             id: id
         }, () => {
             //rename dom
-            $('.video_unit_title_'+id).text(newname);
+            $('.video_unit_title_' + id).text(newname);
         });
     }
 }
