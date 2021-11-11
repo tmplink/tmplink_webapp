@@ -29,7 +29,7 @@
     "status_media_not_found": "File could not be found",
     "status_media_added": "Added",
     "status_media_resolution": "The minimum supported video is 640x480 and the maximum supported video is 4k.",
-    "status_media_duration": "Minimum support 2 minutes, maximum support 5 hours video.",
+    "status_media_duration": "Minimum support 5 seconds, maximum support 5 hours video.",
     "status_media_usage": "Media library capacity is insufficient, please consider purchasing a larger capacity.",
     "upload_sync_onprogress": "In sync",
     "model_profile_title": "Preferences",
