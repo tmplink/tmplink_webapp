@@ -474,7 +474,7 @@
     "status_media_not_found":"无法找到文件",
     "status_media_added":"已添加",
     "status_media_resolution":"最低支持 640x480 ，最大支持 4k 的视频。",
-    "status_media_duration":"最低支持 2 分钟，最长支持 5 小时的视频。",
+    "status_media_duration":"最低支持 5 秒，最长支持 5 小时的视频。",
     "status_media_usage":"媒体库容量不足，请考虑购买更大容量。",
 
 

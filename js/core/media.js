@@ -1,7 +1,7 @@
 class media {
 
     parent = null
-    allow_ext = ['mp4', 'm4v', 'rm', 'rmvb', 'webm', 'mkv', 'avi', 'ts', 'm2ts']
+    allow_ext = ['mp4', 'm4v', 'rm', 'rmvb', 'webm', 'mkv', 'avi', 'ts', 'm2ts', 'mov']
     waitting_list = []
 
     init(parent) {
@@ -10,7 +10,7 @@ class media {
 
     is_allow(filename) {
         for (let i in this.allow_ext) {
-            if (filename.indexOf(this.allow_ext[i]) > -1) {
+            if (filename.toLowerCase().indexOf(this.allow_ext[i]) > -1) {
                 return true;
             }
         }
