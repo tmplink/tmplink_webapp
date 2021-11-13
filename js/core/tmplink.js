@@ -930,6 +930,7 @@ class tmplink {
                             //如果可以，加入到媒体库
                             if(this.media.is_allow(rsp.data.name)){
                                 //绑定按钮
+                                $('#btn_add_to_media').show();
                                 $('#btn_add_to_media').on('click', () => {
                                     if (this.logined == 1) {
                                         $('#menu_add_to_media_video').html(this.languageData.form_btn_processing);
