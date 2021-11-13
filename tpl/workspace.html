@@ -110,6 +110,9 @@
                 </div>
             </div>
 
+            <div id="video_player" class="mb-5" style="width: 100%;display: none;">
+                <video style="border-radius: 10px;width: 100%;" id="video_player_src" type="video/mp4" controls></video>
+            </div>
 
             <div id="workspace_filelist"></div>
 
@@ -182,6 +185,12 @@
                                     <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" class="text-azure mr-1" target="_blank">
                                         <% obj[x].fname %>
                                     </a>
+
+                                    <% if(TL.media.is_allow(obj[x].fname)){ %>
+                                        <span class="badge badge-pill badge-primary btn-point" onclick="TL.media.video_player('<% obj[x].ukey %>')">
+                                            <i class="fa-fw fas fa-play-circle"></i>
+                                        </span>
+                                    <% } %>  
                                     
                                     <% if(obj[x].model!=99){ %>
                                         <!--[在大屏幕上显示]-->

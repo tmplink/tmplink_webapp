@@ -130,7 +130,52 @@ class media {
                 let html = app.tpl('vedio_list_tpl', rsp.data);
                 $('#vedio_list').html(html);
                 this.is_video_ok_check(rsp.data);
+                let length = 0;
+                for (let i in rsp.data) {
+                    length++;
+                }
+                if(length > 3){
+                    $('#video_preview_online').hide();
+                }
             }
+        });
+    }
+
+    video_player(ukey) {
+        //如果有视频正在播放，停止播放
+        if($('#video_player_src').get(0).src){
+            //停止播放
+            document.getElementById('video_player_src').pause();
+        }
+        $('#video_player_src').removeAttr('src');
+        $('#video_player').hide();
+        this.parent.recaptcha_do('video_play', (captcha) => {
+            $.post(this.parent.api_media, {
+                action: 'video_player',
+                token: this.parent.api_token,
+                captcha: captcha,
+                ukey: ukey
+            }, (rsp) => {
+                if (rsp.status == 1) {
+                    $('#video_player').show();
+                    //将页面滚动到最上层
+                    $('html,body').animate({ scrollTop: 0 }, 1000);
+                    //处理界面
+                    $('#video_player_src').attr('src', rsp.data);
+                    //视频就绪时自动播放
+                    $('#video_player_src').on('canplay', function () {
+                        $('#video_player_src').get(0).play();
+                    });
+                }
+                //视频文件尚未加入媒体库
+                if (rsp.status == 2) {
+                    alert(this.parent.languageData.status_media_not_added);
+                }
+                //视频文件尚未就绪
+                if (rsp.status == 3) {
+                    alert(this.parent.languageData.status_media_not_ready);  
+                }
+            });
         });
     }
 
@@ -143,6 +188,8 @@ class media {
                 id: id
             }, (rsp) => {
                 if (rsp.status == 1) {
+                    //加入
+                    $('#video_preview_online').fadeIn();
                     //处理界面
                     $('#video_preview_online_src').attr('src', rsp.data);
                     //将页面滚动到最上层
