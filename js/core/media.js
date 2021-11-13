@@ -130,7 +130,38 @@ class media {
                 let html = app.tpl('vedio_list_tpl', rsp.data);
                 $('#vedio_list').html(html);
                 this.is_video_ok_check(rsp.data);
+                let length = 0;
+                for (let i in rsp.data) {
+                    length++;
+                }
+                if(length > 3){
+                    $('#video_preview_online').hide();
+                }
             }
+        });
+    }
+
+    video_player(id) {
+        this.parent.recaptcha_do('video_play', (captcha) => {
+            $.post(this.parent.api_media, {
+                action: 'video_play',
+                token: this.parent.api_token,
+                captcha: captcha,
+                id: id
+            }, (rsp) => {
+                if (rsp.status == 1) {
+                    //处理界面
+                    $('#video_player_src').attr('src', rsp.data);
+                    //视频就绪时自动播放
+                    $('#video_player_src').on('canplay', function () {
+                        $('#video_player_src').get(0).play();
+                    });
+                }
+                //视频文件尚未就绪
+                if (rsp.status == 2) {
+                    
+                }
+            });
         });
     }
 
@@ -143,6 +174,8 @@ class media {
                 id: id
             }, (rsp) => {
                 if (rsp.status == 1) {
+                    //加入
+                    $('#video_preview_online').fadeIn();
                     //处理界面
                     $('#video_preview_online_src').attr('src', rsp.data);
                     //将页面滚动到最上层
