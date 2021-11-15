@@ -569,14 +569,19 @@ class tmplink {
     }
 
     workspace_del(ukey, group_delete) {
-        if (group_delete !== false) {
+        //如果是批量删除
+        if (group_delete === true) {
+            for(let i in ukey){
+                $('.file_unit_' + ukey[i]).hide();
+            }
+        }else{
             if (this.profile_confirm_delete_get()) {
                 if (!confirm(this.languageData.confirm_delete)) {
                     return false;
                 }
             }
+            $('.file_unit_' + ukey).hide();
         }
-        $('.file_unit_' + ukey).hide();
         $.post(this.api_file, {
             action: 'remove_from_workspace',
             token: this.api_token,
