@@ -69,6 +69,10 @@ class tmplink {
         this.file_manager.init(this);
         this.media.init(this);
 
+        //
+        $('.workspace-navbar').hide();
+        $('.workspace-nologin').hide();
+
         // this.navbar.init(this); //此函数需要等待语言包加载完毕才可执行
 
         this.upload_model_selected_val = localStorage.getItem('app_upload_model') === null ? 0 : localStorage.getItem('app_upload_model');
