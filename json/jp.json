@@ -1,4 +1,6 @@
 {
+    "status_media_not_added": "このビデオはメディアライブラリに追加されていないため、オンラインでは再生できません。 まずはディアライブラリーに追加してください。 \nブラウザでのオンライン再生に対応した動画に変換されます。" ,
+    "status_media_not_ready": "このビデオは、オンライン再生に対応したビデオに変換中ですので、しばらくお待ちください。 \nディアライブラリで変換の進捗状況を確認することができます。" ,
     "des_media": "メディアライブラリ-ホームエンターテインメントの宝物",
     "title_media": "チタンディスク-メディアライブラリ",
     "navbar_buy_media": "メディア",
@@ -29,7 +31,7 @@
     "status_media_not_found": "ファイルが見つかりません",
     "status_media_added": "追加",
     "status_media_resolution": "最小サポート640x480、最大サポート4kビデオ。",
-    "status_media_duration": "最小2分、最大5時間のビデオをサポートします。",
+    "status_media_duration": "最小5秒、最大5時間のビデオをサポートします。",
     "status_media_usage": "メディアライブラリの容量が不足しています。より大きな容量の購入を検討してください。",
     "upload_sync_onprogress": "転送中",
     "model_profile_title": "設定",

@@ -181,6 +181,10 @@
                     </button>
                 </script>
 
+                <div id="video_player" class="mb-5" style="width: 100%;display: none;">
+                    <video style="border-radius: 10px;width: 100%;" id="video_player_src" type="video/mp4" controls></video>
+                </div>
+
                 <div id="room_filelist"></div>
                 <div class="no_photos" style="margin-top: 100px;margin-bottom: 100px;display: none;">
                     <div class="text-center mb-4">
@@ -265,6 +269,12 @@
                                     <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" target="_blank">
                                         <% obj[x].fname %>
                                     </a>
+
+                                    <% if(TL.media.is_allow(obj[x].fname)){ %>
+                                        <span class="badge badge-pill badge-primary btn-point" onclick="TL.media.video_player('<% obj[x].ukey %>')">
+                                            <i class="fa-fw fas fa-play-circle"></i>
+                                        </span>
+                                    <% } %>  
 
                                     <% if(obj[x].like>0){ %>
                                         <span class="badge badge-pill badge-primary">

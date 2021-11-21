@@ -100,15 +100,18 @@ class tools_file_manager {
                 return false;
             }
         }
+        let ukey = [];
         var node = document.getElementsByName(this.items_name);
-        for (let i = 0; i < node.length; i++) {
-            var inode = node[i];
-            let check = inode.getAttribute('data-check');
-            if (check === 'true') {
-                //do something
-                let ukey = inode.getAttribute('tldata');
-                this.parent_op.workspace_del(ukey,false);
+        if(node.length>0){
+            for (let i = 0; i < node.length; i++) {
+                var inode = node[i];
+                let check = inode.getAttribute('data-check');
+                if (check === 'true') {
+                    //do something
+                    ukey.push(inode.getAttribute('tldata'));
+                }
             }
+            this.parent_op.workspace_del(ukey,true);
         }
     }
 

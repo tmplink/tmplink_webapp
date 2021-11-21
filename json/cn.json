@@ -474,8 +474,10 @@
     "status_media_not_found":"无法找到文件",
     "status_media_added":"已添加",
     "status_media_resolution":"最低支持 640x480 ，最大支持 4k 的视频。",
-    "status_media_duration":"最低支持 2 分钟，最长支持 5 小时的视频。",
+    "status_media_duration":"最低支持 5 秒，最长支持 5 小时的视频。",
     "status_media_usage":"媒体库容量不足，请考虑购买更大容量。",
+    "status_media_not_added":"此视频尚未添加到媒体库，无法在线播放。请先加入媒体库。\n媒体库可以将视频转换为支持浏览器在线播放的视频。",
+    "status_media_not_ready":"此视频正在转换成支持在线播放的视频，请稍等。\n您可以在媒体库查看转换进度。",
 
 
     "upload_or_drag": "拖动文件到此位置，或者选择文件上传",

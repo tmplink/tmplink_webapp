@@ -56,7 +56,7 @@ class tmplink {
     upload_model_selected_val = 0
     download_retry = 0
     download_retry_max = 10
-    recaptcha_op = true
+    recaptcha_op = false
 
     constructor() {
         this.app_init();
@@ -68,6 +68,10 @@ class tmplink {
 
         this.file_manager.init(this);
         this.media.init(this);
+
+        //
+        $('.workspace-navbar').hide();
+        $('.workspace-nologin').hide();
 
         // this.navbar.init(this); //此函数需要等待语言包加载完毕才可执行
 
@@ -569,14 +573,19 @@ class tmplink {
     }
 
     workspace_del(ukey, group_delete) {
-        if (group_delete !== false) {
+        //如果是批量删除
+        if (group_delete === true) {
+            for(let i in ukey){
+                $('.file_unit_' + ukey[i]).hide();
+            }
+        }else{
             if (this.profile_confirm_delete_get()) {
                 if (!confirm(this.languageData.confirm_delete)) {
                     return false;
                 }
             }
+            $('.file_unit_' + ukey).hide();
         }
-        $('.file_unit_' + ukey).hide();
         $.post(this.api_file, {
             action: 'remove_from_workspace',
             token: this.api_token,
@@ -930,6 +939,7 @@ class tmplink {
                             //如果可以，加入到媒体库
                             if(this.media.is_allow(rsp.data.name)){
                                 //绑定按钮
+                                $('#btn_add_to_media').show();
                                 $('#btn_add_to_media').on('click', () => {
                                     if (this.logined == 1) {
                                         $('#menu_add_to_media_video').html(this.languageData.form_btn_processing);
