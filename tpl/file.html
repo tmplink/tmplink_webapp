@@ -39,41 +39,41 @@
             </div>
         </div>
 
-        <div class="mx-auto" id="file_box" style="display: none;max-width: 500px;">
-                <div class="text-center mb-5">
-                    <a href="javascript:void(0)" onclick="app.open('/');">
-                        <img src="/img/logo/1.png" alt="tmp.link">
-                    </a>
-                </div>
-                <div class="card shadow" id="file_info">
-                    <div class="card-body">
-                        <div class="alert alert-warning display-none" id="wechat_notice" role="alert"
-                            i18n="filepage_mobile_notice">
-                            .
+        <div class="mx-auto" id="file_box" style="display: none;max-width: 550px;">
+            <div class="text-center mb-5">
+                <a href="javascript:void(0)" onclick="app.open('/');">
+                    <img src="/img/logo/1.png" alt="tmp.link">
+                </a>
+            </div>
+            <div class="card shadow" id="file_info">
+                <div class="card-body">
+                    <div class="alert alert-warning display-none" id="wechat_notice" role="alert"
+                        i18n="filepage_mobile_notice">
+                        .
+                    </div>
+                    <div class="d-none" id="report_ukey"></div>
+                    <div class="row m-0 mt-2">
+                        <div class="p-0 col-md-2 col-12 text-center align-self-center d-sm-block d-none">
+                            <i id="file-icon"></i>
                         </div>
-                        <div class="d-none" id="report_ukey"></div>
-                        <div class="row m-0 mt-2">
-                            <div class="p-0 col-md-2 col-12 text-center align-self-center d-sm-block d-none">
-                                <i id="file-icon"></i>
+                        <div class="p-0 col-md-10 col-12">
+                            <div class="h3 font-weight-light fc-1 filename mb-2" id="filename">.</div>
+                            <div>
+                                <i class="fa-fw far fa-hdd"></i>
+                                <span id="filesize">.</span>
                             </div>
-                            <div class="p-0 col-md-10 col-12">
-                                <div class="h3 font-weight-light fc-1 filename mb-2" id="filename">.</div>
-                                <div>
-                                    <i class="fa-fw far fa-hdd"></i>
-                                    <span id="filesize">.</span>
-                                </div>
-                                <div id="likes" class="btn-point">
-                                    <i class="fa-fw fas fa-star text-yellow"></i>
-                                    <span id="likes_count">0</span>
-                                </div>
-                                <div id="lefttime_show">
-                                    <span><i class="fa-fw far fa-stopwatch"></i> </span>
-                                    <span id="lefttime"></span>
-                                </div>
+                            <div id="likes" class="btn-point">
+                                <i class="fa-fw fas fa-star text-yellow"></i>
+                                <span id="likes_count">0</span>
+                            </div>
+                            <div id="lefttime_show">
+                                <span><i class="fa-fw far fa-stopwatch"></i> </span>
+                                <span id="lefttime"></span>
                             </div>
                         </div>
-                        <hr />
-                        <!-- <div class="single_download_progress_bar" style="display:none">
+                    </div>
+                    <hr />
+                    <!-- <div class="single_download_progress_bar" style="display:none">
                             <div class="single_download_msg"></div>
                             <div>在下载完成之前请不要关闭这个网页，你可以同时下载其它文件。</div>
                             <div class="progress mt-2">
@@ -83,152 +83,157 @@
                             <hr />
                         </div> -->
 
-                        <!--[适用于手持移动设备]-->
-                        <div class="d-block d-sm-none">
+                    <!--[适用于手持移动设备]-->
+                    <div class="d-block d-sm-none">
 
-                            <a class="btn btn-success btn-lg btn-block file_download_url">
-                                <i class="fad fa-download fa-fw mx-auto my-auto mb-2 fa-3x"></i>
-                                <span i18n="file_btn_download">.</span>
-                            </a>
+                        <a class="btn btn-success btn-lg btn-block file_download_url">
+                            <i class="fad fa-download fa-fw mx-auto my-auto mb-2 fa-3x"></i>
+                            <span i18n="file_btn_download">.</span>
+                        </a>
 
-                            <button class="btn btn-primary btn-lg btn-block" id="btn_add_to_workspace_mobile">
-                                <i class="far fa-heart fa-fw mx-auto my-auto mb-2 fa-3x"></i>
-                                <span i18n="file_btn_workspace">.</span>
-                            </button>
+                        <button class="btn btn-primary btn-lg btn-block" id="btn_add_to_workspace_mobile">
+                            <i class="far fa-heart fa-fw mx-auto my-auto mb-2 fa-3x"></i>
+                            <span i18n="file_btn_workspace">.</span>
+                        </button>
 
-                            <button class="btn btn-primary btn-lg btn-block btn_copy btn_copy_fileurl">
-                                <i class="fas fa-share-alt fa-fw mx-auto my-auto mb-2 fa-3x"></i>
-                                <span i18n="file_btn_copy">.</span>
-                            </button>
+                        <button class="btn btn-primary btn-lg btn-block btn_copy btn_copy_fileurl">
+                            <i class="fas fa-share-alt fa-fw mx-auto my-auto mb-2 fa-3x"></i>
+                            <span i18n="file_btn_copy">.</span>
+                        </button>
 
-                            <button class="btn btn-danger btn-lg btn-block" onclick="$('#reportModal').modal('show')">
-                                <i class="fas fa-exclamation-triangle fa-fw mx-auto my-auto mb-2 fa-3x"></i>
-                                <span i18n="file_btn_report">.</span>
-                            </button>
-                        </div>
+                        <button class="btn btn-danger btn-lg btn-block" onclick="$('#reportModal').modal('show')">
+                            <i class="fas fa-exclamation-triangle fa-fw mx-auto my-auto mb-2 fa-3x"></i>
+                            <span i18n="file_btn_report">.</span>
+                        </button>
+                    </div>
 
-                        <!--[适用于桌面设备]-->
-                        <div class="row d-none d-sm-flex">
-                            <div class="col-md-4 col-6 text-center mb-2 btn-point" id="file_download_btn">
-                                <div class="fileicon mx-auto mb-1">
-                                    <i class="fad fa-download fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                </div>
-                                <div>
-                                    <button class="btn" i18n="file_btn_download">.</button>
-                                </div>
+                    <!--[适用于桌面设备]-->
+                    <div class="row d-none d-sm-flex">
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" id="file_download_btn">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="fad fa-download fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
                             </div>
-
-                            <div class="col-md-4 col-6 text-center mb-2 btn-point" id="file_download_by_qrcode">
-                                <div class="fileicon mx-auto mb-1">
-                                    <i class="fas fa-qrcode fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                </div>
-                                <div>
-                                    <button class="btn" i18n="file_btn_qr_mobile">.</button>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-4 col-6 text-center mb-2 btn-point" id="file_download_url_copy">
-                                <div class="fileicon mx-auto mb-1">
-                                    <i class="fas fa-share-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan" id="file_download_url_copy_icon"></i>
-                                </div>
-                                <div>
-                                    <button class="btn" i18n="file_btn_copy">.</button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-6 text-center mb-2" id="file_download_ukey_copy">
-                                <div class="fileicon mx-auto mb-1">
-                                    <i class="fas fa-share-alt-square fa-fw mx-auto my-auto mb-2 fa-3x text-cyan" id="file_download_ukey_copy_icon"></i>
-                                </div>
-                                <div>
-                                    <a class="btn" i18n="file_key_copy">.</a>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/workspace')">
-                                <div class="fileicon mx-auto mb-1">
-                                    <i class="far fa-file-search fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                </div>
-                                <div>
-                                    <button class="btn">
-                                        <span i18n="navbar_workspace">.</span>
-                                        <span class="badge badge-pill badge-success upload_count"
-                                            style="display: none;"></span>
-                                    </button>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/dir');">
-                                <div class="fileicon mx-auto mb-1">
-                                    <i class="fal fa-desktop-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                                </div>
-                                <div>
-                                    <button class="btn" i18n="navbar_meetingroom">.</button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-6 text-center mb-2 btn-point" id="btn_add_to_workspace">
-                                <div class="fileicon mx-auto mb-1">
-                                    <i class="far fa-heart fa-fw mx-auto my-auto mb-2 fa-3x text-cyan" id="btn_add_to_workspace_icon"></i>
-                                </div>
-                                <div>
-                                    <button class="btn" i18n="file_btn_workspace">.</button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-6 text-center mb-2 btn-point" id="btn_add_to_media" style="display: none;">
-                                <div class="fileicon mx-auto mb-1">
-                                    <i class="fab fa-youtube fa-fw mx-auto my-auto mb-2 fa-3x text-cyan" id="btn_add_to_media_icon"></i>
-                                </div>
-                                <div>
-                                    <button class="btn" i18n="menu_add_to_media_video" id="menu_add_to_media_video">.</button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-6 text-center mb-2 btn-point" id="btn_highdownload">
-                                <div class="fileicon mx-auto mb-1">
-                                    <i class="fad fa-rocket-launch fa-fw mx-auto my-auto mb-2 fa-3x text-lime"></i>
-                                </div>
-                                <div>
-                                    <button class="btn">
-                                        <span i18n="file_btn_upup">.</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-6 text-center mb-2 btn-point" id="btn_report_file">
-                                <div class="fileicon mx-auto mb-1">
-                                    <i
-                                        class="fas fa-exclamation-triangle fa-fw mx-auto my-auto mb-2 fa-3x text-red"></i>
-                                </div>
-                                <div>
-                                    <button class="btn">
-                                        <span i18n="file_btn_report">.</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="text-right user-unlogin" style="display: none;">
-                            <div class="badge badge-pill badge-dark btn-point" onclick="app.open('/login')">
-                                <span i18n="need_login_of_file">.</span>
+                            <div>
+                                <button class="btn" i18n="file_btn_download">.</button>
                             </div>
                         </div>
 
-                        <div class="mt-2"></div>
-                        <div class="d-inline d-sm-none float-right mt-2 mb-2">
-                            <i class="far fa-file-search fa-fw mx-auto my-auto ml-2 text-cyan fa-2x"
-                                onclick="app.open('/workspace')"></i>
-                            <i class="fal fa-desktop-alt fa-fw mx-auto my-auto ml-2 text-cyan fa-2x"
-                                onclick="app.open('/dir')"></i>
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" id="file_download_by_qrcode">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="fas fa-qrcode fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                            </div>
+                            <div>
+                                <button class="btn" i18n="file_btn_qr_mobile">.</button>
+                            </div>
                         </div>
 
-                        <div class="clearfix"></div>
 
-                        <!-- <div class="text-right hs-enabled" style="display: none;">
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" id="file_download_url_copy">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="fas fa-share-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"
+                                    id="file_download_url_copy_icon"></i>
+                            </div>
+                            <div>
+                                <button class="btn" i18n="file_btn_copy">.</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-6 text-center mb-2" id="file_download_ukey_copy">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="fas fa-share-alt-square fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"
+                                    id="file_download_ukey_copy_icon"></i>
+                            </div>
+                            <div>
+                                <a class="btn" i18n="file_key_copy">.</a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/workspace')">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="far fa-file-search fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                            </div>
+                            <div>
+                                <button class="btn">
+                                    <span i18n="navbar_workspace">.</span>
+                                    <span class="badge badge-pill badge-success upload_count"
+                                        style="display: none;"></span>
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" onclick="app.open('/dir');">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="fal fa-desktop-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                            </div>
+                            <div>
+                                <button class="btn" i18n="navbar_meetingroom">.</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" id="btn_add_to_workspace">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="far fa-heart fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"
+                                    id="btn_add_to_workspace_icon"></i>
+                            </div>
+                            <div>
+                                <button class="btn" i18n="file_btn_workspace">.</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" id="btn_add_to_media"
+                            style="display: none;">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="fab fa-youtube fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"
+                                    id="btn_add_to_media_icon"></i>
+                            </div>
+                            <div>
+                                <button class="btn" i18n="menu_add_to_media_video"
+                                    id="menu_add_to_media_video">.</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" id="btn_highdownload">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="fad fa-rocket-launch fa-fw mx-auto my-auto mb-2 fa-3x text-lime"></i>
+                            </div>
+                            <div>
+                                <button class="btn">
+                                    <span i18n="file_btn_upup">.</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-6 text-center mb-2 btn-point" id="btn_report_file">
+                            <div class="fileicon mx-auto mb-1">
+                                <i class="fas fa-exclamation-triangle fa-fw mx-auto my-auto mb-2 fa-3x text-red"></i>
+                            </div>
+                            <div>
+                                <button class="btn">
+                                    <span i18n="file_btn_report">.</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="text-right user-unlogin" style="display: none;">
+                        <div class="badge badge-pill badge-dark btn-point" onclick="app.open('/login')">
+                            <span i18n="need_login_of_file">.</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-2"></div>
+                    <div class="d-inline d-sm-none float-right mt-2 mb-2">
+                        <i class="far fa-file-search fa-fw mx-auto my-auto ml-2 text-cyan fa-2x"
+                            onclick="app.open('/workspace')"></i>
+                        <i class="fal fa-desktop-alt fa-fw mx-auto my-auto ml-2 text-cyan fa-2x"
+                            onclick="app.open('/dir')"></i>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <!-- <div class="text-right hs-enabled" style="display: none;">
                             <div class="badge badge-pill badge-success">
                                 <span>HS enabled</span>
                             </div>
@@ -239,52 +244,58 @@
                             </div>
                         </div> -->
 
-                        <div class="text-right">
-                            <span class="btn-group">
-                                <div class="dropdown-toggle badge badge-pill badge-dark" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false" >
-                                    <i class="fal fa-download fa-fw"></i> <span i18n="file_btn_download_opt">.</span>
-                                </div>
-                                <div class="dropdown-menu dropdown-menu-right shadow">
-                                    <button class="dropdown-item btn_copy btn_copy_downloadurl_for_other">
-                                        <i class="fad fa-terminal fa-fw"></i>
-                                        <span i18n="file_btn_download_opt_link">.</span>
-                                    </button>
-                                    <button class="dropdown-item btn_copy btn_copy_downloadurl_for_curl">
-                                        <i class="fad fa-terminal fa-fw"></i>
-                                        <span i18n="file_btn_download_opt_curl">.</span>
-                                    </button>
-                                    <button class="dropdown-item btn_copy btn_copy_downloadurl_for_wget">
-                                        <i class="fad fa-terminal fa-fw"></i>
-                                        <span i18n="file_btn_download_opt_wget">.</span>
-                                    </button>
-                                </div>
-                            </span>
-                        </div>
-
-                        <div class="text-right">
-                            <span class="btn-group">
-                                <div class="dropdown-toggle badge badge-pill badge-dark" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span> <span> /
-                                        Language</span>
-                                </div>
-                                <div class="dropdown-menu dropdown-menu-right shadow">
-                                    <a class="dropdown-item" href="javascript:void(0)"
-                                        onclick="TL.language('cn');">中文</a>
-                                    <a class="dropdown-item" href="javascript:void(0)"
-                                        onclick="TL.language('en');">English</a>
-                                    <a class="dropdown-item" href="javascript:void(0)"
-                                        onclick="TL.language('jp');">日本語</a>
-                                </div>
-                            </span>
-                        </div>
-
+                    <div class="text-right">
+                        <span class="btn-group">
+                            <div class="dropdown-toggle badge badge-pill badge-dark" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="fal fa-download fa-fw"></i> <span i18n="file_btn_download_opt">.</span>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-right shadow">
+                                <button class="dropdown-item btn_copy btn_copy_downloadurl_for_other">
+                                    <i class="fad fa-terminal fa-fw"></i>
+                                    <span i18n="file_btn_download_opt_link">.</span>
+                                </button>
+                                <button class="dropdown-item btn_copy btn_copy_downloadurl_for_curl">
+                                    <i class="fad fa-terminal fa-fw"></i>
+                                    <span i18n="file_btn_download_opt_curl">.</span>
+                                </button>
+                                <button class="dropdown-item btn_copy btn_copy_downloadurl_for_wget">
+                                    <i class="fad fa-terminal fa-fw"></i>
+                                    <span i18n="file_btn_download_opt_wget">.</span>
+                                </button>
+                            </div>
+                        </span>
                     </div>
+
+                    <div class="text-right">
+                        <span class="btn-group">
+                            <div class="dropdown-toggle badge badge-pill badge-dark" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span> <span> /
+                                    Language</span>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-right shadow">
+                                <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('cn');">中文</a>
+                                <a class="dropdown-item" href="javascript:void(0)"
+                                    onclick="TL.language('en');">English</a>
+                                <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
+                            </div>
+                        </span>
+                    </div>
+                    <!--[赞助商链接]-->
+                    <div>
+                        <hr>
+                        <a href="https://www.vx.link/?rel=tmplink&page=file" target="_blank">
+                            <i class="fa-fw fab fa-adversal"></i>
+                            流量优化技术拯救龟速服务器,无需安装软件,最低仅需 10元 / 年.
+                        </a>
+                    </div>
+
                 </div>
+            </div>
         </div>
 
-        
+
 
         <div class="row pt-5 pb-5" id="wx_notice" style="display: none;">
             <div class="col-12 col-md-6 text-light">
