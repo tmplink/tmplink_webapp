@@ -1,42 +1,54 @@
 <div style="height: 40px;"></div>
 <div class="container d-flex flex-grow-1">
     <div class="align-self-center mx-auto w-100" style="max-width: 500px;">
-        <div class="text-center mb-5">
+        <div class="mb-5">
             <img src="/img/logo/1.png" alt="tmp.link">
         </div>
         <div class="index-box p-5 bg-white shadow-sm">
             <div class="index-box pb-0">
 
+                <div class="text-center mb-4">
+                    <i class="fa-4x fal fa-paper-plane"></i>
+                </div>
+
+                <p class="h4 text-center" i18n="index_a1">
+                    .
+                </p>
+                <hr>
+
                 <div class="mt-2" id="index_userinfo_loading">
                     <div class="text-center glass" style="border-radius: 10px;padding: 10px;">
                         <div class="text-center">
-                            <i class="fa-fw fas fa-spinner fa-spin fa-4x"></i>
+                            <i class="fa-fw fal fa-spinner-third fa-spin fa-4x"></i>
                         </div>
                     </div>
                 </div>
 
                 <div class="navbar_ready mt-2" style="display: none;">
 
-                    <div class="row workspace-nologin">
-
-                        <div class="col-6 text-center mb-2 btn-point" onclick="app.open('/reg');">
-                            <div class="fileicon mx-auto mb-1">
-                                <i class="fas fa-user-tie fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                            </div>
-                            <div>
-                                <a class="btn" i18n="index_b2">.</a>
-                            </div>
+                    <div class="workspace-nologin">
+                        
+                        <h3 i18n="please_login">.</h3>
+                        <div class="alert alert-warning text-left" style="display: none;" role="alert" id="msg_notice">
                         </div>
 
+                        <label for="email" class="sr-only" i18n="form_email">.</label>
+                        <input type="email" id="email" class="form-control  mb-2" i18n="form_email" placeholder="."
+                            required autofocus>
 
-                        <div class="col-6 text-center mb-2 btn-point" onclick="app.open('/login');">
-                            <div class="fileicon mx-auto mb-1">
-                                <i class="fas fa-sign-in-alt fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
-                            </div>
-                            <div>
-                                <button class="btn" i18n="index_b3">.</button>
-                            </div>
+                        <label for="password" class="sr-only" i18n="form_password">.</label>
+                        <input type="password" id="password" class="form-control mb-2" i18n="form_password"
+                            placeholder="." required onkeyup="if(event.keyCode==13){TL.login()}">
+                        <div class="text-right">
+                            <button id="submit" class="btn btn btn-primary mt-4" i18n="form_btn_login"
+                                onclick="TL.login();">.</button>
                         </div>
+
+                        <div class="text-right">
+                            <a tmpui-root="true" tmpui-app="true" href="reg" i18n="login_reg"
+                                data-dl-root="true">.</a>
+                        </div>
+
 
                     </div>
 
@@ -167,59 +179,16 @@
                     </div>
                 </div>
             </div>
-            <div class="workspace-nologin">
+            <!-- <div class="workspace-nologin">
                 <hr>
+                <div class="text-center mb-4">
+                    <i class="fa-4x fal fa-paper-plane"></i>
+                </div>
 
                 <p class="h4 text-center" i18n="index_a1">
                     .
                 </p>
-
-                <div class="index-box mt-2 p-2 card shadow-sm">
-                    <div class="d-flex align-items-center">
-                        <span class="mr-3">
-                            <i class="fas fa-tachometer-alt-fastest fa-fw  fa-4x"></i>
-                        </span>
-                        <div>
-                            <h2 class="m-1" i18n="index_d3">
-                                .
-                            </h2>
-                            <div class="m-1" i18n="index_d4">
-                                .
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="index-box mt-2 p-2 card shadow-sm">
-                    <div class="d-flex align-items-center">
-                        <span class="mr-3">
-                            <i class="fad fa-browser fa-fw fa-4x"></i>
-                        </span>
-                        <div>
-                            <h2 class="m-1" i18n="index_d5">
-                                .
-                            </h2>
-                            <div class="m-1" i18n="index_d6">
-                                .
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="index-box mt-2 p-2 card shadow-sm">
-                    <div class="d-flex align-items-center">
-                        <span class="mr-3">
-                            <i class="fad fa-box-open fa-fw  fa-4x"></i>
-                        </span>
-                        <div>
-                            <h2 class="m-1" i18n="index_d1">
-                                .
-                            </h2>
-                            <div class="m-1" i18n="index_d2">
-                                .
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div> -->
         </div>
 
 
