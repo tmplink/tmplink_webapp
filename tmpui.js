@@ -621,27 +621,27 @@ class tmpUI {
         var lang = localStorage.getItem('tmpUI_language');
         if (lang === null) {
             this.log("language auto detect : " + lang);
-            var langs = navigator.language;
+            var langs = navigator.language.toLowerCase();
             switch (langs) {
-                case 'zh-CN':
+                case 'zh-cn':
                     this.languageSetting = 'cn';
                     break;
-                case 'zh-TW':
+                case 'zh-tw':
                     this.languageSetting = 'hk';
                     break;
-                case 'zh-SG':
+                case 'zh-sg':
                     this.languageSetting = 'cn';
                     break;
-                case 'zh-HK':
+                case 'zh-hk':
                     this.languageSetting = 'hk';
                     break;
-                case 'ja-JP':
+                case 'ja-jp':
                     this.languageSetting = 'jp';
                     break;
-                case 'ko-KR':
+                case 'ko-kr':
                     this.languageSetting = 'kr';
                     break;
-                case 'ru-MI':
+                case 'ru-mi':
                     this.languageSetting = 'ru';
                     break;
                 case 'ms':
@@ -653,7 +653,7 @@ class tmpUI {
                 case 'fr':
                     this.languageSetting = 'fr';
                     break;
-                case 'en-US':
+                case 'en-us':
                     this.languageSetting = 'en';
                     break;
                 default:

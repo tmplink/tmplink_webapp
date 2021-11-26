@@ -2394,11 +2394,11 @@ class tmplink {
         }
 
         if (lang === 'cn') {
-            span_lang = '简体';
+            span_lang = '简体中文';
         }
 
         if (lang === 'hk') {
-            span_lang = '繁体';
+            span_lang = '繁体中文';
         }
 
         if (lang === 'jp') {
