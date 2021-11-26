@@ -167,8 +167,8 @@ class tmplink {
             let bglist = [1, 2];
             let index = Math.floor((Math.random() * bglist.length));
             let img = new Image();
-            img.src = '/img/bg/' + bglist[index] + '.jpg';
-            //img.src = '/img/bg/s5.jpg';
+            //img.src = '/img/bg/' + bglist[index] + '.jpg';
+            img.src = '/img/bg/2.jpg';
             img.onload = () => {
                 if (img.height >= 1080 && img.width >= 1920) {
                     $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-size: cover;background-repeat: no-repeat;background-attachment: scroll;background-image:url(' + img.src + ');"></div>');
@@ -2368,6 +2368,11 @@ class tmplink {
                         this.get_details(() => {
                             localStorage.setItem('app_login', 1);
                             window.history.back();
+                            //如果当前页是首页，则刷新当前页面
+                            let url = this.get_url_params();
+                            if(url.tmpui_page==='/'){
+                                window.location.reload();
+                            }
                             //app.open('/workspace');
                         });
                     } else {

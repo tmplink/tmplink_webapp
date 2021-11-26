@@ -1,4 +1,5 @@
 {
+    "please_login":"Sign In",
     "status_media_not_added": "This video has not been added to the media library and cannot be played online. Please add it to the media library first. \nThe media library can convert the video to support browser playback online.",
     "status_media_not_ready": "This video is being converted to a video that supports online playback, please wait. \nYou can check the conversion progress in the media library.",
     "des_media": "Media Library - Family Entertainment Treasures",
@@ -129,7 +130,7 @@
     "upload_dirs": "Upload Folder",
     "upload_dirs_des": "Click to select a folder to upload.",
     "model_addmr": "Create Folder",
-    "index_a1": "Internationalized file storage and sharing.",
+    "index_a1": "Make your files arrive at lightning speed.",
     "model_list": "List",
     "model_grid": "Icon",
     "model_photo": "Image",
