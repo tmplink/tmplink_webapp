@@ -411,9 +411,14 @@ class tmplink {
             $('.workspace-navbar').hide();
             $('.workspace-nologin').show();
         }
-        $('#index_userinfo_loading').hide();
+        
         $('.navbar_nloading').hide();
         $('.navbar_ready').show();
+        //set process bar to 100%
+        $('#index_userinfo_loading_Bar').css('width', '100%');
+        setTimeout(() => {
+            $('#index_userinfo_loading').fadeOut();
+        },1000);
     }
 
     get_details(cb) {
@@ -2370,7 +2375,7 @@ class tmplink {
                             window.history.back();
                             //如果当前页是首页，则刷新当前页面
                             let url = this.get_url_params();
-                            if(url.tmpui_page==='/'){
+                            if(url.tmpui_page==='/'||url.tmpui_page===undefined){
                                 window.location.reload();
                             }
                             //app.open('/workspace');
