@@ -27,7 +27,7 @@
                 <div id="download_queue_list"></div>
             </div>
         </div>
-        <div id="room_filelist_box" class="card mt-4 hideOnLoad shadow">
+        <div id="dir_list_box" class="card mt-4 hideOnLoad shadow">
             <div class="card-header pt-5">
                 <div class="text-center mx-auto">
                     <span class="room_title h2"></span>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <div id="meetroom_filelist_data" class="card-body">
+            <div class="card-body">
                 <div class="card shadow-sm p-3">
                     <form autocomplete="off">
                         <div class="input-group mb-1">
@@ -78,16 +78,16 @@
                             <span i18n="sort_title" class="d-none d-sm-inline">.</span>
                         </button>
                         <button id="room_btn_file_list" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
-                            onclick="TL.room_filelist_model('list');">
+                            onclick="TL.dir_list_model('list');">
                             <i class="fa-fw fad fa-th-list"></i>
                             <span i18n="model_list" class="d-none d-sm-inline">.</span>
                         </button>
-                        <!-- <button id="room_btn_file_grid" class="btn btn-light btn-sm mr-1 text-azure" onclick="TL.room_filelist_model('grid');">
+                        <!-- <button id="room_btn_file_grid" class="btn btn-light btn-sm mr-1 text-azure" onclick="TL.dir_list_model('grid');">
                         <i class="fa-fw fas fa-th"></i>
                         <span i18n="model_grid" class="d-none d-sm-inline">.</span>
                     </button> -->
                         <button id="room_btn_file_photo" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
-                            onclick="TL.room_filelist_model('photo');">
+                            onclick="TL.dir_list_model('photo');">
                             <i class="fa-fw far fa-image"></i>
                             <span i18n="model_photo" class="d-none d-sm-inline">.</span>
                         </button>
@@ -164,7 +164,7 @@
                         </button>
                     <% } %>
                     <% if(TL.room.parent != 0){ %>
-                        <a href="/room?mrid=<% TL.room.parent %>" tmpui-app="true" class="btn btn-sm btn-light text-azure mr-1  mt-1">
+                        <a href="/room?mrid=<% TL.room.parent %>" tmpui-reaction="true"  tmpui-action="TL.room_list()" class="btn btn-sm btn-light text-azure mr-1  mt-1">
                             <i class="fad fa-arrow-square-left"></i>
                             <span i18n="filelist_dir_parent" class="d-none d-sm-inline"><% TL.languageData.filelist_dir_parent %></span>
                         </a>
@@ -186,7 +186,8 @@
                         controls></video>
                 </div>
 
-                <div id="room_filelist"></div>
+                <div id="dir_list"></div>
+
                 <div class="no_photos" style="margin-top: 100px;margin-bottom: 100px;display: none;">
                     <div class="text-center mb-4">
                         <i class="fa-fw fad fa-4x fa-camera-retro"></i>
@@ -208,7 +209,7 @@
                     </a>
                 </div>
 
-                <script type="text/template" id="room_filelist_photo_tpl">
+                <script type="text/template" id="dir_photolist_tpl">
                     <div class="row" id="room_file_content">
                     <% for (var x in obj) { %>
                         <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
@@ -269,7 +270,7 @@
                     </div>
                 </script>
 
-                <script type="text/template" id="room_filelist_list_tpl">
+                <script type="text/template" id="dir_filelist_tpl">
                     <% for (var x in obj) { %>
                         <div class="row mx-0 mb-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
                             <div class="col-12 col-md-8 col-lg-7 my-1 d-flex align-items-center listfontweight filename">
@@ -388,13 +389,13 @@
                 <% } %>
                 </script>
 
-                <script type="text/template" id="meetroom_list_tpl">
+                <script type="text/template" id="dir_list_tpl">
                     <% for (var x in obj) { %>
                         <div class="row mx-0 list-bar" id="meetingroom_id_<% obj[x].mr_id %>">
                             <div class="col-12 col-md-6 col-lg-8 my-1 d-flex align-items-center listfontweight filename">
                                 <i class="fad fa-folders text-cyan fa-fw d-none d-md-block"></i>
                                 &nbsp
-                                <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true">
+                                <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-reaction="true" tmpui-action="TL.room_list()">
                                     <% obj[x].name %>
                                 </a>
                             </div>

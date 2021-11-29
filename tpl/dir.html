@@ -18,7 +18,7 @@
             </div>
             <div class="row" id="meetroom_list"></div>
 
-            <script type="text/template" id="meetroom_list_tpl">
+            <script type="text/template" id="dir_list_tpl">
                 <% for (var x in obj) { %>
                     <div class="col-6 col-md-3 col-lg-2 p-2 text-center dir-icon" id="meetingroom_id_<% obj[x].mr_id %>">
                         <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true">
@@ -50,7 +50,7 @@
                     </div>
                 <% } %>
             </script>
-            <script type="text/template" id="meetroom_list_tpl_list">
+            <script type="text/template" id="dir_list_tpl_list">
                 <% for (var x in obj) { %>
                     <div class="row p-2 dir-icon filelist-card shadow-sm mb-2 mx-0" id="meetingroom_id_<% obj[x].mr_id %>">
                         <div class="col-12 col-md-6 col-lg-8 my-1 px-0 d-flex align-items-center listfontweight filename">
