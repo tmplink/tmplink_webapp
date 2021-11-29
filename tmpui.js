@@ -1,8 +1,8 @@
 /**
  * tmpUI.js
- * version: 22
+ * version: 23
  * Github : https://github.com/tmplink/tmpUI
- * Date : 2021-11-21
+ * Date : 2021-11-29
  */
 
 class tmpUI {
@@ -263,6 +263,43 @@ class tmpUI {
                                 }, null, url);
                                 //ajax('GET', url, 'page=' + url, this.loader, true);
                                 this.route();
+                            });
+                        }
+                    }
+
+                    if (atag[i].getAttribute("tmpui-reaction") == 'true' && atag[i].getAttribute("tmpui-app-rebind") != 'true') {
+                        //获取绝对链接地址
+                        let newpage = atag[i].getAttribute("target") == '_blank' ? true : false;
+                        let url = '';
+                        let a_url = atag[i].getAttribute("href");
+                        let urlp = a_url.split("?");
+                        //
+                        if (urlp.length === 1) {
+                            url = this.index + '?tmpui_page=' + urlp[0];
+                        } else {
+                            url = this.index + '?tmpui_page=' + urlp[0] + '&' + urlp[1];
+                        }
+
+                        //生成App内链接地址
+                        //let url = this.index + '?tmpui_page=' + t_url + u;
+                        //写入到专用标签
+                        atag[i].setAttribute("tmpui-app-rebind", 'true');
+                        //修改原有标签到新地址
+                        atag[i].setAttribute("href", url);
+                        //修改事件行为
+                        if (!newpage) {
+                            atag[i].addEventListener('click', e => {
+                                e.preventDefault();
+                                console.log(url);
+                                history.pushState({
+                                    newPage: url
+                                }, null, url);
+                                //获取 action
+                                let action = atag[i].getAttribute("tmpui-action");
+                                //执行
+                                eval(action);
+                                //ajax('GET', url, 'page=' + url, this.loader, true);
+                                //this.route();
                             });
                         }
                     }

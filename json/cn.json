@@ -160,10 +160,9 @@
     "workspace_model4": "30天内有效",
 
     "meetroom_list": "文件夹列表",
-    "meetroom_filelist": "30天内有效",
     "meetroom_des": "您可以通过文件夹分享多个文件，并控制访问权限。",
 
-    "room_filelist": "文件列表",
+    "dir_list": "文件列表",
     "room_userlist": "用户列表",
     "room_status_fail": "文件夹不可用",
     "room_status_unavailable_needlogin": "无权限，请先登录。",

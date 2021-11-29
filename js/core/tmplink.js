@@ -687,7 +687,7 @@ class tmplink {
             this.loading_box_off();
             //cancel
             if (rsp.status == 0 || rsp.data.length < 50) {
-                this.room_filelist_autoload_disabled();
+                this.dir_list_autoload_disabled();
             }
         });
     }
@@ -1443,7 +1443,7 @@ class tmplink {
                     //在下载全部文件之前，需要先刷新列表
                     this.mr_file_view(rsp.data, 0, params.mrid);
                     //关闭自动载入功能
-                    this.room_filelist_autoload_disabled();
+                    this.dir_list_autoload_disabled();
                     //启动下载
                     for (let i in rsp.data) {
                         this.download_allfile_queue_add(() => {
@@ -1813,11 +1813,15 @@ class tmplink {
 
         if (page == 0) {
             this.page_number = 0;
-            $('#room_filelist').html('');
+            $('#dir_list').html('');
             this.list_data = [];
         } else {
             this.page_number++;
         }
+
+        //清空数据
+        //$('#dir_list').html('');
+
 
         //如果是全页加载
         if (page === 'all') {
@@ -1831,7 +1835,7 @@ class tmplink {
         //if search
         let search = $('#room_search').val();
 
-        $('#room_filelist_box').show();
+        $('#dir_list_box').show();
         $('#mr_filelist_refresh_icon').addClass('fa-spin');
         $('#mr_filelist_refresh_icon').attr('disabled', true);
         this.loading_box_on();
@@ -1867,12 +1871,12 @@ class tmplink {
 
                 //cancel
                 if (rsp.status == 0 || rsp.data.length < 50) {
-                    this.room_filelist_autoload_disabled();
+                    this.dir_list_autoload_disabled();
                 }
 
                 //如果是全页加载
                 if (page === 'all') {
-                    this.room_filelist_autoload_disabled();
+                    this.dir_list_autoload_disabled();
                     this.autoload = false;
                 }
 
@@ -1950,7 +1954,7 @@ class tmplink {
         }
     }
 
-    room_filelist_model(type) {
+    dir_list_model(type) {
         let room_key = 'app_room_view_' + this.room.mr_id;
         switch (type) {
             case 'photo':
@@ -1971,7 +1975,7 @@ class tmplink {
         $('#room_btn_file_photo').removeClass('bg-dark');
     }
 
-    room_filelist_autoload_enabled() {
+    dir_list_autoload_enabled() {
         this.autoload = true;
         $(window).on("scroll", (event) => {
             if ($(event.currentTarget).scrollTop() + $(window).height() + 100 >= $(document).height() && $(event.currentTarget).scrollTop() > 100) {
@@ -1983,7 +1987,7 @@ class tmplink {
         });
     }
 
-    room_filelist_autoload_disabled() {
+    dir_list_autoload_disabled() {
         $(window).off("scroll");
     }
 
@@ -1991,16 +1995,16 @@ class tmplink {
         this.room_btn_active_reset();
         $('#room_btn_file_list').addClass('bg-dark');
         if (page == 0 || page == 'all') {
-            $('#room_filelist').html('');
+            $('#dir_list').html('');
             if (this.subroom_data.length != 0) {
-                $('#room_filelist').append(app.tpl('meetroom_list_tpl', this.subroom_data));
+                $('#dir_list').append(app.tpl('dir_list_tpl', this.subroom_data));
             }
             if (data === false && this.subroom_data == 0) {
                 $('.no_files').show();
             }
         }
         if (data.length != 0) {
-            $('#room_filelist').append(app.tpl('room_filelist_list_tpl', data));
+            $('#dir_list').append(app.tpl('dir_filelist_tpl', data));
         }
         $('.lefttime-remainder').each((i, e) => {
             let id = $(e).attr('id');
@@ -2015,16 +2019,16 @@ class tmplink {
         this.room_btn_active_reset();
         $('#room_btn_file_photo').addClass('bg-dark');
         if (page == 0 || page == 'all') {
-            $('#room_filelist').html('');
+            $('#dir_list').html('');
             if (this.subroom_data.length != 0) {
-                $('#room_filelist').append(app.tpl('meetroom_list_tpl', this.subroom_data));
+                $('#dir_list').append(app.tpl('dir_list_tpl', this.subroom_data));
             }
             if (data === false && this.subroom_data == 0) {
                 $('.no_photos').show();
             }
         }
         if (data.length != 0) {
-            $('#room_filelist').append(app.tpl('room_filelist_photo_tpl', data));
+            $('#dir_list').append(app.tpl('dir_photolist_tpl', data));
         }
         this.btn_copy_bind();
         app.linkRebind();
@@ -2119,7 +2123,7 @@ class tmplink {
     }
 
     mr_newname(mrid) {
-        var newname = prompt(this.languageData.modal_meetingroom_newname, "none");
+        var newname = prompt(this.languageData.modal_meetingroom_newname, "");
         $.post(this.api_mr, {
             action: 'rename',
             token: this.api_token,
@@ -2170,7 +2174,7 @@ class tmplink {
                 $('#mr_list_refresh_icon').removeAttr('disabled');
                 return false;
             } else {
-                $('#meetroom_list').html(app.tpl('meetroom_list_tpl', rsp.data));
+                $('#meetroom_list').html(app.tpl('dir_list_tpl', rsp.data));
                 this.btn_copy_bind();
             }
             $('#mr_list_refresh_icon').html('<i class="fa-fw fas fa-sync-alt"></i>');
@@ -2305,7 +2309,7 @@ class tmplink {
 
             $('#mr_copy').attr('data-clipboard-text', 'http://tmp.link/room/' + rsp.data.mr_id);
             $('.room_title').html(rsp.data.name);
-            $('#room_filelist').show();
+            $('#dir_list').show();
 
             if (rsp.data.sub_rooms !== 0) {
                 this.subroom_data = rsp.data.sub_rooms;
