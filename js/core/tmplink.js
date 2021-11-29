@@ -2200,6 +2200,7 @@ class tmplink {
     }
 
     room_total(mrid) {
+        $('#room_total').html('');
         $.post(this.api_mr, {
             action: 'total', mr_id: mrid, token: this.api_token
         }, (rsp) => {
