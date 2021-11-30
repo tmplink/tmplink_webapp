@@ -56,7 +56,7 @@ class tmplink {
     upload_model_selected_val = 0
     download_retry = 0
     download_retry_max = 10
-    recaptcha_op = false
+    recaptcha_op = true
 
     constructor() {
         this.app_init();
@@ -416,9 +416,9 @@ class tmplink {
         $('.navbar_ready').show();
         //set process bar to 100%
         $('#index_userinfo_loading_Bar').css('width', '100%');
-        setTimeout(() => {
-            $('#index_userinfo_loading').fadeOut();
-        },1000);
+        // setTimeout(() => {
+        //     $('#index_userinfo_loading').fadeOut();
+        // },1000);
     }
 
     get_details(cb) {
