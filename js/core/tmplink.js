@@ -891,6 +891,10 @@ class tmplink {
                             captcha: recaptcha
                         }, (req) => {
 
+                            gtag('config', 'UA-96864664-3', {
+                                'page_title': 'Download-' + rsp.data.name,
+                            });
+
                             if (req.status != 1) {
                                 this.alert('加载失败，请刷新页面。');
 
@@ -1375,6 +1379,11 @@ class tmplink {
                 captcha: recaptcha
             }, (req) => {
                 if (req.status == 1) {
+
+                    gtag('config', 'UA-96864664-3', {
+                        'page_title': 'Download-' + title,
+                    });
+
                     this.download_queue_add(req.data, title, ukey, size, type);
                     this.download_queue_start();
                     return true;
@@ -1392,6 +1401,7 @@ class tmplink {
 
     download_file_url(i, cb) {
         let ukey = this.list_data[i].ukey;
+        let title = this.list_data[i].fname;
 
         this.recaptcha_do('download_req_on_list', (recaptcha) => {
             $.post(this.api_file, {
@@ -1401,6 +1411,9 @@ class tmplink {
                 captcha: recaptcha
             }, (req) => {
                 if (req.status == 1) {
+                    gtag('config', 'UA-96864664-3', {
+                        'page_title': 'Download-' + title,
+                    });
                     cb(req.data);
                     return true;
                 }
