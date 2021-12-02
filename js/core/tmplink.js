@@ -2390,11 +2390,12 @@ class tmplink {
                         this.logined = 1;
                         this.get_details(() => {
                             localStorage.setItem('app_login', 1);
-                            window.history.back();
                             //如果当前页是首页，则刷新当前页面
                             let url = this.get_url_params();
                             if(url.tmpui_page==='/'||url.tmpui_page===undefined){
                                 window.location.reload();
+                            }else{
+                                window.history.back();
                             }
                             //app.open('/workspace');
                         });
