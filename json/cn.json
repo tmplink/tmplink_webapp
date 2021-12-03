@@ -118,6 +118,8 @@
     "model_copy":"分享",
     "model_rocket":"高速通道",
 
+    "hs_enabled":"高速通道",
+
     "file_name": "文件名称",
     "file_type": "文件类型",
     "file_size": "文件大小",
@@ -236,7 +238,7 @@
 
     "model_title_buy_highspeed": "开通高速通道",
     "highspeed_content": "不限速是我们的承诺，但是在下载高峰时段，您可能会遇到下载速度降低的情况。因此我们为您准备了额外的服务器以提供更好的下载体验。",
-    "highspeed_content2": "* 需要注意的是，尽管我们已经提升了服务器给到您的网络带宽，但是实际下载速度仍然取决诸多因素。您与宽带运营商签约的带宽，Wifi连接的网络质量，以及终端设备的性能等因素都可能影响最终下载速度。我们不对最终下载速度作出任何承诺。",
+    "highspeed_content2": "* 高速通道服务由 <a href=\"https://www.vx.link\" target=\"_blank\"> vxTrans &trade; 流量加速服务 </a> 提供支持",
     "highspeed_price_cny1": "￥6 / 一个月",
     "highspeed_price_usd1": "$1 / 一个月",
     "highspeed_times": "购买时长",
