@@ -20,6 +20,7 @@
             </li>
         </div>
 
+
         <div class="form-inline mt-1 my-lg-0 navbar_ready" style="display: none;">
 
             <div class="mt-1 mx-1">
@@ -47,6 +48,13 @@
                 </button>
             </div>
 
+            <div class="mt-1 mx-1">
+                <button class="btn btn-success mt-1 mx-1 my-sm-0 hs-enabled" style="display: none;">
+                    <i class="fad fa-rocket-launch fa-fw"></i>
+                    <span i18n="hs_enabled">.</span>
+                </button>
+            </div>
+
             <div class="btn-group mt-1 mx-1 workspace-navbar">
                 <button type="button" class=" btn btn-success dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -67,8 +75,8 @@
                         onclick="$('#ordersModal').modal('show');TL.orders_list();" i18n="navbar_orders">.</a>
                     <hr>
                     <span class="dropdown-item-text" i18n="navbar_buy">.</span>
-                    <!-- <a class="dropdown-item" href="javascript:void(0)" onclick="TL.buy_select_open('hs');"
-                        i18n="navbar_buy_hs">.</a> -->
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.buy_select_open('hs');"
+                        i18n="navbar_buy_hs">.</a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.buy_select_open('storage');"
                         i18n="navbar_buy_storage">.</a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.buy_select_open('media');"
