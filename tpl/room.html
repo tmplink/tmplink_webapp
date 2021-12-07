@@ -153,7 +153,7 @@
                 </div>
 
                 <script type="text/template" id="room_back_btn_tpl">
-                    <% if(TL.room.owner==1){ %>
+                    <% if(TL.room.owner==1 || (TL.room.allow_upload=='yes'&&TL.isLogin())){ %>
                         <button onclick="TL.upload_open('<% TL.room.mr_id %>');" tmpui-app="true" class="btn btn-sm btn-primary  mr-1  mt-1">
                             <i class="fad fa-cloud-upload fa-fw"></i>
                             <span i18n="nav_upload" class="d-none d-sm-inline"><% TL.languageData.nav_upload %></span>
@@ -518,7 +518,7 @@
 
                 <h5 i18n="modal_performance_sort">.</h5>
                 <div class="form-group">
-                    <select class="form-control" id="pf_sort_by">
+                    <select class="form-control" id="pf_sort_by" onchange="TL.room_performance_post()">
                         <option value="0" i18n-only="html" i18n="sort_by_id">.</option>
                         <option value="1" i18n-only="html" i18n="sort_by_name">.</option>
                         <option value="2" i18n-only="html" i18n="sort_by_size">.</option>
@@ -526,15 +526,22 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" id="pf_sort_type">
+                    <select class="form-control" id="pf_sort_type" onchange="TL.room_performance_post()">
                         <option value="0" i18n-only="html" i18n="sort_desc">.</option>
                         <option value="1" i18n-only="html" i18n="sort_asc">.</option>
                     </select>
                 </div>
+
+                <h5 i18n="modal_performance_share">.</h5>
+                <label class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="pf_allow_upload" onclick="TL.room_performance_post()">
+                    <span class="form-check-label" i18n="modal_performance_share_des">
+                        .
+                    </span>
+                </label>
             </div>
             <div class="modal-footer">
-                <button id="btn_pf_confirm" class="btn btn-light" onclick="TL.room_performance_post()"
-                    i18n="model_btn_ok">.</button>
+                <button id="btn_pf_confirm" class="btn btn-light" i18n="model_btn_ok">.</button>
             </div>
         </div>
     </div>

@@ -450,6 +450,9 @@
     "modal_performance_display_1":"图片",
     "modal_performance_sort":"默认的文件排序方式",
 
+    "modal_performance_share":"协作",
+    "modal_performance_share_des":"允许其他用户将文件上传至此文件夹",
+
 
     "status_need_login": "请先登录",
     "status_13": "重设密码失败，操作过于频繁，请一小时后再试。",

@@ -1916,6 +1916,14 @@ class tmplink {
         let room_sort_type = storage_room_sort_type === null ? this.room.sort_type : storage_room_sort_type;
         localStorage.setItem(room_key_sort_type, room_sort_type);
         $("#pf_sort_type option[value='" + this.room.sort_type + "']").attr("selected", "selected");
+
+        let room_key_allow_upload = 'app_room_view_allow_upload_' + room_id;
+        let storage_room_allow_upload = localStorage.getItem(room_key_allow_upload);
+        let room_allow_upload = storage_room_allow_upload === null ? this.room.allow_upload : storage_room_allow_upload;
+        localStorage.setItem(room_key_allow_upload, room_allow_upload);
+        if (storage_room_allow_upload == 'yes') {
+            $('#pf_allow_upload').attr('checked', 'checked');
+        }
     }
 
     room_performance_open() {
@@ -1927,6 +1935,7 @@ class tmplink {
         let pf_display = $('#pf_display').val();
         let pf_sort_by = $('#pf_sort_by').val();
         let pf_sort_type = $('#pf_sort_type').val();
+        let pf_allow_upload = $('#pf_allow_upload').is(':checked')?'yes':'no';
         let mrid = this.room.mr_id;
         $('#btn_pf_confirm').attr('disabled', 'disabled');
         $.post(this.api_mr, {
@@ -1935,9 +1944,8 @@ class tmplink {
             pf_display: pf_display,
             sort_by: pf_sort_by,
             sort_type: pf_sort_type,
+            pf_upload: pf_allow_upload,
             mr_id: mrid
-        }, () => {
-            $('#performanceModal').modal('hide');
         });
     }
 
@@ -2300,6 +2308,7 @@ class tmplink {
             this.room.sort_by = rsp.data.sort_by;
             this.room.sort_type = rsp.data.sort_type;
             this.room.status = rsp.data.status;
+            this.room.allow_upload = rsp.data.allow_upload;
             this.room_performance_init(this.room.mr_id);
 
             //如果用户不是文件夹的拥有者，则显示出加入收藏夹的按钮
@@ -2319,6 +2328,11 @@ class tmplink {
             if (rsp.data.favorites > 0) {
                 $('.fav-enabled').show();
                 $('#favorite_count').html(rsp.data.favorites);
+            }
+
+            //如果文件夹不是用户的，则隐藏偏好设定
+            if (this.room.owner == 0) {
+                $('#room_btn_performance').hide();
             }
 
             $('#mr_copy').attr('data-clipboard-text', 'http://tmp.link/room/' + rsp.data.mr_id);
@@ -2505,7 +2519,7 @@ class tmplink {
     }
 
     cc_send() {
-        var email = $('#email').val();
+        var email = $('#email_new').val();
         $('#msg_notice').show();
         $('#msg_notice').html(this.languageData.form_btn_processing);
         $('#button-reg-checkcode').html(this.languageData.form_btn_processing);
