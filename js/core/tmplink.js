@@ -2519,7 +2519,7 @@ class tmplink {
     }
 
     cc_send() {
-        var email = $('#email').val();
+        var email = $('#email_new').val();
         $('#msg_notice').show();
         $('#msg_notice').html(this.languageData.form_btn_processing);
         $('#button-reg-checkcode').html(this.languageData.form_btn_processing);
