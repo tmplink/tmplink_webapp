@@ -478,7 +478,7 @@ class tmplink {
     }
 
     email_change_confim() {
-        var email = $('#email').val();
+        var email = $('#email_new').val();
         var code = $('#checkcode').val();
         $("#notice_emailchange").html(this.languageData.model_email_change_msg_processing);
         $("#email_change_confim_btn").attr('disabled', true);
