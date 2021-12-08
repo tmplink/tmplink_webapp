@@ -523,7 +523,7 @@ class tmplink {
 
     password_found() {
         this.recaptcha_do('init', (captcha) => {
-            var email = $('#email').val();
+            var email = $('#email_new').val();
             if (email === '') {
                 return false;
             }
@@ -2480,7 +2480,7 @@ class tmplink {
     }
 
     register() {
-        var email = $('#email').val();
+        var email = $('#email_new').val();
         var password = $('#password').val();
         var rpassword = $('#rpassword').val();
         var code = $('#checkcode').val();
