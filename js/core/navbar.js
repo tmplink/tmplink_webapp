@@ -38,7 +38,7 @@ class navbar {
         $('#navbar_model_icon').attr('class', 'fal fa-desktop-alt fa-fw mx-auto');
         $('#navbar_model_text').html(this.parent.languageData.navbar_meetingroom);
         if (act === true) {
-            app.open('/dir');
+            app.open('/room&mrid=0');
         }
     }
 

@@ -411,7 +411,7 @@ class tmplink {
             $('.workspace-navbar').hide();
             $('.workspace-nologin').show();
         }
-        
+
         $('.navbar_nloading').hide();
         $('.navbar_ready').show();
         //set process bar to 100%
@@ -580,10 +580,10 @@ class tmplink {
     workspace_del(ukey, group_delete) {
         //如果是批量删除
         if (group_delete === true) {
-            for(let i in ukey){
+            for (let i in ukey) {
                 $('.file_unit_' + ukey[i]).hide();
             }
-        }else{
+        } else {
             if (this.profile_confirm_delete_get()) {
                 if (!confirm(this.languageData.confirm_delete)) {
                     return false;
@@ -946,24 +946,24 @@ class tmplink {
                             });
 
                             //如果可以，加入到媒体库
-                            if(this.media.is_allow(rsp.data.name)){
+                            if (this.media.is_allow(rsp.data.name)) {
                                 //绑定按钮
                                 $('#btn_add_to_media').show();
                                 $('#btn_add_to_media').on('click', () => {
                                     if (this.logined == 1) {
                                         $('#menu_add_to_media_video').html(this.languageData.form_btn_processing);
-                                        this.media.video_add(params.ukey,(status,text)=>{
-                                            if(status){
+                                        this.media.video_add(params.ukey, (status, text) => {
+                                            if (status) {
                                                 $('#btn_add_to_media_icon').removeClass('text-cyan');
                                                 $('#btn_add_to_media_icon').addClass('text-red');
                                                 $('#menu_add_to_media_video').html(text);
-                                            }else{
+                                            } else {
                                                 alert(text);
                                             }
                                             //remove event
                                             $('#btn_add_to_media').off('click');
                                         });
-                                    } 
+                                    }
                                 });
                             }
 
@@ -1849,8 +1849,8 @@ class tmplink {
         let search = $('#room_search').val();
 
         $('#dir_list_box').show();
-        $('#mr_filelist_refresh_icon').addClass('fa-spin');
-        $('#mr_filelist_refresh_icon').attr('disabled', true);
+        $('.mr_filelist_refresh_icon').addClass('fa-spin');
+        $('.mr_filelist_refresh_icon').attr('disabled', true);
         this.loading_box_on();
         var params = this.get_url_params();
         this.recaptcha_do('mr_list', (recaptcha) => {
@@ -1870,8 +1870,8 @@ class tmplink {
                 search: search
             }, (rsp) => {
                 $('.data_loading').hide();
-                $('#mr_filelist_refresh_icon').removeClass('fa-spin');
-                $('#mr_filelist_refresh_icon').removeAttr('disabled');
+                $('.mr_filelist_refresh_icon').removeClass('fa-spin');
+                $('.mr_filelist_refresh_icon').removeAttr('disabled');
                 this.mr_file_view(rsp.data, page, params.mrid);
                 if (rsp.status != 0) {
                     this.autoload = true;
@@ -1935,7 +1935,7 @@ class tmplink {
         let pf_display = $('#pf_display').val();
         let pf_sort_by = $('#pf_sort_by').val();
         let pf_sort_type = $('#pf_sort_type').val();
-        let pf_allow_upload = $('#pf_allow_upload').is(':checked')?'yes':'no';
+        let pf_allow_upload = $('#pf_allow_upload').is(':checked') ? 'yes' : 'no';
         let mrid = this.room.mr_id;
         $('#btn_pf_confirm').attr('disabled', 'disabled');
         $.post(this.api_mr, {
@@ -2103,11 +2103,7 @@ class tmplink {
             }, (rsp) => {
                 if (rsp.status == 1) {
                     $('#notice_meetingroom_create').html(this.languageData.notice_meetingroom_status_mrcreated);
-                    if (mr_id == 0) {
-                        this.mr_list();
-                    } else {
-                        this.room_list();
-                    }
+                    this.room_list();
                     $('#mrCreaterModal').modal('hide');
                 } else {
                     $('#notice_meetingroom_create').html(this.languageData.notice_meetingroom_status_mrcreat_fail);
@@ -2222,6 +2218,9 @@ class tmplink {
 
     room_total(mrid) {
         $('#room_total').html('');
+        if(mrid==0){
+            return false;
+        }
         $.post(this.api_mr, {
             action: 'total', mr_id: mrid, token: this.api_token
         }, (rsp) => {
@@ -2354,6 +2353,13 @@ class tmplink {
             this.mr_file_list('all');
 
             //是否需要设置上级目录返回按钮
+            if (this.room.top == 99) {
+                $('.btn_for_sub').hide();
+                $('.btn_for_desktop').show();
+            } else {
+                $('.btn_for_sub').show();
+                $('.btn_for_desktop').hide();
+            }
             $('#room_back_btn').html(app.tpl('room_back_btn_tpl', {}));
             $('#room_loading').hide();
             $('#room_loaded').show();
@@ -2406,9 +2412,9 @@ class tmplink {
                             localStorage.setItem('app_login', 1);
                             //如果当前页是首页，则刷新当前页面
                             let url = this.get_url_params();
-                            if(url.tmpui_page==='/'||url.tmpui_page===undefined){
+                            if (url.tmpui_page === '/' || url.tmpui_page === undefined) {
                                 window.location.reload();
-                            }else{
+                            } else {
                                 window.history.back();
                             }
                             //app.open('/workspace');
@@ -2703,7 +2709,7 @@ class tmplink {
     }
 
     upload_worker(file, id, filename) {
-        this.recaptcha_do('upload_request_select',(captcha)=>{
+        this.recaptcha_do('upload_request_select', (captcha) => {
             $.post(this.api_url_upload, {
                 'token': this.api_token,
                 'action': 'upload_request_select',
