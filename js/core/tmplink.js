@@ -905,9 +905,14 @@ class tmplink {
                                 return false;
                             }
                             let download_link = req.data;
+
                             //设定下载链接
                             let download_url = download_link;
                             let download_cmdurl = download_link;
+
+                            //自动启动下载
+                            window.location.href = download_url;
+
                             //分享链接
                             let share_url = 'http://tmp.link/f/' + params.ukey;
 
