@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="card shadow-sm p-3">
+                <div class="card px-3">
                     <form autocomplete="off" class="btn_for_sub">
                         <div class="input-group mb-1">
                             <div class="input-group-prepend">
@@ -67,19 +67,16 @@
                     <div class="mb-1"></div>
 
                     <div class="btn_for_desktop">
-                        <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.room_list()">
-                            <i class="fa-fw fas fa-sync-alt mr_filelist_refresh_icon"></i>
-                        </button>
                         <button class="btn btn-light text-azure btn-sm mr-1  mt-1" onclick="$('#mrCreaterModal').modal('show');$('#mr_id').val('0');$('#mr_parent_id').val('0');$('#mr_top_id').val('0');">
                             <i class="fa-fw fad fa-folder-plus"></i>
                             <span i18n="model_title_folder_title" class="d-none d-sm-inline" >.</span>
                         </button>
+                        <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.room_list()">
+                            <i class="fa-fw fas fa-sync-alt mr_filelist_refresh_icon"></i>
+                        </button>
                     </div>
 
                     <div class="btn_for_sub">
-                        <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.mr_file_list(0)">
-                            <i class="fa-fw fas fa-sync-alt mr_filelist_refresh_icon"></i>
-                        </button>
                         <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
                             id="filelist_filter">
                             <i class="fa-fw fad fa-sliders-h"></i>
@@ -117,6 +114,9 @@
                             onclick="$('#roomReportModal').modal('show')" style="display: none;">
                             <i class="fa-fw fas fa-exclamation-triangle text-danger"></i>
                             <span class="d-none d-sm-inline" i18n="file_btn_report">.</span>
+                        </button>
+                        <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.mr_file_list(0)">
+                            <i class="fa-fw fas fa-sync-alt mr_filelist_refresh_icon"></i>
                         </button>
                     </div>
 
@@ -402,7 +402,15 @@
                     <% for (var x in obj) { %>
                         <div class="row mx-0 list-bar" id="meetingroom_id_<% obj[x].mr_id %>">
                             <div class="col-12 col-md-6 col-lg-8 my-1 d-flex align-items-center listfontweight filename">
-                                <i class="fad fa-folders text-cyan fa-fw d-none d-md-block"></i>
+                                <% if (obj[x].fav == 0) { %>
+                                    <% if (obj[x].model == 'public') { %>
+                                        <i class="fad fa-folder text-cyan fa-fw d-none d-md-block"></i>
+                                    <% }else{ %>   
+                                        <i class="fas fa-folder-minus text-cyan fa-fw d-none d-md-block"></i>
+                                    <% } %>  
+                                <% }else{ %> 
+                                    <i class="fad fa-folder-plus text-cyan fa-fw d-none d-md-block"></i>
+                                <% } %> 
                                 &nbsp
                                 <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-reaction="true" tmpui-action="TL.room_list()">
                                     <% obj[x].name %>
