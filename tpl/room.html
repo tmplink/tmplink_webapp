@@ -173,7 +173,7 @@
                         </button>
                     <% } %>
                     <% if(TL.room.top != 99){ %>
-                        <a href="/room?mrid=<% TL.room.parent %>" tmpui-reaction="true"  tmpui-action="TL.room_list()" class="btn btn-sm btn-light text-azure mr-1  mt-1">
+                        <a href="/room?mrid=<% TL.room.parent %>" tmpui-action="TL.room_list()" class="btn btn-sm btn-light text-azure mr-1  mt-1">
                             <i class="fad fa-arrow-square-left"></i>
                             <span i18n="filelist_dir_parent" class="d-none d-sm-inline"><% TL.languageData.filelist_dir_parent %></span>
                         </a>
@@ -412,7 +412,7 @@
                                     <i class="fad fa-folder-plus text-cyan fa-fw d-none d-md-block"></i>
                                 <% } %> 
                                 &nbsp
-                                <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-reaction="true" tmpui-action="TL.room_list()">
+                                <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-action="TL.room_list()">
                                     <% obj[x].name %>
                                 </a>
                             </div>
