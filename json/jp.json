@@ -1,4 +1,7 @@
 {
+    "status_file_1": "読み込み中...",
+    "status_file_2": "読み込みに失敗しました、ページを更新してください",
+    "status_file_3": "ダウンロード開始",
     "modal_performance_share": "コラボレーション",
     "modal_performance_share_des": "他のユーザーがこのフォルダーにファイルをアップロードできるようにする",
     "hs_enabled": "高速",

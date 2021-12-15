@@ -1,4 +1,7 @@
 {
+    "status_file_1": "正在載入...",
+    "status_file_2": "載入失敗，請刷新頁面",
+    "status_file_3": "開始下載",
     "modal_performance_share": "協作",
     "modal_performance_share_des": "允許其他用戶將檔案上傳至此文件夾",
     "product_name": "鈦盤",

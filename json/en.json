@@ -1,4 +1,7 @@
 {
+    "status_file_1": "Loading...",
+    "status_file_2": "Failed to load, please refresh the page",
+    "status_file_3": "Start downloading",
     "modal_performance_share": "Collaboration",
     "modal_performance_share_des": "Allow other users to upload files to this folder",
     "hs_enabled": "High-speed",

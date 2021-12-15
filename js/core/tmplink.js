@@ -882,6 +882,9 @@ class tmplink {
                         $('.user-login').hide();
                     }
 
+                    $('#download_msg').html('<i class="fad fa-spinner-third fa-spin fa-fw"></i> '+this.languageData.status_file_1);
+                    $('#download_msg').attr('class','badge badge-pill badge-info');
+
                     //请求下载地址
                     this.recaptcha_do('download_req', (recaptcha) => {
                         $.post(this.api_file, {
@@ -896,8 +899,8 @@ class tmplink {
                             });
 
                             if (req.status != 1) {
-                                this.alert('加载失败，请刷新页面。');
-
+                                $('#download_msg').html('<i class="fas fa-exclamation-circle fa-fw"></i> '+this.languageData.status_file_2);
+                                $('#download_msg').attr('class','badge badge-pill badge-danger');
                                 $('#file_download_btn_1').hide();
                                 $('#file_download_btn_2').hide();
                                 $('#file_download_by_qrcode').hide();
@@ -912,6 +915,8 @@ class tmplink {
 
                             //自动启动下载
                             window.location.href = download_url;
+                            $('#download_msg').html('<i class="fas fa-check-circle fa-fw"></i> '+this.languageData.status_file_3);
+                            $('#download_msg').attr('class','badge badge-pill badge-success');
 
                             //分享链接
                             let share_url = 'http://tmp.link/f/' + params.ukey;

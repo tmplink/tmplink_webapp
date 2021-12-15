@@ -467,6 +467,10 @@
     "status_error_14": "您的账号目前没有文件夹。",
     "status_error_15": "提取码错误。",
 
+    "status_file_1":"正在载入...",
+    "status_file_2":"载入失败，请刷新页面",
+    "status_file_3":"开始下载",
+
     "confirm_delete": "确定要删除吗？",
 
     "menu_delete":"删除文件",
