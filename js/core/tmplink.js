@@ -1932,7 +1932,6 @@ class tmplink {
     }
 
     room_performance_open() {
-        $('#btn_pf_confirm').removeAttr('disabled');
         $('#performanceModal').modal('show');
     }
 
@@ -1942,7 +1941,6 @@ class tmplink {
         let pf_sort_type = $('#pf_sort_type').val();
         let pf_allow_upload = $('#pf_allow_upload').is(':checked') ? 'yes' : 'no';
         let mrid = this.room.mr_id;
-        $('#btn_pf_confirm').attr('disabled', 'disabled');
         $.post(this.api_mr, {
             action: 'pf_set',
             token: this.api_token,
