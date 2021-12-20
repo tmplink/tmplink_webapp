@@ -172,6 +172,12 @@
                             <span i18n="nav_upload" class="d-none d-sm-inline"><% TL.languageData.nav_upload %></span>
                         </button>
                     <% } %>
+
+                    <button class="btn btn-primary btn-sm mr-1  mt-1" onclick="TL.download_allfile_btn();">
+                        <i class="fa-fw fad fa-download"></i>
+                        <span i18n="file_btn_downloadall" class="d-none d-sm-inline"><% TL.languageData.file_btn_downloadall %></span>
+                    </button>
+
                     <% if(TL.room.top != 99){ %>
                         <a href="/room?mrid=<% TL.room.parent %>" tmpui-action="TL.room_list()" class="btn btn-sm btn-light text-azure mr-1  mt-1">
                             <i class="fad fa-arrow-square-left"></i>
@@ -184,10 +190,7 @@
                             <span i18n="model_title_folder_title" class="d-none d-sm-inline"><% TL.languageData.model_title_folder_title %></span>
                         </button>
                     <% } %>
-                    <button class="btn btn-light text-azure btn-sm mr-1  mt-1" onclick="TL.download_allfile_btn();">
-                        <i class="fa-fw fad fa-download"></i>
-                        <span i18n="file_btn_downloadall" class="d-none d-sm-inline"><% TL.languageData.file_btn_downloadall %></span>
-                    </button>
+                    
                 </script>
 
                 <div id="video_player" class="mb-5" style="width: 100%;display: none;">
