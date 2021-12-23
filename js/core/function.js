@@ -56,3 +56,52 @@ function countDown(id, time) {
         }, 1000);
     }
 }
+
+function bytetoconver(val, label) {
+    if (val < 1) {
+        return '0 B';
+    }
+
+    var s = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+    var e = Math.floor(Math.log(val) / Math.log(1024));
+    var value = ((val / Math.pow(1024, Math.floor(e))).toFixed(2));
+    e = (e < 0) ? (-e) : e;
+    if (label) {
+        value += ' ' + s[e];
+    }
+    return value;
+}
+
+function formatTime(s) {
+    var day = Math.floor(s / (24 * 3600));
+    var hour = Math.floor((s - day * 24 * 3600) / 3600);
+    var minute = Math.floor((s - day * 24 * 3600 - hour * 3600) / 60);
+    var second = s - day * 24 * 3600 - hour * 3600 - minute * 60;
+    if (hour < 10) {
+        hour = '0' + hour.toString();
+    }
+    if (minute < 10) {
+        minute = '0' + minute.toString();
+    }
+    if (second < 10) {
+        second = '0' + second.toString();
+    }
+    return hour + ":" + minute + ":" + second;
+}
+
+function get_url_params() {
+    var vars = [],
+        hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
+function get_page_mrid() {
+    var params = get_url_params();
+    return params.mrid;
+}

@@ -10,6 +10,7 @@ class uploader {
     upload_progressbar_counter_loaded = []
     upload_progressbar_counter_count = []
     upload_progressbar_counter = []
+    upload_s2_status = []
 
     init(parent_op) {
         this.parent_op = parent_op;
@@ -26,18 +27,18 @@ class uploader {
     }
 
     upload_cli() {
-        if (this.logined === 1) {
+        if (this.parent_op.logined === 1) {
             $('#uploadCliModal').modal('show');
-            $('#upload_cli_token').html(this.api_token);
+            $('#upload_cli_token').html(this.parent_op.api_token);
         } else {
-            this.alert(this.languageData.status_need_login);
+            this.parent_op.alert(this.parent_op.languageData.status_need_login);
             app.open('/login');
         }
     }
 
-    upload_open(mr_id) {
-        if (!this.logined) {
-            this.alert(this.languageData.status_need_login);
+    open(mr_id) {
+        if (!this.parent_op.logined) {
+            this.parent_op.alert(this.parent_op.languageData.status_need_login);
             return false;
         }
 
@@ -91,38 +92,38 @@ class uploader {
         let id = file_res.id;
         let model = this.upload_model_get();
         if (file.size > this.single_file_size) {
-            this.alert(this.languageData.upload_limit_size);
+            this.parent_op.alert(this.parent_op.languageData.upload_limit_size);
             $('#uq_' + id).fadeOut();
             return false;
         }
-        if (this.logined === false) {
-            this.alert(this.languageData.upload_model99_needs_login);
+        if (this.parent_op.logined === false) {
+            this.parent_op.alert(this.parent_op.languageData.upload_model99_needs_login);
             $('#uq_' + id).fadeOut();
             return false;
         }
         // if (this.storage == 0) {
-        //     this.alert(this.languageData.upload_buy_storage);
+        //     this.parent_op.alert(this.parent_op.languageData.upload_buy_storage);
         //     $('#uq_' + id).fadeOut();
         //     return false;
         // }
         if (file.size > (this.storage - this.storage_used) && (model == 99)) {
-            this.alert(this.languageData.upload_fail_storage);
+            this.parent_op.alert(this.parent_op.languageData.upload_fail_storage);
             $('#uq_' + id).fadeOut();
             return false;
         }
         $('#uq_delete_' + id).hide();
-        $('#uqnn_' + id).html(this.languageData.upload_upload_prepare);
+        $('#uqnn_' + id).html(this.parent_op.languageData.upload_upload_prepare);
         this.upload_prepare(file, id, (f, sha1, id) => {
             //如果sha1不等于0，则调用另外的接口直接发送文件名信息。
             let filename = is_dir ? file.webkitRelativePath : file.name;
             if (sha1 !== 0) {
-                $.post(this.api_file, {
+                $.post(this.parent_op.api_file, {
                     'sha1': sha1,
                     'filename': filename,
                     'model': this.upload_model_get(),
                     'mr_id': this.upload_mrid_get(),
                     'action': 'prepare_v4',
-                    'token': this.api_token
+                    'token': this.parent_op.api_token
                 }, (rsp) => {
                     if (rsp.status === 1) {
                         this.upload_final(rsp, file, id);
@@ -138,6 +139,50 @@ class uploader {
         });
     }
 
+    model_selected(model) {
+        console.log('upload::model::' + model);
+
+        //检查账号是否有足够可用的空间
+        if (model == 99) {
+            if (this.storage_used >= this.storage) {
+                alert('私有空间已经用完，请考虑购买私有空间扩展包。');
+                return false;
+            }
+        }
+
+        switch (model) {
+            case 0:
+                $('#seleted_model').html(this.parent_op.languageData.modal_settings_upload_model1);
+                $('#upload_model').val(0);
+                break;
+            case 1:
+                $('#seleted_model').html(this.parent_op.languageData.modal_settings_upload_model2);
+                $('#upload_model').val(1);
+                break;
+            case 2:
+                $('#seleted_model').html(this.parent_op.languageData.modal_settings_upload_model3);
+                $('#upload_model').val(2);
+                break;
+            case 3:
+                $('#seleted_model').html(this.parent_op.languageData.modal_settings_upload_model4);
+                $('#upload_model').val(3);
+                break;
+            case 99:
+                $('#seleted_model').html(this.parent_op.languageData.modal_settings_upload_model99);
+                $('#upload_model').val(99);
+                break;
+        }
+        $('#select_model_list').hide();
+        $('#upload_select_file').show();
+        $('#selected_model_box').show();
+        localStorage.setItem('app_upload_model', model);
+    }
+
+    model_reset() {
+        $('#select_model_list').show();
+        $('#upload_select_file').hide();
+        $('#selected_model_box').hide();
+    }
 
 
     upload_prepare(file, id, callback) {
@@ -156,9 +201,9 @@ class uploader {
     }
 
     upload_worker(file, id, filename) {
-        this.recaptcha_do('upload_request_select', (captcha) => {
-            $.post(this.api_url_upload, {
-                'token': this.api_token,
+        this.parent_op.recaptcha_do('upload_request_select', (captcha) => {
+            $.post(this.parent_op.api_url_upload, {
+                'token': this.parent_op.api_token,
                 'action': 'upload_request_select',
                 'filesize': file.size,
                 'captcha': captcha,
@@ -171,7 +216,7 @@ class uploader {
                     fd.append("utoken", rsp.data.utoken);
                     fd.append("model", this.upload_model_get());
                     fd.append("mr_id", this.upload_mrid_get());
-                    fd.append("token", this.api_token);
+                    fd.append("token", this.parent_op.api_token);
                     this.upload_s2_status[id] = 0;
                     var xhr = new XMLHttpRequest();
                     xhr.upload.addEventListener("progress", (evt) => {
@@ -199,7 +244,7 @@ class uploader {
                     xhr.send(fd);
                 } else {
                     //无法获得可用的上传服务器
-                    this.alert('上传失败，无法获得可用的服务器。');
+                    this.parent_op.alert('上传失败，无法获得可用的服务器。');
                 }
             });
         });
@@ -207,11 +252,11 @@ class uploader {
 
     upload_progressbar_draw(id) {
         let speed = this.upload_progressbar_counter_count[id];
-        let left_time = this.formatTime(Math.ceil((this.upload_progressbar_counter_total[id] - this.upload_progressbar_counter_loaded[id]) / speed));
-        let msg = this.bytetoconver(this.upload_progressbar_counter_loaded[id], true) + ' / ' + this.bytetoconver(this.upload_progressbar_counter_total[id], true);
+        let left_time = formatTime(Math.ceil((this.upload_progressbar_counter_total[id] - this.upload_progressbar_counter_loaded[id]) / speed));
+        let msg = bytetoconver(this.upload_progressbar_counter_loaded[id], true) + ' / ' + bytetoconver(this.upload_progressbar_counter_total[id], true);
         let uqmid = "#uqm_" + id;
         let uqpid = "#uqp_" + id;
-        msg += ' | ' + this.bytetoconver(speed, true) + '/s | ' + left_time;
+        msg += ' | ' + bytetoconver(speed, true) + '/s | ' + left_time;
         $(uqmid).html(msg);
         var percentComplete = Math.round(this.upload_progressbar_counter_loaded[id] * 100 / this.upload_progressbar_counter_total[id]);
         $(uqpid).css('width', percentComplete + '%');
@@ -219,11 +264,11 @@ class uploader {
         this.upload_progressbar_counter_count[id] = 0;
         //更新上传按钮的速度指示器
         $('.upload_speed').show();
-        $('.upload_speed').html(this.bytetoconver(speed, true) + '/s');
+        $('.upload_speed').html(bytetoconver(speed, true) + '/s');
 
     }
 
-    upload_selected(dom) {
+    selected(dom) {
         let file = document.getElementById('fileToUpload').files;
         let f = null;
         if (file.length > 0) {
@@ -245,7 +290,7 @@ class uploader {
         dom.value = '';
     }
 
-    upload_dir_selected(e) {
+    dir_selected(e) {
         let file = document.getElementById('dirsToUpload').files;
         let f = null;
         if (file.length > 0) {
@@ -267,7 +312,7 @@ class uploader {
     }
 
 
-    upload_drop(e) {
+    drop(e) {
         e.preventDefault();
         var fileList = e.dataTransfer.files;
         //files
@@ -297,7 +342,7 @@ class uploader {
             let file = f.file;
             $('#uploaded_file_box').append(app.tpl('upload_list_wait_tpl', {
                 name: file.name,
-                size: this.bytetoconver(file.size, true),
+                size: bytetoconver(file.size, true),
                 id: this.upload_queue_id
             }));
             $('#uploaded_file_box').show();
@@ -321,7 +366,7 @@ class uploader {
     upload_progress(evt, id) {
         if (evt.lengthComputable) {
             if (evt.total === evt.loaded) {
-                $('#uqnn_' + id).html(this.languageData.upload_sync);
+                $('#uqnn_' + id).html(this.parent_op.languageData.upload_sync);
                 $('#uqp_' + id).css('width', '100%');
                 $('#uqp_' + id).addClass('progress-bar-striped');
                 $('#uqp_' + id).addClass('progress-bar-animated');
@@ -337,7 +382,7 @@ class uploader {
                 this.upload_start();
             } else {
                 //
-                $('#uqnn_' + id).html(this.languageData.upload_sync);
+                $('#uqnn_' + id).html(this.parent_op.languageData.upload_sync);
                 this.upload_progressbar_counter_count[id] += evt.loaded - this.upload_s2_status[id];
                 this.upload_s2_status[id] = evt.loaded;
                 //
@@ -364,7 +409,7 @@ class uploader {
     upload_failed(evt, id) {
         clearInterval(this.upload_progressbar_counter[id]);
         this.upload_progressbar_counter[id] = null;
-        this.alert(this.languageData.upload_fail);
+        this.parent_op.alert(this.parent_op.languageData.upload_fail);
         $('#uq_' + id).fadeOut();
         this.upload_processing = 0;
         this.upload_start();
@@ -373,33 +418,33 @@ class uploader {
     upload_canceled(evt, id) {
         clearInterval(this.upload_progressbar_counter[id]);
         this.upload_progressbar_counter[id] = null;
-        this.alert(this.languageData.upload_cancel);
+        this.parent_op.alert(this.parent_op.languageData.upload_cancel);
         $('#uq_' + id).fadeOut();
         this.upload_processing = 0;
         this.upload_start();
     }
 
     upload_final(rsp, file, id) {
-        //$('#nav_upload_btn').html(this.languageData.nav_upload);
+        //$('#nav_upload_btn').html(this.parent_op.languageData.nav_upload);
         if (rsp.status === 1) {
-            $('#uqnn_' + id).html(this.languageData.upload_ok);
+            $('#uqnn_' + id).html(this.parent_op.languageData.upload_ok);
             setTimeout(() => {
                 $('#uq_' + id).hide();
             }, 3000);
             // $('#uploaded_file_box').append(app.tpl('upload_list_ok_tpl', {
             //     name: file.name,
-            //     size: this.bytetoconver(file.size, true),
+            //     size: bytetoconver(file.size, true),
             //     ukey: rsp.data.ukey
             // }));
             //this.btn_copy_bind();
         } else {
-            $('#uqnn_' + id).html(`<span class="text-red">${this.languageData.upload_fail}</span>`);
+            $('#uqnn_' + id).html(`<span class="text-red">${this.parent_op.languageData.upload_fail}</span>`);
         }
-        if (this.get_page_mrid() != undefined && this.upload_queue_file.length == 0) {
-            this.room_list();
+        if (get_page_mrid() != undefined && this.upload_queue_file.length == 0) {
+            this.parent_op.room_list();
         }
-        if (this.get_page_mrid() == undefined && this.upload_queue_file.length == 0) {
-            this.workspace_filelist(0);
+        if (get_page_mrid() == undefined && this.upload_queue_file.length == 0) {
+            this.parent_op.workspace_filelist(0);
         }
         // this.upload_processing = 0;
         // this.upload_start();

@@ -30,7 +30,6 @@ class tmplink {
     download_index = 0
     lazyLoadInstance = null
     get_details_do = false
-    upload_s2_status = []
     countDownID = [];
 
     storage = 0
@@ -55,9 +54,11 @@ class tmplink {
         this.file_manager = new tools_file_manager;
         this.media = new media;
         this.navbar = new navbar;
+        this.uploader = new uploader;
 
         this.file_manager.init(this);
         this.media.init(this);
+        this.uploader.init(this);
 
         //
         $('.workspace-navbar').hide();
@@ -148,7 +149,7 @@ class tmplink {
     }
 
     bg_load() {
-        // let url = this.get_url_params('tmpui_page');
+        // let url = get_url_params('tmpui_page');
         if (document.querySelector('#background_wrap_preload') == null) {
             $('body').append('<div id="background_wrap_preload" style="z-index: -1;background-color:#383838; position: fixed;top: 0;left: 0;height: 100%;width: 100%;"></div>');
             // if (url.tmpui_page == '/media') {
@@ -213,52 +214,6 @@ class tmplink {
         } else {
             return false;
         }
-    }
-
-
-    upload_model_selected(model) {
-        console.log('upload::model::' + model);
-
-        //检查账号是否有足够可用的空间
-        if (model == 99) {
-            if (this.storage_used >= this.storage) {
-                alert('私有空间已经用完，请考虑购买私有空间扩展包。');
-                return false;
-            }
-        }
-
-        switch (model) {
-            case 0:
-                $('#seleted_model').html(this.languageData.modal_settings_upload_model1);
-                $('#upload_model').val(0);
-                break;
-            case 1:
-                $('#seleted_model').html(this.languageData.modal_settings_upload_model2);
-                $('#upload_model').val(1);
-                break;
-            case 2:
-                $('#seleted_model').html(this.languageData.modal_settings_upload_model3);
-                $('#upload_model').val(2);
-                break;
-            case 3:
-                $('#seleted_model').html(this.languageData.modal_settings_upload_model4);
-                $('#upload_model').val(3);
-                break;
-            case 99:
-                $('#seleted_model').html(this.languageData.modal_settings_upload_model99);
-                $('#upload_model').val(99);
-                break;
-        }
-        $('#select_model_list').hide();
-        $('#upload_select_file').show();
-        $('#selected_model_box').show();
-        localStorage.setItem('app_upload_model', model);
-    }
-
-    upload_model_reset() {
-        $('#select_model_list').show();
-        $('#upload_select_file').hide();
-        $('#selected_model_box').hide();
     }
 
     dir_tree_get() {
@@ -381,7 +336,7 @@ class tmplink {
         localStorage.setItem(key.sort_by, this.sort_by);
         localStorage.setItem(key.sort_type, this.sort_type);
 
-        if (this.get_page_mrid() !== undefined) {
+        if (get_page_mrid() !== undefined) {
             //刷新文件夹
             this.mr_file_list(0);
         } else {
@@ -606,7 +561,7 @@ class tmplink {
             token: this.api_token
         }, (rsp) => {
             if (rsp.data.nums > 0) {
-                let total_size_text = this.bytetoconver(rsp.data.size, true);
+                let total_size_text = bytetoconver(rsp.data.size, true);
                 $('#workspace_total').html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
             }
         }, 'json');
@@ -633,7 +588,7 @@ class tmplink {
         }
         //if search
         let search = $('#workspace_search').val();
-        let total_size_text = this.bytetoconver(this.total_size);
+        let total_size_text = bytetoconver(this.total_size);
 
         //更新文件总数
         this.workspace_total();
@@ -816,7 +771,7 @@ class tmplink {
         }
 
         this.loading_box_on();
-        var params = this.get_url_params();
+        var params = get_url_params();
         if (params.ukey !== undefined) {
             $.post(this.api_file, {
                 action: 'details',
@@ -1173,7 +1128,7 @@ class tmplink {
     }
 
     single_download_progress_on(evt) {
-        $('.single_download_msg').html('已下载... ' + this.bytetoconver(evt.loaded, true));
+        $('.single_download_msg').html('已下载... ' + bytetoconver(evt.loaded, true));
         $('.single_download_progress_bar_set').css('width', (evt.loaded / evt.total) * 100 + '%');
         $('.single_download_progress_bar_set').addClass('progress-bar-animated');
         $('.single_download_progress_bar_set').addClass('progress-bar-striped');
@@ -1331,7 +1286,7 @@ class tmplink {
     }
 
     download_progress_on(evt, id, filename, index) {
-        //$('#download_queue_' + id).html(TL.languageData.download_run + filename + ' (' + this.bytetoconver(evt.loaded, true) + ' / ' + this.bytetoconver(evt.total, true) + ')');
+        //$('#download_queue_' + id).html(TL.languageData.download_run + filename + ' (' + bytetoconver(evt.loaded, true) + ' / ' + bytetoconver(evt.total, true) + ')');
         $('.download_progress_bar_set_' + index).css('width', (evt.loaded / evt.total) * 100 + '%');
         if (evt.loaded == evt.total) {
             $('.download_progress_bar_' + index).fadeOut();
@@ -1435,7 +1390,7 @@ class tmplink {
         // }
         this.loading_box_on();
         let search = $('#room_search').val();
-        var params = this.get_url_params();
+        var params = get_url_params();
         this.recaptcha_do('mr_addlist', (recaptcha) => {
             let photo = 0;
             if (localStorage.getItem(room_key) == 'photo') {
@@ -1500,7 +1455,7 @@ class tmplink {
 
     cli_uploader_generator2() {
         //如果有设定文件夹
-        let mrid = this.get_page_mrid();
+        let mrid = get_page_mrid();
         console.log(mrid);
         let text_mr = '';
         if (mrid != undefined) {
@@ -1754,12 +1709,12 @@ class tmplink {
                     r[i].icon = 'fas fa-rabbit-fast';
                     break;
                 case 'storage':
-                    r[i].name = this.languageData.service_code_storage + ' (' + this.bytetoconver(data[i].val, true) + ')';
+                    r[i].name = this.languageData.service_code_storage + ' (' + bytetoconver(data[i].val, true) + ')';
                     r[i].des = this.languageData.service_code_storage_des;
                     r[i].icon = 'fad fa-box-heart';
                     break;
                 case 'media-video':
-                    r[i].name = this.languageData.service_code_media + ' (' + this.bytetoconver(data[i].val, true) + ')';
+                    r[i].name = this.languageData.service_code_media + ' (' + bytetoconver(data[i].val, true) + ')';
                     r[i].des = this.languageData.service_code_media_des;
                     r[i].icon = 'fal fa-video';
                     break;
@@ -1769,7 +1724,7 @@ class tmplink {
     }
 
     mr_file_addlist() {
-        var params = this.get_url_params();
+        var params = get_url_params();
         $('#mrfile_add_list').html('<i class="fa-4x fa-fw fad fa-spinner-third fa-spin mx-auto"></i>');
         $.post(this.api_mr, {
             action: 'file_addlist',
@@ -1786,7 +1741,7 @@ class tmplink {
     }
 
     mr_file_add(ukey) {
-        var params = this.get_url_params();
+        var params = get_url_params();
         $('#btn-mraddlist-' + ukey).fadeOut(300);
         this.recaptcha_do('mr_add', (recaptcha) => {
             $.post(this.api_mr, {
@@ -1802,7 +1757,7 @@ class tmplink {
     }
 
     room_key_get() {
-        let key = this.get_page_mrid();
+        let key = get_page_mrid();
         if (key == undefined) {
             key = 'workspace';
         }
@@ -1852,7 +1807,7 @@ class tmplink {
         $('.mr_filelist_refresh_icon').addClass('fa-spin');
         $('.mr_filelist_refresh_icon').attr('disabled', true);
         this.loading_box_on();
-        var params = this.get_url_params();
+        var params = get_url_params();
         this.recaptcha_do('mr_list', (recaptcha) => {
             let photo = 0;
             if (localStorage.getItem(key.view) == 'photo') {
@@ -2055,7 +2010,7 @@ class tmplink {
     }
 
     mr_file_del(ukey) {
-        var params = this.get_url_params();
+        var params = get_url_params();
         if (this.profile_confirm_delete_get()) {
             if (!confirm(this.languageData.confirm_delete)) {
                 return false;
@@ -2161,7 +2116,7 @@ class tmplink {
             ukey: ukey
         }, (rsp) => {
             //如果在 workspace 里面，则刷新
-            if (this.get_page_mrid() == undefined) {
+            if (get_page_mrid() == undefined) {
                 this.workspace_filelist(0);
             } else {
                 this.mr_file_list('all')
@@ -2223,19 +2178,14 @@ class tmplink {
             action: 'total', mr_id: mrid, token: this.api_token
         }, (rsp) => {
             if (rsp.data.nums > 0) {
-                let total_size_text = this.bytetoconver(rsp.data.size, true);
+                let total_size_text = bytetoconver(rsp.data.size, true);
                 $('#room_total').html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
             }
         }, 'json');
     }
 
-    get_page_mrid() {
-        var params = this.get_url_params();
-        return params.mrid;
-    }
-
     room_list() {
-        var params = this.get_url_params();
+        var params = get_url_params();
         $('#room_userlist').hide();
         $('.permission-room-file').hide();
         $('.permission-room-user').hide();
@@ -2409,7 +2359,7 @@ class tmplink {
                         this.get_details(() => {
                             localStorage.setItem('app_login', 1);
                             //如果当前页是首页，则刷新当前页面
-                            let url = this.get_url_params();
+                            let url = get_url_params();
                             if (url.tmpui_page === '/' || url.tmpui_page === undefined) {
                                 window.location.reload();
                             } else {
@@ -2624,26 +2574,11 @@ class tmplink {
 
     storage_status_update() {
         let data = {};
-        data.storage_text = this.bytetoconver(this.storage, true);
-        data.storage_used_text = this.bytetoconver(this.storage_used, true);
+        data.storage_text = bytetoconver(this.storage, true);
+        data.storage_used_text = bytetoconver(this.storage_used, true);
         data.percent = (this.storage_used / this.storage) * 100;
         $('#upload_storage_status').html(data.storage_used_text + ' | ' + data.storage_text);
         // $('#upload_storage_status').html(app.tpl('upload_storage_status_tpl', data));
-    }
-
-    bytetoconver(val, label) {
-        if (val < 1) {
-            return '0 B';
-        }
-
-        var s = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
-        var e = Math.floor(Math.log(val) / Math.log(1024));
-        var value = ((val / Math.pow(1024, Math.floor(e))).toFixed(2));
-        e = (e < 0) ? (-e) : e;
-        if (label) {
-            value += ' ' + s[e];
-        }
-        return value;
     }
 
     btn_copy_bind() {
@@ -2872,23 +2807,6 @@ class tmplink {
 
         }
         return r;
-    }
-
-    formatTime(s) {
-        var day = Math.floor(s / (24 * 3600));
-        var hour = Math.floor((s - day * 24 * 3600) / 3600);
-        var minute = Math.floor((s - day * 24 * 3600 - hour * 3600) / 60);
-        var second = s - day * 24 * 3600 - hour * 3600 - minute * 60;
-        if (hour < 10) {
-            hour = '0' + hour.toString();
-        }
-        if (minute < 10) {
-            minute = '0' + minute.toString();
-        }
-        if (second < 10) {
-            second = '0' + second.toString();
-        }
-        return hour + ":" + minute + ":" + second;
     }
 
     copyToClip(content) {

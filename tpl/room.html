@@ -167,7 +167,7 @@
 
                 <script type="text/template" id="room_back_btn_tpl">
                     <% if(TL.room.owner==1 || (TL.room.allow_upload=='yes'&&TL.isLogin())){ %>
-                        <button onclick="TL.upload_open('<% TL.room.mr_id %>');" tmpui-app="true" class="btn btn-sm btn-primary  mr-1  mt-1">
+                        <button onclick="TL.uploader.open('<% TL.room.mr_id %>');" tmpui-app="true" class="btn btn-sm btn-primary  mr-1  mt-1">
                             <i class="fad fa-cloud-upload fa-fw"></i>
                             <span i18n="nav_upload" class="d-none d-sm-inline"><% TL.languageData.nav_upload %></span>
                         </button>

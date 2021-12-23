@@ -73,7 +73,7 @@
 
 <div class="modal fade" id="uploadModal">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content shadow-lg" ondrop="TL.upload_drop(event)">
+        <div class="modal-content shadow-lg" ondrop="TL.uploader.drop(event)">
             <div class="modal-header">
                 <h4 class="modal-title" i18n="model_title_upload">.</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
@@ -84,7 +84,7 @@
                 </div> -->
                 <!--[新设计]-->
                 <div class="select-box-all p-2" id="selected_model_box" style="display: none;">
-                    <button type="button" class="btn btn-primary btn-sm text-right" onclick="TL.upload_model_reset()"
+                    <button type="button" class="btn btn-primary btn-sm text-right" onclick="TL.uploader.model_reset()"
                         i18n="modal_settings_upload_model_reset">.</button>
                     <span id="seleted_model"></span>
                 </div>
@@ -94,7 +94,7 @@
                         <div class="text-left mb-3">
                             <div class="display-4" i18n="modal_settings_upload_model_unlimited">.</div>
                         </div>
-                        <div class="select-box p-2 btn-point" onclick="TL.upload_model_selected(0)">
+                        <div class="select-box p-2 btn-point" onclick="TL.uploader.model_selected(0)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
                                     <i class="mt-1 fal fa-history fa-fw"></i>
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="select-box p-2 btn-point" onclick="TL.upload_model_selected(1)">
+                        <div class="select-box p-2 btn-point" onclick="TL.uploader.model_selected(1)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
                                     <i class="mt-1 fal fa-history fa-fw"></i>
@@ -124,7 +124,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="select-box p-2 btn-point" onclick="TL.upload_model_selected(2)">
+                        <div class="select-box p-2 btn-point" onclick="TL.uploader.model_selected(2)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
                                     <i class="mt-1 fal fa-history fa-fw"></i>
@@ -146,7 +146,7 @@
                             <div class="display-4" i18n="model_title_buy_storage">.</div>
                             <div id="upload_storage_status"></div>
                         </div>
-                        <div class="select-box p-2 btn-point storage_needs" onclick="TL.upload_model_selected(99)">
+                        <div class="select-box p-2 btn-point storage_needs" onclick="TL.uploader.model_selected(99)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
                                     <i class="mt-1 far fa-infinity fa-fw"></i>
@@ -183,7 +183,7 @@
                 <div id="upload_select_file" style="display: none;">
                     <div class="select-box p-2 btn-point">
                         <input type="file" multiple="multiple" id="fileToUpload" style="display: none;"
-                            onchange="TL.upload_selected(this);" />
+                            onchange="TL.uploader.selected(this);" />
                         <label for="fileToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
@@ -202,7 +202,7 @@
                     </div>
                     <div class="select-box p-2 btn-point" id="dirsToUpload_label">
                         <input type="file" id="dirsToUpload" style="display: none;" multiple directory webkitdirectory
-                            mozdirectory onchange="TL.upload_dir_selected(this);" />
+                            mozdirectory onchange="TL.uploader.dir_selected(this);" />
                         <label for="dirsToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
@@ -286,7 +286,7 @@
                         <div class="col-12 col-md-4 col-lg-3 text-muted my-1 listfontweight d-flex align-items-center justify-content-end">
                             <% obj.size %>
                                 &nbsp
-                                <a href="javascript:void(0)" onclick="TL.upload_queue_remove(<% obj.id %>)" id="uq_delete_<% obj.id %>" class="text-red btn btn-sm btn-light mx-1">
+                                <a href="javascript:void(0)" onclick="TL.uploader.queue_remove(<% obj.id %>)" id="uq_delete_<% obj.id %>" class="text-red btn btn-sm btn-light mx-1">
                                     <i class="fa-fw fad fa-trash-alt"></i>
                                 </a>
                         </div>
