@@ -451,7 +451,7 @@ class uploader {
                     size: bytetoconver(file.size, true),
                     ukey: rsp.data.ukey
                 }));
-                this.btn_copy_bind();
+                this.parent_op.btn_copy_bind();
             }
 
             // $('#uploaded_file_box').append(app.tpl('upload_list_ok_tpl', {
