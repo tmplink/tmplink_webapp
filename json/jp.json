@@ -40,7 +40,7 @@
     "status_media_resolution": "最小サポート640x480、最大サポート4kビデオ。",
     "status_media_duration": "最小5秒、最大5時間のビデオをサポートします。",
     "status_media_usage": "メディアライブラリの容量が不足しています。より大きな容量の購入を検討してください。",
-    "upload_sync_onprogress": "転送中",
+    "upload_sync_onprogress": "データの同期中です、お待ちください。",
     "model_profile_title": "設定",
     "model_profile_confirm_delete": "削除する前にもう一度確認しますか？",
     "navbar_profile": "設定",

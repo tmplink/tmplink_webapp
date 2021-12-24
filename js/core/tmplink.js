@@ -342,18 +342,24 @@ class tmplink {
             this.logined = 1;
             $('.workspace-navbar').show();
             $('.workspace-nologin').hide();
+            $('#index_manager').fadeIn();
         } else {
             $('.workspace-navbar').hide();
             $('.workspace-nologin').show();
+            $('#index_prepare').fadeIn();
         }
 
         $('.navbar_nloading').hide();
         $('.navbar_ready').show();
         //set process bar to 100%
-        $('#index_userinfo_loading_Bar').css('width', '100%');
         // setTimeout(() => {
         //     $('#index_userinfo_loading').fadeOut();
         // },1000);
+    }
+
+    open_manager(){
+        $('#index_prepare').fadeOut();
+        $('#index_manager').fadeIn();
     }
 
     get_details(cb) {
@@ -1009,12 +1015,15 @@ class tmplink {
 
                 //file need to sync
                 if (rsp.status === 2) {
-                    $('#file_messenger_icon').html('<i class="fa-fw fas fa-spinner fa-spin fa-4x"></i>');
+                    $('#file_messenger_icon').html('<i class="fa-fw fad fa-spinner-third fa-spin fa-4x"></i>');
                     $('#file_messenger_msg').html(this.languageData.upload_sync_onprogress);
                     $('#file_messenger').show();
                     gtag('config', 'UA-96864664-3', {
                         'page_title': 'D-sync',
                     });
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 10000);
                     return false;
                 }
 
