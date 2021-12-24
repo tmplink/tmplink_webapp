@@ -1015,12 +1015,15 @@ class tmplink {
 
                 //file need to sync
                 if (rsp.status === 2) {
-                    $('#file_messenger_icon').html('<i class="fa-fw fas fa-spinner fa-spin fa-4x"></i>');
+                    $('#file_messenger_icon').html('<i class="fa-fw fad fa-spinner-third fa-spin fa-4x"></i>');
                     $('#file_messenger_msg').html(this.languageData.upload_sync_onprogress);
                     $('#file_messenger').show();
                     gtag('config', 'UA-96864664-3', {
                         'page_title': 'D-sync',
                     });
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 10000);
                     return false;
                 }
 

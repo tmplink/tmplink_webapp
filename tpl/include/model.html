@@ -301,14 +301,14 @@
                 </script>
 
                 <script type="text/template" id="upload_list_ok_tpl">
-                    <div class="row p-2 filelist-card shadow-sm mb-2 mx-0 upload_file_ok">
-                        <div class="col-12 col-md-7 col-lg-8 my-1 d-flex align-items-center listfontweight filename">
+                    <div class="row p-2 mb-2 mx-0 select-box">
+                        <div class="col-12 my-1 d-flex align-items-center listfontweight filename">
                             <% obj.name %>
                         </div>
-                        <div class="col-6 col-md-2 col-lg-2 text-muted my-1 listfontweight d-flex align-items-center justify-content-start justify-content-lg-end">
+                        <div class="col-6 text-muted my-1 listfontweight d-flex align-items-center justify-content-start justify-content-lg-end">
                             <% obj.size %>
                         </div>
-                        <div class="col-6 col-md-3 col-lg-2 my-1 d-flex align-items-center justify-content-end">
+                        <div class="col-6  my-1 d-flex align-items-center justify-content-end">
                             <a href="//tmp.link/f/<% obj.ukey %>" class="text-azure btn btn-sm btn-light mx-1">
                                 <i class="fa-fw fad fa-download"></i>
                             </a>

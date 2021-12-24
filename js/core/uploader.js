@@ -96,11 +96,11 @@ class uploader {
             $('#uq_' + id).fadeOut();
             return false;
         }
-        if (this.parent_op.logined === false) {
-            this.parent_op.alert(this.parent_op.languageData.upload_model99_needs_login);
-            $('#uq_' + id).fadeOut();
-            return false;
-        }
+        // if (this.parent_op.logined === false) {
+        //     this.parent_op.alert(this.parent_op.languageData.upload_model99_needs_login);
+        //     $('#uq_' + id).fadeOut();
+        //     return false;
+        // }
         // if (this.storage == 0) {
         //     this.parent_op.alert(this.parent_op.languageData.upload_buy_storage);
         //     $('#uq_' + id).fadeOut();
@@ -340,12 +340,15 @@ class uploader {
             f.id = this.upload_queue_id;
             this.upload_queue_file.push(f);
             let file = f.file;
-            $('#uploaded_file_box').append(app.tpl('upload_list_wait_tpl', {
+
+            //如果未登录，添加队列到首页
+            let target = this.parent_op.isLogin() ? '#uploaded_file_box' : '#upload_index_box';
+            $(target).append(app.tpl('upload_list_wait_tpl', {
                 name: file.name,
                 size: bytetoconver(file.size, true),
                 id: this.upload_queue_id
             }));
-            $('#uploaded_file_box').show();
+            $(target).show();
             this.upload_queue_id++;
             //更新状态
             this.upload_btn_status_update();
@@ -428,9 +431,29 @@ class uploader {
         //$('#nav_upload_btn').html(this.parent_op.languageData.nav_upload);
         if (rsp.status === 1) {
             $('#uqnn_' + id).html(this.parent_op.languageData.upload_ok);
-            setTimeout(() => {
+
+            //如果未登录状态下上传，则不隐藏上传完成后的信息
+            if (this.parent_op.isLogin()) {
+                setTimeout(() => {
+                    $('#uq_' + id).hide();
+                }, 3000);
+                if (get_page_mrid() != undefined && this.upload_queue_file.length == 0) {
+                    this.parent_op.room_list();
+                }
+                if (get_page_mrid() == undefined && this.upload_queue_file.length == 0) {
+                    this.parent_op.workspace_filelist(0);
+                }
+                this.upload_btn_status_update();
+            } else {
                 $('#uq_' + id).hide();
-            }, 3000);
+                $('#upload_index_box').append(app.tpl('upload_list_ok_tpl', {
+                    name: file.name,
+                    size: bytetoconver(file.size, true),
+                    ukey: rsp.data.ukey
+                }));
+                this.btn_copy_bind();
+            }
+
             // $('#uploaded_file_box').append(app.tpl('upload_list_ok_tpl', {
             //     name: file.name,
             //     size: bytetoconver(file.size, true),
@@ -440,16 +463,10 @@ class uploader {
         } else {
             $('#uqnn_' + id).html(`<span class="text-red">${this.parent_op.languageData.upload_fail}</span>`);
         }
-        if (get_page_mrid() != undefined && this.upload_queue_file.length == 0) {
-            this.parent_op.room_list();
-        }
-        if (get_page_mrid() == undefined && this.upload_queue_file.length == 0) {
-            this.parent_op.workspace_filelist(0);
-        }
+        
         // this.upload_processing = 0;
         // this.upload_start();
         //更新上传统计
         this.upload_count++;
-        this.upload_btn_status_update();
     }
 }
