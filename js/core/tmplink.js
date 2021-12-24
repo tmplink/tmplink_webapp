@@ -45,7 +45,7 @@ class tmplink {
     upload_model_selected_val = 0
     download_retry = 0
     download_retry_max = 10
-    recaptcha_op = true
+    recaptcha_op = false
 
     constructor() {
         this.app_init();
