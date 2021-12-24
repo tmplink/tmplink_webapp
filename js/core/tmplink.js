@@ -342,18 +342,24 @@ class tmplink {
             this.logined = 1;
             $('.workspace-navbar').show();
             $('.workspace-nologin').hide();
+            $('#index_manager').fadeIn();
         } else {
             $('.workspace-navbar').hide();
             $('.workspace-nologin').show();
+            $('#index_prepare').fadeIn();
         }
 
         $('.navbar_nloading').hide();
         $('.navbar_ready').show();
         //set process bar to 100%
-        $('#index_userinfo_loading_Bar').css('width', '100%');
         // setTimeout(() => {
         //     $('#index_userinfo_loading').fadeOut();
         // },1000);
+    }
+
+    open_manager(){
+        $('#index_prepare').fadeOut();
+        $('#index_manager').fadeIn();
     }
 
     get_details(cb) {
