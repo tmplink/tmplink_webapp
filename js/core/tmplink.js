@@ -3,6 +3,7 @@ class tmplink {
     api_url = 'https://tun.tmp.link/api_v2'
     api_url_upload = this.api_url + '/file'
     api_file = this.api_url + '/file'
+    api_pay = this.api_url + '/pay'
     api_user = this.api_url + '/user'
     api_media = this.api_url + '/media'
     api_mr = this.api_url + '/meetingroom'
@@ -55,7 +56,9 @@ class tmplink {
         this.media = new media;
         this.navbar = new navbar;
         this.uploader = new uploader;
+        this.giftcard = new giftcard;
 
+        this.giftcard.init(this);
         this.file_manager.init(this);
         this.media.init(this);
         this.uploader.init(this);
