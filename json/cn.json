@@ -1,6 +1,6 @@
 {
     "product_name" : "钛盘",
-    "des_index": "超好用的文件中转站，最大支持单个 10 GB 文件上传，立即使用！",
+    "des_index": "超好用的文件中转站，最大支持单个 50GB 文件上传，立即使用！",
     "title_index": "钛盘 - 超好用的文件中转站",
     "des_file": "文件提取页",
     "title_file": "钛盘 - 文件提取",
@@ -324,7 +324,7 @@
     "model_title_upload_cli_des": "在命令行的环境下，使用 curl 上传文件。",
     "model_title_sr_only": "关闭",
     "model_title_upload_max": "最大限制",
-    "model_title_upload_max_des": "单个文件最大支持 10GB。为了提高上传文件的成功率，比较大的文件建议使用 zip 分卷至 1GB 的大小再上传。",
+    "model_title_upload_max_des": "单个文件最大支持 50GB。为了提高上传文件的成功率，比较大的文件建议使用 zip 分卷至 1GB 的大小再上传。",
 
     "model_upload_cli_path": "文件路径",
     "model_upload_cli_copy": "生成上传命令",
@@ -350,7 +350,7 @@
     "model_btn_buy_storage": "购买私有空间",
     "model_btn_upload": "开始上传文件",
     "model_btn_upload_cli": "使用命令行上传文件",
-    "model_btn_select": "选择要上传的文件(最大 10 GB)",
+    "model_btn_select": "选择要上传的文件(最大 50GB )",
     "model_btn_upload_clean": "清空",
     "model_btn_cancel": "取消",
 
@@ -369,7 +369,7 @@
     "model_resetpassword_error_fail": "修改失败，请重新登录",
 
     "upload_fail": "上传文件发生了错误，请重新上传。",
-    "upload_limit_size": "目前只能上传小于 10 GB的文件。",
+    "upload_limit_size": "目前只能上传小于 50GB 的文件。",
     "upload_cancel": "上传被用户取消或者浏览器断开连接。",
     "upload_ok": "上传完成",
     "upload_sync_onprogress": "正在传送，请稍等。",
