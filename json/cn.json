@@ -359,7 +359,8 @@
     "model_changeemail_notice": "输入新的邮箱，并接收验证码，完成更新。",
     "model_changeemail_new": "新的邮箱地址",
     "model_changeemail_new_placeholder": "请填写您的要设置的新地址",
-    "model_changeemail_est": "* 如果您较长时间没有收到新邮件提醒，请注意查看一下垃圾箱(Spam)。<br>",
+    "model_changeemail_est": "* 如果您较长时间没有收到新邮件提醒，请注意查看一下垃圾箱(Spam)。",
+    "model_changeemail_news": "* 我们不会向您的邮箱发送非必要邮件。如果需要订阅新闻以了解钛盘的最新动态，请在页底点击 “新闻公告” 获取。",
     "model_changeemail_code_placeholder": "填写您新收到的验证码",
 
     "model_resetpassword_notice": "修改密码无需输入旧密码",
@@ -426,6 +427,7 @@
 
     "footer_tos": "服务条款",
     "footer_privacy": "隐私政策",
+    "footer_news": "<a href=\"https://t.me/tmplink_news_cn\" target=\"_blank\" style=\"color:white\">新闻公告</a>",
     "footer_contact": "联系我们",
     "footer": " © 2018 - 2021 TMPLINK STUDIO &trade; ",
 
