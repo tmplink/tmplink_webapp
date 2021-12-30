@@ -1,4 +1,6 @@
 {
+    "index_tmp_upload_des": "No login required, save only 24 hours, single file up to 50 GB.",
+    "index_login_des": "Securely manage uploaded files and get more features.",
     "status_file_1": "Loading...",
     "status_file_2": "Failed to load, please refresh the page",
     "status_file_3": "Start downloading",
