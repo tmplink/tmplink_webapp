@@ -41,7 +41,6 @@ class tmplink {
     autoload = false
     sort_by = 0
     sort_type = 0
-    single_file_size = 10 * 1024 * 1024 * 1024
     file_manager = null
     upload_model_selected_val = 0
     download_retry = 0

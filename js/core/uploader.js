@@ -5,6 +5,7 @@ class uploader {
     upload_queue_id = 0
     upload_queue_file = []
     upload_processing = 0
+    single_file_size = 50 * 1024 * 1024 * 1024
 
     upload_progressbar_counter_total = []
     upload_progressbar_counter_loaded = []
