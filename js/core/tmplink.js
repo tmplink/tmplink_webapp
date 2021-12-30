@@ -350,7 +350,8 @@ class tmplink {
             $('.workspace-nologin').show();
             $('#index_prepare').fadeIn();
         }
-
+        
+        $('#index_lang').fadeIn();
         $('.navbar_nloading').hide();
         $('.navbar_ready').show();
         //set process bar to 100%

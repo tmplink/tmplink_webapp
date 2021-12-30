@@ -1,4 +1,6 @@
 {
+    "index_tmp_upload_des": "無需登錄，僅保存24小時，單個檔案最大 50 GB，無限空間。",
+    "index_login_des": "安全地管理上傳的文件，並獲得更多功能。",
     "status_file_1": "正在載入...",
     "status_file_2": "載入失敗，請刷新頁面",
     "status_file_3": "開始下載",

@@ -72,6 +72,8 @@
     "index_b1": "提取文件",
     "index_b2": "注册账号",
     "index_b3": "登录账号",
+    "index_tmp_upload_des":"无需登录，仅保存24小时，单个文件最大 50 GB，无限空间。",
+    "index_login_des":"安全地管理上传的文件，并获得更多功能。",
     "index_get_file1":"提取文件",
     "index_get_file2":"请输入提取码",
 
