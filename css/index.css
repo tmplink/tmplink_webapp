@@ -9,35 +9,50 @@ body {
     height: 100%;
 } */
 
-body::-webkit-scrollbar-track {
-    background-clip: padding-box;
-    border: solid transparent;
-    border-width: 0 0 0 4px;
+/* Hide all possibilities in advance */
+.firefox, .msie, .safari, .chrome, .win, .mac { display:none; }
+
+/* Detect Internet Explorer 9 or Greater */
+@media screen and (min-width:0\0) and (min-resolution: +72dpi) { .msie, .win { display:block; } }
+
+/* Detect Internet Explorer 8 or Lower and veru old versions of Firefox */
+@media \0screen\,screen\9 { .msie, .win { display:block; } }
+
+/* Detect any version of Firefox */
+_:-moz-tree-row(hover), .firefox { display:block; }
+
+/* Rule out any straggling Internet Explorer References */
+_:-moz-tree-row(hover), .msie, .win { display:none; }
+
+/* Detect Windows Firefox 4 or newer */
+@media screen and (-moz-windows-theme) { .win, .firefox { display:block; } }
+
+/* Detect Windows Firefox 25 or newer */
+@media screen and (-moz-os-version) { .win, .firefox { display:block; } }
+
+/* Detect Mac Firefox 25 or newer */
+@supports (-moz-osx-font-smoothing:auto) { .mac, .firefox { display:block; } }
+
+/* Detect Chrome 22+ (and Safari 6.1+) */
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm), screen and(-webkit-min-device-pixel-ratio:0) {
+  .chrome { display:block; }
 }
 
-body::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, .2);
-    background-clip: padding-box;
-    border: solid transparent;
-    min-height: 28px;
-    padding: 100px 0 0;
-    box-shadow: inset 1px 1px 0 rgb(0 0 0 / 10%), inset 0 -1px 0 rgb(0 0 0 / 7%);
+/* Detect Chrome 28+ */
+@media screen and (-webkit-min-device-pixel-ratio:0) { @supports (background-attachment:local) {
+  .chrome { display:block; }
+}
+    
+/* Detect Mac Safari 6.1 or newer, hide any straggling Chrome references */
+@media screen and (-webkit-max-device-pixel-ratio:1) and (min-color-index:0) {
+    .mac, .safari {(; display:block; );} 
+    .chrome {(; display:none; );} 
 }
 
-body::-webkit-scrollbar {
-    height: 16px;
-    overflow: visible;
-    width: 16px !important;
-}
-
-body::-webkit-scrollbar-button {
-    height: 0;
-    width: 0;
-}
-
-body::-webkit-scrollbar-corner {
-    background: transparent;
-}
+/* For PowerPC People who have Internet Explorer for Mac... */  
+  
+/*\*//*/ .mac, .msie { display:block; } /**/
+/*\*//*/ .win { display:none; } /**/
 
 .glass {
     background-color: rgba(255, 255, 255, 0.5);
