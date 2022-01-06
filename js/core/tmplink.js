@@ -45,7 +45,7 @@ class tmplink {
     upload_model_selected_val = 0
     download_retry = 0
     download_retry_max = 10
-    recaptcha_op = false
+    recaptcha_op = true
 
     constructor() {
         this.app_init();
@@ -126,6 +126,15 @@ class tmplink {
         });
     }
 
+    total_downloads(){
+        $.post(this.api_file, {
+            action: 'total_downloads',
+            token: this.api_token
+        }, (rsp) => {
+            $('#total_downloads').html(rsp.data);
+        });
+    }
+
     ready(cb) {
         if (this.pageReady) {
             cb();
@@ -192,6 +201,9 @@ class tmplink {
             this.storage_status_update();
             this.head_set();
         });
+        setInterval(() => {
+            this.total_downloads();
+        }, 10000);
     }
 
     head_set_refresh() {
