@@ -2224,6 +2224,8 @@ class tmplink {
                 $('#file_messenger_icon').html('<i class="fas fa-folder-times  fa-4x"></i>');
                 $('#file_messenger_msg').html(this.languageData.room_status_fail);
                 $('#file_messenger').show();
+                $('#room_loaded').html('');
+                $('#room_loaded').hide();
                 gtag('config', 'UA-96864664-3', {
                     'page_title': 'F-Unavailable',
                 });
@@ -2238,6 +2240,8 @@ class tmplink {
                 $('#file_messenger_icon').html('<i class="fas fa-folder-times  fa-4x"></i>');
                 $('#file_messenger_msg').html(this.languageData.room_status_fail);
                 $('#file_messenger').show();
+                $('#room_loaded').html('');
+                $('#room_loaded').hide();
                 gtag('config', 'UA-96864664-3', {
                     'page_title': 'F-Reported',
                 });
@@ -2250,6 +2254,8 @@ class tmplink {
                 $('#file_messenger_msg').html(this.languageData.status_need_login);
                 $('#file_messenger_msg_login').show();
                 $('#file_messenger').show();
+                $('#room_loaded').html('');
+                $('#room_loaded').hide();
                 gtag('config', 'UA-96864664-3', {
                     'page_title': 'F-unLogin',
                 });
