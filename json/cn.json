@@ -287,6 +287,7 @@
 
     "reg_title": "注册",
     "reg_term": "注册即代表您已阅读并同意服务条款",
+    "reg_supported_emails": "查看可用于注册的邮箱地址",
     "reg_finish": "注册完成",
 
     "form_ukey": "提取码",
