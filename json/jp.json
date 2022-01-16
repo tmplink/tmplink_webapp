@@ -1,4 +1,6 @@
+
 {
+    "reg_supported_emails": "登録可能なメールアドレスを表示",
     "model_changeemail_news":"* お客様の受信箱に必要のないメールを送信することはありません。 チタンプレートの最新情報をお届けするニュースレターの購読をご希望の方は、ページ下部の「ニュース」をクリックしてください。",
     "footer_news": "<a href=\"https://t.me/tmplink_news_en\" target=\"_blank\" style=\"color:white\">ニュース(English)</a>",
     "index_tmp_upload_des": "ログイン不要、24時間保存のみ、1ファイル50GBまで、容量無制限。",
