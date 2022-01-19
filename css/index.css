@@ -296,3 +296,7 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
     color: #343a40;
     background-color: #f8f9fa;
 }
+
+.line{
+    border-bottom: 1px solid #e9ecef;
+}
