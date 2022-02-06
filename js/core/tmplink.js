@@ -1,13 +1,14 @@
 class tmplink {
 
     api_url = 'https://tun.tmp.link/api_v2'
+    api_backup = 'https://api.tmp.link/api_v2';
     api_url_upload = this.api_url + '/file'
     api_file = this.api_url + '/file'
     api_pay = this.api_url + '/pay'
     api_user = this.api_url + '/user'
     api_media = this.api_url + '/media'
     api_mr = this.api_url + '/meetingroom'
-    api_toks = this.api_url + '/token'
+    api_toks = this.api_backup + '/token'
     api_token = null
 
     pageReady = false
@@ -45,7 +46,7 @@ class tmplink {
     upload_model_selected_val = 0
     download_retry = 0
     download_retry_max = 10
-    recaptcha_op = true
+    recaptcha_op = false
 
     constructor() {
         this.app_init();
