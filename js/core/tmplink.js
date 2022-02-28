@@ -584,6 +584,7 @@ class tmplink {
 
     workspace_filelist(page) {
         $('.no_files').fadeOut();
+        $('.no_dir').fadeOut();
         $('.no_photos').fadeOut();
         //when page is 0,page will be init
         if (page == 0) {
@@ -1786,6 +1787,7 @@ class tmplink {
 
     mr_file_list(page) {
         $('.no_files').fadeOut();
+        $('.no_dir').fadeOut();
         $('.no_photos').fadeOut();
 
         let key = this.room_key_get();
@@ -1980,6 +1982,8 @@ class tmplink {
     }
 
     mr_file_by_list(data, page) {
+        let url_params = this.get_url_params();
+        console.log(url_params);
         this.room_btn_active_reset();
         $('#room_btn_file_list').addClass('bg-dark');
         if (page == 0 || page == 'all') {
@@ -1987,8 +1991,11 @@ class tmplink {
             if (this.subroom_data.length != 0) {
                 $('#dir_list').append(app.tpl('dir_list_tpl', this.subroom_data));
             }
-            if (data === false && this.subroom_data == 0) {
+            if (data === false && this.subroom_data == 0 && url_params.mrid != 0) {
                 $('.no_files').show();
+            }
+            if(data === false && url_params.mrid == '0'){
+                $('.no_dir').show();
             }
         }
         if (data.length != 0) {
