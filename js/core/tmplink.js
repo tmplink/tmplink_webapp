@@ -126,7 +126,7 @@ class tmplink {
         });
     }
 
-    total_downloads(){
+    total_downloads() {
         $.post(this.api_file, {
             action: 'total_downloads',
             token: this.api_token
@@ -162,11 +162,11 @@ class tmplink {
     bg_load() {
         // let url = get_url_params('tmpui_page');
         if (document.querySelector('#background_wrap_preload') == null) {
-            
+
             //使用svg背景
             let svg = "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgOTAwIDYwMCIgd2lkdGg9IjkwMCIgaGVpZ2h0PSI2MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iI2JhY2RiYSIgZD0iTTAgMGg5MDB2NjAwSDB6Ii8+PHBhdGggZD0iTTAgNDAxbDIxLjUuMmMyMS41LjEgNjQuNS41IDEwNy4zIDUuOCA0Mi45IDUuMyA4NS41IDE1LjcgMTI4LjQgOS43IDQyLjgtNiA4NS44LTI4LjQgMTI4LjYtMjkuMiA0Mi45LS44IDg1LjUgMTkuOCAxMjguNCAyMS4zIDQyLjggMS41IDg1LjgtMTYuMSAxMjguNi0yNi41QzY4NS43IDM3MiA3MjguMyAzNjkgNzcxLjIgMzY1YzQyLjgtNCA4NS44LTkgMTA3LjMtMTEuNUw5MDAgMzUxdjI1MEgweiIgZmlsbD0iIzc3ZDc3ZSIvPjxwYXRoIGQ9Ik0wIDQwOGwyMS41IDEwLjVDNDMgNDI5IDg2IDQ1MCAxMjguOCA0NDguN2M0Mi45LTEuNCA4NS41LTI1IDEyOC40LTM3IDQyLjgtMTIgODUuOC0xMi40IDEyOC42LTIuNCA0Mi45IDEwIDg1LjUgMzAuNCAxMjguNCAzMC4yIDQyLjgtLjIgODUuOC0yMC44IDEyOC42LTI4LjMgNDIuOS03LjUgODUuNS0xLjkgMTI4LjQgNC42IDQyLjggNi41IDg1LjggMTMuOSAxMDcuMyAxNy41TDkwMCA0Mzd2MTY0SDB6IiBmaWxsPSIjNWViZTY3Ii8+PHBhdGggZD0iTTAgNDM3bDIxLjUgOS43YzIxLjUgOS42IDY0LjUgMjkgMTA3LjMgMzEuOCA0Mi45IDIuOCA4NS41LTEwLjggMTI4LjQtMTEuMyA0Mi44LS41IDg1LjggMTIuMSAxMjguNiAyMC4xIDQyLjkgOCA4NS41IDExLjQgMTI4LjQgMTIgNDIuOC43IDg1LjgtMS4zIDEyOC42LTQuNSA0Mi45LTMuMSA4NS41LTcuNSAxMjguNC03IDQyLjguNSA4NS44IDUuOSAxMDcuMyA4LjVMOTAwIDQ5OXYxMDJIMHoiIGZpbGw9IiM0NWE1NTAiLz48cGF0aCBkPSJNMCA1MjlsMjEuNS41YzIxLjUuNSA2NC41IDEuNSAxMDcuMy00LjIgNDIuOS01LjYgODUuNS0xOCAxMjguNC0yNC44IDQyLjgtNi44IDg1LjgtOC4yIDEyOC42LS43IDQyLjkgNy41IDg1LjUgMjMuOSAxMjguNCAyOS40IDQyLjggNS41IDg1LjguMSAxMjguNi02LjIgNDIuOS02LjMgODUuNS0xMy43IDEyOC40LTEzLjcgNDIuOCAwIDg1LjggNy40IDEwNy4zIDExTDkwMCA1MjR2NzdIMHoiIGZpbGw9IiMyYThkM2EiLz48cGF0aCBkPSJNMCA1NjZsMjEuNS02LjdjMjEuNS02LjYgNjQuNS0yMCAxMDcuMy0yMy44IDQyLjktMy44IDg1LjUgMS44IDEyOC40IDYgNDIuOCA0LjIgODUuOCA2LjggMTI4LjYgNC44IDQyLjktMiA4NS41LTguNiAxMjguNC01LjYgNDIuOCAzIDg1LjggMTUuNiAxMjguNiAxNi4xIDQyLjkuNSA4NS41LTExLjEgMTI4LjQtMTMuMSA0Mi44LTIgODUuOCA1LjYgMTA3LjMgOS41TDkwMCA1NTd2NDRIMHoiIGZpbGw9IiMwMDc1MjQiLz48L3N2Zz4=";
-            $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-size: cover;background-repeat: no-repeat;background-attachment: scroll;background-image:url(\''+svg+'\');"></div>');
-            
+            $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-size: cover;background-repeat: no-repeat;background-attachment: scroll;background-image:url(\'' + svg + '\');"></div>');
+
         }
 
     }
@@ -362,7 +362,7 @@ class tmplink {
             $('.workspace-nologin').show();
             $('#index_prepare').fadeIn();
         }
-        
+
         $('#index_lang').fadeIn();
         $('.navbar_nloading').hide();
         $('.navbar_ready').show();
@@ -372,7 +372,7 @@ class tmplink {
         // },1000);
     }
 
-    open_manager(){
+    open_manager() {
         $('#index_prepare').fadeOut();
         $('#index_manager').fadeIn();
     }
@@ -839,8 +839,8 @@ class tmplink {
                         $('.user-login').hide();
                     }
 
-                    $('#download_msg').html('<i class="fad fa-spinner-third fa-spin fa-fw"></i> '+this.languageData.status_file_1);
-                    $('#download_msg').attr('class','badge badge-pill badge-info');
+                    $('#download_msg').html('<i class="fad fa-spinner-third fa-spin fa-fw"></i> ' + this.languageData.status_file_1);
+                    $('#download_msg').attr('class', 'badge badge-pill badge-info');
 
                     //请求下载地址
                     this.recaptcha_do('download_req', (recaptcha) => {
@@ -856,8 +856,8 @@ class tmplink {
                             });
 
                             if (req.status != 1) {
-                                $('#download_msg').html('<i class="fas fa-exclamation-circle fa-fw"></i> '+this.languageData.status_file_2);
-                                $('#download_msg').attr('class','badge badge-pill badge-danger');
+                                $('#download_msg').html('<i class="fas fa-exclamation-circle fa-fw"></i> ' + this.languageData.status_file_2);
+                                $('#download_msg').attr('class', 'badge badge-pill badge-danger');
                                 $('#file_download_btn_1').hide();
                                 $('#file_download_btn_2').hide();
                                 $('#file_download_by_qrcode').hide();
@@ -872,8 +872,8 @@ class tmplink {
 
                             //自动启动下载
                             window.location.href = download_url;
-                            $('#download_msg').html('<i class="fas fa-check-circle fa-fw"></i> '+this.languageData.status_file_3);
-                            $('#download_msg').attr('class','badge badge-pill badge-success');
+                            $('#download_msg').html('<i class="fas fa-check-circle fa-fw"></i> ' + this.languageData.status_file_3);
+                            $('#download_msg').attr('class', 'badge badge-pill badge-success');
 
                             //分享链接
                             let share_url = 'http://tmp.link/f/' + params.ukey;
@@ -1994,7 +1994,7 @@ class tmplink {
             if (data === false && this.subroom_data == 0 && url_params.mrid != 0) {
                 $('.no_files').show();
             }
-            if(data === false && url_params.mrid == '0'){
+            if (data === false && this.subroom_data == 0 && url_params.mrid == '0') {
                 $('.no_dir').show();
             }
         }
@@ -2192,7 +2192,7 @@ class tmplink {
 
     room_total(mrid) {
         $('#room_total').html('');
-        if(mrid==0){
+        if (mrid == 0) {
             return false;
         }
         $.post(this.api_mr, {
@@ -2543,7 +2543,7 @@ class tmplink {
         return msg;
     }
 
-    
+
 
     alert(content) {
         $("#alert-modal-content").html(content);
