@@ -211,12 +211,16 @@
         </div>
 
         <div class="text-right index-box" id="index_lang" style="display: none;">
-            <span class="btn-group">
-                <div class="dropdown-toggle badge badge-pill badge-dark" data-toggle="dropdown"
+            <span class="badge badge-pill badge-dark btn-point showOpenInMenubarX" style="display: none;" onclick="TL.openInMenubarXofIndex()">
+                <img src="/img/menubarx/icon.svg" class="fa-fw" /> <span  i18n="open_in_menubarx">.</span>
+            </span>
+            <span class="badge badge-pill badge-dark" style="padding-top: 4px;padding-bottom: 5px;padding-left: 10px;padding-right: 10px;">
+                <span class="dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span> <span> /
-                        Language</span>
-                </div>
+                    <i class="fad fa-language fa-fw"></i> 
+                    <span class="selected_lang">.</span> 
+                    <span> / Language</span>
+                </span>
                 <div class="dropdown-menu shadow">
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('cn');">简体中文</a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('hk');">繁体中文</a>
