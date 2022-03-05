@@ -1174,6 +1174,11 @@ class tmplink {
         this.openInMenubarX('https://app.tmp.link');
     }
 
+    openInMenubarXofFile(){
+        let params = get_url_params();
+        this.openInMenubarX('http://tmp.link/f/${params.ukey}');
+    }
+
     openInMenubarX(link){
         let openlink = `https://menubarx.app/open/?xurl=${link}&xwidth=390&xheight=844&xbar=0`;
         window.open(openlink);
