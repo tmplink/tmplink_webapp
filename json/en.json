@@ -108,6 +108,7 @@
     "on_select": "Selected item",
     "page_no_photos": "There are currently no pictures available for display. Click <i class=\"fa-fw fad fa-th-list text-azure\"></i> to view all files.",
     "page_no_files": "There are currently no files to display, please upload files first.",
+    "page_no_dir": "Your desktop is empty, please create a folder first, and then go to the folder to upload files. <br> Once the desktop has folders, you can move files into the folders in Files.",
     "ad_file_1_1": "Faster than faster",
     "ad_file_1_2": "Download via high-speed channel.<br>Only CNY 6 per month.",
     "ad_file_1_3": "Activate now",
