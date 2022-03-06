@@ -370,6 +370,9 @@ class tmplink {
         // setTimeout(() => {
         //     $('#index_userinfo_loading').fadeOut();
         // },1000);
+        if(this.isMacOS()&&!this.isMenubarX()){
+            $('.showOpenInMenubarX').show();
+        }
     }
 
     open_manager() {
@@ -1156,6 +1159,30 @@ class tmplink {
     isWeixin() {
         var ua = navigator.userAgent.toLowerCase();
         return ua.match(/MicroMessenger/i) == "micromessenger";
+    }
+
+    isMenubarX(){
+        var ua = navigator.userAgent.toLowerCase();
+        return ua.match(/MicroMessenger/i) == "menubarx";
+    }
+
+    isMacOS(){
+        var ua = navigator.userAgent.toLowerCase();
+        return ua.match(/Macintosh/i) == "macintosh";
+    }
+
+    openInMenubarXofIndex(){
+        this.openInMenubarX('https://app.tmp.link');
+    }
+
+    openInMenubarXofFile(){
+        let params = get_url_params();
+        this.openInMenubarX('http://tmp.link/f/${params.ukey}');
+    }
+
+    openInMenubarX(link){
+        let openlink = `https://menubarx.app/open/?xurl=${link}&xwidth=390&xheight=844&xbar=0`;
+        window.open(openlink);
     }
 
     isMobile() {

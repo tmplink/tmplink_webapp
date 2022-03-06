@@ -243,10 +243,11 @@
                             <span i18n="hs_enabled">.</span>
                         </div>
                     </div>
+
                     <div class="text-right">
                         <span class="btn-group">
                             <div class="dropdown-toggle badge badge-pill badge-dark" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                                aria-haspopup="true" aria-expanded="false" style="padding-top: 4px;padding-bottom: 5px;padding-left: 10px;padding-right: 10px;">
                                 <i class="fal fa-download fa-fw"></i> <span i18n="file_btn_download_opt">.</span>
                             </div>
                             <div class="dropdown-menu dropdown-menu-right shadow">
@@ -269,7 +270,7 @@
                     <div class="text-right">
                         <span class="btn-group">
                             <div class="dropdown-toggle badge badge-pill badge-dark" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                                aria-haspopup="true" aria-expanded="false" style="padding-top: 4px;padding-bottom: 5px;padding-left: 10px;padding-right: 10px;">
                                 <i class="fad fa-language fa-fw"></i> <span class="selected_lang">.</span> <span> /
                                     Language</span>
                             </div>
@@ -279,6 +280,14 @@
                                 <a class="dropdown-item" href="javascript:void(0)"
                                     onclick="TL.language('en');">English</a>
                                 <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
+                            </div>
+                        </span>
+                    </div>
+
+                    <div class="text-right showOpenInMenubarX btn-point" style="display: none;">
+                        <span class="btn-group">
+                            <div class="badge badge-pill badge-dark" onclick="TL.openInMenubarXofFile()">
+                                <img src="/img/menubarx/icon.svg" class="fa-fw" /> <span  i18n="open_in_menubarx">.</span>
                             </div>
                         </span>
                     </div>
