@@ -70,6 +70,7 @@
     "total_units_of_file": "Files",
     "total_units_of_dirs": "Folders",
     "file_btn_upup": "Accelerator",
+    "file_btn_play": "Play",
     "model_title_upup": "Improve download speed",
     "model_upup_t1": "Enable multi-thread support",
     "model_upup_d1_1": "Enable Chrome and Edge multi-threaded download, you can usually get several times faster download speed. You don’t need to install any third-party software, and you don’t need to pay for it.",

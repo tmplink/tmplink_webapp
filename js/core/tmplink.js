@@ -370,7 +370,7 @@ class tmplink {
         // setTimeout(() => {
         //     $('#index_userinfo_loading').fadeOut();
         // },1000);
-        if(this.isMacOS()&&!this.isMenubarX()){
+        if (this.isMacOS() && !this.isMenubarX()) {
             $('.showOpenInMenubarX').show();
         }
     }
@@ -874,9 +874,10 @@ class tmplink {
                             let download_cmdurl = download_link;
 
                             //自动启动下载
-                            window.location.href = download_url;
-                            $('#download_msg').html('<i class="fas fa-check-circle fa-fw"></i> ' + this.languageData.status_file_3);
-                            $('#download_msg').attr('class', 'badge badge-pill badge-success');
+                            // window.location.href = download_url;
+                            // $('#download_msg').html('<i class="fas fa-check-circle fa-fw"></i> ' + this.languageData.status_file_3);
+                            // $('#download_msg').attr('class', 'badge badge-pill badge-success');
+                            $('#download_msg').fadeOut();
 
                             //分享链接
                             let share_url = 'http://tmp.link/f/' + params.ukey;
@@ -907,6 +908,34 @@ class tmplink {
                                 //触发下载
                                 window.open(download_url, '_blank');
                                 return true;
+                            });
+
+                            //当文件后缀是 mp4 时，显示视频播放按钮
+                            if (rsp.data.type == 'mp4') {
+                                $('#btn_play').show();
+                            }
+                            $('#btn_play').on('click', () => {
+                                if (this.isLogin) {
+                                    this.recaptcha_do('play_req', (recaptcha) => {
+                                        $.post(this.api_file, {
+                                            action: 'play_req',
+                                            ukey: params.ukey,
+                                            token: this.api_token,
+                                            captcha: recaptcha
+                                        }, (req) => {
+                                            if (req.status != 1) {
+                                                $('#play_msg').html('<i class="fas fa-exclamation-circle fa-fw"></i> ' + this.languageData.status_file_2);
+                                                $('#play_msg').attr('class', 'badge badge-pill badge-danger');
+                                                return false;
+                                            }
+                                            let play_link = req.data;
+                                            window.open(play_link, '_blank');
+                                        }, 'json');
+                                    });
+                                }else{
+                                    //提示需要登陆
+                                    alert(this.languageData.status_need_login);
+                                }
                             });
 
                             //扫码下载按钮绑定
@@ -1161,26 +1190,26 @@ class tmplink {
         return ua.match(/MicroMessenger/i) == "micromessenger";
     }
 
-    isMenubarX(){
+    isMenubarX() {
         var ua = navigator.userAgent.toLowerCase();
         return ua.match(/MicroMessenger/i) == "menubarx";
     }
 
-    isMacOS(){
+    isMacOS() {
         var ua = navigator.userAgent.toLowerCase();
         return ua.match(/Macintosh/i) == "macintosh";
     }
 
-    openInMenubarXofIndex(){
+    openInMenubarXofIndex() {
         this.openInMenubarX('https://app.tmp.link');
     }
 
-    openInMenubarXofFile(){
+    openInMenubarXofFile() {
         let params = get_url_params();
         this.openInMenubarX(`http://tmp.link/f/${params.ukey}`);
     }
 
-    openInMenubarX(link){
+    openInMenubarX(link) {
         let openlink = `https://menubarx.app/open/?xurl=${link}&xwidth=375&xheight=677&xbar=0`;
         window.open(openlink);
     }
