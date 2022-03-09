@@ -71,6 +71,7 @@
     "total_units_of_file": "ファイル",
     "total_units_of_dirs": "フォルダ",
     "file_btn_upup": "スピードアップ",
+    "file_btn_play": "再生",
     "model_title_upup": "ダウンロード速度を向上させる",
     "model_upup_t1": "マルチスレッドサポートを有効にする",
     "model_upup_d1_1": "ChromeとEdgeのマルチスレッドダウンロードを有効にすると、通常、ダウンロード速度が数倍速くなります。サードパーティのソフトウェアをインストールする必要はなく、料金を支払う必要もありません。",
