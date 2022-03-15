@@ -426,20 +426,22 @@
                 <div class="row">
                     <div class="col-6 text-center dir-icon p-3 btn-point" onclick="TL.bug_select('cny')">
                         <div class="fileicon mx-auto mb-2">
-                            <i class="fab fa-alipay fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
+                            <i
+                                class="fab fa-alipay fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
                         </div>
                         <div class="max-width-90 mx-auto" i18n="model_buy_select_cny_title">.</div>
                         <div class="max-width-90 mx-auto" i18n="model_buy_select_cny_des">.</div>
                     </div>
                     <div class="col-6 text-center dir-icon p-3 btn-point" onclick="TL.bug_select('usd')">
                         <div class="fileicon mx-auto mb-2">
-                            <i class="fab fa-paypal fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
+                            <i
+                                class="fab fa-paypal fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
                         </div>
                         <div class="max-width-90 mx-auto" i18n="model_buy_select_usd_title">.</div>
                         <div class="max-width-90 mx-auto" i18n="model_buy_select_usd_des">.</div>
                     </div>
                 </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
@@ -503,17 +505,13 @@
                 <p i18n="media_content2">.</p>
                 <hr />
                 <div class="form-group media_price_list" id="media_price_of_cny">
-                    <label for="media_code" i18n="media_type">.</label>
                     <select class="form-control" id="media_code_cny">
                         <option value="MEDIA-V-P" i18n-only="html" i18n="media_price_cny1" selected>.</option>
-                        <option value="MEDIA-V-H" i18n-only="html" i18n="media_price_cny2">.</option>
                     </select>
                 </div>
                 <div class="form-group media_price_list" id="media_price_of_usd">
-                    <label for="media_code" i18n="media_type">.</label>
                     <select class="form-control" id="media_code_usd">
                         <option value="MEDIA-V-P-us" i18n-only="html" i18n="media_price_usd1" selected>.</option>
-                        <option value="MEDIA-V-H-us" i18n-only="html" i18n="media_price_usd2">.</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -527,8 +525,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
-                <button type="button" class="btn btn-success" i18n="model_buy_btn"
-                    onclick="TL.media_buy();">.</button>
+                <button type="button" class="btn btn-success" i18n="model_buy_btn" onclick="TL.media_buy();">.</button>
             </div>
         </div>
     </div>
@@ -762,7 +759,7 @@
             <div class="modal-body">
                 <h3 i18n="model_upup_t1">.</h3>
                 <p i18n="model_upup_d1_1"">.</p>
-                <p i18n="model_upup_d1_2"">.</p>
+                <p i18n=" model_upup_d1_2"">.</p>
                 <code>
                     chrome://flags/#enable-parallel-downloading
                 </code>
@@ -789,10 +786,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <textarea id="copy-modal-body" style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;width: 100%;" rows="10"></textarea>
+                <textarea id="copy-modal-body"
+                    style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;width: 100%;"
+                    rows="10"></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success btn_copy" i18n="file_btn_copy" id="copy-modal-btn">.</button>
+                <button type="button" class="btn btn-success btn_copy" i18n="file_btn_copy"
+                    id="copy-modal-btn">.</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
             </div>
         </div>
@@ -877,6 +877,92 @@
                 <!-- 播放器 -->
                 <div class="embed-responsive embed-responsive-16by9" style="display:none" id="video_player">
                     <video id="video_player_src" controls></video>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 商店选项 -->
+<div class="modal fade" id="shopModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="navbar_buy">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 存储 -->
+                <div class="row p-2 filelist-card shadow-sm mb-2 mx-1 btn-point" onclick="TL.buy_select_open('storage');">
+                    <div class="col-12">
+                        <div class="card-p3">
+                            <div class="d-flex align-items-center">
+                                <span class="stamp stamp-md bg-blue mr-3">
+                                    <i class="mt-1 fad fa-box-heart fa-2x fa-fw"></i>
+                                </span>
+                                <div>
+                                    <h4 class="m-0" i18n="model_title_buy_storage">
+                                        .
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <small class="text-muted" i18n="storage_content2">
+                                    .
+                                </small>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 高速通道 -->
+                <div class="row p-2 filelist-card shadow-sm mb-2 mx-1 btn-point" onclick="TL.buy_select_open('hs');">
+                    <div class="col-12">
+                        <div class="card-p3">
+                            <div class="d-flex align-items-center">
+                                <span class="stamp stamp-md bg-blue mr-3">
+                                    <i class="mt-1 fas fa-rabbit-fast fa-2x fa-fw"></i>
+                                </span>
+                                <div>
+                                    <h4 class="m-0" i18n="model_title_buy_highspeed">
+                                        .
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <small class="text-muted" i18n="highspeed_content">
+                                    .
+                                </small>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 媒体 -->
+                <div class="row p-2 filelist-card shadow-sm mb-2 mx-1 btn-point" onclick="TL.buy_select_open('media');">
+                    <div class="col-12">
+                        <div class="card-p3">
+                            <div class="d-flex align-items-center">
+                                <span class="stamp stamp-md bg-blue mr-3">
+                                    <i class="mt-1 fal fa-video fa-2x fa-fw"></i>
+                                </span>
+                                <div>
+                                    <h4 class="m-0" i18n="model_title_buy_media">
+                                        .
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <small class="text-muted" i18n="media_content2">
+                                    .
+                                </small>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

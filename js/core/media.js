@@ -119,13 +119,13 @@ class media {
                 case 1:
                     this.current_play_wait = 0;
                     $('#video_preload').hide();
-                    this.video_play(rsp.data);
+                    this.video_play(this.parent.languageData.video_player_prepare);
                     break;
                 case 2:
                     this.current_play_wait = ukey;
                     $('#video_status_icon_fail').hide();
                     $('#video_status_icon_process').show();
-                    $('#video_status').html('视频正在准备中，请稍等...');
+                    $('#video_status').html(this.parent.languageData.video_player_proccess);
                     setTimeout(() => {
                         this.video_can_play(ukey);
                     }, 5000);
@@ -134,7 +134,7 @@ class media {
                     this.current_play_wait = 0;
                     $('#video_status_icon_process').hide();
                     $('#video_status_icon_fail').show();
-                    $('#video_status').html('视频无法播放');
+                    $('#video_status').html(this.parent.languageData.video_player_fail);
                     break;
                 case 0:
                     this.current_play_wait = 0;
