@@ -119,7 +119,7 @@ class media {
                 case 1:
                     this.current_play_wait = 0;
                     $('#video_preload').hide();
-                    this.video_play(this.parent.languageData.video_player_prepare);
+                    this.video_play(ukey);
                     break;
                 case 2:
                     this.current_play_wait = ukey;
