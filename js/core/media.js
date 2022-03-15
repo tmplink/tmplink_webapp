@@ -119,7 +119,7 @@ class media {
                 case 1:
                     this.current_play_wait = 0;
                     $('#video_preload').hide();
-                    this.video_play(ukey);
+                    this.video_play(rsp.data);
                     break;
                 case 2:
                     this.current_play_wait = ukey;
