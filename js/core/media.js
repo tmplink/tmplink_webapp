@@ -3,6 +3,8 @@ class media {
     parent = null
     allow_ext = ['mp4', 'm4v', 'rm', 'rmvb', 'webm', 'mkv', 'avi', 'ts', 'm2ts', 'mov']
     waitting_list = []
+    current_play = 0;
+    current_play_wait = 0;
 
     init(parent) {
         this.parent = parent;
@@ -73,166 +75,84 @@ class media {
         });
     }
 
-    video_add(ukey, cb) {
-        this.parent.recaptcha_do('video_add', (captcha) => {
-            $.post(this.parent.api_media, {
-                action: 'video_add',
-                captcha: captcha,
-                token: this.parent.api_token,
-                ukey: ukey
-            }, (rsp) => {
-                let text = '';
-                let status = false;
-                if (rsp.status == 1) {
-                    text = this.parent.languageData.status_ok;
-                    status = true;
-                }
-                if (rsp.status == 2) {
-                    text = this.parent.languageData.status_media_not_found;
-                    status = false;
-                }
-                if (rsp.status == 3) {
-                    text = this.parent.languageData.status_media_not_allow;
-                    status = false;
-                }
-                if (rsp.status == 4) {
-                    text = this.parent.languageData.status_media_added;
-                    status = true;
-                }
-                if (rsp.status == 5) {
-                    text = this.parent.languageData.status_media_resolution;
-                    status = false;
-                }
-                if (rsp.status == 6) {
-                    text = this.parent.languageData.status_media_duration;
-                    status = false;
-                }
-                if (rsp.status == 7) {
-                    text = this.parent.languageData.status_media_usage;
-                    status = false;
-                }
-                if (typeof cb == 'function') {
-                    cb(status, text);
-                } else {
-                    alert(text);
-                }
-            });
-        });
-    }
+    video_can_play(ukey) {
+        //需要登录
+        if (!this.parent.isLogin()) {
+            alert(this.parent.languageData.status_need_login);
+            return false;
+        }
 
-    video_list() {
-        $.post(this.parent.api_media, {
-            action: 'video_list',
-            token: this.parent.api_token
-        }, (rsp) => {
-            if (rsp.status == 1) {
-                //处理界面
-                let html = app.tpl('vedio_list_tpl', rsp.data);
-                $('#vedio_list').html(html);
-                this.is_video_ok_check(rsp.data);
-                let length = 0;
-                for (let i in rsp.data) {
-                    length++;
-                }
-                if(length > 3){
-                    $('#video_preview_online').hide();
-                }
-            }
-        });
-    }
+        if (this.current_play == ukey && this.current_play_wait == 0) {
+            $('#videoPlayerModal').modal('show');
+            return false;
+        }
 
-    video_player(ukey) {
         //如果有视频正在播放，停止播放
-        if($('#video_player_src').get(0).src){
+        if ($('#video_player_src').get(0).src) {
             //停止播放
             document.getElementById('video_player_src').pause();
+            $('#video_player_src').removeAttr('src');
+            $('#video_player').hide();
         }
-        $('#video_player_src').removeAttr('src');
+
+        $('#videoPlayerModal').modal('show');
+        $('#video_preload').show();
         $('#video_player').hide();
-        this.parent.recaptcha_do('video_play', (captcha) => {
-            $.post(this.parent.api_media, {
-                action: 'video_player',
-                token: this.parent.api_token,
-                captcha: captcha,
-                ukey: ukey
-            }, (rsp) => {
-                if (rsp.status == 1) {
-                    $('#video_player').show();
-                    //将页面滚动到最上层
-                    $('html,body').animate({ scrollTop: 0 }, 1000);
-                    //处理界面
-                    $('#video_player_src').attr('src', rsp.data);
-                    //视频就绪时自动播放
-                    $('#video_player_src').on('canplay', function () {
-                        $('#video_player_src').get(0).play();
-                    });
-                }
-                //视频文件尚未加入媒体库
-                if (rsp.status == 2) {
-                    alert(this.parent.languageData.status_media_not_added);
-                }
-                //视频文件尚未就绪
-                if (rsp.status == 3) {
-                    alert(this.parent.languageData.status_media_not_ready);  
-                }
-            });
-        });
-    }
 
-    video_play(id) {
-        this.parent.recaptcha_do('video_play', (captcha) => {
-            $.post(this.parent.api_media, {
-                action: 'video_play',
-                token: this.parent.api_token,
-                captcha: captcha,
-                id: id
-            }, (rsp) => {
-                if (rsp.status == 1) {
-                    //加入
-                    $('#video_preview_online').fadeIn();
-                    //处理界面
-                    $('#video_preview_online_src').attr('src', rsp.data);
-                    //将页面滚动到最上层
-                    $('html,body').animate({ scrollTop: 0 }, 1000);
-                    //取消静音
-                    $('#video_preview_online_src').prop('muted', false);
-                    //视频就绪时自动播放
-                    $('#video_preview_online_src').on('canplay', function () {
-                        $('#video_preview_online_src').get(0).play();
-                    });
-                }
-            });
-        });
-    }
+        $('#video_status_icon_fail').hide();
+        $('#video_status_icon_process').show();
+        $('#video_status').html('正在处理');
+        this.current_play = ukey;
 
-    video_del(id) {
-        if (this.parent.profile_confirm_delete_get()) {
-            if (!confirm(this.parent.languageData.confirm_delete)) {
-                return false;
-            }
+        //如果当前等待的视频与当前播放的视频不一致，则退出等待
+        if (this.current_play_wait !== ukey && this.current_play_wait !== 0) {
+            this.current_play_wait = 0;
+            return false;
         }
-        this.parent.recaptcha_do('video_del', (captcha) => {
-            $.post(this.parent.api_media, {
-                action: 'video_del',
-                captcha: captcha,
-                token: this.parent.api_token,
-                id: id
-            }, () => {
-                $('.video_unit_' + id).remove();
-            });
+
+        $.post(this.parent.api_media, {
+            action: 'video_can_play',
+            token: this.parent.api_token,
+            ukey: ukey
+        }, (rsp) => {
+            switch (rsp.status) {
+                case 1:
+                    this.current_play_wait = 0;
+                    $('#video_preload').hide();
+                    this.video_play(rsp.data);
+                    break;
+                case 2:
+                    this.current_play_wait = ukey;
+                    $('#video_status_icon_fail').hide();
+                    $('#video_status_icon_process').show();
+                    $('#video_status').html('视频正在准备中，请稍等...');
+                    setTimeout(() => {
+                        this.video_can_play(ukey);
+                    }, 5000);
+                    break;
+                case 3:
+                    this.current_play_wait = 0;
+                    $('#video_status_icon_process').hide();
+                    $('#video_status_icon_fail').show();
+                    $('#video_status').html('视频无法播放');
+                    break;
+                case 0:
+                    this.current_play_wait = 0;
+                    $('#video_status_icon_process').hide();
+                    $('#video_status_icon_fail').show();
+                    $('#video_status').html(this.parent.languageData.status_need_login);
+                    break;
+            }
         });
     }
 
-    video_rename(id, name) {
-        var newname = prompt(this.parent.languageData.modal_meetingroom_newname, name);
-        $.post(this.parent.api_media, {
-            action: 'video_rename',
-            token: this.parent.api_token,
-            name: newname,
-            id: id
-        }, () => {
-            //rename dom
-            $('.video_unit_title_' + id).text(newname);
+    video_play(src) {
+        $('#video_player').show();
+        //处理界面
+        $('#video_player_src').attr('src', src);
+        //视频就绪时自动播放
+        $('#video_player_src').on('canplay', function () {
+            $('#video_player_src').get(0).play();
         });
     }
 }
