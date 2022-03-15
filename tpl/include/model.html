@@ -852,3 +852,36 @@
         </div>
     </div>
 </div>
+
+<!-- 视频播放器 -->
+<div class="modal fade" id="videoPlayerModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title">播放器</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 预处理 -->
+                <div id="video_preload" class="text-center" style="padding-top: 20px;padding-bottom: 20px;">
+                    <div id="video_status_icon_process">
+                        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                    </div>
+                    <div id="video_status_icon_fail">
+                        <i class="fa fa-times-circle fa-3x fa-fw"></i>
+                    </div>
+                    <div style="height: 15px;"></div>
+                    <span id="video_status"></span>
+                </div>
+
+                <!-- 播放器 -->
+                <div class="embed-responsive embed-responsive-16by9" style="display:none" id="video_player">
+                    <video id="video_player_src" controls></video>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>

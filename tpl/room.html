@@ -193,11 +193,6 @@
                     
                 </script>
 
-                <div id="video_player" class="mb-5" style="width: 100%;display: none;">
-                    <video style="border-radius: 10px;width: 100%;" id="video_player_src" type="video/mp4"
-                        controls></video>
-                </div>
-
                 <div id="dir_list"></div>
 
                 <div class="no_photos" style="margin-top: 100px;margin-bottom: 100px;display: none;">
@@ -299,7 +294,7 @@
                                     </a>
 
                                     <% if(TL.media.is_allow(obj[x].fname)){ %>
-                                        <span class="badge badge-pill badge-primary btn-point" onclick="TL.media.video_player('<% obj[x].ukey %>')">
+                                        <span class="badge badge-pill badge-primary btn-point" onclick="TL.media.video_can_play('<% obj[x].ukey %>')">
                                             <i class="fa-fw fas fa-play-circle"></i>
                                         </span>
                                     <% } %>  
@@ -355,13 +350,6 @@
                                                 <% } %>   
                                             </div>
                                         </span>
-                                    <% } %>
-                                    <% if (TL.room.owner != 1) { %>
-                                        <% if(TL.media.is_allow(obj[x].fname)){ %>
-                                            <button class="text-azure btn_copy btn btn-sm btn-light add-to-media-<% obj[x].ukey %>" onclick="TL.media.video_add_on_list('<% obj[x].ukey %>')">
-                                                <i class="fa-fw fab fa-youtube add-to-media-btn-<% obj[x].ukey %>"></i>
-                                            </button>
-                                        <% } %> 
                                     <% } %>
 
                             </div>
@@ -613,3 +601,4 @@
         </div>
     </div>
 </div>
+

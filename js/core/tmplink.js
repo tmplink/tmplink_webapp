@@ -1527,7 +1527,6 @@ class tmplink {
     cli_uploader_generator2() {
         //如果有设定文件夹
         let mrid = get_page_mrid();
-        console.log(mrid);
         let text_mr = '';
         if (mrid != undefined) {
             text_mr = `-F "mrid=${mrid}"`;
@@ -2039,7 +2038,6 @@ class tmplink {
 
     mr_file_by_list(data, page) {
         let url_params = this.get_url_params();
-        console.log(url_params);
         this.room_btn_active_reset();
         $('#room_btn_file_list').addClass('bg-dark');
         if (page == 0 || page == 'all') {
