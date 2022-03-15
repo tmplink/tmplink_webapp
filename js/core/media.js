@@ -119,7 +119,7 @@ class media {
                 case 1:
                     this.current_play_wait = 0;
                     $('#video_preload').hide();
-                    this.video_play(rsp.data);
+                    this.video_play(rsp.data.url,rsp.data.title);
                     break;
                 case 2:
                     this.current_play_wait = ukey;
@@ -146,13 +146,17 @@ class media {
         });
     }
 
-    video_play(src) {
+    video_play(src,title) {
         $('#video_player').show();
         //处理界面
         $('#video_player_src').attr('src', src);
         //视频就绪时自动播放
         $('#video_player_src').on('canplay', function () {
             $('#video_player_src').get(0).play();
+        });
+
+        gtag('config', 'UA-96864664-3', {
+            'page_title': 'Play-' + title,
         });
     }
 }
