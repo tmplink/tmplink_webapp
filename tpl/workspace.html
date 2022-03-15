@@ -29,7 +29,7 @@
                                 i18n="search_btn">.</button>
                         </div>
                         <input type="search" id="workspace_search" class="form-control" placeholder="."
-                            i18n="search_plh" onkeyup="if(event.keyCode==13)TL.workspace_filelist(0);return false;"
+                            i18n="search_plh" onkeyup="if(event.keyCode==13)TL.workspace_filelist(0);"
                             style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
                     </div>
                     <input style="display:none;">
@@ -182,7 +182,7 @@
                                     </a>
 
                                     <% if(TL.media.is_allow(obj[x].fname)){ %>
-                                        <span class="badge badge-pill badge-primary btn-point" onclick="TL.media.video_player('<% obj[x].ukey %>')">
+                                        <span class="badge badge-pill badge-primary btn-point" onclick="TL.media.video_can_play('<% obj[x].ukey %>')">
                                             <i class="fa-fw fas fa-play-circle"></i>
                                         </span>
                                     <% } %>  

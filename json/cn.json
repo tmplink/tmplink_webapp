@@ -310,6 +310,10 @@
     "form_btn_processing": "处理中..",
     "form_btn_processed": "已完成",
 
+    "video_player_prepare":"正在处理",
+    "video_player_proccess":"视频正在准备中，请稍等...",
+    "video_player_fail":"无法播放",
+
     "model_email_change_msg_processing": "正在处理...",
     "model_email_change_msg_processed": "已完成",
     "model_resetpassword_msg_processing": "正在处理...",

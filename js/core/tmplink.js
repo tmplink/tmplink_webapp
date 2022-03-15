@@ -910,59 +910,18 @@ class tmplink {
                                 return true;
                             });
 
-                            //当文件后缀是 mp4 时，显示视频播放按钮
-                            if (rsp.data.type == 'mp4') {
-                                $('#btn_play').show();
-                            }
-                            $('#btn_play').on('click', () => {
-                                if (this.isLogin) {
-                                    this.recaptcha_do('play_req', (recaptcha) => {
-                                        $.post(this.api_file, {
-                                            action: 'play_req',
-                                            ukey: params.ukey,
-                                            token: this.api_token,
-                                            captcha: recaptcha
-                                        }, (req) => {
-                                            if (req.status != 1) {
-                                                $('#play_msg').html('<i class="fas fa-exclamation-circle fa-fw"></i> ' + this.languageData.status_file_2);
-                                                $('#play_msg').attr('class', 'badge badge-pill badge-danger');
-                                                return false;
-                                            }
-                                            let play_link = req.data;
-                                            window.open(play_link, '_blank');
-                                        }, 'json');
-                                    });
-                                }else{
-                                    //提示需要登陆
-                                    alert(this.languageData.status_need_login);
-                                }
-                            });
-
                             //扫码下载按钮绑定
                             $('#file_download_by_qrcode').on('click', () => {
                                 $('#qrModal').modal('show');
                                 return true;
                             });
 
-                            //如果可以，加入到媒体库
+                            //如果可以，显示播放按钮
                             if (this.media.is_allow(rsp.data.name)) {
-                                //绑定按钮
-                                $('#btn_add_to_media').show();
-                                $('#btn_add_to_media').on('click', () => {
-                                    if (this.logined == 1) {
-                                        $('#menu_add_to_media_video').html(this.languageData.form_btn_processing);
-                                        this.media.video_add(params.ukey, (status, text) => {
-                                            if (status) {
-                                                $('#btn_add_to_media_icon').removeClass('text-cyan');
-                                                $('#btn_add_to_media_icon').addClass('text-red');
-                                                $('#menu_add_to_media_video').html(text);
-                                            } else {
-                                                alert(text);
-                                            }
-                                            //remove event
-                                            $('#btn_add_to_media').off('click');
-                                        });
-                                    }
+                                $('#btn_play').show();
+                                $('#btn_play').on('click', () => {
+                                    this.media.video_can_play(params.ukey);
+                                    return true;
                                 });
                             }
 
