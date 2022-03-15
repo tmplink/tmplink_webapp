@@ -1580,7 +1580,12 @@ class tmplink {
             return false;
         }
         this.buy_type = type;
-        $('#buySelectModal').modal('show');
+
+        $('#shopModal').hide();
+        setTimeout(() => {
+            $('#buySelectModal').modal('show');
+        },500);
+        
     }
 
     bug_select(type) {
