@@ -75,15 +75,21 @@ class media {
         });
     }
 
-    video_can_play(ukey) {
+    video_can_play_open(ukey) {
         //需要登录
         if (!this.parent.isLogin()) {
             alert(this.parent.languageData.status_need_login);
+            app.open('/login');
             return false;
         }
+        $('#videoPlayerModal').modal('show');
+        this.video_can_play(ukey);
+    }
 
+    video_can_play(ukey) {
+
+        //当前正在处理
         if (this.current_play == ukey && this.current_play_wait == 0) {
-            $('#videoPlayerModal').modal('show');
             return false;
         }
 
@@ -95,7 +101,6 @@ class media {
             $('#video_player').hide();
         }
 
-        $('#videoPlayerModal').modal('show');
         $('#video_preload').show();
         $('#video_player').hide();
 
@@ -140,7 +145,8 @@ class media {
                     this.current_play_wait = 0;
                     $('#video_status_icon_process').hide();
                     $('#video_status_icon_fail').show();
-                    $('#video_status').html(this.parent.languageData.status_need_login);
+                    alert(this.parent.languageData.status_need_login);
+                    app.open('/login');
                     break;
             }
         });
