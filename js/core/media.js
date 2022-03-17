@@ -165,4 +165,11 @@ class media {
             'page_title': 'Play-' + title,
         });
     }
+
+    video_pause() {
+        //如果视频正在播放，则暂停
+        if ($('#video_player_src').get(0).src) {
+            document.getElementById('video_player_src').pause();
+        }
+    }
 }
