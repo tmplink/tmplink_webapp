@@ -917,10 +917,10 @@ class tmplink {
                             });
 
                             //如果可以，显示播放按钮
-                            if (this.media.is_allow(rsp.data.name)) {
-                                $('#btn_play').show();
-                                $('#btn_play').on('click', () => {
-                                    this.media.video_can_play(params.ukey);
+                            if (this.media.is_allow(rsp.data.name)&&this.isLogin()) {
+                                $('.btn_play').show();
+                                $('.btn_play').on('click', () => {
+                                    this.media.video_can_play_open(params.ukey);
                                     return true;
                                 });
                             }
