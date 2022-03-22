@@ -155,10 +155,11 @@ class tmplink {
         if (document.querySelector('#background_wrap_preload') == null) {
 
             //使用svg背景
-            let svg = "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgOTAwIDYwMCIgd2lkdGg9IjkwMCIgaGVpZ2h0PSI2MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGZpbHRlciBpZD0iYSI+PGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz48ZmVCbGVuZCBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJCYWNrZ3JvdW5kSW1hZ2VGaXgiIHJlc3VsdD0ic2hhcGUiLz48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxNjEiIHJlc3VsdD0iZWZmZWN0MV9mb3JlZ3JvdW5kQmx1ciIvPjwvZmlsdGVyPjwvZGVmcz48cGF0aCBmaWxsPSIjNjBGIiBkPSJNMCAwaDkwMHY2MDBIMHoiLz48ZyBmaWx0ZXI9InVybCgjYSkiPjxjaXJjbGUgY3g9Ijg4OCIgY3k9IjI2NCIgZmlsbD0iIzBDOSIgcj0iMzU3Ii8+PGNpcmNsZSBjeD0iMjQiIGN5PSIxNSIgZmlsbD0iIzYwRiIgcj0iMzU3Ii8+PGNpcmNsZSBjeD0iMzE3IiBjeT0iNDUyIiBmaWxsPSIjMEM5IiByPSIzNTciLz48Y2lyY2xlIGN4PSI1MjIiIGN5PSIxMDAiIGZpbGw9IiMwQzkiIHI9IjM1NyIvPjxjaXJjbGUgY3g9Ijc2NyIgY3k9IjQ5MSIgZmlsbD0iIzYwRiIgcj0iMzU3Ii8+PGNpcmNsZSBjeD0iNjQ1IiBjeT0iMzIxIiBmaWxsPSIjMEM5IiByPSIzNTciLz48L2c+PC9zdmc+";
-            $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-size: cover;background-repeat: no-repeat;background-attachment: scroll;background-image:url(\'' + svg + '\');"></div>');
-
-        }
+            // let svg = "data:image/svg+xml,%3Csvg viewBox='0 0 900 600' width='900' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cfilter id='a'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='161' result='effect1_foregroundBlur'/%3E%3C/filter%3E%3C/defs%3E%3Cpath fill='%23722add' d='M0 0h900v600H0z'/%3E%3Cg filter='url(%23a)'%3E%3Ccircle cx='584' cy='165' fill='%231cc2c2' r='357'/%3E%3Ccircle cx='162' cy='117' fill='%23722add' r='357'/%3E%3Ccircle cx='410' cy='98' fill='%231cc2c2' r='357'/%3E%3Ccircle cx='657' cy='404' fill='%231cc2c2' r='357'/%3E%3Ccircle cx='465' cy='330' fill='%23722add' r='357'/%3E%3Ccircle cx='216' cy='585' fill='%231cc2c2' r='357'/%3E%3C/g%3E%3C/svg%3E";
+            // $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-size: cover;background-repeat: no-repeat;background-attachment: scroll;background-image:url(\'' + svg + '\');"></div>');
+            // let svg = "/img/bg.svg";
+            $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color: #0093E9;background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);"></div>');
+        } 
 
     }
 
