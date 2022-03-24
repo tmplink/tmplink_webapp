@@ -294,9 +294,11 @@
                                     </a>
 
                                     <% if(TL.media.is_allow(obj[x].fname)){ %>
+                                        <% if(TL.area_cn!==true||TL.room.owner == 1){ %>
                                         <span class="badge badge-pill badge-primary btn-point" onclick="TL.media.video_can_play_open('<% obj[x].ukey %>')">
                                             <i class="fa-fw fas fa-play-circle"></i>
                                         </span>
+                                        <% } %>  
                                     <% } %>  
 
                                     <% if(obj[x].like>0){ %>

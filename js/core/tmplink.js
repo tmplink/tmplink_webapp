@@ -15,6 +15,7 @@ class tmplink {
 
 
     logined = 0
+    area_cn = false
     uid = 0
     email = null
     api_language = null
@@ -61,6 +62,7 @@ class tmplink {
         this.file_manager.init(this);
         this.media.init(this);
         this.uploader.init(this);
+        this.setArea();
 
         //
         $('.workspace-navbar').hide();
@@ -123,6 +125,17 @@ class tmplink {
             dragover: function (e) {
                 e.preventDefault();
             }
+        });
+    }
+
+    setArea(){
+        this.recaptcha_do('set_area', (captcha) => {
+            $.post(this.api_toks, {
+                action: 'set_area',
+                captcha: captcha
+            }, (rsp) => {
+                this.area_cn = rsp.data;
+            });
         });
     }
 
@@ -907,11 +920,13 @@ class tmplink {
 
                             //如果可以，显示播放按钮
                             if (this.media.is_allow(rsp.data.name)) {
-                                $('.btn_play').show();
-                                $('.btn_play').on('click', () => {
-                                    this.media.video_can_play_open(params.ukey);
-                                    return true;
-                                });
+                                if(this.area_cn!==true){
+                                    $('.btn_play').show();
+                                    $('.btn_play').on('click', () => {
+                                        this.media.video_can_play_open(params.ukey);
+                                        return true;
+                                    });
+                                }
                             }
 
                             //复制链接按钮绑定
