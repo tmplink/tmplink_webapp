@@ -12,7 +12,8 @@ class media {
 
     is_allow(filename) {
         for (let i in this.allow_ext) {
-            if (filename.toLowerCase().indexOf(this.allow_ext[i]) > -1) {
+            let ext = filename.substring(filename.lastIndexOf('.') + 1, filename.length);
+            if (ext.toLowerCase().indexOf(this.allow_ext[i]) > -1) {
                 return true;
             }
         }
