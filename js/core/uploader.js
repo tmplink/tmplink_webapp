@@ -97,6 +97,16 @@ class uploader {
             $('#uq_' + id).fadeOut();
             return false;
         }
+
+        //如果要上传的文件是永久有效期，并且超过了私有空间的限制，则提示错误
+        if (model == 99) {
+            if (this.storage_used + file.size > this.storage) {
+                this.parent_op.alert(this.parent_op.languageData.upload_limit_size);
+                $('#uq_' + id).fadeOut();
+                return false;
+            }
+        }
+
         // if (this.parent_op.logined === false) {
         //     this.parent_op.alert(this.parent_op.languageData.upload_model99_needs_login);
         //     $('#uq_' + id).fadeOut();
@@ -187,6 +197,7 @@ class uploader {
 
 
     upload_prepare(file, id, callback) {
+        
         //不支持FileReader，直接下一步。
         if (!window.FileReader) {
             callback(file, 0, id);
