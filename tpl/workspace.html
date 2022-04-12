@@ -9,7 +9,7 @@
     <div id="filelist" class="card mt-4 shadow" style="display: none;">
         <div class="card-header pt-3">
             <div class="mx-auto text-center mt-3">
-                <i class="fa-4x far fa-file-search"></i>
+                <i class="fa-4x fa-light fa-file-magnifying-glass"></i>
                 <div class="lead mt-2" id="workspace_total"></div>
                 <div class="mt-1">
                     <span class="badge badge-pill badge-danger upload_queue" style="display: none;"></span>
@@ -42,12 +42,12 @@
                     </button>
                     <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
                         id="filelist_filter">
-                        <i class="fa-fw fad fa-sliders-h"></i>
+                        <i class="fa-fw fa-light fa-list"></i>
                         <span i18n="sort_title" class="d-none d-sm-inline">.</span>
                     </button>
                     <button id="ws_btn_file_list" class="btn btn-light text-azure btn-sm mr-1 mt-1"
                         onclick="TL.workspace_filelist_model('list');">
-                        <i class="fa-fw fad fa-th-list"></i>
+                        <i class="fa-fw fa-light fa-list-radio"></i>
                         <span i18n="model_list" class="d-none d-sm-inline">.</span>
                     </button>
                     <!-- <button id="ws_btn_file_grid" class="btn btn-light text-azure btn-sm mr-2"
@@ -65,39 +65,39 @@
                 <!--[选择器]-->
                 <div>
                     <button onclick="TL.uploader.open(0);" class="btn btn-sm btn-primary mr-1 mt-1">
-                        <i class="fad fa-cloud-upload fa-fw"></i>
+                        <i class="fa-light fa-cloud-arrow-up fa-fw"></i>
                         <span i18n="nav_upload" class="d-none d-sm-inline">.</span>
                     </button>
                     <button onclick="TL.file_manager.checkbox_select_all();"
                         class="btn btn-light text-azure btn-sm mr-1 mt-1">
-                        <i class="fas fa-check-square fa-fw"></i>
+                        <i class="fa-solid fa-square-check fa-fw"></i>
                         <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
                     </button>
                     <button onclick="TL.file_manager.checkbox_select_none();"
                         class="btn btn-light text-azure btn-sm mr-1 mt-1">
-                        <i class="far fa-check-square fa-fw"></i>
+                        <i class="fa-light fa-square-check fa-fw"></i>
                         <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
                     </button>
                     <div class="dropdown">
                         <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="far fa-ballot-check fa-fw"></i> <span i18n="on_select">.</span>
+                            <i class="fa-light fa-list-check fa-fw"></i> <span i18n="on_select">.</span>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <button class="dropdown-item" onclick="TL.file_manager.checkbox_delete()">
-                                <i class="fa-fw fad fa-trash"></i>
+                                <i class="fa-fw fa-light fa-trash-can"></i>
                                 <span i18n="on_select_delete">.</span>
                             </button>
                             <button class="dropdown-item" onclick="TL.file_manager.checkbox_download()">
-                                <i class="fa-fw fad fa-download"></i>
+                                <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                 <span i18n="on_select_download">.</span>
                             </button>
                             <button class="dropdown-item" onclick="TL.file_manager.checkbox_share()">
-                                <i class="fa-fw fad fa-share-alt"></i>
+                                <i class="fa-fw fa-light fa-share-from-square"></i>
                                 <span i18n="on_select_share">.</span>
                             </button>
                             <button class="dropdown-item" onclick="TL.file_manager.checkbox_move_to_model('workspace')">
-                                <i class="fa-fw fad fa-folder-plus"></i>
+                                <i class="fa-fw fa-light fa-folder-plus"></i>
                                 <span i18n="on_select_move">.</span>
                             </button>
                         </div>
@@ -109,13 +109,13 @@
 
             <div class="no_photos" style="margin-top: 100px;margin-bottom: 100px;display: none;">
                 <div class="text-center mb-4">
-                    <i class="fa-fw fad fa-4x fa-camera-retro"></i>
+                    <i class="fa-fw fa-4x fa-light fa-camera"></i>
                 </div>
                 <div class="text-center" i18n="page_no_photos">.</div>
             </div>
             <div class="no_files" style="margin-top: 100px;margin-bottom: 100px;display: none;">
                 <div class="text-center mb-4">
-                    <i class="fa-fw fad fa-folder-open fa-4x"></i>
+                    <i class="fa-fw fa-light fa-folder-open fa-4x"></i>
                 </div>
                 <div class="text-center" i18n="page_no_files">.</div>
             </div>
@@ -137,16 +137,16 @@
                                 <div class="card-body pr-0">
                                     <div class="text-right file_ok_<% obj[x].ukey %>">
                                         <div>
-                                            <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fad fa-download"></i></button>
-                                            <button href="javascript:void(0)" onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1"><i class="fa-fw fad fa-edit"></i></button>
-                                            <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fad fa-share-alt"></i></button>
-                                            <button href="javascript:void(0)" id="btn-rm-file_<% obj[x].ukey %>" class="text-red btn btn-sm btn-light" onclick="TL.workspace_del('<% obj[x].ukey %>')"><i class="fa-fw fad fa-trash"></i></button>
+                                            <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></button>
+                                            <button href="javascript:void(0)" onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-pen-to-square"></i></button>
+                                            <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
+                                            <button href="javascript:void(0)" id="btn-rm-file_<% obj[x].ukey %>" class="text-red btn btn-sm btn-light" onclick="TL.workspace_del('<% obj[x].ukey %>')"><i class="fa-fw fa-light fa-trash-can"></i></button>
                                         </div>
                                         <div class="mt-1">
                                             <span class="mr-2"><% obj[x].fsize_formated %></span>
                                             <% if(obj[x].like>0){ %>
                                                 <span class="badge badge-pill badge-primary">
-                                                    <i class="fa-fw fas fa-star text-yellow"></i>
+                                                    <i class="fa-fw fa-solid fa-circle-star text-yellow"></i>
                                                     <% obj[x].like %>
                                                 </span>
                                             <% } %>
@@ -192,17 +192,17 @@
                                     <% } %>
                                     <% if(obj[x].like>0){ %>
                                         <span class="badge badge-pill badge-primary">
-                                            <i class="fa-fw fas fa-star text-yellow"></i>
+                                            <i class="fa-fw fa-solid fa-circle-star text-yellow"></i>
                                             <% obj[x].like %>
                                         </span>
                                     <% } %>
                                     <% if(obj[x].dir_name!=null){ %>
                                         <div class="d-none d-lg-block">
-                                            <i class="fad fa-folder-open fa-fw text-cyan"></i>
+                                            <i class="fa-light fa-folder-open fa-fw text-cyan"></i>
                                             <a href="/room&mrid=<% obj[x].mrid %>" tmpui-app="true"> <% obj[x].dir_name %></a>
                                         </div>
                                         <span class="d-inline d-lg-none">
-                                            <i class="fad fa-folder-open fa-fw text-cyan"></i>
+                                            <i class="fa-light fa-folder-open fa-fw text-cyan"></i>
                                             <a href="/room&mrid=<% obj[x].mrid %>" tmpui-app="true"> <% obj[x].dir_name %></a>
                                         </span>
                                     <% } %>
@@ -222,8 +222,8 @@
                         </div>
                         <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].ukey %>">
                             <span class="mr-2"><% obj[x].fsize_formated %></span>
-                            <button onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fad fa-download"></i></button>
-                            <button data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fad fa-share-alt"></i></button>
+                            <button onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></button>
+                            <button data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
                             <span class="btn-group">
                                 <div class="dropdown-toggle text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
@@ -231,11 +231,11 @@
                                 </div>
                                 <div class="dropdown-menu dropdown-menu-right shadow">
                                     <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="dropdown-item">
-                                        <i class="fa-fw fad fa-edit"></i>
+                                        <i class="fa-fw fa-light fa-pen-to-square"></i>
                                         <span i18n="menu_rename">.</span>
                                     </button>
                                     <button id="btn-rm-file_<% obj[x].ukey %>" class="dropdown-item" onclick="TL.workspace_del('<% obj[x].ukey %>')">
-                                        <i class="fa-fw fad fa-trash"></i>
+                                        <i class="fa-fw fa-light fa-trash-can"></i>
                                         <span i18n="menu_delete">.</span>
                                     </button>
                                 </div>

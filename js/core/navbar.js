@@ -27,7 +27,7 @@ class navbar {
     }
 
     model_workspace(act) {
-        $('#navbar_model_icon').attr('class', 'far fa-file-search fa-fw mx-auto');
+        $('#navbar_model_icon').attr('class', 'fa-light fa-file-magnifying-glass fa-fw mx-auto');
         $('#navbar_model_text').html(this.parent.languageData.navbar_workspace);
         if (act === true) {
             app.open('/workspace');
@@ -43,7 +43,7 @@ class navbar {
     }
 
     model_media(act) {
-        $('#navbar_model_icon').attr('class', 'fal fa-video fa-fw mx-auto');
+        $('#navbar_model_icon').attr('class', 'fa-light fa-circle-video fa-fw mx-auto');
         $('#navbar_model_text').html(this.parent.languageData.navbar_media);
         if (act === true) {
             app.open('/media');

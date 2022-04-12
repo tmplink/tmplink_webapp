@@ -68,7 +68,7 @@
 
                     <div class="btn_for_desktop">
                         <button class="btn btn-light text-azure btn-sm mr-1  mt-1" onclick="$('#mrCreaterModal').modal('show');$('#mr_id').val('0');$('#mr_parent_id').val('0');$('#mr_top_id').val('0');">
-                            <i class="fa-fw fad fa-folder-plus"></i>
+                            <i class="fa-fw fa-light fa-folder-plus"></i>
                             <span i18n="model_title_folder_title" class="d-none d-sm-inline" >.</span>
                         </button>
                         <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.room_list()">
@@ -79,12 +79,12 @@
                     <div class="btn_for_sub">
                         <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
                             id="filelist_filter">
-                            <i class="fa-fw fad fa-sliders-h"></i>
+                            <i class="fa-fw fa-light fa-list"></i>
                             <span i18n="sort_title" class="d-none d-sm-inline">.</span>
                         </button>
                         <button id="room_btn_file_list" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
                             onclick="TL.dir_list_model('list');">
-                            <i class="fa-fw fad fa-th-list"></i>
+                            <i class="fa-fw fa-light fa-list-radio"></i>
                             <span i18n="model_list" class="d-none d-sm-inline">.</span>
                         </button>
                         <!-- <button id="room_btn_file_grid" class="btn btn-light btn-sm mr-1 text-azure" onclick="TL.dir_list_model('grid');">
@@ -102,7 +102,7 @@
                             <span class="d-none d-sm-inline" i18n="btn_performance">.</span>
                         </button>
                         <button class="btn btn-light btn-sm mr-1 mt-1 btn_copy text-azure" id="mr_copy">
-                            <i class="fa-fw fad fa-share-alt"></i>
+                            <i class="fa-fw fa-light fa-share-from-square"></i>
                             <span i18n="model_copy" class="d-none d-sm-inline">.</span>
                         </button>
                         <button id="room_btn_favorate" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
@@ -112,7 +112,7 @@
                         </button>
                         <button id="room_btn_report" class="btn btn-light text-azure btn-sm mr-1 mt-1"
                             onclick="$('#roomReportModal').modal('show')" style="display: none;">
-                            <i class="fa-fw fas fa-exclamation-triangle text-danger"></i>
+                            <i class="fa-fw fa-light fa-circle-exclamation text-danger"></i>
                             <span class="d-none d-sm-inline" i18n="file_btn_report">.</span>
                         </button>
                         <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.mr_file_list(0)">
@@ -124,40 +124,40 @@
                         <span id="room_back_btn"></span>
                         <button onclick="TL.file_manager.checkbox_select_all();"
                             class="btn btn-light text-azure btn-sm mr-1  mt-1">
-                            <i class="fas fa-check-square fa-fw"></i>
+                            <i class="fa-solid fa-square-check fa-fw"></i>
                             <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
                         </button>
                         <button onclick="TL.file_manager.checkbox_select_none();"
                             class="btn btn-light text-azure btn-sm mr-1 mt-1">
-                            <i class="far fa-check-square fa-fw"></i>
+                            <i class="fa-light fa-square-check fa-fw"></i>
                             <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
                         </button>
                         <div class="dropdown">
                             <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
                                 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
-                                <i class="far fa-ballot-check fa-fw"></i> <span i18n="on_select">.</span>
+                                <i class="fa-light fa-list-check fa-fw"></i> <span i18n="on_select">.</span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <button class="dropdown-item not_owner" onclick="TL.file_manager.checkbox_delete()">
-                                    <i class="fa-fw fad fa-trash"></i>
+                                    <i class="fa-fw fa-light fa-trash-can"></i>
                                     <span i18n="on_select_delete">.</span>
                                 </button>
                                 <button class="dropdown-item" onclick="TL.file_manager.checkbox_download()">
-                                    <i class="fa-fw fad fa-download"></i>
+                                    <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                     <span i18n="on_select_download">.</span>
                                 </button>
                                 <button class="dropdown-item" onclick="TL.file_manager.checkbox_download_url()">
-                                    <i class="fa-fw fad fa-download"></i>
+                                    <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                     <span i18n="on_select_copy_download_url">.</span>
                                 </button>
                                 <button class="dropdown-item" onclick="TL.file_manager.checkbox_share()">
-                                    <i class="fa-fw fad fa-share-alt"></i>
+                                    <i class="fa-fw fa-light fa-share-from-square"></i>
                                     <span i18n="on_select_share">.</span>
                                 </button>
                                 <button class="dropdown-item not_owner"
                                     onclick="TL.file_manager.checkbox_move_to_model('room')">
-                                    <i class="fa-fw fad fa-folder-plus"></i>
+                                    <i class="fa-fw fa-light fa-folder-plus"></i>
                                     <span i18n="on_select_move">.</span>
                                 </button>
                             </div>
@@ -168,48 +168,47 @@
                 <script type="text/template" id="room_back_btn_tpl">
                     <% if(TL.room.owner==1 || (TL.room.allow_upload=='yes'&&TL.isLogin())){ %>
                         <button onclick="TL.uploader.open('<% TL.room.mr_id %>');" tmpui-app="true" class="btn btn-sm btn-primary  mr-1  mt-1">
-                            <i class="fad fa-cloud-upload fa-fw"></i>
+                            <i class="fa-light fa-cloud-arrow-up fa-fw"></i>
                             <span i18n="nav_upload" class="d-none d-sm-inline"><% TL.languageData.nav_upload %></span>
                         </button>
                     <% } %>
 
                     <button class="btn btn-primary btn-sm mr-1  mt-1" onclick="TL.download_allfile_btn();">
-                        <i class="fa-fw fad fa-download"></i>
+                        <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                         <span i18n="file_btn_downloadall" class="d-none d-sm-inline"><% TL.languageData.file_btn_downloadall %></span>
                     </button>
 
                     <% if(TL.room.top != 99){ %>
                         <a href="/room?mrid=<% TL.room.parent %>" tmpui-action="TL.room_list()" class="btn btn-sm btn-light text-azure mr-1  mt-1">
-                            <i class="fad fa-arrow-square-left"></i>
+                            <i class="fa-light fa-arrow-turn-down-left"></i>
                             <span i18n="filelist_dir_parent" class="d-none d-sm-inline"><% TL.languageData.filelist_dir_parent %></span>
                         </a>
                     <% } %>
                     <% if(TL.room.owner==1){ %>
                         <button class="btn btn-light text-azure btn-sm mr-1  mt-1" onclick="$('#mrCreaterModal').modal('show');$('#mr_id').val('<% TL.room.mr_id %>');$('#mr_parent_id').val('<% TL.room.parent %>');$('#mr_top_id').val('<% TL.room.top %>');">
-                            <i class="fa-fw fad fa-folder-plus"></i>
+                            <i class="fa-fw fa-light fa-folder-plus"></i>
                             <span i18n="model_title_folder_title" class="d-none d-sm-inline"><% TL.languageData.model_title_folder_title %></span>
                         </button>
                     <% } %>
-                    
                 </script>
 
                 <div id="dir_list"></div>
 
                 <div class="no_photos" style="margin-top: 100px;margin-bottom: 100px;display: none;">
                     <div class="text-center mb-4">
-                        <i class="fa-fw fad fa-4x fa-camera-retro"></i>
+                        <i class="fa-fw fa-4x fa-light fa-camera"></i>
                     </div>
                     <div class="text-center" i18n="page_no_photos">.</div>
                 </div>
                 <div class="no_files" style="margin-top: 100px;margin-bottom: 100px;display: none;">
                     <div class="text-center mb-4">
-                        <i class="fa-fw fad fa-folder-open fa-4x"></i>
+                        <i class="fa-fw fa-light fa-folder-open fa-4x"></i>
                     </div>
                     <div class="text-center" i18n="page_no_files">.</div>
                 </div>
                 <div class="no_dir" style="margin-top: 100px;margin-bottom: 100px;display: none;">
                     <div class="text-center mb-4">
-                        <i class="fa-fw fad fa-folder-open fa-4x"></i>
+                        <i class="fa-fw fa-light fa-folder-open fa-4x"></i>
                     </div>
                     <div class="text-center" i18n="page_no_dir">.</div>
                 </div>
@@ -241,17 +240,17 @@
                                         <div class="text-right file_ok_<% obj[x].ukey %>">
                                             <div>
                                                 <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
-                                                    <i class="fa-fw fad fa-download"></i>
+                                                    <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                                 </button>
                                                 <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1">
-                                                    <i class="fa-fw fad fa-share-alt"></i>
+                                                    <i class="fa-fw fa-light fa-share-from-square"></i>
                                                 </button>
                                                 <% if (TL.room.owner == 1) { %>
                                                     <button href="javascript:void(0)" onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1">
-                                                        <i class="fa-fw fad fa-edit"></i>
+                                                        <i class="fa-fw fa-light fa-pen-to-square"></i>
                                                     </button>
                                                     <button href="javascript:void(0);" class="text-red btn btn-sm btn-light" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
-                                                        <i class="fa-fw fad fa-trash"></i>
+                                                        <i class="fa-fw fa-light fa-trash-can"></i>
                                                     </button>
                                                 <% } %>
                                             </div>
@@ -261,7 +260,7 @@
                                                 </span>
                                                 <% if(obj[x].like>0){ %>
                                                     <span class="badge badge-pill badge-primary">
-                                                        <i class="fa-fw fas fa-star text-yellow"></i>
+                                                        <i class="fa-fw fa-solid fa-circle-star text-yellow"></i>
                                                         <% obj[x].like %>
                                                     </span>
                                                 <% } %>
@@ -303,7 +302,7 @@
 
                                     <% if(obj[x].like>0){ %>
                                         <span class="badge badge-pill badge-primary">
-                                            <i class="fa-fw fas fa-star text-yellow"></i>
+                                            <i class="fa-fw fa-solid fa-circle-star text-yellow"></i>
                                             <% obj[x].like %>
                                         </span>
                                     <% } %>
@@ -324,10 +323,10 @@
                                         <% obj[x].fsize_formated %>
                                     </span>
                                     <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
-                                        <i class="fa-fw fad fa-download"></i>
+                                        <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                     </button>
                                     <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1">
-                                        <i class="fa-fw fad fa-share-alt"></i>
+                                        <i class="fa-fw fa-light fa-share-from-square"></i>
                                     </button>
                                     <% if (TL.room.owner == 1) { %>
                                         <span class="btn-group">
@@ -337,11 +336,11 @@
                                             </div>
                                             <div class="dropdown-menu dropdown-menu-right shadow">
                                                 <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="dropdown-item">
-                                                    <i class="fa-fw fad fa-edit"></i>
+                                                    <i class="fa-fw fa-light fa-pen-to-square"></i>
                                                     <span i18n="menu_rename">.</span>
                                                 </button>
                                                 <button class="dropdown-item" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
-                                                    <i class="fa-fw fad fa-trash"></i>
+                                                    <i class="fa-fw fa-light fa-trash-can"></i>
                                                     <span i18n="menu_delete">.</span>
                                                 </button> 
                                             </div>
@@ -373,7 +372,7 @@
                 <div class="col-6 col-md-3 col-lg-2 p-2 text-center" id="meetingroom_id_<% obj[x].mr_id %>">
                     <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true">
                         <div class="fileicon mx-auto mb-2 shadow-sm">
-                            <i class="fad fa-folders fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
+                            <i class="fa-light fa-folders fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
                         </div>
                         <div class="max-width-90 mx-auto">
                             <div class="text-truncate" alt="<% obj[x].name %>"><% obj[x].name %></div>
@@ -382,10 +381,10 @@
                     
                     <div><% TL.languageData.filelist_dir %></div>
                     <div>
-                        <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="mt-1 btn_copy"><i class="fa-fw fad fa-share-alt"></i></a>
+                        <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="mt-1 btn_copy"><i class="fa-fw fa-light fa-share-from-square"></i></a>
                         <% if (obj[x].type === 'owner') { %>
-                            <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-blue mt-1"><i class="fad fa-edit"></i></a>
-                            <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red mt-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fad fa-trash"></i></a>
+                            <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-blue mt-1"><i class="fa-light fa-pen-to-square"></i></a>
+                            <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red mt-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash-can"></i></a>
                         <% } %>
                     </div>
                 </div>
@@ -398,12 +397,12 @@
                             <div class="col-12 col-md-6 col-lg-8 my-1 d-flex align-items-center listfontweight filename">
                                 <% if (obj[x].fav == 0) { %>
                                     <% if (obj[x].model == 'public') { %>
-                                        <i class="fad fa-folder text-cyan fa-fw d-none d-md-block"></i>
+                                        <i class="fa-light fa-folder text-cyan fa-fw d-none d-md-block"></i>
                                     <% }else{ %>   
-                                        <i class="fas fa-folder-minus text-cyan fa-fw d-none d-md-block"></i>
+                                        <i class="fa-light fa-lock text-cyan fa-fw d-none d-md-block"></i>
                                     <% } %>  
                                 <% }else{ %> 
-                                    <i class="fad fa-folder-plus text-cyan fa-fw d-none d-md-block"></i>
+                                    <i class="fa-light fa-link text-cyan fa-fw d-none d-md-block"></i>
                                 <% } %> 
                                 &nbsp
                                 <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-action="TL.room_list()">
@@ -414,10 +413,10 @@
                                 <span class="mr-2">
                                     <% TL.languageData.filelist_dir %>
                                 </span>
-                                <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fad fa-share-alt"></i></a>
+                                <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-share-from-square"></i></a>
                                 <% if (obj[x].type === 'owner') { %>
-                                    <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fad fa-edit"></i></a>
-                                    <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fad fa-trash"></i></a>
+                                    <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-pen-to-square"></i></a>
+                                    <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash-can"></i></a>
                                 <% } %>
                             </div>
                         </div>

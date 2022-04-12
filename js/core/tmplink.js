@@ -635,7 +635,7 @@ class tmplink {
             $('#filelist_refresh_icon').removeAttr('disabled');
             if (rsp.status === 0) {
                 if (page == 0) {
-                    $('#workspace_filelist').html('<div class="text-center"><i class="fa-fw fad fa-folder-open fa-4x"></i></div>');
+                    $('#workspace_filelist').html('<div class="text-center"><i class="fa-fw fa-light fa-folder-open fa-4x"></i></div>');
                 }
                 this.autoload = false;
             } else {
@@ -775,7 +775,7 @@ class tmplink {
 
     details_file() {
         if (this.isWeixin()) {
-            // $('#file_messenger_icon').html('<i class="fad fa-download fa-fw fa-4x"></i>');
+            // $('#file_messenger_icon').html('<i class="fa-light fa-cloud-arrow-down fa-fw fa-4x"></i>');
             // $('#file_messenger_msg').removeClass('display-4');
             // $('#file_messenger_msg').html('由于微信的限制，目前无法提供下载。请复制链接后，在外部浏览器打开进行下载。');
             // $('#file_messenger').show();
@@ -1313,7 +1313,7 @@ class tmplink {
         //$('.download_progress_bar_' + index).hide();
         //恢复进度条样式
         $('.btn_download_' + index).removeAttr('disabled');
-        $('.btn_download_' + index).html('<i class="fa-fw fad fa-download"></i>');
+        $('.btn_download_' + index).html('<i class="fa-fw fa-light fa-cloud-arrow-down"></i>');
 
         delete this.download_queue[index];
         this.download_queue_run();
@@ -1383,7 +1383,7 @@ class tmplink {
                 }
                 this.alert('发生了错误，请重试。');
                 $('.btn_download_' + ukey).removeAttr('disabled');
-                $('.btn_download_' + ukey).html('<i class="fa-fw fad fa-download"></i>');
+                $('.btn_download_' + ukey).html('<i class="fa-fw fa-light fa-cloud-arrow-down"></i>');
             });
         });
     }
@@ -1720,7 +1720,7 @@ class tmplink {
             //captcha: recaptcha
         }, (rsp) => {
             if (rsp.data.service == 0) {
-                $('#orders_addon_contents').html('<div class="text-center"><i class="fa-fw fad fa-folder-open fa-4x"></i></div>');
+                $('#orders_addon_contents').html('<div class="text-center"><i class="fa-fw fa-light fa-folder-open fa-4x"></i></div>');
             } else {
                 $('#orders_addon_contents').html('<div class="row" id="orders_services_contents"></div>');
                 var service_list = rsp.data.service;
@@ -1744,17 +1744,17 @@ class tmplink {
                 case 'hs':
                     r[i].name = this.languageData.service_code_hs;
                     r[i].des = this.languageData.service_code_hs_des;
-                    r[i].icon = 'fas fa-rabbit-fast';
+                    r[i].icon = 'fa-light fa-gauge-circle-bolt';
                     break;
                 case 'storage':
                     r[i].name = this.languageData.service_code_storage + ' (' + bytetoconver(data[i].val, true) + ')';
                     r[i].des = this.languageData.service_code_storage_des;
-                    r[i].icon = 'fad fa-box-heart';
+                    r[i].icon = 'fa-light fa-album-circle-plus';
                     break;
                 case 'media-video':
                     r[i].name = this.languageData.service_code_media + ' (' + bytetoconver(data[i].val, true) + ')';
                     r[i].des = this.languageData.service_code_media_des;
-                    r[i].icon = 'fal fa-video';
+                    r[i].icon = 'fa-light fa-circle-video';
                     break;
             }
         }
@@ -1771,7 +1771,7 @@ class tmplink {
             mr_id: params.mrid
         }, (rsp) => {
             if (rsp.status == 0) {
-                $('#mrfile_add_list').html('<div class="mx-auto"><i class="fa-fw fad fa-folder-open fa-4x"></i></div>');
+                $('#mrfile_add_list').html('<div class="mx-auto"><i class="fa-fw fa-light fa-folder-open fa-4x"></i></div>');
             } else {
                 $('#mrfile_add_list').html(app.tpl('mrfile_add_list_tpl', rsp.data));
             }
@@ -2182,7 +2182,7 @@ class tmplink {
         }, (rsp) => {
             this.loading_box_off();
             if (rsp.status == 0) {
-                $('#meetroom_list').html('<div class="mx-auto"><i class="fa-fw fad fa-folder-open fa-4x"></i></div>');
+                $('#meetroom_list').html('<div class="mx-auto"><i class="fa-fw fa-light fa-folder-open fa-4x"></i></div>');
                 $('#mr_list_refresh_icon').html('<i class="fa-fw fas fa-sync-alt"></i>');
                 $('#mr_list_refresh_icon').removeAttr('disabled');
                 return false;
@@ -2654,204 +2654,202 @@ class tmplink {
     }
 
     fileicon(type) {
-        var r = 'fad fa-file';
+        var r = 'fa-light fa-file-lines';
         switch (type) {
             case 'pdf':
-                r = 'fad fa-file-pdf';
+                r = 'fa-light fa-file-pdf';
                 break;
-
             case 'zip':
-                r = 'fad fa-file-archive';
+                r = 'fa-light fa-file-zipper';
                 break;
             case 'rar':
-                r = 'fad fa-file-archive';
+                r = 'fa-light fa-file-zipper';
                 break;
             case '7z':
-                r = 'fad fa-file-archive';
+                r = 'fa-light fa-file-zipper';
                 break;
             case 'gz':
-                r = 'fad fa-file-archive';
+                r = 'fa-light fa-file-zipper';
                 break;
             case 'tar':
-                r = 'fad fa-file-archive';
+                r = 'fa-light fa-file-zipper';
                 break;
             case 'msixbundle':
-                r = 'fad fa-file-archive';
+                r = 'fa-light fa-file-zipper';
                 break;
 
             case 'doc':
-                r = 'fad fa-file-word';
+                r = 'fa-light fa-file-lines-word';
                 break;
             case 'wps':
-                r = 'fad fa-file-word';
+                r = 'fa-light fa-file-lines-word';
                 break;
             case 'docx':
-                r = 'fad fa-file-word';
+                r = 'fa-light fa-file-lines-word';
                 break;
 
             case 'c':
-                r = 'fad fa-file-code';
+                r = 'fa-light fa-file-lines-code';
                 break;
             case 'go':
-                r = 'fad fa-file-code';
+                r = 'fa-light fa-file-lines-code';
                 break;
             case 'cpp':
-                r = 'fad fa-file-code';
+                r = 'fa-light fa-file-lines-code';
                 break;
             case 'php':
-                r = 'fad fa-file-code';
+                r = 'fa-light fa-file-lines-code';
                 break;
             case 'java':
-                r = 'fad fa-file-code';
+                r = 'fa-light fa-file-lines-code';
                 break;
             case 'js':
-                r = 'fad fa-file-code';
+                r = 'fa-light fa-file-lines-code';
                 break;
             case 'vb':
-                r = 'fad fa-file-code';
+                r = 'fa-light fa-file-lines-code';
                 break;
             case 'py':
-                r = 'fad fa-file-code';
+                r = 'fa-light fa-file-lines-code';
                 break;
             case 'css':
-                r = 'fad fa-file-code';
+                r = 'fa-light fa-file-lines-code';
                 break;
             case 'html':
-                r = 'fad fa-file-code';
+                r = 'fa-light fa-file-lines-code';
                 break;
             case 'tar':
-                r = 'fad fa-file-code';
+                r = 'fa-light fa-file-lines-code';
                 break;
             case 'asm':
-                r = 'fad fa-file-code';
+                r = 'fa-light fa-file-lines-code';
                 break;
 
             case 'ogg':
-                r = 'fad fa-file-music';
+                r = 'fa-light fa-file-lines-music';
                 break;
             case 'm4a':
-                r = 'fad fa-file-music';
+                r = 'fa-light fa-file-lines-music';
                 break;
             case 'mp3':
-                r = 'fad fa-file-music';
+                r = 'fa-light fa-file-lines-music';
                 break;
             case 'wav':
-                r = 'fad fa-file-music';
+                r = 'fa-light fa-file-lines-music';
                 break;
             case 'weba':
-                r = 'fad fa-file-music';
+                r = 'fa-light fa-file-lines-music';
                 break;
-
             case 'mp4':
-                r = 'fad fa-file-video';
+                r = 'fa-solid fa-circle-video';
                 break;
             case 'rm':
-                r = 'fad fa-file-video';
+                r = 'fa-solid fa-circle-video';
                 break;
             case 'rmvb':
-                r = 'fad fa-file-video';
+                r = 'fa-solid fa-circle-video';
                 break;
             case 'avi':
-                r = 'fad fa-file-video';
+                r = 'fa-solid fa-circle-video';
                 break;
             case 'mkv':
-                r = 'fad fa-file-video';
+                r = 'fa-solid fa-circle-video';
                 break;
             case 'webm':
-                r = 'fad fa-file-video';
+                r = 'fa-solid fa-circle-video';
                 break;
             case 'wmv':
-                r = 'fad fa-file-video';
+                r = 'fa-solid fa-circle-video';
                 break;
             case 'flv':
-                r = 'fad fa-file-video';
+                r = 'fa-solid fa-circle-video';
                 break;
             case 'mpg':
-                r = 'fad fa-file-video';
+                r = 'fa-solid fa-circle-video';
                 break;
             case 'mpeg':
-                r = 'fad fa-file-video';
+                r = 'fa-solid fa-circle-video';
                 break;
             case 'ts':
-                r = 'fad fa-file-video';
+                r = 'fa-solid fa-circle-video';
                 break;
             case 'mov':
-                r = 'fad fa-file-video';
+                r = 'fa-solid fa-circle-video';
                 break;
             case 'vob':
-                r = 'fad fa-file-video';
+                r = 'fa-solid fa-circle-video';
                 break;
 
             case 'png':
-                r = 'fad fa-file-image';
+                r = 'fa-light fa-file-lines-image';
                 break;
             case 'gif':
-                r = 'fad fa-file-image';
+                r = 'fa-light fa-file-lines-image';
                 break;
             case 'bmp':
-                r = 'fad fa-file-image';
+                r = 'fa-light fa-file-lines-image';
                 break;
             case 'jpg':
-                r = 'fad fa-file-image';
+                r = 'fa-light fa-file-lines-image';
                 break;
             case 'jpeg':
-                r = 'fad fa-file-image';
+                r = 'fa-light fa-file-lines-image';
                 break;
             case 'webp':
-                r = 'fad fa-file-image';
+                r = 'fa-light fa-file-lines-image';
                 break;
 
             case 'ppt':
-                r = 'fad fa-file-powerpoint';
+                r = 'fa-light fa-file-lines-powerpoint';
                 break;
             case 'pptx':
-                r = 'fad fa-file-powerpoint';
+                r = 'fa-light fa-file-lines-powerpoint';
                 break;
 
             case 'xls':
-                r = 'fad fa-file-excel';
+                r = 'fa-light fa-file-lines-excel';
                 break;
             case 'xlsx':
-                r = 'fad fa-file-excel';
+                r = 'fa-light fa-file-lines-excel';
                 break;
             case 'xlsm':
-                r = 'fad fa-file-excel';
+                r = 'fa-light fa-file-lines-excel';
                 break;
 
             case 'exe':
-                r = 'fad fa-window';
+                r = 'fa-light fa-window';
                 break;
             case 'bin':
-                r = 'fad fa-window';
+                r = 'fa-light fa-window';
                 break;
             case 'msi':
-                r = 'fad fa-window';
+                r = 'fa-light fa-window';
                 break;
             case 'bat':
-                r = 'fad fa-window';
+                r = 'fa-light fa-window';
                 break;
             case 'sh':
-                r = 'fad fa-window';
+                r = 'fa-light fa-window';
                 break;
 
             case 'rpm':
-                r = 'fad fa-box-alt';
+                r = 'fa-light fa-cube';
                 break;
             case 'deb':
-                r = 'fad fa-box-alt';
+                r = 'fa-light fa-cube';
                 break;
             case 'msi':
-                r = 'fad fa-box-alt';
+                r = 'fa-light fa-cube';
                 break;
             case 'dmg':
-                r = 'fad fa-box-alt';
+                r = 'fa-light fa-cube';
                 break;
             case 'apk':
-                r = 'fad fa-box-alt';
+                r = 'fa-light fa-cube';
                 break;
 
             case 'torrent':
-                r = 'fad fa-share-alt-square';
+                r = 'fa-light fa-acorn';
                 break;
 
         }
