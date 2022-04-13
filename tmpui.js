@@ -2,7 +2,7 @@
  * tmpUI.js
  * version: 27
  * Github : https://github.com/tmplink/tmpUI
- * Date : 2021-12-16
+ * Date :2022-12-16
  */
 
  class tmpUI {
