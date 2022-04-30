@@ -2305,6 +2305,7 @@ class tmplink {
             this.room.sort_type = rsp.data.sort_type;
             this.room.status = rsp.data.status;
             this.room.allow_upload = rsp.data.allow_upload;
+            this.room.img_link = rsp.data.img_link;
             this.room_performance_init(this.room.mr_id);
 
             //如果用户不是文件夹的拥有者，则显示出加入收藏夹的按钮
@@ -2329,6 +2330,15 @@ class tmplink {
             //如果文件夹不是用户的，则隐藏偏好设定
             if (this.room.owner == 0) {
                 $('#room_btn_performance').hide();
+            }
+
+            //如果文件夹有设置图片
+            console.log(this.room);
+            if (this.room.img_link != '0') {
+                $('.room_img').attr('src', this.room.img_link);
+                $('.room_img').show();
+            }else{
+                $('.room_img').hide();
             }
 
             $('#mr_copy').attr('data-clipboard-text', 'http://tmp.link/room/' + rsp.data.mr_id);

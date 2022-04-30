@@ -1,5 +1,6 @@
 <div id="tpl_header"></div>
 <div class="container d-flex flex-grow-1">
+
     <div id="file_messenger" class="align-self-center w-100" style="display: none;">
         <div class="card align-self-center mx-auto" style="margin-top: 20px;padding:100px;max-width: 550px;">
             <div class="text-center" id="file_messenger_icon"></div>
@@ -27,29 +28,42 @@
                 <div id="download_queue_list"></div>
             </div>
         </div>
+
+        <div class="mt-4 d-block d-sm-none">
+            <!--[这里显示文件夹预设图片]-->
+            <img src="" class="room_img" style="display: none;border-radius: 8px;width: 100%;">
+        </div>
+
         <div id="dir_list_box" class="card mt-4 hideOnLoad shadow">
-            <div class="card-header pt-5">
-                <div class="text-center mx-auto">
-                    <span class="room_title h2"></span>
-                    <div class="lead mt-2" id="room_total"></div>
-                    <div class="text-center">
-                        <div class="badge badge-pill badge-pink fav-enabled" style="display: none;">
-                            <i class="fa-fw fas fa-heart"></i>
-                            <span id="favorite_count">0</span>
-                        </div>
-                        <div class="badge badge-pill badge-dark btn-point user-unlogin" onclick="app.open('/login')"
-                            style="display: none;">
-                            <span i18n="need_login_of_dir">.</span>
-                        </div>
-                        <div class="mt-1">
-                            <span class="badge badge-pill badge-danger  upload_queue" style="display: none;"></span>
-                            <span class="badge badge-pill badge-success upload_count" style="display: none;"></span>
-                            <span class="badge badge-pill badge-success upload_speed" style="display: none;"></span>
+
+            <div class="card-body">
+                <div class="clearfix mb-3 px-3">
+                    <div class="float-left mr-5 d-none d-sm-inline">
+                        <!--[这里显示文件夹预设图片]-->
+                        <img src="" class="room_img" style="display: none;border-radius: 8px;height: 120px;">
+                    </div>
+                    <div class="float-left">
+                        <span class="room_title display-4"></span>
+                        <div class="lead mt-2" id="room_total"></div>
+                        <div>
+                            <div class="badge badge-pill badge-pink fav-enabled" style="display: none;">
+                                <i class="fa-fw fas fa-heart"></i>
+                                <span id="favorite_count">0</span>
+                            </div>
+                            <div class="badge badge-pill badge-dark btn-point user-unlogin" onclick="app.open('/login')"
+                                style="display: none;">
+                                <span i18n="need_login_of_dir">.</span>
+                            </div>
+                            <div class="mt-1">
+                                <span class="badge badge-pill badge-danger  upload_queue" style="display: none;"></span>
+                                <span class="badge badge-pill badge-success upload_count" style="display: none;"></span>
+                                <span class="badge badge-pill badge-success upload_speed" style="display: none;"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body">
+
+                <div class="clearfix mt-3"></div>
                 <div class="card px-3">
                     <form autocomplete="off" class="btn_for_sub">
                         <div class="input-group mb-1">
@@ -67,9 +81,10 @@
                     <div class="mb-1"></div>
 
                     <div class="btn_for_desktop">
-                        <button class="btn btn-light text-azure btn-sm mr-1  mt-1" onclick="$('#mrCreaterModal').modal('show');$('#mr_id').val('0');$('#mr_parent_id').val('0');$('#mr_top_id').val('0');">
+                        <button class="btn btn-light text-azure btn-sm mr-1  mt-1"
+                            onclick="$('#mrCreaterModal').modal('show');$('#mr_id').val('0');$('#mr_parent_id').val('0');$('#mr_top_id').val('0');">
                             <i class="fa-fw fa-light fa-folder-plus"></i>
-                            <span i18n="model_title_folder_title" class="d-none d-sm-inline" >.</span>
+                            <span i18n="model_title_folder_title" class="d-none d-sm-inline">.</span>
                         </button>
                         <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.room_list()">
                             <i class="fa-fw fas fa-sync-alt mr_filelist_refresh_icon"></i>
@@ -560,7 +575,8 @@
 
                 <h5 i18n="modal_performance_share">.</h5>
                 <label class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="pf_allow_upload" onclick="TL.room_performance_post()">
+                    <input class="form-check-input" type="checkbox" id="pf_allow_upload"
+                        onclick="TL.room_performance_post()">
                     <span class="form-check-label" i18n="modal_performance_share_des">
                         .
                     </span>
@@ -596,4 +612,3 @@
         </div>
     </div>
 </div>
-
