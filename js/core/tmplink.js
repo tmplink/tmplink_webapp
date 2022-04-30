@@ -2781,22 +2781,22 @@ class tmplink {
                 break;
 
             case 'png':
-                r = 'fa-light fa-file-lines-image';
+                r = 'fa-light fa-file-image';
                 break;
             case 'gif':
-                r = 'fa-light fa-file-lines-image';
+                r = 'fa-light fa-file-image';
                 break;
             case 'bmp':
-                r = 'fa-light fa-file-lines-image';
+                r = 'fa-light fa-file-image';
                 break;
             case 'jpg':
-                r = 'fa-light fa-file-lines-image';
+                r = 'fa-light fa-file-image';
                 break;
             case 'jpeg':
-                r = 'fa-light fa-file-lines-image';
+                r = 'fa-light fa-file-image';
                 break;
             case 'webp':
-                r = 'fa-light fa-file-lines-image';
+                r = 'fa-light fa-file-image';
                 break;
 
             case 'ppt':
