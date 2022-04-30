@@ -2679,105 +2679,105 @@ class tmplink {
                 break;
 
             case 'doc':
-                r = 'fa-light fa-file-lines-word';
+                r = 'fa-light fa-file-word';
                 break;
             case 'wps':
-                r = 'fa-light fa-file-lines-word';
+                r = 'fa-light fa-file-word';
                 break;
             case 'docx':
-                r = 'fa-light fa-file-lines-word';
+                r = 'fa-light fa-file-word';
                 break;
 
             case 'c':
-                r = 'fa-light fa-file-lines-code';
+                r = 'fa-light fa-file-code';
                 break;
             case 'go':
-                r = 'fa-light fa-file-lines-code';
+                r = 'fa-light fa-file-code';
                 break;
             case 'cpp':
-                r = 'fa-light fa-file-lines-code';
+                r = 'fa-light fa-file-code';
                 break;
             case 'php':
-                r = 'fa-light fa-file-lines-code';
+                r = 'fa-light fa-file-code';
                 break;
             case 'java':
-                r = 'fa-light fa-file-lines-code';
+                r = 'fa-light fa-file-code';
                 break;
             case 'js':
-                r = 'fa-light fa-file-lines-code';
+                r = 'fa-light fa-file-code';
                 break;
             case 'vb':
-                r = 'fa-light fa-file-lines-code';
+                r = 'fa-light fa-file-code';
                 break;
             case 'py':
-                r = 'fa-light fa-file-lines-code';
+                r = 'fa-light fa-file-code';
                 break;
             case 'css':
-                r = 'fa-light fa-file-lines-code';
+                r = 'fa-light fa-file-code';
                 break;
             case 'html':
-                r = 'fa-light fa-file-lines-code';
+                r = 'fa-light fa-file-code';
                 break;
             case 'tar':
-                r = 'fa-light fa-file-lines-code';
+                r = 'fa-light fa-file-code';
                 break;
             case 'asm':
-                r = 'fa-light fa-file-lines-code';
+                r = 'fa-light fa-file-code';
                 break;
 
             case 'ogg':
-                r = 'fa-light fa-file-lines-music';
+                r = 'fa-light fa-file-music';
                 break;
             case 'm4a':
-                r = 'fa-light fa-file-lines-music';
+                r = 'fa-light fa-file-music';
                 break;
             case 'mp3':
-                r = 'fa-light fa-file-lines-music';
+                r = 'fa-light fa-file-music';
                 break;
             case 'wav':
-                r = 'fa-light fa-file-lines-music';
+                r = 'fa-light fa-file-music';
                 break;
             case 'weba':
-                r = 'fa-light fa-file-lines-music';
+                r = 'fa-light fa-file-music';
                 break;
             case 'mp4':
-                r = 'fa-solid fa-circle-video';
+                r = 'fa-light fa-file-video';
                 break;
             case 'rm':
-                r = 'fa-solid fa-circle-video';
+                r = 'fa-light fa-file-video';
                 break;
             case 'rmvb':
-                r = 'fa-solid fa-circle-video';
+                r = 'fa-light fa-file-video';
                 break;
             case 'avi':
-                r = 'fa-solid fa-circle-video';
+                r = 'fa-light fa-file-video';
                 break;
             case 'mkv':
-                r = 'fa-solid fa-circle-video';
+                r = 'fa-light fa-file-video';
                 break;
             case 'webm':
-                r = 'fa-solid fa-circle-video';
+                r = 'fa-light fa-file-video';
                 break;
             case 'wmv':
-                r = 'fa-solid fa-circle-video';
+                r = 'fa-light fa-file-video';
                 break;
             case 'flv':
-                r = 'fa-solid fa-circle-video';
+                r = 'fa-light fa-file-video';
                 break;
             case 'mpg':
-                r = 'fa-solid fa-circle-video';
+                r = 'fa-light fa-file-video';
                 break;
             case 'mpeg':
-                r = 'fa-solid fa-circle-video';
+                r = 'fa-light fa-file-video';
                 break;
             case 'ts':
-                r = 'fa-solid fa-circle-video';
+                r = 'fa-light fa-file-video';
                 break;
             case 'mov':
-                r = 'fa-solid fa-circle-video';
+                r = 'fa-light fa-file-video';
                 break;
             case 'vob':
-                r = 'fa-solid fa-circle-video';
+                r = 'fa-light fa-file-video';
                 break;
 
             case 'png':
@@ -2800,20 +2800,20 @@ class tmplink {
                 break;
 
             case 'ppt':
-                r = 'fa-light fa-file-lines-powerpoint';
+                r = 'fa-light fa-file-powerpoint';
                 break;
             case 'pptx':
-                r = 'fa-light fa-file-lines-powerpoint';
+                r = 'fa-light fa-file-powerpoint';
                 break;
 
             case 'xls':
-                r = 'fa-light fa-file-lines-excel';
+                r = 'fa-light fa-file-excel';
                 break;
             case 'xlsx':
-                r = 'fa-light fa-file-lines-excel';
+                r = 'fa-light fa-file-excel';
                 break;
             case 'xlsm':
-                r = 'fa-light fa-file-lines-excel';
+                r = 'fa-light fa-file-excel';
                 break;
 
             case 'exe':
