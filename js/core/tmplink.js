@@ -1544,7 +1544,7 @@ class tmplink {
         }
         this.buy_type = type;
 
-        $('#shopModal').hide();
+        $('#shopModal').modal('hide');
         setTimeout(() => {
             $('#buySelectModal').modal('show');
         },500);
