@@ -2333,7 +2333,6 @@ class tmplink {
             }
 
             //如果文件夹有设置图片
-            console.log(this.room);
             if (this.room.img_link != '0') {
                 $('.room_img').attr('src', this.room.img_link);
                 $('.room_img').show();
