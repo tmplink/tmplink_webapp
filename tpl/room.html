@@ -55,9 +55,11 @@
                                 <span i18n="need_login_of_dir">.</span>
                             </div>
                             <div class="mt-1">
-                                <span class="badge badge-pill badge-danger  upload_queue" style="display: none;"></span>
-                                <span class="badge badge-pill badge-success upload_count" style="display: none;"></span>
-                                <span class="badge badge-pill badge-success upload_speed" style="display: none;"></span>
+                                <span class="upload_queue" style="display: none;">
+                                    <i class="fa-fw fa-light fa-circle-arrow-up"></i>
+                                    <span class="upload_queue_counter"></span> 
+                                    <span class="upload_speed"></span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -155,7 +157,7 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <button class="dropdown-item not_owner" onclick="TL.file_manager.checkbox_delete()">
-                                    <i class="fa-fw fa-light fa-trash-can"></i>
+                                    <i class="fa-fw fa-light fa-trash"></i>
                                     <span i18n="on_select_delete">.</span>
                                 </button>
                                 <button class="dropdown-item" onclick="TL.file_manager.checkbox_download()">
@@ -265,7 +267,7 @@
                                                         <i class="fa-fw fa-light fa-pen-to-square"></i>
                                                     </button>
                                                     <button href="javascript:void(0);" class="text-red btn btn-sm btn-light" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
-                                                        <i class="fa-fw fa-light fa-trash-can"></i>
+                                                        <i class="fa-fw fa-light fa-trash"></i>
                                                     </button>
                                                 <% } %>
                                             </div>
@@ -355,7 +357,7 @@
                                                     <span i18n="menu_rename">.</span>
                                                 </button>
                                                 <button class="dropdown-item" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
-                                                    <i class="fa-fw fa-light fa-trash-can"></i>
+                                                    <i class="fa-fw fa-light fa-trash"></i>
                                                     <span i18n="menu_delete">.</span>
                                                 </button> 
                                             </div>
@@ -399,7 +401,7 @@
                         <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="mt-1 btn_copy"><i class="fa-fw fa-light fa-share-from-square"></i></a>
                         <% if (obj[x].type === 'owner') { %>
                             <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-blue mt-1"><i class="fa-light fa-pen-to-square"></i></a>
-                            <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red mt-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash-can"></i></a>
+                            <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red mt-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></a>
                         <% } %>
                     </div>
                 </div>
@@ -431,7 +433,7 @@
                                 <a href="javascript:void(0)" data-clipboard-text="http://tmp.link/room/<% obj[x].mr_id %>" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-share-from-square"></i></a>
                                 <% if (obj[x].type === 'owner') { %>
                                     <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-pen-to-square"></i></a>
-                                    <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash-can"></i></a>
+                                    <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></a>
                                 <% } %>
                             </div>
                         </div>

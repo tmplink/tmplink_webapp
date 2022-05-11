@@ -197,7 +197,7 @@ class uploader {
 
 
     upload_prepare(file, id, callback) {
-        
+
         //不支持FileReader，直接下一步。
         if (!window.FileReader) {
             callback(file, 0, id);
@@ -354,7 +354,7 @@ class uploader {
             let file = f.file;
 
             //如果未登录，添加队列到首页
-            let target = this.parent_op.isLogin() ? '#uploaded_file_box' : '#upload_index_box';
+            let target = this.parent_op.isLogin() ? '#upload_model_box' : '#upload_index_box';
             $(target).append(app.tpl('upload_list_wait_tpl', {
                 name: file.name,
                 size: bytetoconver(file.size, true),
@@ -372,7 +372,8 @@ class uploader {
     upload_btn_status_update() {
         //更新队列数
         $('.upload_queue').fadeIn();
-        $('.upload_queue').html(this.upload_queue_file.length);
+        $('.upload_queue_counter').html(this.upload_queue_file.length);
+
         //更新已完成📖
         $('.upload_count').fadeIn();
         $('.upload_count').html(this.upload_count);
@@ -446,19 +447,24 @@ class uploader {
 
             //如果未登录状态下上传，则不隐藏上传完成后的信息
             if (this.parent_op.isLogin()) {
-                setTimeout(() => {
-                    $('#uq_' + id).hide();
-                }, 3000);
                 if (get_page_mrid() != undefined && this.upload_queue_file.length == 0) {
                     this.parent_op.room_list();
                 }
                 if (get_page_mrid() == undefined && this.upload_queue_file.length == 0) {
                     this.parent_op.workspace_filelist(0);
                 }
+                $('#uq_' + id).hide();
+                $('#upload_model_box_finish').append(app.tpl('upload_list_ok_tpl', {
+                    name: file.name,
+                    size: bytetoconver(file.size, true),
+                    ukey: rsp.data.ukey
+                }));
+                this.parent_op.btn_copy_bind();
                 this.upload_btn_status_update();
             } else {
-                $('#uq_' + id).hide();
-                $('#upload_index_box').append(app.tpl('upload_list_ok_tpl', {
+                $('#uq_' + id).remove();
+                $('#upload_index_box_finish').show();
+                $('#upload_index_box_finish').append(app.tpl('upload_list_ok_tpl', {
                     name: file.name,
                     size: bytetoconver(file.size, true),
                     ukey: rsp.data.ukey
@@ -473,9 +479,45 @@ class uploader {
             // }));
             //this.btn_copy_bind();
         } else {
-            $('#uqnn_' + id).html(`<span class="text-red">${this.parent_op.languageData.upload_fail}</span>`);
+            //根据错误代码显示错误信息
+            let error_msg = this.parent_op.languageData.upload_fail;
+            switch (rsp.datus) {
+                case '2':
+                    //上传失败，无效请求
+                    error_msg = this.parent_op.languageData.upload_fail_utoken;
+                    break;
+                case '3':
+                    //上传失败，不能上传空文件
+                    error_msg = this.parent_op.languageData.upload_fail_empty;
+                    break;
+                case '4':
+                    //上传失败，上传的文件大小超出了系统允许的大小
+                    error_msg = this.parent_op.languageData.upload_limit_size;
+                    break;
+                case '5':
+                    //上传失败，超出了单日允许的最大上传量
+                    error_msg = this.parent_op.languageData.upload_limit_day;
+                    break;
+                case '6':
+                    //上传失败，没有权限上传到这个文件夹
+                    error_msg = this.parent_op.languageData.upload_fail_permission;
+                    break;
+                case '7':
+                    //要上传的文件超出了私有存储空间限制
+                    error_msg = this.parent_op.languageData.upload_fail_storage;
+                    break;
+                case '8':
+                    //上传失败，目前暂时无法为这个文件分配存储空间
+                    error_msg = this.parent_op.languageData.upload_fail_prepare;
+                    break;
+                case '9':
+                    //上传失败，操作失败，无法获取节点信息
+                    error_msg = this.parent_op.languageData.upload_fail_node;
+                    break;
+            }
+            $('#uqnn_' + id).html(`<span class="text-red">${error_msg}</span>`);
         }
-        
+
         // this.upload_processing = 0;
         // this.upload_start();
         //更新上传统计

@@ -1,4 +1,10 @@
 {
+    "upload_fail_prepare": "上傳失敗，系統繁忙，無法響應此請求。",
+    "upload_fail_utoken": "上傳失敗，無效的請求。",
+    "upload_fail_empty": "上傳失敗，不能上傳空文件。",
+    "upload_limit_day": "上傳失敗，目前已超出今日上傳總量，請明天再來。或者購買私有空間，上傳至私有空間不受限制。",
+    "upload_fail_permission": "上傳失敗，您沒有權限上傳文件至此文件夾。",
+    "upload_fail_node": "上傳失敗，無法獲得節點信息。",
     "video_player_prepare": "正在處理",
     "video_player_proccess": "視頻正在準備中，請稍等...",
     "video_player_fail": "無法播放",

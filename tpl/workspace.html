@@ -12,9 +12,11 @@
                 <i class="fa-4x fa-light fa-file-magnifying-glass"></i>
                 <div class="lead mt-2" id="workspace_total"></div>
                 <div class="mt-1">
-                    <span class="badge badge-pill badge-danger upload_queue" style="display: none;"></span>
-                    <span class="badge badge-pill badge-success upload_count" style="display: none;"></span>
-                    <span class="badge badge-pill badge-success upload_speed" style="display: none;"></span>
+                    <span class="upload_queue" style="display: none;">
+                        <i class="fa-fw fa-light fa-circle-arrow-up"></i>
+                        <span class="upload_queue_counter"></span> 
+                        <span class="upload_speed"></span>
+                    </span>
                 </div>
             </div>
         </div>
@@ -85,7 +87,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <button class="dropdown-item" onclick="TL.file_manager.checkbox_delete()">
-                                <i class="fa-fw fa-light fa-trash-can"></i>
+                                <i class="fa-fw fa-light fa-trash"></i>
                                 <span i18n="on_select_delete">.</span>
                             </button>
                             <button class="dropdown-item" onclick="TL.file_manager.checkbox_download()">
@@ -140,7 +142,7 @@
                                             <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></button>
                                             <button href="javascript:void(0)" onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-pen-to-square"></i></button>
                                             <button href="javascript:void(0)" data-clipboard-text="http://tmp.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
-                                            <button href="javascript:void(0)" id="btn-rm-file_<% obj[x].ukey %>" class="text-red btn btn-sm btn-light" onclick="TL.workspace_del('<% obj[x].ukey %>')"><i class="fa-fw fa-light fa-trash-can"></i></button>
+                                            <button href="javascript:void(0)" id="btn-rm-file_<% obj[x].ukey %>" class="text-red btn btn-sm btn-light" onclick="TL.workspace_del('<% obj[x].ukey %>')"><i class="fa-fw fa-light fa-trash"></i></button>
                                         </div>
                                         <div class="mt-1">
                                             <span class="mr-2"><% obj[x].fsize_formated %></span>
@@ -235,7 +237,7 @@
                                         <span i18n="menu_rename">.</span>
                                     </button>
                                     <button id="btn-rm-file_<% obj[x].ukey %>" class="dropdown-item" onclick="TL.workspace_del('<% obj[x].ukey %>')">
-                                        <i class="fa-fw fa-light fa-trash-can"></i>
+                                        <i class="fa-fw fa-light fa-trash"></i>
                                         <span i18n="menu_delete">.</span>
                                     </button>
                                 </div>

@@ -277,7 +277,11 @@
                     </div>
                 </script>
 
-                <div id="uploaded_file_box" class="mt-2" style="max-height: 500px;overflow:scroll;">
+                <div id="upload_model_box_finish" class="mt-2" style="max-height: 500px;overflow:scroll;">
+
+                </div>
+
+                <div id="upload_model_box" class="mt-2" style="max-height: 500px;overflow:scroll;">
 
                 </div>
 
@@ -290,7 +294,7 @@
                             <% obj.size %>
                                 &nbsp
                                 <a href="javascript:void(0)" onclick="TL.uploader.queue_remove(<% obj.id %>)" id="uq_delete_<% obj.id %>" class="text-red btn btn-sm btn-light mx-1">
-                                    <i class="fa-fw fa-light fa-trash-can-alt"></i>
+                                    <i class="fa-fw fa-light fa-trash"></i>
                                 </a>
                         </div>
                         <div class="col-12 my-1 text-muted" id="uqnn_<% obj.id %>"></div>
@@ -304,19 +308,20 @@
                 </script>
 
                 <script type="text/template" id="upload_list_ok_tpl">
-                    <div class="row p-2 mb-2 mx-0 select-box">
-                        <div class="col-12 my-1 d-flex align-items-center listfontweight filename">
-                            <% obj.name %>
+                    <div class="row p-2 mb-2 mx-0 select-box uploaded_<% obj.ukey %>">
+                        <div class="col-8 my-1">
+                            <i class="fa-fw fa-solid fa-circle-check text-green"></i> 
+                            <% obj.name %> <% obj.size %>
                         </div>
-                        <div class="col-6 text-muted my-1 listfontweight d-flex align-items-center justify-content-start">
-                            <% obj.size %>
-                        </div>
-                        <div class="col-6  my-1 d-flex align-items-center justify-content-end">
+                        <div class="col-4  my-1 d-flex align-items-center justify-content-end">
                             <a href="//tmp.link/f/<% obj.ukey %>" class="text-azure btn btn-sm btn-light mx-1">
                                 <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                             </a>
                             <a href="javascript:void(0);" data-clipboard-text="http://tmp.link/f/<% obj.ukey %>" class="text-azure btn btn-sm btn-light mx-1 btn_copy">
-                                <i class="fa-fw fad fa-copy"></i>
+                                <i class="fa-fw fa-thin fa-copy"></i>
+                            </a>
+                            <a href="javascript:void(0)" onclick="$('.uploaded_<% obj.ukey %>').remove()" class="text-red btn btn-sm btn-light mx-1">
+                                <i class="fa-fw fa-light fa-trash"></i>
                             </a>
                         </div>
                     </div>
