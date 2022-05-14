@@ -128,7 +128,7 @@ class tmplink {
         });
     }
 
-    setArea(){
+    setArea() {
         this.recaptcha_do('set_area', (captcha) => {
             $.post(this.api_toks, {
                 action: 'set_area',
@@ -172,7 +172,7 @@ class tmplink {
             // $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-size: cover;background-repeat: no-repeat;background-attachment: scroll;background-image:url(\'' + svg + '\');"></div>');
             // let svg = "/img/bg.svg";
             $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color: #0093E9;background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);"></div>');
-        } 
+        }
 
     }
 
@@ -1547,8 +1547,8 @@ class tmplink {
         $('#shopModal').modal('hide');
         setTimeout(() => {
             $('#buySelectModal').modal('show');
-        },500);
-        
+        }, 500);
+
     }
 
     bug_select(type) {
@@ -1911,13 +1911,15 @@ class tmplink {
         localStorage.setItem(room_key_sort_type, room_sort_type);
         $("#pf_sort_type option[value='" + this.room.sort_type + "']").attr("selected", "selected");
 
-        let room_key_allow_upload = 'app_room_view_allow_upload_' + room_id;
-        let storage_room_allow_upload = localStorage.getItem(room_key_allow_upload);
-        let room_allow_upload = storage_room_allow_upload === null ? this.room.allow_upload : storage_room_allow_upload;
-        localStorage.setItem(room_key_allow_upload, room_allow_upload);
-        if (storage_room_allow_upload == 'yes') {
-            $('#pf_allow_upload').attr('checked', 'checked');
-        }
+        // let room_key_allow_upload = 'app_room_view_allow_upload_' + room_id;
+        // let storage_room_allow_upload = localStorage.getItem(room_key_allow_upload);
+        // let room_allow_upload = storage_room_allow_upload === null ? this.room.allow_upload : storage_room_allow_upload;
+        // localStorage.setItem(room_key_allow_upload, room_allow_upload);
+        // if (storage_room_allow_upload == 'yes') {
+        //     $('#pf_allow_upload').attr('checked', 'checked');
+        // } else {
+        //     $('#pf_allow_upload').removeAttr('checked');
+        // }
     }
 
     room_performance_open() {
@@ -2336,8 +2338,16 @@ class tmplink {
             if (this.room.img_link != '0') {
                 $('.room_img').attr('src', this.room.img_link);
                 $('.room_img').show();
-            }else{
+            } else {
                 $('.room_img').hide();
+            }
+
+            //如果文件夹允许其他人上传文件
+            console.log(this.room.allow_upload);
+            if (this.room.allow_upload == 'yes') {
+                $('#pf_allow_upload').attr('checked', '');
+            } else {
+                $('#pf_allow_upload').removeAttr('checked');
             }
 
             $('#mr_copy').attr('data-clipboard-text', 'http://tmp.link/room/' + rsp.data.mr_id);
