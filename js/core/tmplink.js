@@ -729,7 +729,7 @@ class tmplink {
         if (page == 0) {
             $('#workspace_filelist').html('<div class="row" id="filelist_photo"></div>');
         }
-        $('#workspace_filelist').append(app.tpl('workspace_filelist_photo_tpl', data));
+        $('#filelist_photo').append(app.tpl('workspace_filelist_photo_tpl', data));
         this.btn_copy_bind();
         this.is_file_ok_check(data);
         app.linkRebind();
