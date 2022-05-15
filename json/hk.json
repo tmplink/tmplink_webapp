@@ -1,4 +1,5 @@
 {
+    "status_area": "此文件在該地區不可用",
     "upload_fail_prepare": "上傳失敗，系統繁忙，無法響應此請求。",
     "upload_fail_utoken": "上傳失敗，無效的請求。",
     "upload_fail_empty": "上傳失敗，不能上傳空文件。",

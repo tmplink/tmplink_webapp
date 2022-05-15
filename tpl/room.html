@@ -47,7 +47,7 @@
                         <div class="lead mt-2" id="room_total"></div>
                         <div>
                             <div class="badge badge-pill badge-pink fav-enabled" style="display: none;">
-                                <i class="fa-fw fas fa-heart"></i>
+                                <i class="fa-fw fa-light fa-heart"></i>
                                 <span id="favorite_count">0</span>
                             </div>
                             <div class="badge badge-pill badge-dark btn-point user-unlogin" onclick="app.open('/login')"
@@ -89,7 +89,7 @@
                             <span i18n="model_title_folder_title" class="d-none d-sm-inline">.</span>
                         </button>
                         <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.room_list()">
-                            <i class="fa-fw fas fa-sync-alt mr_filelist_refresh_icon"></i>
+                            <i class="fa-fw fa-light fa-rotate mr_filelist_refresh_icon"></i>
                         </button>
                     </div>
 
@@ -104,18 +104,14 @@
                             <i class="fa-fw fa-light fa-list-radio"></i>
                             <span i18n="model_list" class="d-none d-sm-inline">.</span>
                         </button>
-                        <!-- <button id="room_btn_file_grid" class="btn btn-light btn-sm mr-1 text-azure" onclick="TL.dir_list_model('grid');">
-                        <i class="fa-fw fas fa-th"></i>
-                        <span i18n="model_grid" class="d-none d-sm-inline">.</span>
-                    </button> -->
                         <button id="room_btn_file_photo" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
                             onclick="TL.dir_list_model('photo');">
-                            <i class="fa-fw far fa-image"></i>
+                            <i class="fa-fw fa-light fa-image"></i>
                             <span i18n="model_photo" class="d-none d-sm-inline">.</span>
                         </button>
                         <button id="room_btn_performance" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
                             onclick="TL.room_performance_open();">
-                            <i class="fa-fw fas fa-heart"></i>
+                            <i class="fa-fw fa-light fa-heart"></i>
                             <span class="d-none d-sm-inline" i18n="btn_performance">.</span>
                         </button>
                         <button class="btn btn-light btn-sm mr-1 mt-1 btn_copy text-azure" id="mr_copy">
@@ -124,7 +120,7 @@
                         </button>
                         <button id="room_btn_favorate" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
                             style="display: none;">
-                            <i class="fa-fw fas fa-folder-plus"></i>
+                            <i class="fa-fw fa-light fa-folder-plus"></i>
                             <span class="d-none d-sm-inline" i18n="btn_favorite">.</span>
                         </button>
                         <button id="room_btn_report" class="btn btn-light text-azure btn-sm mr-1 mt-1"
@@ -133,7 +129,7 @@
                             <span class="d-none d-sm-inline" i18n="file_btn_report">.</span>
                         </button>
                         <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.mr_file_list(0)">
-                            <i class="fa-fw fas fa-sync-alt mr_filelist_refresh_icon"></i>
+                            <i class="fa-fw fa-light fa-rotate mr_filelist_refresh_icon"></i>
                         </button>
                     </div>
 
@@ -313,7 +309,7 @@
                                     <% if(TL.media.is_allow(obj[x].fname)){ %>
                                         <% if(TL.area_cn!==true||TL.room.owner == 1){ %>
                                         <!-- <span class="badge badge-pill badge-primary btn-point" onclick="TL.media.video_can_play_open('<% obj[x].ukey %>')">
-                                            <i class="fa-fw fas fa-play-circle"></i>
+                                            <i class="fa-fw fa-light fa-play-circle"></i>
                                         </span> -->
                                         <% } %>  
                                     <% } %>  
@@ -327,7 +323,7 @@
                                     <% if(obj[x].model!=99){ %>
                                         <!--[这里处理剩余时间]-->
                                         <span>
-                                            <i class="fa-fw far fa-stopwatch"></i> 
+                                            <i class="fa-fw fa-light fa-stopwatch"></i> 
                                             <span class="lefttime-remainder" id="r_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
                                         </span>
                                     <% } %>  
@@ -350,7 +346,7 @@
                                         <span class="btn-group">
                                             <div class="dropdown-toggle text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown"
                                                 aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-h fa-fw"></i>
+                                                <i class="fa-light fa-ellipsis fa-fw"></i>
                                             </div>
                                             <div class="dropdown-menu dropdown-menu-right shadow">
                                                 <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="dropdown-item">
@@ -468,7 +464,7 @@
                             <div class="text-truncate" alt="<% obj[x].fname %>" title="<% obj[x].fname %>"><% obj[x].fname %></div>
                         </div>
                         <div>
-                            <a href="javascript:void(0)" id="btn-mraddlist-<% obj[x].ukey%>" class="text-azure mt-1 mr-1" onclick="TL.mr_file_add('<% obj[x].ukey%>')"><i class="fa-fw far fa-plus"></i></a>
+                            <a href="javascript:void(0)" id="btn-mraddlist-<% obj[x].ukey%>" class="text-azure mt-1 mr-1" onclick="TL.mr_file_add('<% obj[x].ukey%>')"><i class="fa-fw fa-light fa-circle-plus"></i></a>
                         </div>
                     </div>
                 </div>

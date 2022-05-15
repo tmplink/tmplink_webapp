@@ -152,7 +152,7 @@
                         <div class="select-box p-2 btn-point storage_needs" onclick="TL.uploader.model_selected(99)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 far fa-infinity fa-fw"></i>
+                                    <i class="mt-1 fa-light fa-infinity fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="modal_settings_upload_model99">
@@ -168,7 +168,7 @@
                             onclick="$('#uploadModal').modal('hide');TL.buy_select_open('storage');">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 far fa-layer-plus fa-fw"></i>
+                                    <i class="mt-1 fa-light fa-layer-plus fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="modal_settings_upload_buy_storage">
@@ -190,7 +190,7 @@
                         <label for="fileToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 far fa-file-upload fa-fw"></i>
+                                    <i class="mt-1 fa-cloud-arrow-up fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="model_title_upload">
@@ -209,7 +209,7 @@
                         <label for="dirsToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 far fa-folder-upload fa-fw"></i>
+                                    <i class="mt-1 fa-light fa-folder-arrow-up fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="upload_dirs">
@@ -225,7 +225,7 @@
                     <div class="select-box p-2 btn-point" onclick="TL.cli_uploader_generator2();">
                         <div class="d-flex align-items-center">
                             <span class="stamp stamp-md bg-blue mr-3">
-                                <i class="mt-1 far fa-terminal fa-fw"></i>
+                                <i class="mt-1 fa-light fa-rectangle-terminal fa-fw"></i>
                             </span>
                             <div>
                                 <h4 class="m-0" i18n="model_title_upload_cli">
@@ -244,7 +244,7 @@
                                 <div class="col-2 my-1 d-flex align-items-center justify-content-end">
                                     <a id="cliuploader_copy" href="javascript:void(0)" data-clipboard-text="#"
                                         class="text-azure btn_copy btn btn-sm btn-light mx-1">
-                                        <i class="fa-fw far fa-copy"></i>
+                                        <i class="fa-fw fa-light fa-copy"></i>
                                     </a>
                                 </div>
                             </div>
@@ -628,7 +628,7 @@
             <div class="modal-body">
                 <div id="orders_loader">
                     <div class="text-center">
-                        <i class="fa-fw fas fa-spinner fa-spin fa-4x"></i>
+                        <i class="fa-fw fa-light fa-spinner-third fa-spin fa-4x"></i>
                     </div>
                 </div>
                 <div id="orders_loaded" style="display: none;">
@@ -733,11 +733,11 @@
                         <input type="radio" id="target_dir_<% obj.id %>"  name="dir_tree" value="<% obj.id %>">
                         <% if(obj.children){ %>
                             <label for="mv_select_box_<% obj.id %>" id="mv_select_box_<% obj.id %>" onclick="TL.dir_tree_display('<% obj.id %>')" style="margin-bottom: 0px">
-                                <i class="fa-fw fas fa-folder-plus"></i> <% obj.name %>
+                                <i class="fa-fw fa-light fa-folder-plus"></i> <% obj.name %>
                             </label>
                         <% }else{ %>
                             <label for="mv_select_box_<% obj.id %>" style="margin-bottom: 0px">
-                                <i class="fa-fw fas fa-folder"></i> <% obj.name %>
+                                <i class="fa-fw fa-light fa-folder"></i> <% obj.name %>
                             </label>
                         <% } %>
                         <ul id="mv_box_<% obj.id %>" style="display: none;margin-bottom: 0px"></ul>

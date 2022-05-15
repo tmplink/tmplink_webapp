@@ -40,7 +40,7 @@
                 <!--[主要控制器]-->
                 <div class="mb-1">
                     <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.workspace_filelist(0);">
-                        <i class="fas fa-sync-alt fa-fw" id="filelist_refresh_icon"></i>
+                        <i class="fa-light fa-rotate fa-fw" id="filelist_refresh_icon"></i>
                     </button>
                     <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
                         id="filelist_filter">
@@ -52,14 +52,10 @@
                         <i class="fa-fw fa-light fa-list-radio"></i>
                         <span i18n="model_list" class="d-none d-sm-inline">.</span>
                     </button>
-                    <!-- <button id="ws_btn_file_grid" class="btn btn-light text-azure btn-sm mr-2"
-                    onclick="TL.workspace_filelist_model('grid');">
-                    <i class="fa-fw fas fa-th"></i>
-                    <span i18n="model_grid" class="d-none d-sm-inline">.</span>
                 </button> -->
                     <button id="ws_btn_file_photo" class="btn btn-light  text-azure btn-sm mr-1 mt-1"
                         onclick="TL.workspace_filelist_model('photo');">
-                        <i class="fa-fw far fa-image"></i>
+                        <i class="fa-fw fa-light fa-image"></i>
                         <span i18n="model_photo" class="d-none d-sm-inline">.</span>
                     </button>
                 </div>
@@ -181,14 +177,14 @@
 
                                     <% if(TL.media.is_allow(obj[x].fname)){ %>
                                         <!-- <span class="badge badge-pill badge-primary btn-point" onclick="TL.media.video_can_play_open('<% obj[x].ukey %>')">
-                                            <i class="fa-fw fas fa-play-circle"></i>
+                                            <i class="fa-fw fa-light fa-play-circle"></i>
                                         </span> -->
                                     <% } %>  
                                     
                                     <% if(obj[x].model!=99){ %>
                                         <!--[在大屏幕上显示]-->
                                         <span class="d-none d-lg-inline">
-                                            <i class="fa-fw far fa-stopwatch"></i> 
+                                            <i class="fa-fw fa-light fa-stopwatch"></i> 
                                             <span class="lefttime-remainder" id="wd_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
                                         </span>
                                     <% } %>
@@ -211,7 +207,7 @@
                                     <% if(obj[x].model!=99){ %>
                                         <!--[在小屏幕上显示]-->
                                         <span class="d-inline d-lg-none">
-                                            <i class="fa-fw far fa-stopwatch"></i> 
+                                            <i class="fa-fw fa-light fa-stopwatch"></i> 
                                             <span class="lefttime-remainder" id="wm_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
                                         </span>
                                     <% } %>
@@ -229,7 +225,7 @@
                             <span class="btn-group">
                                 <div class="dropdown-toggle text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-h fa-fw"></i>
+                                    <i class="fa-light fa-ellipsis fa-fw"></i>
                                 </div>
                                 <div class="dropdown-menu dropdown-menu-right shadow">
                                     <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="dropdown-item">

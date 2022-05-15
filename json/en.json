@@ -1,4 +1,5 @@
 {
+    "status_area": "This file is not available in this area",
     "upload_fail_prepare": "Upload failed, the system is busy and could not respond to this request.",
     "upload_fail_utoken": "Upload failed, invalid request.",
     "upload_fail_empty": "Upload failed, could not upload empty file.",

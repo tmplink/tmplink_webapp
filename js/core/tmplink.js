@@ -533,7 +533,7 @@ class tmplink {
             if (animated === false) {
                 return false;
             } else {
-                $(id).html('<i class="fas fa-check-circle" aria-hidden="true"></i>');
+                $(id).html('<i class="fa-light fa-circle-check" aria-hidden="true"></i>');
             }
         }, 'json');
     }
@@ -844,7 +844,7 @@ class tmplink {
                         $('.user-login').hide();
                     }
 
-                    $('#download_msg').html('<i class="fad fa-spinner-third fa-spin fa-fw"></i> ' + this.languageData.status_file_1);
+                    $('#download_msg').html('<i class="fa-solid fa-spinner fa-spin fa-fw"></i> ' + this.languageData.status_file_1);
                     $('#download_msg').attr('class', 'badge badge-pill badge-info');
 
                     //请求下载地址
@@ -861,7 +861,7 @@ class tmplink {
                             });
 
                             if (req.status != 1) {
-                                $('#download_msg').html('<i class="fas fa-exclamation-circle fa-fw"></i> ' + this.languageData.status_file_2);
+                                $('#download_msg').html('<i class="fa-light fa-circle-exclamation fa-fw"></i> ' + this.languageData.status_file_2);
                                 $('#download_msg').attr('class', 'badge badge-pill badge-danger');
                                 $('#file_download_btn_1').hide();
                                 $('#file_download_btn_2').hide();
@@ -877,7 +877,7 @@ class tmplink {
 
                             //自动启动下载
                             // window.location.href = download_url;
-                            // $('#download_msg').html('<i class="fas fa-check-circle fa-fw"></i> ' + this.languageData.status_file_3);
+                            // $('#download_msg').html('<i class="fa-light fa-circle-check fa-fw"></i> ' + this.languageData.status_file_3);
                             // $('#download_msg').attr('class', 'badge badge-pill badge-success');
                             $('#download_msg').fadeOut();
 
@@ -1014,23 +1014,23 @@ class tmplink {
 
                 //file need to login
                 if (rsp.status === 3) {
-                    $('#file_messenger_icon').html('<i class="fas fa-robot fa-7x"></i>');
+                    $('#file_messenger_icon').html('<i class="fa-light fa-user-robot fa-7x"></i>');
                     $('#file_messenger_msg').html(this.languageData.status_need_login);
                     $('#file_messenger_msg_login').show();
                     $('#file_messenger').show();
                     gtag('config', 'UA-96864664-3', {
-                        'page_title': 'D-unLogin',
+                        'page_title': `Any-[${params.ukey}]`,
                     });
                     return false;
                 }
 
                 //file need to sync
                 if (rsp.status === 2) {
-                    $('#file_messenger_icon').html('<i class="fa-fw fad fa-spinner-third fa-spin fa-4x"></i>');
+                    $('#file_messenger_icon').html('<i class="fa-fw fa-solid fa-spinner fa-spin fa-4x"></i>');
                     $('#file_messenger_msg').html(this.languageData.upload_sync_onprogress);
                     $('#file_messenger').show();
                     gtag('config', 'UA-96864664-3', {
-                        'page_title': 'D-sync',
+                        'page_title': `Sync-[${params.ukey}]`,
                     });
                     setTimeout(() => {
                         window.location.reload();
@@ -1038,8 +1038,19 @@ class tmplink {
                     return false;
                 }
 
+                //file unavailable in china
+                if (rsp.status === 4) {
+                    $('#file_messenger_icon').html('<i class="fa-solid fa-earth-asia fa-7x"></i>');
+                    $('#file_messenger_msg').html(this.languageData.status_area);
+                    $('#file_messenger').show();
+                    gtag('config', 'UA-96864664-3', {
+                        'page_title': `Area-[${params.ukey}]`,
+                    });
+                    return false;
+                }
+
                 //file unavailable
-                $('#file_messenger_icon').html('<i class="fas fa-folder-times  fa-4x"></i>');
+                $('#file_messenger_icon').html('<i class="fa-light fa-folder-xmark  fa-4x"></i>');
                 $('#file_messenger_msg').html(this.languageData.file_unavailable);
                 $('#file_messenger').show();
                 gtag('config', 'UA-96864664-3', {
@@ -1358,7 +1369,7 @@ class tmplink {
 
         //新的方案
         $('.btn_download_' + ukey).attr('disabled', 'true');
-        $('.btn_download_' + ukey).html('<i class="fa-fw fas fa-spinner fa-pulse"></i>');
+        $('.btn_download_' + ukey).html('<i class="fa-fw fa-light fa-spinner-third fa-pulse"></i>');
 
         this.recaptcha_do('download_req_on_list', (recaptcha) => {
             $.post(this.api_file, {
@@ -1763,7 +1774,7 @@ class tmplink {
 
     mr_file_addlist() {
         var params = get_url_params();
-        $('#mrfile_add_list').html('<i class="fa-4x fa-fw fad fa-spinner-third fa-spin mx-auto"></i>');
+        $('#mrfile_add_list').html('<i class="fa-4x fa-fw fa-solid fa-spinner fa-spin mx-auto"></i>');
         $.post(this.api_mr, {
             action: 'file_addlist',
             token: this.api_token,
@@ -2175,7 +2186,7 @@ class tmplink {
             app.open('/login');
             return;
         }
-        $('#mr_list_refresh_icon').html('<i class="fa-fw fad fa-spinner-third fa-spin"></i>');
+        $('#mr_list_refresh_icon').html('<i class="fa-fw fa-solid fa-spinner fa-spin"></i>');
         $('#mr_list_refresh_icon').attr('disabled', true);
         this.loading_box_on();
         $.post(this.api_mr, {
@@ -2185,14 +2196,14 @@ class tmplink {
             this.loading_box_off();
             if (rsp.status == 0) {
                 $('#meetroom_list').html('<div class="mx-auto"><i class="fa-fw fa-light fa-folder-open fa-4x"></i></div>');
-                $('#mr_list_refresh_icon').html('<i class="fa-fw fas fa-sync-alt"></i>');
+                $('#mr_list_refresh_icon').html('<i class="fa-fw fa-light fa-rotate"></i>');
                 $('#mr_list_refresh_icon').removeAttr('disabled');
                 return false;
             } else {
                 $('#meetroom_list').html(app.tpl('dir_list_tpl', rsp.data));
                 this.btn_copy_bind();
             }
-            $('#mr_list_refresh_icon').html('<i class="fa-fw fas fa-sync-alt"></i>');
+            $('#mr_list_refresh_icon').html('<i class="fa-fw fa-light fa-rotate"></i>');
             $('#mr_list_refresh_icon').removeAttr('disabled');
             app.linkRebind();
         });
@@ -2252,7 +2263,7 @@ class tmplink {
                 this.room.top = 0;
                 this.room.ownner = 0;
                 this.room.mr_id = 0;
-                $('#file_messenger_icon').html('<i class="fas fa-folder-times  fa-4x"></i>');
+                $('#file_messenger_icon').html('<i class="fa-light fa-folder-xmark  fa-4x"></i>');
                 $('#file_messenger_msg').html(this.languageData.room_status_fail);
                 $('#file_messenger').show();
                 $('#room_loaded').html('');
@@ -2268,7 +2279,7 @@ class tmplink {
                 this.room.top = 0;
                 this.room.ownner = 0;
                 this.room.mr_id = 0;
-                $('#file_messenger_icon').html('<i class="fas fa-folder-times  fa-4x"></i>');
+                $('#file_messenger_icon').html('<i class="fa-light fa-folder-xmark  fa-4x"></i>');
                 $('#file_messenger_msg').html(this.languageData.room_status_fail);
                 $('#file_messenger').show();
                 $('#room_loaded').html('');
@@ -2281,7 +2292,7 @@ class tmplink {
 
             //room need to login
             if (rsp.status === 3) {
-                $('#file_messenger_icon').html('<i class="fas fa-robot fa-7x"></i>');
+                $('#file_messenger_icon').html('<i class="fa-light fa-user-robot fa-7x"></i>');
                 $('#file_messenger_msg').html(this.languageData.status_need_login);
                 $('#file_messenger_msg_login').show();
                 $('#file_messenger').show();
@@ -2653,7 +2664,7 @@ class tmplink {
         var clipboard = new Clipboard('.btn_copy');
         clipboard.on('success', (e) => {
             let tmp = $(e.trigger).html();
-            $(e.trigger).html('<i class="fas fa-check-circle fa-fw"></i>');
+            $(e.trigger).html('<i class="fa-light fa-circle-check fa-fw"></i>');
             setTimeout(() => {
                 $(e.trigger).html(tmp);
             }, 3000);
