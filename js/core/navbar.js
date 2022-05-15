@@ -27,7 +27,7 @@ class navbar {
     }
 
     model_workspace(act) {
-        $('#navbar_model_icon').attr('class', 'fa-light fa-file-magnifying-glass fa-fw mx-auto');
+        $('#navbar_model_icon').attr('class', 'fa-light fa-memo-pad fa-fw mx-auto');
         $('#navbar_model_text').html(this.parent.languageData.navbar_workspace);
         if (act === true) {
             app.open('/workspace');
@@ -35,7 +35,7 @@ class navbar {
     }
 
     model_desktop(act) {
-        $('#navbar_model_icon').attr('class', 'fal fa-desktop-alt fa-fw mx-auto');
+        $('#navbar_model_icon').attr('class', 'fa-light fa-cabinet-filing fa-fw mx-auto');
         $('#navbar_model_text').html(this.parent.languageData.navbar_meetingroom);
         if (act === true) {
             app.open('/room&mrid=0');
