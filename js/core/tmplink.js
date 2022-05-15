@@ -46,7 +46,7 @@ class tmplink {
     upload_model_selected_val = 0
     download_retry = 0
     download_retry_max = 10
-    recaptcha_op = false
+    recaptcha_op = true
 
     constructor() {
         this.app_init();
@@ -285,7 +285,7 @@ class tmplink {
             this.alert(this.languageData.status_error_15);
             return false;
         }
-        window.open('http://tmp.link/f/' + code);
+        window.open('https://ttttt.link/f/' + code);
     }
 
     loading_box_on() {
@@ -882,7 +882,7 @@ class tmplink {
                             $('#download_msg').fadeOut();
 
                             //分享链接
-                            let share_url = 'http://tmp.link/f/' + params.ukey;
+                            let share_url = 'https://ttttt.link/f/' + params.ukey;
 
                             //添加下载 src
                             $('.file_download_url').attr('href', download_url);
@@ -1169,7 +1169,7 @@ class tmplink {
 
     openInMenubarXofFile() {
         let params = get_url_params();
-        this.openInMenubarX(`http://tmp.link/f/${params.ukey}`);
+        this.openInMenubarX(`https://ttttt.link/f/${params.ukey}`);
     }
 
     openInMenubarX(link) {
@@ -2350,7 +2350,7 @@ class tmplink {
                 $('#pf_allow_upload').removeAttr('checked');
             }
 
-            $('#mr_copy').attr('data-clipboard-text', 'http://tmp.link/room/' + rsp.data.mr_id);
+            $('#mr_copy').attr('data-clipboard-text', 'https://ttttt.link/room/' + rsp.data.mr_id);
             $('.room_title').html(rsp.data.name);
             $('#dir_list').show();
 
@@ -2624,7 +2624,7 @@ class tmplink {
     find_file() {
         var ukey = $('#ukey').val();
         if (ukey !== '') {
-            window.open('http://tmp.link/f/' + ukey);
+            window.open('https://ttttt.link/f/' + ukey);
         }
     }
 
