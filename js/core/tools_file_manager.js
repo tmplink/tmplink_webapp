@@ -99,7 +99,7 @@ class tools_file_manager {
     checkbox_share_to_clicpboard(data) {
         let ctext = '';
         for (let x in data) {
-            ctext = ctext + '[' + data[x].title + '] https://tmp.link/f/' + data[x].ukey + "\r";
+            ctext = ctext + '[' + data[x].title + '] https://ttttt.link/f/' + data[x].ukey + "\r";
         }
         this.parent_op.copyToClip(ctext);
     }
