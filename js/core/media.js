@@ -51,7 +51,7 @@ class media {
                 }
             } else {
                 $(`.video_processing_${data[i].id}`).attr('style', 'display: none !important;');
-                $(`#video_img_ok_${data[i].id}`).attr('preload-src', `https://getfile.tmp.link/media_img-${data[i].sha1}-360x220.jpg`);
+                $(`#video_img_ok_${data[i].id}`).attr('preload-src', `https://static.ttttt.link/media_img-${data[i].sha1}-360x220.jpg`);
             }
         }
         this.parent.lazyload('.lazyload');

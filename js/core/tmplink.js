@@ -30,7 +30,6 @@ class tmplink {
     download_queue = []
     download_queue_processing = false
     download_index = 0
-    lazyLoadInstance = null
     get_details_do = false
     countDownID = [];
 
@@ -108,10 +107,6 @@ class tmplink {
             });
         });
 
-        this.lazyLoadInstance = new LazyLoad({
-            elements_selector: ".lazyload"
-        });
-
         $(document).on({
             dragleave: function (e) {
                 e.preventDefault();
@@ -179,14 +174,13 @@ class tmplink {
     lazyload(dom) {
         $(dom).each((i, e) => {
             let img = new Image();
-            let url = $(e).attr('preload-src');
+            let url = $(e).attr('data-src');
             if (url !== undefined) {
                 img.src = url;
                 img.onload = () => {
                     $(e).attr('src', img.src);
                 }
             }
-
         });
     }
 
@@ -460,7 +454,7 @@ class tmplink {
     }
 
     previewModel(ukey, name, id) {
-        let url = 'https://getfile.tmp.link/img-' + ukey + '-0x0.jpg';
+        let url = 'https://static.ttttt.link/img-' + ukey + '-0x0.jpg';
         $('#preview_img').attr('src', '/img/lazy.gif');
         $.get(url, () => {
             $('#preview_img').attr('src', url);
@@ -733,7 +727,7 @@ class tmplink {
         this.btn_copy_bind();
         this.is_file_ok_check(data);
         app.linkRebind();
-        this.lazyLoadInstance.update();
+        this.lazyload('.lazyload');
     }
 
     workspace_filelist_by_list(data, page) {
@@ -992,7 +986,7 @@ class tmplink {
                             //设置背景
                             //this.btn_copy_bind();
                             // if (rsp.data.type == 'jpg' || rsp.data.type == 'jpeg' || rsp.data.type == 'png' || rsp.data.type == 'gif') {
-                            //     let img_url = 'https://getfile.tmp.link/img-' + params.ukey + '-0x0.jpg';
+                            //     let img_url = 'https://static.ttttt.link/img-' + params.ukey + '-0x0.jpg';
                             //     $('.img_great').attr('src', img_url);
                             //     //specail image model
                             //     let img = new Image();
@@ -2062,7 +2056,7 @@ class tmplink {
         }
         this.btn_copy_bind();
         app.linkRebind();
-        this.lazyLoadInstance.update();
+        this.lazyload('.lazyload');
     }
 
     mr_file_del(ukey) {
