@@ -455,7 +455,7 @@ class tmplink {
 
     previewModel(ukey, name, id) {
         let url = 'https://static.ttttt.link/img-' + ukey + '-0x0.jpg';
-        $('#preview_img').attr('src', '/img/lazy.gif');
+        $('#preview_img').attr('src', '/img/loading.svg');
         $.get(url, () => {
             $('#preview_img').attr('src', url);
         });
