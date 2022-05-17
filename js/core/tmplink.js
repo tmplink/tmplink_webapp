@@ -1169,7 +1169,7 @@ class tmplink {
     }
 
     openInMenubarXofIndex() {
-        this.openInMenubarX('https://app.tmp.link');
+        this.openInMenubarX('https://ttttt.link');
     }
 
     openInMenubarXofFile() {
