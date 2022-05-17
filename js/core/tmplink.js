@@ -838,7 +838,7 @@ class tmplink {
                         $('.user-login').hide();
                     }
 
-                    $('#download_msg').html('<img src="/img/loading.svg"/> ' + this.languageData.status_file_1);
+                    $('#download_msg').html('<img src="/img/loading.svg" height="20"/> ' + this.languageData.status_file_1);
                     $('#download_msg').attr('class', 'badge badge-pill badge-info');
 
                     //请求下载地址
@@ -1020,7 +1020,7 @@ class tmplink {
 
                 //file need to sync
                 if (rsp.status === 2) {
-                    $('#file_messenger_icon').html('<img src="/img/loading.svg"  />');
+                    $('#file_messenger_icon').html('<img src="/img/loading.svg" height="80"  />');
                     $('#file_messenger_msg').html(this.languageData.upload_sync_onprogress);
                     $('#file_messenger').show();
                     gtag('config', 'UA-96864664-3', {
@@ -2180,7 +2180,7 @@ class tmplink {
             app.open('/login');
             return;
         }
-        $('#mr_list_refresh_icon').html('<img src="/img/loading.svg"  />');
+        $('#mr_list_refresh_icon').html('<img src="/img/loading.svg" height="19" />');
         $('#mr_list_refresh_icon').attr('disabled', true);
         this.loading_box_on();
         $.post(this.api_mr, {

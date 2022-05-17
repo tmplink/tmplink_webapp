@@ -1,6 +1,6 @@
 <div class="loading-box" id="loading_box" style="display: none;">
     <div class="shadow-sm text-center glass" style="border-radius: 10px;padding: 10px;">
-        <img src="/img/loading.svg"  height="80"/>
+        <img src="/img/loading.svg" height="80" />
     </div>
 </div>
 
@@ -8,12 +8,12 @@
 <nav class="mainNav navbar  navbar-light d-none d-sm-flex">
     <div class="container">
         <a class="navbar-brand" href="javascript:void(0)" onclick="app.open('/');">
-            <img src="/img/ico/logo_bar.svg" height="28" alt="tmp.link">
+            <span style="color: white;border-radius: 8px;border-color: white;border-width: 2px;border-style: solid;padding-left: 5px;padding-right: 5px;">TTTTT.Link</span>
         </a>
 
         <div class="form-inline mt-1 my-lg-0 navbar_nloading">
             <li class="nav-item">
-                <img src="/img/loading.svg"  />
+                <img src="/img/loading.svg" />
             </li>
         </div>
 
@@ -30,7 +30,8 @@
                         <i class="fa-light fa-cabinet-filing fa-fw"></i>
                         <span i18n="navbar_meetingroom">.</span>
                     </button>
-                    <button class="btn btn-primary mt-1 my-sm-0 workspace-navbar" onclick="$('#shopModal').modal('show');">
+                    <button class="btn btn-primary mt-1 my-sm-0 workspace-navbar"
+                        onclick="$('#shopModal').modal('show');">
                         <i class="fa-light fa-bag-shopping fa-fw"></i>
                         <span i18n="navbar_buy">.</span>
                     </button>
@@ -70,7 +71,7 @@
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)"
                         onclick="$('#ordersModal').modal('show');TL.orders_list();" i18n="navbar_orders">.</a>
-                    
+
                 </div>
             </div>
 
