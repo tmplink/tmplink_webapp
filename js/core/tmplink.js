@@ -838,7 +838,7 @@ class tmplink {
                         $('.user-login').hide();
                     }
 
-                    $('#download_msg').html('<i class="fa-solid fa-spinner fa-spin fa-fw"></i> ' + this.languageData.status_file_1);
+                    $('#download_msg').html('<img src="/img/loading.svg"/> ' + this.languageData.status_file_1);
                     $('#download_msg').attr('class', 'badge badge-pill badge-info');
 
                     //请求下载地址
@@ -1020,7 +1020,7 @@ class tmplink {
 
                 //file need to sync
                 if (rsp.status === 2) {
-                    $('#file_messenger_icon').html('<i class="fa-fw fa-solid fa-spinner fa-spin fa-4x"></i>');
+                    $('#file_messenger_icon').html('<img src="/img/loading.svg"  />');
                     $('#file_messenger_msg').html(this.languageData.upload_sync_onprogress);
                     $('#file_messenger').show();
                     gtag('config', 'UA-96864664-3', {
@@ -1363,7 +1363,7 @@ class tmplink {
 
         //新的方案
         $('.btn_download_' + ukey).attr('disabled', 'true');
-        $('.btn_download_' + ukey).html('<i class="fa-fw fa-light fa-spinner-third fa-pulse"></i>');
+        $('.btn_download_' + ukey).html('<img src="/img/loading.svg" height="19" />');
 
         this.recaptcha_do('download_req_on_list', (recaptcha) => {
             $.post(this.api_file, {
@@ -1768,7 +1768,7 @@ class tmplink {
 
     mr_file_addlist() {
         var params = get_url_params();
-        $('#mrfile_add_list').html('<i class="fa-4x fa-fw fa-solid fa-spinner fa-spin mx-auto"></i>');
+        $('#mrfile_add_list').html('<img src="/img/loading.svg"  />');
         $.post(this.api_mr, {
             action: 'file_addlist',
             token: this.api_token,
@@ -2180,7 +2180,7 @@ class tmplink {
             app.open('/login');
             return;
         }
-        $('#mr_list_refresh_icon').html('<i class="fa-fw fa-solid fa-spinner fa-spin"></i>');
+        $('#mr_list_refresh_icon').html('<img src="/img/loading.svg"  />');
         $('#mr_list_refresh_icon').attr('disabled', true);
         this.loading_box_on();
         $.post(this.api_mr, {

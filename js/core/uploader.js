@@ -88,7 +88,7 @@ class uploader {
     }
 
     upload_core(file_res, is_dir) {
-        $('#nav_upload_btn').html('<i class="fa-fw fa-solid fa-spinner fa-spin"></i>');
+        $('#nav_upload_btn').html('<img src="/img/loading.svg"  />');
         let file = file_res.file;
         let id = file_res.id;
         let model = this.upload_model_get();
