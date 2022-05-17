@@ -838,7 +838,7 @@ class tmplink {
                         $('.user-login').hide();
                     }
 
-                    $('#download_msg').html('<img src="/img/loading.svg" height="20"/> ' + this.languageData.status_file_1);
+                    $('#download_msg').html('<i class="fa-light fa-loader fa-spin fa-fw"></i> ' + this.languageData.status_file_1);
                     $('#download_msg').attr('class', 'badge badge-pill badge-info');
 
                     //请求下载地址
@@ -1363,7 +1363,7 @@ class tmplink {
 
         //新的方案
         $('.btn_download_' + ukey).attr('disabled', 'true');
-        $('.btn_download_' + ukey).html('<img src="/img/loading.svg" height="19" />');
+        $('.btn_download_' + ukey).html('<i class="fa-light fa-loader fa-spin fa-fw"></i>');
 
         this.recaptcha_do('download_req_on_list', (recaptcha) => {
             $.post(this.api_file, {
