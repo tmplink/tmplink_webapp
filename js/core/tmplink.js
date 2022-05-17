@@ -455,9 +455,12 @@ class tmplink {
 
     previewModel(ukey, name, id) {
         let url = 'https://static.ttttt.link/img-' + ukey + '-0x0.jpg';
-        $('#preview_img').attr('src', '/img/loading.svg');
+        $('#preview_img_loader').show();
+        $('#preview_img').hide();
         $.get(url, () => {
+            $('#preview_img_loader').hide();
             $('#preview_img').attr('src', url);
+            $('#preview_img').show();
         });
         let lastukey = $('#btn_preview_download').attr('data-ukey');
         $('#preview_title').html(name);
