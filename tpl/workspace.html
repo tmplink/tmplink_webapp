@@ -129,7 +129,7 @@
                                             <img src="/img/loading.png" style="height:220px;" />
                                         <% }else{ %>
                                             <a href="javascript:;" onclick="TL.previewModel('<% obj[x].ukey %>','<% obj[x].fname_ex %>',<% x %>)">
-                                                <img class='lazyload' src="/img/loading.svg" data-src="https://static.ttttt.link/img-<% obj[x].ukey %>-360x220.jpg" style="height:220px;border-radius: 10px;" />
+                                                <img class='lazyload' src="/img/loading.svg" data-src="https://static.<% TL.site_domain %>/img-<% obj[x].ukey %>-360x220.jpg" style="height:220px;border-radius: 10px;" />
                                             </a>  
                                         <% } %>
                                     </div>
@@ -137,7 +137,7 @@
                                         <div>
                                             <button  onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></button>
                                             <button  onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-pen-to-square"></i></button>
-                                            <button  data-clipboard-text="https://ttttt.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
+                                            <button  data-clipboard-text="https://<% TL.site_domain %>/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
                                             <button  id="btn-rm-file_<% obj[x].ukey %>" class="text-red btn btn-sm btn-light" onclick="TL.workspace_del('<% obj[x].ukey %>')"><i class="fa-fw fa-light fa-trash"></i></button>
                                         </div>
                                         <div class="mt-1">
@@ -221,7 +221,7 @@
                         <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].ukey %>">
                             <span class="mr-2"><% obj[x].fsize_formated %></span>
                             <button onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></button>
-                            <button data-clipboard-text="https://ttttt.link/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
+                            <button data-clipboard-text="https://<% TL.site_domain %>/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
                             <span class="btn-group">
                                 <div class="dropdown-toggle text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">

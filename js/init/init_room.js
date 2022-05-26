@@ -6,6 +6,7 @@ app.ready(() => {
         $('.nav_upload').attr('disabled', true);
         $('title').attr('i18n', 'title_room');
         $('meta[name=description]').attr('i18n', 'des_room');
+        app.languageBuild();
     });
 });
 

@@ -5,6 +5,7 @@ app.ready(() => {
         TL.workspace_navbar();
         $('title').attr('i18n', 'title_workspace');
         $('meta[name=description]').attr('i18n', 'des_workspace');
+        app.languageBuild();
     });
 
     TL.ready(() => {

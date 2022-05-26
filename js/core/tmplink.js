@@ -9,6 +9,7 @@ class tmplink {
     api_mr = this.api_url + '/meetingroom'
     api_toks = this.api_url + '/token'
     api_token = null
+    site_domain = null
 
     pageReady = false
     readyFunction = []
@@ -67,6 +68,8 @@ class tmplink {
         $('.workspace-navbar').hide();
         $('.workspace-nologin').hide();
 
+        this.setDomain();
+
         // this.navbar.init(this); //此函数需要等待语言包加载完毕才可执行
 
         this.upload_model_selected_val = localStorage.getItem('app_upload_model') === null ? 0 : localStorage.getItem('app_upload_model');
@@ -121,6 +124,18 @@ class tmplink {
                 e.preventDefault();
             }
         });
+    }
+
+    setDomain(){
+        //获取当前域名
+        this.site_domain = window.location.hostname=='ttttt.link'?'ttttt.link':'tmp.link';
+        if(this.site_domain==='tmp.link'){
+            $('.logo').attr('src','/img/logo/2.png');
+            $('#head_logo').html('tmp.link');
+        }else{
+            $('.logo').attr('src','/img/logo/logo2.svg');
+            $('#head_logo').html('ttttt.link');
+        }
     }
 
     setArea() {
@@ -279,7 +294,7 @@ class tmplink {
             this.alert(this.languageData.status_error_15);
             return false;
         }
-        window.open('https://ttttt.link/f/' + code);
+        window.open('https://'+this.site_domain+'/f/' + code);
     }
 
     loading_box_on() {
@@ -454,7 +469,7 @@ class tmplink {
     }
 
     previewModel(ukey, name, id) {
-        let url = 'https://static.ttttt.link/img-' + ukey + '-0x0.jpg';
+        let url = 'https://static.'+this.site_domain+'/img-' + ukey + '-0x0.jpg';
         $('#preview_img_loader').show();
         $('#preview_img').hide();
         $.get(url, () => {
@@ -705,7 +720,6 @@ class tmplink {
             default:
                 this.workspace_filelist_by_list(data, page);
         }
-        app.languageBuild();
     }
 
     workspace_btn_active_reset() {
@@ -879,7 +893,7 @@ class tmplink {
                             $('#download_msg').fadeOut();
 
                             //分享链接
-                            let share_url = 'https://ttttt.link/f/' + params.ukey;
+                            let share_url = 'https://'+this.site_domain+'/f/' + params.ukey;
 
                             //添加下载 src
                             $('.file_download_url').attr('href', download_url);
@@ -1172,12 +1186,12 @@ class tmplink {
     }
 
     openInMenubarXofIndex() {
-        this.openInMenubarX('https://ttttt.link');
+        this.openInMenubarX('https://'+this.site_domain);
     }
 
     openInMenubarXofFile() {
         let params = get_url_params();
-        this.openInMenubarX(`https://ttttt.link/f/${params.ukey}`);
+        this.openInMenubarX(`https://${this.site_domain}/f/${params.ukey}`);
     }
 
     openInMenubarX(link) {
@@ -2219,7 +2233,6 @@ class tmplink {
                 this.mr_file_by_list(data, page);
         }
         this.is_file_ok_check(data);
-        app.languageBuild();
     }
 
     room_total(mrid) {
@@ -2358,7 +2371,7 @@ class tmplink {
                 $('#pf_allow_upload').removeAttr('checked');
             }
 
-            $('#mr_copy').attr('data-clipboard-text', 'https://ttttt.link/room/' + rsp.data.mr_id);
+            $('#mr_copy').attr('data-clipboard-text', 'https://'+this.site_domain+'/room/' + rsp.data.mr_id);
             $('.room_title').html(rsp.data.name);
             $('#dir_list').show();
 
@@ -2387,6 +2400,8 @@ class tmplink {
             $('#room_back_btn').html(app.tpl('room_back_btn_tpl', {}));
             $('#room_loading').hide();
             $('#room_loaded').show();
+            //重新设定网页标题
+            document.title = rsp.data.name;
             app.linkRebind();
         });
     }
@@ -2632,7 +2647,7 @@ class tmplink {
     find_file() {
         var ukey = $('#ukey').val();
         if (ukey !== '') {
-            window.open('https://ttttt.link/f/' + ukey);
+            window.open('https://'+this.site_domain+'/f/' + ukey);
         }
     }
 

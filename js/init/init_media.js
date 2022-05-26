@@ -2,6 +2,7 @@ app.ready(() => {
     TL.ready(() => {
         $('title').attr('i18n', 'title_media');
         $('meta[name=description]').attr('i18n', 'des_media');
+        app.languageBuild();
     });
 
     TL.ready(() => {

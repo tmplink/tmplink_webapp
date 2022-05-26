@@ -370,13 +370,17 @@ class uploader {
     }
 
     upload_btn_status_update() {
-        //更新队列数
-        $('.upload_queue').fadeIn();
-        $('.upload_queue_counter').html(this.upload_queue_file.length);
+        if(this.upload_queue_file.length>0){
+            //更新队列数
+            $('.upload_queue').fadeIn();
+            $('.upload_queue_counter').html(this.upload_queue_file.length);
 
-        //更新已完成📖
-        $('.upload_count').fadeIn();
-        $('.upload_count').html(this.upload_count);
+            //更新已完成📖
+            $('.upload_count').fadeIn();
+            $('.upload_count').html(this.upload_count);
+        }else{
+            $('.upload_queue').fadeOut();
+        }
     }
 
     upload_progress(evt, id) {

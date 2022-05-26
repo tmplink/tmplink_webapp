@@ -5,9 +5,11 @@ class tools_file_manager {
     pre_op_list = null
     move_place = 'workspace'
     dir_tree_init = false
+    site_domain = null
 
     init(parent_op) {
         this.parent_op = parent_op;
+        this.site_domain = this.parent_op.site_domain;
     }
 
     checkbox_onclick_by_list(node) {
@@ -99,7 +101,7 @@ class tools_file_manager {
     checkbox_share_to_clicpboard(data) {
         let ctext = '';
         for (let x in data) {
-            ctext = ctext + '[' + data[x].title + '] https://ttttt.link/f/' + data[x].ukey + "\r";
+            ctext = ctext + '[' + data[x].title + '] https://'+this.site_domain+'/f/' + data[x].ukey + "\r";
         }
         this.parent_op.copyToClip(ctext);
     }
