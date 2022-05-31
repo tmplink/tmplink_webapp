@@ -152,12 +152,37 @@ class uploader {
                         'action': 'check_in_dir',
                         'token': this.parent_op.api_token
                     }, (rsp) => {
-                        if (rsp.status === 1) {
-                            this.upload_final(rsp, file, id, true);
-                            this.upload_processing = 0;
-                            this.upload_start();
-                        } else {
-                            this.upload_worker(f, id, filename);
+                        switch (rsp.status) {
+                            //文件尚未上传到服务器
+                            case 0:
+                                this.upload_worker(f, id, filename);
+                                break;
+                            //文件已被上传，并且已经在文件夹中
+                            case '1':
+                                this.upload_final(rsp, file, id, true);
+                                this.upload_processing = 0;
+                                this.upload_start();
+                                break;
+                            //文件已被上传,但是不在文件中，调用 prepare 处理
+                            case '2':
+                                $.post(this.parent_op.api_file, {
+                                    'sha1': sha1,
+                                    'filename': filename,
+                                    'model': this.upload_model_get(),
+                                    'mr_id': this.upload_mrid_get(),
+                                    'skip_upload': upload_skip,
+                                    'action': 'prepare_v4',
+                                    'token': this.parent_op.api_token
+                                }, (rsp) => {
+                                    if (rsp.status === 1) {
+                                        this.upload_final(rsp, file, id);
+                                        this.upload_processing = 0;
+                                        this.upload_start();
+                                    } else {
+                                        this.upload_worker(f, id, filename);
+                                    }
+                                }, 'json');
+                                break;
                         }
                     }, 'json');
                 } else {
@@ -167,7 +192,7 @@ class uploader {
                         'model': this.upload_model_get(),
                         'mr_id': this.upload_mrid_get(),
                         'skip_upload': upload_skip,
-                        'action': 'prepare_v5',
+                        'action': 'prepare_v4',
                         'token': this.parent_op.api_token
                     }, (rsp) => {
                         if (rsp.status === 1) {
@@ -408,7 +433,7 @@ class uploader {
         if (this.upload_queue_file.length > 0) {
             //更新队列数
             $('.upload_queue').fadeIn();
-            $('.upload_queue_counter').html(this.upload_queue_file.length+1);
+            $('.upload_queue_counter').html(this.upload_queue_file.length + 1);
 
             //更新已完成📖
             $('.upload_count').fadeIn();
