@@ -203,7 +203,7 @@
                             </div>
                         </label>
                     </div>
-                    <div class="select-box p-2 btn-point" id="dirsToUpload_label">
+                    <div class="select-box p-2 btn-point dirsToUpload_label">
                         <input type="file" id="dirsToUpload" style="display: none;" multiple directory webkitdirectory
                             mozdirectory onchange="TL.uploader.dir_selected(this);" />
                         <label for="dirsToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
@@ -221,6 +221,27 @@
                                 </div>
                             </div>
                         </label>
+                    </div>
+                    <div class="select-box p-2 btn-point">
+                        <div class="d-flex align-items-center">
+                            <span class="stamp stamp-md bg-blue mr-3">
+                                <i class="mt-1 fa-light fa-forward fa-fw"></i>
+                            </span>
+                            <div>
+                                <h4 class="m-0" i18n="model_title_skip">
+                                    .
+                                </h4>
+                                <small class="text-muted" i18n="model_title_skip_des">
+                                    .
+                                </small>
+                            </div>
+                            <span style="min-width: 40px;margin-left:auto;margin-right:0;">
+                                <small class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="skip_upload"
+                                        onclick="TL.uploader.skipUpload()">
+                                </small>
+                            </span>
+                        </div>
                     </div>
                     <div class="select-box p-2 btn-point" onclick="TL.cli_uploader_generator2();">
                         <div class="d-flex align-items-center">
@@ -628,7 +649,7 @@
             <div class="modal-body">
                 <div id="orders_loader">
                     <div class="text-center">
-                        <img src="/img/loading.svg"  height="80"/>
+                        <img src="/img/loading.svg" height="80" />
                     </div>
                 </div>
                 <div id="orders_loaded" style="display: none;">
@@ -684,7 +705,7 @@
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <img src="/img/loading.svg" id="preview_img_loader" height="80"/>
+                    <img src="/img/loading.svg" id="preview_img_loader" height="80" />
                     <img src="/img/loading.svg" id="preview_img" />
                 </div>
                 <div id="preview_download_1" class="col-12" style="display:none">
@@ -768,19 +789,19 @@
                 <code>
                     chrome://flags/#enable-parallel-downloading
                 </code>
-                <div class="text-center mt-2">
+                <div class=" text-center mt-2">
                     <img class="img-thumbnail" src="/img/pd.png" />
-                </div>
-                <hr>
-                <h3 i18n="model_upup_t2">.</h3>
-                <p i18n="model_upup_d2_1">.</p>
-                <p i18n="model_upup_d2_2">.</p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
-            </div>
+            <hr>
+            <h3 i18n="model_upup_t2">.</h3>
+            <p i18n="model_upup_d2_1">.</p>
+            <p i18n="model_upup_d2_2">.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
         </div>
     </div>
+</div>
 </div>
 
 <div class="modal fade" id="copyModal" data-backdrop="false">
@@ -864,13 +885,14 @@
         <div class="modal-content shadow-lg">
             <div class="modal-header">
                 <h4 class="modal-title">播放器</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="TL.media.video_pause()"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    onclick="TL.media.video_pause()"></button>
             </div>
             <div class="modal-body">
                 <!-- 预处理 -->
                 <div id="video_preload" class="text-center" style="padding-top: 20px;padding-bottom: 20px;">
                     <div id="video_status_icon_process">
-                        <img src="/img/loading.svg" height="80"  />
+                        <img src="/img/loading.svg" height="80" />
                     </div>
                     <div id="video_status_icon_fail">
                         <i class="fa fa-times-circle fa-3x fa-fw"></i>
@@ -885,7 +907,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel" onclick="TL.media.video_pause()">.</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel"
+                    onclick="TL.media.video_pause()">.</button>
             </div>
         </div>
     </div>
@@ -901,7 +924,8 @@
             </div>
             <div class="modal-body">
                 <!-- 存储 -->
-                <div class="row p-2 filelist-card shadow-sm mb-2 mx-1 btn-point" onclick="TL.buy_select_open('storage');">
+                <div class="row p-2 filelist-card shadow-sm mb-2 mx-1 btn-point"
+                    onclick="TL.buy_select_open('storage');">
                     <div class="col-12">
                         <div class="card-p3">
                             <div class="d-flex align-items-center">

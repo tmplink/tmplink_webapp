@@ -332,6 +332,8 @@
     "model_title_sr_only": "关闭",
     "model_title_upload_max": "最大限制",
     "model_title_upload_max_des": "单个文件最大支持 50GB。",
+    "model_title_skip": "跳过",
+    "model_title_skip_des": "当要上传的文件已经存在于当前文件夹中时，跳过。",
 
     "model_upload_cli_path": "文件路径",
     "model_upload_cli_copy": "生成上传命令",

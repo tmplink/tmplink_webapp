@@ -1,7 +1,9 @@
 class uploader {
     parent_op = null
 
-    upload_count = 0;
+    skip_upload = false
+    mr_id = 0
+    upload_count = 0
     upload_queue_id = 0
     upload_queue_file = []
     upload_processing = 0
@@ -15,6 +17,10 @@ class uploader {
 
     init(parent_op) {
         this.parent_op = parent_op;
+    }
+
+    skipUpload() {
+        this.skip_upload = ($('#skip_upload').is(':checked')) ? true : false;
     }
 
     upload_queue_clean() {
@@ -38,6 +44,9 @@ class uploader {
     }
 
     open(mr_id) {
+
+        this.mr_id = mr_id;
+
         if (!this.parent_op.logined) {
             this.parent_op.alert(this.parent_op.languageData.status_need_login);
             return false;
@@ -45,7 +54,7 @@ class uploader {
 
         if (mr_id == 0) {
             $('#dirsToUpload').hide();
-            $('#dirsToUpload_label').hide();
+            $('.dirsToUpload_label').hide();
         }
 
         // this.upload_model_selected(Number(this.upload_model_selected_val));
@@ -55,6 +64,11 @@ class uploader {
         //如果可用的私有空间不足，则隐藏选项
         if (this.storage_used >= this.storage) {
             $('.storage_needs').hide();
+        }
+
+        //skip upload
+        if (this.skip_upload) {
+            $('#skip_upload').attr('checked', 'checked');
         }
 
         $('#uploadModal').modal('show');
@@ -124,26 +138,47 @@ class uploader {
         }
         $('#uq_delete_' + id).hide();
         $('#uqnn_' + id).html(this.parent_op.languageData.upload_upload_prepare);
+
         this.upload_prepare(file, id, (f, sha1, id) => {
             //如果sha1不等于0，则调用另外的接口直接发送文件名信息。
             let filename = is_dir ? file.webkitRelativePath : file.name;
+            let upload_skip = this.skip_upload ? 1 : 0;
             if (sha1 !== 0) {
-                $.post(this.parent_op.api_file, {
-                    'sha1': sha1,
-                    'filename': filename,
-                    'model': this.upload_model_get(),
-                    'mr_id': this.upload_mrid_get(),
-                    'action': 'prepare_v4',
-                    'token': this.parent_op.api_token
-                }, (rsp) => {
-                    if (rsp.status === 1) {
-                        this.upload_final(rsp, file, id);
-                        this.upload_processing = 0;
-                        this.upload_start();
-                    } else {
-                        this.upload_worker(f, id, filename);
-                    }
-                }, 'json');
+                //如果启用了跳过文件
+                if (this.skip_upload) {
+                    $.post(this.parent_op.api_file, {
+                        'sha1': sha1,
+                        'mr_id': this.upload_mrid_get(),
+                        'action': 'check_in_dir',
+                        'token': this.parent_op.api_token
+                    }, (rsp) => {
+                        if (rsp.status === 1) {
+                            this.upload_final(rsp, file, id, true);
+                            this.upload_processing = 0;
+                            this.upload_start();
+                        } else {
+                            this.upload_worker(f, id, filename);
+                        }
+                    }, 'json');
+                } else {
+                    $.post(this.parent_op.api_file, {
+                        'sha1': sha1,
+                        'filename': filename,
+                        'model': this.upload_model_get(),
+                        'mr_id': this.upload_mrid_get(),
+                        'skip_upload': upload_skip,
+                        'action': 'prepare_v5',
+                        'token': this.parent_op.api_token
+                    }, (rsp) => {
+                        if (rsp.status === 1) {
+                            this.upload_final(rsp, file, id);
+                            this.upload_processing = 0;
+                            this.upload_start();
+                        } else {
+                            this.upload_worker(f, id, filename);
+                        }
+                    }, 'json');
+                }
             } else {
                 this.upload_worker(f, id);
             }
@@ -370,15 +405,15 @@ class uploader {
     }
 
     upload_btn_status_update() {
-        if(this.upload_queue_file.length>0){
+        if (this.upload_queue_file.length > 0) {
             //更新队列数
             $('.upload_queue').fadeIn();
-            $('.upload_queue_counter').html(this.upload_queue_file.length);
+            $('.upload_queue_counter').html(this.upload_queue_file.length+1);
 
             //更新已完成📖
             $('.upload_count').fadeIn();
             $('.upload_count').html(this.upload_count);
-        }else{
+        } else {
             $('.upload_queue').fadeOut();
         }
     }
@@ -444,7 +479,10 @@ class uploader {
         this.upload_start();
     }
 
-    upload_final(rsp, file, id) {
+    upload_final(rsp, file, id, skip) {
+        if (skip === undefined) {
+            skip = false;
+        }
         //$('#nav_upload_btn').html(this.parent_op.languageData.nav_upload);
         if (rsp.status === 1) {
             $('#uqnn_' + id).html(this.parent_op.languageData.upload_ok);
@@ -458,12 +496,14 @@ class uploader {
                     this.parent_op.workspace_filelist(0);
                 }
                 $('#uq_' + id).hide();
-                $('#upload_model_box_finish').append(app.tpl('upload_list_ok_tpl', {
-                    name: file.name,
-                    size: bytetoconver(file.size, true),
-                    ukey: rsp.data.ukey
-                }));
-                this.parent_op.btn_copy_bind();
+                if (skip === false) {
+                    $('#upload_model_box_finish').append(app.tpl('upload_list_ok_tpl', {
+                        name: file.name,
+                        size: bytetoconver(file.size, true),
+                        ukey: rsp.data.ukey
+                    }));
+                    this.parent_op.btn_copy_bind();
+                }
                 this.upload_btn_status_update();
             } else {
                 $('#uq_' + id).remove();
