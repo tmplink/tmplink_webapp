@@ -49,6 +49,8 @@ class tmplink {
     recaptcha_op = true
 
     constructor() {
+        this.setDomain();
+        
         this.app_init();
         this.api_init();
         //初始化管理器
@@ -67,8 +69,6 @@ class tmplink {
         //
         $('.workspace-navbar').hide();
         $('.workspace-nologin').hide();
-
-        this.setDomain();
 
         // this.navbar.init(this); //此函数需要等待语言包加载完毕才可执行
 
