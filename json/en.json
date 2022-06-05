@@ -1,4 +1,5 @@
 {
+    "copied" : "Copied!",
     "model_title_skip": "Skip",
     "model_title_skip_des": "Skip when the file to be uploaded already exists in the current folder.",
     "status_area": "This file is not available in this area",

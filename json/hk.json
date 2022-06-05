@@ -1,4 +1,5 @@
 {
+    "copied" : "已復制",
     "model_title_skip": "跳過",
     "model_title_skip_des": "當要上傳的已經存在於當前檔案夾中時，跳過。",
     "status_area": "此檔案在該地區不可用",

@@ -2676,7 +2676,7 @@ class tmplink {
         var clipboard = new Clipboard('.btn_copy');
         clipboard.on('success', (e) => {
             let tmp = $(e.trigger).html();
-            $(e.trigger).html('<i class="fa-light fa-circle-check fa-fw"></i>');
+            $(e.trigger).html(this.languageData.copied);
             setTimeout(() => {
                 $(e.trigger).html(tmp);
             }, 3000);
