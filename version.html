@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Limit</title>
+    <style>
+        html,body{
+            height: 100%;
+        }
+        .Aligner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .Aligner-item {
+            max-width: 50%;
+        }
+
+        .Aligner-item--top {
+            align-self: flex-start;
+        }
+
+        .Aligner-item--bottom {
+            align-self: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Aligner">
+        <div class="Aligner-item">
+            <div style="text-align: center;">
+                <img src="/img/globe-solid.svg" alt="no service" style="height: 40px;">
+            </div>
+            <h3 id="msg"></h3>
+        </div>
+    </div>
+    <script>
+        //检查浏览器语言，并显示对应的提示.
+        var lang = navigator.language || navigator.userLanguage;
+        var msg = "";
+
+        msg = 'App is not available on this browser, please update to the latest version of your browser.';
+        if (lang.indexOf('zh') > -1) {
+            msg = '很抱歉，此浏览器不受支持，请升级您的浏览器。';
+        }
+        if (lang.indexOf('ja') > -1) {
+            msg = 'このブラウザではアプリをご利用いただけませんので、最新のブラウザにアップデートしてください。';
+        }
+
+        document.getElementById('msg').innerHTML = msg;
+    </script>
+</body>
+
+</html>
