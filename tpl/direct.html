@@ -1,0 +1,184 @@
+<div id="tpl_header"></div>
+<div class="container d-flex flex-grow-1 flex-column">
+    <div id="download_queue" class="card mt-4 shadow" style="display: none;">
+        <div id="filelist_model" class="card-body">
+            <div id="download_queue_list">
+            </div>
+        </div>
+    </div>
+    <div id="filelist" class="card mt-4 shadow" style="display: none;">
+        <div class="card-header pt-3">
+            <div class="mx-auto text-center mt-3">
+                <i class="fa-4x fa-light fa-share-nodes"></i>
+                <div class="lead mt-2" id="direct_total"></div>
+            </div>
+        </div>
+        <div id="filelist_model" class="card-body">
+
+            <div class="card shadow-sm p-3">
+                <!--[搜索栏]-->
+                <form autocomplete="off">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary" type="button" onclick="TL.direct_filelist(0);"
+                                i18n="search_btn">.</button>
+                        </div>
+                        <input type="search" id="direct_search" class="form-control" placeholder="." i18n="search_plh"
+                            onkeyup="if(event.keyCode==13)TL.direct_filelist(0);"
+                            style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
+                    </div>
+                    <input style="display:none;">
+                </form>
+
+                <!--[主要控制器]-->
+                <div class="mb-1">
+                    <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.direct_filelist(0);">
+                        <i class="fa-light fa-rotate fa-fw" id="filelist_refresh_icon"></i>
+                    </button>
+                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
+                        id="filelist_filter">
+                        <i class="fa-fw fa-light fa-list"></i>
+                        <span i18n="sort_title" class="d-none d-sm-inline">.</span>
+                    </button>
+                </div>
+
+                <!--[选择器]-->
+                <div>
+                    <button onclick="TL.file_manager.checkbox_select_all();"
+                        class="btn btn-light text-azure btn-sm mr-1 mt-1">
+                        <i class="fa-solid fa-square-check fa-fw"></i>
+                        <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
+                    </button>
+                    <button onclick="TL.file_manager.checkbox_select_none();"
+                        class="btn btn-light text-azure btn-sm mr-1 mt-1">
+                        <i class="fa-light fa-square-check fa-fw"></i>
+                        <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa-light fa-list-check fa-fw"></i> <span i18n="on_select">.</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <button class="dropdown-item" onclick="TL.file_manager.checkbox_delete()">
+                                <i class="fa-fw fa-light fa-trash"></i>
+                                <span i18n="on_select_delete">.</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="direct_filelist"></div>
+
+            <div class="no_photos" style="margin-top: 100px;margin-bottom: 100px;display: none;">
+                <div class="text-center mb-4">
+                    <i class="fa-fw fa-4x fa-light fa-camera"></i>
+                </div>
+                <div class="text-center" i18n="page_no_photos">.</div>
+            </div>
+            <div class="no_files" style="margin-top: 100px;margin-bottom: 100px;display: none;">
+                <div class="text-center mb-4">
+                    <i class="fa-fw fa-light fa-folder-open fa-4x"></i>
+                </div>
+                <div class="text-center" i18n="page_no_files">.</div>
+            </div>
+
+            <script type="text/template" id="direct_filelist_list_tpl">
+                <% for (var x in obj) { %>
+                    <div class="row mx-0 mb-1 p-1 line list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
+                        <div class="col-12 col-md-8 col-lg-7 d-flex align-items-center listfontweight filename">
+                            <div class="row">
+                                <div class="col-12 filename">
+                                    <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
+                                    <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" class="text-azure mr-1" target="_blank">
+                                        <% obj[x].fname %>
+                                    </a>
+
+                                    <% if(TL.media.is_allow(obj[x].fname)){ %>
+                                        <!-- <span class="badge badge-pill badge-primary btn-point" onclick="TL.media.video_can_play_open('<% obj[x].ukey %>')">
+                                            <i class="fa-fw fa-light fa-play-circle"></i>
+                                        </span> -->
+                                    <% } %>  
+                                    
+                                    <% if(obj[x].model!=99){ %>
+                                        <!--[在大屏幕上显示]-->
+                                        <span class="d-none d-lg-inline">
+                                            <i class="fa-fw fa-light fa-stopwatch"></i> 
+                                            <span class="lefttime-remainder" id="wd_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
+                                        </span>
+                                    <% } %>
+                                    <% if(obj[x].like>0){ %>
+                                        <span class="badge badge-pill badge-primary">
+                                            <i class="fa-fw fa-solid fa-circle-star text-yellow"></i>
+                                            <% obj[x].like %>
+                                        </span>
+                                    <% } %>
+                                    <% if(obj[x].dir_name!=null){ %>
+                                        <div class="d-none d-lg-block">
+                                            <i class="fa-light fa-folder-open fa-fw text-cyan"></i>
+                                            <a href="/room&mrid=<% obj[x].mrid %>" tmpui-app="true"> <% obj[x].dir_name %></a>
+                                        </div>
+                                        <span class="d-inline d-lg-none">
+                                            <i class="fa-light fa-folder-open fa-fw text-cyan"></i>
+                                            <a href="/room&mrid=<% obj[x].mrid %>" tmpui-app="true"> <% obj[x].dir_name %></a>
+                                        </span>
+                                    <% } %>
+                                    <% if(obj[x].model!=99){ %>
+                                        <!--[在小屏幕上显示]-->
+                                        <span class="d-inline d-lg-none">
+                                            <i class="fa-fw fa-light fa-stopwatch"></i> 
+                                            <span class="lefttime-remainder" id="wm_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
+                                        </span>
+                                    <% } %>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-2 my-1 d-flex align-items-center justify-content-end">
+                            <% obj[x].ctime %>
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].ukey %>">
+                            <span class="mr-2"><% obj[x].fsize_formated %></span>
+                            <button onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></button>
+                            <button data-clipboard-text="https://<% TL.site_domain %>/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
+                            <span class="btn-group">
+                                <div class="dropdown-toggle text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa-light fa-ellipsis fa-fw"></i>
+                                </div>
+                                <div class="dropdown-menu dropdown-menu-right shadow">
+                                    <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="dropdown-item">
+                                        <i class="fa-fw fa-light fa-pen-to-square"></i>
+                                        <span i18n="menu_rename">.</span>
+                                    </button>
+                                    <button id="btn-rm-file_<% obj[x].ukey %>" class="dropdown-item" onclick="TL.direct_del('<% obj[x].ukey %>')">
+                                        <i class="fa-fw fa-light fa-trash"></i>
+                                        <span i18n="menu_delete">.</span>
+                                    </button>
+                                </div>
+                            </span>
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-3 mt-2 d-flex flex-row align-items-center justify-content-center file_relay_<% obj[x].ukey %>">
+                            <div class="d-block w-100">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
+                                        <% TL.languageData.upload_sync_onprogress %>:<% obj[x].fsize_formated %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-2 download_progress_bar_<% obj[x].ukey %> mb-1" style="display:none">
+                            <div class="progress" style="height: 5px;">
+                                <div class="progress-bar bg-success download_progress_bar_set_<% obj[x].ukey %>" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="tpl_footer"></div>
+<div id="tpl_model"></div>
