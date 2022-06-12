@@ -5,6 +5,7 @@ class tmplink {
     api_file = this.api_url + '/file'
     api_pay = this.api_url + '/pay'
     api_user = this.api_url + '/user'
+    api_direct = this.api_url + '/direct'
     api_media = this.api_url + '/media'
     api_mr = this.api_url + '/meetingroom'
     api_toks = this.api_url + '/token'
@@ -59,10 +60,12 @@ class tmplink {
         this.navbar = new navbar;
         this.uploader = new uploader;
         this.giftcard = new giftcard;
+        this.direct = new direct;
 
         this.giftcard.init(this);
         this.file_manager.init(this);
         this.media.init(this);
+        this.direct.init(this);
         this.uploader.init(this);
         this.setArea();
 
