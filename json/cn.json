@@ -494,6 +494,16 @@
 
     "confirm_delete": "确定要删除吗？",
 
+    "direct_unbind_domain":"尚未绑定域名",
+    "direct_unbind_notice":"请先绑定域名，然后才能使用直链分享功能。",
+    "direct_total_downloads":"下载次数",
+    "direct_total_transfer":"传输",
+    "direct_quota":"配额",
+    "direct_btn_bind_domain":"绑定域名",
+    "direct_btn_bind_prompt_msg":"请输入要绑定的域名",
+    "direct_btn_bind_prompt_error":"无法使用此域名",
+    "direct_btn_bind_prompt_ok":"已完成绑定，现在，您可以在其它页面生成直链，并在这里管理生成的直链。",
+
     "menu_delete":"删除文件",
     "menu_rename":"重命名",
     "menu_add_to_media_video":"加入到媒体库",

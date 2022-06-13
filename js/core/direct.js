@@ -3,7 +3,7 @@ class direct {
     parent_op = null
     domain = null
     total_transfer = 0
-    total_downlaods = 0
+    total_downloads = 0
     quota = 0
 
     page_number = 0
@@ -14,10 +14,35 @@ class direct {
         this.parent_op = parent_op;
     }
 
-    navbar() {
-        if (this.parent_op.logined == 1) {
-            $('.workspace-navbar').show();
+    /**
+     * 初始化模块信息
+     */
+     prepare() {
+        if (this.parent_op.isLogin()===false) {
+            return false;
         }
+        $.post(this.parent_op.api_direct, {
+            'action': 'details',
+            'token': this.parent_op.api_token
+        }, (rsp) => {
+            this.domain = rsp.data.domain;
+            this.quota = rsp.data.quota;
+            this.total_downloads = rsp.data.total_downloads;
+            this.total_transfer = rsp.data.total_transfer;
+
+            let quota = bytetoconver(this.quota,true);
+            let total_transfer = bytetoconver(this.total_transfer,true);
+
+
+            if (this.domain == 0) {
+                $('#direct_bind_domain').html(this.parent_op.languageData.direct_unbind_domain);
+                $('#diredirect_bind_notice').html(this.parent_op.languageData.direct_unbind_notice);
+            }else{
+                $('#direct_bind_domain').html(this.domain);
+                console.log(this.total_downloads);
+                $('#diredirect_bind_notice').html(`${this.parent_op.languageData.direct_quota}：${quota}，${this.parent_op.languageData.direct_total_downloads}：${this.total_downloads}，${this.parent_op.languageData.direct_total_transfer}：${total_transfer}`);
+            }
+        }, 'json');
     }
 
     /**
@@ -158,37 +183,25 @@ class direct {
     }
 
     /**
-     * 初始化模块信息
-     */
-    prepare() {
-        if (this.parent_op.logined == 0) {
-            return false;
-        }
-        $.post(this.parent_op.api_direct, {
-            'action': 'details',
-            'token': this.parent_op.api_token
-        }, (rsp) => {
-            this.domain = rsp.data.domain;
-            this.quota = rsp.data.quota;
-            this.total_downlaods = rsp.data.total_downlaods;
-            this.total_transfer = rsp.data.total_transfer;
-        }, 'json');
-    }
-
-    /**
      * 设置域名
      */
     setDomain() {
-        let domain = $('#direct_domain').val();
-        $.post(this.parent_op.api_file, {
+        let domain = prompt(this.parent_op.languageData.direct_btn_bind_prompt_msg);
+        //检查输入的是否是正确的域名
+        if (domain == null) {
+            return false;
+        }
+        $.post(this.parent_op.api_direct, {
             'action': 'direct_set_domain',
             'domain': domain,
             'token': this.parent_op.api_token
         }, (rsp) => {
             if (rsp.status == 1) {
-                alert('ok');
+                alert(this.parent_op.languageData.direct_btn_bind_prompt_ok);
+                $('#direct_bind_domain').html(domain);
+                $('#diredirect_bind_notice').html('');
             } else {
-                alert('fail');
+                alert(this.parent_op.languageData.direct_btn_bind_prompt_error);
             }
         }), 'json';
     }
