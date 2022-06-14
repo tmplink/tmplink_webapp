@@ -101,13 +101,11 @@ class tmplink {
                         }, (rsp) => {
                             this.api_token = rsp.data;
                             localStorage.setItem('app_token', rsp.data);
-                            this.readyExec();
                             this.details_init();
                         });
                     });
                 } else {
                     this.api_token = token;
-                    this.readyExec();
                     this.details_init();
                 }
             });
@@ -217,6 +215,9 @@ class tmplink {
             this.get_details_do = true;
             this.storage_status_update();
             this.head_set();
+            //初始化直链
+            this.direct.init_details();
+            this.readyExec();
         });
     }
 

@@ -1,10 +1,11 @@
 class direct {
 
     parent_op = null
-    domain = null
+    domain = 0
     total_transfer = 0
     total_downloads = 0
     quota = 0
+    set = false
 
     page_number = 0
     list_Data = []
@@ -14,10 +15,7 @@ class direct {
         this.parent_op = parent_op;
     }
 
-    /**
-     * 初始化模块信息
-     */
-     prepare() {
+    init_details(){
         if (this.parent_op.isLogin()===false) {
             return false;
         }
@@ -29,18 +27,53 @@ class direct {
             this.quota = rsp.data.quota;
             this.total_downloads = rsp.data.total_downloads;
             this.total_transfer = rsp.data.total_transfer;
+            this.set = 1;
+        }, 'json');
+    }
 
-            let quota = bytetoconver(this.quota,true);
-            let total_transfer = bytetoconver(this.total_transfer,true);
+    /**
+     * 初始化模块信息
+     */
+     prepare() {
+        if(this.set===false){
+            setTimeout(()=>{
+                this.prepare();
+            },1000);
+        }
+        let quota = bytetoconver(this.quota,true);
+        let total_transfer = bytetoconver(this.total_transfer,true);
 
 
-            if (this.domain == 0) {
-                $('#direct_bind_domain').html(this.parent_op.languageData.direct_unbind_domain);
-                $('#diredirect_bind_notice').html(this.parent_op.languageData.direct_unbind_notice);
+        if (this.domain == 0) {
+            $('#direct_bind_domain').html(this.parent_op.languageData.direct_unbind_domain);
+            $('#diredirect_bind_notice').html(this.parent_op.languageData.direct_unbind_notice);
+        }else{
+            $('#direct_bind_domain').html(this.domain);
+            console.log(this.total_downloads);
+            $('#diredirect_bind_notice').html(`${this.parent_op.languageData.direct_quota}：${quota}，${this.parent_op.languageData.direct_total_downloads}：${this.total_downloads}，${this.parent_op.languageData.direct_total_transfer}：${total_transfer}`);
+        }
+    }
+
+    is_allow(){
+        if(this.domain == 0){
+            return false;
+        }
+        return true;
+    }
+
+    addLink(ukey){
+        $.post(this.parent_op.api_direct, {
+            'action': 'add_link',
+            'ukey': ukey,
+            'token': this.parent_op.api_token
+        }, (rsp) => {
+            if(rsp.status==1){
+                //提示添加成功，并复制到剪贴板
+                alert(this.parent_op.languageData.direct_add_link_success);
+                console.log(`http://${this.domain}/${rsp.data}`);
+                this.parent_op.copyToClip(`http://${this.domain}/${rsp.data}`);
             }else{
-                $('#direct_bind_domain').html(this.domain);
-                console.log(this.total_downloads);
-                $('#diredirect_bind_notice').html(`${this.parent_op.languageData.direct_quota}：${quota}，${this.parent_op.languageData.direct_total_downloads}：${this.total_downloads}，${this.parent_op.languageData.direct_total_transfer}：${total_transfer}`);
+                alert(this.parent_op.languageData.status_error_0);
             }
         }, 'json');
     }
