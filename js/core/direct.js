@@ -15,8 +15,9 @@ class direct {
         this.parent_op = parent_op;
     }
 
-    init_details(){
+    init_details(cb){
         if (this.parent_op.isLogin()===false) {
+            cb();
             return false;
         }
         $.post(this.parent_op.api_direct, {
@@ -28,6 +29,7 @@ class direct {
             this.total_downloads = rsp.data.total_downloads;
             this.total_transfer = rsp.data.total_transfer;
             this.set = 1;
+            cb();
         }, 'json');
     }
 
@@ -75,6 +77,16 @@ class direct {
             }else{
                 alert(this.parent_op.languageData.status_error_0);
             }
+        }, 'json');
+    }
+
+    delLink(direct_key){
+        $.post(this.parent_op.api_direct, {
+            'action': 'del_link',
+            'direct_key': direct_key,
+            'token': this.parent_op.api_token
+        }, () => {
+            $(`.file_unit_${direct_key}`).remove(); 
         }, 'json');
     }
 
@@ -140,7 +152,7 @@ class direct {
             this.loading_box_off();
             //cancel
             if (rsp.status == 0 || rsp.data.length < 50) {
-                this.dir_list_autoload_disabled();
+                this.list_autoload_disabled();
             }
         });
     }

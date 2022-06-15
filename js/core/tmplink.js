@@ -216,8 +216,9 @@ class tmplink {
             this.storage_status_update();
             this.head_set();
             //初始化直链
-            this.direct.init_details();
-            this.readyExec();
+            this.direct.init_details(()=>{
+                this.readyExec();
+            });       
         });
     }
 

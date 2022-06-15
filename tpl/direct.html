@@ -86,7 +86,7 @@
 
             <script type="text/template" id="direct_filelist_list_tpl">
                 <% for (var x in obj) { %>
-                    <div class="row mx-0 mb-1 p-1 line list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
+                    <div class="row mx-0 mb-1 p-1 line list-bar file_unit_<% obj[x].direct_key %>" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
                         <div class="col-12 col-md-8 col-lg-7 d-flex align-items-center listfontweight filename">
                             <div class="row">
                                 <div class="col-12 filename">
@@ -97,7 +97,7 @@
                                         <!--[在大屏幕上显示]-->
                                         <span class="d-none d-lg-inline">
                                             <i class="fa-fw fa-light fa-stopwatch"></i> 
-                                            <span class="lefttime-remainder" id="wd_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
+                                            <span class="lefttime-remainder" id="wd_<% obj[x].direct_key %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
                                         </span>
                                     <% } %>
 
@@ -123,7 +123,7 @@
                                         <!--[在小屏幕上显示]-->
                                         <span class="d-inline d-lg-none">
                                             <i class="fa-fw fa-light fa-stopwatch"></i> 
-                                            <span class="lefttime-remainder" id="wm_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
+                                            <span class="lefttime-remainder" id="wm_<% obj[x].direct_key %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
                                         </span>
                                     <% } %>
                                 </div>
@@ -133,11 +133,11 @@
                         <div class="col-12 col-md-4 col-lg-2 my-1 d-flex align-items-center justify-content-end">
                             <% obj[x].ctime %>
                         </div>
-                        <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].ukey %>">
+                        <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].direct_key %>">
                             <span class="mr-2"><% obj[x].fsize_formated %></span>
-                            <button onclick="TL.direct.download('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></button>
-                            <button data-clipboard-text="https://<% TL.site_domain %>/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
-                            <button id="btn-rm-file_<% obj[x].ukey %>" class="btn btn-sm btn-outline-danger mx-1" onclick="TL.direct_del('<% obj[x].ukey %>')">
+                            <a href="http://<% TL.direct.domain %>/file-<% obj[x].direct_key %>" target="_blank" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></a>
+                            <button data-clipboard-text="http://<% TL.direct.domain %>/file-<% obj[x].direct_key %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
+                            <button id="btn-rm-file_<% obj[x].direct_key %>" class="btn btn-sm btn-outline-danger mx-1" onclick="TL.direct.delLink('<% obj[x].direct_key %>')">
                                 <i class="fa-fw fa-light fa-trash"></i>
                             </button>
                         </div>
