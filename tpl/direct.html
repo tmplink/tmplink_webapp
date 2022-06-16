@@ -30,10 +30,14 @@
                     <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.direct.filelist(0);">
                         <i class="fa-light fa-rotate fa-fw" id="filelist_refresh_icon"></i>
                     </button>
-                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.setDomain();"
-                        id="filelist_filter">
+                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.setDomain();">
                         <i class="fa-fw fa-light fa-signal-stream"></i>
                         <span i18n="direct_btn_bind_domain" class="d-none d-sm-inline">.</span>
+                    </button>
+                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1"
+                        onclick="$('#directIntroModal').modal('show');">
+                        <i class="fa-fw fa-light fa-book-open"></i>
+                        <span i18n="direct_btn_intro" class="d-none d-sm-inline">.</span>
                     </button>
                     <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
                         id="filelist_filter">
@@ -144,6 +148,26 @@
                     </div>
                 <% } %>
             </script>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="directIntroModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="direct_intro_modal_title">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p i18n="direct_intro_modal_body_1">
+                    .
+                </p>
+                <p>
+                <div i18n="direct_intro_modal_body_2">.</div>
+                <div i18n="direct_intro_modal_body_3">.</div>
+                </p>
+            </div>
         </div>
     </div>
 </div>
