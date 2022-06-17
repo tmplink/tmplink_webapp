@@ -1591,6 +1591,9 @@ class tmplink {
             if (this.buy_type == 'media') {
                 this.media_buy_modal(type);
             }
+            if (this.buy_type == 'direct') {
+                this.direct_buy_modal(type);
+            }
         }, 500);
 
     }
@@ -1607,6 +1610,20 @@ class tmplink {
         $('#hs_price_of_' + type).show();
 
         $('#highspeedModal').modal('show');
+    }
+
+    direct_buy_modal(type) {
+        if (this.logined === 0) {
+            this.alert(this.languageData.status_need_login);
+            return false;
+        }
+
+        //隐藏不同类型币种的价格列表
+        $('.direct_quota_price_list').hide();
+        //显示当前币种的价格列表
+        $('#direct_quota_opt_' + type).show();
+
+        $('#directQuotaModal').modal('show');
     }
 
     hs_download_file(filename) {
@@ -1643,6 +1660,31 @@ class tmplink {
                 }, 'json');
             }
         }, 'json');
+    }
+
+    direct_quota_buy() {
+        if (this.logined === 0) {
+            this.alert(this.this.languageData.status_need_login);
+            return false;
+        }
+
+        let price = 0;
+        let time = 1;
+        let code = 0;
+
+        if (this.buy_currency == 'cny') {
+            code = $('#dq_code_cny').val();
+            price = $("#dq_code_cny option:selected").attr('data-price');
+        } else {
+            code = $('#dq_code_usd').val();
+            price = $("#dq_code_usd option:selected").attr('data-price');
+        }
+
+        if (this.buy_currency == 'cny') {
+            window.open("https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=direct&prepare_times=" + time, '_blank');
+        } else {
+            window.open('https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=direct&prepare_code=' + code + '&prepare_times=' + time, '_blank');
+        }
     }
 
     hs_download_buy() {
