@@ -27,7 +27,7 @@
     <script type="text/javascript" src="./tmpui.js?v=27"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 817,
+            "version": 818,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "googleAnalytics": "UA-96864664-3",
@@ -58,6 +58,7 @@
                     "/js/core/tools_file_manager.js": { "type": "js", "reload": false },
                     "/js/core/function.js": { "type": "js", "reload": false },
                     "/js/core/media.js": { "type": "js", "reload": false },
+                    "/js/core/direct.js": { "type": "js", "reload": false },
                     "/js/core/navbar.js": { "type": "js", "reload": false },
                     "/js/core/uploader.js": { "type": "js", "reload": false },
                     "/js/core/giftcard.js": { "type": "js", "reload": false },
@@ -153,6 +154,16 @@
                         "/css/index.css": { "type": "css" },
                         "/js/init/init_workspace.js": { "type": "js" },
                         "/tpl/workspace.html": { "type": "html", "target": { "type": "body" } }
+                    }
+                },
+                "/direct": {
+                    "title": "TMP.link - Direct",
+                    "preload": ["init"],
+                    "append": ["tmplink"],
+                    "body": {
+                        "/css/index.css": { "type": "css" },
+                        "/js/init/init_direct.js": { "type": "js" },
+                        "/tpl/direct.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
                 "/dir": {

@@ -5,6 +5,7 @@ class tmplink {
     api_file = this.api_url + '/file'
     api_pay = this.api_url + '/pay'
     api_user = this.api_url + '/user'
+    api_direct = this.api_url + '/direct'
     api_media = this.api_url + '/media'
     api_mr = this.api_url + '/meetingroom'
     api_toks = this.api_url + '/token'
@@ -59,10 +60,12 @@ class tmplink {
         this.navbar = new navbar;
         this.uploader = new uploader;
         this.giftcard = new giftcard;
+        this.direct = new direct;
 
         this.giftcard.init(this);
         this.file_manager.init(this);
         this.media.init(this);
+        this.direct.init(this);
         this.uploader.init(this);
         this.setArea();
 
@@ -98,13 +101,11 @@ class tmplink {
                         }, (rsp) => {
                             this.api_token = rsp.data;
                             localStorage.setItem('app_token', rsp.data);
-                            this.readyExec();
                             this.details_init();
                         });
                     });
                 } else {
                     this.api_token = token;
-                    this.readyExec();
                     this.details_init();
                 }
             });
@@ -214,6 +215,10 @@ class tmplink {
             this.get_details_do = true;
             this.storage_status_update();
             this.head_set();
+            //初始化直链
+            this.direct.init_details(()=>{
+                this.readyExec();
+            });       
         });
     }
 
@@ -1586,6 +1591,9 @@ class tmplink {
             if (this.buy_type == 'media') {
                 this.media_buy_modal(type);
             }
+            if (this.buy_type == 'direct') {
+                this.direct_buy_modal(type);
+            }
         }, 500);
 
     }
@@ -1602,6 +1610,20 @@ class tmplink {
         $('#hs_price_of_' + type).show();
 
         $('#highspeedModal').modal('show');
+    }
+
+    direct_buy_modal(type) {
+        if (this.logined === 0) {
+            this.alert(this.languageData.status_need_login);
+            return false;
+        }
+
+        //隐藏不同类型币种的价格列表
+        $('.direct_quota_price_list').hide();
+        //显示当前币种的价格列表
+        $('#direct_quota_opt_' + type).show();
+
+        $('#directQuotaModal').modal('show');
     }
 
     hs_download_file(filename) {
@@ -1638,6 +1660,31 @@ class tmplink {
                 }, 'json');
             }
         }, 'json');
+    }
+
+    direct_quota_buy() {
+        if (this.logined === 0) {
+            this.alert(this.this.languageData.status_need_login);
+            return false;
+        }
+
+        let price = 0;
+        let time = 1;
+        let code = 0;
+
+        if (this.buy_currency == 'cny') {
+            code = $('#dq_code_cny').val();
+            price = $("#dq_code_cny option:selected").attr('data-price');
+        } else {
+            code = $('#dq_code_usd').val();
+            price = $("#dq_code_usd option:selected").attr('data-price');
+        }
+
+        if (this.buy_currency == 'cny') {
+            window.open("https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=direct&prepare_times=" + time, '_blank');
+        } else {
+            window.open('https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=direct&prepare_code=' + code + '&prepare_times=' + time, '_blank');
+        }
     }
 
     hs_download_buy() {
