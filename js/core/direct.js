@@ -72,8 +72,8 @@ class direct {
             if(rsp.status==1){
                 //提示添加成功，并复制到剪贴板
                 alert(this.parent_op.languageData.direct_add_link_success);
-                console.log(`http://${this.domain}/${rsp.data}`);
-                this.parent_op.copyToClip(`http://${this.domain}/${rsp.data}`);
+                console.log(`http://${this.domain}/file-${rsp.data}`);
+                this.parent_op.copyToClip(`http://${this.domain}/file-${rsp.data}`);
             }else{
                 alert(this.parent_op.languageData.status_error_0);
             }
