@@ -155,7 +155,7 @@ class uploader {
                         switch (rsp.status) {
                             //文件尚未上传到服务器
                             case 0:
-                                this.upload_worker(f, id, filename);
+                                this.upload_worker(f, sha1, id, filename);
                                 break;
                             //文件已被上传，并且已经在文件夹中
                             case '1':
@@ -179,7 +179,7 @@ class uploader {
                                         this.upload_processing = 0;
                                         this.upload_start();
                                     } else {
-                                        this.upload_worker(f, id, filename);
+                                        this.upload_worker(f, sha1, id, filename);
                                     }
                                 }, 'json');
                                 break;
@@ -200,12 +200,12 @@ class uploader {
                             this.upload_processing = 0;
                             this.upload_start();
                         } else {
-                            this.upload_worker(f, id, filename);
+                            this.upload_worker(f, sha1, id, filename);
                         }
                     }, 'json');
                 }
             } else {
-                this.upload_worker(f, id);
+                this.upload_worker(f, sha1, id, filename);
             }
         });
     }
@@ -272,54 +272,110 @@ class uploader {
         reader.readAsArrayBuffer(file.slice(0, (1024 * 1024 * 32)));
     }
 
-    upload_worker(file, id, filename) {
+    upload_worker(file, sha1, id, filename) {
         this.parent_op.recaptcha_do('upload_request_select', (captcha) => {
             $.post(this.parent_op.api_url_upload, {
                 'token': this.parent_op.api_token,
-                'action': 'upload_request_select',
+                'action': 'upload_request_select2',
                 'filesize': file.size,
                 'captcha': captcha,
-                'sync': '1'
             }, (rsp) => {
                 if (rsp.status == 1) {
-                    var fd = new FormData();
-                    fd.append("file", file);
-                    fd.append("filename", filename);
-                    fd.append("utoken", rsp.data.utoken);
-                    fd.append("model", this.upload_model_get());
-                    fd.append("mr_id", this.upload_mrid_get());
-                    fd.append("token", this.parent_op.api_token);
-                    this.upload_s2_status[id] = 0;
-                    var xhr = new XMLHttpRequest();
-                    xhr.upload.addEventListener("progress", (evt) => {
-                        this.upload_progress(evt, id)
-                    }, false);
-                    xhr.addEventListener("load", (evt) => {
-                        this.upload_complete(evt, file, id)
-                    }, false);
-                    xhr.addEventListener("error", (evt) => {
-                        //add retry
-                        if (this.download_retry < this.download_retry_max) {
-                            this.download_retry++;
-                            setTimeout(() => {
-                                this.upload_worker(file, id, filename);
-                            }, 1000);
-                        } else {
-                            this.download_retry = 0;
-                            this.upload_failed(evt, id);
-                        }
-                    }, false);
-                    xhr.addEventListener("abort", (evt) => {
-                        this.upload_canceled(evt, id)
-                    }, false);
-                    xhr.open("POST", rsp.data.uploader);
-                    xhr.send(fd);
+                    let api_sync = rsp.data.uploader + '/app/upload_sync';
+                    //文件小于 8 MB，直接上传
+                    if (file.size <= (1024 * 1024 * 8)) {
+                        var fd = new FormData();
+                        fd.append("file", file);
+                        fd.append("filename", filename);
+                        fd.append("utoken", rsp.data.utoken);
+                        fd.append("model", this.upload_model_get());
+                        fd.append("mr_id", this.upload_mrid_get());
+                        fd.append("token", this.parent_op.api_token);
+                        this.upload_s2_status[id] = 0;
+                        var xhr = new XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", (evt) => {
+                            this.upload_progress(evt, id)
+                        }, false);
+                        xhr.addEventListener("load", (evt) => {
+                            this.upload_complete(evt, file, id)
+                        }, false);
+                        xhr.addEventListener("error", (evt) => {
+                            //add retry
+                            if (this.download_retry < this.download_retry_max) {
+                                this.download_retry++;
+                                setTimeout(() => {
+                                    this.upload_worker(file, sha1, id, filename);
+                                }, 1000);
+                            } else {
+                                this.download_retry = 0;
+                                this.upload_failed(evt, id);
+                            }
+                        }, false);
+                        xhr.addEventListener("abort", (evt) => {
+                            this.upload_canceled(evt, id)
+                        }, false);
+                        xhr.open("POST", api_sync);
+                        xhr.send(fd);
+                    } else {
+                        let api_sync = rsp.data.uploader + '/app/upload_slice';
+                        this.worker_slice(api_sync, rsp.data.utoken, sha1, file, id);
+                    }
                 } else {
                     //无法获得可用的上传服务器
                     this.parent_op.alert('上传失败，无法获得可用的服务器。');
                 }
             });
         });
+    }
+
+    /**
+     * 分片上传
+     * @param {*} file 
+     * @param {*} id 
+     * @param {*} filename 
+     */
+    worker_slice(server, utoken, sha1, file, id) {
+        //查询分片信息
+        $.post(server, {
+            'token': this.parent_op.api_token,
+            'action': 'prepare',
+            'sha1': sha1, 'filename': file.name, 'filesize': file.size,
+            'utoken': utoken, 'mr_id': this.upload_mrid_get(),
+        }, (rsp) => {
+            switch (rsp.status) {
+                case 1:
+                    //已完成上传
+                    break;
+                case 2:
+                    //没有可上传分片，等待所有分片完成
+                    break;
+                case 3:
+                    //获得一个需要上传的分片编号,开始处理上传
+                    this.worker_slice_uploader(server, utoken, sha1, file, rsp.index, () => {
+                        //回归
+                        this.worker_slice(server, utoken, sha1, file, id);
+                    });
+                    break;
+
+            }
+        }, 'json');
+    }
+
+    /**
+     * 分片上传
+     */
+    worker_slice_uploader(server, sha1, file, index, cb) {
+        //从 file 中读取指定的分片
+        console(`Upload filename:${file.name} slice ${index}`);
+        let blob = file.slice(index * (1024 * 1024 * 8), (index + 1) * (1024 * 1024 * 8));
+        $.post(server, {
+            sha1: sha1, index: index, filedata: blob
+        }, (rsp) => {
+            //完成上传
+            if (rsp.status == 5) {
+                cb();
+            }
+        }, 'json');
     }
 
     upload_progressbar_draw(id) {
