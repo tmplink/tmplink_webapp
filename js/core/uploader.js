@@ -340,7 +340,7 @@ class uploader {
             'token': this.parent_op.api_token,
             'action': 'prepare',
             'sha1': sha1, 'filename': file.name, 'filesize': file.size,
-            'utoken': utoken, 'mr_id': this.upload_mrid_get(),
+            'utoken': utoken, 'mr_id': this.upload_mrid_get(),'model':this.upload_model_get()
         }, (rsp) => {
             switch (rsp.status) {
                 case 1:
@@ -351,7 +351,7 @@ class uploader {
                     break;
                 case 3:
                     //获得一个需要上传的分片编号,开始处理上传
-                    this.worker_slice_uploader(server, utoken, sha1, file, rsp.index, () => {
+                    this.worker_slice_uploader(server, sha1, file, rsp.data, () => {
                         //回归
                         this.worker_slice(server, utoken, sha1, file, id);
                     });
@@ -366,16 +366,29 @@ class uploader {
      */
     worker_slice_uploader(server, sha1, file, index, cb) {
         //从 file 中读取指定的分片
-        console(`Upload filename:${file.name} slice ${index}`);
+        console.log(`Upload filename:${file.name} slice ${index}`);
         let blob = file.slice(index * (1024 * 1024 * 8), (index + 1) * (1024 * 1024 * 8));
-        $.post(server, {
-            sha1: sha1, index: index, filedata: blob
-        }, (rsp) => {
-            //完成上传
+
+        //提交分片
+        let xhr = new XMLHttpRequest();
+        //构建参数
+        let fd = new FormData();
+        fd.append("filedata", blob);
+        fd.append("sha1", sha1);
+        fd.append("index", index);
+        fd.append("action", 'upload_slice');
+        //提交
+        xhr.open("POST", server);
+        xhr.send(fd);
+        //完成时回调
+        xhr.addEventListener("load", (evt) => {
+            //将返回值解析为 json
+            let rsp = JSON.parse(evt.target.response);
+            //如果返回值是 5，则表示分片上传完成
             if (rsp.status == 5) {
                 cb();
             }
-        }, 'json');
+        });
     }
 
     upload_progressbar_draw(id) {
