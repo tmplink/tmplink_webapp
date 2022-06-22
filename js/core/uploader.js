@@ -7,7 +7,7 @@ class uploader {
     upload_queue_id = 0
     upload_queue_file = []
     upload_processing = 0
-    single_file_size = 50 * 1024 * 1024 * 1024
+    single_file_size = 10 * 1024 * 1024 * 1024
 
     upload_progressbar_counter_total = []
     upload_progressbar_counter_loaded = []
@@ -358,19 +358,25 @@ class uploader {
                  */
                 case 1:
                     //已完成上传
+                    this.upload_processing = 0;
                     this.upload_final(rsp, file, id);
+                    this.upload_start();
                     break;
                 case 6:
                     //已完成上传
                     //重置 rsp.stustus = 1
                     rsp.status = 1;
+                    this.upload_processing = 0;
                     this.upload_final(rsp, file, id);
+                    this.upload_start();
                     break;
                 case 8:
                     //已完成上传
                     //重置 rsp.stustus = 1
                     rsp.status = 1;
+                    this.upload_processing = 0;
                     this.upload_final(rsp, file, id);
+                    this.upload_start();
                     break;
                 case 2:
                     //没有可上传分片，等待所有分片完成
@@ -380,7 +386,7 @@ class uploader {
                     break;
                 case 3:
                     //获得一个需要上传的分片编号,开始处理上传
-                    this.worker_slice_uploader(server, sha1, file, rsp.data, () => {
+                    this.worker_slice_uploader(server, id, sha1, file, rsp.data, () => {
                         //回归
                         this.worker_slice(server, utoken, sha1, file, id);
                     });
@@ -388,7 +394,9 @@ class uploader {
                 case 9:
                     //重置 rsp.stustus = 1
                     rsp.status = 1;
+                    this.upload_processing = 0;
                     this.upload_final(rsp, file, id);
+                    this.upload_start();
                     break;
 
             }
@@ -398,9 +406,9 @@ class uploader {
     /**
      * 分片上传
      */
-    worker_slice_uploader(server, sha1, file, index, cb) {
+    worker_slice_uploader(server, id, sha1, file, slice_status, cb) {
         //从 file 中读取指定的分片
-        console.log(`Upload filename:${file.name} slice ${index}`);
+        let index = slice_status.next;
         let blob = file.slice(index * (1024 * 1024 * 8), (index + 1) * (1024 * 1024 * 8));
 
         //提交分片
@@ -411,9 +419,7 @@ class uploader {
         fd.append("sha1", sha1);
         fd.append("index", index);
         fd.append("action", 'upload_slice');
-        //提交
-        xhr.open("POST", server);
-        xhr.send(fd);
+
         //完成时回调
         xhr.addEventListener("load", (evt) => {
             //将返回值解析为 json
@@ -423,6 +429,30 @@ class uploader {
                 cb();
             }
         });
+        
+        //更新上传信息到界面上
+        let uqmid = "#uqm_" + id;
+        let uqpid = "#uqp_" + id;
+        let uqgid = "#uqg_" + id;
+        let progress_percent = slice_status.success / slice_status.total * 100;
+        $(uqmid).html(`${this.parent_op.languageData.upload_upload_processing} ${file.name} (${(slice_status.success)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
+        $(uqpid).css('width', progress_percent + '%');
+
+        //上传进度更新,not work
+        // xhr.addEventListener("progress", (evt) => {
+        //     if (evt.lengthComputable) {
+        //         let percentComplete = evt.loaded / evt.total;
+        //         //更新到 uqgid 中
+        //         $(uqgid).html(`${Math.round(percentComplete * 100)}%`);
+        //         console.log(`${Math.round(percentComplete * 100)}%`);
+        //     }
+        // });
+
+        $('.upload_speed').show();
+
+        //提交
+        xhr.open("POST", server);
+        xhr.send(fd);
     }
 
     upload_progressbar_draw(id) {
