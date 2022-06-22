@@ -340,14 +340,43 @@ class uploader {
             'token': this.parent_op.api_token,
             'action': 'prepare',
             'sha1': sha1, 'filename': file.name, 'filesize': file.size,
-            'utoken': utoken, 'mr_id': this.upload_mrid_get(),'model':this.upload_model_get()
+            'utoken': utoken, 'mr_id': this.upload_mrid_get(), 'model': this.upload_model_get()
         }, (rsp) => {
             switch (rsp.status) {
+                /**
+                 * 分片上传服务
+                 * 返回状态码
+                 * 1 ：上传完成
+                 * 2 ：上传尚未完成，需要等待其他人完成上传（客户端每隔一段时间再次发起查询，如果用户无法完成上传，则重新分配）
+                 * 3 ：进入上传流程，客户端将会获得一份分配的分片编号
+                 * 4 ：分片任务不存在
+                 * 5 ：分片上传完成
+                 * 6 ：这个文件已经被其他人上传了，因此直接跳过（需要清理已上传的文件）
+                 * 7 : 上传失败，原因将会写入到 data
+                 * 8 ：分片合并完成
+                 * 9 ：文件已经上传完成，但是文件合并进程正在进行中，处于锁定状态
+                 */
                 case 1:
                     //已完成上传
+                    this.upload_final(rsp, file, id);
+                    break;
+                case 6:
+                    //已完成上传
+                    //重置 rsp.stustus = 1
+                    rsp.status = 1;
+                    this.upload_final(rsp, file, id);
+                    break;
+                case 8:
+                    //已完成上传
+                    //重置 rsp.stustus = 1
+                    rsp.status = 1;
+                    this.upload_final(rsp, file, id);
                     break;
                 case 2:
                     //没有可上传分片，等待所有分片完成
+                    setTimeout(() => {
+                        this.worker_slice(server, utoken, sha1, file, id);
+                    }, 10000);
                     break;
                 case 3:
                     //获得一个需要上传的分片编号,开始处理上传
@@ -355,6 +384,11 @@ class uploader {
                         //回归
                         this.worker_slice(server, utoken, sha1, file, id);
                     });
+                    break;
+                case 9:
+                    //重置 rsp.stustus = 1
+                    rsp.status = 1;
+                    this.upload_final(rsp, file, id);
                     break;
 
             }
@@ -373,7 +407,7 @@ class uploader {
         let xhr = new XMLHttpRequest();
         //构建参数
         let fd = new FormData();
-        fd.append("filedata", blob);
+        fd.append("filedata", blob, 'slice');
         fd.append("sha1", sha1);
         fd.append("index", index);
         fd.append("action", 'upload_slice');
