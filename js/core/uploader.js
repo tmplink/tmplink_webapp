@@ -8,6 +8,7 @@ class uploader {
     upload_queue_file = []
     upload_processing = 0
     single_file_size = 10 * 1024 * 1024 * 1024
+    slice_size = 8 * 1024 * 1024;
 
     upload_progressbar_counter_total = []
     upload_progressbar_counter_loaded = []
@@ -283,7 +284,7 @@ class uploader {
                 if (rsp.status == 1) {
                     let api_sync = rsp.data.uploader + '/app/upload_sync';
                     //文件小于 8 MB，直接上传
-                    if (file.size <= (1024 * 1024 * 8)) {
+                    if (file.size <= this.slice_size) {
                         var fd = new FormData();
                         fd.append("file", file);
                         fd.append("filename", filename);
@@ -409,7 +410,7 @@ class uploader {
     worker_slice_uploader(server, id, sha1, file, slice_status, cb) {
         //从 file 中读取指定的分片
         let index = slice_status.next;
-        let blob = file.slice(index * (1024 * 1024 * 8), (index + 1) * (1024 * 1024 * 8));
+        let blob = file.slice(index * this.slice_size, (index + 1) * this.slice_size);
 
         //提交分片
         let xhr = new XMLHttpRequest();
@@ -419,6 +420,8 @@ class uploader {
         fd.append("sha1", sha1);
         fd.append("index", index);
         fd.append("action", 'upload_slice');
+        //上传速度计算。初始化时间
+        let start_time = new Date().getTime();
 
         //完成时回调
         xhr.addEventListener("load", (evt) => {
@@ -435,11 +438,23 @@ class uploader {
         let uqpid = "#uqp_" + id;
         let uqgid = "#uqg_" + id;
         let progress_percent = slice_status.success / slice_status.total * 100;
-        $(uqmid).html(`${this.parent_op.languageData.upload_upload_processing} ${file.name} (${(slice_status.success)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
         $(uqpid).css('width', progress_percent + '%');
 
-        //上传进度更新,not work
+        //上传速度计算,上传结束时启动
+        xhr.addEventListener("loadend", (evt) => {
+            //计算上传速度
+            let end_time = new Date().getTime();
+            let speed = (this.slice_size / (end_time - start_time))*1000;
+            $(uqmid).html(`${this.parent_op.languageData.upload_upload_processing} ${file.name} (${(slice_status.success)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
+            $(uqgid).html(`${bytetoconver(speed,true)}/s`);
+        });
+
+        //上传发生错误，重启
+        xhr.addEventListener("error", (evt) => {
+            cb();
+        });
         // xhr.addEventListener("progress", (evt) => {
+        //     console.log(evt);
         //     if (evt.lengthComputable) {
         //         let percentComplete = evt.loaded / evt.total;
         //         //更新到 uqgid 中
@@ -451,6 +466,7 @@ class uploader {
         $('.upload_speed').show();
 
         //提交
+        xhr.overrideMimeType("application/octet-stream");
         xhr.open("POST", server);
         xhr.send(fd);
     }
