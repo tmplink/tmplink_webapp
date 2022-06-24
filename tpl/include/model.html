@@ -76,7 +76,8 @@
 
 <div class="modal fade" id="uploadModal">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content shadow-lg" ondrop="TL.uploader.drop(event)">
+        <div class="modal-content shadow-lg" ondrop="TL.uploader.drop(event)"ondragover="$(this).addClass('shadow-lg');$('#tmp_upload_btn2').removeClass('bg-blue').addClass('bg-success');"
+        ondragleave="$(this).removeClass('shadow-lg');$('#tmp_upload_btn2').removeClass('bg-success').addClass('bg-blue');">
             <div class="modal-header">
                 <h4 class="modal-title" i18n="model_title_upload">.</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
@@ -189,7 +190,7 @@
                             onchange="TL.uploader.selected(this);" />
                         <label for="fileToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
                             <div class="d-flex align-items-center">
-                                <span class="stamp stamp-md bg-blue mr-3">
+                                <span class="stamp stamp-md bg-blue mr-3" id="tmp_upload_btn2">
                                     <i class="mt-1 fa-light fa-cloud-arrow-up fa-fw"></i>
                                 </span>
                                 <div>
