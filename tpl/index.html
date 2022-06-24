@@ -5,14 +5,17 @@
             <img src="/img/logo/logo2.svg" class="logo" alt="tmp.link" style="width: 50%;">
         </div>
 
-        <div class="bg-white index-box p-2" id="index_prepare" style="display: none;">
+        <div class="bg-white index-box p-2" id="index_prepare" style="display: none;" 
+            ondrop="TL.uploader.drop(event)"
+            ondragover="$(this).addClass('shadow-lg');$('#tmp_upload_btn').removeClass('bg-blue').addClass('bg-success');"
+            ondragleave="$(this).removeClass('shadow-lg');$('#tmp_upload_btn').removeClass('bg-success').addClass('bg-blue');">
             <div class="row m-0">
                 <div class="col-12 p-3 btn-point">
                     <input type="file" multiple="multiple" id="fileToUpload" style="display: none;"
                         onchange="TL.uploader.selected(this);" />
                     <label for="fileToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
                         <div class="d-flex align-items-center">
-                            <span class="stamp stamp-md bg-blue mr-3">
+                            <span class="stamp stamp-md bg-blue mr-3" id="tmp_upload_btn">
                                 <i class="mt-1 fa-light fa-cloud-arrow-up fa-fw"></i>
                             </span>
                             <div>
