@@ -447,7 +447,7 @@ class uploader {
             //计算上传速度
             let end_time = new Date().getTime();
             let speed = (this.slice_size / (end_time - start_time))*1000;
-            $(uqmid).html(`${this.parent_op.languageData.upload_upload_processing} ${file.name} (${(slice_status.success)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
+            $(uqmid).html(`${this.parent_op.languageData.upload_upload_processing} ${file.name} (${(slice_status.success+1)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
             $(uqgid).html(`${bytetoconver(speed,true)}/s`);
         });
 
