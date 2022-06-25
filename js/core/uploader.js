@@ -360,7 +360,7 @@ class uploader {
                 case 1:
                     //已完成上传
                     this.upload_processing = 0;
-                    this.upload_final(rsp, file, id);
+                    this.upload_final({status:rsp.status,data:{ukey:rsp.data}}, file, id);
                     this.upload_start();
                     break;
                 case 6:
@@ -368,15 +368,16 @@ class uploader {
                     //重置 rsp.stustus = 1
                     rsp.status = 1;
                     this.upload_processing = 0;
-                    this.upload_final(rsp, file, id);
+                    this.upload_final({status:rsp.status,data:{ukey:rsp.data}}, file, id);
                     this.upload_start();
                     break;
                 case 8:
                     //已完成上传
                     //重置 rsp.stustus = 1
+                    //重置 rsp.ukey = rsp.data ，模板中需要用到
                     rsp.status = 1;
                     this.upload_processing = 0;
-                    this.upload_final(rsp, file, id);
+                    this.upload_final({status:rsp.status,data:{ukey:rsp.data}}, file, id);
                     this.upload_start();
                     break;
                 case 2:
@@ -396,7 +397,7 @@ class uploader {
                     //重置 rsp.stustus = 1
                     rsp.status = 1;
                     this.upload_processing = 0;
-                    this.upload_final(rsp, file, id);
+                    this.upload_final({status:rsp.status,data:{ukey:rsp.data}}, file, id);
                     this.upload_start();
                     break;
 
