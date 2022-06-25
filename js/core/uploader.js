@@ -438,6 +438,7 @@ class uploader {
         let uqmid = "#uqm_" + id;
         let uqpid = "#uqp_" + id;
         let uqgid = "#uqg_" + id;
+        $('#uqnn_' + id).html(this.parent_op.languageData.upload_sync);
         let progress_percent = slice_status.success / slice_status.total * 100;
         $(uqpid).css('width', progress_percent + '%');
 
