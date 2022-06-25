@@ -474,7 +474,7 @@ class tmplink {
     }
 
     previewModel(ukey, name, id) {
-        let url = 'https://static.'+this.site_domain+'/img-' + ukey + '-0x0.jpg';
+        let url = 'https://tmp-static.vx-cdn.com/img-' + ukey + '-0x0.jpg';
         $('#preview_img_loader').show();
         $('#preview_img').hide();
         $.get(url, () => {
