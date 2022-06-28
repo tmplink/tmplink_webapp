@@ -20,9 +20,10 @@ class navbar {
             case '/room':
                 this.model_desktop(act);
                 break;
-            case '/media':
-                this.model_media(act);
+            case '/direct':
+                this.model_direct(act);
                 break;
+                
         }
     }
 
@@ -48,6 +49,13 @@ class navbar {
         if (act === true) {
             app.open('/media');
         }
+    }
 
+    model_direct(act) {
+        $('#navbar_model_icon').attr('class', 'fa-light fa-share-nodes fa-fw mx-auto');
+        $('#navbar_model_text').html(this.parent.languageData.navbar_direct);
+        if (act === true) {
+            app.open('/direct');
+        }
     }
 }

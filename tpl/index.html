@@ -1,14 +1,18 @@
 <div style="height: 40px;"></div>
 <div class="container d-flex flex-grow-1">
-    <div class="align-self-center mx-auto w-100" style="max-width: 500px;">
-        <div class="mb-5 text-center">
+    <div class="align-self-center mx-auto w-100" style="max-width: 600px;">
+        <!-- <div class="mb-5 text-center">
             <img src="/img/logo/logo2.svg" class="logo" alt="tmp.link" style="width: 50%;">
-        </div>
+        </div> -->
 
-        <div class="bg-white index-box p-2" id="index_prepare" style="display: none;" 
-            ondrop="TL.uploader.drop(event)"
+        <div class="bg-white index-box p-5" id="index_prepare" style="display: none;" ondrop="TL.uploader.drop(event)"
             ondragover="$(this).addClass('shadow-lg');$('#tmp_upload_btn').removeClass('bg-blue').addClass('bg-success');"
             ondragleave="$(this).removeClass('shadow-lg');$('#tmp_upload_btn').removeClass('bg-success').addClass('bg-blue');">
+            <p class="h4 text-center" i18n="index_a1">
+                .
+            </p>
+
+            <hr />
             <div class="row m-0">
                 <div class="col-12 p-3 btn-point">
                     <input type="file" multiple="multiple" id="fileToUpload" style="display: none;"
@@ -41,6 +45,86 @@
                             <small class="text-muted" i18n="index_login_des">
                                 .
                             </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="index_feature">
+                <hr>
+                <div class="row m-0">
+                    <div class="col-12 p-3">
+                        <div class="d-flex align-items-center">
+                            <span class="stamp stamp-md bg-teal mr-3">
+                                <i class="mt-1 fa-solid fa-people-carry-box fa-fw"></i>
+                            </span>
+                            <div>
+                                <h4 class="m-0" i18n="index_feature_1">
+                                    .
+                                </h4>
+                                <small class="text-muted" i18n="index_feature_2">
+                                    .
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 p-3">
+                        <div class="d-flex align-items-center">
+                            <span class="stamp stamp-md bg-teal mr-3">
+                                <i class="mt-1 fa-solid fa-code-pull-request fa-fw"></i>
+                            </span>
+                            <div>
+                                <h4 class="m-0" i18n="index_feature_3">
+                                    .
+                                </h4>
+                                <small class="text-muted" i18n="index_feature_4">
+                                    .
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 p-3">
+                        <div class="d-flex align-items-center">
+                            <span class="stamp stamp-md bg-teal mr-3">
+                                <i class="mt-1 fa-solid fa-gauge-max fa-fw"></i>
+                            </span>
+                            <div>
+                                <h4 class="m-0" i18n="index_feature_5">
+                                    .
+                                </h4>
+                                <small class="text-muted" i18n="index_feature_6">
+                                    .
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 p-3">
+                        <div class="d-flex align-items-center">
+                            <span class="stamp stamp-md bg-teal mr-3">
+                                <i class="mt-1 fa-light fa-link fa-fw"></i>
+                            </span>
+                            <div>
+                                <h4 class="m-0" i18n="index_feature_7">
+                                    .
+                                </h4>
+                                <small class="text-muted" i18n="index_feature_8">
+                                    .
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 p-3">
+                        <div class="d-flex align-items-center">
+                            <span class="stamp stamp-md bg-teal mr-3">
+                                <i class="mt-1 fa-light fa-eye-slash fa-fw"></i>
+                            </span>
+                            <div>
+                                <h4 class="m-0" i18n="index_feature_9">
+                                    .
+                                </h4>
+                                <small class="text-muted" i18n="index_feature_10">
+                                    .
+                                </small>
+                            </div>
                         </div>
                     </div>
                 </div>

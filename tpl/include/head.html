@@ -8,7 +8,7 @@
 <nav class="mainNav navbar  navbar-light d-none d-sm-flex mt-2">
     <div class="container">
         <a class="navbar-brand mt-1 my-lg-0 pb-0" href="javascript:void(0)" onclick="app.open('/');">
-            <span style="color: white;border-radius: 8px;border-color: white;border-width: 2px;border-style: solid;padding-left: 5px;padding-right: 5px;" id="head_logo">TTTTT.Link</span>
+            <!-- <span style="color: white;border-radius: 8px;border-color: white;border-width: 2px;border-style: solid;padding-left: 5px;padding-right: 5px;" id="head_logo">TTTTT.Link</span> -->
         </a>
 
         <div class="form-inline mt-1 my-lg-0 pb-0 navbar_nloading">
@@ -73,8 +73,16 @@
                         <span i18n="navbar_profile">.</span>
                         <!-- <span class="badge badge-pill badge-danger">new</span> -->
                     </a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#profileModal').modal('show');">
+                        <span i18n="navbar_profile">.</span>
+                        <!-- <span class="badge badge-pill badge-danger">new</span> -->
+                    </a>
                     <a class="dropdown-item" href="javascript:void(0)"
                         onclick="$('#ordersModal').modal('show');TL.orders_list();" i18n="navbar_orders">.</a>
+                    <hr />
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.logout();">
+                        <span i18n="navbar_exit">.</span>
+                    </a>
 
                 </div>
             </div>
@@ -90,13 +98,6 @@
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('en');">English</a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
                 </div>
-            </div>
-
-            <div class="mt-1">
-                <button class="btn btn-danger mt-1 my-sm-0 workspace-navbar" onclick="TL.logout();">
-                    <i class="fa-light fa-power-off fa-fw"></i>
-                    <span i18n="navbar_exit">.</span>
-                </button>
             </div>
         </div>
     </div>

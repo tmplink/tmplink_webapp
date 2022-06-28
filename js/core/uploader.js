@@ -492,6 +492,9 @@ class uploader {
     }
 
     selected(dom) {
+        //隐藏首页特性的介绍
+        $('#index_feature').fadeOut();
+
         let file = document.getElementById('fileToUpload').files;
         let f = null;
         if (file.length > 0) {
