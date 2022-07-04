@@ -477,7 +477,7 @@
     "download_speed1": "Authenticated user can get up to 10 MB/s download speed (vs. 5 MB/s for unauthenticated users)",
     "download_speed2": "Please note your download speed is bounded by your Internet connection. And also, if you're downloading files over cellular connection, additional fee may be charged by your mobile provider.During peak hours, the download speed may be affected by the number of simultaneous downloads.",
     "file_btn_highdownload": "High Speed Download",
-    "model_title_buy_highspeed": "Buy VIP Channel",
+    "model_title_buy_highspeed": "VIP Channel",
     "highspeed_title": "VIP Channel",
     "highspeed_content": "No speed limit is our promise, but during peak hours, you may experience reduced download speed. Therefore we have prepared extra servers for you to provide a better download experience.",
     "highspeed_price_cny1": "6 CNY per month",

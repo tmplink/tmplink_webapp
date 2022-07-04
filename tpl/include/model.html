@@ -505,7 +505,7 @@
                     <select id="highspeed_time" class="form-control">
                         <option value="1" selected="selected" i18n="times_1" i18n-only="html">.</option>
                         <option value="3" i18n="times_2" i18n-only="html">.</option>
-                        <option value="12" i18n="times_3" i18n-only="html">.</option>
+                        <option value="10" i18n="times_3" i18n-only="html">.</option>
                     </select>
                 </div>
             </div>
@@ -546,7 +546,7 @@
                     <select id="media_time" class="form-control">
                         <option value="1" selected="selected" i18n="times_1" i18n-only="html">.</option>
                         <option value="3" i18n="times_2" i18n-only="html">.</option>
-                        <option value="12" i18n="times_3" i18n-only="html">.</option>
+                        <option value="10" i18n="times_3" i18n-only="html">.</option>
                     </select>
                 </div>
             </div>
@@ -620,9 +620,9 @@
                 <div class="form-group">
                     <label for="storage_time" i18n="storage_times">.</label>
                     <select id="storage_time" class="form-control">
-                        <option value="1" selected="selected" i18n="times_1" i18n-only="html">.</option>
-                        <option value="3" i18n="times_2" i18n-only="html">.</option>
-                        <option value="12" i18n="times_3" i18n-only="html">.</option>
+                        <!-- <option value="1" selected="selected" i18n="times_1" i18n-only="html">.</option>
+                        <option value="3" i18n="times_2" i18n-only="html">.</option> -->
+                        <option value="10" selected="selected" i18n="times_3" i18n-only="html">.</option>
                     </select>
                 </div>
             </div>
@@ -959,13 +959,13 @@
             </div>
             <div class="modal-body">
                 <!-- 存储 -->
-                <div class="row p-2 filelist-card shadow-sm mb-2 mx-1 btn-point"
+                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point"
                     onclick="TL.buy_select_open('storage');">
                     <div class="col-12">
                         <div class="card-p3">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 fa-light fa-album-circle-plus fa-2x fa-fw"></i>
+                                    <i class="mt-1 fa-light fa-album-circle-plus fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="model_title_buy_storage">
@@ -973,7 +973,7 @@
                                     </h4>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center mt-1">
                                 <small class="text-muted" i18n="storage_content2">
                                     .
                                 </small>
@@ -983,12 +983,12 @@
                     </div>
                 </div>
                 <!-- 高速通道 -->
-                <div class="row p-2 filelist-card shadow-sm mb-2 mx-1 btn-point" onclick="TL.buy_select_open('hs');">
+                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point" onclick="TL.buy_select_open('hs');">
                     <div class="col-12">
                         <div class="card-p3">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 fa-light fa-gauge-circle-bolt fa-2x fa-fw"></i>
+                                    <i class="mt-1 fa-light fa-gauge-circle-bolt fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="model_title_buy_highspeed">
@@ -996,7 +996,7 @@
                                     </h4>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center mt-1">
                                 <small class="text-muted" i18n="highspeed_content">
                                     .
                                 </small>
@@ -1029,12 +1029,12 @@
                     </div>
                 </div> -->
                 <!-- 直链 -->
-                <div class="row p-2 filelist-card shadow-sm mb-2 mx-1 btn-point" onclick="TL.buy_select_open('direct');">
+                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point" onclick="TL.buy_select_open('direct');">
                     <div class="col-12">
                         <div class="card-p3">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 fa-light fa-share-nodes fa-2x fa-fw"></i>
+                                    <i class="mt-1 fa-light fa-share-nodes fa-fw"></i>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="model_title_buy_direct_quota">
@@ -1042,7 +1042,7 @@
                                     </h4>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center mt-1">
                                 <small class="text-muted" i18n="direct_quota_content">
                                     .
                                 </small>
