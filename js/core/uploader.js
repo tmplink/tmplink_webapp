@@ -431,6 +431,9 @@ class uploader {
             //如果返回值是 5，则表示分片上传完成
             if (rsp.status == 5) {
                 cb();
+            }else{
+                //其它情况也返回处理
+                cb();
             }
         });
         
