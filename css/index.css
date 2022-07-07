@@ -300,3 +300,22 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
 .line{
     border-bottom: 1px solid #e9ecef;
 }
+
+/**
+只在移动设备上才生效
+*/
+@media (max-width: 576px) {
+    .xs-card {
+        border-radius: 8px;
+        border-color: aquamarine;
+        border-style: dashed;
+        margin-bottom: 5px;
+    }
+
+    .xs-card2 {
+        border-radius: 8px;
+        border-color: #7fcfff;
+        border-style: solid;
+        margin-bottom: 5px;
+    }
+}

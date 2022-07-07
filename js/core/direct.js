@@ -46,13 +46,11 @@ class direct {
         let total_transfer = bytetoconver(this.total_transfer,true);
 
 
-        if (this.domain == 0) {
-            $('#direct_bind_domain').html(this.parent_op.languageData.direct_unbind_domain);
-            $('#diredirect_bind_notice').html(this.parent_op.languageData.direct_unbind_notice);
-        }else{
+        if (this.domain != 0) {
             $('#direct_bind_domain').html(this.domain);
-            console.log(this.total_downloads);
-            $('#diredirect_bind_notice').html(`${this.parent_op.languageData.direct_quota}：${quota}，${this.parent_op.languageData.direct_total_downloads}：${this.total_downloads}，${this.parent_op.languageData.direct_total_transfer}：${total_transfer}`);
+            $('#direct_quota').html(quota);
+            $('#direct_total_transfer').html(total_transfer);
+            $('#direct_total_downloads').html(this.total_downloads);
         }
     }
 
