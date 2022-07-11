@@ -4,6 +4,7 @@ class direct {
     domain = 0
     total_transfer = 0
     total_downloads = 0
+    protocol = 'http://'
     quota = 0
     set = false
 
@@ -29,6 +30,10 @@ class direct {
             this.total_downloads = rsp.data.total_downloads;
             this.total_transfer = rsp.data.total_transfer;
             this.set = 1;
+            //如果domain是 *.5t-cdn.com 作为子域名，生成的链接则应该是 https://
+            if (this.domain.indexOf('.5t-cdn.com') != -1) {
+                this.protocol = 'https://';
+            }
             cb();
         }, 'json');
     }
@@ -70,12 +75,15 @@ class direct {
             if(rsp.status==1){
                 //提示添加成功，并复制到剪贴板
                 alert(this.parent_op.languageData.direct_add_link_success);
-                console.log(`http://${this.domain}/files/${rsp.data}/${filename}`);
-                this.parent_op.copyToClip(`http://${this.domain}/files/${rsp.data}/${filename}`);
+                this.parent_op.copyToClip(`${this.protocol}${this.domain}/files/${rsp.data}/${filename}`);
             }else{
                 alert(this.parent_op.languageData.status_error_0);
             }
         }, 'json');
+    }
+
+    genLinkDirect(dkey,filename){
+        return `${this.protocol}${this.domain}/files/${dkey}/${filename}`;
     }
 
     delLink(direct_key){
@@ -190,6 +198,12 @@ class direct {
         if (data.length == 0) {
             return false;
         }
+
+        //为 data 增加直链单元
+        for(let i =0;i<data.length;i++){
+            let filename = encodeURIComponent(data[i].fname);
+            data[i].direct_link = this.genLinkDirect(data[i].direct_key,filename);
+        }
         $('#direct_filelist').append(app.tpl('direct_filelist_list_tpl', data));
         $('.lefttime-remainder').each((i, e) => {
             let id = $(e).attr('id');
@@ -229,7 +243,7 @@ class direct {
      * 设置域名
      */
     setDomain() {
-        let domain = prompt(this.parent_op.languageData.direct_btn_bind_prompt_msg);
+        let domain = $('#direct-domain').val();
         //检查输入的是否是正确的域名
         if (domain == null) {
             return false;
@@ -243,6 +257,7 @@ class direct {
                 alert(this.parent_op.languageData.direct_btn_bind_prompt_ok);
                 $('#direct_bind_domain').html(domain);
                 $('#diredirect_bind_notice').html('');
+                window.location.reload();
             } else {
                 alert(this.parent_op.languageData.direct_btn_bind_prompt_error);
             }

@@ -531,8 +531,15 @@
     "direct_btn_intro":"使用指南",
     "direct_btn_bind_prompt_msg":"请输入要绑定的域名",
     "direct_btn_bind_prompt_error":"无法使用此域名",
-    "direct_btn_bind_prompt_ok":"已完成绑定，现在，请将您的域名通过 CNAME 指向到 direct.tmp.link。然后，您可以在其它页面生成直链，并在这里管理生成的直链。",
+    "direct_btn_bind_prompt_ok":"已完成绑定。",
     "direct_add_link_success":"这个文件的直接链接已复制到剪贴板，您可以从 “直链” 中对这些链接进行管理。",
+
+    "direct_modal_bind_domain_1":"绑定自己的域名",
+    "direct_modal_bind_domain_2":"您可以绑定自己拥有的域名，绑定完成之后，请将对应域名做 CNAME 记录，指向 <span class=\"text-red\">direct.tmp.link</span>",
+    "direct_modal_bind_domain_3":"钛盘二级域名",
+    "direct_modal_bind_domain_4":"钛盘提供免费的二级域名给您使用，格式为 <span class=\"text-red\">*.5t-cdn.com</span>，比如您可以设置为 <span class=\"text-red\">myname.5t-cdn.com</span>",
+    "direct_modal_bind_domain_5":"开始绑定域名",
+    "direct_modal_bind_domain_6":"请输入您的域名",
 
     "menu_delete":"删除文件",
     "menu_addlink":"通过直链分享",

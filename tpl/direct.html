@@ -46,7 +46,7 @@
                     <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.direct.filelist(0);">
                         <i class="fa-light fa-rotate fa-fw" id="filelist_refresh_icon"></i>
                     </button>
-                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.setDomain();">
+                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="$('#directEditDomainModal').modal('show');">
                         <i class="fa-fw fa-light fa-signal-stream"></i>
                         <span i18n="direct_btn_bind_domain" class="d-none d-sm-inline">.</span>
                     </button>
@@ -159,8 +159,8 @@
                         </div>
                         <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].direct_key %>">
                             <span class="mr-2"><% obj[x].fsize_formated %></span>
-                            <a href="http://<% TL.direct.domain %>/files/<% obj[x].direct_key %>/<% encodeURIComponent(obj[x].fname) %>" target="_blank" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></a>
-                            <button data-clipboard-text="http://<% TL.direct.domain %>/files/<% obj[x].direct_key %>/<% encodeURIComponent(obj[x].fname) %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
+                            <a href="<% obj[x].direct_link %>" target="_blank" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></a>
+                            <button data-clipboard-text="<% obj[x].direct_link %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
                             <button id="btn-rm-file_<% obj[x].direct_key %>" class="btn btn-sm btn-outline-danger mx-1" onclick="TL.direct.delLink('<% obj[x].direct_key %>')">
                                 <i class="fa-fw fa-light fa-trash"></i>
                             </button>
@@ -191,6 +191,42 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="directEditDomainModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="direct_btn_bind_domain">
+                    .
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card p-3 shadow-sm">
+                    <h4 i18n="direct_modal_bind_domain_1">.</h4>
+                    <p i18n="direct_modal_bind_domain_2">.</p>
+                </div>
+                <div class="card p-3 shadow-sm">
+                    <h4 i18n="direct_modal_bind_domain_3">.</h4>
+                    <p i18n="direct_modal_bind_domain_4">.</p>
+                </div>
+                <!--[表单]-->
+                <div class="card p-3 shadow-sm">
+                    <form id="form-direct-domain">
+                        <div class="form-group">
+                            <label for="direct-domain" i18n="direct_modal_bind_domain_5">.</label>
+                            <input type="text" class="form-control" id="direct-domain" placeholder="." i18n="direct_modal_bind_domain_6" i18n-placeholder="true">
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary btn-block" onclick="TL.direct.setDomain()">绑定</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div id="tpl_footer"></div>
 <div id="tpl_model"></div>
