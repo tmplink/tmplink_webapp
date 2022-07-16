@@ -8,7 +8,7 @@ class uploader {
     upload_queue_file = []
     upload_processing = 0
     single_file_size = 10 * 1024 * 1024 * 1024
-    slice_size = 8 * 1024 * 1024;
+    slice_size = 32 * 1024 * 1024;
 
     upload_progressbar_counter_total = []
     upload_progressbar_counter_loaded = []
