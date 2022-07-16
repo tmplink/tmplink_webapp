@@ -283,7 +283,7 @@ class uploader {
             }, (rsp) => {
                 if (rsp.status == 1) {
                     let api_sync = rsp.data.uploader + '/app/upload_sync';
-                    //文件小于 8 MB，直接上传
+                    //文件小于 32 MB，直接上传
                     if (file.size <= this.slice_size) {
                         var fd = new FormData();
                         fd.append("file", file);
@@ -340,10 +340,10 @@ class uploader {
         $.post(server, {
             'token': this.parent_op.api_token,
             'action': 'prepare',
-            'sha1': sha1, 'filename': file.name, 'filesize': file.size,
+            'sha1': sha1, 'filename': file.name, 'filesize': file.size,'slice_size':this.slice_size,
             'utoken': utoken, 'mr_id': this.upload_mrid_get(), 'model': this.upload_model_get()
         }, (rsp) => {
-            switch (rsp.status) {
+            switch (rsp.status) {   
                 /**
                  * 分片上传服务
                  * 返回状态码
@@ -421,6 +421,7 @@ class uploader {
         fd.append("sha1", sha1);
         fd.append("index", index);
         fd.append("action", 'upload_slice');
+        fd.append("slice_size", this.slice_size);
         //上传速度计算。初始化时间
         let start_time = new Date().getTime();
 
