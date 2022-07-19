@@ -2208,6 +2208,9 @@ class tmplink {
 
     mr_newname(mrid) {
         var newname = prompt(this.languageData.modal_meetingroom_newname, "");
+        if(newname===null){
+            return false;
+        }
         $.post(this.api_mr, {
             action: 'rename',
             token: this.api_token,
