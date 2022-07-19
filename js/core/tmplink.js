@@ -2407,7 +2407,14 @@ class tmplink {
 
             //如果文件夹有设置图片
             if (this.room.img_link != '0') {
-                $('.room_img').attr('src', this.room.img_link);
+                //设置占位图
+                $('.room_img').attr('src', '/img/loading.svg');
+                //先请求图片，就绪后再显示
+                let img = new Image();
+                img.src = this.room.img_link;
+                img.onload = () => { 
+                    $('.room_img').attr('src', this.room.img_link);
+                }
                 $('.room_img').show();
             } else {
                 $('.room_img').hide();
