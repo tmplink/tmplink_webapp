@@ -997,11 +997,7 @@ class tmplink {
 
                             //举报文件按钮绑定
                             $('#btn_report_file').on('click', () => {
-                                if (this.logined == 1) {
-                                    $('#reportModal').modal('show');
-                                } else {
-                                    app.open('/login');
-                                }
+                                $('#reportModal').modal('show');
                             });
 
 
