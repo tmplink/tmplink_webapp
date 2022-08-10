@@ -117,6 +117,10 @@
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
                                     <% obj[x].fname %>
                                     
+                                    <% if(TL.direct.is_allow_play(obj[x].fname)){ %>
+                                        <a href="<% obj[x].play_link %>" target="_blank"><i class="fa-solid fa-circle-play fa-fw"></i></a>
+                                    <% } %>
+
                                     <% if(obj[x].model!=99){ %>
                                         <!--[在大屏幕上显示]-->
                                         <span class="d-none d-lg-inline">

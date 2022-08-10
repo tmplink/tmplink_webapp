@@ -6,6 +6,7 @@ class direct {
     total_downloads = 0
     protocol = 'http://'
     quota = 0
+    allow_ext = ['mp4', 'm4v', 'webm', 'mov','ogg','mp3']
     set = false
 
     page_number = 0
@@ -36,6 +37,15 @@ class direct {
             }
             cb();
         }, 'json');
+    }
+
+    is_allow_play(filename){
+        let ext = filename.split('.').pop();
+        //if file can be paly and domain not be 5t-cdn.com
+        if(this.allow_ext.indexOf(ext)==-1 || this.domain.indexOf('.5t-cdn.com') != -1){
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -75,7 +85,8 @@ class direct {
             if(rsp.status==1){
                 //提示添加成功，并复制到剪贴板
                 alert(this.parent_op.languageData.direct_add_link_success);
-                this.parent_op.copyToClip(`${this.protocol}${this.domain}/files/${rsp.data}/${filename}`);
+                // this.parent_op.copyToClip(`${this.protocol}${this.domain}/files/${rsp.data}/${filename}`);
+                this.parent_op.copyToClip(this.genLinkDirect(rsp.data,filename).download);
             }else{
                 alert(this.parent_op.languageData.status_error_0);
             }
@@ -83,7 +94,8 @@ class direct {
     }
 
     genLinkDirect(dkey,filename){
-        return `${this.protocol}${this.domain}/files/${dkey}/${filename}`;
+        let filename2 = encodeURI(filename);
+        return {download:`${this.protocol}${this.domain}/files/${dkey}/${filename2}`,play:`${this.protocol}${this.domain}/stream-${dkey}`};
     }
 
     delLink(direct_key){
@@ -202,7 +214,8 @@ class direct {
         //为 data 增加直链单元
         for(let i =0;i<data.length;i++){
             let filename = encodeURIComponent(data[i].fname);
-            data[i].direct_link = this.genLinkDirect(data[i].direct_key,filename);
+            data[i].direct_link = this.genLinkDirect(data[i].direct_key,filename).download;
+            data[i].play_link = this.genLinkDirect(data[i].direct_key,filename).play;
         }
         $('#direct_filelist').append(app.tpl('direct_filelist_list_tpl', data));
         $('.lefttime-remainder').each((i, e) => {

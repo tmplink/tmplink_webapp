@@ -1,3 +1,28 @@
+function isiPad() {
+    return (/macintosh|mac os x/i.test(navigator.userAgent) && window.screen.height > window.screen.width && !navigator.userAgent.match(/(iPhone\sOS)\s([\d_]+)/)) || navigator.userAgent.match(/(iPad).*OS\s([\d_]+)/);
+}
+
+//if iphone or ipad
+function is_iphone_or_ipad() {
+    //如果是 macos 或者 windows 设备
+    if ((navigator.userAgent.match(/Macintosh/i) && isiPad()===null) || navigator.userAgent.match(/Windows/i)) {
+        return false;
+    }
+
+    //如果是 android 设备
+    if (navigator.userAgent.match(/Android/i)) {
+        $('#anyconnect_android_device').show();
+        return false;
+    }
+
+    //如果是 iPhone
+    if (navigator.userAgent.match(/iPhone/i)) {
+        return true;
+    }
+
+    return true;
+}
+
 //倒计时函数，将剩余的时间格式化成时分秒并写入到指定的 html 中
 function countDown(id, time) {
     let now = time-1;

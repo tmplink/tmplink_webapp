@@ -185,11 +185,13 @@
                             <span i18n="nav_upload" class="d-none d-sm-inline"><% TL.languageData.nav_upload %></span>
                         </button>
                     <% } %>
-
+                    
+                    <% if(is_iphone_or_ipad() == false){ %>
                     <button class="btn btn-primary btn-sm mr-1  mt-1" onclick="TL.download_allfile_btn();">
                         <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                         <span i18n="file_btn_downloadall" class="d-none d-sm-inline"><% TL.languageData.file_btn_downloadall %></span>
                     </button>
+                    <% } %>
 
                     <% if(TL.room.top != 99){ %>
                         <a href="/room?mrid=<% TL.room.parent %>" tmpui-action="TL.room_list()" class="btn btn-sm btn-light text-azure mr-1  mt-1">

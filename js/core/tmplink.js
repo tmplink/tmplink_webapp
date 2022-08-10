@@ -1392,12 +1392,20 @@ class tmplink {
             }, (req) => {
                 if (req.status == 1) {
 
+                    //如果不是在 ipad 或者 iphone 上
+                    if(is_iphone_or_ipad() == false){
+                        //开始下载
+                        this.download_queue_add(req.data, title, ukey, size, type);
+                        this.download_queue_start();
+                    }else{
+                        //使用 href 提供下载
+                        location.href = req.data;
+                    }
+                    
                     gtag('config', 'UA-96864664-3', {
                         'page_title': 'Download-' + title,
                     });
 
-                    this.download_queue_add(req.data, title, ukey, size, type);
-                    this.download_queue_start();
                     return true;
                 }
                 if (req.status == 3) {
