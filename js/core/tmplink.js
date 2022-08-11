@@ -43,7 +43,7 @@ class tmplink {
     autoload = false
     sort_by = 0
     sort_type = 0
-    file_manager = null
+    Selecter = null
     upload_model_selected_val = 0
     download_retry = 0
     download_retry_max = 10
@@ -55,7 +55,7 @@ class tmplink {
         this.app_init();
         this.api_init();
         //初始化管理器
-        this.file_manager = new tools_file_manager;
+        this.Selecter = new BoxSelecter;
         this.media = new media;
         this.navbar = new navbar;
         this.uploader = new uploader;
@@ -63,7 +63,7 @@ class tmplink {
         this.direct = new direct;
 
         this.giftcard.init(this);
-        this.file_manager.init(this);
+        this.Selecter.init(this);
         this.media.init(this);
         this.direct.init(this);
         this.uploader.init(this);

@@ -135,12 +135,12 @@
 
                     <div class="btn_for_sub">
                         <span id="room_back_btn"></span>
-                        <button onclick="TL.file_manager.checkbox_select_all();"
+                        <button onclick="TL.Selecter.setAll();"
                             class="btn btn-light text-azure btn-sm mr-1  mt-1">
                             <i class="fa-solid fa-square-check fa-fw"></i>
                             <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
                         </button>
-                        <button onclick="TL.file_manager.checkbox_select_none();"
+                        <button onclick="TL.Selecter.setNone();"
                             class="btn btn-light text-azure btn-sm mr-1 mt-1">
                             <i class="fa-light fa-square-check fa-fw"></i>
                             <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
@@ -152,24 +152,24 @@
                                 <i class="fa-light fa-list-check fa-fw"></i> <span i18n="on_select">.</span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <button class="dropdown-item not_owner" onclick="TL.file_manager.checkbox_delete()">
+                                <button class="dropdown-item not_owner" onclick="TL.Selecter.delete()">
                                     <i class="fa-fw fa-light fa-trash"></i>
                                     <span i18n="on_select_delete">.</span>
                                 </button>
-                                <button class="dropdown-item" onclick="TL.file_manager.checkbox_download()">
+                                <button class="dropdown-item" onclick="TL.Selecter.download()">
                                     <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                     <span i18n="on_select_download">.</span>
                                 </button>
-                                <button class="dropdown-item" onclick="TL.file_manager.checkbox_download_url()">
+                                <button class="dropdown-item" onclick="TL.Selecter.downloadURL()">
                                     <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                     <span i18n="on_select_copy_download_url">.</span>
                                 </button>
-                                <button class="dropdown-item" onclick="TL.file_manager.checkbox_share()">
+                                <button class="dropdown-item" onclick="TL.Selecter.share()">
                                     <i class="fa-fw fa-light fa-share-from-square"></i>
                                     <span i18n="on_select_share">.</span>
                                 </button>
                                 <button class="dropdown-item not_owner"
-                                    onclick="TL.file_manager.checkbox_move_to_model('room')">
+                                    onclick="TL.Selecter.moveToModel('room')">
                                     <i class="fa-fw fa-light fa-folder-plus"></i>
                                     <span i18n="on_select_move">.</span>
                                 </button>
@@ -241,7 +241,7 @@
                     <% for (var x in obj) { %>
                         <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
                             <div class="col-lg-4 col-xl-3 col-md-6 col-12 file_unit_<% obj[x].ukey %>">
-                                <div class="card text-center" name="items_box" tldata="<% obj[x].ukey %>" tltype="photo_card" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
+                                <div class="card text-center" name="items_box" tldata="<% obj[x].ukey %>" tltype="photo_card" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
                                     
                                     <div class="card-body">
                                         <div style="height:220px;" class="mb-2">
@@ -300,7 +300,7 @@
 
                 <script type="text/template" id="dir_filelist_tpl">
                     <% for (var x in obj) { %>
-                        <div class="row mx-0 mb-1 py-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
+                        <div class="row mx-0 mb-1 py-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
                             <div class="col-12 col-md-8 col-lg-7 my-1 d-flex align-items-center listfontweight filename">
                                 <div>
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>

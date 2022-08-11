@@ -1,4 +1,4 @@
-class tools_file_manager {
+class BoxSelecter {
 
     items_name = 'items_box'
     parent_op = null
@@ -12,25 +12,25 @@ class tools_file_manager {
         this.site_domain = this.parent_op.site_domain;
     }
 
-    checkbox_onclick_by_list(node) {
+    onclickByList(node) {
         let n = node.getAttribute('data-check');
         if (n !== 'true') {
-            this.checkbox_select_on(node);
+            this.setOn(node);
         } else {
-            this.checkbox_select_off(node);
+            this.selectOff(node);
         }
     }
 
-    checkbox_onclick(node) {
+    boxOnclick(node) {
         let n = node.getAttribute('data-check');
         if (n !== 'true') {
-            this.checkbox_select_on(node);
+            this.setOn(node);
         } else {
-            this.checkbox_select_off(node);
+            this.selectOff(node);
         }
     }
 
-    checkbox_select_on(node) {
+    setOn(node) {
         let inode = node.getAttribute('tldata');
         let itype = node.getAttribute('tltype');
         if(itype==='photo_card'){
@@ -43,7 +43,7 @@ class tools_file_manager {
         node.setAttribute('data-check', 'true');
     }
 
-    checkbox_select_off(node) {
+    selectOff(node) {
         let inode = node.getAttribute('tldata');
         let itype = node.getAttribute('tltype');
         if(itype==='photo_card'){
@@ -56,21 +56,21 @@ class tools_file_manager {
         node.setAttribute('data-check', 'false');
     }
 
-    checkbox_select_all() {
+    setAll() {
         var node = document.getElementsByName(this.items_name);
         for (let i = 0; i < node.length; i++) {
-            this.checkbox_select_on(node[i]);
+            this.setOn(node[i]);
         }
     }
 
-    checkbox_select_none() {
+    setNone() {
         var node = document.getElementsByName(this.items_name);
         for (let i = 0; i < node.length; i++) {
-            this.checkbox_select_off(node[i]);
+            this.selectOff(node[i]);
         }
     }
 
-    file_on_check() {
+    fileOnCheck() {
         var node = document.getElementsByName(this.items_name);
         for (let i = 0; i < node.length; i++) {
             if (inode.checked == true) {
@@ -81,7 +81,7 @@ class tools_file_manager {
         //do something
     }
 
-    checkbox_share() {
+    share() {
         var node = document.getElementsByName(this.items_name);
         let ukeys = [];
         for (let i = 0; i < node.length; i++) {
@@ -95,10 +95,10 @@ class tools_file_manager {
                 });
             }
         }
-        this.checkbox_share_to_clicpboard(ukeys);
+        this.toClicpboard(ukeys);
     }
 
-    checkbox_share_to_clicpboard(data) {
+    toClicpboard(data) {
         let ctext = '';
         for (let x in data) {
             ctext = ctext + '[' + data[x].title + '] https://'+this.site_domain+'/f/' + data[x].ukey + "\r";
@@ -106,7 +106,7 @@ class tools_file_manager {
         this.parent_op.copyToClip(ctext);
     }
 
-    checkbox_delete() {
+    delete() {
         if(this.parent_op.profile_confirm_delete_get()){
             if(!confirm(this.parent_op.languageData.confirm_delete)){
                 return false;
@@ -127,7 +127,7 @@ class tools_file_manager {
         }
     }
 
-    checkbox_download() {
+    download() {
         var node = document.getElementsByName(this.items_name);
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
@@ -140,7 +140,7 @@ class tools_file_manager {
         }
     }
 
-    checkbox_download_url() {
+    downloadURL() {
         //未登录无法使用此功能
         if (!this.parent_op.isLogin()) {
             this.parent_op.alert(this.parent_op.languageData.status_need_login);
@@ -155,10 +155,8 @@ class tools_file_manager {
                 //do something
                 check_count++;
                 let ukey = inode.getAttribute('tldata');
-                this.parent_op.download_file_url(ukey, (download_url) => {
-                    $('#copy-modal-body').html($('#copy-modal-body').html() + `${download_url}\n`);
-                    $('#copy-modal-btn').attr('data-clipboard-text', $('#copy-modal-body').html());
-                    this.parent_op.btn_copy_bind();
+                this.parent_op.download_file_url(ukey, (downloadURL) => {
+                    $('#copy-modal-body').html($('#copy-modal-body').html() + `${downloadURL}\n`);
                 });
             }
         }
@@ -166,11 +164,13 @@ class tools_file_manager {
             this.parent_op.alert(this.parent_op.languageData.status_error_12);
             return false;
         }
-        //打开复制窗口
+        // //打开复制窗口
+        // let base64_text = window.btoa($('#copy-modal-body').html());
+        // $('#copy-modal-body').attr('base64',base64_text);
         $('#copyModal').modal('show');
     }
 
-    checkbox_move_to_model(type) {
+    moveToModel(type) {
         var node = document.getElementsByName(this.items_name);
         this.move_place = type;
         for (let i = 0; i < node.length; i++) {
@@ -190,7 +190,7 @@ class tools_file_manager {
         return false;
     }
 
-    checkbox_move_to_dir() {
+    moveToDir() {
         var node = document.getElementsByName(this.items_name);
         let ukeys = [];
         for (let i = 0; i < node.length; i++) {
@@ -205,4 +205,67 @@ class tools_file_manager {
         this.parent_op.move_to_dir(ukeys, this.move_place);
     }
 
+    directCopy(type) {
+        var node = document.getElementsByName(this.items_name);
+        let copyText = '';
+        for (let i = 0; i < node.length; i++) {
+            var inode = node[i];
+            let check = inode.getAttribute('data-check');
+            if (check === 'true') {
+                //do something
+                let dkey = inode.getAttribute('tldata');
+                let fname = inode.getAttribute('tltitle');
+                //get file url
+                let urldata = this.parent_op.direct.genLinkDirect(dkey,fname);
+                //create copy text
+                switch (type) {
+                    case 'downloadURLForText':
+                        copyText += `${fname}\n${urldata.download}\n\n`;
+                        break;
+                    case 'downloadURLForHTML':
+                        copyText += `<a href="${urldata.download}" target="_blank">${fname}</a>\n`;
+                        break;
+                    case 'streamURLForText':
+                        if(this.parent_op.direct.is_allow_play(fname)){
+                            copyText += `${fname}\n${urldata.play}\n\n`;
+                        }
+                        break;
+                    case 'streamURLForHTML':
+                        if(this.parent_op.direct.is_allow_play(fname)){
+                            copyText += `<a href="${urldata.play}" target="_blank">${fname}</a>\n\n`;
+                        }
+                        break;
+                }
+            }
+        }
+
+        //打开复制窗口
+        if(copyText!==''){
+            $('#copy-modal-body').html(copyText);
+            //需要先 base64 编码
+            // let base64_text = window.btoa(copyText);
+            // $('#copy-modal-body').attr('base64',base64_text);
+            $('#copyModal').modal('show');
+        }
+    }
+
+    copyModelCP(){
+        // let copyText = $('#copy-modal-body').attr('base64');
+        // copyText = window.atob(copyText);
+        //copy text from copy-modal-body
+        let copyText = $('#copy-modal-body').text();
+        var aux = document.createElement("textarea");
+        aux.value = copyText;
+        document.body.appendChild(aux);
+        aux.select();
+        document.execCommand("copy");
+        document.body.removeChild(aux);
+
+        let tmp = $('#copy-modal-btn').html();
+        $('#copy-modal-btn').html(this.parent_op.languageData.copied);
+        setTimeout(()=>{
+            $('#copy-modal-btn').html(tmp);
+        }
+        ,2000);
+    }
 }

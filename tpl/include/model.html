@@ -807,7 +807,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
                 <button type="button" class="btn btn-success" i18n="model_btn_ok"
-                    onclick="TL.file_manager.checkbox_move_to_dir();">.</button>
+                    onclick="TL.Selecter.moveToDir();">.</button>
             </div>
         </div>
     </div>
@@ -854,9 +854,8 @@
                     rows="10"></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success btn_copy" i18n="file_btn_copy"
-                    id="copy-modal-btn">.</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+                <button type="button" class="btn btn-success" i18n="file_btn_copy"
+                    id="copy-modal-btn" onclick="TL.Selecter.copyModelCP()">.</button>
             </div>
         </div>
     </div>

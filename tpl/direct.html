@@ -46,7 +46,8 @@
                     <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.direct.filelist(0);">
                         <i class="fa-light fa-rotate fa-fw" id="filelist_refresh_icon"></i>
                     </button>
-                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="$('#directEditDomainModal').modal('show');">
+                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1"
+                        onclick="$('#directEditDomainModal').modal('show');">
                         <i class="fa-fw fa-light fa-signal-stream"></i>
                         <span i18n="direct_btn_bind_domain" class="d-none d-sm-inline">.</span>
                     </button>
@@ -67,14 +68,12 @@
                 </div>
 
                 <!--[选择器]-->
-                <!-- <div>
-                    <button onclick="TL.file_manager.checkbox_select_all();"
-                        class="btn btn-light text-azure btn-sm mr-1 mt-1">
+                <div>
+                    <button onclick="TL.Selecter.setAll();" class="btn btn-light text-azure btn-sm mr-1 mt-1">
                         <i class="fa-solid fa-square-check fa-fw"></i>
                         <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
                     </button>
-                    <button onclick="TL.file_manager.checkbox_select_none();"
-                        class="btn btn-light text-azure btn-sm mr-1 mt-1">
+                    <button onclick="TL.Selecter.setNone();" class="btn btn-light text-azure btn-sm mr-1 mt-1">
                         <i class="fa-light fa-square-check fa-fw"></i>
                         <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
                     </button>
@@ -83,14 +82,30 @@
                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa-light fa-list-check fa-fw"></i> <span i18n="on_select">.</span>
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item" onclick="TL.file_manager.checkbox_delete()">
+                        <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
+                            <!-- <button class="dropdown-item" onclick="TL.Selecter.delete()">
                                 <i class="fa-fw fa-light fa-trash"></i>
                                 <span i18n="on_select_delete">.</span>
+                            </button> -->
+                            <button class="dropdown-item" onclick="TL.Selecter.directCopy('downloadURLForText')">
+                                <i class="fa-fw fa-light fa-download"></i>
+                                <span i18n="on_select_copy_direct_url_text">.</span>
+                            </button>
+                            <button class="dropdown-item" onclick="TL.Selecter.directCopy('downloadURLForHTML')">
+                                <i class="fa-fw fa-light fa-download"></i>
+                                <span i18n="on_select_copy_direct_url_html">.</span>
+                            </button>
+                            <button class="dropdown-item" onclick="TL.Selecter.directCopy('streamURLForText')">
+                                <i class="fa-fw fa-light fa-play-circle"></i>
+                                <span i18n="on_select_copy_stream_url_text">.</span>
+                            </button>
+                            <button class="dropdown-item" onclick="TL.Selecter.directCopy('streamURLForHTML')">
+                                <i class="fa-fw fa-light fa-play-circle"></i>
+                                <span i18n="on_select_copy_stream_url_html">.</span>
                             </button>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
 
             <div id="direct_filelist"></div>
@@ -110,7 +125,7 @@
 
             <script type="text/template" id="direct_filelist_list_tpl">
                 <% for (var x in obj) { %>
-                    <div class="row mx-0 mb-1 p-1 line list-bar file_unit_<% obj[x].direct_key %>" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].fname %>" onclick="TL.file_manager.checkbox_onclick_by_list(this);">
+                    <div class="row mx-0 mb-1 p-1 line list-bar file_unit_<% obj[x].direct_key %>" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
                         <div class="col-12 col-md-8 col-lg-7 d-flex align-items-center listfontweight filename">
                             <div class="row">
                                 <div class="col-12 filename">
@@ -219,10 +234,12 @@
                     <form id="form-direct-domain">
                         <div class="form-group">
                             <label for="direct-domain" i18n="direct_modal_bind_domain_5">.</label>
-                            <input type="text" class="form-control" id="direct-domain" placeholder="." i18n="direct_modal_bind_domain_6" i18n-placeholder="true">
+                            <input type="text" class="form-control" id="direct-domain" placeholder="."
+                                i18n="direct_modal_bind_domain_6" i18n-placeholder="true">
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-primary btn-block" onclick="TL.direct.setDomain()">绑定</button>
+                            <button type="button" class="btn btn-primary btn-block"
+                                onclick="TL.direct.setDomain()">绑定</button>
                         </div>
                     </form>
                 </div>
