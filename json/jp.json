@@ -1,4 +1,9 @@
 {
+    "on_select_addto_direct": "ダイレクトリンクアドレスを作成",
+    "on_select_copy_direct_url_text": "ダイレクト URL をコピー (テキスト)",
+    "on_select_copy_direct_url_html": "ダイレクト URL (コード) をコピー",
+    "on_select_copy_stream_url_text": "オンライン配信のアドレス(テキスト)をコピー",
+    "on_select_copy_stream_url_html": "オンライン再生のアドレス(コード)をコピー",
     "direct_modal_bind_domain_1": "独自のドメイン名をバインドする",
     "direct_modal_bind_domain_2": "独自のドメイン名をバインドできます。バインドが完了したら、<span class=\" text-red\">direct.tmp.link </span> を指す、対応するドメイン名のCNAMEレコードを作成してください。",
     "direct_modal_bind_domain_3": "TMPLINKのサブドメイン",

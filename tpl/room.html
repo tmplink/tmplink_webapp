@@ -151,7 +151,7 @@
                                 aria-expanded="false">
                                 <i class="fa-light fa-list-check fa-fw"></i> <span i18n="on_select">.</span>
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
                                 <button class="dropdown-item not_owner" onclick="TL.Selecter.delete()">
                                     <i class="fa-fw fa-light fa-trash"></i>
                                     <span i18n="on_select_delete">.</span>
@@ -167,6 +167,10 @@
                                 <button class="dropdown-item" onclick="TL.Selecter.share()">
                                     <i class="fa-fw fa-light fa-share-from-square"></i>
                                     <span i18n="on_select_share">.</span>
+                                </button>
+                                <button class="dropdown-item" onclick="TL.Selecter.directAddlinks()">
+                                    <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
+                                    <span i18n="on_select_addto_direct">.</span>
                                 </button>
                                 <button class="dropdown-item not_owner"
                                     onclick="TL.Selecter.moveToModel('room')">
@@ -359,6 +363,12 @@
                                                     <i class="fa-fw fa-light fa-trash"></i>
                                                     <span i18n="menu_delete"><% TL.languageData.menu_delete %></span>
                                                 </button> 
+                                                <% if(TL.direct.is_allow()){ %>
+                                                    <button onclick="TL.direct.addLink('<% obj[x].ukey %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item">
+                                                        <i class="fa-fw fa-light fa-share-nodes"></i>
+                                                        <span i18n="menu_addlink"><% TL.languageData.menu_addlink %></span>
+                                                    </button>
+                                                <% } %>  
                                             </div>
                                         </span>
                                     <% } %>

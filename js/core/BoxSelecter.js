@@ -242,17 +242,11 @@ class BoxSelecter {
         //打开复制窗口
         if(copyText!==''){
             $('#copy-modal-body').html(copyText);
-            //需要先 base64 编码
-            // let base64_text = window.btoa(copyText);
-            // $('#copy-modal-body').attr('base64',base64_text);
             $('#copyModal').modal('show');
         }
     }
 
     copyModelCP(){
-        // let copyText = $('#copy-modal-body').attr('base64');
-        // copyText = window.atob(copyText);
-        //copy text from copy-modal-body
         let copyText = $('#copy-modal-body').text();
         var aux = document.createElement("textarea");
         aux.value = copyText;
@@ -267,5 +261,43 @@ class BoxSelecter {
             $('#copy-modal-btn').html(tmp);
         }
         ,2000);
+    }
+
+    directAddlinks() {
+        var node = document.getElementsByName(this.items_name);
+        let ukeys = [];
+        for (let i = 0; i < node.length; i++) {
+            var inode = node[i];
+            let check = inode.getAttribute('data-check');
+            if (check === 'true') {
+                //do something
+                let ukey = inode.getAttribute('tldata');
+                ukeys.push(ukey);
+            }
+        }
+
+        //打开复制窗口
+        if(ukeys.length>0){
+            this.parent_op.direct.addLinks(ukeys);
+        }
+    }
+
+    directDelete() {
+        var node = document.getElementsByName(this.items_name);
+        let ukeys = [];
+        for (let i = 0; i < node.length; i++) {
+            var inode = node[i];
+            let check = inode.getAttribute('data-check');
+            if (check === 'true') {
+                //do something
+                let ukey = inode.getAttribute('tldata');
+                ukeys.push(ukey);
+            }
+        }
+
+        //打开复制窗口
+        if(ukeys.length>0){
+            this.parent_op.direct.delLinks(ukeys);
+        }
     }
 }

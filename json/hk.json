@@ -1,4 +1,9 @@
 {
+    "on_select_addto_direct":"創建直鏈地址",
+    "on_select_copy_direct_url_text":"複製直鏈地址（文本）",
+    "on_select_copy_direct_url_html":"複製直鏈地址（代碼）",
+    "on_select_copy_stream_url_text":"複製在線播放的地址（文本）",
+    "on_select_copy_stream_url_html":"複製在線播放的地址（代碼）",
     "direct_modal_bind_domain_1":"綁定自己的域名",
     "direct_modal_bind_domain_2":"您可以綁定自己擁有的域名，綁定完成之後，請將對應域名做 CNAME 記錄，指向 <span class=\"text-red\">direct.tmp.link</span>",
     "direct_modal_bind_domain_3":"鈦盤二級域名",

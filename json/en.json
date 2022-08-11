@@ -1,4 +1,9 @@
 {
+    "on_select_addto_direct": "Create a direct link address",
+    "on_select_copy_direct_url_text": "Copy direct link address (text)",
+    "on_select_copy_direct_url_html": "Copy direct link address (html)",
+    "on_select_copy_stream_url_text": "Copy the address of the online playback (text)",
+    "on_select_copy_stream_url_html": "Copy address for online playback (html)",
     "direct_modal_bind_domain_1": "Bind your own domain name",
     "direct_modal_bind_domain_2": "You can bind your own domain name. After the binding is complete, please make a CNAME record for the corresponding domain name, pointing to <span class=\"text-red\">direct.tmp.link</span>",
     "direct_modal_bind_domain_3": "Subdomain of TMPLINK",
