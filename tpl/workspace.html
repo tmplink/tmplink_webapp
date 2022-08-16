@@ -179,10 +179,10 @@
                                         <% obj[x].fname %>
                                     </a>
 
-                                    <% if(TL.media.is_allow(obj[x].fname)){ %>
-                                        <!-- <span class="badge badge-pill badge-primary btn-point" onclick="TL.media.video_can_play_open('<% obj[x].ukey %>')">
+                                    <% if(TL.stream.allow(obj[x].fname)){ %>
+                                        <span class="btn-point" onclick="TL.stream.request('<% obj[x].ukey %>')">
                                             <i class="fa-fw fa-light fa-play-circle"></i>
-                                        </span> -->
+                                        </span>
                                     <% } %>  
                                     
                                     <% if(obj[x].model!=99){ %>

@@ -61,7 +61,9 @@ class tmplink {
         this.uploader = new uploader;
         this.giftcard = new giftcard;
         this.direct = new direct;
+        this.stream = new stream;
 
+        this.stream.init(this);
         this.giftcard.init(this);
         this.Selecter.init(this);
         this.media.init(this);
@@ -935,15 +937,13 @@ class tmplink {
                             });
 
                             //如果可以，显示播放按钮
-                            // if (this.media.is_allow(rsp.data.name)) {
-                            //     if(this.area_cn!==true){
-                            //         $('.btn_play').show();
-                            //         $('.btn_play').on('click', () => {
-                            //             this.media.video_can_play_open(params.ukey);
-                            //             return true;
-                            //         });
-                            //     }
-                            // }
+                            if (this.stream.allow(rsp.data.name)) {
+                                $('.btn_play').show();
+                                $('.btn_play').on('click', () => {
+                                    this.media.request(params.ukey);
+                                    return true;
+                                });
+                            }
 
                             //复制链接按钮绑定
                             $('#file_download_url_copy').on('click', () => {
