@@ -65,7 +65,9 @@ class stream {
                 captcha: recaptcha
             }, (req) => {
                 if (req.status == 1) {
-                    this.play(req.data);
+                    //播放地址参数需要 base64 编码
+                    let player = 'https://player.5t-cdn.com/?stream=' + btoa(req.data);
+                    this.play(player);
                 } else {
                     alert('error');
                 }
