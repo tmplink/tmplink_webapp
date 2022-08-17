@@ -35,7 +35,7 @@
                                 i18n="search_btn">.</button>
                         </div>
                         <input type="search" id="direct_search" class="form-control" placeholder="." i18n="search_plh"
-                            onkeyup="if(event.keyCode==13)TL.direct_filelist(0);"
+                            onkeyup="if(event.keyCode==13)TL.direct.filelist(0);"
                             style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
                     </div>
                     <input style="display:none;">
@@ -60,7 +60,7 @@
                         <i class="fa-fw fa-light fa-book-open"></i>
                         <span i18n="direct_btn_intro" class="d-none d-sm-inline">.</span>
                     </button>
-                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
+                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.sortModal();"
                         id="filelist_filter">
                         <i class="fa-fw fa-light fa-list"></i>
                         <span i18n="sort_title" class="d-none d-sm-inline">.</span>

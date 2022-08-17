@@ -9,12 +9,16 @@ class direct {
     allow_ext = ['mp4', 'm4v', 'webm', 'mov', 'ogg', 'mp3']
     set = false
 
+    sort_by = 0
+    sort_type = 0
+
     page_number = 0
     list_Data = []
     autoload = false
 
     init(parent_op) {
         this.parent_op = parent_op;
+        this.sortSettingsInit();
     }
 
     init_details(cb) {
@@ -163,7 +167,7 @@ class direct {
 
 
         //获取排序
-        let key = this.key_get();
+        let key = this.keyGet();
         let sort_by = localStorage.getItem(key.sort_by);
         let sort_type = localStorage.getItem(key.sort_type);
 
@@ -216,7 +220,7 @@ class direct {
             default:
                 localStorage.setItem('app_direct_view', 'list');
         }
-        this.direct_filelist(0);
+        this.filelist(0);
     }
 
     direct_view(data, page) {
@@ -257,11 +261,40 @@ class direct {
         app.linkRebind();
     }
 
-    key_get() {
+    sortSettingsInit() {
+        let key = this.keyGet();
+
+        let storage_sort_by = localStorage.getItem(key.sort_by);
+        let sort_by = storage_sort_by === null ? this.sort_by : storage_sort_by;
+        localStorage.setItem(key.sort_by, sort_by);
+        $("#direct_sort_by option[value='" + sort_by + "']").attr("selected", "selected");
+
+        let storage_sort_type = localStorage.getItem(key.sort_type);
+        let sort_type = storage_sort_type === null ? this.sort_type : storage_sort_type;
+        localStorage.setItem(key.sort_type, sort_type);
+        $("#direct_sort_type option[value='" + sort_type + "']").attr("selected", "selected");
+    }
+
+    sortSettings() {
+        let key = this.keyGet();
+        this.sort_by = $('#direct_sort_by').val();
+        this.sort_type = $('#direct_sort_type').val();
+        localStorage.setItem(key.sort_by, this.sort_by);
+        localStorage.setItem(key.sort_type, this.sort_type);
+
+        this.filelist(0);
+        $('#directSortModal').modal('hide');
+    }
+
+    sortModal(){
+        $('#directSortModal').modal('show');
+    }
+
+    keyGet() {
         return {
-            view: 'app_room_view_direct',
-            sort_by: 'app_room_view_sort_by_direct',
-            sort_type: 'app_room_view_sort_type_direct',
+            view: 'app_direct_view',
+            sort_by: 'app_direct_view_sort_by',
+            sort_type: 'app_direct_view_sort_type',
         }
 
     }
