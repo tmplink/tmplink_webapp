@@ -31,7 +31,6 @@ class stream {
     }
 
     allow(filename,owner) {
-        console.log(`owner:${owner},uid:${this.parent.uid}`);
         if (this.parent.area_cn&&owner!==this.parent.uid) {
             return false;
         }
