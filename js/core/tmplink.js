@@ -406,6 +406,7 @@ class tmplink {
             if (rsp.status === 1) {
                 localStorage.setItem('app_login', 1);
                 this.logined = 1;
+                this.uid = rsp.data.uid;
                 this.storage_used = rsp.data.storage_used;
                 this.storage = rsp.data.storage;
                 this.high_speed_channel = rsp.data.highspeedchannel;

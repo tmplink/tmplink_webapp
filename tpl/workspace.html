@@ -179,7 +179,7 @@
                                         <% obj[x].fname %>
                                     </a>
 
-                                    <% if(TL.stream.allow(obj[x].fname)){ %>
+                                    <% if(TL.stream.allow(obj[x].fname,obj[x].owner)){ %>
                                         <span class="btn-point" onclick="TL.stream.request('<% obj[x].ukey %>')">
                                             <i class="fa-fw fa-light fa-play-circle"></i>
                                         </span>

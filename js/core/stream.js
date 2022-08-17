@@ -30,8 +30,9 @@ class stream {
         }
     }
 
-    allow(filename) {
-        if (this.parent.area_cn) {
+    allow(filename,owner) {
+        console.log(`owner:${owner},uid:${this.parent.uid}`);
+        if (this.parent.area_cn&&owner!==this.parent.uid) {
             return false;
         }
         
@@ -51,7 +52,7 @@ class stream {
     
     request(ukey) {
         //未登录的情况下，跳转到登录界面
-        if (this.parent.logined == 1) {
+        if (this.parent.logined !== 1) {
             app.open('/login');
             return;
         }
