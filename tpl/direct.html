@@ -131,7 +131,7 @@
                             <div class="row">
                                 <div class="col-12 filename">
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
-                                    <% obj[x].fname %>
+                                    <a href="<% obj[x].direct_link %>" class="filelist_link" target="_blank"><% obj[x].fname %></a>
                                     
                                     <% if(TL.direct.is_allow_play(obj[x].fname)){ %>
                                         <a href="<% obj[x].play_link %>" target="_blank"><i class="fa-solid fa-circle-play fa-fw"></i></a>

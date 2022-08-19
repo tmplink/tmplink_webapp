@@ -57,7 +57,7 @@
                             <div class="mt-1">
                                 <span class="upload_queue" style="display: none;">
                                     <i class="fa-fw fa-light fa-circle-arrow-up"></i>
-                                    <span class="upload_queue_counter"></span> 
+                                    <span class="upload_queue_counter"></span>
                                     <span class="upload_speed"></span>
                                 </span>
                             </div>
@@ -135,13 +135,11 @@
 
                     <div class="btn_for_sub">
                         <span id="room_back_btn"></span>
-                        <button onclick="TL.Selecter.setAll();"
-                            class="btn btn-light text-azure btn-sm mr-1  mt-1">
+                        <button onclick="TL.Selecter.setAll();" class="btn btn-light text-azure btn-sm mr-1  mt-1">
                             <i class="fa-solid fa-square-check fa-fw"></i>
                             <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
                         </button>
-                        <button onclick="TL.Selecter.setNone();"
-                            class="btn btn-light text-azure btn-sm mr-1 mt-1">
+                        <button onclick="TL.Selecter.setNone();" class="btn btn-light text-azure btn-sm mr-1 mt-1">
                             <i class="fa-light fa-square-check fa-fw"></i>
                             <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
                         </button>
@@ -172,8 +170,7 @@
                                     <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                     <span i18n="on_select_addto_direct">.</span>
                                 </button>
-                                <button class="dropdown-item not_owner"
-                                    onclick="TL.Selecter.moveToModel('room')">
+                                <button class="dropdown-item not_owner" onclick="TL.Selecter.moveToModel('room')">
                                     <i class="fa-fw fa-light fa-folder-plus"></i>
                                     <span i18n="on_select_move">.</span>
                                 </button>
@@ -308,13 +305,13 @@
                             <div class="col-12 col-md-8 col-lg-7 my-1 d-flex align-items-center listfontweight filename">
                                 <div>
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
-                                    <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" target="_blank">
+                                    <a href="/file?ukey=<% obj[x].ukey %>" class="filelist_link mr-1" tmpui-app="true" target="_blank">
                                         <% obj[x].fname %>
                                     </a>
 
                                     <% if(TL.stream.allow(obj[x].fname,obj[x].owner)){ %>
                                         <span class="btn-point" onclick="TL.stream.request('<% obj[x].ukey %>')">
-                                            <i class="fa-fw fa-light fa-play-circle"></i>
+                                            <i class="text-blue fa-fw fa-light fa-play-circle"></i>
                                         </span>
                                     <% } %> 
 
@@ -429,7 +426,7 @@
                                     <i class="fa-light fa-link text-cyan fa-fw d-none d-md-block"></i>
                                 <% } %> 
                                 &nbsp
-                                <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-action="TL.room_list()">
+                                <a href="/room?mrid=<% obj[x].mr_id %>" class="filelist_link" tmpui-action="TL.room_list()">
                                     <% obj[x].name %>
                                 </a>
                             </div>

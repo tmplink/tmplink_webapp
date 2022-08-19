@@ -69,7 +69,7 @@
     "open_in_menubarx": "在 MenubarX 中啟動鈦盤",
     "reg_supported_emails": "查看可用於註冊的郵箱地址",
     "model_changeemail_news": "* 我們不會向您的郵箱發送非必要郵件。如果需要訂閱新聞以了解鈦盤的最新動態，請在頁底點擊 “新聞公告” 獲取。",
-    "footer_news": "<a href=\"https://t.me/tmplink_news_cn\" target=\"_blank\">新聞公告</a>",
+    "footer_news": "<a href=\"https://t.me/tmplink_news_cn\" target=\"_blank\" class=\"filelist_link\">新聞公告</a>",
     "index_tmp_upload_des": "無需登錄，僅保存24小時，單個檔案最大 20 GB，無限空間。",
     "index_login_des": "安全地管理上傳的檔案，並獲得更多功能。",
     "status_file_1": "正在載入...",

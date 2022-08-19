@@ -319,3 +319,13 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
         margin-bottom: 5px;
     }
 }
+
+.filelist_link {
+    text-decoration: none;
+    color: #212529;
+}
+
+.filelist_link:hover {
+    text-decoration: none;
+    color: #323283;
+}
