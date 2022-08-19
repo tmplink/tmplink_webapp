@@ -938,10 +938,10 @@ class tmplink {
                             });
 
                             //如果可以，显示播放按钮
-                            if (this.stream.allow(rsp.data.name)) {
+                            if (this.stream.allow(rsp.data.name,this.uid)) {
                                 $('.btn_play').show();
                                 $('.btn_play').on('click', () => {
-                                    this.media.request(params.ukey);
+                                    this.stream.request(params.ukey);
                                     return true;
                                 });
                             }
@@ -1018,6 +1018,10 @@ class tmplink {
                             //         }
                             //     }
                             // }
+
+                            $('#file_loading').fadeOut(100);
+                            $('#file_op').fadeIn(300);
+
                             return true;
                         });
                     });

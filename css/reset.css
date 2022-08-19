@@ -53,7 +53,7 @@
 
 a,a:link,a:visited,a:hover,a:active{
   text-decoration: none !important;
-  color: #212529 !important;
+  /* color: #212529 !important; */
 }
 
 .display-none{

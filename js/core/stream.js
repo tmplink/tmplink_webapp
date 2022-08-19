@@ -56,6 +56,8 @@ class stream {
             return;
         }
 
+        //显示载入动画
+        $('#loading_box').fadeIn();
         this.parent.recaptcha_do('stream_req', (recaptcha) => {
             $.post(this.parent.api_file, {
                 action: 'stream_req',
@@ -63,6 +65,7 @@ class stream {
                 token: this.parent.api_token,
                 captcha: recaptcha
             }, (req) => {
+                $('#loading_box').fadeOut();
                 if (req.status == 1) {
                     //播放地址参数需要 base64 编码
                     let player = 'https://player.5t-cdn.com/?stream=' + btoa(req.data);
