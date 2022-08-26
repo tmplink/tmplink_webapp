@@ -19,9 +19,14 @@ class direct {
     init(parent_op) {
         this.parent_op = parent_op;
         this.sortSettingsInit();
+
+        if (this.parent_op.area_cn) {
+            $('#tmplink_subdomain').hide();
+        }
     }
 
     init_details(cb) {
+
         if (this.parent_op.isLogin() === false) {
             cb();
             return false;
