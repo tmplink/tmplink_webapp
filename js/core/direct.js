@@ -46,7 +46,8 @@ class direct {
     is_allow_play(filename) {
         let ext = filename.split('.').pop();
         //if file can be paly and domain not be 5t-cdn.com
-        if (this.allow_ext.indexOf(ext) == -1 || this.domain.indexOf('.5t-cdn.com') != -1) {
+        // if (this.allow_ext.indexOf(ext) == -1 || this.domain.indexOf('.5t-cdn.com') != -1) {
+        if (this.allow_ext.indexOf(ext) == -1) {
             return false;
         }
         return true;
