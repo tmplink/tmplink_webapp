@@ -416,6 +416,7 @@ class tmplink {
                 this.storage = rsp.data.storage;
                 this.high_speed_channel = rsp.data.highspeedchannel;
                 this.profile_confirm_delete_set(rsp.data.pf_confirm_delete);
+                this.profile_bulk_copy_set(rsp.data.pf_bulk_copy);
                 localStorage.setItem('app_lang', rsp.data.lang);
                 app.languageSet(rsp.data.lang);
                 //console.log
@@ -2026,6 +2027,34 @@ class tmplink {
         });
     }
 
+    profile_bulk_copy_post() {
+        let status = ($('#confirm_bulk_copy').is(':checked')) ? 'yes' : 'no';
+        localStorage.setItem('user_profile_confirm_delete', status);
+        $.post(this.api_user, {
+            action: 'pf_bulk_copy_set',
+            token: this.api_token,
+            status: status
+        });
+    }
+
+    profile_bulk_copy_set(status) {
+        localStorage.setItem('user_profile_bulk_copy', status);
+        if (status == 'yes') {
+            $('#bulk_copy_status').attr('checked', 'checked');
+        }
+    }
+
+    profile_bulk_copy_get() {
+        let status = localStorage.getItem('user_profile_bulk_copy');
+        if (status == 'yes') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
     profile_confirm_delete_post() {
         let status = ($('#confirm_delete_status').is(':checked')) ? 'yes' : 'no';
         localStorage.setItem('user_profile_confirm_delete', status);
@@ -2435,7 +2464,7 @@ class tmplink {
             }
 
             //如果文件夹允许其他人上传文件
-            console.log(this.room.allow_upload);
+            // console.log(this.room.allow_upload);
             if (this.room.allow_upload == 'yes') {
                 $('#pf_allow_upload').attr('checked', '');
             } else {

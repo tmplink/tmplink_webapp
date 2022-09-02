@@ -117,6 +117,7 @@
     "status_media_usage": "Media library capacity is insufficient, please consider purchasing a larger capacity.",
     "upload_sync_onprogress": "Uploading, please wait...",
     "model_profile_title": "Preferences",
+    "model_profile_bulk_copy":"Do you want to enable continuous copying?<br>After enabling you can click the copy button continuously to copy multiple file links.",
     "model_profile_confirm_delete": "Do you want to confirm again before deleting?",
     "navbar_profile": "Preferences",
     "confirm_delete": "Are you sure you want to delete?",
