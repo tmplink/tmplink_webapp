@@ -292,7 +292,7 @@ class direct {
         $('#directSortModal').modal('hide');
     }
 
-    sortModal(){
+    sortModal() {
         $('#directSortModal').modal('show');
     }
 
@@ -325,6 +325,7 @@ class direct {
      * 设置域名
      */
     setDomain() {
+        this.loading_box_on();
         let domain = $('#direct-domain').val();
         //检查输入的是否是正确的域名
         if (domain == null) {
@@ -343,6 +344,33 @@ class direct {
             } else {
                 alert(this.parent_op.languageData.direct_btn_bind_prompt_error);
             }
+            this.loading_box_off();
+        }), 'json';
+    }
+
+    /**
+     * 设置域名
+     */
+    getFreeQuotaOfSponsor() {
+        this.loading_box_on();
+        $.post(this.parent_op.api_pay, {
+            'action': 'free_dq_get',
+            'token': this.parent_op.api_token
+        }, (rsp) => {
+            switch (rsp.status) {
+                case 1:
+                    alert(this.parent_op.languageData.direct_sponsor_freee_quota_msg_1);
+                    break;
+                case 2:
+                    alert(this.parent_op.languageData.direct_sponsor_freee_quota_msg_2);
+                    break;
+                case 3:
+                    alert(this.parent_op.languageData.direct_sponsor_freee_quota_msg_3);
+                    break;
+                default:
+                    alert(this.parent_op.languageData.status_error_0);
+            }
+            this.loading_box_off();
         }), 'json';
     }
 
