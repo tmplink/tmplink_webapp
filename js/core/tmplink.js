@@ -54,6 +54,7 @@ class tmplink {
         
         this.app_init();
         this.api_init();
+
         //初始化管理器
         this.Selecter = new BoxSelecter;
         this.media = new media;
@@ -384,6 +385,10 @@ class tmplink {
         $('#index_lang').fadeIn();
         $('.navbar_nloading').hide();
         $('.navbar_ready').show();
+
+        if(this.high_speed_channel){
+            $('.show_for_sponsor').show();
+        }
         //set process bar to 100%
         // setTimeout(() => {
         //     $('#index_userinfo_loading').fadeOut();
@@ -1822,7 +1827,7 @@ class tmplink {
                 case 'hs':
                     r[i].name = this.languageData.service_code_hs;
                     r[i].des = this.languageData.service_code_hs_des;
-                    r[i].icon = 'fa-light fa-gauge-circle-bolt';
+                    r[i].icon = 'fa-solid fa-heart-circle-check';
                     break;
                 case 'storage':
                     r[i].name = this.languageData.service_code_storage + ' (' + bytetoconver(data[i].val, true) + ')';

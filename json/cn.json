@@ -259,8 +259,8 @@
     "model_buy_btn":"付款",
     "model_buy_des": "选购服务需要使用点数，如果您的账号没有点数，请先充值点数。",
 
-    "model_title_buy_highspeed": "高速通道",
-    "highspeed_content": "不限速是我们的承诺，但是在下载高峰时段，您可能会遇到下载速度降低的情况。因此我们为您准备了额外的服务器以提供更好的下载体验。",
+    "model_title_buy_highspeed": "成为赞助者",
+    "highspeed_content": "我们非常感谢您为钛盘的持续进化添砖加瓦，成为赞助者后，我们为您准备以下权益：<br>1，通过高速通道下载文件。<br>2，18 GB 私有存储空间。<br>3，每月 88GB 直链流量配额。",
     "highspeed_content2": "* 高速通道服务由 <a href=\"https://www.vx.link\" target=\"_blank\"> vxTrans &trade; 流量加速服务 </a> 提供支持",
     "highspeed_price_cny1": "￥6 / 一个月",
     "highspeed_price_usd1": "$1 / 一个月",
@@ -380,8 +380,8 @@
     "oders_table2": "简介",
     "oders_table3": "到期时间",
 
-    "service_code_hs": "高速通道",
-    "service_code_hs_des": "通过一组独享的服务器来为您提供更高速的下载体验。",
+    "service_code_hs": "赞助者",
+    "service_code_hs_des": "感谢您为钛盘的持续进化添砖加瓦。",
     "service_code_storage": "存储包",
     "service_code_storage_des": "使用存储包可以长期保存上传的文件，不同容量的存储包可以叠加。",
     "service_code_media": "媒体库",
@@ -533,7 +533,7 @@
     "direct_total_downloads":"下载次数",
     "direct_total_transfer":"传输",
     "direct_quota":"流量配额",
-    "direct_btn_buy_quota":"购买流量配额",
+    "direct_btn_buy_quota":"购买流量",
     "direct_btn_bind_domain":"绑定域名",
     "direct_btn_intro":"使用指南",
     "direct_btn_bind_prompt_msg":"请输入要绑定的域名",
@@ -547,6 +547,11 @@
     "direct_modal_bind_domain_4":"钛盘提供免费的二级域名给您使用，格式为 <span class=\"text-red\">*.5t-cdn.com</span>，比如您可以设置为 <span class=\"text-red\">myname.5t-cdn.com</span>",
     "direct_modal_bind_domain_5":"开始绑定域名",
     "direct_modal_bind_domain_6":"请输入您的域名",
+
+    "direct_btn_free_quota":"领取流量",
+    "direct_sponsor_freee_quota_msg_1":"领取成功。",
+    "direct_sponsor_freee_quota_msg_2":"这是赞助者的专享权益，您目前还不是赞助者。请成为赞助者后再来",
+    "direct_sponsor_freee_quota_msg_3":"您已经领取了本月的配额，请下个月再来。",
 
     "menu_delete":"删除文件",
     "menu_addlink":"通过直链分享",
