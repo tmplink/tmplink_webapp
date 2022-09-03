@@ -55,7 +55,7 @@ class tmplink {
 
     constructor() {
         this.setDomain();
-        
+
         this.app_init();
         this.api_init();
 
@@ -79,13 +79,6 @@ class tmplink {
         //
         $('.workspace-navbar').hide();
         $('.workspace-nologin').hide();
-
-        //初始化全局通知插件
-        $.notify.defaults({
-            globalPosition: 'buttom center',
-            showAnimation: 'fadeIn',
-            hideAnimation: 'fadeOut',
-        });
 
         // this.navbar.init(this); //此函数需要等待语言包加载完毕才可执行
 
@@ -141,14 +134,14 @@ class tmplink {
         });
     }
 
-    setDomain(){
+    setDomain() {
         //获取当前域名
-        this.site_domain = window.location.hostname=='ttttt.link'?'ttttt.link':'tmp.link';
-        if(this.site_domain==='tmp.link'){
-            $('.logo').attr('src','/img/logo/2.png');
+        this.site_domain = window.location.hostname == 'ttttt.link' ? 'ttttt.link' : 'tmp.link';
+        if (this.site_domain === 'tmp.link') {
+            $('.logo').attr('src', '/img/logo/2.png');
             $('#head_logo').html('tmp.link');
-        }else{
-            $('.logo').attr('src','/img/logo/logo2.svg');
+        } else {
+            $('.logo').attr('src', '/img/logo/logo2.svg');
             $('#head_logo').html('ttttt.link');
         }
     }
@@ -230,9 +223,9 @@ class tmplink {
             this.storage_status_update();
             this.head_set();
             //初始化直链
-            this.direct.init_details(()=>{
+            this.direct.init_details(() => {
                 this.readyExec();
-            });       
+            });
         });
     }
 
@@ -313,7 +306,7 @@ class tmplink {
             this.alert(this.languageData.status_error_15);
             return false;
         }
-        window.open('https://'+this.site_domain+'/f/' + code);
+        window.open('https://' + this.site_domain + '/f/' + code);
     }
 
     loading_box_on() {
@@ -397,8 +390,10 @@ class tmplink {
         $('.navbar_nloading').hide();
         $('.navbar_ready').show();
 
-        if(this.high_speed_channel){
+        if (this.high_speed_channel) {
             $('.show_for_sponsor').show();
+        }else{
+            $('.to_be_sponsor').show();
         }
         //set process bar to 100%
         // setTimeout(() => {
@@ -918,7 +913,7 @@ class tmplink {
                             $('#download_msg').fadeOut();
 
                             //分享链接
-                            let share_url = 'https://'+this.site_domain+'/f/' + params.ukey;
+                            let share_url = 'https://' + this.site_domain + '/f/' + params.ukey;
 
                             //添加下载 src
                             $('.file_download_url').attr('href', download_url);
@@ -955,7 +950,7 @@ class tmplink {
                             });
 
                             //如果可以，显示播放按钮
-                            if (this.stream.allow(rsp.data.name,this.uid)) {
+                            if (this.stream.allow(rsp.data.name, this.uid)) {
                                 $('.btn_play').show();
                                 $('.btn_play').on('click', () => {
                                     this.stream.request(params.ukey);
@@ -1209,7 +1204,7 @@ class tmplink {
     }
 
     openInMenubarXofIndex() {
-        this.openInMenubarX('https://'+this.site_domain);
+        this.openInMenubarX('https://' + this.site_domain);
     }
 
     openInMenubarXofFile() {
@@ -1415,15 +1410,15 @@ class tmplink {
                 if (req.status == 1) {
 
                     //如果不是在 ipad 或者 iphone 上
-                    if(is_iphone_or_ipad() == false){
+                    if (is_iphone_or_ipad() == false) {
                         //开始下载
                         this.download_queue_add(req.data, title, ukey, size, type);
                         this.download_queue_start();
-                    }else{
+                    } else {
                         //使用 href 提供下载
                         location.href = req.data;
                     }
-                    
+
                     gtag('config', 'UA-96864664-3', {
                         'page_title': 'Download-' + title,
                     });
@@ -2263,7 +2258,7 @@ class tmplink {
 
     mr_newname(mrid) {
         var newname = prompt(this.languageData.modal_meetingroom_newname, "");
-        if(newname===null){
+        if (newname === null) {
             return false;
         }
         $.post(this.api_mr, {
@@ -2467,7 +2462,7 @@ class tmplink {
                 //先请求图片，就绪后再显示
                 let img = new Image();
                 img.src = this.room.img_link;
-                img.onload = () => { 
+                img.onload = () => {
                     $('.room_img').attr('src', this.room.img_link);
                 }
                 $('.room_img').show();
@@ -2483,7 +2478,7 @@ class tmplink {
                 $('#pf_allow_upload').removeAttr('checked');
             }
 
-            $('#mr_copy').attr('data-clipboard-text', 'https://'+this.site_domain+'/room/' + rsp.data.mr_id);
+            $('#mr_copy').attr('data-clipboard-text', 'https://' + this.site_domain + '/room/' + rsp.data.mr_id);
             $('.room_title').html(rsp.data.name);
             $('#dir_list').show();
 
@@ -2759,7 +2754,7 @@ class tmplink {
     find_file() {
         var ukey = $('#ukey').val();
         if (ukey !== '') {
-            window.open('https://'+this.site_domain+'/f/' + ukey);
+            window.open('https://' + this.site_domain + '/f/' + ukey);
         }
     }
 
@@ -3010,43 +3005,46 @@ class tmplink {
         }
         return r;
     }
-    
-    bulkCopy(dom,content,base64){
+
+    bulkCopy(dom, content, base64) {
 
         //如果传递进来的内容是 base64 编码的内容，先解码
-        if(base64===true){
+        if (base64 === true) {
             content = Base64Decode(content);
         }
-        
-        let tmp = $(dom).html();
-        $(dom).html('<i class="fa-fw fa-light fa-circle-check"></i>');
-        setTimeout(() => {
-            $(dom).html(tmp);
-        }, 3000);
 
-        if(this.profile_bulk_copy_get()){
+        if (dom !== null) {
+            let tmp = $(dom).html();
+            $(dom).html('<i class="fa-fw fa-light fa-circle-check"></i>');
+            setTimeout(() => {
+                $(dom).html(tmp);
+            }, 3000);
+        }
+
+
+        if (this.profile_bulk_copy_get()) {
             //如果启用了批量复制，检查目前是否处于定时器状态
-            if(this.bulkCopyTimer!==0){
+            if (this.bulkCopyTimer !== 0) {
                 //处于定时器状态，先取消。
                 clearTimeout(this.bulkCopyTimer);
                 this.bulkCopyTimer = 0;
-            }else{
-                $.notify(this.languageData.notify_bulk_copy_start,"success");
+            } else {
+                $.notifi(this.languageData.notify_bulk_copy_start, "success");
             }
 
             //将内容写入到缓存并复制到剪贴板
             this.bulkCopyTmp += content + "\n";
             this.copyToClip(this.bulkCopyTmp);
             //设置一个10秒缓存器
-            this.bulkCopyTimer = setTimeout(()=>{
+            this.bulkCopyTimer = setTimeout(() => {
                 this.bulkCopyTimer = 0;
                 this.bulkCopyTmp = '';
-                $.notify(this.languageData.notify_bulk_copy_finish,"success");
-            },10000);
-            
-        }else{
+                $.notifi(this.languageData.notify_bulk_copy_finish, "success");
+            }, 10000);
+
+        } else {
             //直接复制
-            $.notify(this.languageData.copied,"success",);
+            $.notifi(this.languageData.copied, "success",);
             this.copyToClip(content);
         }
     }
