@@ -303,14 +303,14 @@
                     <% for (var x in obj) { %>
                         <div class="row mx-0 mb-1 py-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
                             <div class="col-12 col-md-8 col-lg-7 my-1 d-flex align-items-center listfontweight filename">
-                                <div onclick="event.stopPropagation();">
+                                <div>
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
-                                    <a href="/file?ukey=<% obj[x].ukey %>" class="filelist_link mr-1" tmpui-app="true" target="_blank">
+                                    <a href="/file?ukey=<% obj[x].ukey %>" class="filelist_link mr-1" tmpui-app="true" target="_blank" onclick="event.stopPropagation();">
                                         <% obj[x].fname %>
                                     </a>
 
                                     <% if(TL.stream.allow(obj[x].fname,obj[x].owner)){ %>
-                                        <span class="btn-point" onclick="TL.stream.request('<% obj[x].ukey %>')">
+                                        <span class="btn-point" onclick="TL.stream.request('<% obj[x].ukey %>')" onclick="event.stopPropagation();">
                                             <i class="text-blue fa-fw fa-light fa-play-circle"></i>
                                         </span>
                                     <% } %> 
