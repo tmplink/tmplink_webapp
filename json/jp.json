@@ -75,7 +75,7 @@
     "open_in_menubarx": "MenubarXで開始します ",
     "reg_supported_emails": "登録可能なメールアドレスを表示",
     "model_changeemail_news": "* お客様の受信箱に必要のないメールを送信することはありません。 チタンプレートの最新情報をお届けするニュースレターの購読をご希望の方は、ページ下部の「ニュース」をクリックしてください。",
-    "footer_news": "<a href=\"https://t.me/tmplink_news_en\" target=\"_blank\" style=\"color:white\">ニュース(English)</a>",
+    "footer_news": "<a href=\"https://t.me/tmplink_news_en\" target=\"_blank\" class=\"filelist_link\">ニュース(English)</a>",
     "index_tmp_upload_des": "ログイン不要、24時間保存のみ、1ファイル 20 GB まで、容量無制限。",
     "index_login_des": "アップロードされたファイルを安全に管理し、より多くの機能を手に入れることができます。",
     "status_file_1": "読み込み中...",
