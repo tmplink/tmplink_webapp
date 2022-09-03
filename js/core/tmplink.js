@@ -49,6 +49,10 @@ class tmplink {
     download_retry_max = 10
     recaptcha_op = false
 
+    bulkCopyStatus = false
+    bulkCopyTmp = ''
+    bulkCopyTimer = 0
+
     constructor() {
         this.setDomain();
         
@@ -75,6 +79,13 @@ class tmplink {
         //
         $('.workspace-navbar').hide();
         $('.workspace-nologin').hide();
+
+        //初始化全局通知插件
+        $.notify.defaults({
+            globalPosition: 'buttom center',
+            showAnimation: 'fadeIn',
+            hideAnimation: 'fadeOut',
+        });
 
         // this.navbar.init(this); //此函数需要等待语言包加载完毕才可执行
 
@@ -2028,8 +2039,8 @@ class tmplink {
     }
 
     profile_bulk_copy_post() {
-        let status = ($('#confirm_bulk_copy').is(':checked')) ? 'yes' : 'no';
-        localStorage.setItem('user_profile_confirm_delete', status);
+        let status = ($('#bulk_copy_status').is(':checked')) ? 'yes' : 'no';
+        localStorage.setItem('user_profile_bulk_copy', status);
         $.post(this.api_user, {
             action: 'pf_bulk_copy_set',
             token: this.api_token,
@@ -2041,6 +2052,7 @@ class tmplink {
         localStorage.setItem('user_profile_bulk_copy', status);
         if (status == 'yes') {
             $('#bulk_copy_status').attr('checked', 'checked');
+            this.bulkCopyStatus = true;
         }
     }
 
@@ -2783,6 +2795,7 @@ class tmplink {
         });
     }
 
+
     api_init() {
         $.post(this.api_url + '/init', (data) => {
             this.api_file = data + '/file';
@@ -2996,6 +3009,46 @@ class tmplink {
 
         }
         return r;
+    }
+    
+    bulkCopy(dom,content,base64){
+
+        //如果传递进来的内容是 base64 编码的内容，先解码
+        if(base64===true){
+            content = Base64Decode(content);
+        }
+        
+        let tmp = $(dom).html();
+        $(dom).html('<i class="fa-fw fa-light fa-circle-check"></i>');
+        setTimeout(() => {
+            $(dom).html(tmp);
+        }, 3000);
+
+        if(this.profile_bulk_copy_get()){
+            //如果启用了批量复制，检查目前是否处于定时器状态
+            if(this.bulkCopyTimer!==0){
+                //处于定时器状态，先取消。
+                clearTimeout(this.bulkCopyTimer);
+                this.bulkCopyTimer = 0;
+            }else{
+                $.notify(this.languageData.notify_bulk_copy_start,"success");
+            }
+
+            //将内容写入到缓存并复制到剪贴板
+            this.bulkCopyTmp += content + "\n";
+            this.copyToClip(this.bulkCopyTmp);
+            //设置一个10秒缓存器
+            this.bulkCopyTimer = setTimeout(()=>{
+                this.bulkCopyTimer = 0;
+                this.bulkCopyTmp = '';
+                $.notify(this.languageData.notify_bulk_copy_finish,"success");
+            },10000);
+            
+        }else{
+            //直接复制
+            $.notify(this.languageData.copied,"success",);
+            this.copyToClip(content);
+        }
     }
 
     copyToClip(content) {

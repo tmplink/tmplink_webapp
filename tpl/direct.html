@@ -133,7 +133,7 @@
                     <div class="row mx-0 mb-1 p-1 line list-bar file_unit_<% obj[x].direct_key %>" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
                         <div class="col-12 col-md-8 col-lg-7 d-flex align-items-center listfontweight filename">
                             <div class="row">
-                                <div class="col-12 filename">
+                                <div class="col-12 filename" onclick="event.stopPropagation();">
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
                                     <a href="<% obj[x].direct_link %>" class="filelist_link" target="_blank"><% obj[x].fname %></a>
                                     
@@ -181,10 +181,10 @@
                         <div class="col-12 col-md-4 col-lg-2 my-1 d-flex align-items-center justify-content-end">
                             <% obj[x].ctime %>
                         </div>
-                        <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].direct_key %>">
+                        <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].direct_key %>" onclick="event.stopPropagation();">
                             <span class="mr-2"><% obj[x].fsize_formated %></span>
                             <a href="<% obj[x].direct_link %>" target="_blank" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></a>
-                            <button data-clipboard-text="<% obj[x].direct_link %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
+                            <button onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].fname}\n${obj[x].direct_link}`) %>',true)" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
                             <button id="btn-rm-file_<% obj[x].direct_key %>" class="btn btn-sm btn-outline-danger mx-1" onclick="TL.direct.delLink('<% obj[x].direct_key %>')">
                                 <i class="fa-fw fa-light fa-trash"></i>
                             </button>

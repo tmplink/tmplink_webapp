@@ -5,7 +5,7 @@ function isiPad() {
 //if iphone or ipad
 function is_iphone_or_ipad() {
     //如果是 macos 或者 windows 设备
-    if ((navigator.userAgent.match(/Macintosh/i) && isiPad()===null) || navigator.userAgent.match(/Windows/i)) {
+    if ((navigator.userAgent.match(/Macintosh/i) && isiPad() === null) || navigator.userAgent.match(/Windows/i)) {
         return false;
     }
 
@@ -25,7 +25,7 @@ function is_iphone_or_ipad() {
 
 //倒计时函数，将剩余的时间格式化成时分秒并写入到指定的 html 中
 function countDown(id, time) {
-    let now = time-1;
+    let now = time - 1;
     let left_time = now;
 
     let d = '';
@@ -33,17 +33,17 @@ function countDown(id, time) {
     let m = '';
     let s = '';
 
-    if(now==0){
+    if (now == 0) {
         return false;
     }
-    
-    if(now>86400){
+
+    if (now > 86400) {
         d = Math.floor(now / 86400);
         d = d + ':';
         left_time = left_time % 86400;
     }
 
-    if(left_time>3600){
+    if (left_time > 3600) {
         h = Math.floor(left_time / 3600);
         h = h < 10 ? "0" + h : h;
         h = h === "0" ? "00" : h;
@@ -51,7 +51,7 @@ function countDown(id, time) {
         left_time = left_time % 3600;
     }
 
-    if(left_time>60){
+    if (left_time > 60) {
         m = Math.floor(left_time / 60);
         m = m < 10 ? "0" + m : m;
         m = m === "0" ? "00" : m;
@@ -59,24 +59,24 @@ function countDown(id, time) {
         left_time = left_time % 60;
     }
 
-    if(left_time>0){
-        s = left_time; 
+    if (left_time > 0) {
+        s = left_time;
         s = s < 10 ? "0" + s : s;
         s = s === "0" ? "00" : s;
     }
-    if(left_time===0&&m!==''){
+    if (left_time === 0 && m !== '') {
         s = "00";
     }
 
-    let dom =  document.getElementById(id);
-    if(dom===null){
+    let dom = document.getElementById(id);
+    if (dom === null) {
         return false;
-    }else{
+    } else {
         dom.innerHTML = d + h + m + s;
     }
 
     if (now > 0) {
-        setTimeout(()=>{
+        setTimeout(() => {
             countDown(id, now);
         }, 1000);
     }
@@ -129,4 +129,21 @@ function get_url_params() {
 function get_page_mrid() {
     var params = get_url_params();
     return params.mrid;
+}
+
+function Base64Encode(str) {
+    // first we use encodeURIComponent to get percent-encoded UTF-8,
+    // then we convert the percent encodings into raw bytes which
+    // can be fed into btoa.
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+        function toSolidBytes(match, p1) {
+            return String.fromCharCode('0x' + p1);
+        }));
+}
+
+function Base64Decode(str) {
+    // Going backwards: from bytestream, to percent-encoding, to original string.
+    return decodeURIComponent(atob(str).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
 }

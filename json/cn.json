@@ -572,6 +572,9 @@
     "open_in_menubarx":"在 MenubarX 中启动钛盘",
     "copied" : "已复制",
 
+    "notify_bulk_copy_start":"已开始连续复制",
+    "notify_bulk_copy_finish":"连续复制结束",
+
     "upload_or_drag": "拖动文件到此位置，或者选择文件上传",
     "upload_files": "上传文件",
     "upload_dirs": "上传文件夹",
