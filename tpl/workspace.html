@@ -222,10 +222,10 @@
                         <div class="col-12 col-md-4 col-lg-2 my-1 d-flex align-items-center justify-content-end">
                             <% obj[x].ctime %>
                         </div>
-                        <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].ukey %>" onclick="event.stopPropagation();">
+                        <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].ukey %>">
                             <span class="mr-2"><% obj[x].fsize_formated %></span>
-                            <button onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></button>
-                            <button onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].fname}\nhttps://${TL.site_domain}/f/${obj[x].ukey}`) %>',true)" class="text-azure  btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
+                            <button onclick="event.stopPropagation();TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></button>
+                            <button onclick="event.stopPropagation();TL.bulkCopy(this,'<% Base64Encode(`${obj[x].fname}\nhttps://${TL.site_domain}/f/${obj[x].ukey}`) %>',true)" class="text-azure  btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
                             <span class="dropdown">
                                 <button role="button" type="button" class="text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown">
                                     <i class="fa-light fa-ellipsis fa-fw"></i>
