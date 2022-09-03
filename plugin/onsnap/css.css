@@ -1,0 +1,59 @@
+/*!
+ * jQuery Notifi Plugin v1.0
+ * https://github.com/scullytr/notifi
+ *
+ * Copyright (c) 2019 Tim Scully;
+ * Released under the MIT License (MIT)
+ */
+.ntf-notice {
+    background-color: #26df7c;
+    box-shadow: 0 0 5px #949394;
+    -webkit-box-shadow: 0 0 5px #949394;
+    -moz-box-shadow: 0 0 5px #949394;
+    color: #ffffff;
+    display: none;
+    margin: 0 20px;
+    padding: 10px;
+    position: relative;
+}
+
+.ntf-notice:not(:first-child) {
+    border-top: 1px dashed #000;
+}
+
+.ntf-notice:last-child {
+    border-radius: 0 0 5px 5px;
+}
+
+.ntf-notice a, .ntf-notice a:visited {
+    color: #ffffff;
+}
+
+.ntf-notice-close {
+    bottom: 0px;
+    cursor: pointer;
+    display: inline;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 20px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.ntf-warning {
+    background-color: #d6874a;
+    color: #fff;
+}
+
+.ntf-warning a {
+    color: #fff;
+}
+
+#ntf-notifications {
+    background: transparent;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    z-index: 100;
+}

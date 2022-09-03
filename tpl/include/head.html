@@ -64,18 +64,26 @@
                 </button>
                 <div class="dropdown-menu shadow">
                     <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');"
-                        i18n="navbar_reset_password">.</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#emailModal').modal('show');"
-                        i18n="navbar_reset_email">.</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');">
+                        <i class="fa-light fa-key"></i>
+                        <span i18n="navbar_reset_password">.</span>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#emailModal').modal('show');">
+                        <i class="fa-light fa-envelope"></i>
+                        <span i18n="navbar_reset_email">.</span>
+                    </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#profileModal').modal('show');">
+                        <i class="fa-light fa-sliders-simple"></i>
                         <span i18n="navbar_profile">.</span>
-                        <!-- <span class="badge badge-pill badge-danger">new</span> -->
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)"
-                        onclick="$('#ordersModal').modal('show');TL.orders_list();" i18n="navbar_orders">.</a>
+                        onclick="$('#ordersModal').modal('show');TL.orders_list();">
+                        <i class="fa-light fa-star"></i>
+                        <span i18n="navbar_orders">.</span>
+                    </a>
                     <hr />
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.logout();">
+                        <i class="fa-light fa-right-from-bracket"></i>
                         <span i18n="navbar_exit">.</span>
                     </a>
 
@@ -96,9 +104,16 @@
             </div>
 
             <div class="mt-1 show_for_sponsor" style="display: none;">
-                <button class="btn btn-warning mt-1 my-sm-0" onclick="alert('Thank you for your sponsorship');">
-                    <i class="fa-solid fa-heart-circle-check fa-fw"></i>
+                <button class="btn btn-success mt-1 my-sm-0" onclick="alert('Thank you for your sponsorship');">
+                    <i class="fa-solid fa-heart-circle-check"></i>
                     <span i18n="service_code_hs">.</span>
+                </button>
+            </div>
+
+            <div class="mt-1 to_be_sponsor" style="display: none;">
+                <button class="btn btn-warning mt-1 my-sm-0" onclick="TL.buy_select_open('hs');">
+                    <i class="fa-solid fa-heart-circle-check fa-fw"></i>
+                    <span i18n="model_title_buy_highspeed">.</span>
                 </button>
             </div>
         </div>
@@ -150,16 +165,32 @@
                 </button>
                 <div class="dropdown-menu shadow">
                     <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');"
-                        i18n="navbar_reset_password">.</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#emailModal').modal('show');"
-                        i18n="navbar_reset_email">.</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');">
+                        <i class="fa-light fa-key"></i>
+                        <span i18n="navbar_reset_password">.</span>
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#emailModal').modal('show');">
+                        <i class="fa-light fa-envelope"></i>
+                        <span i18n="navbar_reset_email">.</span>
+                    </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#profileModal').modal('show');">
+                        <i class="fa-light fa-sliders-simple"></i>
                         <span i18n="navbar_profile">.</span>
-                        <!-- <span class="badge badge-pill badge-danger">new</span> -->
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)"
-                        onclick="$('#ordersModal').modal('show');TL.orders_list();" i18n="navbar_orders">.</a>
+                        onclick="$('#ordersModal').modal('show');TL.orders_list();">
+                        <i class="fa-light fa-star"></i>
+                        <span i18n="navbar_orders">.</span>
+                    </a>
+                    <a class="dropdown-item show_for_sponsor text-success" href="javascript:void(0)" onclick="alert('Thank you for your sponsorship');" style="display: none;">
+                        <i class="fa-solid fa-heart-circle-check"></i>
+                        <span i18n="service_code_hs">.</span>
+                    </a>
+                    <a class="dropdown-item to_be_sponsor" href="javascript:void(0)" onclick="TL.buy_select_open('hs');" style="display: none;">
+                        <i class="fa-light fa-heart-circle-plus text-red"></i>
+                        <span i18n="model_title_buy_highspeed">.</span>
+                        <span class="badge badge-pill badge-danger">new</span>
+                    </a>
                 </div>
             </div>
         </div>

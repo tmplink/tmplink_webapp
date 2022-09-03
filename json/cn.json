@@ -127,6 +127,7 @@
 
     "model_profile_title":"偏好设定",
     "model_profile_confirm_delete":"是否启用删除前确认？",
+    "model_profile_bulk_copy":"是否启用连续复制？<br>启用后您可以连续点击复制按钮以复制多个文件链接。",
 
     "page_503_content": "当前有下载任务正在进行中，请等待该任务结束后再开始新的下载。",
     "page_404_content": "无法找到对应的页面。",
@@ -570,6 +571,9 @@
 
     "open_in_menubarx":"在 MenubarX 中启动钛盘",
     "copied" : "已复制",
+
+    "notify_bulk_copy_start":"已开始连续复制",
+    "notify_bulk_copy_finish":"连续复制结束",
 
     "upload_or_drag": "拖动文件到此位置，或者选择文件上传",
     "upload_files": "上传文件",

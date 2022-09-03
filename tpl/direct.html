@@ -125,7 +125,7 @@
                 <div class="text-center mb-4">
                     <i class="fa-fw fa-light fa-folder-open fa-4x"></i>
                 </div>
-                <div class="text-center" i18n="page_no_files">.</div>
+                <!-- <div class="text-center" i18n="page_no_files">.</div> -->
             </div>
 
             <script type="text/template" id="direct_filelist_list_tpl">
@@ -135,10 +135,14 @@
                             <div class="row">
                                 <div class="col-12 filename">
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
-                                    <a href="<% obj[x].direct_link %>" class="filelist_link" target="_blank"><% obj[x].fname %></a>
+                                    <a href="<% obj[x].direct_link %>" class="filelist_link" target="_blank" onclick="event.stopPropagation();">
+                                        <% obj[x].fname %>
+                                    </a>
                                     
                                     <% if(TL.direct.is_allow_play(obj[x].fname)){ %>
-                                        <a href="<% obj[x].play_link %>" target="_blank"><i class="fa-solid fa-circle-play fa-fw"></i></a>
+                                        <a href="<% obj[x].play_link %>" target="_blank" onclick="event.stopPropagation();">
+                                            <i class="fa-solid fa-circle-play fa-fw"></i>
+                                        </a>
                                     <% } %>
 
                                     <% if(obj[x].model!=99){ %>
@@ -157,11 +161,11 @@
                                     <% } %>
 
                                     <% if(obj[x].dir_name!=null){ %>
-                                        <div class="d-none d-lg-block">
+                                        <div class="d-none d-lg-block" onclick="event.stopPropagation();">
                                             <i class="fa-light fa-folder-open fa-fw text-cyan"></i>
                                             <a href="/room&mrid=<% obj[x].mrid %>" tmpui-app="true"> <% obj[x].dir_name %></a>
                                         </div>
-                                        <span class="d-inline d-lg-none">
+                                        <span class="d-inline d-lg-none" onclick="event.stopPropagation();">
                                             <i class="fa-light fa-folder-open fa-fw text-cyan"></i>
                                             <a href="/room&mrid=<% obj[x].mrid %>" tmpui-app="true"> <% obj[x].dir_name %></a>
                                         </span>
@@ -181,12 +185,12 @@
                         <div class="col-12 col-md-4 col-lg-2 my-1 d-flex align-items-center justify-content-end">
                             <% obj[x].ctime %>
                         </div>
-                        <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].direct_key %>">
+                        <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].direct_key %>" onclick="event.stopPropagation();">
                             <span class="mr-2"><% obj[x].fsize_formated %></span>
                             <a href="<% obj[x].direct_link %>" target="_blank" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></a>
-                            <button data-clipboard-text="<% obj[x].direct_link %>" class="text-azure btn_copy btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
-                            <button id="btn-rm-file_<% obj[x].direct_key %>" class="btn btn-sm btn-outline-danger mx-1" onclick="TL.direct.delLink('<% obj[x].direct_key %>')">
-                                <i class="fa-fw fa-light fa-trash"></i>
+                            <button onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].fname}\n${obj[x].direct_link}`) %>',true)" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
+                            <button id="btn-rm-file_<% obj[x].direct_key %>" class="btn btn-sm btn-light mx-1" onclick="TL.direct.delLink('<% obj[x].direct_key %>')">
+                                <i class="fa-fw fa-light fa-trash text-danger"></i>
                             </button>
                         </div>
                     </div>

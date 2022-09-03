@@ -88,10 +88,10 @@ class direct {
 
     genLinkDirect(dkey, filename) {
         let filename2 = encodeURI(filename);
-        return { download: `${this.protocol}${this.domain}/files/${dkey}/${filename2}`, play: `${this.protocol}${this.domain}/stream-${dkey}` };
+        return { download: `${filename}\n${this.protocol}${this.domain}/files/${dkey}/${filename2}`, play: `${this.protocol}${this.domain}/stream-${dkey}`};
     }
 
-    addLink(ukey, filename) {
+    addLink(ukey) {
         $.post(this.parent_op.api_direct, {
             'action': 'add_link',
             'ukey': ukey,
@@ -99,26 +99,31 @@ class direct {
         }, (rsp) => {
             if (rsp.status == 1) {
                 //提示添加成功，并复制到剪贴板
-                alert(this.parent_op.languageData.direct_add_link_success);
+                let files = rsp.data;
+                $.notifi(this.parent_op.languageData.direct_add_link_success, "success");
                 // this.parent_op.copyToClip(`${this.protocol}${this.domain}/files/${rsp.data}/${filename}`);
-                this.parent_op.copyToClip(this.genLinkDirect(rsp.data, filename).download);
+                this.parent_op.bulkCopy(null,this.genLinkDirect(files[0].dkey, files[0].name).download,false);
             } else {
-                alert(this.parent_op.languageData.status_error_0);
+                $.notifi(this.parent_op.languageData.status_error_0, "success");
             }
         }, 'json');
     }
 
-    addLinks(ukey) {
+    addLinks(ukeys) {
         $.post(this.parent_op.api_direct, {
             'action': 'add_link',
-            'ukey': ukey,
+            'ukey': ukeys,
             'token': this.parent_op.api_token
         }, (rsp) => {
             if (rsp.status == 1) {
                 //提示添加成功，并复制到剪贴板
-                alert(this.parent_op.languageData.direct_add_link_success);
+                let files = rsp.data;
+                $.notifi(this.parent_op.languageData.direct_add_link_success, "success");
+                for(let i in files){
+                    this.parent_op.bulkCopy(null,this.genLinkDirect(files[i].dkey, files[i].name).download,false);
+                }
             } else {
-                alert(this.parent_op.languageData.status_error_0);
+                $.notifi(this.parent_op.languageData.status_error_0, "success");
             }
         }, 'json');
     }

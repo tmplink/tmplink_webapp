@@ -259,14 +259,14 @@
                                                 <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
                                                     <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                                 </button>
-                                                <button href="javascript:void(0)" data-clipboard-text="https://<% TL.site_domain %>/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1">
+                                                <button onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].fname}\nhttps://${TL.site_domain}/f/${obj[x].ukey}`) %>',true)" class="text-azure btn btn-sm btn-light mr-1">
                                                     <i class="fa-fw fa-light fa-share-from-square"></i>
                                                 </button>
                                                 <% if (TL.room.owner == 1) { %>
-                                                    <button href="javascript:void(0)" onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1">
+                                                    <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1">
                                                         <i class="fa-fw fa-light fa-pen-to-square"></i>
                                                     </button>
-                                                    <button href="javascript:void(0);" class="text-red btn btn-sm btn-light" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
+                                                    <button class="text-red btn btn-sm btn-light" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
                                                         <i class="fa-fw fa-light fa-trash"></i>
                                                     </button>
                                                 <% } %>
@@ -301,16 +301,16 @@
 
                 <script type="text/template" id="dir_filelist_tpl">
                     <% for (var x in obj) { %>
-                        <div class="row mx-0 mb-1 py-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                        <div class="row line mx-0 mb-1 py-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
                             <div class="col-12 col-md-8 col-lg-7 my-1 d-flex align-items-center listfontweight filename">
                                 <div>
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
-                                    <a href="/file?ukey=<% obj[x].ukey %>" class="filelist_link mr-1" tmpui-app="true" target="_blank">
+                                    <a href="/file?ukey=<% obj[x].ukey %>" class="filelist_link mr-1" tmpui-app="true" target="_blank" onclick="event.stopPropagation();">
                                         <% obj[x].fname %>
                                     </a>
 
                                     <% if(TL.stream.allow(obj[x].fname,obj[x].owner)){ %>
-                                        <span class="btn-point" onclick="TL.stream.request('<% obj[x].ukey %>')">
+                                        <span class="btn-point" onclick="TL.stream.request('<% obj[x].ukey %>')" onclick="event.stopPropagation();">
                                             <i class="text-blue fa-fw fa-light fa-play-circle"></i>
                                         </span>
                                     <% } %> 
@@ -334,40 +334,38 @@
                                 <% obj[x].ctime %>
                             </div>
                             <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].ukey %>">
-                                    <span class="mr-2">
-                                        <% obj[x].fsize_formated %>
-                                    </span>
-                                    <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
-                                        <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
-                                    </button>
-                                    <button href="javascript:void(0)" data-clipboard-text="https://<% TL.site_domain %>/f/<% obj[x].ukey %>" class="text-azure btn_copy btn btn-sm btn-light mr-1">
-                                        <i class="fa-fw fa-light fa-share-from-square"></i>
-                                    </button>
-                                    <% if (TL.room.owner == 1) { %>
-                                        <span class="btn-group">
-                                            <div class="dropdown-toggle text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa-light fa-ellipsis fa-fw"></i>
-                                            </div>
-                                            <div class="dropdown-menu dropdown-menu-right shadow">
-                                                <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="dropdown-item">
-                                                    <i class="fa-fw fa-light fa-pen-to-square"></i>
-                                                    <span i18n="menu_rename"><% TL.languageData.menu_rename %></span>
+                                <span class="mr-2">
+                                    <% obj[x].fsize_formated %>
+                                </span>
+                                <button href="javascript:void(0)" onclick="event.stopPropagation();TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
+                                    <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
+                                </button>
+                                <button href="javascript:void(0)" onclick="event.stopPropagation();TL.bulkCopy(this,'<% Base64Encode(`${obj[x].fname}\nhttps://${TL.site_domain}/f/${obj[x].ukey}`) %>',true)" class="text-azure btn btn-sm btn-light mr-1">
+                                    <i class="fa-fw fa-light fa-share-from-square"></i>
+                                </button>
+                                <% if (TL.room.owner == 1) { %>
+                                    <span class="dropdown">
+                                        <button role="button" type="button" class="text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown">
+                                            <i class="fa-light fa-ellipsis fa-fw"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right shadow">
+                                            <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="dropdown-item">
+                                                <i class="fa-fw fa-light fa-pen-to-square"></i>
+                                                <span i18n="menu_rename"><% TL.languageData.menu_rename %></span>
+                                            </button>
+                                            <button class="dropdown-item" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
+                                                <i class="fa-fw fa-light fa-trash"></i>
+                                                <span i18n="menu_delete"><% TL.languageData.menu_delete %></span>
+                                            </button> 
+                                            <% if(TL.direct.is_allow()){ %>
+                                                <button onclick="TL.direct.addLink('<% obj[x].ukey %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item">
+                                                    <i class="fa-fw fa-light fa-share-nodes"></i>
+                                                    <span i18n="menu_addlink"><% TL.languageData.menu_addlink %></span>
                                                 </button>
-                                                <button class="dropdown-item" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
-                                                    <i class="fa-fw fa-light fa-trash"></i>
-                                                    <span i18n="menu_delete"><% TL.languageData.menu_delete %></span>
-                                                </button> 
-                                                <% if(TL.direct.is_allow()){ %>
-                                                    <button onclick="TL.direct.addLink('<% obj[x].ukey %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item">
-                                                        <i class="fa-fw fa-light fa-share-nodes"></i>
-                                                        <span i18n="menu_addlink"><% TL.languageData.menu_addlink %></span>
-                                                    </button>
-                                                <% } %>  
-                                            </div>
-                                        </span>
-                                    <% } %>
-
+                                            <% } %>  
+                                        </div>
+                                    </span>
+                                <% } %>
                             </div>
                             <div class="col-12 col-md-12 col-lg-3 my-1 d-flex flex-row align-items-center justify-content-center file_relay_<% obj[x].ukey %>">
                                 <div class="d-block w-100">
@@ -384,7 +382,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="line my-1"></div>
                     <% } %>
                 </script>
 
@@ -402,7 +399,7 @@
                     
                     <div><% TL.languageData.filelist_dir %></div>
                     <div>
-                        <a href="javascript:void(0)" data-clipboard-text="https://<% TL.site_domain %>/room/<% obj[x].mr_id %>" class="mt-1 btn_copy"><i class="fa-fw fa-light fa-share-from-square"></i></a>
+                        <a href="javascript:void(0)" onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].name}\nhttps://${TL.site_domain}/room/${obj[x].mr_id}`) %>',true)" class="mt-1"><i class="fa-fw fa-light fa-share-from-square"></i></a>
                         <% if (obj[x].type === 'owner') { %>
                             <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-blue mt-1"><i class="fa-light fa-pen-to-square"></i></a>
                             <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red mt-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></a>
@@ -414,7 +411,7 @@
 
                 <script type="text/template" id="dir_list_tpl">
                     <% for (var x in obj) { %>
-                        <div class="row mx-0 my-1 list-bar" id="meetingroom_id_<% obj[x].mr_id %>">
+                        <div class="row mx-0 my-1 list-bar line" id="meetingroom_id_<% obj[x].mr_id %>">
                             <div class="col-12 col-md-6 col-lg-8 my-1 d-flex align-items-center listfontweight filename">
                                 <% if (obj[x].fav == 0) { %>
                                     <% if (obj[x].model == 'public') { %>
@@ -434,14 +431,13 @@
                                 <span class="mr-2">
                                     <% TL.languageData.filelist_dir %>
                                 </span>
-                                <a href="javascript:void(0)" data-clipboard-text="https://<% TL.site_domain %>/room/<% obj[x].mr_id %>" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-share-from-square"></i></a>
+                                <button onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].name}\nhttps://${TL.site_domain}/room/${obj[x].mr_id}`) %>',true)" class="text-azure btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
                                 <% if (obj[x].type === 'owner') { %>
-                                    <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-azure btn_copy btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-pen-to-square"></i></a>
-                                    <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></a>
+                                    <button  onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-azure btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-pen-to-square"></i></button>
+                                    <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></button>
                                 <% } %>
                             </div>
                         </div>
-                        <div class="line my-1"></div>
                     <% } %>
                 </script>
             </div>

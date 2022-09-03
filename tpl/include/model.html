@@ -934,6 +934,14 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <label class="form-check form-switch mb-5">
+                    <input class="form-check-input" type="checkbox" id="bulk_copy_status"
+                        onclick="TL.profile_bulk_copy_post()">
+                    <span class="form-check-label" i18n="model_profile_bulk_copy">
+                        .
+                    </span>
+                </label>
+                
                 <label class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="confirm_delete_status"
                         onclick="TL.profile_confirm_delete_post()">
@@ -993,29 +1001,6 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- 高速通道 -->
-                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point" onclick="TL.buy_select_open('hs');">
-                    <div class="col-12">
-                        <div class="card-p3">
-                            <div class="d-flex align-items-center">
-                                <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 fa-solid fa-heart-circle-plus fa-fw"></i>
-                                </span>
-                                <div>
-                                    <h4 class="m-0" i18n="model_title_buy_highspeed">
-                                        .
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center mt-1">
-                                <small class="text-muted" i18n="highspeed_content">
-                                    .
-                                </small>
-                                <br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- 存储 -->
                 <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point"
                     onclick="TL.buy_select_open('storage');">
