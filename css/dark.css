@@ -13,4 +13,9 @@
         color: rgb(14, 14, 14) !important;
         border-color: rgb(14, 14, 14) !important;
     }
+
+    #bg_video, #background_wrap_video{
+        filter: invert(1) hue-rotate(.5turn);
+        opacity: 0.5;
+    }
 }

@@ -134,6 +134,22 @@ class tmplink {
         });
     }
 
+    matchNightModel() {
+        let media = window.matchMedia('(prefers-color-scheme: dark)');
+        return media.matches;
+    }
+
+    matchNightModelListener(cb) {
+        let media = window.matchMedia('(prefers-color-scheme: dark)');
+        let callback = (e) => {
+            let prefersDarkMode = e.matches;
+            cb(prefersDarkMode);
+        };
+        if (typeof media.addEventListener === 'function') {
+            media.addEventListener('change', callback);
+        }
+    }
+
     setDomain() {
         //获取当前域名
         this.site_domain = window.location.hostname == 'ttttt.link' ? 'ttttt.link' : 'tmp.link';
@@ -182,7 +198,6 @@ class tmplink {
     }
 
     bg_load() {
-        let url = get_url_params('tmpui_page');
         if (document.querySelector('#background_wrap_preload') == null) {
 
             //使用svg背景
@@ -192,22 +207,57 @@ class tmplink {
             $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color: #0093E9;background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);"></div>');
         }
 
-        //如果在首页，载入视频
-        let page = url.tmpui_page;
-        if(page==='/'||page===undefined||this.isMobile()===false){
-            let video = '<video muted loop id="bg_Video" class="w-100"><source src="/video/bg.mp4" type="video/mp4"></video>';
-            $('body').append(`<div id="background_wrap_video" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;display:none;width: 100%;">${video}</div>`);
+        let night = this.matchNightModel();
+        this.bgLoadVideo(night);
+        this.matchNightModelListener((night)=>{
+            this.bgVideoChange(night);
+        });
+    }
 
+    bgLoadVideo(night){
+        let videoSrc = '';
+        if(night){
+            videoSrc = '/video/bg_night.mp4';
+        }else{
+            videoSrc = '/video/bg.mp4';
+        }
+
+        //如果在首页，载入视频
+        let url = get_url_params('tmpui_page');
+        let page = url.tmpui_page;
+        if (page === '/' || page === undefined || this.isMobile() === false) {
+            let video = `<video muted loop id="bg_Video" style="height:auto;width:auto;min-height:100%;min-width:100%"><source src="${videoSrc}" type="video/mp4"></video>`;
+            $('body').append(`<div id="background_wrap_video" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;display:none;width: 100%;">${video}</div>`);
+            $('#background_wrap').hide();
             let v = document.getElementById('bg_Video');
-            v.addEventListener('canplay',  ()=>{
+            v.addEventListener('canplay', () => {
                 $('#background_wrap_video').fadeIn();
                 v.play();
             });
-        }else{
+        } else {
             $('#background_wrap_video').remove();
+            $('#background_wrap').show();
         }
     }
 
+    bgVideoChange(night){
+        let videoSrc = '';
+        if(night){
+            videoSrc = '/video/bg_night.mp4';
+        }else{
+            videoSrc = '/video/bg.mp4';
+        }
+
+        //如果在首页，载入视频
+        let url = get_url_params('tmpui_page');
+        let page = url.tmpui_page;
+        if (page === '/' || page === undefined || this.isMobile() === false) {
+            $('#bg_Video').attr('src',videoSrc);
+        } else {
+            $('#background_wrap_video').remove();
+        }
+    }
+    
     lazyload(dom) {
         $(dom).each((i, e) => {
             let img = new Image();
@@ -406,7 +456,7 @@ class tmplink {
 
         if (this.high_speed_channel) {
             $('.show_for_sponsor').show();
-        }else{
+        } else {
             $('.to_be_sponsor').show();
         }
         //set process bar to 100%
