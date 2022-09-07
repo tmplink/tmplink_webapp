@@ -196,7 +196,7 @@ class tmplink {
         let page = url.tmpui_page;
         if(page==='/'||page===undefined){
             let video = '<video muted loop id="bg_Video" class="w-100"><source src="/video/bg.mp4" type="video/mp4"></video>';
-            $('body').append(`<div id="background_wrap_video" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;width: 100%;">${video}</div>`);
+            $('body').append(`<div id="background_wrap_video" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;display:none;width: 100%;">${video}</div>`);
 
             let v = document.getElementById('bg_Video');
             v.addEventListener('canplay',  ()=>{
