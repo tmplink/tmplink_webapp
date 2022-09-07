@@ -182,7 +182,7 @@ class tmplink {
     }
 
     bg_load() {
-        // let url = get_url_params('tmpui_page');
+        let url = get_url_params('tmpui_page');
         if (document.querySelector('#background_wrap_preload') == null) {
 
             //使用svg背景
@@ -192,6 +192,20 @@ class tmplink {
             $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color: #0093E9;background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);"></div>');
         }
 
+        //如果在首页，载入视频
+        let page = url.tmpui_page;
+        if(page==='/'||page===undefined){
+            let video = '<video muted loop id="bg_Video" class="w-100"><source src="/video/bg.mp4" type="video/mp4"></video>';
+            $('body').append(`<div id="background_wrap_video" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;width: 100%;">${video}</div>`);
+
+            let v = document.getElementById('bg_Video');
+            v.addEventListener('canplay',  ()=>{
+                $('#background_wrap_video').fadeIn();
+                v.play();
+            });
+        }else{
+            $('#background_wrap_video').remove();
+        }
     }
 
     lazyload(dom) {
