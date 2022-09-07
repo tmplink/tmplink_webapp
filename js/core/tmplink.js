@@ -194,7 +194,7 @@ class tmplink {
 
         //如果在首页，载入视频
         let page = url.tmpui_page;
-        if(page==='/'||page===undefined){
+        if(page==='/'||page===undefined||this.isMobile()===false){
             let video = '<video muted loop id="bg_Video" class="w-100"><source src="/video/bg.mp4" type="video/mp4"></video>';
             $('body').append(`<div id="background_wrap_video" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;display:none;width: 100%;">${video}</div>`);
 
