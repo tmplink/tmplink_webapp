@@ -252,7 +252,13 @@ class tmplink {
         let url = get_url_params('tmpui_page');
         let page = url.tmpui_page;
         if (page === '/' || page === undefined || this.isMobile() === false) {
+            $('#background_wrap_video').fadeOut();
             $('#bg_Video').attr('src',videoSrc);
+            let v = document.getElementById('bg_Video');
+            v.addEventListener('canplay', () => {
+                $('#background_wrap_video').fadeIn();
+                v.play();
+            });
         } else {
             $('#background_wrap_video').remove();
             $('#background_wrap').show();
