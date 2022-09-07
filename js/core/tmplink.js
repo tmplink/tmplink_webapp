@@ -226,7 +226,7 @@ class tmplink {
         let url = get_url_params('tmpui_page');
         let page = url.tmpui_page;
         if (page === '/' || page === undefined || this.isMobile() === false) {
-            let video = `<video muted loop id="bg_Video" style="height:auto;width:auto;min-height:100%;min-width:100%"><source src="${videoSrc}" type="video/mp4"></video>`;
+            let video = `<video muted id="bg_Video" style="height:auto;width:auto;min-height:100%;min-width:100%"><source src="${videoSrc}" type="video/mp4"></video>`;
             $('body').append(`<div id="background_wrap_video" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;display:none;width: 100%;">${video}</div>`);
             $('#background_wrap').hide();
             let v = document.getElementById('bg_Video');
@@ -255,6 +255,7 @@ class tmplink {
             $('#bg_Video').attr('src',videoSrc);
         } else {
             $('#background_wrap_video').remove();
+            $('#background_wrap').show();
         }
     }
     
