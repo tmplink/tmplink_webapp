@@ -68,7 +68,7 @@ class stream {
                 $('#loading_box').fadeOut();
                 if (req.status == 1) {
                     //播放地址参数需要 base64 编码
-                    let player = 'https://player.5t-cdn.com/?stream=' + btoa(req.data);
+                    let player = 'http://play.5t-cdn.com/?stream=' + btoa(req.data);
                     this.play(player);
                 } else {
                     alert('error');
