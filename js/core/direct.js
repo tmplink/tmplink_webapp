@@ -73,10 +73,13 @@ class direct {
 
         if (this.domain != 0) {
             $('#direct_bind_domain').html(this.domain);
-            $('#direct_quota').html(quota);
-            $('#direct_total_transfer').html(total_transfer);
-            $('#direct_total_downloads').html(this.total_downloads);
+        }else{
+            $('.no_direct_domains').fadeIn();
         }
+
+        $('#direct_quota').html(quota);
+        $('#direct_total_transfer').html(total_transfer);
+        $('#direct_total_downloads').html(this.total_downloads);
     }
 
     is_allow() {
@@ -157,6 +160,12 @@ class direct {
      * 初始化页面
      */
     filelist(page) {
+        console.log(this.domain);
+        if(this.domain==0){
+            $('#filelist').show();
+            return false;
+        }
+
         $('.no_files').fadeOut();
         $('.no_dir').fadeOut();
         $('.no_photos').fadeOut();

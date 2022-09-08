@@ -64,7 +64,7 @@
 
     $.notifi.defaults = {
         hidden: null,
-        autoHideDelay: 5000,
+        autoHideDelay: 2000,
         hideSpeed: 100,
         noticeClass: '',
         noticeClose: '<div>X</div>',
