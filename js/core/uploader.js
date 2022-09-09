@@ -85,12 +85,21 @@ class uploader {
                 this.upload_processing = 1;
                 this.upload_core(f, f.is_dir);
             }
+            console.log(this.upload_queue_file);
         }
     }
 
-    upload_queue_remove(id) {
+    queue_remove(id) {
         // delete this.upload_queue_file[id];
         // this.upload_queue_file.length--;
+
+        for (var i = 0; i < this.upload_queue_file.length - 1; i++) {
+            if (this.upload_queue_file[i].id == id) {
+                console.log('delete:'+id);
+                this.upload_queue_file.splice(i, 1);
+            }
+        }
+
         $('#uq_' + id).hide();
     }
 
@@ -340,10 +349,10 @@ class uploader {
         $.post(server, {
             'token': this.parent_op.api_token,
             'action': 'prepare',
-            'sha1': sha1, 'filename': file.name, 'filesize': file.size,'slice_size':this.slice_size,
+            'sha1': sha1, 'filename': file.name, 'filesize': file.size, 'slice_size': this.slice_size,
             'utoken': utoken, 'mr_id': this.upload_mrid_get(), 'model': this.upload_model_get()
         }, (rsp) => {
-            switch (rsp.status) {   
+            switch (rsp.status) {
                 /**
                  * 分片上传服务
                  * 返回状态码
@@ -360,7 +369,7 @@ class uploader {
                 case 1:
                     //已完成上传
                     this.upload_processing = 0;
-                    this.upload_final({status:rsp.status,data:{ukey:rsp.data}}, file, id);
+                    this.upload_final({ status: rsp.status, data: { ukey: rsp.data } }, file, id);
                     this.upload_start();
                     break;
                 case 6:
@@ -368,7 +377,7 @@ class uploader {
                     //重置 rsp.stustus = 1
                     rsp.status = 1;
                     this.upload_processing = 0;
-                    this.upload_final({status:rsp.status,data:{ukey:rsp.data}}, file, id);
+                    this.upload_final({ status: rsp.status, data: { ukey: rsp.data } }, file, id);
                     this.upload_start();
                     break;
                 case 8:
@@ -377,7 +386,7 @@ class uploader {
                     //重置 rsp.ukey = rsp.data ，模板中需要用到
                     rsp.status = 1;
                     this.upload_processing = 0;
-                    this.upload_final({status:rsp.status,data:{ukey:rsp.data}}, file, id);
+                    this.upload_final({ status: rsp.status, data: { ukey: rsp.data } }, file, id);
                     this.upload_start();
                     break;
                 case 2:
@@ -397,7 +406,7 @@ class uploader {
                     //重置 rsp.stustus = 1
                     rsp.status = 1;
                     this.upload_processing = 0;
-                    this.upload_final({status:rsp.status,data:{ukey:rsp.data}}, file, id);
+                    this.upload_final({ status: rsp.status, data: { ukey: rsp.data } }, file, id);
                     this.upload_start();
                     break;
 
@@ -432,12 +441,12 @@ class uploader {
             //如果返回值是 5，则表示分片上传完成
             if (rsp.status == 5) {
                 cb();
-            }else{
+            } else {
                 //其它情况也返回处理
                 cb();
             }
         });
-        
+
         //更新上传信息到界面上
         let uqmid = "#uqm_" + id;
         let uqpid = "#uqp_" + id;
@@ -450,9 +459,9 @@ class uploader {
         xhr.addEventListener("loadend", (evt) => {
             //计算上传速度
             let end_time = new Date().getTime();
-            let speed = (this.slice_size / (end_time - start_time))*1000;
-            $(uqmid).html(`${this.parent_op.languageData.upload_upload_processing} ${file.name} (${(slice_status.success+1)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
-            $(uqgid).html(`${bytetoconver(speed,true)}/s`);
+            let speed = (this.slice_size / (end_time - start_time)) * 1000;
+            $(uqmid).html(`${this.parent_op.languageData.upload_upload_processing} ${file.name} (${(slice_status.success + 1)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
+            $(uqgid).html(`${bytetoconver(speed, true)}/s`);
         });
 
         //上传发生错误，重启
@@ -591,7 +600,7 @@ class uploader {
         if (this.upload_queue_file.length > 0) {
             //更新队列数
             $('.upload_queue').fadeIn();
-            $('.upload_queue_counter').html(this.upload_queue_file.length + 1);
+            $('.upload_queue_counter').html(this.upload_queue_file.length);
 
             //更新已完成📖
             $('.upload_count').fadeIn();
