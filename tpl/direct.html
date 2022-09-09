@@ -46,8 +46,7 @@
                     <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.direct.filelist(0);">
                         <i class="fa-light fa-rotate fa-fw" id="filelist_refresh_icon"></i>
                     </button>
-                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1"
-                        onclick="TL.direct.openDomainEditor();">
+                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.openDomainEditor();">
                         <i class="fa-fw fa-light fa-signal-stream"></i>
                         <span i18n="direct_btn_bind_domain" class="d-none d-sm-inline">.</span>
                     </button>
@@ -55,15 +54,16 @@
                         <i class="fa-fw fa-light fa-battery-bolt"></i>
                         <span i18n="direct_btn_buy_quota" class="d-none d-sm-inline">.</span>
                     </button>
-                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.getFreeQuotaOfSponsor();">
+                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1"
+                        onclick="TL.direct.getFreeQuotaOfSponsor();">
                         <i class="fa-fw fa-light fa-battery-bolt"></i>
                         <span i18n="direct_btn_free_quota" class="d-none d-sm-inline">.</span>
                     </button>
-                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1"
+                    <!-- <button class="btn btn-light btn-sm  text-azure mr-1 mt-1"
                         onclick="$('#directIntroModal').modal('show');">
                         <i class="fa-fw fa-light fa-book-open"></i>
                         <span i18n="direct_btn_intro" class="d-none d-sm-inline">.</span>
-                    </button>
+                    </button> -->
                     <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.sortModal();"
                         id="filelist_filter">
                         <i class="fa-fw fa-light fa-list"></i>
@@ -87,7 +87,7 @@
                             <i class="fa-light fa-list-check fa-fw"></i> <span i18n="on_select">.</span>
                         </button>
                         <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
-                            
+
                             <button class="dropdown-item" onclick="TL.Selecter.directCopy('downloadURLForText')">
                                 <i class="fa-fw fa-light fa-download text-azure"></i>
                                 <span i18n="on_select_copy_direct_url_text">.</span>
@@ -115,7 +115,7 @@
 
             <div id="direct_filelist"></div>
 
-            <div class="no_photos" style="margin-top: 100px;margin-bottom: 100px;display: none;">
+            <div class="no_photos" style="margin-top: 20px;margin-bottom: 100px;display: none;">
                 <div class="text-center mb-4">
                     <i class="fa-fw fa-4x fa-light fa-camera"></i>
                 </div>
@@ -127,16 +127,31 @@
                 </div>
                 <!-- <div class="text-center" i18n="page_no_files">.</div> -->
             </div>
-            <div class="no_direct_domains" style="margin-top: 100px;margin-bottom: 100px;display: none;">
-                <div class="text-center mb-4">
-                    <i class="fa-fw fa-light fa-signal-stream fa-4x"></i>
-                </div>
+            <div class="no_direct_domains mx-auto"
+                style="margin-top: 100px;margin-bottom: 100px;display: none;max-width: 620px;">
                 <div class="text-center">
-                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1"
-                        onclick="TL.direct.openDomainEditor()">
-                        <i class="fa-fw fa-light fa-signal-stream"></i>
-                        <span i18n="direct_btn_bind_domain" class="d-none d-sm-inline">.</span>
-                    </button>
+                    <h3 i18n="direct_intro_welcome">.</h3>
+                </div>
+                <div>
+                    <p i18n="direct_intro_1">.</p>
+                    <ul>
+                        <li i18n="direct_intro_2">.</li>
+                        <li i18n="direct_intro_3">.</li>
+                        <li i18n="direct_intro_4">.</li>
+                        <li i18n="direct_intro_5">.</li>
+                        <li i18n="direct_intro_6">.</li>
+                    </ul>
+
+                    <p i18n="direct_intro_7">.</p>
+                    <ul>
+                        <li i18n="direct_intro_8">.</li>
+                        <li>
+                            <span class="btn-point" onclick="TL.direct.openDomainEditor()">
+                                <span i18n="direct_btn_bind_domain">.</span>。
+                            </span>
+                        </li>
+                    </ul>
+                    <p i18n="direct_intro_9">.</p>
                 </div>
             </div>
 
