@@ -19,10 +19,6 @@ class direct {
     init(parent_op) {
         this.parent_op = parent_op;
         this.sortSettingsInit();
-
-        if (this.parent_op.area_cn) {
-            $('#tmplink_subdomain').hide();
-        }
     }
 
     init_details(cb) {
@@ -46,6 +42,13 @@ class direct {
             }
             cb();
         }, 'json');
+    }
+
+    openDomainEditor(){
+        if (this.parent_op.area_cn) {
+            $('#tmplink_subdomain').hide();
+        }
+        $('#directEditDomainModal').modal('show');
     }
 
     is_allow_play(filename) {
