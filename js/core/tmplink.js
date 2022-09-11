@@ -205,20 +205,42 @@ class tmplink {
             // $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-size: cover;background-repeat: no-repeat;background-attachment: scroll;background-image:url(\'' + svg + '\');"></div>');
             // let svg = "/img/bg.svg";
             $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color: #0093E9;background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);"></div>');
+            $('body').append(`<div id="background_wrap_img" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;display:none;width: 100%;"></div>`);
         }
 
         let night = this.matchNightModel();
-        this.bgLoadVideo(night);
-        this.matchNightModelListener((night)=>{
-            this.bgVideoChange(night);
+        this.bgLoadImg(night);
+        this.matchNightModelListener((night) => {
+            this.bgLoadImg(night);
         });
     }
 
-    bgLoadVideo(night){
+    bgLoadImg(night) {
+        let imgSrc = '';
+        if (night) {
+            imgSrc = '/img/bg/dark.jpg';
+            if (window.orientation == 180 || window.orientation == 0) {
+                imgSrc = '/img/bg/dark_re.jpg';
+            }
+        } else {
+            imgSrc = '/img/bg/light.jpg';
+            if (window.orientation == 180 || window.orientation == 0) {
+                imgSrc = '/img/bg/light_re.jpg';
+            }
+        }
+        $('#background_wrap_img').fadeOut();
+        $.get(imgSrc,()=>{
+            $('#background_wrap_img').css('background',`url("${imgSrc}") no-repeat center`);
+            $('#background_wrap_img').css('background-size','cover');
+            $('#background_wrap_img').fadeIn();
+        });
+    }
+
+    bgLoadVideo(night) {
         let videoSrc = '';
-        if(night){
+        if (night) {
             videoSrc = '/video/bg_night.mp4';
-        }else{
+        } else {
             videoSrc = '/video/bg.mp4';
         }
 
@@ -240,11 +262,11 @@ class tmplink {
         }
     }
 
-    bgVideoChange(night){
+    bgVideoChange(night) {
         let videoSrc = '';
-        if(night){
+        if (night) {
             videoSrc = '/video/bg_night.mp4';
-        }else{
+        } else {
             videoSrc = '/video/bg.mp4';
         }
 
@@ -253,7 +275,7 @@ class tmplink {
         let page = url.tmpui_page;
         if (page === '/' || page === undefined || this.isMobile() === false) {
             $('#background_wrap_video').fadeOut();
-            $('#bg_Video').attr('src',videoSrc);
+            $('#bg_Video').attr('src', videoSrc);
             let v = document.getElementById('bg_Video');
             v.addEventListener('canplay', () => {
                 $('#background_wrap_video').fadeIn();
@@ -264,7 +286,7 @@ class tmplink {
             $('#background_wrap').show();
         }
     }
-    
+
     lazyload(dom) {
         $(dom).each((i, e) => {
             let img = new Image();
