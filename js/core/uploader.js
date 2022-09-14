@@ -580,6 +580,12 @@ class uploader {
             this.upload_queue_file.push(f);
             let file = f.file;
 
+            //检查是否超出了可用的私有存储空间
+            if((this.parent_op.storage_used + file.size)>this.parent_op.storage){
+                $.notifi(file.name+' : '+this.parent_op.languageData.upload_fail_storage, {noticeClass:'ntf-error',autoHideDelay:5000});
+                return false;
+            }
+
             //如果未登录，添加队列到首页
             let target = this.parent_op.isLogin() ? '#upload_model_box' : '#upload_index_box';
             $(target).append(app.tpl('upload_list_wait_tpl', {
@@ -717,40 +723,41 @@ class uploader {
         } else {
             //根据错误代码显示错误信息
             let error_msg = this.parent_op.languageData.upload_fail;
-            switch (rsp.datus) {
-                case '2':
+            switch (rsp.status) {
+                case 2:
                     //上传失败，无效请求
                     error_msg = this.parent_op.languageData.upload_fail_utoken;
                     break;
-                case '3':
+                case 3:
                     //上传失败，不能上传空文件
                     error_msg = this.parent_op.languageData.upload_fail_empty;
                     break;
-                case '4':
+                case 4:
                     //上传失败，上传的文件大小超出了系统允许的大小
                     error_msg = this.parent_op.languageData.upload_limit_size;
                     break;
-                case '5':
+                case 5:
                     //上传失败，超出了单日允许的最大上传量
                     error_msg = this.parent_op.languageData.upload_limit_day;
                     break;
-                case '6':
+                case 6:
                     //上传失败，没有权限上传到这个文件夹
                     error_msg = this.parent_op.languageData.upload_fail_permission;
                     break;
-                case '7':
+                case 7:
                     //要上传的文件超出了私有存储空间限制
                     error_msg = this.parent_op.languageData.upload_fail_storage;
                     break;
-                case '8':
+                case 8:
                     //上传失败，目前暂时无法为这个文件分配存储空间
                     error_msg = this.parent_op.languageData.upload_fail_prepare;
                     break;
-                case '9':
+                case 9:
                     //上传失败，操作失败，无法获取节点信息
                     error_msg = this.parent_op.languageData.upload_fail_node;
                     break;
             }
+            console.log(rsp.status+':'+error_msg);
             $('#uqnn_' + id).html(`<span class="text-red">${error_msg}</span>`);
         }
 

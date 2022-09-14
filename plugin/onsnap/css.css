@@ -46,6 +46,11 @@
     color: #fff;
 }
 
+.ntf-error {
+    background-color: #d64a4a;
+    color: #fff;
+}
+
 .ntf-warning a {
     color: #fff;
 }
@@ -55,5 +60,5 @@
     position: fixed;
     text-align: center;
     width: 100%;
-    z-index: 100;
+    z-index: 9999;
 }

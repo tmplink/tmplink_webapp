@@ -10,7 +10,7 @@
         var o = $.extend(true, {}, $.notifi.defaults, options),
             notificationBar = $('#ntf-notifications').length ? $('#ntf-notifications') : $('<div>', {
                 "id": 'ntf-notifications',
-                "style": 'background:transparent; position:fixed; text-align:center; width:100%; z-index:100;'
+                "style": 'background:transparent; position:fixed; text-align:center; width:100%; z-index:9999;'
             }).prependTo('body'),
             noticeClose = $(o.noticeClose),
             noticeContent = content || '&nbsp;',
