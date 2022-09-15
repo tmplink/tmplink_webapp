@@ -41,6 +41,9 @@ class direct {
             //如果domain是 *.5t-cdn.com 作为子域名，生成的链接则应该是 https://
             if (this.domain.indexOf('.5t-cdn.com') != -1) {
                 this.protocol = 'https://';
+                $('#direct_bind_ssl').html('已启用');
+            }else{
+                $('#direct_bind_ssl').html('未启用');
             }
             if(this.ssl){
                 $('#direct_bind_ssl').html('已启用');
