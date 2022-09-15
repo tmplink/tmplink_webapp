@@ -8,6 +8,7 @@ class direct {
     quota = 0
     allow_ext = ['mp4', 'm4v', 'webm', 'mov', 'ogg', 'mp3']
     set = false
+    ssl = false
 
     sort_by = 0
     sort_type = 0
@@ -36,9 +37,16 @@ class direct {
             this.total_downloads = rsp.data.total_downloads;
             this.total_transfer = rsp.data.total_transfer;
             this.set = 1;
+            this.ssl = rsp.data.ssl_status==='yes'?true:false;
             //如果domain是 *.5t-cdn.com 作为子域名，生成的链接则应该是 https://
             if (this.domain.indexOf('.5t-cdn.com') != -1) {
                 this.protocol = 'https://';
+            }
+            if(this.ssl){
+                $('#direct_bind_ssl').html('已启用');
+                this.protocol = 'https://';
+            }else{
+                $('#direct_bind_ssl').html('未启用');
             }
             cb();
         }, 'json');
@@ -341,8 +349,35 @@ class direct {
     /**
      * 设置域名
      */
+     enableSSL() {
+        this.loading_box_on();
+
+        var ssl_cert = $('#set_ssl_cert').val()+"\n"+$('#set_ssl_cert_ca').val()+"\n"+$('#set_ssl_cert_chain').val();
+        var ssl_key = $('#set_ssl_key').val();
+
+        $.post(this.parent_op.api_direct, {
+            'action': 'direct_set_ssl',
+            'ssl_cert':ssl_cert, 'ssl_key':ssl_key,
+            'token': this.parent_op.api_token
+        }, (rsp) => {
+            if (rsp.status == 1) {
+                alert('已完成');
+                this.init_details(()=>{
+                    $('#directSSLModal').modal('hide');
+                });
+            } else {
+                alert('错误的证书');
+            }
+            this.loading_box_off();
+        }), 'json';
+    }
+
+    /**
+     * 设置域名
+     */
     setDomain() {
         this.loading_box_on();
+
         let domain = $('#direct-domain').val();
         //检查输入的是否是正确的域名
         if (domain == null) {

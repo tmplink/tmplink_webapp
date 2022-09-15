@@ -581,10 +581,13 @@ class uploader {
             let file = f.file;
 
             //检查是否超出了可用的私有存储空间
-            if((this.parent_op.storage_used + file.size)>this.parent_op.storage){
-                $.notifi(file.name+' : '+this.parent_op.languageData.upload_fail_storage, {noticeClass:'ntf-error',autoHideDelay:5000});
-                return false;
+            if(this.upload_model_get()==99){
+                if((this.parent_op.storage_used + file.size)>this.parent_op.storage){
+                    $.notifi(file.name+' : '+this.parent_op.languageData.upload_fail_storage, {noticeClass:'ntf-error',autoHideDelay:5000});
+                    return false;
+                }
             }
+            
 
             //如果未登录，添加队列到首页
             let target = this.parent_op.isLogin() ? '#upload_model_box' : '#upload_index_box';
