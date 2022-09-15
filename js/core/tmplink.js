@@ -3126,7 +3126,7 @@ class tmplink {
             }
 
             //将内容写入到缓存并复制到剪贴板
-            this.bulkCopyTmp += content + "\n";
+            this.bulkCopyTmp += content + " \n";
             this.copyToClip(this.bulkCopyTmp);
             //设置一个10秒缓存器
             this.bulkCopyTimer = setTimeout(() => {

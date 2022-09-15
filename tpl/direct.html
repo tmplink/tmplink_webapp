@@ -225,7 +225,7 @@
                         <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].direct_key %>" onclick="event.stopPropagation();">
                             <span class="mr-2"><% obj[x].fsize_formated %></span>
                             <a href="<% obj[x].direct_link %>" target="_blank" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></a>
-                            <button onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].fname}\n${obj[x].direct_link}`) %>',true)" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
+                            <button onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].direct_link}`) %>',true)" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
                             <button id="btn-rm-file_<% obj[x].direct_key %>" class="btn btn-sm btn-light mx-1" onclick="TL.direct.delLink('<% obj[x].direct_key %>')">
                                 <i class="fa-fw fa-light fa-trash text-danger"></i>
                             </button>
