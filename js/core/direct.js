@@ -105,7 +105,11 @@ class direct {
 
     genLinkDirect(dkey, filename) {
         let filename2 = encodeURI(filename);
-        return { download: `${this.protocol}${this.domain}/files/${dkey}/${filename2}`, play: `${this.protocol}${this.domain}/stream-${dkey}`};
+        return { 
+            download: `${this.protocol}${this.domain}/files/${dkey}/${filename2}`, 
+            res: `${this.protocol}${this.domain}/res/${dkey}/${filename2}`, 
+            play: `${this.protocol}${this.domain}/stream-${dkey}`
+        };
     }
 
     addLink(ukey) {

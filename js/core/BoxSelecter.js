@@ -33,9 +33,9 @@ class BoxSelecter {
     setOn(node) {
         let inode = node.getAttribute('tldata');
         let itype = node.getAttribute('tltype');
-        if(itype==='photo_card'){
+        if (itype === 'photo_card') {
             $(`.file_unit_${inode} .card`).css('background-color', 'rgb(220, 236, 245)');
-        }else{
+        } else {
             $(`.file_unit_${inode}`).css('border-radius', '5px');
             $(`.file_unit_${inode}`).css('border-width', '1px');
             $(`.file_unit_${inode}`).css('background-color', 'rgb(220, 236, 245)');
@@ -46,9 +46,9 @@ class BoxSelecter {
     selectOff(node) {
         let inode = node.getAttribute('tldata');
         let itype = node.getAttribute('tltype');
-        if(itype==='photo_card'){
+        if (itype === 'photo_card') {
             $(`.file_unit_${inode} .card`).css('background-color', '');
-        }else{
+        } else {
             $(`.file_unit_${inode}`).css('border-radius', '');
             $(`.file_unit_${inode}`).css('border-width', '');
             $(`.file_unit_${inode}`).css('background-color', '');
@@ -101,20 +101,20 @@ class BoxSelecter {
     toClicpboard(data) {
         let ctext = '';
         for (let x in data) {
-            ctext = ctext + '[' + data[x].title + '] https://'+this.site_domain+'/f/' + data[x].ukey + "\r";
+            ctext = ctext + '[' + data[x].title + '] https://' + this.site_domain + '/f/' + data[x].ukey + "\r";
         }
         this.parent_op.copyToClip(ctext);
     }
 
     delete() {
-        if(this.parent_op.profile_confirm_delete_get()){
-            if(!confirm(this.parent_op.languageData.confirm_delete)){
+        if (this.parent_op.profile_confirm_delete_get()) {
+            if (!confirm(this.parent_op.languageData.confirm_delete)) {
                 return false;
             }
         }
         let ukey = [];
         var node = document.getElementsByName(this.items_name);
-        if(node.length>0){
+        if (node.length > 0) {
             for (let i = 0; i < node.length; i++) {
                 var inode = node[i];
                 let check = inode.getAttribute('data-check');
@@ -123,7 +123,7 @@ class BoxSelecter {
                     ukey.push(inode.getAttribute('tldata'));
                 }
             }
-            this.parent_op.workspace_del(ukey,true);
+            this.parent_op.workspace_del(ukey, true);
         }
     }
 
@@ -160,7 +160,7 @@ class BoxSelecter {
                 });
             }
         }
-        if(check_count === 0){
+        if (check_count === 0) {
             this.parent_op.alert(this.parent_op.languageData.status_error_12);
             return false;
         }
@@ -176,7 +176,7 @@ class BoxSelecter {
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
             let check = inode.getAttribute('data-check');
-            if(this.dir_tree_init===false){
+            if (this.dir_tree_init === false) {
                 this.parent_op.dir_tree_display(0);
                 this.dir_tree_init = true;
             }
@@ -216,7 +216,7 @@ class BoxSelecter {
                 let dkey = inode.getAttribute('tldata');
                 let fname = inode.getAttribute('tltitle');
                 //get file url
-                let urldata = this.parent_op.direct.genLinkDirect(dkey,fname);
+                let urldata = this.parent_op.direct.genLinkDirect(dkey, fname);
                 //create copy text
                 switch (type) {
                     case 'downloadURLForText':
@@ -226,27 +226,33 @@ class BoxSelecter {
                         copyText += `<a href="${urldata.download}" target="_blank">${fname}</a>\n`;
                         break;
                     case 'streamURLForText':
-                        if(this.parent_op.direct.is_allow_play(fname)){
+                        if (this.parent_op.direct.is_allow_play(fname)) {
                             copyText += `${fname}\n${urldata.play}\n\n`;
                         }
                         break;
                     case 'streamURLForHTML':
-                        if(this.parent_op.direct.is_allow_play(fname)){
+                        if (this.parent_op.direct.is_allow_play(fname)) {
                             copyText += `<a href="${urldata.play}" target="_blank">${fname}</a>\n\n`;
                         }
+                        break;
+                    case 'resURLForText':
+                        copyText += `${fname}\n${urldata.res}\n\n`;
+                        break;
+                    case 'resURLForHTML':
+                        copyText += `<a href="${urldata.res}" target="_blank">${fname}</a>\n\n`;
                         break;
                 }
             }
         }
 
         //打开复制窗口
-        if(copyText!==''){
+        if (copyText !== '') {
             $('#copy-modal-body').html(copyText);
             $('#copyModal').modal('show');
         }
     }
 
-    copyModelCP(){
+    copyModelCP() {
         let copyText = $('#copy-modal-body').text();
         var aux = document.createElement("textarea");
         aux.value = copyText;
@@ -257,10 +263,10 @@ class BoxSelecter {
 
         let tmp = $('#copy-modal-btn').html();
         $('#copy-modal-btn').html(this.parent_op.languageData.copied);
-        setTimeout(()=>{
+        setTimeout(() => {
             $('#copy-modal-btn').html(tmp);
         }
-        ,2000);
+            , 2000);
     }
 
     directAddlinks() {
@@ -277,7 +283,7 @@ class BoxSelecter {
         }
 
         //打开复制窗口
-        if(ukeys.length>0){
+        if (ukeys.length > 0) {
             this.parent_op.direct.addLinks(ukeys);
         }
     }
@@ -296,7 +302,7 @@ class BoxSelecter {
         }
 
         //打开复制窗口
-        if(ukeys.length>0){
+        if (ukeys.length > 0) {
             this.parent_op.direct.delLinks(ukeys);
         }
     }

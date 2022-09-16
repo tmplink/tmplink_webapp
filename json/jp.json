@@ -1,4 +1,6 @@
 {
+    "on_select_copy_res_url_text": "リソースリンクアドレスをコピー (テキスト)",
+    "on_select_copy_res_url_html": "リソース リンク アドレス (コード) をコピー",
     "direct_intro_welcome": "ダイレクトリンク機能へようこそ",
     "direct_intro_1": "ダイレクト リンク機能により、TMPLINK にアップロードされたファイルをリソース リンクとして友人と共有できます。",
     "direct_intro_2": "ファイルのダウンロード ページに入らずに直接ダウンロードします。",

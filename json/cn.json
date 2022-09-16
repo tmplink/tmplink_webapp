@@ -44,10 +44,12 @@
     "on_select_share":"复制分享链接",
     "on_select":"选中项目",
     "on_select_addto_direct":"创建直链地址",
-    "on_select_copy_direct_url_text":"复制直链地址（文本）",
-    "on_select_copy_direct_url_html":"复制直链地址（代码）",
+    "on_select_copy_direct_url_text":"复制下载地址（文本）",
+    "on_select_copy_direct_url_html":"复制下载地址（代码）",
     "on_select_copy_stream_url_text":"复制在线播放的地址（文本）",
     "on_select_copy_stream_url_html":"复制在线播放的地址（代码）",
+    "on_select_copy_res_url_text":"复制静态资源地址（文本）",
+    "on_select_copy_res_url_html":"复制静态资源地址（代码）",
 
 
     "page_no_photos":"当前没有可供显示的图片，点击 <i class=\"fa-fw fa-light fa-list-radio text-azure\"></i> 查看所有文件。",
