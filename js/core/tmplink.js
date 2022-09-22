@@ -1135,7 +1135,7 @@ class tmplink {
 
                 //file need to login
                 if (rsp.status === 3) {
-                    $('#file_messenger_icon').html('<i class="fa-light fa-user-robot fa-7x"></i>');
+                    $('#file_messenger_icon').html('<i class="fa-solid fa-shield-keyhole fa-7x"></i>');
                     $('#file_messenger_msg').html(this.languageData.status_need_login);
                     $('#file_messenger_msg_login').show();
                     $('#file_messenger').show();
