@@ -1,9 +1,9 @@
 {
     "name": "TMPLINK",
-    "short_name": "TMP",
+    "short_name": "TMPLINK",
     "start_url": ".",
     "categories":"productivity",
-    "display": "standalone",
+    "display": "fullscreen",
     "background_color": "#fff",
     "description": "Simple sharing, easy management. Every day, users around the world create links and share files through Titanium Drive.",
     "icons": [{
