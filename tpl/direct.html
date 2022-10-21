@@ -7,12 +7,14 @@
                 <div class="lead mt-2">
                     <span class="badge badge-pill badge-info p-2 mx-1 mt-1">
                         <i class="fa-fw fa-solid fa-link"></i>
-                        <span id="direct_bind_domain">0</span>
+                        <span id="direct_bind_domain_box">
+                            <a href="#" target="_blank" id="direct_bind_domain" class="text-white">#</a>
+                        </span>
                     </span>
                     <span class="badge badge-pill badge-info p-2 mx-1 mt-1 btn-point"
                         onclick="$('#directSSLModal').modal('show');">
                         <i class="fa-fw fa-solid fa-shield-halved"></i>
-                        安全传输: <span id="direct_bind_ssl"></span>
+                        <span i18n="direct_ssl">.</span> : <span id="direct_bind_ssl"></span>
                     </span>
                 </div>
                 <div class="lead mt-2">
@@ -306,29 +308,29 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
-                <h4 class="modal-title">
-                    增强项：安全传输
+                <h4 class="modal-title" i18n="direct_box_ssl_title">
+                    .
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h4>启用 HTTPS 支持</h4>
-                <p>设置 SSL 证书以启用 HTTPS 安全传输数据，所有 HTTP 流量也会重定向至 HTTPS。</p>
+                <h4 i18n="direct_box_ssl_des1">.</h4>
+                <p i18n="direct_box_ssl_des2">.</p>
                 <div class="card p-3 mt-3  shadow-sm">
                     <div class="form-group">
-                        <label for="set_ssl_cert">域名证书</label>
+                        <label for="set_ssl_cert" i18n="direct_box_ssl_cert">.</label>
                         <textarea class="form-control" id="set_ssl_cert" rows="2"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="set_ssl_cert">根证书</label>
+                        <label for="set_ssl_cert" i18n="direct_box_ssl_ca">.</label>
                         <textarea class="form-control" id="set_ssl_cert_ca" rows="2"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="set_ssl_cert">中间证书</label>
+                        <label for="set_ssl_cert" i18n="direct_box_ssl_imp">.</label>
                         <textarea class="form-control" id="set_ssl_cert_chain" rows="2"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="set_ssl_key">私钥</label>
+                        <label for="set_ssl_key" i18n="direct_box_ssl_key">.</label>
                         <textarea class="form-control" id="set_ssl_key" rows="2"></textarea>
                     </div>
                 </div>
@@ -337,8 +339,10 @@
                 <span id="box_post_doing" style="text-align: center;display: none;">
                     <i class="fa fa-spinner-third fa-spin"></i>
                 </span>
+                <button id="box_disable_ssl" type="button" onclick="TL.direct.disableSSL()"
+                    class="btn btn-danger btn-radius" i18n="direct_box_ssl_stop">.</button>
                 <button id="box_post" type="button" onclick="TL.direct.enableSSL()"
-                    class="btn btn-primary btn-radius">提交</button>
+                    class="btn btn-primary btn-radius" i18n="direct_box_ssl_post">.</button>
             </div>
         </div>
     </div>

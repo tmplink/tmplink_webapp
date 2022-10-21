@@ -41,15 +41,17 @@ class direct {
             //如果domain是 *.5t-cdn.com 作为子域名，生成的链接则应该是 https://
             if (this.domain.indexOf('.5t-cdn.com') != -1) {
                 this.protocol = 'https://';
-                $('#direct_bind_ssl').html('已启用');
+                $('#direct_bind_ssl').html(this.parent_op.languageData.direct_ssl_enbaled);
             }else{
-                $('#direct_bind_ssl').html('未启用');
+                $('#direct_bind_ssl').html(this.parent_op.languageData.direct_ssl_disabled);
             }
             if(this.ssl){
-                $('#direct_bind_ssl').html('已启用');
+                $('#direct_bind_ssl').html(this.parent_op.languageData.direct_ssl_enbaled);
+                $('#box_disable_ssl').show();
                 this.protocol = 'https://';
             }else{
-                $('#direct_bind_ssl').html('未启用');
+                $('#box_disable_ssl').hide();
+                $('#direct_bind_ssl').html(this.parent_op.languageData.direct_ssl_disabled);
             }
             cb();
         }, 'json');
@@ -86,8 +88,11 @@ class direct {
 
 
         if (this.domain != 0) {
+            $('#direct_bind_domain_box').show();
             $('#direct_bind_domain').html(this.domain);
+            $('#direct_bind_domain').attr('href',this.protocol+this.domain);
         }else{
+            $('#direct_bind_domain_box').hide();
             $('.no_direct_domains').fadeIn();
         }
 
@@ -178,7 +183,11 @@ class direct {
      * 初始化页面
      */
     filelist(page) {
-        console.log(this.domain);
+
+        if (this.parent_op.logined != 1) {
+            app.open('/login');
+        }
+
         if(this.domain==0){
             $('#filelist').show();
             return false;
@@ -368,14 +377,31 @@ class direct {
             'token': this.parent_op.api_token
         }, (rsp) => {
             if (rsp.status == 1) {
-                alert('已完成');
+                alert(this.parent_op.languageData.direct_msg_complete);
                 this.init_details(()=>{
                     $('#directSSLModal').modal('hide');
                 });
             } else {
-                alert('错误的证书');
+                alert(this.parent_op.languageData.direct_msg_ssl_invalid);
             }
             this.loading_box_off();
+        }), 'json';
+    }
+
+    disableSSL() {
+
+        if(!confirm(this.parent_op.languageData.direct_msg_ssl_disable)){
+            return false;
+        }
+
+        this.loading_box_on();
+
+        $.post(this.parent_op.api_direct, {
+            'action': 'direct_disable_ssl',
+            'token': this.parent_op.api_token
+        }, (rsp) => {
+            alert(this.parent_op.languageData.direct_msg_complete);
+            window.location.reload();
         }), 'json';
     }
 
@@ -397,10 +423,14 @@ class direct {
         }, (rsp) => {
             if (rsp.status == 1) {
                 alert(this.parent_op.languageData.direct_btn_bind_prompt_ok);
+                $('#direct_bind_domain_box').show();
                 $('#direct_bind_domain').html(domain);
+                $('#direct_bind_domain').attr('href',this.protocol+domain);
+                
                 $('#diredirect_bind_notice').html('');
                 window.location.reload();
             } else {
+                $('#direct_bind_domain_box').hide();
                 alert(this.parent_op.languageData.direct_btn_bind_prompt_error);
             }
             this.loading_box_off();

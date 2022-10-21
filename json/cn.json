@@ -567,6 +567,24 @@
     "direct_sponsor_freee_quota_msg_2":"这是赞助者的专享权益，您目前还不是赞助者。请成为赞助者后再来",
     "direct_sponsor_freee_quota_msg_3":"您已经领取了本月的配额，请下个月再来。",
 
+    "direct_ssl":"安全传输",
+    "direct_ssl_enbaled":"已启用",
+    "direct_ssl_disabled":"未启用",
+    "direct_msg_complete":"已启用",
+    "direct_msg_ssl_invalid":"无效的证书",
+    "direct_msg_ssl_disable":"停用此功能后，大约需要 5 分钟生效。确定吗？",
+
+    "direct_box_ssl_title":"增强项：安全传输",
+    "direct_box_ssl_des1":"启用 HTTPS 支持",
+    "direct_box_ssl_des2":"设置 SSL 证书以启用 HTTPS 安全传输数据，所有 HTTP 流量也会重定向至 HTTPS。",
+    "direct_box_ssl_cert":"域名证书",
+    "direct_box_ssl_ca":"根证书",
+    "direct_box_ssl_imp":"中间证书",
+    "direct_box_ssl_key":"私钥",
+    "direct_box_ssl_stop":"停用安全传输",
+    "direct_box_ssl_post":"提交",
+    
+
     "menu_delete":"删除文件",
     "menu_addlink":"通过直链分享",
     "menu_rename":"重命名",
