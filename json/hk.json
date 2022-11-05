@@ -1,4 +1,6 @@
 {
+    "modal_performance_direct": "直鏈",
+    "modal_performance_direct_des": "生成一個目錄鏈接，並為此文件夾中的所有文件提供直接下載鏈接。每次重新啟用此選項，都會生成不一樣的鏈接，原先的鏈接會失效。",
     "direct_ssl": "安全傳輸",
     "direct_ssl_enbaled": "已啟用",
     "direct_ssl_disabled": "未啟用",

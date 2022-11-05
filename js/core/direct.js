@@ -256,6 +256,76 @@ class direct {
         });
     }
 
+    dirRoomInit(){
+        if (this.parent_op.isLogin() === false) {
+            return false;
+        }
+
+        let mrid = this.parent_op.room.mr_id;
+        $.post(this.parent_op.api_direct, {
+            'action': 'dir_details',
+            'mrid': mrid,
+            'token': this.parent_op.api_token
+        }, (rsp) => {
+            if (rsp.status == 1) {
+                this.dir_btn_status = true;
+                this.dir_link = `${this.protocol}${this.domain}/dir/${rsp.data}`;
+                this.dir_key = rsp.data;
+                //操作按钮
+                this.dirRoomPfBtnUpdate();
+                //更新文件夹界面
+                this.dirRoomUpdate();
+            }
+        }, 'json');
+    }
+
+    dirToggle() {
+        let status = $('#pf_allow_direct').is(':checked') ? true : false;
+        let post_params ={};
+
+        if(status){
+            post_params.action = 'add_dir';
+            post_params.mrid = this.parent_op.room.mr_id;
+        }else{
+            post_params.action = 'del_dir';
+            post_params.direct_key = this.dir_key;
+        }
+        post_params.token = this.parent_op.api_token;
+
+        $.post(this.parent_op.api_direct,post_params, (rsp) => {
+            if (rsp.status == 1) {
+                if(status){
+                    this.dir_btn_status = false;
+                }else{
+                    this.dir_btn_status = true;
+                    this.dir_link = `${this.protocol}${this.domain}/dir/${rsp.data}`;
+                }
+                //操作按钮
+                this.dirRoomPfBtnUpdate();
+                //更新文件夹界面
+                this.dirRoomUpdate();
+            }
+        }, 'json');
+    }
+
+    dirRoomUpdate(){
+        if(this.dir_btn_status){
+            $('#room_link').html(this.dir_link);
+            $('#room_link').attr('href',this.dir_link);
+            $('#room_link').show();
+        }else{
+            $('#room_link').hide();
+        }
+    }
+
+    dirRoomPfBtnUpdate(){
+        if(this.dir_btn_status){
+            $('#pf_allow_direct').attr('checked', 'checked');
+        }else{
+            $('#pf_allow_direct').removeAttr('checked');
+        }
+    }
+
     direct_filelist_model(type) {
         switch (type) {
             case 'photo':

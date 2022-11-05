@@ -1,4 +1,6 @@
 {
+    "modal_performance_direct": "ディレクトリのリンク",
+    "modal_performance_direct_des": "ディレクトリのリンクを生成し、このフォルダー内のすべてのファイルへの直接ダウンロードのリンクを提供します。 このオプションを再度有効にするたびに、異なるリンクが生成され、元のリンクは無効となります。",
     "direct_ssl": "HTTPS",
     "direct_ssl_enbaled": "有効",
     "direct_ssl_disabled": "非活性化",

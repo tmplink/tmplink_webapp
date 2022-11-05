@@ -505,6 +505,9 @@
     "modal_performance_share":"协作",
     "modal_performance_share_des":"允许其他用户将文件上传至此文件夹",
 
+    "modal_performance_direct":"直链",
+    "modal_performance_direct_des":"生成一个目录链接，并为此文件夹中的所有文件提供直接下载链接。每次重新启用此选项，都会生成不一样的链接，原先的链接会失效。",
+
 
     "status_need_login": "请先登录",
     "status_area": "此文件在该地区不可用",

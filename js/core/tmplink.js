@@ -2523,6 +2523,14 @@ class tmplink {
             this.room.img_link = rsp.data.img_link;
             this.room_performance_init(this.room.mr_id);
 
+            //如果用户是拥有者，显示直链相关的信息，并初始化
+            if (this.room.owner == 1) {
+                this.direct.dirRoomInit();
+                $('.room_direct_model').show();
+            }else{
+                $('.room_direct_model').hide();
+            }
+
             //如果用户不是文件夹的拥有者，则显示出加入收藏夹的按钮
             if (this.room.owner == 0) {
                 $('#room_btn_favorate').on('click', () => {
