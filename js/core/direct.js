@@ -302,10 +302,11 @@ class direct {
 
         $.post(this.parent_op.api_direct,post_params, (rsp) => {
             if (rsp.status == 1) {
-                if(status){
+                if(post_params.action==='del_dir'){
                     this.dir_btn_status = false;
                 }else{
                     this.dir_btn_status = true;
+                    this.dir_key = rsp.data;
                     this.dir_link = `${this.protocol}${this.domain}/dir/${rsp.data}`;
                 }
                 //操作按钮
@@ -320,9 +321,9 @@ class direct {
         if(this.dir_btn_status){
             $('#room_link').html(this.dir_link);
             $('#room_link').attr('href',this.dir_link);
-            $('#room_link').show();
+            $('#room_direct_model').show();
         }else{
-            $('#room_link').hide();
+            $('#room_direct_model').hide();
         }
     }
 
