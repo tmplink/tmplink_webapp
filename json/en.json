@@ -1,4 +1,5 @@
 {
+    "modal_performance_direct_tip":"Your account has not been configured with a direct domain name, please complete this setting first.",
     "modal_performance_direct": "Direct Link",
     "modal_performance_direct_des": "Generate a directory link and provide a direct download link for all files in this folder. Each time this option is re-enabled, a different link will be generated and the original link will be disabled.",
     "direct_ssl": "HTTPS",

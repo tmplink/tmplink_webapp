@@ -261,6 +261,14 @@ class direct {
             return false;
         }
 
+        if(this.domain==0){
+            $('#pf_allow_direct').attr('disabled',true);
+            $('#pf_allow_direct_notice').show();
+            return false;
+        }else{
+            $('#pf_allow_direct_notice').hide();
+        }
+
         let mrid = this.parent_op.room.mr_id;
         $.post(this.parent_op.api_direct, {
             'action': 'dir_details',

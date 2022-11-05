@@ -507,6 +507,7 @@
 
     "modal_performance_direct":"直链",
     "modal_performance_direct_des":"生成一个目录链接，并为此文件夹中的所有文件提供直接下载链接。每次重新启用此选项，都会生成不一样的链接，原先的链接会失效。",
+    "modal_performance_direct_tip":"您的账号还没有配置直链域名，请先完成该设定。",
 
 
     "status_need_login": "请先登录",

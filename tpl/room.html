@@ -589,6 +589,13 @@
                 <div class="room_direct_model">
                     <hr>
                     <h5 i18n="modal_performance_direct">.</h5>
+                    <div class="alert alert-warning" id="pf_allow_direct_notice">
+                        <span i18n="modal_performance_direct_tip">.</span>
+                        <button class="btn btn-primary mt-1 my-sm-0 workspace-navbar" onclick="app.open('/direct');">
+                            <i class="fa-light fa-share-nodes fa-fw"></i>
+                            <span i18n="navbar_direct">.</span>
+                        </button>
+                    </div>
                     <label class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="pf_allow_direct"
                             onclick="TL.direct.dirToggle()">
