@@ -1,4 +1,5 @@
 {
+    "direct_intro":"文件夾的 “偏好設置” 中新增 “直鏈” 設定，可以為文件夾生成專屬直鏈。",
     "modal_performance_direct_tip":"您的賬號還沒有配置直鏈域名，請先完成該設定。",
     "modal_performance_direct": "直鏈",
     "modal_performance_direct_des": "生成一個目錄鏈接，並為此文件夾中的所有文件提供直接下載鏈接。每次重新啟用此選項，都會生成不一樣的鏈接，原先的鏈接會失效。",

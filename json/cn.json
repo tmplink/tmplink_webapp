@@ -530,6 +530,7 @@
 
     "confirm_delete": "确定要删除吗？",
 
+    "direct_intro":"文件夹的 “偏好设置” 中新增 “直链” 设定，可以为文件夹生成专属直链。",
     "direct_intro_modal_title":"通过直接链接分享文件",
     "direct_intro_modal_body_title":"欢迎使用",
     "direct_intro_modal_body_1":"直链是最快捷的文件分享方式，您可以从 “流” 选择任意文件加入到直链，然后分享给其它人下载。并且，您可以为同一个文件创建多份分享链接，您可以随时撤销文件的分享。",
