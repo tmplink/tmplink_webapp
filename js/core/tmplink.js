@@ -2552,7 +2552,7 @@ class tmplink {
 
             //如果文件夹不是用户的，则隐藏偏好设定
             if (this.room.owner == 0) {
-                $('#room_btn_performance').hide();
+                $('.room_btn_performance').hide();
             }
 
             //如果文件夹有设置图片
