@@ -2,7 +2,6 @@ const resSet = "tmplink";
 const assets = [
     "/",
     "/img/ico/logo-256x256.png",
-    "/img/ico/logo-256x256.png",
     "/img/screenshots/1.png",
     "/img/screenshots/2.png",
     "/js/tools/jquery.min.js",
