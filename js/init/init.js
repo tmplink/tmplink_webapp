@@ -5,7 +5,7 @@ app.ready(()=>{
 
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker
-            .register("/pwa/sw.js")
+            .register("/pwa_sw.js")
             .then(res => console.log("SW:ok"))
             .catch(err => console.log("SW:error", err));
     }
