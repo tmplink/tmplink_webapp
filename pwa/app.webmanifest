@@ -2,6 +2,7 @@
   "name": "TMPLINK",
   "short_name": "TMPLINK",
   "start_url": "/",
+  "scope": "/",
   "categories": "productivity",
   "display": "fullscreen",
   "background_color": "#fff",
