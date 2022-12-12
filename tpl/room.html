@@ -35,7 +35,7 @@
             <img src="" class="room_img" style="display: none;border-radius: 8px;width: 100%;">
         </div>
 
-        <div id="dir_list_box" class="card mt-4 hideOnLoad shadow">
+        <div id="dir_list_box" class="card mt-4 hideOnLoad shadow-lg">
 
             <div class="card-body">
                 <div class="clearfix mb-3 px-3">
@@ -397,7 +397,7 @@
                 <% for (var x in obj) { %>
                 <div class="col-6 col-md-3 col-lg-2 p-2 text-center" id="meetingroom_id_<% obj[x].mr_id %>">
                     <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true">
-                        <div class="fileicon mx-auto mb-2 shadow-sm">
+                        <div class="fileicon mx-auto mb-2 shadow-lg">
                             <i class="fa-light fa-folders fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
                         </div>
                         <div class="max-width-90 mx-auto">
@@ -468,7 +468,7 @@
                 <script type="text/template" id="mrfile_add_list_tpl">
                 <% for (var x in obj) { %>
                     <div class="col-6 col-md-3 p-2 text-center" id="mraddlist-<% obj[x].ukey%>">
-                        <div class="fileicon mx-auto mb-2 shadow-sm <% obj[x].model_color %>">
+                        <div class="fileicon mx-auto mb-2 shadow-lg <% obj[x].model_color %>">
                             <i class="<% TL.fileicon(obj[x].ftype) %> fa-4x mx-auto mb-2 fa-fw"></i>
                         </div>
                         <div class="max-width-80 mx-auto">

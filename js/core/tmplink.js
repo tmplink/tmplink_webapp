@@ -207,6 +207,7 @@ class tmplink {
 
             //暂时不使用蓝色背景
             // $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color: #0093E9;background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);"></div>');
+            $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color: #fcfcfc;"></div>');
             $('body').append(`<div id="background_wrap_img" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;display:none;width: 100%;"></div>`);
             let night = this.matchNightModel();
             this.bgLoadCSS(night);
