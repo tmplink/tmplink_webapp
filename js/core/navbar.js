@@ -8,6 +8,38 @@ class navbar {
         //根据 tmpui_page 初始化底部导航栏
         let url = this.parent.get_url_params('tmpui_page');
         this.model_select(url.tmpui_page, false);
+        this.resetNavBar();
+        //画面の幅や高さの変化を聞き分けて、下のナビゲーションバーを切り替えることができる
+        window.addEventListener('resize', () => {
+            this.resetNavBar();
+        }
+        );
+    }
+
+    resetNavBar() {
+        if (this.isTablet()) {
+            $('.topnav').addClass('fixed-bottom');
+            $('.topnav').addClass('nav-bottom-set');
+            $('.topnav').removeClass('nav-top-set');
+            $('.topnav').removeClass('fixed-top');
+            $('.topnav-addon').hide();
+        } else {
+            $('.topnav').removeClass('fixed-bottom');
+            $('.topnav').removeClass('nav-bottom-set');
+            $('.topnav').addClass('nav-top-set');
+            $('.topnav').addClass('fixed-top');
+            $('.topnav-addon').show();
+        }
+    }
+
+    isTablet() {
+        let w = window.innerWidth;
+        let h = window.innerHeight;
+        if (h > w) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     model_select(model, act) {

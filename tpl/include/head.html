@@ -4,119 +4,7 @@
     </div>
 </div>
 
-
-<!-- <nav class="mainNav navbar  navbar-light d-none d-sm-flex mt-2">
-    <div class="container">
-        <a class="navbar-brand mt-1 my-lg-0 pb-0" href="javascript:void(0)" onclick="app.open('/');">
-        </a>
-
-        <div class="form-inline mt-1 my-lg-0 pb-0 navbar_nloading">
-            <li class="nav-item">
-                <img src="/img/loading.svg" />
-            </li>
-        </div>
-
-        <div class="form-inline mt-1 my-lg-0 pb-0 navbar_ready" style="display: none;">
-
-            <div class="mt-1 mr-1">
-                <div class="btn-group">
-                    <a class="btn btn-primary mt-1 my-sm-0 workspace-navbar" href="/home&listview=workspace" tmpui-action="homeView.workspace();">
-                        <i class="fa-light fa-memo-pad fa-fw"></i>
-                        <span i18n="navbar_workspace">.</span>
-                    </a>
-                    <a class="btn btn-primary mt-1 my-sm-0 workspace-navbar" href="/home&listview=room&mrid=0" tmpui-action="homeView.room();">
-                        <i class="fa-light fa-cabinet-filing fa-fw"></i>
-                        <span i18n="navbar_meetingroom">.</span>
-                    </a>
-                    <a class="btn btn-primary mt-1 my-sm-0 workspace-navbar" href="/home&listview=direct" tmpui-action="homeView.direct();">
-                        <i class="fa-light fa-share-nodes fa-fw"></i>
-                        <span i18n="navbar_direct">.</span>
-                    </a>
-                    <button class="btn btn-primary mt-1 my-sm-0 workspace-navbar"
-                        onclick="$('#shopModal').modal('show');">
-                        <i class="fa-light fa-bag-shopping fa-fw"></i>
-                        <span i18n="navbar_buy">.</span>
-                    </button>
-                </div>
-                <button class="btn btn-primary mt-1 mr-1 my-sm-0 workspace-nologin" onclick="app.open('/login');">
-                    <i class="fa-light fa-arrow-right-to-bracket fa-fw"></i>
-                    <span i18n="navbar_login">.</span>
-                </button>
-                <button class="btn btn-primary mt-1 mr-1 my-sm-0 workspace-nologin" onclick="app.open('/reg');">
-                    <i class="fa-light fa-user-plus fa-fw"></i>
-                    <span i18n="navbar_reg">.</span>
-                </button>
-            </div>
-
-            <div class="btn-group mt-1 mr-1 workspace-navbar">
-                <button type="button" class=" btn btn-success dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fa-light fa-sliders-up fa-fw"></i><span i18n="navbar_settings">.</span>
-                </button>
-                <div class="dropdown-menu shadow">
-                    <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');">
-                        <i class="fa-light fa-key fa-fw"></i>
-                        <span i18n="navbar_reset_password">.</span>
-                    </a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#emailModal').modal('show');">
-                        <i class="fa-light fa-envelope fa-fw"></i>
-                        <span i18n="navbar_reset_email">.</span>
-                    </a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#profileModal').modal('show');">
-                        <i class="fa-light fa-sliders-simple fa-fw"></i>
-                        <span i18n="navbar_profile">.</span>
-                    </a>
-                    <a class="dropdown-item" href="javascript:void(0)"
-                        onclick="$('#ordersModal').modal('show');TL.orders_list();">
-                        <i class="fa-light fa-star fa-fw"></i>
-                        <span i18n="navbar_orders">.</span>
-                    </a>
-                    <button class="dropdown-item" onclick="TL.giftcard.active()">
-                        <i class="fa-light fa-gift fa-fw"></i>
-                        <span>兑换奖品</span>
-                    </button>
-                    <hr />
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.logout();">
-                        <i class="fa-light fa-right-from-bracket"></i>
-                        <span i18n="navbar_exit">.</span>
-                    </a>
-
-                </div>
-            </div>
-
-            <div class="btn-group mt-1 mr-1">
-                <button type="button" class=" btn btn-success dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fa-light fa-language fa-fw"></i> <span class="selected_lang">.</span>
-                </button>
-                <div class="dropdown-menu shadow">
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('cn');">简体中文</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('hk');">繁体中文</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('en');">English</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
-                </div>
-            </div>
-
-            <div class="mt-1 show_for_sponsor" style="display: none;">
-                <button class="btn btn-success mt-1 my-sm-0" onclick="alert('Thank you for your sponsorship');">
-                    <i class="fa-solid fa-heart-circle-check"></i>
-                    <span i18n="service_code_hs">.</span>
-                </button>
-            </div>
-
-            <div class="mt-1 to_be_sponsor" style="display: none;">
-                <button class="btn btn-warning mt-1 my-sm-0" onclick="TL.buy_select_open('hs');">
-                    <i class="fa-solid fa-heart-circle-check fa-fw"></i>
-                    <span i18n="model_title_buy_highspeed">.</span>
-                </button>
-            </div>
-        </div>
-    </div>
-</nav> -->
-
-<nav class="mainNav fixed-top d-none d-sm-flex bg-light p-2 shadow"
-    style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
+<nav class="mainNav d-none d-sm-flex bg-light p-2 topnav">
     <!--[desktop]-->
     <div class="container">
         <div class="row text-center">
@@ -227,11 +115,9 @@
             </div>
         </div>
     </div>
-
 </nav>
 
-<nav class="mainNav fixed-bottom d-sm-none bg-light p-2"
-    style="border-top-left-radius: 10px;border-top-right-radius: 10px;box-shadow: 0rem 0rem 1rem rgb(0 0 0 / 15%);">
+<nav class="mainNav fixed-bottom d-sm-none bg-light p-2 nav-bottom-set">
     <!--[mobile]-->
     <div class="container text-center">
         <img class="navbar_nloading" src="/img/loading.svg" style="height:40px;" />
@@ -327,34 +213,9 @@
             </div>
         </div>
     </div>
-    <!-- <div id="buttonGroup" class="btn-group selectors" role="group">
-        <button id="home" type="button" class="btn btn-secondary button-inactive">
-            <div class="selector-holder">
-                <i class="fa-light fa-memo-pad fa-fw mx-auto"></i>
-                <span>流</span>
-            </div>
-        </button>
-        <button id="create" type="button" class="btn btn-secondary button-inactive">
-            <div class="selector-holder text-center">
-                <i class="fa-light fa-sliders-up fa-fw mx-auto"></i>
-                <span>设置</span>
-            </div>
-        </button>
-        <div class="btn-group dropup">
-            <button type="button" class="btn btn-secondary button-inactive selector-holder text-center" data-toggle="dropdown">
-                <i class="fa-light fa-language fa-fw mx-auto"></i>
-                <span class="selected_lang">.</span>
-            </button>
-            <div class="dropdown-menu shadow">
-                <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('cn');">中文</a>
-                <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('en');">English</a>
-                <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
-            </div>
-        </div>
-    </div> -->
 </nav>
 
-<div class="d-none d-sm-flex" style="height: 50px;"></div>
+<div class="d-none d-sm-flex topnav-addon" style="height: 50px;"></div>
 <!-- <div class="d-flex d-sm-none" style="height: 60px;"></div> -->
 <script>
     TL.head_set_refresh();
