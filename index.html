@@ -29,7 +29,7 @@
     <script type="text/javascript" src="./tmpui.js?v=27"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 908,
+            "version": 909,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "googleAnalytics": "UA-96864664-3",
@@ -151,44 +151,22 @@
                         "/tpl/about.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
-                "/workspace": {
-                    "title": "TMP.link - Files",
+                "/home": {
+                    "title": "TMP.link",
                     "preload": ["init"],
                     "append": ["tmplink"],
                     "body": {
                         "/css/index.css": { "type": "css" },
                         "/js/init/init_workspace.js": { "type": "js" },
-                        "/tpl/workspace.html": { "type": "html", "target": { "type": "body" } }
-                    }
-                },
-                "/direct": {
-                    "title": "TMP.link - Direct",
-                    "preload": ["init"],
-                    "append": ["tmplink"],
-                    "body": {
-                        "/css/index.css": { "type": "css" },
                         "/js/init/init_direct.js": { "type": "js" },
-                        "/tpl/direct.html": { "type": "html", "target": { "type": "body" } }
-                    }
-                },
-                "/dir": {
-                    "title": "TMP.link - Directory",
-                    "preload": ["init"],
-                    "append": ["tmplink"],
-                    "body": {
-                        "/css/index.css": { "type": "css" },
-                        "/js/init/init_dir.js": { "type": "js" },
-                        "/tpl/dir.html": { "type": "html", "target": { "type": "body" } }
-                    }
-                },
-                "/room": {
-                    "title": "TMP.link - Directory",
-                    "preload": ["init"],
-                    "append": ["tmplink"],
-                    "body": {
-                        "/css/index.css": { "type": "css" },
                         "/js/init/init_room.js": { "type": "js" },
-                        "/tpl/room.html": { "type": "html", "target": { "type": "body" } }
+                        "/tpl/listview/workspace.html": { "type": "file"},
+                        "/tpl/listview/direct.html": { "type": "file"},
+                        "/tpl/listview/room.html": { "type": "file"},
+
+                        "/tpl/home.html": { "type": "html", "target": { "type": "body" } },
+                        "/js/core/home.js": { "type": "js", "reload": false },
+                        "/js/init/init_home.js": { "type": "js" },//重要：初期化設定の実行
                     }
                 },
                 "/503": {

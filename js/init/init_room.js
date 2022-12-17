@@ -1,4 +1,4 @@
-app.ready(() => {
+function INIT_room(){
     TL.ready(() => {
         TL.head_set();
         TL.room_list(0);
@@ -8,8 +8,4 @@ app.ready(() => {
         $('meta[name=description]').attr('i18n', 'des_room');
         app.languageBuild();
     });
-});
-
-app.onExit(() => {
-    TL.dir_list_autoload_disabled();
-});
+}
