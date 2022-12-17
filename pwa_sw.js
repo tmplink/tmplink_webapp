@@ -1,4 +1,4 @@
-const resSet = "tmplink";
+const resSet = "tmplink 910";
 const assets = [
     "/",
 ];
@@ -9,6 +9,20 @@ self.addEventListener("install", installEvent => {
             cache.addAll(assets);
         })
     );
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== resSet) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
 });
 
 self.addEventListener("fetch", fetchEvent => {
