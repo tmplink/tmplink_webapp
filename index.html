@@ -24,6 +24,13 @@
             window.location.href = '/version.html';
         }
 
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker
+                .register("/pwa_sw.js")
+                .then(res => console.log("SW:ok"))
+                .catch(err => console.log("SW:error", err));
+        }
+
     </script>
 
     <script type="text/javascript" src="./tmpui.js?v=27"></script>
@@ -160,9 +167,9 @@
                         "/js/init/init_workspace.js": { "type": "js" },
                         "/js/init/init_direct.js": { "type": "js" },
                         "/js/init/init_room.js": { "type": "js" },
-                        "/tpl/listview/workspace.html": { "type": "file"},
-                        "/tpl/listview/direct.html": { "type": "file"},
-                        "/tpl/listview/room.html": { "type": "file"},
+                        "/tpl/listview/workspace.html": { "type": "file" },
+                        "/tpl/listview/direct.html": { "type": "file" },
+                        "/tpl/listview/room.html": { "type": "file" },
 
                         "/tpl/home.html": { "type": "html", "target": { "type": "body" } },
                         "/js/core/home.js": { "type": "js", "reload": false },
