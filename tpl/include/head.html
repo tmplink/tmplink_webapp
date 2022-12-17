@@ -5,10 +5,9 @@
 </div>
 
 
-<nav class="mainNav navbar  navbar-light d-none d-sm-flex mt-2">
+<!-- <nav class="mainNav navbar  navbar-light d-none d-sm-flex mt-2">
     <div class="container">
         <a class="navbar-brand mt-1 my-lg-0 pb-0" href="javascript:void(0)" onclick="app.open('/');">
-            <!-- <span style="color: white;border-radius: 8px;border-color: white;border-width: 2px;border-style: solid;padding-left: 5px;padding-right: 5px;" id="head_logo">TTTTT.Link</span> -->
         </a>
 
         <div class="form-inline mt-1 my-lg-0 pb-0 navbar_nloading">
@@ -49,18 +48,10 @@
                 </button>
             </div>
 
-            <!-- <div class="mt-1 mr-1">
-                <button class="btn btn-danger mt-1 mr-1 my-sm-0" onclick="TL.giftcard.active()">
-                    <i class="fa-light fa-gift fa-fw"></i>
-                    <span>兑换</span>
-                </button>
-            </div> -->
-
             <div class="btn-group mt-1 mr-1 workspace-navbar">
                 <button type="button" class=" btn btn-success dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i class="fa-light fa-sliders-up fa-fw"></i><span i18n="navbar_settings">.</span>
-                    <!-- <span class="badge badge-pill badge-danger">1</span> -->
                 </button>
                 <div class="dropdown-menu shadow">
                     <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span>
@@ -122,10 +113,125 @@
             </div>
         </div>
     </div>
+</nav> -->
+
+<nav class="mainNav fixed-top d-none d-sm-flex bg-light p-2 shadow"
+    style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">
+    <!--[desktop]-->
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-2">
+                <div class="d-flex flex-column">
+                    <a class="btn p-0 topnav_workspace" href="/home&listview=workspace" tmpui-action="homeView.workspace();">
+                        <div>
+                            <i class="fa-light fa-memo-pad fa-fw"></i>
+                        </div>
+                        <div>
+                            <span i18n="navbar_workspace">.</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-2">
+                <div class="d-flex flex-column">
+                    <a class="btn p-0 topnav_desktop" href="/home&listview=room&mrid=0" tmpui-action="homeView.room();">
+                        <div><i class="fa-light fa-cabinet-filing fa-fw"></i></div>
+                        <div><span i18n="navbar_meetingroom">.</span></div>
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-2">
+                <div class="d-flex flex-column">
+                    <a class="btn p-0 topnav_direct" href="/home&listview=direct" tmpui-action="homeView.direct();">
+                        <div>
+                            <i class="fa-light fa-share-nodes fa-fw"></i>
+                        </div>
+                        <div>
+                            <span i18n="navbar_direct">.</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-2">
+                <div class="d-flex flex-column">
+                    <button class="btn p-0" onclick="$('#shopModal').modal('show');">
+                        <div>
+                            <i class="fa-light fa-bag-shopping fa-fw"></i>
+                        </div>
+                        <div>
+                            <span i18n="navbar_buy">.</span>
+                        </div>
+                    </button>
+                </div>
+
+            </div>
+            <div class="col-2">
+                <div class="btn-group dropup">
+                    <button type="button" class="btn" data-toggle="dropdown">
+                        <div class="d-flex flex-column">
+                            <i class="fa-light fa-sliders-up fa-fw mx-auto"></i>
+                            <span i18n="navbar_settings">.</span>
+                        </div>
+                    </button>
+                    <div class="dropdown-menu shadow">
+                        <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span>
+                        <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');">
+                            <i class="fa-light fa-key"></i>
+                            <span i18n="navbar_reset_password">.</span>
+                        </a>
+                        <a class="dropdown-item" href="javascript:void(0)" onclick="$('#emailModal').modal('show');">
+                            <i class="fa-light fa-envelope"></i>
+                            <span i18n="navbar_reset_email">.</span>
+                        </a>
+                        <a class="dropdown-item" href="javascript:void(0)" onclick="$('#profileModal').modal('show');">
+                            <i class="fa-light fa-sliders-simple"></i>
+                            <span i18n="navbar_profile">.</span>
+                        </a>
+                        <a class="dropdown-item" href="javascript:void(0)"
+                            onclick="$('#ordersModal').modal('show');TL.orders_list();">
+                            <i class="fa-light fa-star"></i>
+                            <span i18n="navbar_orders">.</span>
+                        </a>
+                        <a class="dropdown-item show_for_sponsor text-success" href="javascript:void(0)"
+                            onclick="alert('Thank you for your sponsorship');" style="display: none;">
+                            <i class="fa-solid fa-heart-circle-check"></i>
+                            <span i18n="service_code_hs">.</span>
+                        </a>
+                        <a class="dropdown-item to_be_sponsor" href="javascript:void(0)"
+                            onclick="TL.buy_select_open('hs');" style="display: none;">
+                            <i class="fa-light fa-heart-circle-plus text-red"></i>
+                            <span i18n="model_title_buy_highspeed">.</span>
+                            <span class="badge badge-pill badge-danger">new</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="btn-group dropup">
+                    <button type="button" class="btn" data-toggle="dropdown">
+                        <div class="d-flex flex-column">
+                            <i class="fa-light fa-language fa-fw mx-auto"></i>
+                            <span class="selected_lang">.</span>
+                        </div>
+                    </button>
+                    <div class="dropdown-menu shadow">
+                        <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('cn');">简体中文</a>
+                        <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('hk');">繁体中文</a>
+                        <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('en');">English</a>
+                        <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </nav>
 
-
-<nav class="mainNav fixed-bottom d-sm-none bg-light p-2">
+<nav class="mainNav fixed-bottom d-sm-none bg-light p-2"
+    style="border-top-left-radius: 10px;border-top-right-radius: 10px;box-shadow: 0rem 0rem 1rem rgb(0 0 0 / 15%);">
     <!--[mobile]-->
     <div class="container text-center">
         <img class="navbar_nloading" src="/img/loading.svg" style="height:40px;" />
@@ -146,7 +252,7 @@
                     </a>
                     <a class="dropdown-item" href="/home&listview=room&mrid=0" tmpui-action="homeView.room();">
                         <i class="fa-light fa-cabinet-filing fa-fw"></i>
-                        <span i18n="navbar_meetingroom">.</span>
+                        <div></div>
                     </a>
                     <a class="dropdown-item" href="/home&listview=direct" tmpui-action="homeView.direct();">
                         <i class="fa-light fa-share-nodes fa-fw"></i>
@@ -190,11 +296,13 @@
                         <i class="fa-light fa-star"></i>
                         <span i18n="navbar_orders">.</span>
                     </a>
-                    <a class="dropdown-item show_for_sponsor text-success" href="javascript:void(0)" onclick="alert('Thank you for your sponsorship');" style="display: none;">
+                    <a class="dropdown-item show_for_sponsor text-success" href="javascript:void(0)"
+                        onclick="alert('Thank you for your sponsorship');" style="display: none;">
                         <i class="fa-solid fa-heart-circle-check"></i>
                         <span i18n="service_code_hs">.</span>
                     </a>
-                    <a class="dropdown-item to_be_sponsor" href="javascript:void(0)" onclick="TL.buy_select_open('hs');" style="display: none;">
+                    <a class="dropdown-item to_be_sponsor" href="javascript:void(0)" onclick="TL.buy_select_open('hs');"
+                        style="display: none;">
                         <i class="fa-light fa-heart-circle-plus text-red"></i>
                         <span i18n="model_title_buy_highspeed">.</span>
                         <span class="badge badge-pill badge-danger">new</span>
@@ -246,7 +354,7 @@
     </div> -->
 </nav>
 
-<!-- <div class="d-none d-sm-flex" style="height: 20px;"></div> -->
+<div class="d-none d-sm-flex" style="height: 50px;"></div>
 <!-- <div class="d-flex d-sm-none" style="height: 60px;"></div> -->
 <script>
     TL.head_set_refresh();

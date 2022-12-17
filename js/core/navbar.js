@@ -1,6 +1,7 @@
 class navbar {
 
     parent = null
+    lightUpCurrent = 'workspace'
 
     init(parent) {
         this.parent = parent;
@@ -23,8 +24,14 @@ class navbar {
             case '/direct':
                 this.model_direct(act);
                 break;
-                
+
         }
+    }
+
+    navbar_lightup(name) {
+        $('.topnav_' + this.lightUpCurrent).removeClass('text-azure');
+        this.lightUpCurrent = name;
+        $('.topnav_' + name).addClass('text-azure');
     }
 
     model_workspace(act) {
@@ -33,6 +40,7 @@ class navbar {
         if (act === true) {
             app.open('/workspace');
         }
+        this.navbar_lightup('workspace');
     }
 
     model_desktop(act) {
@@ -41,14 +49,7 @@ class navbar {
         if (act === true) {
             app.open('/room&mrid=0');
         }
-    }
-
-    model_media(act) {
-        $('#navbar_model_icon').attr('class', 'fa-light fa-circle-video fa-fw mx-auto');
-        $('#navbar_model_text').html(this.parent.languageData.navbar_media);
-        if (act === true) {
-            app.open('/media');
-        }
+        this.navbar_lightup('desktop');
     }
 
     model_direct(act) {
@@ -57,5 +58,6 @@ class navbar {
         if (act === true) {
             app.open('/direct');
         }
+        this.navbar_lightup('direct');
     }
 }

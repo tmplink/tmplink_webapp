@@ -27,17 +27,20 @@ class home {
         $('#home_view').html(app.getFile('/tpl/listview/workspace.html'));
         this.active('workspace');
         INIT_workspace();
+        TL.navbar.model_workspace();
     }
 
     room() {
         $('#home_view').html(app.getFile('/tpl/listview/room.html'));
         this.active('room');
         INIT_room();
+        TL.navbar.model_desktop();
     }
 
     direct() {
         $('#home_view').html(app.getFile('/tpl/listview/direct.html'));
         this.active('direct');
         INIT_direct();
+        TL.navbar.model_direct();
     }
 }
