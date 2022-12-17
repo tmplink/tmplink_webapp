@@ -21,18 +21,18 @@
 
             <div class="mt-1 mr-1">
                 <div class="btn-group">
-                    <button class="btn btn-primary mt-1 my-sm-0 workspace-navbar" onclick="app.open('/workspace');">
+                    <a class="btn btn-primary mt-1 my-sm-0 workspace-navbar" href="/home&listview=workspace" tmpui-action="homeView.workspace();">
                         <i class="fa-light fa-memo-pad fa-fw"></i>
                         <span i18n="navbar_workspace">.</span>
-                    </button>
-                    <button class="btn btn-primary mt-1 my-sm-0 workspace-navbar" onclick="app.open('/room&mrid=0');">
+                    </a>
+                    <a class="btn btn-primary mt-1 my-sm-0 workspace-navbar" href="/home&listview=room&mrid=0" tmpui-action="homeView.room();">
                         <i class="fa-light fa-cabinet-filing fa-fw"></i>
                         <span i18n="navbar_meetingroom">.</span>
-                    </button>
-                    <button class="btn btn-primary mt-1 my-sm-0 workspace-navbar" onclick="app.open('/direct');">
+                    </a>
+                    <a class="btn btn-primary mt-1 my-sm-0 workspace-navbar" href="/home&listview=direct" tmpui-action="homeView.direct();">
                         <i class="fa-light fa-share-nodes fa-fw"></i>
                         <span i18n="navbar_direct">.</span>
-                    </button>
+                    </a>
                     <button class="btn btn-primary mt-1 my-sm-0 workspace-navbar"
                         onclick="$('#shopModal').modal('show');">
                         <i class="fa-light fa-bag-shopping fa-fw"></i>
@@ -140,18 +140,18 @@
                     </div>
                 </button>
                 <div class="dropdown-menu shadow">
-                    <button class="dropdown-item" onclick="app.open('/workspace');">
+                    <a class="dropdown-item" href="/home&listview=workspace" tmpui-action="homeView.workspace();">
                         <i class="fa-light fa-memo-pad fa-fw"></i>
                         <span i18n="navbar_workspace">.</span>
-                    </button>
-                    <button class="dropdown-item" onclick="app.open('/room&mrid=0');">
+                    </a>
+                    <a class="dropdown-item" href="/home&listview=room&mrid=0" tmpui-action="homeView.room();">
                         <i class="fa-light fa-cabinet-filing fa-fw"></i>
                         <span i18n="navbar_meetingroom">.</span>
-                    </button>
-                    <button class="dropdown-item" onclick="app.open('/direct');">
+                    </a>
+                    <a class="dropdown-item" href="/home&listview=direct" tmpui-action="homeView.direct();">
                         <i class="fa-light fa-share-nodes fa-fw"></i>
                         <span i18n="navbar_direct">.</span>
-                    </button>
+                    </a>
                     <button class="dropdown-item" onclick="$('#shopModal').modal('show');">
                         <i class="fa-light fa-bag-shopping fa-fw"></i>
                         <span i18n="navbar_buy">.</span>

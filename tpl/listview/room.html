@@ -199,7 +199,7 @@
                     <% } %>
 
                     <% if(TL.room.top != 99){ %>
-                        <a href="/room?mrid=<% TL.room.parent %>" tmpui-action="TL.room_list()" class="btn btn-sm btn-light text-azure mr-1  mt-1">
+                        <a href="/home&listview=room&mrid=<% TL.room.parent %>" tmpui-action="TL.room_list()" class="btn btn-sm btn-light text-azure mr-1  mt-1">
                             <i class="fa-light fa-arrow-turn-down-left"></i>
                             <span i18n="filelist_dir_parent" class="d-none d-sm-inline"><% TL.languageData.filelist_dir_parent %></span>
                         </a>
@@ -396,7 +396,7 @@
                 <script type="text/template" id="meetroom_grid_tpl">
                 <% for (var x in obj) { %>
                 <div class="col-6 col-md-3 col-lg-2 p-2 text-center" id="meetingroom_id_<% obj[x].mr_id %>">
-                    <a href="/room?mrid=<% obj[x].mr_id %>" tmpui-app="true">
+                    <a href="/home&listview=room&mrid=<% obj[x].mr_id %>" tmpui-app="true">
                         <div class="fileicon mx-auto mb-2 shadow-lg">
                             <i class="fa-light fa-folders fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
                         </div>
@@ -431,7 +431,7 @@
                                     <i class="fa-light fa-link text-cyan fa-fw d-none d-md-block"></i>
                                 <% } %> 
                                 &nbsp
-                                <a href="/room?mrid=<% obj[x].mr_id %>" class="filelist_link" tmpui-action="TL.room_list()">
+                                <a href="/home&listview=room&mrid=<% obj[x].mr_id %>" class="filelist_link" tmpui-action="TL.room_list()">
                                     <% obj[x].name %>
                                 </a>
                             </div>

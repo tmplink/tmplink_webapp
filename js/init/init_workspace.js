@@ -1,4 +1,4 @@
-app.ready(() => {
+function INIT_workspace() {
     TL.ready(() => {
         TL.workspace_filelist_autoload_enabled();
         TL.workspace_filelist(0);
@@ -7,12 +7,4 @@ app.ready(() => {
         $('meta[name=description]').attr('i18n', 'des_workspace');
         app.languageBuild();
     });
-
-    TL.ready(() => {
-        TL.head_set();
-    });
-});
-
-app.onExit(() => {
-    TL.workspace_filelist_autoload_disabled();
-});
+}
