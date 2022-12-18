@@ -65,7 +65,7 @@
                         </div>
                     </button>
                     <div class="dropdown-menu shadow">
-                        <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span>
+                        <!-- <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span> -->
                         <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');">
                             <i class="fa-light fa-key"></i>
                             <span i18n="navbar_reset_password">.</span>
@@ -92,7 +92,11 @@
                             onclick="TL.buy_select_open('hs');" style="display: none;">
                             <i class="fa-light fa-heart-circle-plus text-red"></i>
                             <span i18n="model_title_buy_highspeed">.</span>
-                            <span class="badge badge-pill badge-danger">new</span>
+                            <!-- <span class="badge badge-pill badge-danger">new</span> -->
+                        </a>
+                        <a class="dropdown-item" href="javascript:void(0)" onclick="TL.logout();">
+                            <i class="fa-light fa-right-from-bracket"></i>
+                            <span i18n="navbar_exit">.</span>
                         </a>
                     </div>
                 </div>
@@ -148,10 +152,10 @@
                         <i class="fa-light fa-bag-shopping fa-fw"></i>
                         <span i18n="navbar_buy">.</span>
                     </button>
-                    <button class="dropdown-item" onclick="TL.giftcard.active()">
+                    <!-- <button class="dropdown-item" onclick="TL.giftcard.active()">
                         <i class="fa-light fa-gift fa-fw"></i>
                         <span>兑换奖品</span>
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </div>
@@ -164,7 +168,7 @@
                     </div>
                 </button>
                 <div class="dropdown-menu shadow">
-                    <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span>
+                    <!-- <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span> -->
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');">
                         <i class="fa-light fa-key"></i>
                         <span i18n="navbar_reset_password">.</span>
@@ -191,7 +195,11 @@
                         style="display: none;">
                         <i class="fa-light fa-heart-circle-plus text-red"></i>
                         <span i18n="model_title_buy_highspeed">.</span>
-                        <span class="badge badge-pill badge-danger">new</span>
+                        <!-- <span class="badge badge-pill badge-danger">new</span> -->
+                    </a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.logout();">
+                        <i class="fa-light fa-right-from-bracket"></i>
+                        <span i18n="navbar_exit">.</span>
                     </a>
                 </div>
             </div>
