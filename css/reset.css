@@ -2444,7 +2444,7 @@ textarea.form-control {
 
 .btn:focus, .dataTables_wrapper .dataTables_paginate .paginate_button:focus, .btn.focus, .dataTables_wrapper .dataTables_paginate .focus.paginate_button {
   outline: 0;
-  box-shadow: 0 0 0 2px rgba(70, 127, 207, 0.25);
+  /* box-shadow: 0 0 0 2px rgba(70, 127, 207, 0.25); */
 }
 
 .btn.disabled, .dataTables_wrapper .dataTables_paginate .disabled.paginate_button, .btn:disabled, .dataTables_wrapper .dataTables_paginate .paginate_button:disabled {
