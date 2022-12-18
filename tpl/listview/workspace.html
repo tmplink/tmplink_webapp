@@ -152,7 +152,7 @@
                                     </div>
                                     <div class="progress file_relay_<% obj[x].ukey %>">
                                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
-                                            <% TL.languageData.upload_sync_onprogress %>:<% obj[x].fsize_formated %>
+                                            <% app.languageData.upload_sync_onprogress %>:<% obj[x].fsize_formated %>
                                         </div>
                                     </div>
                                     <div class="progress mt-2 download_progress_bar_<% obj[x].ukey %>" style="height: 5px;display:none;">
@@ -197,11 +197,11 @@
                                     <% if(obj[x].dir_name!=null){ %>
                                         <div class="d-none d-lg-block" onclick="event.stopPropagation();">
                                             <i class="fa-light fa-folder-open fa-fw text-cyan"></i>
-                                            <a href="/home&listview=room&mrid=<% obj[x].mrid %>" tmpui-app="true"> <% obj[x].dir_name %></a>
+                                            <a href="/home&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="homeView.room();"> <% obj[x].dir_name %></a>
                                         </div>
                                         <span class="d-inline d-lg-none" onclick="event.stopPropagation();">
                                             <i class="fa-light fa-folder-open fa-fw text-cyan"></i>
-                                            <a href="/home&listview=room&mrid=<% obj[x].mrid %>" tmpui-app="true"> <% obj[x].dir_name %></a>
+                                            <a href="/home&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="homeView.room();"> <% obj[x].dir_name %></a>
                                         </span>
                                     <% } %>
                                     <% if(obj[x].model!=99){ %>
@@ -229,16 +229,16 @@
                                 <div class="dropdown-menu dropdown-menu-right shadow">
                                     <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="dropdown-item">
                                         <i class="fa-fw fa-light fa-pen-to-square"></i>
-                                        <span i18n="menu_rename"><% TL.languageData.menu_rename %></span>
+                                        <span i18n="menu_rename"><% app.languageData.menu_rename %></span>
                                     </button>
                                     <button id="btn-rm-file_<% obj[x].ukey %>" class="dropdown-item" onclick="TL.workspace_del('<% obj[x].ukey %>')">
                                         <i class="fa-fw fa-light fa-trash"></i>
-                                        <span i18n="menu_delete"><% TL.languageData.menu_delete %></span>
+                                        <span i18n="menu_delete"><% app.languageData.menu_delete %></span>
                                     </button>
                                     <% if(TL.direct.is_allow()){ %>
                                         <button onclick="TL.direct.addLink('<% obj[x].ukey %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item">
                                             <i class="fa-fw fa-light fa-share-nodes"></i>
-                                            <span i18n="menu_addlink"><% TL.languageData.menu_addlink %></span>
+                                            <span i18n="menu_addlink"><% app.languageData.menu_addlink %></span>
                                         </button>
                                     <% } %>  
                                 </div>
@@ -248,7 +248,7 @@
                             <div class="d-block w-100">
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
-                                        <% TL.languageData.upload_sync_onprogress %>:<% obj[x].fsize_formated %>
+                                        <% app.languageData.upload_sync_onprogress %>:<% obj[x].fsize_formated %>
                                     </div>
                                 </div>
                             </div>

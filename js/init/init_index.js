@@ -5,6 +5,10 @@ app.ready(() => {
     app.languageBuild();
 
     TL.ready(() => {
-        TL.head_set();
+        if(TL.isLogin()===true){
+            app.open('/home&listview=workspace');
+        }else{
+            TL.head_set();
+        }
     })
 });
