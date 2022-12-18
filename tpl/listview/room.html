@@ -187,27 +187,27 @@
                     <% if(TL.room.owner==1 || (TL.room.allow_upload=='yes'&&TL.isLogin())){ %>
                         <button onclick="TL.uploader.open('<% TL.room.mr_id %>');" tmpui-app="true" class="btn btn-sm btn-primary  mr-1  mt-1">
                             <i class="fa-light fa-cloud-arrow-up fa-fw"></i>
-                            <span i18n="nav_upload" class="d-none d-sm-inline"><% TL.languageData.nav_upload %></span>
+                            <span i18n="nav_upload" class="d-none d-sm-inline"><% app.languageData.nav_upload %></span>
                         </button>
                     <% } %>
                     
                     <% if(is_iphone_or_ipad() == false){ %>
                     <button class="btn btn-primary btn-sm mr-1  mt-1" onclick="TL.download_allfile_btn();">
                         <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
-                        <span i18n="file_btn_downloadall" class="d-none d-sm-inline"><% TL.languageData.file_btn_downloadall %></span>
+                        <span i18n="file_btn_downloadall" class="d-none d-sm-inline"><% app.languageData.file_btn_downloadall %></span>
                     </button>
                     <% } %>
 
                     <% if(TL.room.top != 99){ %>
                         <a href="/home&listview=room&mrid=<% TL.room.parent %>" tmpui-action="TL.room_list()" class="btn btn-sm btn-light text-azure mr-1  mt-1">
                             <i class="fa-light fa-arrow-turn-down-left"></i>
-                            <span i18n="filelist_dir_parent" class="d-none d-sm-inline"><% TL.languageData.filelist_dir_parent %></span>
+                            <span i18n="filelist_dir_parent" class="d-none d-sm-inline"><% app.languageData.filelist_dir_parent %></span>
                         </a>
                     <% } %>
                     <% if(TL.room.owner==1){ %>
                         <button class="btn btn-light text-azure btn-sm mr-1  mt-1" onclick="$('#mrCreaterModal').modal('show');$('#mr_id').val('<% TL.room.mr_id %>');$('#mr_parent_id').val('<% TL.room.parent %>');$('#mr_top_id').val('<% TL.room.top %>');">
                             <i class="fa-fw fa-light fa-folder-plus"></i>
-                            <span i18n="model_title_folder_title" class="d-none d-sm-inline"><% TL.languageData.model_title_folder_title %></span>
+                            <span i18n="model_title_folder_title" class="d-none d-sm-inline"><% app.languageData.model_title_folder_title %></span>
                         </button>
                     <% } %>
                 </script>
@@ -293,7 +293,7 @@
                                         </div>
                                         <div class="progress file_relay_<% obj[x].ukey %>">
                                             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
-                                                <% TL.languageData.upload_sync_onprogress %>:<% obj[x].fsize_formated %>
+                                                <% app.languageData.upload_sync_onprogress %>:<% obj[x].fsize_formated %>
                                             </div>
                                         </div>
                                         <div class="progress mt-2 download_progress_bar_<% obj[x].ukey %>" style="height: 5px;display:none;">
@@ -359,16 +359,16 @@
                                         <div class="dropdown-menu dropdown-menu-right shadow">
                                             <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="dropdown-item">
                                                 <i class="fa-fw fa-light fa-pen-to-square"></i>
-                                                <span i18n="menu_rename"><% TL.languageData.menu_rename %></span>
+                                                <span i18n="menu_rename"><% app.languageData.menu_rename %></span>
                                             </button>
                                             <button class="dropdown-item" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
                                                 <i class="fa-fw fa-light fa-trash"></i>
-                                                <span i18n="menu_delete"><% TL.languageData.menu_delete %></span>
+                                                <span i18n="menu_delete"><% app.languageData.menu_delete %></span>
                                             </button> 
                                             <% if(TL.direct.is_allow()){ %>
                                                 <button onclick="TL.direct.addLink('<% obj[x].ukey %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item">
                                                     <i class="fa-fw fa-light fa-share-nodes"></i>
-                                                    <span i18n="menu_addlink"><% TL.languageData.menu_addlink %></span>
+                                                    <span i18n="menu_addlink"><% app.languageData.menu_addlink %></span>
                                                 </button>
                                             <% } %>  
                                         </div>
@@ -379,7 +379,7 @@
                                 <div class="d-block w-100">
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
-                                            <% TL.languageData.upload_sync_onprogress %>:<% obj[x].fsize_formated %>
+                                            <% app.languageData.upload_sync_onprogress %>:<% obj[x].fsize_formated %>
                                         </div>
                                     </div>
                                 </div> 
@@ -405,7 +405,7 @@
                         </div>
                     </a>
                     
-                    <div><% TL.languageData.filelist_dir %></div>
+                    <div><% app.languageData.filelist_dir %></div>
                     <div>
                         <a href="javascript:void(0)" onclick="TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/room/${obj[x].mr_id}`) %>',true)" class="mt-1"><i class="fa-fw fa-light fa-share-from-square"></i></a>
                         <% if (obj[x].type === 'owner') { %>
@@ -437,7 +437,7 @@
                             </div>
                             <div  class="col-12 col-md-6 col-lg-4 my-1 d-flex align-items-center justify-content-end">
                                 <span class="mr-2">
-                                    <% TL.languageData.filelist_dir %>
+                                    <% app.languageData.filelist_dir %>
                                 </span>
                                 <button onclick="TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/room/${obj[x].mr_id}`) %>',true)" class="text-azure btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
                                 <% if (obj[x].type === 'owner') { %>

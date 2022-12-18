@@ -356,7 +356,7 @@ class tmplink {
             if (rsp.status === 1) {
                 this.dir_tree = rsp.data;
             } else {
-                $('#mv_box_0').html(this.languageData.status_error_14);
+                $('#mv_box_0').html(app.languageData.status_error_14);
             }
         });
     }
@@ -408,7 +408,7 @@ class tmplink {
 
     get_file(code) {
         if (code.length !== 13) {
-            this.alert(this.languageData.status_error_15);
+            this.alert(app.languageData.status_error_15);
             return false;
         }
         window.open('https://' + this.site_domain + '/f/' + code);
@@ -551,10 +551,10 @@ class tmplink {
         var password = $('#modal_password_reset').val();
         var rpassword = $('#modal_password_reset_re').val();
         if (password !== rpassword) {
-            $("#notice_resetpassword").html(this.languageData.model_resetpassword_error_no_match);
+            $("#notice_resetpassword").html(app.languageData.model_resetpassword_error_no_match);
             return false;
         }
-        $("#notice_resetpassword").html(this.languageData.model_resetpassword_msg_processing);
+        $("#notice_resetpassword").html(app.languageData.model_resetpassword_msg_processing);
         $("#modal_password_reset_btn").attr('disabled', true);
         $.post(this.api_user, {
             action: 'passwordreset',
@@ -563,10 +563,10 @@ class tmplink {
             token: this.api_token
         }, (rsp) => {
             if (rsp.status === 1) {
-                $("#notice_resetpassword").html(this.languageData.model_resetpassword_msg_processed);
-                $("#modal_password_reset_btn").html(this.languageData.model_resetpassword_msg_processed);
+                $("#notice_resetpassword").html(app.languageData.model_resetpassword_msg_processed);
+                $("#modal_password_reset_btn").html(app.languageData.model_resetpassword_msg_processed);
             } else {
-                $("#notice_resetpassword").html(this.languageData.model_resetpassword_error_fail);
+                $("#notice_resetpassword").html(app.languageData.model_resetpassword_error_fail);
                 $("#modal_password_reset_btn").removeAttr('disabled');
             }
         });
@@ -575,7 +575,7 @@ class tmplink {
     email_change_confim() {
         var email = $('#email_new').val();
         var code = $('#checkcode').val();
-        $("#notice_emailchange").html(this.languageData.model_email_change_msg_processing);
+        $("#notice_emailchange").html(app.languageData.model_email_change_msg_processing);
         $("#email_change_confim_btn").attr('disabled', true);
         $.post(this.api_user, {
             action: 'email_change',
@@ -584,8 +584,8 @@ class tmplink {
             token: this.api_token
         }, (rsp) => {
             if (rsp.status === 1) {
-                $("#notice_emailchange").html(this.languageData.model_email_change_msg_processed);
-                $("#email_change_confim_btn").html(this.languageData.model_email_change_msg_processed);
+                $("#notice_emailchange").html(app.languageData.model_email_change_msg_processed);
+                $("#email_change_confim_btn").html(app.languageData.model_email_change_msg_processed);
             } else {
                 $("#notice_emailchange").html(rsp.data);
                 $("#email_change_confim_btn").removeAttr('disabled');
@@ -613,7 +613,7 @@ class tmplink {
         $('#btn_preview_download').attr('data-ukey', ukey);
 
         $('#btn_preview_download').removeAttr('disabled');
-        $('#btn_preview_download').html(this.languageData.on_select_download);
+        $('#btn_preview_download').html(app.languageData.on_select_download);
         $('#btn_preview_download').attr('onclick', 'TL.download_file_btn(\'' + ukey + '\')');
         $('#btn_preview_remove').attr('onclick', "TL.workspace_del('" + ukey + "')");
         $('#previewModal').modal('show');
@@ -627,7 +627,7 @@ class tmplink {
             }
             $('#submit').attr('disabled', true);
             $('#msg_notice').show();
-            $('#msg_notice').html(this.languageData.form_btn_processing);
+            $('#msg_notice').html(app.languageData.form_btn_processing);
             $.post(this.api_user, {
                 action: 'passwordfound',
                 token: this.api_token,
@@ -636,17 +636,17 @@ class tmplink {
             }, (rsp) => {
                 if (rsp.status == 1) {
                     $('#msg_notice').fadeOut();
-                    $('#submit').html(this.languageData.form_btn_processed);
+                    $('#submit').html(app.languageData.form_btn_processed);
                 } else {
                     switch (rsp.status) {
                         case 13:
-                            $('#msg_notice').html(this.languageData.status_13);
+                            $('#msg_notice').html(app.languageData.status_13);
                             break;
                         case 14:
-                            $('#msg_notice').html(this.languageData.status_14);
+                            $('#msg_notice').html(app.languageData.status_14);
                             break;
                         default:
-                            $('#msg_notice').html(this.languageData.status_unknow);
+                            $('#msg_notice').html(app.languageData.status_unknow);
                     }
                     $('#submit').removeAttr('disabled');
                 }
@@ -683,7 +683,7 @@ class tmplink {
             }
         } else {
             if (this.profile_confirm_delete_get()) {
-                if (!confirm(this.languageData.confirm_delete)) {
+                if (!confirm(app.languageData.confirm_delete)) {
                     return false;
                 }
             }
@@ -715,7 +715,7 @@ class tmplink {
         }, (rsp) => {
             if (rsp.data.nums > 0) {
                 let total_size_text = bytetoconver(rsp.data.size, true);
-                $('#workspace_total').html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
+                $('#workspace_total').html(`${rsp.data.nums} ${app.languageData.total_units_of_file} , ${total_size_text}`);
             }
         }, 'json');
     }
@@ -980,7 +980,7 @@ class tmplink {
                         $('.user-login').hide();
                     }
 
-                    $('#download_msg').html('<i class="fa-light fa-loader fa-spin fa-fw"></i> ' + this.languageData.status_file_1);
+                    $('#download_msg').html('<i class="fa-light fa-loader fa-spin fa-fw"></i> ' + app.languageData.status_file_1);
                     $('#download_msg').attr('class', 'badge badge-pill badge-info');
 
                     //请求下载地址
@@ -997,7 +997,7 @@ class tmplink {
                             });
 
                             if (req.status != 1) {
-                                $('#download_msg').html('<i class="fa-light fa-circle-exclamation fa-fw"></i> ' + this.languageData.status_file_2);
+                                $('#download_msg').html('<i class="fa-light fa-circle-exclamation fa-fw"></i> ' + app.languageData.status_file_2);
                                 $('#download_msg').attr('class', 'badge badge-pill badge-danger');
                                 $('#file_download_btn_1').hide();
                                 $('#file_download_btn_2').hide();
@@ -1013,7 +1013,7 @@ class tmplink {
 
                             //自动启动下载
                             // window.location.href = download_url;
-                            // $('#download_msg').html('<i class="fa-light fa-circle-check fa-fw"></i> ' + this.languageData.status_file_3);
+                            // $('#download_msg').html('<i class="fa-light fa-circle-check fa-fw"></i> ' + app.languageData.status_file_3);
                             // $('#download_msg').attr('class', 'badge badge-pill badge-success');
                             $('#download_msg').fadeOut();
 
@@ -1149,7 +1149,7 @@ class tmplink {
                 //file need to login
                 if (rsp.status === 3) {
                     $('#file_messenger_icon').html('<i class="fa-solid fa-shield-keyhole fa-7x"></i>');
-                    $('#file_messenger_msg').html(this.languageData.status_need_login);
+                    $('#file_messenger_msg').html(app.languageData.status_need_login);
                     $('#file_messenger_msg_login').show();
                     $('#file_messenger').show();
                     gtag('config', 'UA-96864664-3', {
@@ -1161,7 +1161,7 @@ class tmplink {
                 //file need to sync
                 if (rsp.status === 2) {
                     $('#file_messenger_icon').html('<img src="/img/loading.svg" height="80"  />');
-                    $('#file_messenger_msg').html(this.languageData.upload_sync_onprogress);
+                    $('#file_messenger_msg').html(app.languageData.upload_sync_onprogress);
                     $('#file_messenger').show();
                     gtag('config', 'UA-96864664-3', {
                         'page_title': `Sync-[${params.ukey}]`,
@@ -1175,7 +1175,7 @@ class tmplink {
                 //file unavailable in china
                 if (rsp.status === 4) {
                     $('#file_messenger_icon').html('<i class="fa-solid fa-earth-asia fa-7x"></i>');
-                    $('#file_messenger_msg').html(this.languageData.status_area);
+                    $('#file_messenger_msg').html(app.languageData.status_area);
                     $('#file_messenger').show();
                     gtag('config', 'UA-96864664-3', {
                         'page_title': `Area-[${params.ukey}]`,
@@ -1185,7 +1185,7 @@ class tmplink {
 
                 //file unavailable
                 $('#file_messenger_icon').html('<i class="fa-light fa-folder-xmark  fa-4x"></i>');
-                $('#file_messenger_msg').html(this.languageData.file_unavailable);
+                $('#file_messenger_msg').html(app.languageData.file_unavailable);
                 $('#file_messenger').show();
                 gtag('config', 'UA-96864664-3', {
                     'page_title': 'D-fileUnavailable',
@@ -1341,7 +1341,7 @@ class tmplink {
 
     download_queue_add(url, filename, ukey, filesize, filetype) {
         // if (this.isWeixin()) {
-        //     this.alert(TL.languageData.file_not_allow_in_wechat);
+        //     this.alert(app.languageData.file_not_allow_in_wechat);
         //     return false;
         // }
         // if (this.isMobile()) {
@@ -1465,7 +1465,7 @@ class tmplink {
     }
 
     download_progress_on(evt, id, filename, index) {
-        //$('#download_queue_' + id).html(TL.languageData.download_run + filename + ' (' + bytetoconver(evt.loaded, true) + ' / ' + bytetoconver(evt.total, true) + ')');
+        //$('#download_queue_' + id).html(app.languageData.download_run + filename + ' (' + bytetoconver(evt.loaded, true) + ' / ' + bytetoconver(evt.total, true) + ')');
         $('.download_progress_bar_set_' + index).css('width', (evt.loaded / evt.total) * 100 + '%');
         if (evt.loaded == evt.total) {
             $('.download_progress_bar_' + index).fadeOut();
@@ -1475,21 +1475,21 @@ class tmplink {
     download_file() {
         this.loading_box_on();
         // $('#btn_download').addClass('disabled');
-        // $('#btn_download').html(this.languageData.file_btn_download_status0);
+        // $('#btn_download').html(app.languageData.file_btn_download_status0);
         $.post(this.api_file, {
             action: 'download_check',
             token: this.api_token
         }, (rsp) => {
             if (rsp.status == 1) {
                 // location.href = $('#btn_download').attr('x-href');
-                // $('#btn_download').html(this.languageData.file_btn_download_status2);
+                // $('#btn_download').html(app.languageData.file_btn_download_status2);
                 this.single_download_start($('.single_download_progress_bar').attr('data-href'), $('.single_download_progress_bar').attr('data-filename'));
             } else {
-                $('#btn_download').html(this.languageData.file_btn_download_status1);
+                $('#btn_download').html(app.languageData.file_btn_download_status1);
             }
             // setTimeout(() => {
             //     $('#btn_download').removeClass('disabled');
-            //     $('#btn_download').html(this.languageData.file_btn_download);
+            //     $('#btn_download').html(app.languageData.file_btn_download);
             // }, 3000);
             this.loading_box_off();
         }, 'json');
@@ -1531,7 +1531,7 @@ class tmplink {
                     return true;
                 }
                 if (req.status == 3) {
-                    this.alert(this.languageData.status_need_login);
+                    this.alert(app.languageData.status_need_login);
                     return false;
                 }
                 this.alert('发生了错误，请重试。');
@@ -1566,13 +1566,13 @@ class tmplink {
     download_allfile_btn() {
         //未登录的用户暂时不支持全部下载功能
         if (!this.isLogin()) {
-            this.alert(this.languageData.status_need_login);
+            this.alert(app.languageData.status_need_login);
             return false;
         }
         //在移动设备上无法使用全部下载功能
         let room_key = 'app_room_view_' + this.room.mr_id;
         // if (this.isMobile()) {
-        //     this.alert(this.languageData.alert_no_support);
+        //     this.alert(app.languageData.alert_no_support);
         //     return false;
         // }
         this.loading_box_on();
@@ -1663,7 +1663,7 @@ class tmplink {
 
     media_buy_modal(type) {
         if (this.logined === 0) {
-            this.alert(this.languageData.status_need_login);
+            this.alert(app.languageData.status_need_login);
             return false;
         }
 
@@ -1678,7 +1678,7 @@ class tmplink {
 
     storage_buy_modal(type) {
         if (this.logined === 0) {
-            this.alert(this.languageData.status_need_login);
+            this.alert(app.languageData.status_need_login);
             return false;
         }
 
@@ -1692,7 +1692,7 @@ class tmplink {
 
     buy_select_open(type) {
         if (this.logined === 0) {
-            this.alert(this.languageData.status_need_login);
+            this.alert(app.languageData.status_need_login);
             return false;
         }
         this.buy_type = type;
@@ -1726,7 +1726,7 @@ class tmplink {
 
     hs_buy_modal(type) {
         if (this.logined === 0) {
-            this.alert(this.languageData.status_need_login);
+            this.alert(app.languageData.status_need_login);
             return false;
         }
 
@@ -1740,7 +1740,7 @@ class tmplink {
 
     direct_buy_modal(type) {
         if (this.logined === 0) {
-            this.alert(this.languageData.status_need_login);
+            this.alert(app.languageData.status_need_login);
             return false;
         }
 
@@ -1754,11 +1754,11 @@ class tmplink {
 
     hs_download_file(filename) {
         if (this.logined === 0) {
-            this.alert(this.languageData.status_need_login);
+            this.alert(app.languageData.status_need_login);
             return false;
         }
         $('#btn_highdownload').addClass('disabled');
-        $('#btn_highdownload').html(this.languageData.file_btn_download_status0);
+        $('#btn_highdownload').html(app.languageData.file_btn_download_status0);
         $.post(this.api_file, {
             action: 'highspeed_check',
             token: this.api_token
@@ -1766,7 +1766,7 @@ class tmplink {
             if (rsp.status == 0) {
                 $('#highspeedModal').modal('show');
                 $('#btn_highdownload').removeClass('disabled');
-                $('#btn_highdownload').html(this.languageData.file_btn_highdownload);
+                $('#btn_highdownload').html(app.languageData.file_btn_highdownload);
             } else {
                 $.post(this.api_file, {
                     action: 'download_check',
@@ -1774,14 +1774,14 @@ class tmplink {
                 }, (rsp) => {
                     if (rsp.status == 1) {
                         // location.href = $('#btn_download').attr('x-href');
-                        // $('#btn_highdownload').html(this.languageData.file_btn_download_status2);
+                        // $('#btn_highdownload').html(app.languageData.file_btn_download_status2);
                         this.single_download_start($('.single_download_progress_bar').attr('data-href'), $('.single_download_progress_bar').attr('data-filename'));
                     } else {
-                        $('#btn_highdownload').html(this.languageData.file_btn_download_status1);
+                        $('#btn_highdownload').html(app.languageData.file_btn_download_status1);
                     }
                     setTimeout(() => {
                         $('#btn_highdownload').removeClass('disabled');
-                        $('#btn_highdownload').html(this.languageData.file_btn_highdownload);
+                        $('#btn_highdownload').html(app.languageData.file_btn_highdownload);
                     }, 3000);
                 }, 'json');
             }
@@ -1790,7 +1790,7 @@ class tmplink {
 
     direct_quota_buy() {
         if (this.logined === 0) {
-            this.alert(this.this.languageData.status_need_login);
+            this.alert(this.app.languageData.status_need_login);
             return false;
         }
 
@@ -1815,7 +1815,7 @@ class tmplink {
 
     hs_download_buy() {
         if (this.logined === 0) {
-            this.alert(this.this.languageData.status_need_login);
+            this.alert(this.app.languageData.status_need_login);
             return false;
         }
 
@@ -1840,7 +1840,7 @@ class tmplink {
 
     storage_buy() {
         if (this.logined === 0) {
-            this.alert(this.this.languageData.status_need_login);
+            this.alert(this.app.languageData.status_need_login);
             return false;
         }
         var price = 0;
@@ -1875,7 +1875,7 @@ class tmplink {
 
     media_buy() {
         if (this.logined === 0) {
-            this.alert(this.this.languageData.status_need_login);
+            this.alert(this.app.languageData.status_need_login);
             return false;
         }
         var price = 0;
@@ -1937,18 +1937,18 @@ class tmplink {
             r[i].etime = data[i].etime;
             switch (data[i].code) {
                 case 'hs':
-                    r[i].name = this.languageData.service_code_hs;
-                    r[i].des = this.languageData.service_code_hs_des;
+                    r[i].name = app.languageData.service_code_hs;
+                    r[i].des = app.languageData.service_code_hs_des;
                     r[i].icon = 'fa-solid fa-heart-circle-check';
                     break;
                 case 'storage':
-                    r[i].name = this.languageData.service_code_storage + ' (' + bytetoconver(data[i].val, true) + ')';
-                    r[i].des = this.languageData.service_code_storage_des;
+                    r[i].name = app.languageData.service_code_storage + ' (' + bytetoconver(data[i].val, true) + ')';
+                    r[i].des = app.languageData.service_code_storage_des;
                     r[i].icon = 'fa-light fa-album-circle-plus';
                     break;
                 case 'media-video':
-                    r[i].name = this.languageData.service_code_media + ' (' + bytetoconver(data[i].val, true) + ')';
-                    r[i].des = this.languageData.service_code_media_des;
+                    r[i].name = app.languageData.service_code_media + ' (' + bytetoconver(data[i].val, true) + ')';
+                    r[i].des = app.languageData.service_code_media_des;
                     r[i].icon = 'fa-light fa-circle-video';
                     break;
             }
@@ -2281,7 +2281,7 @@ class tmplink {
     mr_file_del(ukey) {
         var params = get_url_params();
         if (this.profile_confirm_delete_get()) {
-            if (!confirm(this.languageData.confirm_delete)) {
+            if (!confirm(app.languageData.confirm_delete)) {
                 return false;
             }
         }
@@ -2304,14 +2304,14 @@ class tmplink {
         var parent = $('#mr_parent_id').val();
         var top = $('#mr_top_id').val();
         if (model == '' && name == '') {
-            $('#notice_meetingroom_create').html(this.languageData.notice_meetingroom_status_mrcreat_fail);
+            $('#notice_meetingroom_create').html(app.languageData.notice_meetingroom_status_mrcreat_fail);
             return false;
         }
         if (parent > 0) {
             model = 0;
         }
         $('#modal_meetingroom_create_btn').attr('disabled', true);
-        $('#notice_meetingroom_create').html(this.languageData.notice_meetingroom_status_proccessing);
+        $('#notice_meetingroom_create').html(app.languageData.notice_meetingroom_status_proccessing);
         this.recaptcha_do('mr_add', (recaptcha) => {
             $.post(this.api_mr, {
                 action: 'create',
@@ -2324,11 +2324,11 @@ class tmplink {
                 model: model
             }, (rsp) => {
                 if (rsp.status == 1) {
-                    $('#notice_meetingroom_create').html(this.languageData.notice_meetingroom_status_mrcreated);
+                    $('#notice_meetingroom_create').html(app.languageData.notice_meetingroom_status_mrcreated);
                     this.room_list();
                     $('#mrCreaterModal').modal('hide');
                 } else {
-                    $('#notice_meetingroom_create').html(this.languageData.notice_meetingroom_status_mrcreat_fail);
+                    $('#notice_meetingroom_create').html(app.languageData.notice_meetingroom_status_mrcreat_fail);
                 }
                 setTimeout(() => {
                     $('#modal_meetingroom_create_btn').removeAttr('disabled');
@@ -2339,7 +2339,7 @@ class tmplink {
 
     mr_del(mrid) {
         if (this.profile_confirm_delete_get()) {
-            if (!confirm(this.languageData.confirm_delete)) {
+            if (!confirm(app.languageData.confirm_delete)) {
                 return false;
             }
         }
@@ -2362,7 +2362,7 @@ class tmplink {
     }
 
     mr_newname(mrid) {
-        var newname = prompt(this.languageData.modal_meetingroom_newname, "");
+        var newname = prompt(app.languageData.modal_meetingroom_newname, "");
         if (newname === null) {
             return false;
         }
@@ -2377,7 +2377,7 @@ class tmplink {
     }
 
     file_rename(ukey, default_name) {
-        var newname = prompt(this.languageData.modal_meetingroom_newname, default_name);
+        var newname = prompt(app.languageData.modal_meetingroom_newname, default_name);
         if (newname == null || newname == "") {
             return false;
         }
@@ -2450,7 +2450,7 @@ class tmplink {
         }, (rsp) => {
             if (rsp.data.nums > 0) {
                 let total_size_text = bytetoconver(rsp.data.size, true);
-                $('#room_total').html(`${rsp.data.nums} ${this.languageData.total_units_of_file} , ${total_size_text}`);
+                $('#room_total').html(`${rsp.data.nums} ${app.languageData.total_units_of_file} , ${total_size_text}`);
             }
         }, 'json');
     }
@@ -2479,7 +2479,7 @@ class tmplink {
                 this.room.ownner = 0;
                 this.room.mr_id = 0;
                 $('#file_messenger_icon').html('<i class="fa-light fa-folder-xmark  fa-4x"></i>');
-                $('#file_messenger_msg').html(this.languageData.room_status_fail);
+                $('#file_messenger_msg').html(app.languageData.room_status_fail);
                 $('#file_messenger').show();
                 $('#room_loaded').html('');
                 $('#room_loaded').hide();
@@ -2495,7 +2495,7 @@ class tmplink {
                 this.room.ownner = 0;
                 this.room.mr_id = 0;
                 $('#file_messenger_icon').html('<i class="fa-light fa-folder-xmark  fa-4x"></i>');
-                $('#file_messenger_msg').html(this.languageData.room_status_fail);
+                $('#file_messenger_msg').html(app.languageData.room_status_fail);
                 $('#file_messenger').show();
                 $('#room_loaded').html('');
                 $('#room_loaded').hide();
@@ -2508,7 +2508,7 @@ class tmplink {
             //room need to login
             if (rsp.status === 3) {
                 $('#file_messenger_icon').html('<i class="fa-light fa-user-robot fa-7x"></i>');
-                $('#file_messenger_msg').html(this.languageData.status_need_login);
+                $('#file_messenger_msg').html(app.languageData.status_need_login);
                 $('#file_messenger_msg_login').show();
                 $('#file_messenger').show();
                 $('#room_loaded').html('');
@@ -2631,7 +2631,7 @@ class tmplink {
             app.open('/login');
             return false;
         }
-        alert(this.languageData.favorite_add_success);
+        alert(app.languageData.favorite_add_success);
         $.post(this.api_mr, {
             action: 'favorite_add',
             token: this.api_token,
@@ -2653,8 +2653,8 @@ class tmplink {
         var password = $('#password').val();
         $('#submit').attr('disabled', true);
         $('#msg_notice').show();
-        $('#submit').html(this.languageData.form_btn_processing);
-        $('#msg_notice').html(this.languageData.form_btn_processing);
+        $('#submit').html(app.languageData.form_btn_processing);
+        $('#msg_notice').html(app.languageData.form_btn_processing);
         this.recaptcha_do('user_login', (recaptcha) => {
             if (email !== '' && password !== '') {
                 $.post(this.api_user, {
@@ -2665,7 +2665,7 @@ class tmplink {
                     password: password
                 }, (rsp) => {
                     if (rsp.status == 1) {
-                        $('#msg_notice').html(this.languageData.login_ok);
+                        $('#msg_notice').html(app.languageData.login_ok);
                         this.logined = 1;
                         this.get_details(() => {
                             localStorage.setItem('app_login', 1);
@@ -2679,8 +2679,8 @@ class tmplink {
                             //app.open('/workspace');
                         });
                     } else {
-                        $('#msg_notice').html(this.languageData.login_fail);
-                        $('#submit').html(this.languageData.form_btn_login);
+                        $('#msg_notice').html(app.languageData.login_fail);
+                        $('#submit').html(app.languageData.form_btn_login);
                         $('#submit').removeAttr('disabled');
                     }
                 });
@@ -2726,6 +2726,7 @@ class tmplink {
         }
         $('.selected_lang').html(span_lang);
         app.languageSet(lang);
+        this.languageData = app.languageData;
         //重新初始化导航，目前有一个小问题，无法刷新导航，暂时不管。
         //this.navbar.init(this);
         //console.log('navbar reinit');
@@ -2750,8 +2751,8 @@ class tmplink {
         var rpassword = $('#rpassword').val();
         var code = $('#checkcode').val();
         $('#msg_notice').show();
-        $('#msg_notice').html(this.languageData.form_btn_processing);
-        $('#submit').html(this.languageData.form_btn_login);
+        $('#msg_notice').html(app.languageData.form_btn_processing);
+        $('#submit').html(app.languageData.form_btn_login);
         $('#submit').attr('disabled', true);
         this.recaptcha_do('user_register', (recaptcha) => {
             $.post(this.api_user, {
@@ -2764,8 +2765,8 @@ class tmplink {
                 code: code
             }, (rsp) => {
                 if (rsp.status === 1) {
-                    $('#msg_notice').html(this.languageData.reg_finish);
-                    $('#submit').html(this.languageData.reg_finish);
+                    $('#msg_notice').html(app.languageData.reg_finish);
+                    $('#submit').html(app.languageData.reg_finish);
                     this.get_details(() => {
                         gtag('event', 'conversion', {
                             'send_to': 'AW-977119233/7Pa-CNH4qbkBEIHQ9tED'
@@ -2776,7 +2777,7 @@ class tmplink {
                     });
                 } else {
                     $('#msg_notice').html(rsp.data);
-                    $('#submit').html(this.languageData.form_btn_login);
+                    $('#submit').html(app.languageData.form_btn_login);
                     $('#submit').removeAttr('disabled');
                 }
             });
@@ -2786,8 +2787,8 @@ class tmplink {
     cc_send() {
         var email = $('#email_new').val();
         $('#msg_notice').show();
-        $('#msg_notice').html(this.languageData.form_btn_processing);
-        $('#button-reg-checkcode').html(this.languageData.form_btn_processing);
+        $('#msg_notice').html(app.languageData.form_btn_processing);
+        $('#button-reg-checkcode').html(app.languageData.form_btn_processing);
         $('#button-reg-checkcode').attr('disabled', true);
         this.recaptcha_do('user_checkcode', (recaptcha) => {
             if (email !== '') {
@@ -2799,11 +2800,11 @@ class tmplink {
                     email: email
                 }, (rsp) => {
                     if (rsp.status == 1) {
-                        $('#msg_notice').html(this.languageData.form_checkcode_msg_sended);
-                        $('#button-reg-checkcode').html(this.languageData.form_checkcode_sended);
+                        $('#msg_notice').html(app.languageData.form_checkcode_msg_sended);
+                        $('#button-reg-checkcode').html(app.languageData.form_checkcode_sended);
                     } else {
                         $('#msg_notice').html(this.error_text(rsp.status));
-                        $('#button-reg-checkcode').html(this.languageData.form_getcode);
+                        $('#button-reg-checkcode').html(app.languageData.form_getcode);
                         $('#button-reg-checkcode').removeAttr('disabled');
                     }
                 });
@@ -2812,16 +2813,16 @@ class tmplink {
     }
 
     error_text(code) {
-        let msg = this.languageData.status_error_0;
+        let msg = app.languageData.status_error_0;
         switch (code) {
             case 9:
-                msg = this.languageData.status_error_9;
+                msg = app.languageData.status_error_9;
                 break;
             case 11:
-                msg = this.languageData.status_error_11;
+                msg = app.languageData.status_error_11;
                 break;
             case 10:
-                msg = this.languageData.status_error_10;
+                msg = app.languageData.status_error_10;
                 break;
         }
         return msg;
@@ -2838,14 +2839,14 @@ class tmplink {
         var ukey = $('#report_ukey').html();
         var reason = $('#report_model').val();
         $('#reportbtn').attr('disabled', true);
-        $('#reportbtn').html(`<span class="text-red">${this.languageData.form_btn_processed}</span>`);
+        $('#reportbtn').html(`<span class="text-red">${app.languageData.form_btn_processed}</span>`);
         $.post(this.api_file, {
             'action': 'report',
             'token': this.api_token,
             'reason': reason,
             'ukey': ukey
         }, (rsp) => {
-            $('#reportbtn').html(this.languageData.form_btn_processed);
+            $('#reportbtn').html(app.languageData.form_btn_processed);
         }, 'json');
     }
 
@@ -2853,14 +2854,14 @@ class tmplink {
         var mr_id = this.room.mr_id;
         var reason = $('#room_report_model').val();
         $('#room_reportbtn').attr('disabled', true);
-        $('#room_reportbtn').html(`<span class="text-red">${this.languageData.form_btn_processed}</span>`);
+        $('#room_reportbtn').html(`<span class="text-red">${app.languageData.form_btn_processed}</span>`);
         $.post(this.api_mr, {
             'action': 'report',
             'token': this.api_token,
             'reason': reason,
             'mr_id': mr_id
         }, (rsp) => {
-            $('#room_reportbtn').html(this.languageData.form_btn_processed);
+            $('#room_reportbtn').html(app.languageData.form_btn_processed);
         }, 'json');
     }
 
@@ -2896,7 +2897,7 @@ class tmplink {
         var clipboard = new Clipboard('.btn_copy');
         clipboard.on('success', (e) => {
             let tmp = $(e.trigger).html();
-            $(e.trigger).html(this.languageData.copied);
+            $(e.trigger).html(app.languageData.copied);
             setTimeout(() => {
                 $(e.trigger).html(tmp);
             }, 3000);
@@ -3142,7 +3143,7 @@ class tmplink {
                 clearTimeout(this.bulkCopyTimer);
                 this.bulkCopyTimer = 0;
             } else {
-                $.notifi(this.languageData.notify_bulk_copy_start, "success");
+                $.notifi(app.languageData.notify_bulk_copy_start, "success");
             }
 
             //将内容写入到缓存并复制到剪贴板
@@ -3152,12 +3153,12 @@ class tmplink {
             this.bulkCopyTimer = setTimeout(() => {
                 this.bulkCopyTimer = 0;
                 this.bulkCopyTmp = '';
-                $.notifi(this.languageData.notify_bulk_copy_finish, "success");
+                $.notifi(app.languageData.notify_bulk_copy_finish, "success");
             }, 10000);
 
         } else {
             //直接复制
-            $.notifi(this.languageData.copied, "success",);
+            $.notifi(app.languageData.copied, "success",);
             this.copyToClip(content);
         }
     }
