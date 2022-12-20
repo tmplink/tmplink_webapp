@@ -48,6 +48,12 @@ class tmplink {
     download_retry = 0
     download_retry_max = 10
     recaptcha_op = true
+    recaptcha_actions = [
+        "token",
+        "download_req", "upload_request_select2",
+        "login","checkcode_send",
+        "stream_req",
+    ]
 
     bulkCopyStatus = false
     bulkCopyTmp = ''
@@ -100,7 +106,7 @@ class tmplink {
                 }
 
                 if (rsp.status != 1) {
-                    this.recaptcha_do('token_init', (captcha) => {
+                    this.recaptcha_do('token', (captcha) => {
                         $.post(this.api_toks, {
                             action: 'token',
                             captcha: captcha,
@@ -168,7 +174,11 @@ class tmplink {
                 action: 'set_area',
                 captcha: captcha
             }, (rsp) => {
-                this.area_cn = rsp.data;
+                if(rsp.data===1){
+                    this.area_cn = true;
+                }else{
+                    this.area_cn = false;
+                }
             });
         });
     }
@@ -436,7 +446,7 @@ class tmplink {
         //     }
         // }
 
-        if (this.recaptcha_op) {
+        if (this.recaptcha_op&&this.recaptchaCheckAction(type)) {
             if (typeof grecaptcha === 'object') {
                 grecaptcha.ready(() => {
                     grecaptcha.execute(this.recaptcha, {
@@ -454,6 +464,15 @@ class tmplink {
             cb(this.randomString(64));
             return true;
         }
+    }
+
+    recaptchaCheckAction(action){
+        for(let i in this.recaptcha_actions){
+            if(this.recaptcha_actions[i] == action){
+                return true;
+            }
+        }
+        return false
     }
 
     sort_show() {
@@ -621,7 +640,7 @@ class tmplink {
     }
 
     password_found() {
-        this.recaptcha_do('init', (captcha) => {
+        this.recaptcha_do('passwordfound', (captcha) => {
             var email = $('#email_new').val();
             if (email === '') {
                 return false;
@@ -1506,7 +1525,7 @@ class tmplink {
         $('.btn_download_' + ukey).attr('disabled', 'true');
         $('.btn_download_' + ukey).html('<i class="fa-light fa-loader fa-spin fa-fw"></i>');
 
-        this.recaptcha_do('download_req_on_list', (recaptcha) => {
+        this.recaptcha_do('download_req', (recaptcha) => {
             $.post(this.api_file, {
                 action: 'download_req',
                 ukey: ukey,
@@ -1546,7 +1565,7 @@ class tmplink {
         let ukey = this.list_data[i].ukey;
         let title = this.list_data[i].fname;
 
-        this.recaptcha_do('download_req_on_list', (recaptcha) => {
+        this.recaptcha_do('download_req', (recaptcha) => {
             $.post(this.api_file, {
                 action: 'download_req',
                 ukey: ukey,
@@ -2656,7 +2675,7 @@ class tmplink {
         $('#msg_notice').show();
         $('#submit').html(app.languageData.form_btn_processing);
         $('#msg_notice').html(app.languageData.form_btn_processing);
-        this.recaptcha_do('user_login', (recaptcha) => {
+        this.recaptcha_do('login', (recaptcha) => {
             if (email !== '' && password !== '') {
                 $.post(this.api_user, {
                     action: 'login',
@@ -2791,7 +2810,7 @@ class tmplink {
         $('#msg_notice').html(app.languageData.form_btn_processing);
         $('#button-reg-checkcode').html(app.languageData.form_btn_processing);
         $('#button-reg-checkcode').attr('disabled', true);
-        this.recaptcha_do('user_checkcode', (recaptcha) => {
+        this.recaptcha_do('checkcode_send', (recaptcha) => {
             if (email !== '') {
                 $.post(this.api_user, {
                     action: 'checkcode_send',
