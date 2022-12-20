@@ -1,4 +1,4 @@
-const resSet = "tmplink 915";
+const resSet = "tmplink 916";
 const assets = [
     "/",
 ];

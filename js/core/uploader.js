@@ -283,7 +283,7 @@ class uploader {
     }
 
     upload_worker(file, sha1, id, filename) {
-        this.parent_op.recaptcha_do('upload_request_select', (captcha) => {
+        this.parent_op.recaptcha_do('upload_request_select2', (captcha) => {
             $.post(this.parent_op.api_url_upload, {
                 'token': this.parent_op.api_token,
                 'action': 'upload_request_select2',
