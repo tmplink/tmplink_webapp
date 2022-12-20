@@ -12,8 +12,7 @@ class navbar {
         //画面の幅や高さの変化を聞き分けて、下のナビゲーションバーを切り替えることができる
         window.addEventListener('resize', () => {
             this.resetNavBar();
-        }
-        );
+        });
     }
 
     resetNavBar() {

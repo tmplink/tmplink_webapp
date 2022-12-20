@@ -35,7 +35,7 @@
             <img src="" class="room_img" style="display: none;border-radius: 8px;width: 100%;">
         </div>
 
-        <div id="dir_list_box" class="card mt-4 hideOnLoad shadow-lg">
+        <div id="dir_list_box" class="card mt-4 hideOnLoad shadow">
 
             <div class="card-body">
                 <div class="clearfix mb-3 px-3">
@@ -192,10 +192,10 @@
                     <% } %>
                     
                     <% if(is_iphone_or_ipad() == false){ %>
-                    <button class="btn btn-primary btn-sm mr-1  mt-1" onclick="TL.download_allfile_btn();">
+                    <!-- <button class="btn btn-primary btn-sm mr-1  mt-1" onclick="TL.download_allfile_btn();">
                         <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                         <span i18n="file_btn_downloadall" class="d-none d-sm-inline"><% app.languageData.file_btn_downloadall %></span>
-                    </button>
+                    </button> -->
                     <% } %>
 
                     <% if(TL.room.top != 99){ %>
