@@ -174,7 +174,11 @@ class tmplink {
                 action: 'set_area',
                 captcha: captcha
             }, (rsp) => {
-                this.area_cn = rsp.data;
+                if(rsp.data===1){
+                    this.area_cn = true;
+                }else{
+                    this.area_cn = false;
+                }
             });
         });
     }
