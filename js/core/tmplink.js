@@ -204,7 +204,6 @@ class tmplink {
 
     bg_load() {
         if (document.querySelector('#background_wrap') == null) {
-            console.log('bg loaded');
             //使用svg背景
             // let svg = "data:image/svg+xml,%3Csvg viewBox='0 0 900 600' width='900' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cfilter id='a'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='161' result='effect1_foregroundBlur'/%3E%3C/filter%3E%3C/defs%3E%3Cpath fill='%23722add' d='M0 0h900v600H0z'/%3E%3Cg filter='url(%23a)'%3E%3Ccircle cx='584' cy='165' fill='%231cc2c2' r='357'/%3E%3Ccircle cx='162' cy='117' fill='%23722add' r='357'/%3E%3Ccircle cx='410' cy='98' fill='%231cc2c2' r='357'/%3E%3Ccircle cx='657' cy='404' fill='%231cc2c2' r='357'/%3E%3Ccircle cx='465' cy='330' fill='%23722add' r='357'/%3E%3Ccircle cx='216' cy='585' fill='%231cc2c2' r='357'/%3E%3C/g%3E%3C/svg%3E";
             // $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-size: cover;background-repeat: no-repeat;background-attachment: scroll;background-image:url(\'' + svg + '\');"></div>');
