@@ -5,8 +5,7 @@
     <title>TMPLINK</title>
     <meta name="description" content="Free and easy to use temporary file transfer station">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport"
-        content="width=device-width, shrink-to-fit=no, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
     <meta name="renderer" content="webkit" />
     <link rel="manifest" href="/app.webmanifest" />
@@ -36,7 +35,7 @@
     <script type="text/javascript" src="./tmpui.js?v=27"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 917,
+            "version": 918,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "googleAnalytics": "UA-96864664-3",
@@ -77,6 +76,8 @@
                     "/js/core/tmplink.js": { "type": "js", "reload": false },
                     "/css/reset.css": { "type": "css", "reload": false },
                     "/css/dark.css": { "type": "css", "reload": false },
+                    "/css/index.css": { "type": "css", "reload": false },
+                    "/css/sp.css": { "type": "css", "reload": false },
                     "/tpl/include/gtpl.html": { "type": "tpl", "reload": false },
                     "/js/init/init.js": { "type": "js" }
                 }
@@ -94,39 +95,26 @@
                     "preload": ["init"],
                     "append": ["tmplink"],
                     "body": {
-                        "/css/index.css": { "type": "css" },
+
+                        "/js/init/init_workspace.js": { "type": "js" },
+                        "/js/init/init_direct.js": { "type": "js" },
+                        "/js/init/init_room.js": { "type": "js" },
                         "/js/init/init_index.js": { "type": "js" },
-                        "/tpl/index.html": { "type": "html", "target": { "type": "body" } }
-                    }
-                },
-                "/reg": {
-                    "title": "TMP.link - Sign up",
-                    "preload": ["init"],
-                    "append": ["tmplink"],
-                    "body": {
-                        "/css/sp.css": { "type": "css" },
-                        "/js/init/init_reg.js": { "type": "js" },
-                        "/tpl/reg.html": { "type": "html", "target": { "type": "body" } }
-                    }
-                },
-                "/login": {
-                    "title": "TMP.link - Login",
-                    "preload": ["init"],
-                    "append": ["tmplink"],
-                    "body": {
-                        "/css/sp.css": { "type": "css" },
                         "/js/init/init_login.js": { "type": "js" },
-                        "/tpl/login.html": { "type": "html", "target": { "type": "body" } }
-                    }
-                },
-                "/reset": {
-                    "title": "TMP.link - Reset Password",
-                    "preload": ["init"],
-                    "append": ["tmplink"],
-                    "body": {
-                        "/css/sp.css": { "type": "css" },
+                        "/js/init/init_reg.js": { "type": "js" },
                         "/js/init/init_reset.js": { "type": "js" },
-                        "/tpl/reset.html": { "type": "html", "target": { "type": "body" } }
+
+                        "/tpl/listview/workspace.html": { "type": "file" },
+                        "/tpl/listview/direct.html": { "type": "file" },
+                        "/tpl/listview/room.html": { "type": "file" },
+                        "/tpl/listview/index.html": { "type": "file" },
+                        "/tpl/listview/login.html": { "type": "file" },
+                        "/tpl/listview/reg.html": { "type": "file" },
+                        "/tpl/listview/reset.html": { "type": "file" },
+
+                        "/tpl/dynamic.html": { "type": "html", "target": { "type": "body" } },
+                        "/js/core/dynamic.js": { "type": "js", "reload": false },
+                        "/js/init/init_dynamic.js": { "type": "js" },//重要：初期化設定の実行
                     }
                 },
                 "/tos": {
@@ -134,7 +122,6 @@
                     "preload": ["init"],
                     "append": ["tmplink"],
                     "body": {
-                        "/css/index.css": { "type": "css" },
                         "/js/init/init_tos.js": { "type": "js" },
                         "/tpl/tos.html": { "type": "html", "target": { "type": "body" } }
                     }
@@ -144,7 +131,6 @@
                     "preload": ["init"],
                     "append": ["tmplink"],
                     "body": {
-                        "/css/index.css": { "type": "css" },
                         "/js/init/init_privacy.js": { "type": "js" },
                         "/tpl/privacy.html": { "type": "html", "target": { "type": "body" } }
                     }
@@ -154,26 +140,7 @@
                     "preload": ["init"],
                     "append": ["tmplink"],
                     "body": {
-                        "/css/index.css": { "type": "css" },
                         "/tpl/about.html": { "type": "html", "target": { "type": "body" } }
-                    }
-                },
-                "/home": {
-                    "title": "TMP.link",
-                    "preload": ["init"],
-                    "append": ["tmplink"],
-                    "body": {
-                        "/css/index.css": { "type": "css" },
-                        "/js/init/init_workspace.js": { "type": "js" },
-                        "/js/init/init_direct.js": { "type": "js" },
-                        "/js/init/init_room.js": { "type": "js" },
-                        "/tpl/listview/workspace.html": { "type": "file" },
-                        "/tpl/listview/direct.html": { "type": "file" },
-                        "/tpl/listview/room.html": { "type": "file" },
-
-                        "/tpl/home.html": { "type": "html", "target": { "type": "body" } },
-                        "/js/core/home.js": { "type": "js", "reload": false },
-                        "/js/init/init_home.js": { "type": "js" },//重要：初期化設定の実行
                     }
                 },
                 "/503": {
@@ -181,7 +148,6 @@
                     "preload": ["init"],
                     "append": ["tmplink"],
                     "body": {
-                        "/css/sp.css": { "type": "css" },
                         "/tpl/503.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
@@ -190,7 +156,6 @@
                     "preload": ["init"],
                     "append": ["tmplink"],
                     "body": {
-                        "/css/sp.css": { "type": "css" },
                         "/tpl/404.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
@@ -199,7 +164,6 @@
                     "preload": ["init"],
                     "append": ["tmplink"],
                     "body": {
-                        "/css/index.css": { "type": "css" },
                         "/js/init/init_file.js": { "type": "js" },
                         "/tpl/file.html": { "type": "html", "target": { "type": "body" } }
                     }

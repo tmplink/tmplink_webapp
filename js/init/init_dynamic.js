@@ -2,22 +2,31 @@
  * このファイルは、ページが読み込まれたときに、対象のビュー情報を取得し、対応するページを読み込む役割を担っています。
  * @author CC2655
  * @version 1.0
- * @date 2022/12/17
+ * @date 2022/12/21
  */
-var homeView = new home();
+var dynamicView = new dynamic();
 app.ready(() => {
     let params = app.getUrlVars(window.location.href);
     switch (params.listview) {
         case 'workspace':
-            homeView.workspace();
+            dynamicView.workspace();
             break;
         case 'room':
-            homeView.room();
+            dynamicView.room();
             break;
         case 'direct':
-            homeView.direct();
+            dynamicView.direct();
+            break;
+        case 'login':
+            dynamicView.login();
+            break;
+        case 'reg':
+            dynamicView.reg();
+            break;
+        case 'reset':
+            dynamicView.reset();
             break;
         default:
-            homeView.workspace();
+            dynamicView.index();
     }
 });

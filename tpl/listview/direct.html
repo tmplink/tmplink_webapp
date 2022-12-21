@@ -12,7 +12,7 @@
                 <span class="badge badge-pill badge-info p-2 mx-1 mt-1 btn-point"
                     onclick="$('#directSSLModal').modal('show');">
                     <i class="fa-fw fa-solid fa-shield-halved"></i>
-                    <span i18n="direct_ssl">.</span> : <span id="direct_bind_ssl"></span>
+                    <span id="direct_bind_ssl"></span>
                 </span>
             </div>
             <div class="lead mt-2">
@@ -211,11 +211,11 @@
                                     <% if(obj[x].dir_name!=null){ %>
                                         <div class="d-none d-lg-block" onclick="event.stopPropagation();">
                                             <i class="fa-light fa-folder-open fa-fw text-cyan"></i>
-                                            <a href="/home&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="homeView.room();"> <% obj[x].dir_name %></a>
+                                            <a href="/&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
                                         </div>
                                         <span class="d-inline d-lg-none" onclick="event.stopPropagation();">
                                             <i class="fa-light fa-folder-open fa-fw text-cyan"></i>
-                                            <a href="/home&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="homeView.room();"> <% obj[x].dir_name %></a>
+                                            <a href="/&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
                                         </span>
                                     <% } %>
 

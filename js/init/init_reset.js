@@ -1,6 +1,11 @@
-
-app.ready(() => {
-    $('title').attr('i18n', 'title_reset');
-    $('meta[name=description]').attr('i18n', 'des_reset');
-    app.languageBuild();
-});
+function INIT_reset() {
+    TL.ready(()=>{
+        app.languageBuild();
+        $('title').html(app.languageData.title_reset);
+        $('meta[name=description]').html(app.languageData.des_reset);
+        if (TL.isLogin()) {
+            dynamicView.workspace();
+        }    
+    });
+    
+}

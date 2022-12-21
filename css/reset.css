@@ -20362,5 +20362,5 @@ svg {
 .nav-top-set{
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  border-bottom: #e1dedf 1px double;
+  box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%) !important;
 }

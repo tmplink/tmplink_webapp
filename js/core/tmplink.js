@@ -21,7 +21,7 @@ class tmplink {
     uid = 0
     email = null
     api_language = null
-    languageData = {}
+    currentLanguage = 'cn'
     mr_data = []
     room = []
     room_data = []
@@ -200,11 +200,6 @@ class tmplink {
             }
             this.readyFunction = [];
         }
-    }
-
-    languageData_init(lang) {
-        this.languageData = lang;
-        this.navbar.init(this);
     }
 
     bg_load() {
@@ -2693,13 +2688,13 @@ class tmplink {
                         this.get_details(() => {
                             localStorage.setItem('app_login', 1);
                             //如果当前页是首页，则刷新当前页面
-                            let url = get_url_params();
-                            if (url.tmpui_page === '/' || url.tmpui_page === undefined) {
-                                window.location.reload();
-                            } else {
-                                window.history.back();
-                            }
-                            //app.open('/workspace');
+                            // let url = get_url_params();
+                            // if (url.tmpui_page === '/' || url.tmpui_page === undefined) {
+                            //     window.location.reload();
+                            // } else {
+                            //     window.history.back();
+                            // }
+                            dynamicView.workspace();
                         });
                     } else {
                         $('#msg_notice').html(app.languageData.login_fail);
@@ -2719,7 +2714,17 @@ class tmplink {
                 lang: lang
             });
         }
-        var span_lang = 'English';
+        this.currentLanguage = lang;
+        this.languageBtnSet();
+        app.languageSet(lang);
+        //重新初始化导航，目前有一个小问题，无法刷新导航，暂时不管。
+        this.navbar.init(this);
+        //console.log('navbar reinit');
+    }
+
+    languageBtnSet(){
+        let lang = this.currentLanguage;
+        let span_lang = 'English';
         if (lang === 'en') {
             span_lang = 'English';
         }
@@ -2735,24 +2740,7 @@ class tmplink {
         if (lang === 'jp') {
             span_lang = '日本語';
         }
-
-        if (lang === 'ru') {
-            span_lang = 'русский';
-        }
-
-        if (lang === 'kr') {
-            span_lang = '한국어';
-        }
-
-        if (lang === 'my') {
-            span_lang = 'Melayu';
-        }
         $('.selected_lang').html(span_lang);
-        app.languageSet(lang);
-        this.languageData = app.languageData;
-        //重新初始化导航，目前有一个小问题，无法刷新导航，暂时不管。
-        //this.navbar.init(this);
-        //console.log('navbar reinit');
     }
 
     logout() {
@@ -2795,7 +2783,7 @@ class tmplink {
                             'send_to': 'AW-977119233/7Pa-CNH4qbkBEIHQ9tED'
                         });
                         setTimeout(() => {
-                            app.open('/workspace');
+                            dynamicView.workspace();
                         }, 3000);
                     });
                 } else {

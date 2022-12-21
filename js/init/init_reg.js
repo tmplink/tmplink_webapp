@@ -1,13 +1,10 @@
-
-app.ready(() => {
-    
-    $('title').attr('i18n', 'title_reg');
-    $('meta[name=description]').attr('i18n', 'des_reg');
-    app.languageBuild();
-
+function INIT_reg() {
     TL.ready(() => {
-        if ($.cookie('app_login') == 1) {
-            app.open('/workspace');
+        app.languageBuild();
+        $('title').html(app.languageData.title_reg);
+        $('meta[name=description]').html(app.languageData.des_reg);
+        if (TL.isLogin()) {
+            dynamicView.workspace();
         }
-    })
-});
+    });
+}

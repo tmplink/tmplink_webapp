@@ -15,19 +15,27 @@ class navbar {
         });
     }
 
+    disabled() {
+        $('.mainNav').addClass('dynViewDisabled');
+    }
+
+    enabled() {
+        $('.mainNav').removeClass('dynViewDisabled');
+    }
+
     resetNavBar() {
         if (this.isTablet()) {
             $('.topnav').addClass('fixed-bottom');
             $('.topnav').addClass('nav-bottom-set');
             $('.topnav').removeClass('nav-top-set');
             $('.topnav').removeClass('fixed-top');
-            $('.topnav-addon').hide();
+            $('.topnav-addon').addClass('dynViewDisabled');
         } else {
             $('.topnav').removeClass('fixed-bottom');
             $('.topnav').removeClass('nav-bottom-set');
             $('.topnav').addClass('nav-top-set');
             $('.topnav').addClass('fixed-top');
-            $('.topnav-addon').show();
+            $('.topnav-addon').removeClass('dynViewDisabled');
         }
     }
 
@@ -69,7 +77,7 @@ class navbar {
         $('#navbar_model_icon').attr('class', 'fa-light fa-memo-pad fa-fw mx-auto');
         $('#navbar_model_text').html(app.languageData.navbar_workspace);
         if (act === true) {
-            app.open('/workspace');
+            dynamicView.workspace();
         }
         this.navbar_lightup('workspace');
     }

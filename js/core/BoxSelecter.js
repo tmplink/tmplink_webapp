@@ -108,7 +108,7 @@ class BoxSelecter {
 
     delete() {
         if (this.parent_op.profile_confirm_delete_get()) {
-            if (!confirm(this.parent_op.languageData.confirm_delete)) {
+            if (!confirm(app.languageData.confirm_delete)) {
                 return false;
             }
         }
@@ -143,7 +143,7 @@ class BoxSelecter {
     downloadURL() {
         //未登录无法使用此功能
         if (!this.parent_op.isLogin()) {
-            this.parent_op.alert(this.parent_op.languageData.status_need_login);
+            this.parent_op.alert(app.languageData.status_need_login);
             return false;
         }
         var node = document.getElementsByName(this.items_name);
@@ -161,7 +161,7 @@ class BoxSelecter {
             }
         }
         if (check_count === 0) {
-            this.parent_op.alert(this.parent_op.languageData.status_error_12);
+            this.parent_op.alert(app.languageData.status_error_12);
             return false;
         }
         // //打开复制窗口
@@ -186,7 +186,7 @@ class BoxSelecter {
             }
         }
 
-        alert(this.parent_op.languageData.status_error_12);
+        alert(app.languageData.status_error_12);
         return false;
     }
 
@@ -262,7 +262,7 @@ class BoxSelecter {
         document.body.removeChild(aux);
 
         let tmp = $('#copy-modal-btn').html();
-        $('#copy-modal-btn').html(this.parent_op.languageData.copied);
+        $('#copy-modal-btn').html(app.languageData.copied);
         setTimeout(() => {
             $('#copy-modal-btn').html(tmp);
         }

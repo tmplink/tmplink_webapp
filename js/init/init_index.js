@@ -1,14 +1,10 @@
-
-app.ready(() => {
-    $('title').attr('i18n', 'title_index');
-    $('meta[name=description]').attr('i18n', 'des_index');
+function INIT_index() {
     app.languageBuild();
+    $('title').html(app.languageData.title_index);
+    $('meta[name=description]').html(app.languageData.des_index);
+    console.log(app.languageData.des_index);
 
-    TL.ready(() => {
-        if(TL.isLogin()===true){
-            app.open('/home&listview=workspace');
-        }else{
-            TL.head_set();
-        }
-    })
-});
+    if (TL.isLogin() === true) {
+        dynamicView.workspace();
+    }
+}

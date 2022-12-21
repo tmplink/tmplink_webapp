@@ -39,8 +39,8 @@ class uploader {
             $('#uploadCliModal').modal('show');
             $('#upload_cli_token').html(this.parent_op.api_token);
         } else {
-            this.parent_op.alert(this.parent_op.languageData.status_need_login);
-            app.open('/login');
+            this.parent_op.alert(app.languageData.status_need_login);
+            app.open('/&listview=login');
         }
     }
 
@@ -49,7 +49,7 @@ class uploader {
         this.mr_id = mr_id;
 
         if (!this.parent_op.logined) {
-            this.parent_op.alert(this.parent_op.languageData.status_need_login);
+            this.parent_op.alert(app.languageData.status_need_login);
             return false;
         }
 
@@ -117,7 +117,7 @@ class uploader {
         let id = file_res.id;
         let model = this.upload_model_get();
         if (file.size > this.single_file_size) {
-            this.parent_op.alert(this.parent_op.languageData.upload_limit_size);
+            this.parent_op.alert(app.languageData.upload_limit_size);
             $('#uq_' + id).fadeOut();
             return false;
         }
@@ -125,29 +125,29 @@ class uploader {
         //如果要上传的文件是永久有效期，并且超过了私有空间的限制，则提示错误
         if (model == 99) {
             if (this.storage_used + file.size > this.storage) {
-                this.parent_op.alert(this.parent_op.languageData.upload_limit_size);
+                this.parent_op.alert(app.languageData.upload_limit_size);
                 $('#uq_' + id).fadeOut();
                 return false;
             }
         }
 
         // if (this.parent_op.logined === false) {
-        //     this.parent_op.alert(this.parent_op.languageData.upload_model99_needs_login);
+        //     this.parent_op.alert(app.languageData.upload_model99_needs_login);
         //     $('#uq_' + id).fadeOut();
         //     return false;
         // }
         // if (this.storage == 0) {
-        //     this.parent_op.alert(this.parent_op.languageData.upload_buy_storage);
+        //     this.parent_op.alert(app.languageData.upload_buy_storage);
         //     $('#uq_' + id).fadeOut();
         //     return false;
         // }
         if (file.size > (this.storage - this.storage_used) && (model == 99)) {
-            this.parent_op.alert(this.parent_op.languageData.upload_fail_storage);
+            this.parent_op.alert(app.languageData.upload_fail_storage);
             $('#uq_' + id).fadeOut();
             return false;
         }
         $('#uq_delete_' + id).hide();
-        $('#uqnn_' + id).html(this.parent_op.languageData.upload_upload_prepare);
+        $('#uqnn_' + id).html(app.languageData.upload_upload_prepare);
 
         this.upload_prepare(file, id, (f, sha1, id) => {
             //如果sha1不等于0，则调用另外的接口直接发送文件名信息。
@@ -233,23 +233,23 @@ class uploader {
 
         switch (model) {
             case 0:
-                $('#seleted_model').html(this.parent_op.languageData.modal_settings_upload_model1);
+                $('#seleted_model').html(app.languageData.modal_settings_upload_model1);
                 $('#upload_model').val(0);
                 break;
             case 1:
-                $('#seleted_model').html(this.parent_op.languageData.modal_settings_upload_model2);
+                $('#seleted_model').html(app.languageData.modal_settings_upload_model2);
                 $('#upload_model').val(1);
                 break;
             case 2:
-                $('#seleted_model').html(this.parent_op.languageData.modal_settings_upload_model3);
+                $('#seleted_model').html(app.languageData.modal_settings_upload_model3);
                 $('#upload_model').val(2);
                 break;
             case 3:
-                $('#seleted_model').html(this.parent_op.languageData.modal_settings_upload_model4);
+                $('#seleted_model').html(app.languageData.modal_settings_upload_model4);
                 $('#upload_model').val(3);
                 break;
             case 99:
-                $('#seleted_model').html(this.parent_op.languageData.modal_settings_upload_model99);
+                $('#seleted_model').html(app.languageData.modal_settings_upload_model99);
                 $('#upload_model').val(99);
                 break;
         }
@@ -451,7 +451,7 @@ class uploader {
         let uqmid = "#uqm_" + id;
         let uqpid = "#uqp_" + id;
         let uqgid = "#uqg_" + id;
-        $('#uqnn_' + id).html(this.parent_op.languageData.upload_sync);
+        $('#uqnn_' + id).html(app.languageData.upload_sync);
         let progress_percent = slice_status.success / slice_status.total * 100;
         $(uqpid).css('width', progress_percent + '%');
 
@@ -460,7 +460,7 @@ class uploader {
             //计算上传速度
             let end_time = new Date().getTime();
             let speed = (this.slice_size / (end_time - start_time)) * 1000;
-            $(uqmid).html(`${this.parent_op.languageData.upload_upload_processing} ${file.name} (${(slice_status.success + 1)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
+            $(uqmid).html(`${app.languageData.upload_upload_processing} ${file.name} (${(slice_status.success + 1)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
             $(uqgid).html(`${bytetoconver(speed, true)}/s`);
         });
 
@@ -583,7 +583,7 @@ class uploader {
             //检查是否超出了可用的私有存储空间
             if(this.upload_model_get()==99){
                 if((this.parent_op.storage_used + file.size)>this.parent_op.storage){
-                    $.notifi(file.name+' : '+this.parent_op.languageData.upload_fail_storage, {noticeClass:'ntf-error',autoHideDelay:5000});
+                    $.notifi(file.name+' : '+app.languageData.upload_fail_storage, {noticeClass:'ntf-error',autoHideDelay:5000});
                     return false;
                 }
             }
@@ -622,7 +622,7 @@ class uploader {
     upload_progress(evt, id) {
         if (evt.lengthComputable) {
             if (evt.total === evt.loaded) {
-                $('#uqnn_' + id).html(this.parent_op.languageData.upload_sync);
+                $('#uqnn_' + id).html(app.languageData.upload_sync);
                 $('#uqp_' + id).css('width', '100%');
                 $('#uqp_' + id).addClass('progress-bar-striped');
                 $('#uqp_' + id).addClass('progress-bar-animated');
@@ -638,7 +638,7 @@ class uploader {
                 this.upload_start();
             } else {
                 //
-                $('#uqnn_' + id).html(this.parent_op.languageData.upload_sync);
+                $('#uqnn_' + id).html(app.languageData.upload_sync);
                 this.upload_progressbar_counter_count[id] += evt.loaded - this.upload_s2_status[id];
                 this.upload_s2_status[id] = evt.loaded;
                 //
@@ -665,7 +665,7 @@ class uploader {
     upload_failed(evt, id) {
         clearInterval(this.upload_progressbar_counter[id]);
         this.upload_progressbar_counter[id] = null;
-        this.parent_op.alert(this.parent_op.languageData.upload_fail);
+        this.parent_op.alert(app.languageData.upload_fail);
         $('#uq_' + id).fadeOut();
         this.upload_processing = 0;
         this.upload_start();
@@ -674,7 +674,7 @@ class uploader {
     upload_canceled(evt, id) {
         clearInterval(this.upload_progressbar_counter[id]);
         this.upload_progressbar_counter[id] = null;
-        this.parent_op.alert(this.parent_op.languageData.upload_cancel);
+        this.parent_op.alert(app.languageData.upload_cancel);
         $('#uq_' + id).fadeOut();
         this.upload_processing = 0;
         this.upload_start();
@@ -684,9 +684,9 @@ class uploader {
         if (skip === undefined) {
             skip = false;
         }
-        //$('#nav_upload_btn').html(this.parent_op.languageData.nav_upload);
+        //$('#nav_upload_btn').html(app.languageData.nav_upload);
         if (rsp.status === 1) {
-            $('#uqnn_' + id).html(this.parent_op.languageData.upload_ok);
+            $('#uqnn_' + id).html(app.languageData.upload_ok);
 
             //如果未登录状态下上传，则不隐藏上传完成后的信息
             if (this.parent_op.isLogin()) {
@@ -725,39 +725,39 @@ class uploader {
             //this.btn_copy_bind();
         } else {
             //根据错误代码显示错误信息
-            let error_msg = this.parent_op.languageData.upload_fail;
+            let error_msg = app.languageData.upload_fail;
             switch (rsp.status) {
                 case 2:
                     //上传失败，无效请求
-                    error_msg = this.parent_op.languageData.upload_fail_utoken;
+                    error_msg = app.languageData.upload_fail_utoken;
                     break;
                 case 3:
                     //上传失败，不能上传空文件
-                    error_msg = this.parent_op.languageData.upload_fail_empty;
+                    error_msg = app.languageData.upload_fail_empty;
                     break;
                 case 4:
                     //上传失败，上传的文件大小超出了系统允许的大小
-                    error_msg = this.parent_op.languageData.upload_limit_size;
+                    error_msg = app.languageData.upload_limit_size;
                     break;
                 case 5:
                     //上传失败，超出了单日允许的最大上传量
-                    error_msg = this.parent_op.languageData.upload_limit_day;
+                    error_msg = app.languageData.upload_limit_day;
                     break;
                 case 6:
                     //上传失败，没有权限上传到这个文件夹
-                    error_msg = this.parent_op.languageData.upload_fail_permission;
+                    error_msg = app.languageData.upload_fail_permission;
                     break;
                 case 7:
                     //要上传的文件超出了私有存储空间限制
-                    error_msg = this.parent_op.languageData.upload_fail_storage;
+                    error_msg = app.languageData.upload_fail_storage;
                     break;
                 case 8:
                     //上传失败，目前暂时无法为这个文件分配存储空间
-                    error_msg = this.parent_op.languageData.upload_fail_prepare;
+                    error_msg = app.languageData.upload_fail_prepare;
                     break;
                 case 9:
                     //上传失败，操作失败，无法获取节点信息
-                    error_msg = this.parent_op.languageData.upload_fail_node;
+                    error_msg = app.languageData.upload_fail_node;
                     break;
             }
             console.log(rsp.status+':'+error_msg);
