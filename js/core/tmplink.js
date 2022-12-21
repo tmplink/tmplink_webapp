@@ -958,7 +958,7 @@ class tmplink {
                         if (this.logined == 1) {
                             this.workspace_add('#btn_add_to_workspace_mobile', params.ukey);
                         } else {
-                            app.open('/login');
+                            app.open('/&listview=login');
                         }
                     });
 
@@ -1113,7 +1113,7 @@ class tmplink {
                                     }, 3000);
                                     this.workspace_add('#btn_add_to_workspace', params.ukey, false);
                                 } else {
-                                    app.open('/login');
+                                    app.open('/&listview=login');
                                 }
                             });
 
@@ -1122,7 +1122,7 @@ class tmplink {
                                 if (this.logined == 1) {
                                     $('#upupModal').modal('show');
                                 } else {
-                                    app.open('/login');
+                                    app.open('/&listview=login');
                                 }
                             });
 
@@ -2416,7 +2416,7 @@ class tmplink {
 
     mr_list() {
         if (localStorage.getItem('app_login') != 1) {
-            app.open('/login');
+            app.open('/&listview=login');
             return;
         }
         $('#mr_list_refresh_icon').html('<img src="/img/loading.svg" height="19" />');
@@ -2645,7 +2645,7 @@ class tmplink {
 
     favorite_add(mr_id) {
         if (!this.isLogin()) {
-            app.open('/login');
+            app.open('/&listview=login');
             return false;
         }
         alert(app.languageData.favorite_add_success);
