@@ -41,19 +41,21 @@ class direct {
             //如果domain是 *.5t-cdn.com 作为子域名，生成的链接则应该是 https://
             if (this.domain.indexOf('.5t-cdn.com') != -1) {
                 this.protocol = 'https://';
-                $('#direct_bind_ssl').html(this.parent_op.languageData.direct_ssl_enbaled);
+                $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
             }else{
-                $('#direct_bind_ssl').html(this.parent_op.languageData.direct_ssl_disabled);
+                $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
             }
             if(this.ssl){
-                $('#direct_bind_ssl').html(this.parent_op.languageData.direct_ssl_enbaled);
+                $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
                 $('#box_disable_ssl').show();
                 this.protocol = 'https://';
             }else{
                 $('#box_disable_ssl').hide();
-                $('#direct_bind_ssl').html(this.parent_op.languageData.direct_ssl_disabled);
+                $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
             }
-            cb();
+            if(typeof cb == 'function'){
+                cb();
+            }
         }, 'json');
     }
 
@@ -126,11 +128,11 @@ class direct {
             if (rsp.status == 1) {
                 //提示添加成功，并复制到剪贴板
                 let files = rsp.data;
-                $.notifi(this.parent_op.languageData.direct_add_link_success, "success");
+                $.notifi(app.languageData.direct_add_link_success, "success");
                 // this.parent_op.copyToClip(`${this.protocol}${this.domain}/files/${rsp.data}/${filename}`);
                 this.parent_op.bulkCopy(null,this.genLinkDirect(files[0].dkey, files[0].name).download,false);
             } else {
-                $.notifi(this.parent_op.languageData.status_error_0, "success");
+                $.notifi(app.languageData.status_error_0, "success");
             }
         }, 'json');
     }
@@ -144,12 +146,12 @@ class direct {
             if (rsp.status == 1) {
                 //提示添加成功，并复制到剪贴板
                 let files = rsp.data;
-                $.notifi(this.parent_op.languageData.direct_add_link_success, "success");
+                $.notifi(app.languageData.direct_add_link_success, "success");
                 for(let i in files){
                     this.parent_op.bulkCopy(null,this.genLinkDirect(files[i].dkey, files[i].name).download,false);
                 }
             } else {
-                $.notifi(this.parent_op.languageData.status_error_0, "success");
+                $.notifi(app.languageData.status_error_0, "success");
             }
         }, 'json');
     }
@@ -185,7 +187,7 @@ class direct {
     filelist(page) {
 
         if (this.parent_op.logined != 1) {
-            app.open('/login');
+            app.open('/&listview=login');
         }
 
         if(this.domain==0){
@@ -456,12 +458,12 @@ class direct {
             'token': this.parent_op.api_token
         }, (rsp) => {
             if (rsp.status == 1) {
-                alert(this.parent_op.languageData.direct_msg_complete);
+                alert(app.languageData.direct_msg_complete);
                 this.init_details(()=>{
                     $('#directSSLModal').modal('hide');
                 });
             } else {
-                alert(this.parent_op.languageData.direct_msg_ssl_invalid);
+                alert(app.languageData.direct_msg_ssl_invalid);
             }
             this.loading_box_off();
         }), 'json';
@@ -469,7 +471,7 @@ class direct {
 
     disableSSL() {
 
-        if(!confirm(this.parent_op.languageData.direct_msg_ssl_disable)){
+        if(!confirm(app.languageData.direct_msg_ssl_disable)){
             return false;
         }
 
@@ -479,7 +481,7 @@ class direct {
             'action': 'direct_disable_ssl',
             'token': this.parent_op.api_token
         }, (rsp) => {
-            alert(this.parent_op.languageData.direct_msg_complete);
+            alert(app.languageData.direct_msg_complete);
             window.location.reload();
         }), 'json';
     }
@@ -501,7 +503,7 @@ class direct {
             'token': this.parent_op.api_token
         }, (rsp) => {
             if (rsp.status == 1) {
-                alert(this.parent_op.languageData.direct_btn_bind_prompt_ok);
+                alert(app.languageData.direct_btn_bind_prompt_ok);
                 $('#direct_bind_domain_box').show();
                 $('#direct_bind_domain').html(domain);
                 $('#direct_bind_domain').attr('href',this.protocol+domain);
@@ -510,7 +512,7 @@ class direct {
                 window.location.reload();
             } else {
                 $('#direct_bind_domain_box').hide();
-                alert(this.parent_op.languageData.direct_btn_bind_prompt_error);
+                alert(app.languageData.direct_btn_bind_prompt_error);
             }
             this.loading_box_off();
         }), 'json';
@@ -527,16 +529,16 @@ class direct {
         }, (rsp) => {
             switch (rsp.status) {
                 case 1:
-                    alert(this.parent_op.languageData.direct_sponsor_freee_quota_msg_1);
+                    alert(app.languageData.direct_sponsor_freee_quota_msg_1);
                     break;
                 case 2:
-                    alert(this.parent_op.languageData.direct_sponsor_freee_quota_msg_2);
+                    alert(app.languageData.direct_sponsor_freee_quota_msg_2);
                     break;
                 case 3:
-                    alert(this.parent_op.languageData.direct_sponsor_freee_quota_msg_3);
+                    alert(app.languageData.direct_sponsor_freee_quota_msg_3);
                     break;
                 default:
-                    alert(this.parent_op.languageData.status_error_0);
+                    alert(app.languageData.status_error_0);
             }
             this.loading_box_off();
         }), 'json';

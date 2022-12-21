@@ -1,7 +1,7 @@
 app.ready(() => {
-    $('title').attr('i18n', 'title_file');
-    $('meta[name=description]').attr('i18n', 'des_file');
     app.languageBuild();
+    $('title').html(app.languageData.title_file);
+    $('meta[name=description]').html(app.languageData.des_file);
 
     TL.ready(() => {
         TL.details_file();

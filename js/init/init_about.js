@@ -1,5 +1,5 @@
 app.ready(() => {
-    $('title').attr('i18n', 'title_about');
-    $('meta[name=description]').attr('i18n', 'des_about');
     app.languageBuild();
+    $('title').html(app.languageData.title_about);
+    $('meta[name=description]').html(app.languageData.des_about);
 });

@@ -329,3 +329,7 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
     text-decoration: none;
     color: #323283;
 }
+
+.dynViewDisabled{
+    display: none !important;
+}
