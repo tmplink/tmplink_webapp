@@ -5,5 +5,8 @@ function INIT_index() {
 
     if (TL.isLogin() === true) {
         dynamicView.workspace();
+    }else{
+        //
+        TL.head_set();
     }
 }
