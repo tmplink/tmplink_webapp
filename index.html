@@ -35,7 +35,7 @@
     <script type="text/javascript" src="./tmpui.js?v=27"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 923,
+            "version": 925,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "googleAnalytics": "UA-96864664-3",
@@ -115,6 +115,12 @@
                         "/tpl/dynamic.html": { "type": "html", "target": { "type": "body" } },
                         "/js/core/dynamic.js": { "type": "js", "reload": false },
                         "/js/init/init_dynamic.js": { "type": "js" },//重要：初期化設定の実行
+                    }
+                },
+                "/home": {
+                    "title": "TMP.link - Redirect Room",
+                    "body": {
+                        "/js/init/redirect_home.js": { "type": "js" }
                     }
                 },
                 "/tos": {

@@ -20,6 +20,9 @@ class dynamic {
         //ページスクロール時の自動読み込みをオフにする
         TL.dir_list_autoload_disabled();
         TL.navbar.enabled();
+        TL.ready(()=>{
+            TL.head_set();
+        });
         app.linkRebind();
     }
 
