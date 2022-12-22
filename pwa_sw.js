@@ -1,14 +1,16 @@
-const resSet = "tmplink 921";
+const resSet = "tmplink 923";
 const assets = [
-    "/",
+  "/",
 ];
 
 self.addEventListener("install", installEvent => {
-    installEvent.waitUntil(
-        caches.open(resSet).then(cache => {
-            cache.addAll(assets);
-        })
-    );
+  //安装时强制跳过等待，直接进入 active
+  self.skipWaiting();
+  installEvent.waitUntil(
+    caches.open(resSet).then(cache => {
+      cache.addAll(assets);
+    })
+  );
 });
 
 self.addEventListener('activate', (event) => {
@@ -26,9 +28,9 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener("fetch", fetchEvent => {
-    fetchEvent.respondWith(
-        caches.match(fetchEvent.request).then(res => {
-            return res || fetch(fetchEvent.request);
-        })
-    );
+  fetchEvent.respondWith(
+    caches.match(fetchEvent.request).then(res => {
+      return res || fetch(fetchEvent.request);
+    })
+  );
 });
