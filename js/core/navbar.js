@@ -27,8 +27,8 @@ class navbar {
     enabledMobile() {
         if(this.isMobile()){
             console.log('is mobile');
-            $('.nav-mobile').hide();
-            $('.nav-desktop').show();
+            $('.nav-mobile').show();
+            $('.nav-desktop').hide();
         }else{
             console.log('is not mobile');
             $('.nav-desktop').show();
