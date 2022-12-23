@@ -156,6 +156,13 @@ class tmplink {
         }
     }
 
+    ga(target){
+        gtag('config', 'UA-96864664-3', {
+            'page_title': target,
+            'page_location': location.href,
+        });
+    }
+
     setDomain() {
         //获取当前域名
         this.site_domain = window.location.hostname == 'ttttt.link' ? 'ttttt.link' : 'tmp.link';
@@ -928,10 +935,7 @@ class tmplink {
             $('#file_messenger_msg').removeClass('display-4');
             $('#file_messenger_msg').html('请复制链接后，在外部浏览器打开进行下载。');
             $('#file_messenger').show();
-
-            gtag('config', 'UA-96864664-3', {
-                'page_title': 'D-weixinUnavailable',
-            });
+            this.ga('weixinUnavailable');
             return false;
             $('#wechat_notice').show();
         }
@@ -945,9 +949,7 @@ class tmplink {
                 token: this.api_token
             }, (rsp) => {
                 if (rsp.status === 1) {
-                    gtag('config', 'UA-96864664-3', {
-                        'page_title': 'D-' + rsp.data.name,
-                    });
+                    this.ga('D-' + rsp.data.name);
                     $('#file_box').show();
                     $('#filename').html(rsp.data.name);
                     $('#filesize').html(rsp.data.size);
@@ -957,6 +959,7 @@ class tmplink {
                     $('#btn_add_to_workspace_mobile').on('click', () => {
                         if (this.logined == 1) {
                             this.workspace_add('#btn_add_to_workspace_mobile', params.ukey);
+                            gtag("event", "login");
                         } else {
                             app.open('/&listview=login');
                         }
@@ -1004,11 +1007,7 @@ class tmplink {
                             token: this.api_token,
                             captcha: recaptcha
                         }, (req) => {
-
-                            gtag('config', 'UA-96864664-3', {
-                                'page_title': 'Download-' + rsp.data.name,
-                            });
-
+                            this.ga('D-' + rsp.data.name);
                             if (req.status != 1) {
                                 $('#download_msg').html('<i class="fa-light fa-circle-exclamation fa-fw"></i> ' + app.languageData.status_file_2);
                                 $('#download_msg').attr('class', 'badge badge-pill badge-danger');
@@ -1165,9 +1164,7 @@ class tmplink {
                     $('#file_messenger_msg').html(app.languageData.status_need_login);
                     $('#file_messenger_msg_login').show();
                     $('#file_messenger').show();
-                    gtag('config', 'UA-96864664-3', {
-                        'page_title': `Any-[${params.ukey}]`,
-                    });
+                    this.ga(`Any-[${params.ukey}]`);
                     return false;
                 }
 
@@ -1176,9 +1173,7 @@ class tmplink {
                     $('#file_messenger_icon').html('<img src="/img/loading.svg" height="80"  />');
                     $('#file_messenger_msg').html(app.languageData.upload_sync_onprogress);
                     $('#file_messenger').show();
-                    gtag('config', 'UA-96864664-3', {
-                        'page_title': `Sync-[${params.ukey}]`,
-                    });
+                    this.ga(`Sync-[${params.ukey}]`);
                     setTimeout(() => {
                         window.location.reload();
                     }, 10000);
@@ -1190,9 +1185,7 @@ class tmplink {
                     $('#file_messenger_icon').html('<i class="fa-solid fa-earth-asia fa-7x"></i>');
                     $('#file_messenger_msg').html(app.languageData.status_area);
                     $('#file_messenger').show();
-                    gtag('config', 'UA-96864664-3', {
-                        'page_title': `Area-[${params.ukey}]`,
-                    });
+                    this.ga(`Area-[${params.ukey}]`);
                     return false;
                 }
 
@@ -1200,9 +1193,7 @@ class tmplink {
                 $('#file_messenger_icon').html('<i class="fa-light fa-folder-xmark  fa-4x"></i>');
                 $('#file_messenger_msg').html(app.languageData.file_unavailable);
                 $('#file_messenger').show();
-                gtag('config', 'UA-96864664-3', {
-                    'page_title': 'D-fileUnavailable',
-                });
+                this.ga(`Unavailable-[${params.ukey}]`);
             }, 'json');
         } else {
             $('#file_unavailable').show();
@@ -1536,10 +1527,7 @@ class tmplink {
                     //     //使用 href 提供下载
                     //     location.href = req.data;
                     // }
-
-                    gtag('config', 'UA-96864664-3', {
-                        'page_title': 'Download-' + title,
-                    });
+                    this.ga('Download-' + title);
 
                     //使用 href 提供下载
                     location.href = req.data;
@@ -1570,9 +1558,7 @@ class tmplink {
                 captcha: recaptcha
             }, (req) => {
                 if (req.status == 1) {
-                    gtag('config', 'UA-96864664-3', {
-                        'page_title': 'Download-' + title,
-                    });
+                    this.ga('Download-' + title);
                     cb(req.data);
                     return true;
                 }
@@ -2500,9 +2486,7 @@ class tmplink {
                 $('#file_messenger').show();
                 $('#room_loaded').html('');
                 $('#room_loaded').hide();
-                gtag('config', 'UA-96864664-3', {
-                    'page_title': 'F-Unavailable',
-                });
+                this.ga('Room-Unavailable');
                 return false;
             }
             //会议室不可用
@@ -2516,9 +2500,7 @@ class tmplink {
                 $('#file_messenger').show();
                 $('#room_loaded').html('');
                 $('#room_loaded').hide();
-                gtag('config', 'UA-96864664-3', {
-                    'page_title': 'F-Reported',
-                });
+                this.ga('Room-Reported');
                 return false;
             }
 
@@ -2530,15 +2512,10 @@ class tmplink {
                 $('#file_messenger').show();
                 $('#room_loaded').html('');
                 $('#room_loaded').hide();
-                gtag('config', 'UA-96864664-3', {
-                    'page_title': 'F-unLogin',
-                });
+                this.ga('Room-Need-Login');
                 return false;
             }
-            gtag('config', 'UA-96864664-3', {
-                'page_title': 'F-' + rsp.data.name,
-            });
-
+            this.ga('Room-'+rsp.data.name);
             //更新统计信息
             this.room_total(rsp.data.mr_id);
             this.room.parent = rsp.data.parent;
@@ -2778,13 +2755,11 @@ class tmplink {
                     $('#msg_notice').html(app.languageData.reg_finish);
                     $('#submit').html(app.languageData.reg_finish);
                     this.get_details(() => {
-                        gtag('event', 'conversion', {
-                            'send_to': 'AW-977119233/7Pa-CNH4qbkBEIHQ9tED'
-                        });
                         setTimeout(() => {
                             dynamicView.workspace();
                         }, 3000);
                     });
+                    gtag("event", "sign_up");
                 } else {
                     $('#msg_notice').html(rsp.data);
                     $('#submit').html(app.languageData.form_btn_login);
