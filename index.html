@@ -11,7 +11,7 @@
     <link rel="manifest" href="/app.webmanifest" />
 
     <link rel="icon" href="/img/ico/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon-precomposed" href="/img/ico/logo-256x256.png" />
+    <link rel="apple-touch-icon-precomposed" href="/img/ico/logo-new.svg" />
     <link rel="stylesheet" href="https://static.vx-cdn.com/project/font-awesome/v6.1.1/css/all.min.css">
 
     <script type="text/javascript">
@@ -35,7 +35,7 @@
     <script type="text/javascript" src="./tmpui.js?v=27"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 925,
+            "version": 926,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "googleAnalytics": "UA-96864664-3",
@@ -117,10 +117,16 @@
                         "/js/init/init_dynamic.js": { "type": "js" },//重要：初期化設定の実行
                     }
                 },
-                "/home": {
+                "/room": {
                     "title": "TMP.link - Redirect Room",
                     "body": {
                         "/js/init/redirect_home.js": { "type": "js" }
+                    }
+                },
+                "/workspace": {
+                    "title": "TMP.link - Redirect Workspace",
+                    "body": {
+                        "/js/init/redirect_workspace.js": { "type": "js" }
                     }
                 },
                 "/tos": {
