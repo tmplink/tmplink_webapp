@@ -8,6 +8,7 @@ class navbar {
         //根据 tmpui_page 初始化底部导航栏
         let url = this.parent.get_url_params('tmpui_page');
         this.model_select(url.tmpui_page, false);
+        this.enabledMobile();
         this.resetNavBar();
         //画面の幅や高さの変化を聞き分けて、下のナビゲーションバーを切り替えることができる
         window.addEventListener('resize', () => {
@@ -23,17 +24,33 @@ class navbar {
         $('.mainNav').removeClass('dynViewDisabled');
     }
 
+    enabledMobile() {
+        if(this.isMobile()){
+            console.log('is mobile');
+            $('.nav-mobile').hide();
+            $('.nav-desktop').show();
+        }else{
+            console.log('is not mobile');
+            $('.nav-desktop').show();
+            $('.nav-mobile').hide();
+        }
+    }
+
     resetNavBar() {
         if (this.isTablet()) {
             $('.topnav').addClass('fixed-bottom');
             $('.topnav').addClass('nav-bottom-set');
+            $('.topnav').addClass('nav-bottom-slideup');
             $('.topnav').removeClass('nav-top-set');
+            $('.topnav').removeClass('nav-top-slidedown');
             $('.topnav').removeClass('fixed-top');
             $('.topnav-addon').addClass('dynViewDisabled');
         } else {
             $('.topnav').removeClass('fixed-bottom');
             $('.topnav').removeClass('nav-bottom-set');
+            $('.topnav').removeClass('nav-bottom-slideup');
             $('.topnav').addClass('nav-top-set');
+            $('.topnav').addClass('nav-top-slidedown');
             $('.topnav').addClass('fixed-top');
             $('.topnav-addon').removeClass('dynViewDisabled');
         }
@@ -47,6 +64,10 @@ class navbar {
         } else {
             return false;
         }
+    }
+
+    isMobile() {
+        return window.screen.width < 768;
     }
 
     model_select(model, act) {
