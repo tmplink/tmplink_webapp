@@ -1,6 +1,6 @@
-const resSet = "tmplink 929";
+const resSet = "tmplink 930";
 const assets = [
-  "/",
+  '/',
 ];
 
 self.addEventListener("install", installEvent => {
