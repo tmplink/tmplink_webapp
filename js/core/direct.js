@@ -283,9 +283,11 @@ class direct {
                 this.dir_key = rsp.data;
                 //操作按钮
                 this.dirRoomPfBtnUpdate();
-                //更新文件夹界面
-                this.dirRoomUpdate();
+            }else{
+                this.dir_btn_status = false;
             }
+            //更新文件夹界面
+            this.dirRoomUpdate();
         }, 'json');
     }
 
