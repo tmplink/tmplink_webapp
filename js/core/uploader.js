@@ -85,7 +85,6 @@ class uploader {
                 this.upload_processing = 1;
                 this.upload_core(f, f.is_dir);
             }
-            console.log(this.upload_queue_file);
         }
     }
 
@@ -95,7 +94,6 @@ class uploader {
 
         for (var i = 0; i < this.upload_queue_file.length - 1; i++) {
             if (this.upload_queue_file[i].id == id) {
-                console.log('delete:'+id);
                 this.upload_queue_file.splice(i, 1);
             }
         }
@@ -221,8 +219,6 @@ class uploader {
     }
 
     model_selected(model) {
-        console.log('upload::model::' + model);
-
         //检查账号是否有足够可用的空间
         if (model == 99) {
             if (this.storage_used >= this.storage) {
@@ -294,6 +290,7 @@ class uploader {
                     let api_sync = rsp.data.uploader + '/app/upload_sync';
                     //文件小于 32 MB，直接上传
                     if (file.size <= this.slice_size) {
+                        console.log('upload::direct::' + file.name);
                         var fd = new FormData();
                         fd.append("file", file);
                         fd.append("filename", filename);
@@ -327,6 +324,7 @@ class uploader {
                         xhr.open("POST", api_sync);
                         xhr.send(fd);
                     } else {
+                        console.log('upload::slice::' + file.name);
                         let api_sync = rsp.data.uploader + '/app/upload_slice';
                         this.worker_slice(api_sync, rsp.data.utoken, sha1, file, id);
                     }

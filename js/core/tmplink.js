@@ -1519,20 +1519,20 @@ class tmplink {
                 if (req.status == 1) {
 
                     //如果不是在 ipad 或者 iphone 上
-                    // if (is_iphone_or_ipad() == false) {
-                    //     //开始下载
-                    //     this.download_queue_add(req.data, title, ukey, size, type);
-                    //     this.download_queue_start();
-                    // } else {
-                    //     //使用 href 提供下载
-                    //     location.href = req.data;
-                    // }
+                    if (is_iphone_or_ipad() == false) {
+                        //开始下载
+                        this.download_queue_add(req.data, title, ukey, size, type);
+                        this.download_queue_start();
+                    } else {
+                        //使用 href 提供下载
+                        location.href = req.data;
+                    }
                     this.ga('Download-' + title);
 
                     //使用 href 提供下载
-                    location.href = req.data;
-                    $('.btn_download_' + ukey).removeAttr('disabled');
-                    $('.btn_download_' + ukey).html('<i class="fa-fw fa-light fa-cloud-arrow-down"></i>');
+                    // location.href = req.data;
+                    // $('.btn_download_' + ukey).removeAttr('disabled');
+                    // $('.btn_download_' + ukey).html('<i class="fa-fw fa-light fa-cloud-arrow-down"></i>');
                     return true;
                 }
                 if (req.status == 3) {
