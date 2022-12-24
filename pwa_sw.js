@@ -33,7 +33,6 @@ self.addEventListener("fetch", fetchEvent => {
   var requestPath = new URL(fetchEvent.request.url).pathname;
   //输出日志
   if (domainList.indexOf(domain) !== -1) {
-    console.log('requestPath：', requestPath);
     if(requestPath !== '/index.html'||requestPath !== '/'){
       fetchEvent.respondWith(
         caches.match(fetchEvent.request).then(res => {
