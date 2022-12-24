@@ -546,6 +546,15 @@ class tmplink {
                 this.storage_used = rsp.data.storage_used;
                 this.storage = rsp.data.storage;
                 this.high_speed_channel = rsp.data.highspeedchannel;
+                this.user_acv = rsp.data.acv;
+
+                this.user_join = rsp.data.join;
+                this.user_total_files = rsp.data.total_files;
+                this.user_total_filesize = bytetoconver(rsp.data.total_filesize,true);
+                this.user_total_upload = bytetoconver(rsp.data.total_upload,true);
+                this.user_acv_dq = bytetoconver(rsp.data.acv_dq*1024 * 1024,true);
+                this.user_acv_storage = bytetoconver(this.user_acv * 16 * 1024 * 1024,true);
+
                 this.profile_confirm_delete_set(rsp.data.pf_confirm_delete);
                 this.profile_bulk_copy_set(rsp.data.pf_bulk_copy);
                 localStorage.setItem('app_lang', rsp.data.lang);
@@ -558,6 +567,16 @@ class tmplink {
                 } else {
                     $('.hs-disabled').show();
                 }
+                //更新到 myModal
+                $('.user_rank').html(this.uid);
+                $('.user_storage').html(bytetoconver(this.storage_used) + '/' + bytetoconver(this.storage));
+                $('.user_acv').html(this.user_acv);
+                $('.user_acv_dq').html(this.user_acv_dq);
+                $('.user_acv_storage').html(this.user_acv_storage);
+                $('.user_join').html(this.user_join);
+                $('.user_total_files').html(this.user_total_files);
+                $('.user_total_filesize').html(this.user_total_filesize);
+                $('.user_total_upload').html(this.user_total_upload);
             } else {
                 $('.user-unlogin').show();
                 localStorage.setItem('app_login', 0);

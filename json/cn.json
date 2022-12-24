@@ -128,6 +128,7 @@
     "navbar_login": "登录",
     "navbar_reg": "注册",
     "navbar_orders": "已购项目",
+    "navbar_my": "我的",
 
     "model_profile_title":"偏好设定",
     "model_profile_confirm_delete":"是否启用删除前确认？",

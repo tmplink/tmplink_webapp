@@ -1,4 +1,5 @@
 {
+    "navbar_my": "Status",
     "title_reset": "TMPLINK - Reset Password",
     "des_reset": "Reset password",
     "direct_intro": "New \"Direct Link\" setting in \"Preferences\" for folders to generate direct links for folders.",

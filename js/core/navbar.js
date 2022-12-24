@@ -67,7 +67,7 @@ class navbar {
     }
 
     isMobile() {
-        return window.screen.width < 768;
+        return window.screen.width < 675;
     }
 
     model_select(model, act) {
