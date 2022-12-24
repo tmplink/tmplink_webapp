@@ -23,20 +23,8 @@
             window.location.href = '/version.html';
         }
 
-        // if ("serviceWorker" in navigator) {
-        //     navigator.serviceWorker
-        //         .register("/pwa_sw.js")
-        //         .then(res => console.log("SW:ok"))
-        //         .catch(err => console.log("SW:error", err));
-        // }
-
-        //uninstall
         if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                for (let registration of registrations) {
-                    registration.unregister()
-                }
-            })
+            navigator.serviceWorker.register('/pwa_sw.js');
         }
 
     </script>
@@ -44,7 +32,7 @@
     <script type="text/javascript" src="./tmpui.js?v=27"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 933,
+            "version": 935,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "googleAnalytics": "UA-96864664-3",

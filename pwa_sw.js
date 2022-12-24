@@ -1,7 +1,8 @@
-const resSet = "tmplink 930";
+const resSet = "tmplink 935";
 const assets = [
   '/',
 ];
+var domainList = ['ttttt.link', 'tmp.link', 'static.vx-cdn.com'];
 
 self.addEventListener("install", installEvent => {
   //安装时强制跳过等待，直接进入 active
@@ -28,9 +29,13 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener("fetch", fetchEvent => {
-  fetchEvent.respondWith(
-    caches.match(fetchEvent.request).then(res => {
-      return res || fetch(fetchEvent.request);
-    })
-  );
+  var domain = new URL(fetchEvent.request.url).hostname;
+  var requestPath = new URL(fetchEvent.request.url).pathname;
+  if (domainList.indexOf(domain) !== -1 && requestPath !== '/index.html') {
+    fetchEvent.respondWith(
+      caches.match(fetchEvent.request).then(res => {
+        return res || fetch(fetchEvent.request);
+      })
+    );
+  }
 });
