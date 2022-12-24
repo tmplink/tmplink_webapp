@@ -2,7 +2,7 @@ const resSet = "tmplink 935";
 const assets = [
   '/',
 ];
-var domainList = ['ttttt.link', 'tmp.link', 'static.vx-cdn.com'];
+var domainList = ['ttttt.link', 'tmp.link', 'static.vx-cdn.com','127.0.0.1'];
 
 self.addEventListener("install", installEvent => {
   //安装时强制跳过等待，直接进入 active
