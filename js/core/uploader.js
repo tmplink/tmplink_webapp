@@ -458,16 +458,20 @@ class uploader {
         $(uqmid).html(`${app.languageData.upload_upload_processing} ${file.name} (${(slice_status.success + 1)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
 
         let last_uploaded = 0;
+        let last_time = new Date().getTime();
 
         //上传速度计算与进度计算，每隔一秒运行一次
         let speed_timer = setInterval(() => {
-            //计算上传速度
+            //计算上传速度，使用 lastime 来计算，计算方法，当前已上传的字节数减去上次已上传的字节数，得出差值，除以时间差，得出速度
             let speed_text = '0B/s';
-            let speed = this.upload_slice_chunk_loaded - last_uploaded;
+            let duration = (new Date().getTime() - last_time) / 1000;
+            let speed = (this.upload_slice_chunk_loaded - last_uploaded) / duration;
             if(speed>0){
                 speed_text = bytetoconver(speed, true) + '/s';
             }
+            last_time = new Date().getTime();
             last_uploaded = this.upload_slice_chunk_loaded;
+            console.log(`duration:${duration},Loaded:${this.upload_slice_chunk_loaded},speed_text:${speed_text}`);
             //计算进度条，计算方法，先计算每个分块的占比，根据已上传的分块加上目前正在上传的分块的占比得出已上传的占比
             let pp_success = slice_status.success / slice_status.total;
             //计算出单个分块在进度条中的占比
