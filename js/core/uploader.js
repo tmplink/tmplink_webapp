@@ -10,6 +10,9 @@ class uploader {
     single_file_size = 50 * 1024 * 1024 * 1024
     slice_size = 32 * 1024 * 1024;
 
+    upload_slice_chunk_loaded = 0
+    upload_slice_chunk_total = 0
+
     upload_progressbar_counter_total = []
     upload_progressbar_counter_loaded = []
     upload_progressbar_counter_count = []
@@ -450,31 +453,66 @@ class uploader {
         let uqpid = "#uqp_" + id;
         let uqgid = "#uqg_" + id;
         $('#uqnn_' + id).html(app.languageData.upload_sync);
-        let progress_percent = slice_status.success / slice_status.total * 100;
-        $(uqpid).css('width', progress_percent + '%');
+
+        //绘制进度信息
+        $(uqmid).html(`${app.languageData.upload_upload_processing} ${file.name} (${(slice_status.success + 1)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
+
+        let last_uploaded = 0;
+
+        //上传速度计算与进度计算，每隔一秒运行一次
+        let speed_timer = setInterval(() => {
+            //计算上传速度
+            let speed_text = '0B/s';
+            let speed = this.upload_slice_chunk_loaded - last_uploaded;
+            if(speed>0){
+                speed_text = bytetoconver(speed, true) + '/s';
+            }
+            last_uploaded = this.upload_slice_chunk_loaded;
+            //计算进度条，计算方法，先计算每个分块的占比，根据已上传的分块加上目前正在上传的分块的占比得出已上传的占比
+            let pp_success = slice_status.success / slice_status.total;
+            //计算出单个分块在进度条中的占比
+            let pp_pie = 100/slice_status.total;
+            if(slice_status.success!==slice_status.total){
+                //目前已上传的分块占比加上正在上传的分块占比
+                let pp_uploaded = slice_status.success * pp_pie;
+                //正在上传的部分的占比
+                let pp_uploading = this.upload_slice_chunk_loaded / this.upload_slice_chunk_total * pp_pie;
+                //合算
+                let progress_percent = pp_uploaded + pp_uploading;
+                $(uqpid).css('width', progress_percent + '%');
+                $(uqgid).html(speed_text);
+            }else{
+                $(uqpid).css('width', '100%');
+                $(uqgid).html(app.languageData.upload_upload_complete);
+            }
+        }, 1000);
+        
+        //上传完成后，关闭计时器
+        xhr.addEventListener("loadend", (evt) => {
+            clearInterval(speed_timer);
+        });
 
         //上传速度计算,上传结束时启动
-        xhr.addEventListener("loadend", (evt) => {
-            //计算上传速度
-            let end_time = new Date().getTime();
-            let speed = (this.slice_size / (end_time - start_time)) * 1000;
-            $(uqmid).html(`${app.languageData.upload_upload_processing} ${file.name} (${(slice_status.success + 1)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
-            $(uqgid).html(`${bytetoconver(speed, true)}/s`);
-        });
+        // xhr.addEventListener("loadend", (evt) => {
+        //     //计算上传速度
+        //     let end_time = new Date().getTime();
+        //     let speed = (this.slice_size / (end_time - start_time)) * 1000;
+        //     $(uqmid).html(`${app.languageData.upload_upload_processing} ${file.name} (${(slice_status.success + 1)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
+        //     $(uqgid).html(`${bytetoconver(speed, true)}/s`);
+        // });
 
         //上传发生错误，重启
         xhr.addEventListener("error", (evt) => {
             cb();
         });
-        // xhr.addEventListener("progress", (evt) => {
-        //     console.log(evt);
-        //     if (evt.lengthComputable) {
-        //         let percentComplete = evt.loaded / evt.total;
-        //         //更新到 uqgid 中
-        //         $(uqgid).html(`${Math.round(percentComplete * 100)}%`);
-        //         console.log(`${Math.round(percentComplete * 100)}%`);
-        //     }
-        // });
+
+        //分块上传进度上报
+        xhr.upload.onprogress = (evt) => {
+            if (evt.lengthComputable) {
+                this.upload_slice_chunk_loaded = evt.loaded;
+                this.upload_slice_chunk_total = evt.total;
+            }
+        };
 
         $('.upload_speed').show();
 
