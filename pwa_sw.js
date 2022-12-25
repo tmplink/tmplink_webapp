@@ -1,11 +1,11 @@
-const resSet = "tmplink v0";
+var domainList = ['ttttt.link', 'tmp.link', 'static.vx-cdn.com','127.0.0.1'];
+
+const resSet = "tmplink v1";
 const assets = [
   '/',
 ];
-var domainList = ['ttttt.link', 'tmp.link', 'static.vx-cdn.com','127.0.0.1'];
 
 self.addEventListener("install", installEvent => {
-  //安装时强制跳过等待，直接进入 active
   self.skipWaiting();
   installEvent.waitUntil(
     caches.open(resSet).then(cache => {
