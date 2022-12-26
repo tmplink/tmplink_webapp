@@ -250,7 +250,7 @@ class tmplink {
             $('#background_wrap_img').css('background',`url("${imgSrc}") no-repeat center`);
             $('#background_wrap_img').css('background-size','cover');
             $('#background_wrap_img').addClass('anime-fadein');
-            $('#background_wrap_img').css('display', 'block');
+            $('#background_wrap_img').css('display', '');
         });
     }
 

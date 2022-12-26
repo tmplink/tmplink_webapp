@@ -1,17 +1,21 @@
 /* 深色模式 */
 @media (prefers-color-scheme: dark) {
-    /* 将一些元素扭转为深色，图片扭转回正常颜色 */
-    #tmpui_body, #tmpui_body img{
+
+    html{
         filter: invert(1) hue-rotate(.5turn);
+    }
+
+    #tmpui_body{
         opacity: 0.9;
     }
 
-    #tmpui_loading_bg{
-        background-color: rgb(14, 14, 14) !important;
+    img{
+        filter: invert(1) hue-rotate(.5turn);
+        /* opacity: 0.9; */
     }
 
-    #background_wrap{
-        background-color: rgb(14, 14, 14) !important;
+    #background_wrap_img{
+        filter: invert(1) hue-rotate(.5turn);;
     }
 
     #head_logo{
