@@ -354,6 +354,7 @@
     "file_btn_report": "Report",
     "file_btn_qr_mobile": "QR Download",
     "file_unavailable": "This file is no longer available",
+    "file_private": "This is private",
     "workspace_title": "Desk",
     "workspace_table_filename": "filename",
     "workspace_table_filetype": "type",

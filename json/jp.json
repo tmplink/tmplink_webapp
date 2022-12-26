@@ -357,6 +357,7 @@
     "file_btn_report": "報告する",
     "file_btn_qr_mobile": "QRコード",
     "file_unavailable": "このファイルはもう利用できません",
+    "file_private": "このファイルはプライベートです",
     "workspace_title": "デスク",
     "workspace_table_filename": "filename",
     "workspace_table_filetype": "タイプ",
