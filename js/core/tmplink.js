@@ -217,17 +217,47 @@ class tmplink {
             // let svg = "/img/bg.svg";
 
             //暂时不使用蓝色背景
-            // $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color: #0093E9;background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);"></div>');
-            $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color: #fcfcfc;"></div>');
+            $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color: #0093E9;"></div>');
+            // $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color: #fcfcfc;"></div>');
             $('body').append(`<div id="background_wrap_img" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;display:none;width: 100%;"></div>`);
             let night = this.matchNightModel();
-            this.bgLoadCSS(night);
+            // this.bgLoadCSS(night);
+            this.bgLoadImg1(night);
         }
         this.matchNightModelListener((night) => {
-            this.bgLoadCSS(night);
+            // this.bgLoadCSS(night);
+            this.bgLoadImg1(night);
         });
     }
-    bgLoadImg(night) {
+
+    bgLoadImg1(night) {
+        let imgSource = {
+            'light': ['/img/bg/l-1.jpg', '/img/bg/l-2.jpg'],
+            'dark': ['/img/bg/d-1.jpg', '/img/bg/d-2.jpg']
+        };
+        //随机选择一张图片
+        let img_light = imgSource['light'][Math.floor(Math.random() * imgSource['light'].length)];
+        let img_dark = imgSource['dark'][Math.floor(Math.random() * imgSource['dark'].length)];
+        let imgSrc = '';
+        if (night) {
+            imgSrc = img_dark;
+        } else {
+            imgSrc = img_light;
+        }
+        $('#background_wrap_img').removeClass('anime-fadein');
+        $('#background_wrap_img').css('display', 'none');
+        $.get(imgSrc,()=>{
+            $('#background_wrap_img').css('background',`url("${imgSrc}") no-repeat center`);
+            $('#background_wrap_img').css('background-size','cover');
+            $('#background_wrap_img').addClass('anime-fadein');
+            $('#background_wrap_img').css('display', 'block');
+        });
+    }
+
+    bgLoadImg2(night) {
+        let imgSource = {
+            'light': ['/img/bg/light.jpg', '/img/bg/light_re.jpg'],
+        };
         let imgSrc = '';
         if (night) {
             imgSrc = '/img/bg/dark.jpg';

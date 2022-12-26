@@ -1,12 +1,17 @@
 /* 深色模式 */
 @media (prefers-color-scheme: dark) {
-    html, img {
+    /* 将一些元素扭转为深色，图片扭转回正常颜色 */
+    #tmpui_body, #tmpui_body img{
         filter: invert(1) hue-rotate(.5turn);
         opacity: 0.9;
     }
 
+    #tmpui_loading_bg{
+        background-color: rgb(14, 14, 14) !important;
+    }
+
     #background_wrap{
-        background-image: linear-gradient(209deg, #ffffff 0%, #9bf0ff 100%) !important;
+        background-color: rgb(14, 14, 14) !important;
     }
 
     #head_logo{
@@ -14,7 +19,7 @@
         border-color: rgb(14, 14, 14) !important;
     }
 
-    #bg_video, #background_wrap_video, #background_wrap_img{
+    #bg_video, #background_wrap_video {
         filter: invert(1) hue-rotate(.5turn);
         opacity: 0.9;
     }
