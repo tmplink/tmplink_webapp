@@ -2586,6 +2586,7 @@ class tmplink {
             this.room.status = rsp.data.status;
             this.room.allow_upload = rsp.data.allow_upload;
             this.room.img_link = rsp.data.img_link;
+            this.room.model = rsp.data.model;
             this.room_performance_init(this.room.mr_id);
 
             //如果用户是拥有者，显示直链相关的信息，并初始化
@@ -2633,6 +2634,13 @@ class tmplink {
                 $('.room_img').show();
             } else {
                 $('.room_img').hide();
+            }
+
+            //如果是私有文件夹
+            if(this.room.model == 'private'){
+                $('.in-private-dir').hide();
+            }else{
+                $('.in-private-dir').show();
             }
 
             //如果文件夹允许其他人上传文件
