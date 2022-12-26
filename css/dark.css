@@ -1,21 +1,15 @@
 /* 深色模式 */
 @media (prefers-color-scheme: dark) {
-
-    html{
+    html {
         filter: invert(1) hue-rotate(.5turn);
     }
 
-    #tmpui_body{
-        opacity: 0.9;
-    }
-
-    img{
+    img {
         filter: invert(1) hue-rotate(.5turn);
-        /* opacity: 0.9; */
     }
 
-    #background_wrap_img{
-        filter: invert(1) hue-rotate(.5turn);;
+    #background_wrap{
+        background-image: linear-gradient(209deg, #ffffff 0%, #9bf0ff 100%) !important;
     }
 
     #head_logo{
@@ -23,8 +17,7 @@
         border-color: rgb(14, 14, 14) !important;
     }
 
-    #bg_video, #background_wrap_video {
+    #bg_video, #background_wrap_video, #background_wrap_img{
         filter: invert(1) hue-rotate(.5turn);
-        opacity: 0.9;
     }
 }
