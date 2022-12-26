@@ -246,6 +246,7 @@
     "file_btn_play": "在線播放",
     "file_btn_qr_mobile": "掃碼下載",
     "file_unavailable": "檔案已失效",
+    "file_private": "私有檔案",
     "media_title": "媒體庫",
     "media_leads": "歡迎來到媒體庫！您可以在檔案流或者檔案夾中，選擇視頻檔案添加到媒體庫，然後媒體庫會將它轉化為可供任何設備在線播放的視頻！",
     "media_processing": "正在處理",

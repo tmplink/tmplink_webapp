@@ -1238,6 +1238,15 @@ class tmplink {
                     return false;
                 }
 
+                //file is private
+                if (rsp.status === 5) {
+                    $('#file_messenger_icon').html('<i class="fa-solid fa-lock-alt fa-7x"></i>');
+                    $('#file_messenger_msg').html(app.languageData.file_private);
+                    $('#file_messenger').show();
+                    this.ga(`Private-[${params.ukey}]`);
+                    return false;
+                }
+
                 //file unavailable
                 $('#file_messenger_icon').html('<i class="fa-light fa-folder-xmark  fa-4x"></i>');
                 $('#file_messenger_msg').html(app.languageData.file_unavailable);
