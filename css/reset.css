@@ -20391,3 +20391,19 @@ svg {
     transform: translateY(0);
   }
 }
+
+/**
+  * 实现淡入的动画效果
+  */
+.anime-fadein{
+  animation: anime-fadein 0.7s ease-in-out;
+}
+
+@keyframes anime-fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
