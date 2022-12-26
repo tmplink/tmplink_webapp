@@ -117,7 +117,7 @@
                             <i class="fa-solid fa-gear"></i>
                             <span class="d-none d-sm-inline" i18n="btn_performance">.</span>
                         </button>
-                        <button class="btn btn-light btn-sm mr-1 mt-1 btn_copy text-azure" id="mr_copy">
+                        <button class="btn btn-light btn-sm mr-1 mt-1 btn_copy text-azure in-private-dir" id="mr_copy">
                             <i class="fa-fw fa-light fa-share-from-square"></i>
                             <span i18n="model_copy" class="d-none d-sm-inline">.</span>
                         </button>
@@ -165,7 +165,7 @@
                                     <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                     <span i18n="on_select_copy_download_url">.</span>
                                 </button>
-                                <button class="dropdown-item" onclick="TL.Selecter.share()">
+                                <button class="dropdown-item in-private-dir" onclick="TL.Selecter.share()">
                                     <i class="fa-fw fa-light fa-share-from-square"></i>
                                     <span i18n="on_select_share">.</span>
                                 </button>
@@ -266,9 +266,11 @@
                                                 <button href="javascript:void(0)" onclick="TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
                                                     <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                                 </button>
-                                                <button onclick="TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/f/${obj[x].ukey}`) %>',true)" class="text-azure btn btn-sm btn-light mr-1">
+                                                <% if(TL.room.model=='public'){ %>
+                                                <button onclick="TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/f/${obj[x].ukey}`) %>',true)" class="in-private-dir text-azure btn btn-sm btn-light mr-1">
                                                     <i class="fa-fw fa-light fa-share-from-square"></i>
                                                 </button>
+                                                <% } %>
                                                 <% if (TL.room.owner == 1) { %>
                                                     <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1">
                                                         <i class="fa-fw fa-light fa-pen-to-square"></i>
@@ -347,9 +349,11 @@
                                 <button href="javascript:void(0)" onclick="event.stopPropagation();TL.download_file_btn('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
                                     <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                 </button>
-                                <button href="javascript:void(0)" onclick="event.stopPropagation();TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/f/${obj[x].ukey}`) %>',true)" class="text-azure btn btn-sm btn-light mr-1">
-                                    <i class="fa-fw fa-light fa-share-from-square"></i>
-                                </button>
+                                <% if(TL.room.model=='public'){ %>
+                                    <button href="javascript:void(0)" onclick="event.stopPropagation();TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/f/${obj[x].ukey}`) %>',true )" class="in-private-dir text-azure btn btn-sm btn-light mr-1">
+                                        <i class="fa-fw fa-light fa-share-from-square"></i>
+                                    </button>
+                                <% } %>
                                 <% if (TL.room.owner == 1) { %>
                                     <span class="dropdown">
                                         <button role="button" type="button" class="text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown">
@@ -365,7 +369,7 @@
                                                 <span i18n="menu_delete"><% app.languageData.menu_delete %></span>
                                             </button> 
                                             <% if(TL.direct.is_allow()){ %>
-                                                <button onclick="TL.direct.addLink('<% obj[x].ukey %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item">
+                                                <button onclick="TL.direct.addLink('<% obj[x].ukey %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item in-private-dir">
                                                     <i class="fa-fw fa-light fa-share-nodes"></i>
                                                     <span i18n="menu_addlink"><% app.languageData.menu_addlink %></span>
                                                 </button>
@@ -406,7 +410,9 @@
                     
                     <div><% app.languageData.filelist_dir %></div>
                     <div>
-                        <a href="javascript:void(0)" onclick="TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/room/${obj[x].mr_id}`) %>',true)" class="mt-1"><i class="fa-fw fa-light fa-share-from-square"></i></a>
+                        <a href="javascript:void(0)" onclick="TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/room/${obj[x].mr_id}`) %>',true)" class="mt-1 in-private-dir">
+                            <i class="fa-fw fa-light fa-share-from-square"></i>
+                        </a>
                         <% if (obj[x].type === 'owner') { %>
                             <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-blue mt-1"><i class="fa-light fa-pen-to-square"></i></a>
                             <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red mt-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></a>
@@ -438,7 +444,11 @@
                                 <span class="mr-2">
                                     <% app.languageData.filelist_dir %>
                                 </span>
-                                <button onclick="TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/room/${obj[x].mr_id}`) %>',true)" class="text-azure btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
+                                <% if(TL.room.model=='public'){ %>
+                                    <button onclick="TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/room/${obj[x].mr_id}`) %>',true)" class="in-public-dir text-azure btn btn-sm btn-light mr-1">
+                                        <i class="fa-fw fa-light fa-share-from-square"></i>
+                                    </button>
+                                <% }%>
                                 <% if (obj[x].type === 'owner') { %>
                                     <button  onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-azure btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-pen-to-square"></i></button>
                                     <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></button>
