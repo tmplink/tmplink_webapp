@@ -592,7 +592,39 @@
     "direct_box_ssl_key":"私钥",
     "direct_box_ssl_stop":"停用安全传输",
     "direct_box_ssl_post":"提交",
-    
+
+    "direct_brand_logo_set_complete":"完成",
+    "direct_brand_logo_set_process":"处理中",
+    "direct_brand_logo_set_invalid":"无效的图片",
+    "direct_brand_logo_set_size":"图片大小超过限制",
+    "direct_brand_logo_set_unknow":"网络错误，请重试",
+    "direct_brand_name_empty":"名称于描述不能为空",
+
+    "brand_submit":"提交审核",
+    "brand_save":"保存",
+
+    "brand_modal_title":"品牌化",
+    "brand_saved_title":"品牌名称",
+    "brand_saved_content":"品牌描述",
+    "brand_title":"名称",
+    "brand_content":"描述",
+    "brand_title_input":"为您的品牌设定一个名称，建议 10 个字以内",
+    "brand_content_input":"为您的品牌设定一个描述，建议 30 个字以内",
+    "brand_logo_selector":"请选图片，分辨率为 256x256，大小在 5MB 以内。",
+
+    "brand_status_wait":"已保存",
+    "brand_status_ok":"生效",
+    "brand_status_reject":"已拒绝",
+    "brand_status_review":"审核中",
+
+    "brand_review_submit":"提交审核",
+    "brand_review_status_1":"提交完成，等待审核",
+    "brand_review_status_0":"提交失败，数据不齐全",
+    "brand_review_tos":"以下是使用本功能的附加条款。您所使用的素材不能：",
+    "brand_review_tos_1":"侵犯其它品牌的版权",
+    "brand_review_tos_2":"裸露的身体部位，或者其它不宜在公共区域展示的内容",
+    "brand_review_tos_3":"被用于非法用途，比如协助实施诈骗",
+    "brand_review_notice" : "在编辑好资料后，请先点击“保存”，然后再提请审核。审核通过后，您的品牌设定将会生效。 <br>请注意，上传新的 Logo 或者是修改名称及描述，都会导致品牌设定进入到等待状态。需要重新提请审核。<br>每次提请审核，将会在一个工作日内处理完成。",
 
     "menu_delete":"删除文件",
     "menu_addlink":"通过直链分享",
