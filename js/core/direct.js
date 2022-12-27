@@ -37,29 +37,44 @@ class direct {
             this.total_downloads = rsp.data.total_downloads;
             this.total_transfer = rsp.data.total_transfer;
             this.set = 1;
-            this.ssl = rsp.data.ssl_status==='yes'?true:false;
+            this.ssl = rsp.data.ssl_status === 'yes' ? true : false;
             //如果domain是 *.5t-cdn.com 作为子域名，生成的链接则应该是 https://
             if (this.domain.indexOf('.5t-cdn.com') != -1) {
                 this.protocol = 'https://';
                 $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
-            }else{
+            } else {
                 $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
             }
-            if(this.ssl){
+            if (this.ssl) {
                 $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
                 $('#box_disable_ssl').show();
                 this.protocol = 'https://';
-            }else{
+            } else {
                 $('#box_disable_ssl').hide();
                 $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
             }
-            if(typeof cb == 'function'){
+
+            //如果有设定品牌
+            if (rsp.data.brand_logo_id !== '0') {
+                $('#brand_saved_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:64px;border-radius: 5px;" />`);
+                $('#direct_branded_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:64px;border-radius: 5px;" />`);
+            }
+            if (rsp.data.brand_title !== '0') {
+                $('#brand_saved_title').html(rsp.data.brand_title);
+            }
+            if (rsp.data.brand_content !== '0') {
+                $('#brand_saved_content').html(rsp.data.brand_content);
+            }
+            this.brandStatus(rsp.data.brand_status);
+
+
+            if (typeof cb == 'function') {
                 cb();
             }
         }, 'json');
     }
 
-    openDomainEditor(){
+    openDomainEditor() {
         if (this.parent_op.area_cn) {
             $('#tmplink_subdomain').hide();
         }
@@ -92,8 +107,8 @@ class direct {
         if (this.domain != 0) {
             $('#direct_bind_domain_box').show();
             $('#direct_bind_domain').html(this.domain);
-            $('#direct_bind_domain').attr('href',this.protocol+this.domain);
-        }else{
+            $('#direct_bind_domain').attr('href', this.protocol + this.domain);
+        } else {
             $('#direct_bind_domain_box').hide();
             $('.no_direct_domains').fadeIn();
         }
@@ -112,9 +127,9 @@ class direct {
 
     genLinkDirect(dkey, filename) {
         let filename2 = encodeURI(filename);
-        return { 
-            download: `${this.protocol}${this.domain}/files/${dkey}/${filename2}`, 
-            res: `${this.protocol}${this.domain}/res/${dkey}/${filename2}`, 
+        return {
+            download: `${this.protocol}${this.domain}/files/${dkey}/${filename2}`,
+            res: `${this.protocol}${this.domain}/res/${dkey}/${filename2}`,
             play: `${this.protocol}${this.domain}/stream-${dkey}`
         };
     }
@@ -130,7 +145,7 @@ class direct {
                 let files = rsp.data;
                 $.notifi(app.languageData.direct_add_link_success, "success");
                 // this.parent_op.copyToClip(`${this.protocol}${this.domain}/files/${rsp.data}/${filename}`);
-                this.parent_op.bulkCopy(null,this.genLinkDirect(files[0].dkey, files[0].name).download,false);
+                this.parent_op.bulkCopy(null, this.genLinkDirect(files[0].dkey, files[0].name).download, false);
             } else {
                 $.notifi(app.languageData.status_error_0, "success");
             }
@@ -147,8 +162,8 @@ class direct {
                 //提示添加成功，并复制到剪贴板
                 let files = rsp.data;
                 $.notifi(app.languageData.direct_add_link_success, "success");
-                for(let i in files){
-                    this.parent_op.bulkCopy(null,this.genLinkDirect(files[i].dkey, files[i].name).download,false);
+                for (let i in files) {
+                    this.parent_op.bulkCopy(null, this.genLinkDirect(files[i].dkey, files[i].name).download, false);
                 }
             } else {
                 $.notifi(app.languageData.status_error_0, "success");
@@ -190,7 +205,7 @@ class direct {
             app.open('/&listview=login');
         }
 
-        if(this.domain==0){
+        if (this.domain == 0) {
             $('#filelist').show();
             return false;
         }
@@ -258,16 +273,16 @@ class direct {
         });
     }
 
-    dirRoomInit(){
+    dirRoomInit() {
         if (this.parent_op.isLogin() === false) {
             return false;
         }
 
-        if(this.domain==0){
-            $('#pf_allow_direct').attr('disabled',true);
+        if (this.domain == 0) {
+            $('#pf_allow_direct').attr('disabled', true);
             $('#pf_allow_direct_notice').show();
             return false;
-        }else{
+        } else {
             $('#pf_allow_direct_notice').hide();
         }
 
@@ -283,7 +298,7 @@ class direct {
                 this.dir_key = rsp.data;
                 //操作按钮
                 this.dirRoomPfBtnUpdate();
-            }else{
+            } else {
                 this.dir_btn_status = false;
             }
             //更新文件夹界面
@@ -293,22 +308,22 @@ class direct {
 
     dirToggle() {
         let status = $('#pf_allow_direct').is(':checked') ? true : false;
-        let post_params ={};
+        let post_params = {};
 
-        if(status){
+        if (status) {
             post_params.action = 'add_dir';
             post_params.mrid = this.parent_op.room.mr_id;
-        }else{
+        } else {
             post_params.action = 'del_dir';
             post_params.direct_key = this.dir_key;
         }
         post_params.token = this.parent_op.api_token;
 
-        $.post(this.parent_op.api_direct,post_params, (rsp) => {
+        $.post(this.parent_op.api_direct, post_params, (rsp) => {
             if (rsp.status == 1) {
-                if(post_params.action==='del_dir'){
+                if (post_params.action === 'del_dir') {
                     this.dir_btn_status = false;
-                }else{
+                } else {
                     this.dir_btn_status = true;
                     this.dir_key = rsp.data;
                     this.dir_link = `${this.protocol}${this.domain}/dir/${rsp.data}`;
@@ -321,20 +336,20 @@ class direct {
         }, 'json');
     }
 
-    dirRoomUpdate(){
-        if(this.dir_btn_status){
+    dirRoomUpdate() {
+        if (this.dir_btn_status) {
             $('#room_link').html(this.dir_link);
-            $('#room_link').attr('href',this.dir_link);
+            $('#room_link').attr('href', this.dir_link);
             $('#room_direct_model').show();
-        }else{
+        } else {
             $('#room_direct_model').hide();
         }
     }
 
-    dirRoomPfBtnUpdate(){
-        if(this.dir_btn_status){
+    dirRoomPfBtnUpdate() {
+        if (this.dir_btn_status) {
             $('#pf_allow_direct').attr('checked', 'checked');
-        }else{
+        } else {
             $('#pf_allow_direct').removeAttr('checked');
         }
     }
@@ -448,20 +463,20 @@ class direct {
     /**
      * 设置域名
      */
-     enableSSL() {
+    enableSSL() {
         this.loading_box_on();
 
-        var ssl_cert = $('#set_ssl_cert').val()+"\n"+$('#set_ssl_cert_ca').val()+"\n"+$('#set_ssl_cert_chain').val();
+        var ssl_cert = $('#set_ssl_cert').val() + "\n" + $('#set_ssl_cert_ca').val() + "\n" + $('#set_ssl_cert_chain').val();
         var ssl_key = $('#set_ssl_key').val();
 
         $.post(this.parent_op.api_direct, {
             'action': 'direct_set_ssl',
-            'ssl_cert':ssl_cert, 'ssl_key':ssl_key,
+            'ssl_cert': ssl_cert, 'ssl_key': ssl_key,
             'token': this.parent_op.api_token
         }, (rsp) => {
             if (rsp.status == 1) {
                 alert(app.languageData.direct_msg_complete);
-                this.init_details(()=>{
+                this.init_details(() => {
                     $('#directSSLModal').modal('hide');
                 });
             } else {
@@ -473,7 +488,7 @@ class direct {
 
     disableSSL() {
 
-        if(!confirm(app.languageData.direct_msg_ssl_disable)){
+        if (!confirm(app.languageData.direct_msg_ssl_disable)) {
             return false;
         }
 
@@ -508,8 +523,8 @@ class direct {
                 alert(app.languageData.direct_btn_bind_prompt_ok);
                 $('#direct_bind_domain_box').show();
                 $('#direct_bind_domain').html(domain);
-                $('#direct_bind_domain').attr('href',this.protocol+domain);
-                
+                $('#direct_bind_domain').attr('href', this.protocol + domain);
+
                 $('#diredirect_bind_notice').html('');
                 window.location.reload();
             } else {
@@ -544,6 +559,95 @@ class direct {
             }
             this.loading_box_off();
         }), 'json';
+    }
+
+    /**
+     * 上传 Logo
+     */
+    brandLogoSet(logo) {
+        $('.brand_logo_postmsg').html(app.languageData.direct_brand_logo_set_process);
+        $('#brand_set_upload_status').html('<i class="fa fa-spinner fa-spin text-blu"></i>');
+        let xhr = new XMLHttpRequest();
+        let formData = new FormData();
+        formData.append('action', 'brand_set_logo');
+        formData.append('token', this.parent_op.api_token);
+        formData.append('file', logo.files[0]);
+        xhr.open('POST', this.parent_op.api_direct, true);
+        xhr.onload = (e) => {
+            if (xhr.status == 200) {
+                let rsp = JSON.parse(xhr.responseText);
+                if (rsp.status == 1) {
+                    $('.brand_logo_postmsg').html(app.languageData.direct_brand_logo_set_complete);
+                }
+                if (rsp.status == 0) {
+                    $('.brand_logo_postmsg').html(app.languageData.direct_brand_logo_set_invalid);
+                }
+                if (rsp.status == 2) {
+                    $('.brand_logo_postmsg').html(app.languageData.direct_brand_logo_set_size);
+                }
+            } else {
+                $('.brand_logo_postmsg').html(app.languageData.status_error_0);
+            }
+            $('#brand_set_upload_status').html('<i class="fa fa-check text-green"></i>');
+            this.init_details();
+        }
+        xhr.send(formData);
+    }
+
+    /**
+     * 设置品牌名称和描述
+     */
+    brandSet(){
+        let brandTitle = $('#brand_name_input').val();
+        let brandContent = $('#brand_content_input').val();
+        if(brandTitle == ''||brandContent == ''){
+            alert(app.languageData.direct_brand_name_empty);
+            return false;
+        }
+        $.post(this.parent_op.api_direct, {
+            'action': 'brand_set',
+            'token': this.parent_op.api_token,
+            'brand_title': brandTitle,
+            'brand_content': brandContent
+        }, (rsp) => {
+            if (rsp.status == 1) {
+                $('.brand_setting_status').html('<i class="fa fa-check text-green"></i>');
+                this.init_details();
+            } else {
+                $('.brand_setting_status').html('<i class="fa fa-times text-red"></i>');
+            }
+        }, 'json');
+    }
+
+    brandReview(){
+        $.post(this.parent_op.api_direct, {
+            'action': 'brand_review',
+            'token': this.parent_op.api_token
+        }, (rsp) => {
+            if (rsp.status == 1) {
+                alert(app.languageData.brand_review_status_1);
+                this.init_details();
+            } else {
+                alert(app.languageData.brand_review_status_0);
+            }
+        }, 'json');
+    }
+
+    brandStatus(status) {
+        switch (status) {
+            case 'ok':
+                $('#brand_status').html('<i class="mr-1 fa-tw fa-light fa-circle-check text-green"></i>'+app.languageData.brand_status_ok);
+                break;
+            case 'reject':
+                $('#brand_status').html('<i class="mr-1 fa-tw fa-light fa-times text-red"></i>'+app.languageData.brand_status_reject);
+                break;
+            case 'wait':
+                $('#brand_status').html('<i class="mr-1 fa-tw fa-light fa-timer text-blue"></i>'+app.languageData.brand_status_wait);
+                break;
+            case 'review':
+                $('#brand_status').html('<i class="mr-1 fa-tw  fa-light fa-circle-user text-blue"></i>'+app.languageData.brand_status_review);
+                break;
+        }
     }
 
     loading_box_on() {
