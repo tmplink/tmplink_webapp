@@ -26,6 +26,12 @@ app.ready(() => {
         case 'reset':
             dynamicView.reset();
             break;
+        case 'tos':
+            dynamicView.tos();
+            break;
+        case 'privacy':
+            dynamicView.privacy();
+            break;
         default:
             dynamicView.index();
     }

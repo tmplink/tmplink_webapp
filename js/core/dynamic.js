@@ -94,4 +94,18 @@ class dynamic {
         TL.navbar.model_direct();
         INIT_reset();
     }
+
+    tos() {
+        this.ga('Terms of Service');
+        $('#home_view').html(app.getFile('/tpl/listview/tos.html'));
+        app.dynOpen('/&listview=tos');
+        INIT_tos();
+    }
+
+    privacy() {
+        this.ga('Privacy Policy');
+        $('#home_view').html(app.getFile('/tpl/listview/privacy.html'));
+        app.dynOpen('/&listview=privacy');
+        INIT_privacy();
+    }
 }
