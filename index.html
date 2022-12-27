@@ -32,7 +32,7 @@
     <script type="text/javascript" src="./tmpui.js?v=27"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 953,
+            "version": 955,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "googleAnalytics": "UA-96864664-3",
@@ -100,6 +100,8 @@
                         "/js/init/init_login.js": { "type": "js" },
                         "/js/init/init_reg.js": { "type": "js" },
                         "/js/init/init_reset.js": { "type": "js" },
+                        "/js/init/init_tos.js": { "type": "js" },
+                        "/js/init/init_privacy.js": { "type": "js" },
 
                         "/tpl/listview/workspace.html": { "type": "file" },
                         "/tpl/listview/direct.html": { "type": "file" },
@@ -108,6 +110,8 @@
                         "/tpl/listview/login.html": { "type": "file" },
                         "/tpl/listview/reg.html": { "type": "file" },
                         "/tpl/listview/reset.html": { "type": "file" },
+                        "/tpl/listview/tos.html": { "type": "file" },
+                        "/tpl/listview/privacy.html": { "type": "file" },
 
                         "/tpl/dynamic.html": { "type": "html", "target": { "type": "body" } },
                         "/js/core/dynamic.js": { "type": "js", "reload": false },
@@ -124,24 +128,6 @@
                     "title": "TMP.link - Redirect Workspace",
                     "body": {
                         "/js/init/redirect_workspace.js": { "type": "js" }
-                    }
-                },
-                "/tos": {
-                    "title": "TMP.link - Terms of Service",
-                    "preload": ["init"],
-                    "append": ["tmplink"],
-                    "body": {
-                        "/js/init/init_tos.js": { "type": "js" },
-                        "/tpl/tos.html": { "type": "html", "target": { "type": "body" } }
-                    }
-                },
-                "/privacy": {
-                    "title": "TMP.link - Privacy Policy",
-                    "preload": ["init"],
-                    "append": ["tmplink"],
-                    "body": {
-                        "/js/init/init_privacy.js": { "type": "js" },
-                        "/tpl/privacy.html": { "type": "html", "target": { "type": "body" } }
                     }
                 },
                 "/about": {
