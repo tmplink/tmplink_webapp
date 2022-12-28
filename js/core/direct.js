@@ -56,8 +56,8 @@ class direct {
 
             //如果有设定品牌
             if (rsp.data.brand_logo_id !== '0') {
-                $('#brand_saved_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:64px;border-radius: 5px;" />`);
-                $('#direct_branded_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:64px;border-radius: 5px;" />`);
+                $('#brand_saved_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:64px;border-radius: 12px;" />`);
+                $('#direct_branded_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:64px;border-radius: 12px;" />`);
             }
             if (rsp.data.brand_title !== '0') {
                 $('#brand_saved_title').html(rsp.data.brand_title);
