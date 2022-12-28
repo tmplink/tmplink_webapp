@@ -50,8 +50,8 @@
                                 <i class="fa-fw fa-light fa-heart"></i>
                                 <span id="favorite_count">0</span>
                             </div>
-                            <div class="badge badge-pill badge-dark btn-point user-unlogin" onclick="app.open('/&listview=login')"
-                                style="display: none;">
+                            <div class="badge badge-pill badge-dark btn-point user-unlogin"
+                                onclick="app.open('/&listview=login')" style="display: none;">
                                 <span i18n="need_login_of_dir">.</span>
                             </div>
                             <div class="mt-1">
@@ -279,6 +279,22 @@
                                                         <i class="fa-fw fa-light fa-trash"></i>
                                                     </button>
                                                 <% } %>
+                                                <!--[按钮组：设置为壁纸]-->
+                                                <span class="dropdown">
+                                                    <button role="button" type="button" class="text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown">
+                                                        <i class="fa-regular fa-image fa-fw"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right shadow">
+                                                    <button onclick="TL.pf_mybg_set('light','<% obj[x].ukey %>')" class="dropdown-item">
+                                                        <i class="fa-fw fa-light fa-image"></i>
+                                                        <span i18n="mybg_set_light"><% app.languageData.mybg_set_light %></span>
+                                                    </button>
+                                                    <button onclick="TL.pf_mybg_set('dark','<% obj[x].ukey %>')" class="dropdown-item">
+                                                        <i class="fa-fw fa-light fa-image"></i>
+                                                        <span i18n="mybg_set_dark"><% app.languageData.mybg_set_dark %></span>
+                                                    </button>
+                                                </div>
+                                            </span>
                                             </div>
                                             <div class="mt-1">
                                                 <span class="mr-1">
@@ -374,6 +390,17 @@
                                                     <span i18n="menu_addlink"><% app.languageData.menu_addlink %></span>
                                                 </button>
                                             <% } %>  
+                                            <!--[如果是图片，则可以被设置为背景]-->
+                                            <% if(obj[x].ftype=='png'||obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'){ %>
+                                                <button onclick="TL.pf_mybg_set('light','<% obj[x].ukey %>')" class="dropdown-item">
+                                                    <i class="fa-fw fa-light fa-image"></i>
+                                                    <span i18n="mybg_set_light"><% app.languageData.mybg_set_light %></span>
+                                                </button>
+                                                <button onclick="TL.pf_mybg_set('dark','<% obj[x].ukey %>')" class="dropdown-item">
+                                                    <i class="fa-fw fa-light fa-image"></i>
+                                                    <span i18n="mybg_set_dark"><% app.languageData.mybg_set_dark %></span>
+                                                </button>
+                                            <% } %> 
                                         </div>
                                     </span>
                                 <% } %>

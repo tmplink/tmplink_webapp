@@ -387,6 +387,11 @@
     "oders_table2": "简介",
     "oders_table3": "到期时间",
 
+    "mybg_set_light": "设置为壁纸（白天）",
+    "mybg_set_dark": "设置为壁纸（夜间）",
+    "mybg_set_ok": "壁纸设置完成。刷新页面后生效。",
+    "mybg_set_fail": "壁纸设置失败。",
+
     "service_code_hs": "赞助者",
     "service_code_hs_des": "感谢您为钛盘的持续进化添砖加瓦。",
     "service_code_storage": "存储包",

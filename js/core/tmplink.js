@@ -51,18 +51,18 @@ class tmplink {
     recaptcha_actions = [
         "token",
         "download_req", "upload_request_select2",
-        "login","checkcode_send",
+        "login", "checkcode_send",
         "stream_req",
     ]
 
     bulkCopyStatus = false
     bulkCopyTmp = ''
     bulkCopyTimer = 0
+    mybg_light = 0
+    mybg_dark = 0
 
     constructor() {
         this.setDomain();
-
-        this.app_init();
         this.api_init();
 
         //初始化管理器
@@ -156,7 +156,7 @@ class tmplink {
         }
     }
 
-    ga(target){
+    ga(target) {
         gtag('config', 'UA-96864664-3', {
             'page_title': target,
             'page_location': location.href,
@@ -181,9 +181,9 @@ class tmplink {
                 action: 'set_area',
                 captcha: captcha
             }, (rsp) => {
-                if(rsp.data===1){
+                if (rsp.data === 1) {
                     this.area_cn = true;
-                }else{
+                } else {
                     this.area_cn = false;
                 }
             });
@@ -231,6 +231,7 @@ class tmplink {
     }
 
     bgLoadImg1(night) {
+        
         let imgSource = {
             'light': ['/img/bg/l-1.jpg', '/img/bg/l-2.jpg'],
             'dark': ['/img/bg/d-1.jpg', '/img/bg/d-2.jpg']
@@ -240,15 +241,23 @@ class tmplink {
         let img_dark = imgSource['dark'][Math.floor(Math.random() * imgSource['dark'].length)];
         let imgSrc = '';
         if (night) {
-            imgSrc = img_dark;
+            if(this.mybg_dark!==0){
+                imgSrc = this.mybg_dark;
+            }else{
+                imgSrc = img_dark;
+            }
         } else {
-            imgSrc = img_light;
+            if(this.mybg_light!==0){
+                imgSrc = this.mybg_light;
+            }else{
+                imgSrc = img_light;
+            }
         }
         $('#background_wrap_img').removeClass('anime-fadein');
         $('#background_wrap_img').css('display', 'none');
-        $.get(imgSrc,()=>{
-            $('#background_wrap_img').css('background',`url("${imgSrc}") no-repeat center`);
-            $('#background_wrap_img').css('background-size','cover');
+        $.get(imgSrc, () => {
+            $('#background_wrap_img').css('background', `url("${imgSrc}") no-repeat center`);
+            $('#background_wrap_img').css('background-size', 'cover');
             $('#background_wrap_img').addClass('anime-fadein');
             $('#background_wrap_img').css('display', '');
         });
@@ -271,17 +280,17 @@ class tmplink {
             }
         }
         $('#background_wrap_img').fadeOut();
-        $.get(imgSrc,()=>{
-            $('#background_wrap_img').css('background',`url("${imgSrc}") no-repeat center`);
-            $('#background_wrap_img').css('background-size','cover');
+        $.get(imgSrc, () => {
+            $('#background_wrap_img').css('background', `url("${imgSrc}") no-repeat center`);
+            $('#background_wrap_img').css('background-size', 'cover');
             $('#background_wrap_img').fadeIn();
         });
     }
 
     bgLoadCSS(night) {
         // $('#background_wrap_img').hide();
-        $('#background_wrap_img').css('background-size','cover');
-        $('#background_wrap_img').css('background-image',`url("/img/bg/cool-background.svg")`);   
+        $('#background_wrap_img').css('background-size', 'cover');
+        $('#background_wrap_img').css('background-image', `url("/img/bg/cool-background.svg")`);
         // if (night) {
         //     $('#background_wrap_img').css('background',``);
         // } else {
@@ -354,10 +363,6 @@ class tmplink {
         });
     }
 
-    app_init() {
-        this.bg_load();
-    }
-
     details_init() {
         var login = localStorage.getItem('app_login');
         if (login != null && login != 0) {
@@ -369,6 +374,7 @@ class tmplink {
             this.get_details_do = true;
             this.storage_status_update();
             this.head_set();
+            this.bg_load();
             //初始化直链
             this.direct.init_details(() => {
                 this.readyExec();
@@ -477,7 +483,7 @@ class tmplink {
         //     }
         // }
 
-        if (this.recaptcha_op&&this.recaptchaCheckAction(type)) {
+        if (this.recaptcha_op && this.recaptchaCheckAction(type)) {
             if (typeof grecaptcha === 'object') {
                 grecaptcha.ready(() => {
                     grecaptcha.execute(this.recaptcha, {
@@ -497,9 +503,9 @@ class tmplink {
         }
     }
 
-    recaptchaCheckAction(action){
-        for(let i in this.recaptcha_actions){
-            if(this.recaptcha_actions[i] == action){
+    recaptchaCheckAction(action) {
+        for (let i in this.recaptcha_actions) {
+            if (this.recaptcha_actions[i] == action) {
                 return true;
             }
         }
@@ -580,14 +586,18 @@ class tmplink {
 
                 this.user_join = rsp.data.join;
                 this.user_total_files = rsp.data.total_files;
-                this.user_total_filesize = bytetoconver(rsp.data.total_filesize,true);
-                this.user_total_upload = bytetoconver(rsp.data.total_upload,true);
-                this.user_acv_dq = bytetoconver(rsp.data.acv_dq*1024 * 1024,true);
-                this.user_acv_storage = bytetoconver(this.user_acv * 16 * 1024 * 1024,true);
+                this.user_total_filesize = bytetoconver(rsp.data.total_filesize, true);
+                this.user_total_upload = bytetoconver(rsp.data.total_upload, true);
+                this.user_acv_dq = bytetoconver(rsp.data.acv_dq * 1024 * 1024, true);
+                this.user_acv_storage = bytetoconver(this.user_acv * 16 * 1024 * 1024, true);
 
                 this.profile_confirm_delete_set(rsp.data.pf_confirm_delete);
                 this.profile_bulk_copy_set(rsp.data.pf_bulk_copy);
                 localStorage.setItem('app_lang', rsp.data.lang);
+
+                this.mybg_light = rsp.data.pf_mybg_light;
+                this.mybg_dark = rsp.data.pf_mybg_dark;
+
                 app.languageSet(rsp.data.lang);
                 //console.log
                 this.dir_tree_get();
@@ -2199,6 +2209,23 @@ class tmplink {
         });
     }
 
+    pf_mybg_set(type, ukey) {
+        this.loading_box_on();
+        $.post(this.api_user, {
+            action: 'pf_mybg_set',
+            token: this.api_token,
+            type: type,
+            ukey: ukey
+        }, (rsp) => {
+            if (rsp.status == 1) {
+                alert(app.languageData.mybg_set_ok);
+            } else {
+                alert(app.languageData.mybg_set_error);
+            }
+            this.loading_box_off();
+        });
+    }
+
     profile_bulk_copy_post() {
         let status = ($('#bulk_copy_status').is(':checked')) ? 'yes' : 'no';
         localStorage.setItem('user_profile_bulk_copy', status);
@@ -2573,7 +2600,7 @@ class tmplink {
                 this.ga('Room-Need-Login');
                 return false;
             }
-            this.ga('Room-'+rsp.data.name);
+            this.ga('Room-' + rsp.data.name);
             //更新统计信息
             this.room_total(rsp.data.mr_id);
             this.room.parent = rsp.data.parent;
@@ -2593,7 +2620,7 @@ class tmplink {
             if (this.room.owner == 1) {
                 this.direct.dirRoomInit();
                 $('.room_direct_model').show();
-            }else{
+            } else {
                 $('.room_direct_model').hide();
             }
 
@@ -2637,9 +2664,9 @@ class tmplink {
             }
 
             //如果是私有文件夹
-            if(this.room.model == 'private'){
+            if (this.room.model == 'private') {
                 $('.in-private-dir').hide();
-            }else{
+            } else {
                 $('.in-private-dir').show();
             }
 
@@ -2764,7 +2791,7 @@ class tmplink {
         //console.log('navbar reinit');
     }
 
-    languageBtnSet(){
+    languageBtnSet() {
         let lang = this.currentLanguage;
         let span_lang = 'English';
         if (lang === 'en') {

@@ -1,4 +1,9 @@
 {
+    "mybg_set_light": "設置為壁紙（白天）",
+    "mybg_set_dark": "設置為壁紙（夜間）",
+    "mybg_set_ok": "壁紙設置完成。刷新頁面後生效。",
+    "mybg_set_fail": "壁紙設置失敗。",
+    
     "direct_brand_logo_set_complete":"完成",
     "direct_brand_logo_set_process":"處理中",
     "direct_brand_logo_set_invalid":"無效的圖片",
