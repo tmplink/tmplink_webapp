@@ -1,4 +1,8 @@
 {
+    "mybg_set_light": "Set as wallpaper (light)",
+    "mybg_set_dark": "Set as wallpaper (dark)",
+    "mybg_set_ok": "Wallpaper setting is complete. It will take effect after refreshing the page." ,
+    "mybg_set_fail": "Wallpaper setting failed." ,
     "direct_brand_logo_set_complete": "Complete",
     "direct_brand_logo_set_process": "Processing",
     "direct_brand_logo_set_invalid": "Invalid image",

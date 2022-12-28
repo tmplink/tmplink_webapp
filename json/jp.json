@@ -1,4 +1,8 @@
 {
+    "mybg_set_light": "壁紙として設定（昼）",
+    "mybg_set_dark": "壁紙として設定（夜）",
+    "mybg_set_ok": "壁紙の設定が完了しました。ページをリフレッシュすると有効になります。",
+    "mybg_set_fail": "壁紙の設定に失敗しました。",
     "direct_brand_logo_set_complete": "完成",
     "direct_brand_logo_set_process": "処理中",
     "direct_brand_logo_set_invalid": "無効な画像",
