@@ -60,6 +60,12 @@ class tmplink {
     bulkCopyTimer = 0
     mybg_light = 0
     mybg_dark = 0
+    mybg_light_key = 0
+    mybg_dark_key = 0
+    system_background = {
+        'light': [ '/img/bg/l-2.jpg','/img/bg/l-1.jpg'],
+        'dark': ['/img/bg/d-1.jpg', '/img/bg/d-2.jpg']
+    }
 
     constructor() {
         this.setDomain();
@@ -231,25 +237,22 @@ class tmplink {
     }
 
     bgLoadImg1(night) {
-        
-        let imgSource = {
-            'light': ['/img/bg/l-1.jpg', '/img/bg/l-2.jpg'],
-            'dark': ['/img/bg/d-1.jpg', '/img/bg/d-2.jpg']
-        };
+
+        let imgSource = this.system_background;
         //随机选择一张图片
         let img_light = imgSource['light'][Math.floor(Math.random() * imgSource['light'].length)];
         let img_dark = imgSource['dark'][Math.floor(Math.random() * imgSource['dark'].length)];
         let imgSrc = '';
         if (night) {
-            if(this.mybg_dark!==0){
+            if (this.mybg_dark !== 0) {
                 imgSrc = this.mybg_dark;
-            }else{
+            } else {
                 imgSrc = img_dark;
             }
         } else {
-            if(this.mybg_light!==0){
+            if (this.mybg_light !== 0) {
                 imgSrc = this.mybg_light;
-            }else{
+            } else {
                 imgSrc = img_light;
             }
         }
@@ -597,6 +600,9 @@ class tmplink {
 
                 this.mybg_light = rsp.data.pf_mybg_light;
                 this.mybg_dark = rsp.data.pf_mybg_dark;
+                this.mybg_light_key = rsp.data.pf_mybg_light_key;
+                this.mybg_dark_key = rsp.data.pf_mybg_dark_key;
+                this.myBgPfInit();
 
                 app.languageSet(rsp.data.lang);
                 //console.log
@@ -623,6 +629,43 @@ class tmplink {
                 this.logined = 0;
             }
             cb();
+        });
+    }
+
+    myBgPfInit() {
+        if (this.mybg_light != '0') {
+            $('.pf_bg_light').attr('src', `https://tmp-static.vx-cdn.com/img-${this.mybg_light_key}-360x220.jpg`);
+            $('.pf_bg_light_set').show();
+        }else{
+            $('.pf_bg_light').attr('src', this.system_background.light[0]);
+            $('.pf_bg_light_set').hide();
+        }
+        if (this.mybg_dark != '0') {
+            $('.pf_bg_dark').attr('src', `https://tmp-static.vx-cdn.com/img-${this.mybg_dark_key}-360x220.jpg`);
+            $('.pf_bg_dark_set').show();
+        }else{
+            $('.pf_bg_dark').attr('src', this.system_background.dark[0]);
+            $('.pf_bg_dark_set').hide();
+        }
+    }
+
+    myBgPfReset(){
+        this.loading_box_on();
+        $.post(this.api_user, {
+            action: 'pf_mybg_reset',
+            token: this.api_token
+        }, (rsp) => {
+            if (rsp.status === 1) {
+                this.mybg_light = 0;
+                this.mybg_dark = 0;
+                this.mybg_light_key = 0;
+                this.mybg_dark_key = 0;
+                this.myBgPfInit();
+                this.bgLoadImg1();
+            } else {
+                alert(app.languageData.status_error_0);
+            }
+            this.loading_box_off();
         });
     }
 
@@ -2218,9 +2261,13 @@ class tmplink {
             ukey: ukey
         }, (rsp) => {
             if (rsp.status == 1) {
-                alert(app.languageData.mybg_set_ok);
+                $.notifi(app.languageData.mybg_set_ok, "success");
+                this.get_details(()=>{
+                    let night = this.matchNightModel();
+                    this.bgLoadImg1(night);
+                });
             } else {
-                alert(app.languageData.mybg_set_error);
+                $.notifi(app.languageData.mybg_set_error, "error");
             }
             this.loading_box_off();
         });

@@ -1,4 +1,4 @@
-<div class="modal fade" id="emailModal" data-backdrop="false">
+<div class="modal" id="emailModal" >
     <div class="modal-dialog  modal-lg modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -41,7 +41,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="passwordModal" data-backdrop="false">
+<div class="modal" id="passwordModal" >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -74,10 +74,11 @@
 </div>
 
 
-<div class="modal fade" id="uploadModal">
+<div class="modal" id="uploadModal">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content shadow-lg" ondrop="TL.uploader.drop(event)"ondragover="$(this).addClass('shadow-lg');$('#tmp_upload_btn2').removeClass('bg-blue').addClass('bg-success');"
-        ondragleave="$(this).removeClass('shadow-lg');$('#tmp_upload_btn2').removeClass('bg-success').addClass('bg-blue');">
+        <div class="modal-content shadow-lg" ondrop="TL.uploader.drop(event)"
+            ondragover="$(this).addClass('shadow-lg');$('#tmp_upload_btn2').removeClass('bg-blue').addClass('bg-success');"
+            ondragleave="$(this).removeClass('shadow-lg');$('#tmp_upload_btn2').removeClass('bg-success').addClass('bg-blue');">
             <div class="modal-header">
                 <h4 class="modal-title" i18n="model_title_upload">.</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
@@ -355,7 +356,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="findModal" data-backdrop="false">
+<div class="modal" id="findModal" >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -380,7 +381,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="reportModal" data-backdrop="false">
+<div class="modal" id="reportModal" >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -404,7 +405,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="speedModal" data-backdrop="false">
+<div class="modal" id="speedModal" >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -422,7 +423,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="qrModal" data-backdrop="false">
+<div class="modal" id="qrModal" >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -442,7 +443,7 @@
 </div>
 
 
-<div class="modal fade" id="buySelectModal" data-backdrop="true">
+<div class="modal" id="buySelectModal" data-backdrop="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -477,11 +478,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="highspeedModal" data-backdrop="true">
+<div class="modal" id="highspeedModal" data-backdrop="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
-                <h4 class="modal-title" >
+                <h4 class="modal-title">
                     <i class="mt-1 fa-solid fa-heart-circle-plus fa-fw"></i>
                     <span i18n="model_title_buy_highspeed">.</span>
                 </h4>
@@ -523,7 +524,7 @@
 
 
 
-<div class="modal fade" id="mediaModal" data-backdrop="true">
+<div class="modal" id="mediaModal" data-backdrop="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -561,7 +562,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="directQuotaModal" data-backdrop="true">
+<div class="modal" id="directQuotaModal" data-backdrop="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -574,7 +575,8 @@
                 <hr />
                 <div class="form-group direct_quota_price_list" id="direct_quota_opt_cny">
                     <select class="form-control" id="dq_code_cny">
-                        <option data-price="6" value="D20" i18n-only="html" i18n="direct_quota_price_cny1" selected>.</option>
+                        <option data-price="6" value="D20" i18n-only="html" i18n="direct_quota_price_cny1" selected>.
+                        </option>
                         <option data-price="18" value="D100" i18n-only="html" i18n="direct_quota_price_cny2">.</option>
                         <option data-price="60" value="D600" i18n-only="html" i18n="direct_quota_price_cny3">.</option>
                         <option data-price="90" value="D1024" i18n-only="html" i18n="direct_quota_price_cny4">.</option>
@@ -582,7 +584,8 @@
                 </div>
                 <div class="form-group direct_quota_price_list" id="direct_quota_opt_usd">
                     <select class="form-control" id="dq_code_usd">
-                        <option data-price="1" value="D20" i18n-only="html" i18n="direct_quota_price_usd1" selected>.</option>
+                        <option data-price="1" value="D20" i18n-only="html" i18n="direct_quota_price_usd1" selected>.
+                        </option>
                         <option data-price="3" value="D100" i18n-only="html" i18n="direct_quota_price_usd2">.</option>
                         <option data-price="10" value="D600" i18n-only="html" i18n="direct_quota_price_usd3">.</option>
                         <option data-price="15" value="D1024" i18n-only="html" i18n="direct_quota_price_usd4">.</option>
@@ -591,13 +594,14 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
-                <button type="button" class="btn btn-success" i18n="model_buy_btn" onclick="TL.direct_quota_buy();">.</button>
+                <button type="button" class="btn btn-success" i18n="model_buy_btn"
+                    onclick="TL.direct_quota_buy();">.</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="storageModal" data-backdrop="true">
+<div class="modal" id="storageModal" data-backdrop="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -640,7 +644,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="uploadCliModal" data-backdrop="false">
+<div class="modal" id="uploadCliModal" >
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -679,7 +683,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="ordersModal" data-backdrop="false">
+<div class="modal" id="ordersModal" >
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -736,7 +740,7 @@
 </div>
 
 
-<div class="modal fade" id="previewModal">
+<div class="modal" id="previewModal">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content shadow-lg" style="max-height: 90%;">
             <div class="modal-header">
@@ -763,7 +767,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="alertModal" data-backdrop="true">
+<div class="modal" id="alertModal" data-backdrop="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -780,7 +784,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="movefileModal" data-backdrop="true">
+<div class="modal" id="movefileModal" data-backdrop="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -816,7 +820,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="upupModal" data-backdrop="true">
+<div class="modal" id="upupModal" data-backdrop="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -844,7 +848,7 @@
 </div>
 </div>
 
-<div class="modal fade" id="copyModal" data-backdrop="false">
+<div class="modal" id="copyModal" >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -857,14 +861,14 @@
                     rows="10"></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" i18n="file_btn_copy"
-                    id="copy-modal-btn" onclick="TL.Selecter.copyModelCP()">.</button>
+                <button type="button" class="btn btn-success" i18n="file_btn_copy" id="copy-modal-btn"
+                    onclick="TL.Selecter.copyModelCP()">.</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="sortModal" data-backdrop="false">
+<div class="modal" id="sortModal" >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -895,7 +899,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="directSortModal" data-backdrop="false">
+<div class="modal" id="directSortModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -926,8 +930,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="profileModal" data-backdrop="false">
-    <div class="modal-dialog modal-dialog-centered">
+<div class="modal" id="profileModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
                 <h4 class="modal-title" i18n="model_profile_title">.</h4>
@@ -941,7 +945,7 @@
                         .
                     </span>
                 </label>
-                
+
                 <label class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="confirm_delete_status"
                         onclick="TL.profile_confirm_delete_post()">
@@ -949,6 +953,32 @@
                         .
                     </span>
                 </label>
+                <hr>
+                <h4 i18n="mybg_performance_title">.</h4>
+                <div i18n="mybg_performance_des" class="mb-2">.</div>
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <div class="img-thumbnail mb-2" style="width: 360px;height: 220px;">
+                            <img src="#" class="img-fluid pf_bg_light w-100 h-100" alt="Responsive image">
+                        </div>
+                        <div class="text-center">
+                            <span class="badge badge-default" i18n="mybg_performance_light">.</span>
+                            <span class="badge badge-default ml-2 pf_bg_light_set" i18n="mybg_performance_set">.</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="img-thumbnail mb-2" style="width: 360px;height: 220px;">
+                            <img src="#" class="img-fluid pf_bg_dark w-100 h-100" alt="Responsive image">
+                        </div>
+                        <div class="text-center">
+                            <span class="badge badge-dark" i18n="mybg_performance_dark">.</span>
+                            <span class="badge badge-dark ml-2 pf_bg_dark_set" i18n="mybg_performance_set">.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-light" onclick="TL.myBgPfReset()" i18n="mybg_performance_reset">.</button>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
@@ -958,7 +988,7 @@
 </div>
 
 <!-- 视频播放器 -->
-<div class="modal fade" id="videoPlayerModal" data-backdrop="false">
+<div class="modal" id="videoPlayerModal" >
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -993,7 +1023,7 @@
 </div>
 
 <!-- 商店选项 -->
-<div class="modal fade" id="shopModal" data-backdrop="false">
+<div class="modal" id="shopModal" >
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -1049,7 +1079,8 @@
                     </div>
                 </div> -->
                 <!-- 直链 -->
-                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point" onclick="TL.buy_select_open('direct');">
+                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point"
+                    onclick="TL.buy_select_open('direct');">
                     <div class="col-12">
                         <div class="card-p3">
                             <div class="d-flex align-items-center">
@@ -1080,7 +1111,7 @@
 </div>
 
 <!-- 我的状态页 -->
-<div class="modal fade" id="myModal" data-backdrop="false">
+<div class="modal" id="myModal" >
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -1095,31 +1126,31 @@
                         </tr>
                         <tr>
                             <td><i class="fa-fw mr-2 fa-regular fa-user-plus"></i>加入于</td>
-                            <td  class="user_join">2022-10-22</td>
+                            <td class="user_join">2022-10-22</td>
                         </tr>
                         <tr>
                             <td><i class="fa-fw mr-2 fa-light fa-chart-network"></i>分享值</td>
-                            <td  class="user_acv">0</td>
+                            <td class="user_acv">0</td>
                         </tr>
                         <tr>
                             <td><i class="fa-fw mr-2 fa-regular fa-database"></i>分享获得的存储空间</td>
-                            <td  class="user_acv_storage">0 GB</td>
+                            <td class="user_acv_storage">0 GB</td>
                         </tr>
                         <tr>
                             <td><i class="fa-fw mr-2 fa-light fa-share-nodes"></i>分享获得的直链流量</td>
-                            <td  class="user_acv_dq">0 GB</td>
+                            <td class="user_acv_dq">0 GB</td>
                         </tr>
                         <tr>
                             <td><i class="fa-fw mr-2 fa-regular fa-file"></i>分享文件数量</td>
-                            <td  class="user_total_files">0</td>
+                            <td class="user_total_files">0</td>
                         </tr>
                         <tr>
                             <td><i class="fa-fw mr-2 fa-regular fa-files"></i>分享中的文件合计</td>
-                            <td  class="user_total_filesize">0 GB</td>
+                            <td class="user_total_filesize">0 GB</td>
                         </tr>
                         <tr>
                             <td><i class="fa-fw mr-2 fa-regular fa-file-check"></i>总计分享</td>
-                            <td  class="user_total_upload">0 GB</td>
+                            <td class="user_total_upload">0 GB</td>
                         </tr>
                     </tbody>
                 </table>
