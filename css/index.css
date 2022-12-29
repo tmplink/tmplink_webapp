@@ -110,6 +110,8 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
     /*文本水平居中*/
 }
 
+/* footer 下的文字全部设置成白色，包括链接 */
+
 #footer {
     text-align: left;
     padding: 10px;
@@ -117,6 +119,11 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
     width: 100%;
     height: 100px;
     clear: both;
+    color: #eaeaea;
+}
+
+#footer a {
+    color: #eaeaea;
 }
 
 .content-box {

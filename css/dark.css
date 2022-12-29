@@ -20,4 +20,9 @@
     #bg_video, #background_wrap_video, #background_wrap_img{
         filter: invert(1) hue-rotate(.5turn);
     }
+
+    /* 页脚内容不参与 */
+    #footer{
+        filter: invert(1) hue-rotate(.5turn);
+    }
 }
