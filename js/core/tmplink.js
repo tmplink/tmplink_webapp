@@ -52,7 +52,7 @@ class tmplink {
         "token",
         "download_req", "upload_request_select2",
         "login", "checkcode_send",
-        "stream_req",
+        "stream_req","upload_direct","upload_slice"
     ]
 
     bulkCopyStatus = false

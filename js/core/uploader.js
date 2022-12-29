@@ -293,39 +293,42 @@ class uploader {
                     let api_sync = rsp.data.uploader + '/app/upload_sync';
                     //文件小于 32 MB，直接上传
                     if (file.size <= this.slice_size) {
-                        console.log('upload::direct::' + file.name);
-                        var fd = new FormData();
-                        fd.append("file", file);
-                        fd.append("filename", filename);
-                        fd.append("utoken", rsp.data.utoken);
-                        fd.append("model", this.upload_model_get());
-                        fd.append("mr_id", this.upload_mrid_get());
-                        fd.append("token", this.parent_op.api_token);
-                        this.upload_s2_status[id] = 0;
-                        var xhr = new XMLHttpRequest();
-                        xhr.upload.addEventListener("progress", (evt) => {
-                            this.upload_progress(evt, id)
-                        }, false);
-                        xhr.addEventListener("load", (evt) => {
-                            this.upload_complete(evt, file, id)
-                        }, false);
-                        xhr.addEventListener("error", (evt) => {
-                            //add retry
-                            if (this.download_retry < this.download_retry_max) {
-                                this.download_retry++;
-                                setTimeout(() => {
-                                    this.upload_worker(file, sha1, id, filename);
-                                }, 1000);
-                            } else {
-                                this.download_retry = 0;
-                                this.upload_failed(evt, id);
-                            }
-                        }, false);
-                        xhr.addEventListener("abort", (evt) => {
-                            this.upload_canceled(evt, id)
-                        }, false);
-                        xhr.open("POST", api_sync);
-                        xhr.send(fd);
+                        this.parent_op.recaptcha_do('upload_direct', (captcha) => {
+                            console.log('upload::direct::' + file.name);
+                            var fd = new FormData();
+                            fd.append("file", file);
+                            fd.append("filename", filename);
+                            fd.append("utoken", rsp.data.utoken);
+                            fd.append("model", this.upload_model_get());
+                            fd.append("mr_id", this.upload_mrid_get());
+                            fd.append("token", this.parent_op.api_token);
+                            fd.append("captcha", captcha);
+                            this.upload_s2_status[id] = 0;
+                            var xhr = new XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", (evt) => {
+                                this.upload_progress(evt, id)
+                            }, false);
+                            xhr.addEventListener("load", (evt) => {
+                                this.upload_complete(evt, file, id)
+                            }, false);
+                            xhr.addEventListener("error", (evt) => {
+                                //add retry
+                                if (this.download_retry < this.download_retry_max) {
+                                    this.download_retry++;
+                                    setTimeout(() => {
+                                        this.upload_worker(file, sha1, id, filename);
+                                    }, 1000);
+                                } else {
+                                    this.download_retry = 0;
+                                    this.upload_failed(evt, id);
+                                }
+                            }, false);
+                            xhr.addEventListener("abort", (evt) => {
+                                this.upload_canceled(evt, id)
+                            }, false);
+                            xhr.open("POST", api_sync);
+                            xhr.send(fd);
+                        });
                     } else {
                         console.log('upload::slice::' + file.name);
                         let api_sync = rsp.data.uploader + '/app/upload_slice';
@@ -466,7 +469,7 @@ class uploader {
             let speed_text = '0B/s';
             let duration = (new Date().getTime() - last_time) / 1000;
             let speed = (this.upload_slice_chunk_loaded - last_uploaded) / duration;
-            if(speed>0){
+            if (speed > 0) {
                 speed_text = bytetoconver(speed, true) + '/s';
             }
             last_time = new Date().getTime();
@@ -475,8 +478,8 @@ class uploader {
             //计算进度条，计算方法，先计算每个分块的占比，根据已上传的分块加上目前正在上传的分块的占比得出已上传的占比
             let pp_success = slice_status.success / slice_status.total;
             //计算出单个分块在进度条中的占比
-            let pp_pie = 100/slice_status.total;
-            if(slice_status.success!==slice_status.total){
+            let pp_pie = 100 / slice_status.total;
+            if (slice_status.success !== slice_status.total) {
                 //目前已上传的分块占比加上正在上传的分块占比
                 let pp_uploaded = slice_status.success * pp_pie;
                 //正在上传的部分的占比
@@ -485,12 +488,12 @@ class uploader {
                 let progress_percent = pp_uploaded + pp_uploading;
                 $(uqpid).css('width', progress_percent + '%');
                 $(uqgid).html(speed_text);
-            }else{
+            } else {
                 $(uqpid).css('width', '100%');
                 $(uqgid).html(app.languageData.upload_upload_complete);
             }
         }, 1000);
-        
+
         //上传完成后，关闭计时器
         xhr.addEventListener("loadend", (evt) => {
             clearInterval(speed_timer);
@@ -523,7 +526,11 @@ class uploader {
         //提交
         xhr.overrideMimeType("application/octet-stream");
         xhr.open("POST", server);
-        xhr.send(fd);
+
+        this.parent_op.recaptcha_do('upload_slice',(recaptcha) => {
+            fd.append('captcha', recaptcha);
+            xhr.send(fd);
+        });
     }
 
     upload_progressbar_draw(id) {
@@ -621,13 +628,13 @@ class uploader {
             let file = f.file;
 
             //检查是否超出了可用的私有存储空间
-            if(this.upload_model_get()==99){
-                if((this.parent_op.storage_used + file.size)>this.parent_op.storage){
-                    $.notifi(file.name+' : '+app.languageData.upload_fail_storage, {noticeClass:'ntf-error',autoHideDelay:5000});
+            if (this.upload_model_get() == 99) {
+                if ((this.parent_op.storage_used + file.size) > this.parent_op.storage) {
+                    $.notifi(file.name + ' : ' + app.languageData.upload_fail_storage, { noticeClass: 'ntf-error', autoHideDelay: 5000 });
                     return false;
                 }
             }
-            
+
 
             //如果未登录，添加队列到首页
             let target = this.parent_op.isLogin() ? '#upload_model_box' : '#upload_index_box';
@@ -800,7 +807,7 @@ class uploader {
                     error_msg = app.languageData.upload_fail_node;
                     break;
             }
-            console.log(rsp.status+':'+error_msg);
+            console.log(rsp.status + ':' + error_msg);
             $('#uqnn_' + id).html(`<span class="text-red">${error_msg}</span>`);
         }
 
