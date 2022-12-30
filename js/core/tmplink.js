@@ -803,7 +803,7 @@ class tmplink {
             if (animated === false) {
                 return false;
             } else {
-                $(id).html('<i class="fa-light fa-circle-check" aria-hidden="true"></i>');
+                // $(id).html('<i class="fa-light fa-circle-check" aria-hidden="true"></i>');
             }
         }, 'json');
     }
@@ -1072,6 +1072,7 @@ class tmplink {
                     $('#btn_add_to_workspace_mobile').on('click', () => {
                         if (this.logined == 1) {
                             this.workspace_add('#btn_add_to_workspace_mobile', params.ukey);
+                            $('#btn_add_to_workspace_mobile').html('<i class="fas fa-circle-check text-green mx-auto my-auto mb-2 fa-3x"></i>');
                             gtag("event", "login");
                         } else {
                             app.open('/&listview=login');
@@ -1217,13 +1218,11 @@ class tmplink {
                             //添加到收藏按钮绑定
                             $('#btn_add_to_workspace').on('click', () => {
                                 if (this.logined == 1) {
-                                    $('#btn_add_to_workspace_icon').removeClass('text-cyan');
-                                    $('#btn_add_to_workspace_icon').addClass('text-red');
-                                    setTimeout(() => {
-                                        $('#btn_add_to_workspace_icon').addClass('text-cyan');
-                                        $('#btn_add_to_workspace_icon').removeClass('text-red');
-                                    }, 3000);
+                                    //更换图标为完成的标志
+                                    $('#btn_add_to_workspace_icon').html('<i class="fas fa-circle-check text-green mx-auto my-auto mb-2 fa-3x"></i>');
                                     this.workspace_add('#btn_add_to_workspace', params.ukey, false);
+                                    //移除监听
+                                    $('#btn_add_to_workspace').off('click');
                                 } else {
                                     app.open('/&listview=login');
                                 }
