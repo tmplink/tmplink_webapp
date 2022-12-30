@@ -14,7 +14,7 @@ class tmplink {
 
     pageReady = false
     readyFunction = []
-
+    bgLoaded = false
 
     logined = 0
     area_cn = false
@@ -70,6 +70,7 @@ class tmplink {
     constructor() {
         this.setDomain();
         this.api_init();
+        this.bg_init();
 
         //初始化管理器
         this.Selecter = new BoxSelecter;
@@ -86,9 +87,7 @@ class tmplink {
         this.media.init(this);
         this.direct.init(this);
         this.uploader.init(this);
-        this.setArea(() => {
-
-        });
+        this.setArea();
 
         //
         $('.workspace-navbar').hide();
@@ -226,25 +225,22 @@ class tmplink {
         }
     }
 
-    bg_load() {
+    bg_init() {
         if (document.querySelector('#background_wrap') == null) {
-            //使用svg背景
-            // let svg = "data:image/svg+xml,%3Csvg viewBox='0 0 900 600' width='900' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cfilter id='a'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur stdDeviation='161' result='effect1_foregroundBlur'/%3E%3C/filter%3E%3C/defs%3E%3Cpath fill='%23722add' d='M0 0h900v600H0z'/%3E%3Cg filter='url(%23a)'%3E%3Ccircle cx='584' cy='165' fill='%231cc2c2' r='357'/%3E%3Ccircle cx='162' cy='117' fill='%23722add' r='357'/%3E%3Ccircle cx='410' cy='98' fill='%231cc2c2' r='357'/%3E%3Ccircle cx='657' cy='404' fill='%231cc2c2' r='357'/%3E%3Ccircle cx='465' cy='330' fill='%23722add' r='357'/%3E%3Ccircle cx='216' cy='585' fill='%231cc2c2' r='357'/%3E%3C/g%3E%3C/svg%3E";
-            // $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-size: cover;background-repeat: no-repeat;background-attachment: scroll;background-image:url(\'' + svg + '\');"></div>');
-            // let svg = "/img/bg.svg";
-
-            //暂时不使用蓝色背景
             $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color: #0093E9;"></div>');
-            // $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color: #fcfcfc;"></div>');
             $('body').append(`<div id="background_wrap_img" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;display:none;width: 100%;"></div>`);
-            let night = this.matchNightModel();
-            // this.bgLoadCSS(night);
-            this.bgLoadImg1(night);
         }
-        this.matchNightModelListener((night) => {
-            // this.bgLoadCSS(night);
+    }
+
+    bg_load() {
+        if(this.bgLoaded===false){
+            let night = this.matchNightModel();
             this.bgLoadImg1(night);
-        });
+            this.matchNightModelListener((night) => {
+                this.bgLoadImg1(night);
+            });
+        }
+        this.bgLoaded = true;
     }
 
     bgLoadImg1(night) {
@@ -254,19 +250,35 @@ class tmplink {
         let img_light = imgSource['light'][Math.floor(Math.random() * imgSource['light'].length)];
         let img_dark = imgSource['dark'][Math.floor(Math.random() * imgSource['dark'].length)];
         let imgSrc = '';
-        if (night) {
-            if (this.mybg_dark !== 0) {
-                imgSrc = this.mybg_dark;
-            } else {
-                imgSrc = img_dark;
-            }
+        let imgSrcLight = '';
+        let imgSrcDark = '';
+
+        if (this.mybg_dark !== 0) {
+            imgSrcDark = this.mybg_dark;
+            $('.pf_bg_dark_set').show();
         } else {
-            if (this.mybg_light !== 0) {
-                imgSrc = this.mybg_light;
-            } else {
-                imgSrc = img_light;
-            }
+            imgSrcDark = img_dark;
+            $('.pf_bg_dark_set').hide();
         }
+
+        if (this.mybg_light !== 0) {
+            imgSrcLight = this.mybg_light;
+            $('.pf_bg_light_set').show();
+        } else {
+            imgSrcLight = img_light;
+            $('.pf_bg_light_set').hide();
+        }
+
+        if (night) {
+            imgSrc = imgSrcDark;
+        } else {
+            imgSrc = imgSrcLight;
+        }
+
+        $('.pf_bg_light').attr('src', imgSrcLight);
+        $('.pf_bg_dark').attr('src', imgSrcDark);
+
+        $('.pf_bg_dark').attr('src', this.system_background.dark[0]);
         $('#background_wrap_img').removeClass('anime-fadein');
         $('#background_wrap_img').css('display', 'none');
         $.get(imgSrc, () => {
@@ -613,7 +625,6 @@ class tmplink {
                 this.mybg_dark = rsp.data.pf_mybg_dark;
                 this.mybg_light_key = rsp.data.pf_mybg_light_key;
                 this.mybg_dark_key = rsp.data.pf_mybg_dark_key;
-                this.myBgPfInit();
 
                 app.languageSet(rsp.data.lang);
                 //console.log
@@ -643,23 +654,6 @@ class tmplink {
         });
     }
 
-    myBgPfInit() {
-        if (this.mybg_light != '0') {
-            $('.pf_bg_light').attr('src', `https://tmp-static.vx-cdn.com/img-${this.mybg_light_key}-360x220.jpg`);
-            $('.pf_bg_light_set').show();
-        } else {
-            $('.pf_bg_light').attr('src', this.system_background.light[0]);
-            $('.pf_bg_light_set').hide();
-        }
-        if (this.mybg_dark != '0') {
-            $('.pf_bg_dark').attr('src', `https://tmp-static.vx-cdn.com/img-${this.mybg_dark_key}-360x220.jpg`);
-            $('.pf_bg_dark_set').show();
-        } else {
-            $('.pf_bg_dark').attr('src', this.system_background.dark[0]);
-            $('.pf_bg_dark_set').hide();
-        }
-    }
-
     myBgPfReset() {
         this.loading_box_on();
         $.post(this.api_user, {
@@ -671,7 +665,6 @@ class tmplink {
                 this.mybg_dark = 0;
                 this.mybg_light_key = 0;
                 this.mybg_dark_key = 0;
-                this.myBgPfInit();
                 this.bgLoadImg1();
             } else {
                 alert(app.languageData.status_error_0);
