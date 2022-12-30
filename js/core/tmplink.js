@@ -52,7 +52,7 @@ class tmplink {
         "token",
         "download_req", "upload_request_select2",
         "login", "checkcode_send",
-        "stream_req","upload_direct","upload_slice"
+        "stream_req", "upload_direct", "upload_slice"
     ]
 
     bulkCopyStatus = false
@@ -63,7 +63,7 @@ class tmplink {
     mybg_light_key = 0
     mybg_dark_key = 0
     system_background = {
-        'light': [ '/img/bg/l-2.jpg','/img/bg/l-1.jpg'],
+        'light': ['/img/bg/l-2.jpg', '/img/bg/l-1.jpg'],
         'dark': ['/img/bg/d-1.jpg', '/img/bg/d-2.jpg']
     }
 
@@ -86,7 +86,9 @@ class tmplink {
         this.media.init(this);
         this.direct.init(this);
         this.uploader.init(this);
-        this.setArea();
+        this.setArea(() => {
+
+        });
 
         //
         $('.workspace-navbar').hide();
@@ -96,7 +98,7 @@ class tmplink {
 
         this.upload_model_selected_val = localStorage.getItem('app_upload_model') === null ? 0 : localStorage.getItem('app_upload_model');
 
-        var token = localStorage.getItem('app_token');
+        let token = localStorage.getItem('app_token');
         this.recaptcha_do('token_check', (captcha) => {
             $.post(this.api_toks, {
                 action: 'token_check',
@@ -181,18 +183,27 @@ class tmplink {
         }
     }
 
-    setArea() {
-        this.recaptcha_do('set_area', (captcha) => {
-            $.post(this.api_toks, {
-                action: 'set_area',
-                captcha: captcha
-            }, (rsp) => {
-                if (rsp.data === 1) {
-                    this.area_cn = true;
-                } else {
-                    this.area_cn = false;
+    setArea(cb) {
+        $.post(this.api_toks, {
+            action: 'set_area',
+        }, (rsp) => {
+            if (rsp.data === 1) {
+                this.area_cn = true;
+                //当为中国大陆地区时，检查主机名是否为ttttt.link，如果不是则跳转到ttttt.link
+                if (this.site_domain !== 'ttttt.link') {
+                    //如果有参数
+                    let params = '';
+                    if (window.location.search !== '') {
+                        params = window.location.search;
+                    }
+                    window.location.href = 'https://ttttt.link' + params;
                 }
-            });
+            } else {
+                this.area_cn = false;
+            }
+            if (cb !== undefined && typeof cb === 'function') {
+                cb();
+            }
         });
     }
 
@@ -636,20 +647,20 @@ class tmplink {
         if (this.mybg_light != '0') {
             $('.pf_bg_light').attr('src', `https://tmp-static.vx-cdn.com/img-${this.mybg_light_key}-360x220.jpg`);
             $('.pf_bg_light_set').show();
-        }else{
+        } else {
             $('.pf_bg_light').attr('src', this.system_background.light[0]);
             $('.pf_bg_light_set').hide();
         }
         if (this.mybg_dark != '0') {
             $('.pf_bg_dark').attr('src', `https://tmp-static.vx-cdn.com/img-${this.mybg_dark_key}-360x220.jpg`);
             $('.pf_bg_dark_set').show();
-        }else{
+        } else {
             $('.pf_bg_dark').attr('src', this.system_background.dark[0]);
             $('.pf_bg_dark_set').hide();
         }
     }
 
-    myBgPfReset(){
+    myBgPfReset() {
         this.loading_box_on();
         $.post(this.api_user, {
             action: 'pf_mybg_reset',
@@ -2262,7 +2273,7 @@ class tmplink {
         }, (rsp) => {
             if (rsp.status == 1) {
                 $.notifi(app.languageData.mybg_set_ok, "success");
-                this.get_details(()=>{
+                this.get_details(() => {
                     let night = this.matchNightModel();
                     this.bgLoadImg1(night);
                 });

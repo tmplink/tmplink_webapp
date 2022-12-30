@@ -1,11 +1,11 @@
 /**
  * tmpUI.js
- * version: 28
+ * version: 29
  * Github : https://github.com/tmplink/tmpUI
- * Date :2022-12-11
+ * Date :2022-12-30
  */
 
- class tmpUI {
+class tmpUI {
 
     status = {}
     config = {}
@@ -30,6 +30,8 @@
     readyFunction = []
     loadingPageInit = false
     loadingPage = false
+    loadingPageDuration = 0
+    loadingPageOnlyFirst = false
     loadingIcon = false
     loadingText = 'Loading...'
     readyCallback = null
@@ -61,6 +63,8 @@
 
         //初始化CSS
         this.cssInit();
+        //初始化loading页面
+        this.loadingPageOnlyFirstHook();
 
         //Checking
         window.onload = () => {
@@ -71,6 +75,23 @@
             //var newPage = e.state.newPage;
             this.route();
         })
+    }
+
+    loadingPageOnlyFirstHook() {
+        //只在第一次加载的时候显示loading页面,需要配合 version 使用，version 不能为0
+        if(this.version == 0){
+            return false;
+        }
+
+        //从 localStorage 中获取上次的版本号
+        let lastVersion = localStorage.getItem('tmpUI_version');
+        if(lastVersion != this.version || lastVersion == null){
+            localStorage.setItem('tmpUI_version', this.version);
+            return false;
+        }
+
+        //如果上次的版本号与当前版本号一致，则不显示loading页面
+        this.loadingPage = false;
     }
 
     cssInit() {
@@ -175,11 +196,17 @@
         if (config.languageDefault !== undefined) {
             this.languageDefault = config.languageDefault;
         }
-        if(config.siteRoot !== undefined){
+        if (config.siteRoot !== undefined) {
             this.siteRoot = config.siteRoot;
         }
-        if(config.index !== undefined){
+        if (config.index !== undefined) {
             this.index = config.index;
+        }
+        if (config.loadingPageDuration !== undefined) {
+            this.loadingPageDuration = config.loadingPageDuration;
+        }
+        if (config.loadingPageOnlyFirst !== undefined) {
+            this.loadingPageOnlyFirst = config.loadingPageOnlyFirst;
         }
 
         //Add GoogleAnalytics
@@ -237,16 +264,16 @@
         this.linkRebindForCode(ctag);
     }
 
-    linkRebindWith(tagName,type){
+    linkRebindWith(tagName, type) {
         let atag = document.getElementsByTagName(tagName);
-        if(type == 'code'){
+        if (type == 'code') {
             this.linkRebindForCode(atag);
-        }else{
+        } else {
             this.linkRebindForAPP(atag);
         }
     }
 
-    linkRebindForAPP(atag){
+    linkRebindForAPP(atag) {
         if (atag.length > 0) {
             for (let i in atag) {
 
@@ -279,7 +306,7 @@
                         if (!newpage) {
                             atag[i].addEventListener('click', e => {
                                 e.preventDefault();
-                                console.log(url);
+                                // console.log(url);
                                 history.pushState({
                                     newPage: url
                                 }, null, url);
@@ -312,7 +339,7 @@
                         if (!newpage) {
                             atag[i].addEventListener('click', e => {
                                 e.preventDefault();
-                                console.log(url);
+                                // console.log(url);
                                 history.pushState({
                                     newPage: url
                                 }, null, url);
@@ -329,7 +356,7 @@
             }
         }
     }
-    linkRebindForCode(ctag){
+    linkRebindForCode(ctag) {
         if (ctag.length > 0) {
             for (let i in ctag) {
                 if (typeof (ctag[i]) === 'object') {
@@ -787,7 +814,6 @@
 
         if (!this.loadingPage) {
             this.log('Loading page exit.');
-            this.ready_exec();
             return false;
         }
 
@@ -807,7 +833,7 @@
             this.log('Loading page created.');
         }
 
-        if (status) {
+        if (status == true) {
             document.body.style.overflow = 'hidden';
             this.domShow('#tmpui');
             this.doExit();
