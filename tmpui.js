@@ -1,6 +1,6 @@
 /**
  * tmpUI.js
- * version: 29
+ * version: 30
  * Github : https://github.com/tmplink/tmpUI
  * Date :2022-12-30
  */
@@ -70,7 +70,7 @@ class tmpUI {
         window.onload = () => {
             this.route();
         }
-        //当页面前进与后退的时候，popstate监听历史记录变化，触发对应页面的ajax请求。
+        //当面前进与后退的时候，popstate监听历史记录变化，触发对应页面的ajax请求。
         window.addEventListener('popstate', e => {
             //var newPage = e.state.newPage;
             this.route();
@@ -509,14 +509,27 @@ class tmpUI {
 
     draw(url) {
 
-        //先处理 css
+        this.drwaTo(url,'css');
+        this.drwaTo(url,'html');
+        this.drwaTo(url,'tpl');
+        this.drwaTo(url,'file');
+        this.drwaTo(url,'js');
+
+        if (this.languageConfig !== false) {
+            this.languageBuild();
+        }
+        this.readyEvent();
+    }
+
+    drwaTo(url,type){
         for (let i in this.config.path[url].res) {
 
             let contentType = this.config.path[url].res[i].type;
+            let content = this.config.path[url].res[i].dom;
             let contentReload = this.config.path[url].res[i].reload;
             let contentReloadTarget = contentReload === false ? 'tmpUIRes_once' : 'tmpUIRes';
-
-            if (contentType === 'css') {
+            
+            if (contentType === 'css' && contentType===type) {
                 if (contentReload === false) {
                     if (this.reloadTable[i] === false) {
                         this.reloadTable[i] = true;
@@ -525,18 +538,10 @@ class tmpUI {
                     }
                 }
                 this.htmlAppend('head', `<!--[${i}]-->`);
-                this.htmlAppend('head', `<link class="${contentReloadTarget}" rel="stylesheet" href="${i}?v=${this.config.version}" sync>`);
+                this.htmlAppend('head', `<link class="${contentReloadTarget}" rel="stylesheet" href="${i}?v=${this.config.version}">`);
             }
-        }
 
-        for (let i in this.config.path[url].res) {
-
-            let contentType = this.config.path[url].res[i].type;
-            let content = this.config.path[url].res[i].dom;
-            let contentReload = this.config.path[url].res[i].reload;
-            let contentReloadTarget = contentReload === false ? 'tmpUIRes_once' : 'tmpUIRes';
-
-            if (contentType === 'js') {
+            if (contentType === 'js'&& contentType===type) {
                 if (contentReload === false) {
                     if (this.reloadTable[i] === false) {
                         this.reloadTable[i] = true;
@@ -552,19 +557,7 @@ class tmpUI {
                 document.body.appendChild(script);
             }
 
-            if (contentType === 'css') {
-                if (contentReload === false) {
-                    if (this.reloadTable[i] === false) {
-                        this.reloadTable[i] = true;
-                    } else {
-                        continue;
-                    }
-                }
-                this.htmlAppend('head', `<!--[${i}]-->`);
-                this.htmlAppend('head', `<link class="${contentReloadTarget}" rel="stylesheet" href="${i}?v=${this.config.version}">`);
-            }
-
-            if (contentType === 'tpl') {
+            if (contentType === 'tpl'&& contentType===type) {
                 if (contentReload === false) {
                     if (this.reloadTable[i] === false) {
                         this.reloadTable[i] = true;
@@ -576,7 +569,7 @@ class tmpUI {
                 this.htmlAppend('body', `<div class="${contentReloadTarget}" style="display:none">${content}</div>\n`);
             }
 
-            if (contentType === 'file') {
+            if (contentType === 'file'&& contentType===type) {
                 this.filesCache[i] = content;
                 if (this.reloadTable[i] === false) {
                     this.reloadTable[i] = true;
@@ -585,7 +578,7 @@ class tmpUI {
                 }
             }
 
-            if (contentType === 'html') {
+            if (contentType === 'html'&& contentType===type) {
                 if (this.config.path[url].res[i].target.type === "append") {
                     this.htmlAppend('#tmpui_body', `<!--[${i}]-->`);
                     this.htmlAppend('#tmpui_body', content);
@@ -601,10 +594,6 @@ class tmpUI {
                 }
             }
         }
-        if (this.languageConfig !== false) {
-            this.languageBuild();
-        }
-        this.readyEvent();
     }
 
     loaderStart(url, cb) {
