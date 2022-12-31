@@ -1,6 +1,6 @@
 /**
  * tmpUI.js
- * version: 30
+ * version: 31
  * Github : https://github.com/tmplink/tmpUI
  * Date :2022-12-31
  */
@@ -82,8 +82,6 @@ class tmpUI {
                 if (typeof this.customRouter[tmpuiPage] === "function") {
                     // 如果是函数，则执行自定义路由
                     this.customRouter[tmpuiPage]();
-                    //添加历史记录
-                    history.pushState({Page:1}, window.title, currentPath);
                 } else {
                     // 否则执行 this.route() 方法
                     this.route();
@@ -358,6 +356,7 @@ class tmpUI {
             }
         }
     }
+
     linkRebindForCode(ctag) {
         if (ctag.length > 0) {
             for (let i in ctag) {
@@ -408,9 +407,12 @@ class tmpUI {
 
     dynOpen(a_url) {
         let url = this.index + '?tmpui_page=' + a_url;
-        history.pushState({
-            Page: 1
-        }, window.title, url);
+        let previousState = history.state;
+        if (url !== previousState.url) {
+            history.pushState({
+                Page: 1
+            }, window.title, url);
+        }   
     }
 
     /**
