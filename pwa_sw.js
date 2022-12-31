@@ -1,6 +1,6 @@
 var domainList = ['ttttt.link', 'tmp.link', 'static.vx-cdn.com','127.0.0.1'];
 
-const resSet = "tmplink v1";
+const resSet = "tmplink v2";
 const assets = [
   '/',
 ];
