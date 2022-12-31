@@ -9,6 +9,50 @@ class dynamic {
 
     current = null
 
+    route() {
+        let url = location.href;
+        let url_params = app.getUrlVars(window.location.href);
+        let listview = url_params.listview;
+        switch (listview) {
+            case 'index':
+                this.index();
+                break;
+
+            case 'workspace':
+                this.workspace();
+                break;
+            case 'room':
+                this.room();
+                break;
+            case 'direct':
+                this.direct();
+                break;
+                
+            case 'login':
+                this.login();
+                break;
+            case 'reg':
+                this.reg();
+                break;
+            case 'reset':
+                this.reset();
+                break;
+                
+            case 'tos':
+                this.tos();
+                break;
+            case 'privacy':
+                this.privacy();
+                break;
+
+
+            default:
+                this.index();
+                break;
+        }
+
+    }
+
     active(title) {
         $('.navbar-collapse').collapse('hide');
         // if(this.current!==title){
@@ -20,13 +64,13 @@ class dynamic {
         //ページスクロール時の自動読み込みをオフにする
         TL.dir_list_autoload_disabled();
         TL.navbar.enabled();
-        TL.ready(()=>{
+        TL.ready(() => {
             TL.head_set();
         });
         app.linkRebind();
     }
 
-    ga(target){
+    ga(target) {
         gtag('config', 'UA-96864664-3', {
             'page_title': target,
             'page_location': location.href,
@@ -78,7 +122,7 @@ class dynamic {
         TL.navbar.disabled();
         INIT_login();
     }
-    
+
     reg() {
         this.ga('Register');
         $('#home_view').html(app.getFile('/tpl/listview/reg.html'));

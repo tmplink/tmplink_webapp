@@ -2,7 +2,7 @@
  * tmpUI.js
  * version: 30
  * Github : https://github.com/tmplink/tmpUI
- * Date :2022-12-30
+ * Date :2022-12-31
  */
 
 class tmpUI {
@@ -16,10 +16,12 @@ class tmpUI {
     reloadTable = {}
     resPath = ''
     pageReady = false
+    pageHistoryCounter = 0
 
     googleAnalytics = false
     googleAnalyticsQueue = []
 
+    customRouter = []
     dynamicRouter = null
     languageDefault = 'en'
     languageConfig = false
@@ -31,15 +33,16 @@ class tmpUI {
     loadingPageInit = false
     loadingPage = false
     loadingPageDuration = 0
-    loadingPageOnlyFirst = false
     loadingIcon = false
     loadingText = 'Loading...'
     readyCallback = null
     progressEnable = true
     progressStatus = false
     currentRoute = '/'
+    currentPage = '/'
     onExitfunction = []
     filesCache = []
+    statusLastPage = ''
 
     constructor(config) {
         this.state = {
@@ -54,6 +57,7 @@ class tmpUI {
 
         //初始化history
         history.replaceState(this.state, null, '');
+
         //写入配置文件
         this.config = this.rebuildConfig(config);
         this.rebuildRunConfig(config);
@@ -63,35 +67,37 @@ class tmpUI {
 
         //初始化CSS
         this.cssInit();
-        //初始化loading页面
-        this.loadingPageOnlyFirstHook();
 
         //Checking
         window.onload = () => {
             this.route();
         }
         //当面前进与后退的时候，popstate监听历史记录变化，触发对应页面的ajax请求。
-        window.addEventListener('popstate', e => {
-            //var newPage = e.state.newPage;
-            this.route();
-        })
+        window.addEventListener("popstate", (e) => {
+            // 获取当前 URL 中的 tmpui_page 参数
+            let tmpuiPage = new URL(window.location.href).searchParams.get("tmpui_page");
+            let currentPath = window.location.pathname+window.location.search;
+            // 如果 tmpuiPage 值与现在的 tmpuiPage 值相同
+            if (tmpuiPage === this.currentPage) {
+                if (typeof this.customRouter[tmpuiPage] === "function") {
+                    // 如果是函数，则执行自定义路由
+                    this.customRouter[tmpuiPage]();
+                    //添加历史记录
+                    history.pushState({Page:1}, window.title, currentPath);
+                } else {
+                    // 否则执行 this.route() 方法
+                    this.route();
+                }
+            } else {
+                // 执行 this.route() 方法
+                this.route();
+            }
+        });
+
     }
 
-    loadingPageOnlyFirstHook() {
-        //只在第一次加载的时候显示loading页面,需要配合 version 使用，version 不能为0
-        if(this.version == 0){
-            return false;
-        }
-
-        //从 localStorage 中获取上次的版本号
-        let lastVersion = localStorage.getItem('tmpUI_version');
-        if(lastVersion != this.version || lastVersion == null){
-            localStorage.setItem('tmpUI_version', this.version);
-            return false;
-        }
-
-        //如果上次的版本号与当前版本号一致，则不显示loading页面
-        this.loadingPage = false;
+    setCoustomRouter(page, router) {
+        this.customRouter[page] = router;
     }
 
     cssInit() {
@@ -205,9 +211,6 @@ class tmpUI {
         if (config.loadingPageDuration !== undefined) {
             this.loadingPageDuration = config.loadingPageDuration;
         }
-        if (config.loadingPageOnlyFirst !== undefined) {
-            this.loadingPageOnlyFirst = config.loadingPageOnlyFirst;
-        }
 
         //Add GoogleAnalytics
         if (config.googleAnalytics !== false) {
@@ -280,7 +283,6 @@ class tmpUI {
                 if (typeof (atag[i]) === 'object') {
                     //不处理上级节点是pre或者code的情况
                     if (atag[i].parentNode.nodeName === 'PRE' || atag[i].parentNode.nodeName === 'CODE') {
-
                         continue;
                     }
                     if (atag[i].getAttribute("tmpui-app") == 'true' && atag[i].getAttribute("tmpui-app-rebind") != 'true') {
@@ -308,8 +310,8 @@ class tmpUI {
                                 e.preventDefault();
                                 // console.log(url);
                                 history.pushState({
-                                    newPage: url
-                                }, null, url);
+                                    Page: 1
+                                }, window.title, url);
                                 //ajax('GET', url, 'page=' + url, this.loader, true);
                                 this.route();
                             });
@@ -341,8 +343,8 @@ class tmpUI {
                                 e.preventDefault();
                                 // console.log(url);
                                 history.pushState({
-                                    newPage: url
-                                }, null, url);
+                                    Page: 1
+                                }, window.title, url);
                                 //获取 action
                                 let action = atag[i].getAttribute("tmpui-action");
                                 //执行
@@ -399,16 +401,16 @@ class tmpUI {
             return false;
         }
         history.pushState({
-            newPage: url
-        }, null, url);
+            Page: 1
+        }, window.title, url);
         this.route();
     }
 
     dynOpen(a_url) {
         let url = this.index + '?tmpui_page=' + a_url;
         history.pushState({
-            newPage: url
-        }, null, url);
+            Page: 1
+        }, window.title, url);
     }
 
     /**
@@ -439,6 +441,7 @@ class tmpUI {
         //默认文件
         if (params.tmpui_page !== undefined) {
             url = params.tmpui_page;
+            this.statusLastPage = url;
         }
 
         //移除一次性资源
@@ -509,11 +512,11 @@ class tmpUI {
 
     draw(url) {
 
-        this.drwaTo(url,'css');
-        this.drwaTo(url,'html');
-        this.drwaTo(url,'tpl');
-        this.drwaTo(url,'file');
-        this.drwaTo(url,'js');
+        this.drwaTo(url, 'css');
+        this.drwaTo(url, 'html');
+        this.drwaTo(url, 'tpl');
+        this.drwaTo(url, 'file');
+        this.drwaTo(url, 'js');
 
         if (this.languageConfig !== false) {
             this.languageBuild();
@@ -521,15 +524,15 @@ class tmpUI {
         this.readyEvent();
     }
 
-    drwaTo(url,type){
+    drwaTo(url, type) {
         for (let i in this.config.path[url].res) {
 
             let contentType = this.config.path[url].res[i].type;
             let content = this.config.path[url].res[i].dom;
             let contentReload = this.config.path[url].res[i].reload;
             let contentReloadTarget = contentReload === false ? 'tmpUIRes_once' : 'tmpUIRes';
-            
-            if (contentType === 'css' && contentType===type) {
+
+            if (contentType === 'css' && contentType === type) {
                 if (contentReload === false) {
                     if (this.reloadTable[i] === false) {
                         this.reloadTable[i] = true;
@@ -541,7 +544,7 @@ class tmpUI {
                 this.htmlAppend('head', `<link class="${contentReloadTarget}" rel="stylesheet" href="${i}?v=${this.config.version}">`);
             }
 
-            if (contentType === 'js'&& contentType===type) {
+            if (contentType === 'js' && contentType === type) {
                 if (contentReload === false) {
                     if (this.reloadTable[i] === false) {
                         this.reloadTable[i] = true;
@@ -557,7 +560,7 @@ class tmpUI {
                 document.body.appendChild(script);
             }
 
-            if (contentType === 'tpl'&& contentType===type) {
+            if (contentType === 'tpl' && contentType === type) {
                 if (contentReload === false) {
                     if (this.reloadTable[i] === false) {
                         this.reloadTable[i] = true;
@@ -569,7 +572,7 @@ class tmpUI {
                 this.htmlAppend('body', `<div class="${contentReloadTarget}" style="display:none">${content}</div>\n`);
             }
 
-            if (contentType === 'file'&& contentType===type) {
+            if (contentType === 'file' && contentType === type) {
                 this.filesCache[i] = content;
                 if (this.reloadTable[i] === false) {
                     this.reloadTable[i] = true;
@@ -578,7 +581,7 @@ class tmpUI {
                 }
             }
 
-            if (contentType === 'html'&& contentType===type) {
+            if (contentType === 'html' && contentType === type) {
                 if (this.config.path[url].res[i].target.type === "append") {
                     this.htmlAppend('#tmpui_body', `<!--[${i}]-->`);
                     this.htmlAppend('#tmpui_body', content);

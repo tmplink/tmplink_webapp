@@ -6,6 +6,11 @@
  */
 var dynamicView = new dynamic();
 app.ready(() => {
+    //写入自定义路由
+    app.setCoustomRouter('/', ()=>{
+        dynamicView.route();
+    });
+
     let params = app.getUrlVars(window.location.href);
     switch (params.listview) {
         case 'workspace':
