@@ -96,7 +96,7 @@ class profile {
         let userTitle = $('#userinfo_name_input').val();
         let userIntro = $('#userinfo_intro_input').val();
         if (userTitle == '' || userIntro == '') {
-            alert(app.languageData.direct_user_name_empty);
+            alert(app.languageData.direct_brand_name_empty);
             return false;
         }
         $.post(this.parent_op.api_user, {

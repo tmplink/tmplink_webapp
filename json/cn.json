@@ -610,7 +610,7 @@
     "direct_brand_logo_set_invalid":"无效的图片",
     "direct_brand_logo_set_size":"图片大小超过限制",
     "direct_brand_logo_set_unknow":"网络错误，请重试",
-    "direct_brand_name_empty":"名称于描述不能为空",
+    "direct_brand_name_empty":"名称与描述不能为空",
 
     "brand_submit":"提交审核",
     "brand_save":"保存",
