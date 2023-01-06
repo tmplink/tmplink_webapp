@@ -39,7 +39,7 @@
     "direct_brand_logo_set_invalid": "無效的圖片",
     "direct_brand_logo_set_size": "圖片大小超過限制",
     "direct_brand_logo_set_unknow": "網絡錯誤，請重試",
-    "direct_brand_name_empty": "名稱於描述不能為空",
+    "direct_brand_name_empty": "名稱與描述不能為空",
     "brand_submit": "提交審核",
     "brand_save": "保存",
     "brand_modal_title": "品牌化",
