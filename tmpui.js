@@ -1,8 +1,8 @@
 /**
  * tmpUI.js
- * version: 31
+ * version: 32
  * Github : https://github.com/tmplink/tmpUI
- * Date :2022-12-31
+ * Date :2023-01-04
  */
 
 class tmpUI {
@@ -32,7 +32,6 @@ class tmpUI {
     readyFunction = []
     loadingPageInit = false
     loadingPage = false
-    loadingPageDuration = 0
     loadingIcon = false
     loadingText = 'Loading...'
     readyCallback = null
@@ -94,6 +93,11 @@ class tmpUI {
 
     }
 
+    /**
+     * TODO: 增加自定义路由选项
+     * @param {*} page 
+     * @param {*} router 
+     */
     setCoustomRouter(page, router) {
         this.customRouter[page] = router;
     }
@@ -205,9 +209,6 @@ class tmpUI {
         }
         if (config.index !== undefined) {
             this.index = config.index;
-        }
-        if (config.loadingPageDuration !== undefined) {
-            this.loadingPageDuration = config.loadingPageDuration;
         }
 
         //Add GoogleAnalytics

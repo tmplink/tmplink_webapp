@@ -44,7 +44,15 @@
                     </div>
                     <div class="float-left">
                         <span class="room_title display-4"></span>
-                        <div class="lead mt-2" id="room_total"></div>
+                        <div class="mt-2" >
+                            <i class="fa-fw fa-regular fa-folder-open"></i>
+                            <span id="room_total"></span>
+                        </div>
+                        <div class="userinfo" style="display: none;">
+                            <i class="fa-fw fa-solid fa-user-tie userinfo_sd" style="display: none;"></i>
+                            <i class="fa-fw fa-sharp fa-solid fa-badge-check userinfo_pro text-azure" style="display: none;"></i>
+                            <span class="userinfo_nickname"></span>
+                        </div>
                         <div>
                             <div class="badge badge-pill badge-pink fav-enabled" style="display: none;">
                                 <i class="fa-fw fa-light fa-heart"></i>
@@ -492,7 +500,7 @@
 <div id="tpl_footer"></div>
 <div id="tpl_model"></div>
 
-<div class="modal" id="mrFileModal" data-backdrop="false">
+<div class="modal" id="mrFileModal" >
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -525,7 +533,7 @@
     </div>
 </div>
 
-<div class="modal" id="mrUserModal" data-backdrop="false">
+<div class="modal" id="mrUserModal" >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -551,7 +559,7 @@
     </div>
 </div>
 
-<div class="modal" id="mrCreaterModal" data-backdrop="false">
+<div class="modal" id="mrCreaterModal" >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -587,7 +595,7 @@
     </div>
 </div>
 
-<div class="modal" id="performanceModal" data-backdrop="false">
+<div class="modal" id="performanceModal" >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -654,7 +662,7 @@
     </div>
 </div>
 
-<div class="modal" id="roomReportModal" data-backdrop="false">
+<div class="modal" id="roomReportModal" >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">

@@ -80,6 +80,7 @@ class tmplink {
         this.giftcard = new giftcard;
         this.direct = new direct;
         this.stream = new stream;
+        this.profile = new profile;
 
         this.stream.init(this);
         this.giftcard.init(this);
@@ -87,6 +88,7 @@ class tmplink {
         this.media.init(this);
         this.direct.init(this);
         this.uploader.init(this);
+        this.profile.init(this);
         this.setArea();
 
         //
@@ -227,7 +229,7 @@ class tmplink {
 
     bg_init() {
         if (document.querySelector('#background_wrap') == null) {
-            $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color:#dbdada;"></div>');
+            $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color:#eaeaea;"></div>');
             $('body').append(`<div id="background_wrap_img" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;display:none;width: 100%;"></div>`);
         }
     }
@@ -405,6 +407,8 @@ class tmplink {
             this.direct.init_details(() => {
                 this.readyExec();
             });
+            //初始化用户个性化信息
+            this.profile.init_details();
         });
     }
 
@@ -1072,6 +1076,27 @@ class tmplink {
                         }
                     });
 
+                    //如果设置了个性化图标
+                    if(rsp.data.ui_publish==='yes' && rsp.data.ui_publish_status==='ok' && rsp.data.ui_pro==='yes'){
+                        $('.userinfo_avatar').show();
+                        let avatarURL = `https://tmp-static.vx-cdn.com/static/avatar?id=${rsp.data.ui_avatar_id}`; 
+                        let img = new Image();
+                        img.src = avatarURL;
+                        img.onload = () => {
+                            $('.userinfo_avatar_img').attr('src', avatarURL);
+                        }
+                    }
+
+                    //设定分享者信息
+                    if(rsp.data.ui_publish==='yes' && rsp.data.ui_publish_status==='ok'){
+                        if(rsp.data.ui_pro==='yes'){
+                            $('.userinfo_pro').show();
+                        }else{
+                            $('.userinfo_sd').show();
+                        }
+                        $('.userinfo').show();
+                        $('.userinfo_nickname').html(rsp.data.ui_nickname);
+                    }
 
                     //更换图标
                     let icon = this.fileicon(rsp.data.type);
@@ -2651,6 +2676,7 @@ class tmplink {
                 return false;
             }
             this.ga('Room-' + rsp.data.name);
+            console.log(rsp.data);
             //更新统计信息
             this.room_total(rsp.data.mr_id);
             this.room.parent = rsp.data.parent;
@@ -2664,6 +2690,12 @@ class tmplink {
             this.room.allow_upload = rsp.data.allow_upload;
             this.room.img_link = rsp.data.img_link;
             this.room.model = rsp.data.model;
+            this.room.ui_avatar_id = rsp.data.ui_avatar_id;
+            this.room.ui_publish = rsp.data.ui_publish;
+            this.room.ui_publish_status = rsp.data.ui_publish_status;
+            this.room.ui_nickname = rsp.data.ui_nickname;
+            this.room.ui_intro = rsp.data.ui_intro;
+            this.room.ui_pro = rsp.data.ui_pro;
             this.room_performance_init(this.room.mr_id);
 
             //如果用户是拥有者，显示直链相关的信息，并初始化
@@ -2727,6 +2759,18 @@ class tmplink {
             } else {
                 $('#pf_allow_upload').removeAttr('checked');
             }
+
+            //如果有设定个性化设置
+            if(this.room.ui_publish==='yes' && this.room.ui_publish_status==='ok'){
+                if(this.room.ui_pro==='yes'){
+                    $('.userinfo_pro').show();
+                }else{
+                    $('.userinfo_sd').show();
+                }
+                $('.userinfo').show();
+                $('.userinfo_nickname').html(`${this.room.ui_nickname} - ${this.room.ui_intro}`);
+            }
+
 
             $('#mr_copy').attr('data-clipboard-text', 'https://' + this.site_domain + '/room/' + rsp.data.mr_id);
             $('.room_title').html(rsp.data.name);

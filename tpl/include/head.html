@@ -49,18 +49,18 @@
                 </div>
             </div>
             <div class="col-2">
-            <div class="workspace-nologin">
-                <div class="d-flex flex-column">
-                    <button class="btn p-0" onclick="dynamicView.reg();">
-                        <div>
-                            <i class="fa-solid fa-user-plus fa-fw"></i>
-                        </div>
-                        <div>
-                            <span i18n="index_b2">.</span>
-                        </div>
-                    </button>
+                <div class="workspace-nologin">
+                    <div class="d-flex flex-column">
+                        <button class="btn p-0" onclick="dynamicView.reg();">
+                            <div>
+                                <i class="fa-solid fa-user-plus fa-fw"></i>
+                            </div>
+                            <div>
+                                <span i18n="index_b2">.</span>
+                            </div>
+                        </button>
+                    </div>
                 </div>
-            </div>
                 <div class="workspace-navbar">
                     <div class="d-flex flex-column">
                         <button class="btn p-0" onclick="$('#myModal').modal('show');">
@@ -97,6 +97,10 @@
                     </button>
                     <div class="dropdown-menu shadow">
                         <!-- <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span> -->
+                        <a class="dropdown-item" href="javascript:void(0)" onclick="$('#userModal').modal('show');TL.profile.refresh();">
+                            <i class="fa-light fa-user-astronaut"></i>
+                            <span i18n="user_modal_title">.</span>
+                        </a>
                         <a class="dropdown-item" href="javascript:void(0)" onclick="$('#shopModal').modal('show');">
                             <i class="fa-light fa-bag-shopping"></i>
                             <span i18n="navbar_buy">.</span>
@@ -222,6 +226,10 @@
                     </div>
                 </button>
                 <div class="dropdown-menu shadow">
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#userModal').modal('show');TL.profile.refresh();">
+                        <i class="fa-light fa-user-astronaut"></i>
+                        <span i18n="user_modal_title">.</span>
+                    </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#myModal').modal('show');">
                         <i class="fa-solid fa-user"></i>
                         <span i18n="navbar_my">.</span>

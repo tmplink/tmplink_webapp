@@ -1,4 +1,4 @@
-<div class="modal" id="emailModal" >
+<div class="modal" id="emailModal">
     <div class="modal-dialog  modal-lg modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -41,7 +41,7 @@
     </div>
 </div>
 
-<div class="modal" id="passwordModal" >
+<div class="modal" id="passwordModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -356,7 +356,7 @@
     </div>
 </div>
 
-<div class="modal" id="findModal" >
+<div class="modal" id="findModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -381,7 +381,7 @@
     </div>
 </div>
 
-<div class="modal" id="reportModal" >
+<div class="modal" id="reportModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -405,7 +405,7 @@
     </div>
 </div>
 
-<div class="modal" id="speedModal" >
+<div class="modal" id="speedModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -423,7 +423,7 @@
     </div>
 </div>
 
-<div class="modal" id="qrModal" >
+<div class="modal" id="qrModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -644,7 +644,7 @@
     </div>
 </div>
 
-<div class="modal" id="uploadCliModal" >
+<div class="modal" id="uploadCliModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -683,7 +683,7 @@
     </div>
 </div>
 
-<div class="modal" id="ordersModal" >
+<div class="modal" id="ordersModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -848,7 +848,7 @@
 </div>
 </div>
 
-<div class="modal" id="copyModal" >
+<div class="modal" id="copyModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -868,7 +868,7 @@
     </div>
 </div>
 
-<div class="modal" id="sortModal" >
+<div class="modal" id="sortModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -988,7 +988,7 @@
 </div>
 
 <!-- 视频播放器 -->
-<div class="modal" id="videoPlayerModal" >
+<div class="modal" id="videoPlayerModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -1023,7 +1023,7 @@
 </div>
 
 <!-- 商店选项 -->
-<div class="modal" id="shopModal" >
+<div class="modal" id="shopModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -1111,7 +1111,7 @@
 </div>
 
 <!-- 我的状态页 -->
-<div class="modal" id="myModal" >
+<div class="modal" id="myModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -1158,6 +1158,96 @@
                     <li>每拥有 1 点分享值，您可以获得 16MB 的存储空间。</li>
                     <li>分享值可以在您分享文件给对方下载时获得，每日更新。</li>
                     <li>分享文件给对方下载时，您还可以获得直链流量。</li>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 设置用户个人资料 -->
+<div class="modal" id="userModal" >
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <i class="fa-light fa-user-astronaut mr-2"></i>
+                    <span i18n="user_modal_title">.</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <!--[已存储的用户个人信息]-->
+                <div class="card shadow-sm mb-2" id="user_saved">
+                    <div class="d-flex align-items-center">
+                        <span class="p-3" id="user_saved_logo">
+                            <img src="/img/loading.svg" class="img-circle" alt="User Image" style="width:64px;height:64px;border-radius: 12px;">
+                        </span>
+                        <div>
+                            <div class="mt-3" id="user_saved_nickname">
+                                .
+                            </div>
+                            <p id="user_saved_intro">
+                                .
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mx-auto text-center">
+                    <span id="user_status"></span>
+
+                </div>
+                <hr>
+                <div class="form-group" id="user_logo">
+                    <label for="user_logo">
+                        <span i18n="user_avatar">.</span>
+                        <span id="user_set_upload_status" class="ml-2"></span>
+                    </label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="user_logo_file"
+                                accept="image/png, image/jpeg" onchange="TL.profile.avatarSet(this)">
+                            <label class="custom-file-label user_logo_postmsg" for="user_logo_file"
+                                i18n="user_logo_selector">.</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" id="user_title">
+                    <label for="user_title" i18n="user_title">.</label>
+                    <span class="ml-2 user_setting_status"></span>
+                    <input type="text" class="form-control" id="userinfo_name_input" i18n="user_title_input"
+                        placeholder=".">
+                </div>
+                <div class="form-group" id="user_content">
+                    <label for="user_content" i18n="user_content">.</label>
+                    <span class="ml-2 user_setting_status"></span>
+                    <input type="text" class="form-control" id="userinfo_intro_input" i18n="user_content_input"
+                        placeholder=".">
+                </div>
+                
+                <div i18n="user_review_tos">.</div>
+                <ul>
+                    <li i18n="user_review_tos_1">.</li>
+                    <li i18n="user_review_tos_2">.</li>
+                </ul>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" id="user_save" i18n="user_save"
+                        onclick="TL.profile.userinfoSet()">.</button>
+                </div>
+                <hr>
+                <label class="form-check form-switch mx-auto">
+                    <input class="form-check-input" type="checkbox" id="userinfo_set_publish"
+                        onclick="TL.profile.setPublish()">
+                    <span class="form-check-label">
+                        <div i18n="user_set_publish">.</div>
+                    </span>
+                </label>
+                <p i18n="user_review_notice1">.</p>
+                <p i18n="user_review_notice2">.</p>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" id="user_post" i18n="user_submit"
+                        onclick="TL.profile.userinfoReview();" i18n="user_review_submit">.</button>
                 </div>
             </div>
             <div class="modal-footer">

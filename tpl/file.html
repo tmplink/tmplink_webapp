@@ -11,6 +11,9 @@
             <a href="/">
                 <img src="/img/ico/logo-new.svg" alt="tmp.link" style="width: 64px;">
             </a>
+            <span class="userinfo_avatar ml-3" style="display: none;">
+                <img src="/img/loading.svg" class="img-circle userinfo_avatar_img" alt="User Image" style="width:64px;height:64px;border-radius: 12px;">
+            </span>
         </div>
         <div id="file_messenger" class="align-self-center mx-auto"
             style="display: none;margin-top: 20px;max-width: 550px;">
@@ -71,6 +74,12 @@
                             <div id="lefttime_show">
                                 <span><i class="fa-fw fa-light fa-stopwatch"></i> </span>
                                 <span id="lefttime"></span>
+                            </div>
+                            <!--[分享者信息]-->
+                            <div class="userinfo" style="display: none;">
+                                <i class="fa-fw fa-solid fa-user-tie mr-1 userinfo_sd" style="display: none;"></i>
+                                <i class="fa-fw fa-sharp fa-solid fa-badge-check userinfo_pro text-azure" style="display: none;"></i>
+                                <span class="userinfo_nickname"></span>
                             </div>
                         </div>
                     </div>
