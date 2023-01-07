@@ -340,3 +340,19 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
 .dynViewDisabled{
     display: none !important;
 }
+
+/**
+ 提醒用小圆点
+*/
+.point-red {
+    position: relative;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #f00;
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+}

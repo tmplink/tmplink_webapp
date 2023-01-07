@@ -92,14 +92,21 @@
                     <button type="button" class="btn" data-toggle="dropdown">
                         <div class="d-flex flex-column">
                             <i class="fa-light fa-sliders-up fa-fw mx-auto"></i>
-                            <span i18n="navbar_settings">.</span>
+                            <span>
+                                <span i18n="navbar_settings">.</span>
+                                <span class="point-red"></span>
+                            </span>
                         </div>
                     </button>
                     <div class="dropdown-menu shadow">
                         <!-- <span class="dropdown-item-text" i18n="navbar_hr_opt">.</span> -->
-                        <a class="dropdown-item" href="javascript:void(0)" onclick="$('#userModal').modal('show');TL.profile.refresh();">
+                        <a class="dropdown-item" href="javascript:void(0)"
+                            onclick="$('#userModal').modal('show');TL.profile.refresh();">
                             <i class="fa-light fa-user-astronaut"></i>
-                            <span i18n="user_modal_title">.</span>
+                            <span>
+                                <span i18n="user_modal_title">.</span>
+                                <span class="point-red"></span>
+                            </span>
                         </a>
                         <a class="dropdown-item" href="javascript:void(0)" onclick="$('#shopModal').modal('show');">
                             <i class="fa-light fa-bag-shopping"></i>
@@ -115,7 +122,10 @@
                         </a>
                         <a class="dropdown-item" href="javascript:void(0)" onclick="$('#profileModal').modal('show');">
                             <i class="fa-light fa-sliders-simple"></i>
-                            <span i18n="navbar_profile">.</span>
+                            <span>
+                                <span i18n="navbar_profile">.</span>
+                                <span class="point-red"></span>
+                            </span>
                         </a>
                         <a class="dropdown-item" href="javascript:void(0)"
                             onclick="$('#ordersModal').modal('show');TL.orders_list();">
@@ -222,13 +232,20 @@
                 <button type="button" class="btn" data-toggle="dropdown">
                     <div class="d-flex flex-column">
                         <i class="fa-light fa-sliders-up fa-fw mx-auto"></i>
-                        <span i18n="navbar_settings">.</span>
+                        <span>
+                            <span i18n="navbar_settings">.</span>
+                            <span class="point-red"></span>
+                        </span>
                     </div>
                 </button>
                 <div class="dropdown-menu shadow">
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#userModal').modal('show');TL.profile.refresh();">
+                    <a class="dropdown-item" href="javascript:void(0)"
+                        onclick="$('#userModal').modal('show');TL.profile.refresh();">
                         <i class="fa-light fa-user-astronaut"></i>
-                        <span i18n="user_modal_title">.</span>
+                        <span>
+                            <span i18n="user_modal_title">.</span>
+                            <span class="point-red"></span>
+                        </span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#myModal').modal('show');">
                         <i class="fa-solid fa-user"></i>
@@ -244,7 +261,10 @@
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#profileModal').modal('show');">
                         <i class="fa-light fa-sliders-simple"></i>
-                        <span i18n="navbar_profile">.</span>
+                        <span>
+                            <span i18n="navbar_profile">.</span>
+                            <span class="point-red"></span>
+                        </span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)"
                         onclick="$('#ordersModal').modal('show');TL.orders_list();">
