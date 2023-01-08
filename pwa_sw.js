@@ -1,6 +1,5 @@
-var domainList = ['ttttt.link', 'tmp.link', 'static.vx-cdn.com','127.0.0.1'];
-
-const resSet = "tmplink v2";
+const allowedTypes = ["js", "css", "jpg", "png", "woff", "svg", "gif", "ico", "ttf", "eot", "woff2","html"];
+const resSet = "tmplink v5";
 const assets = [
   '/',
 ];
@@ -28,17 +27,43 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-self.addEventListener("fetch", fetchEvent => {
-  var domain = new URL(fetchEvent.request.url).hostname;
-  var requestPath = new URL(fetchEvent.request.url).pathname;
-  //输出日志
-  if (domainList.indexOf(domain) !== -1) {
-    if(requestPath !== '/index.html'||requestPath !== '/'){
-      fetchEvent.respondWith(
-        caches.match(fetchEvent.request).then(res => {
-          return res || fetch(fetchEvent.request);
-        })
-      );
+self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+  let ext = getExtension(url.pathname);
+  if (isAllowedType(ext) && ext !== '') {
+    event.respondWith(
+      caches.match(event.request).then(response => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request).then(response => {
+          if (response.status === 200) {
+            caches.open(resSet).then(cache => {
+              cache.put(event.request, response);
+            });
+          }
+          return response.clone();
+        });
+      })
+    );
+  }
+})
+
+function getExtension(path) {
+  if(path === '/index.html'){
+    return '';
+  }
+  if (path.indexOf('.') === -1) {
+    return '';
+  }
+  return path.split('.').pop();
+}
+
+function isAllowedType(ext) {
+  for (let i = 0; i < allowedTypes.length; i++) {
+    if (allowedTypes[i] === ext) {
+      return true;
     }
   }
-});
+  return false;
+}

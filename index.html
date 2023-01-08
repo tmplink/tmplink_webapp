@@ -24,18 +24,18 @@
             window.location.href = '/version.html';
         }
 
-        // if ("serviceWorker" in navigator) {
-        //     navigator.serviceWorker.register('/pwa_sw.js');
-        // }
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register('/pwa_sw.js');
+        }
 
         //暂时卸载 service worker
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function (registrations) {
-                for (let registration of registrations) {
-                    registration.unregister()
-                }
-            })
-        }
+        // if ("serviceWorker" in navigator) {
+        //     navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        //         for (let registration of registrations) {
+        //             registration.unregister()
+        //         }
+        //     })
+        // }
         
     </script>
 
