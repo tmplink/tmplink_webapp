@@ -478,92 +478,85 @@
     </div>
 </div>
 
-<div class="modal" id="highspeedModal">
-    <div class="modal-dialog modal-dialog-centered">
+<div class="modal" id="sponsorModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
                 <h4 class="modal-title">
                     <i class="mt-1 fa-solid fa-heart-circle-plus fa-fw"></i>
-                    <span i18n="model_title_buy_highspeed">.</span>
+                    <span i18n="model_title_sponsor">.</span>
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p i18n="highspeed_content">.</p>
-                <div i18n="highspeed_content2" class="text-muted">.</div>
+                <p i18n="sponsor_content">.</p>
+                <ul>
+                    <li i18n="sponsor_right_1">.</li>
+                    <li i18n="sponsor_right_2">.</li>
+                    <li i18n="sponsor_right_3">.</li>
+                    <li i18n="sponsor_right_4">.</li>
+                    <li i18n="sponsor_right_5">.</li>
+                </ul>
                 <hr />
-                <div class="form-group hs_price_list" id="hs_price_of_cny">
-                    <label i18n="highspeed_type">.</label>
-                    <select class="form-control" id="highspeed_opt_cny">
-                        <option value="6" i18n-only="html" i18n="highspeed_price_cny1" selected>.</option>
-                    </select>
+                <h3 i18n="pay_times_title">.</h3>
+                <div class="row">
+                    <div class="col-6" onclick="TL.buy.selectTime('a')">
+                        <div class="card shadow-sm pay_times_a">
+                            <div class="card-body">
+                                <h4 i18n="pay_times_a">.</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6" onclick="TL.buy.selectTime('b')">
+                        <div class="card shadow-sm pay_times_b">
+                            <div class="card-body">
+                                <h4 i18n="pay_times_b">.</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group hs_price_list" id="hs_price_of_usd">
-                    <label i18n="highspeed_type">.</label>
-                    <select class="form-control" id="highspeed_opt_usd">
-                        <option value="6" i18n-only="html" i18n="highspeed_price_usd1" selected>.</option>
-                    </select>
+                <h3 i18n="model_title_buy_select">.</h3>
+                <div class="row">
+                    <div class="col-6" onclick="TL.buy.selectPayment('cny')">
+                        <div class="card shadow-sm buy_payment_cny">
+                            <div class="card-body">
+                                <h4>
+                                    <i class="fa-brands fa-alipay"></i>
+                                    AliPay
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6" onclick="TL.buy.selectPayment('usd')">
+                        <div class="card shadow-sm buy_payment_usd">
+                            <div class="card-body">
+                                <h4>
+                                    <i class="fa-brands fa-cc-paypal"></i>
+                                    PayPal
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label i18n="highspeed_times">.</label>
-                    <select id="highspeed_time" class="form-control">
-                        <option value="1" selected="selected" i18n="times_1" i18n-only="html">.</option>
-                        <option value="3" i18n="times_2" i18n-only="html">.</option>
-                        <option value="10" i18n="times_3" i18n-only="html">.</option>
-                    </select>
+                <div class="text-right">
+                    <h3 i18n="payment_total">.</h3>
+                    <h3>
+                        <span class="payment_units"></span>
+                        <span class="payment_total"></span>
+                    </h3>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
                 <button type="button" class="btn btn-success" i18n="model_buy_btn"
-                    onclick="TL.hs_download_buy();">.</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="modal" id="mediaModal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content shadow-lg">
-            <div class="modal-header">
-                <h4 class="modal-title" i18n="model_title_buy_media">.</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p i18n="media_content">.</p>
-                <p i18n="media_content2">.</p>
-                <hr />
-                <div class="form-group media_price_list" id="media_price_of_cny">
-                    <select class="form-control" id="media_code_cny">
-                        <option value="MEDIA-V-P" i18n-only="html" i18n="media_price_cny1" selected>.</option>
-                    </select>
-                </div>
-                <div class="form-group media_price_list" id="media_price_of_usd">
-                    <select class="form-control" id="media_code_usd">
-                        <option value="MEDIA-V-P-us" i18n-only="html" i18n="media_price_usd1" selected>.</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="media_time" i18n="media_times">.</label>
-                    <select id="media_time" class="form-control">
-                        <option value="1" selected="selected" i18n="times_1" i18n-only="html">.</option>
-                        <option value="3" i18n="times_2" i18n-only="html">.</option>
-                        <option value="10" i18n="times_3" i18n-only="html">.</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
-                <button type="button" class="btn btn-success" i18n="model_buy_btn" onclick="TL.media_buy();">.</button>
+                    onclick="TL.buy.makeOrder();">.</button>
             </div>
         </div>
     </div>
 </div>
 
 <div class="modal" id="directQuotaModal">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
                 <h4 class="modal-title" i18n="model_title_buy_direct_quota">.</h4>
@@ -573,36 +566,79 @@
                 <p i18n="direct_quota_content">.</p>
                 <p i18n="direct_quota_content2">.</p>
                 <hr />
-                <div class="form-group direct_quota_price_list" id="direct_quota_opt_cny">
-                    <select class="form-control" id="dq_code_cny">
-                        <option data-price="6" value="D20" i18n-only="html" i18n="direct_quota_price_cny1" selected>.
-                        </option>
-                        <option data-price="18" value="D100" i18n-only="html" i18n="direct_quota_price_cny2">.</option>
-                        <option data-price="60" value="D600" i18n-only="html" i18n="direct_quota_price_cny3">.</option>
-                        <option data-price="90" value="D1024" i18n-only="html" i18n="direct_quota_price_cny4">.</option>
-                    </select>
+                <h3 i18n="direct_quota_type">.</h3>
+                <div class="row">
+                    <div class="col-12 col-md-6" onclick="TL.buy.selectCode('#buy_direct_quota_1','D20',6)">
+                        <div class="card shadow-sm" id="buy_direct_quota_1">
+                            <div class="card-body">
+                                <h4>10GB</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6" onclick="TL.buy.selectCode('#buy_direct_quota_2','D100',18)">
+                        <div class="card shadow-sm" id="buy_direct_quota_2">
+                            <div class="card-body">
+                                <h4>100GB</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6" onclick="TL.buy.selectCode('#buy_direct_quota_3','D600',60)">
+                        <div class="card shadow-sm" id="buy_direct_quota_3">
+                            <div class="card-body">
+                                <h4>600GB</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6" onclick="TL.buy.selectCode('#buy_direct_quota_4','D1024',90)">
+                        <div class="card shadow-sm" id="buy_direct_quota_4">
+                            <div class="card-body">
+                                <h4>1TB</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group direct_quota_price_list" id="direct_quota_opt_usd">
-                    <select class="form-control" id="dq_code_usd">
-                        <option data-price="1" value="D20" i18n-only="html" i18n="direct_quota_price_usd1" selected>.
-                        </option>
-                        <option data-price="3" value="D100" i18n-only="html" i18n="direct_quota_price_usd2">.</option>
-                        <option data-price="10" value="D600" i18n-only="html" i18n="direct_quota_price_usd3">.</option>
-                        <option data-price="15" value="D1024" i18n-only="html" i18n="direct_quota_price_usd4">.</option>
-                    </select>
+                <h3 i18n="model_title_buy_select">.</h3>
+                <div class="row">
+                    <div class="col-6" onclick="TL.buy.selectPayment('cny')">
+                        <div class="card shadow-sm buy_payment_cny">
+                            <div class="card-body">
+                                <h4>
+                                    <i class="fa-brands fa-alipay"></i>
+                                    AliPay
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6" onclick="TL.buy.selectPayment('usd')">
+                        <div class="card shadow-sm buy_payment_usd">
+                            <div class="card-body">
+                                <h4>
+                                    <i class="fa-brands fa-cc-paypal"></i>
+                                    PayPal
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <h3 i18n="payment_total">.</h3>
+                    <h3>
+                        <span class="payment_units"></span>
+                        <span class="payment_total"></span>
+                    </h3>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
                 <button type="button" class="btn btn-success" i18n="model_buy_btn"
-                    onclick="TL.direct_quota_buy();">.</button>
+                    onclick="TL.buy.makeOrder();">.</button>
             </div>
         </div>
     </div>
 </div>
 
 <div class="modal" id="storageModal">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
                 <h4 class="modal-title" i18n="model_title_buy_storage">.</h4>
@@ -612,33 +648,75 @@
                 <p i18n="storage_content">.</p>
                 <p i18n="storage_content2">.</p>
                 <hr />
-                <div class="form-group storage_price_list" id="storage_price_of_cny">
-                    <label for="storage_code" i18n="storage_type">.</label>
-                    <select class="form-control" id="storage_code_cny">
-                        <option value="256GB" i18n-only="html" i18n="storage_price_cny1" selected>.</option>
-                        <option value="1TB" i18n-only="html" i18n="storage_price_cny2">.</option>
-                    </select>
+                <h3 i18n="storage_type">.</h3>
+                <div class="row">
+                    <div class="col-12 col-sm-6"  onclick="TL.buy.selectCode('#buy_storage_256','256GB',6)">
+                        <div class="card shadow-sm" id="buy_storage_256">
+                            <div class="card-body">
+                                <h4>256 GB</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6"  onclick="TL.buy.selectCode('#buy_storage_1024','1TB',18)">
+                        <div class="card shadow-sm" id="buy_storage_1024">
+                            <div class="card-body">
+                                <h4>1 TB</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group storage_price_list" id="storage_price_of_usd">
-                    <label for="storage_code" i18n="storage_type">.</label>
-                    <select class="form-control" id="storage_code_usd">
-                        <option value="256GB-us" i18n-only="html" i18n="storage_price_usd1" selected>.</option>
-                        <option value="1TB-us" i18n-only="html" i18n="storage_price_usd2">.</option>
-                    </select>
+                <h3 i18n="pay_times_title">.</h3>
+                <div class="row">
+                    <div class="col-6" onclick="TL.buy.selectTime('a')">
+                        <div class="card shadow-sm pay_times_a">
+                            <div class="card-body">
+                                <h4 i18n="pay_times_a">.</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6" onclick="TL.buy.selectTime('b')">
+                        <div class="card shadow-sm pay_times_b">
+                            <div class="card-body">
+                                <h4 i18n="pay_times_b">.</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="storage_time" i18n="storage_times">.</label>
-                    <select id="storage_time" class="form-control">
-                        <!-- <option value="1" selected="selected" i18n="times_1" i18n-only="html">.</option>
-                        <option value="3" i18n="times_2" i18n-only="html">.</option> -->
-                        <option value="10" selected="selected" i18n="times_3" i18n-only="html">.</option>
-                    </select>
+                <h3 i18n="model_title_buy_select">.</h3>
+                <div class="row">
+                    <div class="col-6" onclick="TL.buy.selectPayment('cny')">
+                        <div class="card shadow-sm buy_payment_cny">
+                            <div class="card-body">
+                                <h4>
+                                    <i class="fa-brands fa-alipay"></i>
+                                    AliPay
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6" onclick="TL.buy.selectPayment('usd')">
+                        <div class="card shadow-sm buy_payment_usd">
+                            <div class="card-body">
+                                <h4>
+                                    <i class="fa-brands fa-cc-paypal"></i>
+                                    PayPal
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <h3 i18n="payment_total">.</h3>
+                    <h3>
+                        <span class="payment_units"></span>
+                        <span class="payment_total"></span>
+                    </h3>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
                 <button type="button" class="btn btn-success" i18n="model_buy_btn"
-                    onclick="TL.storage_buy();">.</button>
+                    onclick="TL.buy.makeOrder();">.</button>
             </div>
         </div>
     </div>
@@ -1031,9 +1109,32 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <!--[成为赞助者]-->
+                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point"
+                    onclick="TL.buy.openSponsor();">
+                    <div class="col-12">
+                        <div class="card-p3">
+                            <div class="d-flex align-items-center">
+                                <span class="stamp stamp-md bg-blue mr-3">
+                                    <i class="mt-1 fa-solid fa-heart-circle-plus fa-fw"></i>
+                                </span>
+                                <div>
+                                    <h4 class="m-0" i18n="model_title_sponsor">
+                                        .
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mt-1">
+                                <small class="text-muted" i18n="model_des_sponsor">
+                                    .
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- 存储 -->
                 <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point"
-                    onclick="TL.buy_select_open('storage');">
+                    onclick="TL.buy.openStorage();">
                     <div class="col-12">
                         <div class="card-p3">
                             <div class="d-flex align-items-center">
@@ -1055,32 +1156,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- 媒体 -->
-                <!-- <div class="row p-2 filelist-card shadow-sm mb-2 mx-1 btn-point" onclick="TL.buy_select_open('media');">
-                    <div class="col-12">
-                        <div class="card-p3">
-                            <div class="d-flex align-items-center">
-                                <span class="stamp stamp-md bg-blue mr-3">
-                                    <i class="mt-1 fa-light fa-circle-video fa-2x fa-fw"></i>
-                                </span>
-                                <div>
-                                    <h4 class="m-0" i18n="model_title_buy_media">
-                                        .
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <small class="text-muted" i18n="media_content2">
-                                    .
-                                </small>
-                                <br>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
                 <!-- 直链 -->
                 <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point"
-                    onclick="TL.buy_select_open('direct');">
+                    onclick="TL.buy.openQuato();">
                     <div class="col-12">
                         <div class="card-p3">
                             <div class="d-flex align-items-center">
@@ -1168,7 +1246,7 @@
 </div>
 
 <!-- 设置用户个人资料 -->
-<div class="modal" id="userModal" >
+<div class="modal" id="userModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -1182,7 +1260,8 @@
                 <div class="card shadow-sm mb-2" id="user_saved">
                     <div class="d-flex align-items-center">
                         <span class="p-3" id="user_saved_logo">
-                            <img src="/img/loading.svg" class="img-circle" alt="User Image" style="width:64px;height:64px;border-radius: 12px;">
+                            <img src="/img/loading.svg" class="img-circle" alt="User Image"
+                                style="width:64px;height:64px;border-radius: 12px;">
                         </span>
                         <div>
                             <div class="mt-3" id="user_saved_nickname">
@@ -1225,7 +1304,7 @@
                     <input type="text" class="form-control" id="userinfo_intro_input" i18n="user_content_input"
                         placeholder=".">
                 </div>
-                
+
                 <div i18n="user_review_tos">.</div>
                 <ul>
                     <li i18n="user_review_tos_1">.</li>

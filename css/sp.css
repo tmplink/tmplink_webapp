@@ -62,3 +62,7 @@
 .btn-pointer {
   cursor: pointer;
 }
+
+.card-selected{
+  border: 2px solid #007bff;
+}

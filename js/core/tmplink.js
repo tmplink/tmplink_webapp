@@ -81,6 +81,7 @@ class tmplink {
         this.direct = new direct;
         this.stream = new stream;
         this.profile = new profile;
+        this.buy = new buy;
 
         this.stream.init(this);
         this.giftcard.init(this);
@@ -89,6 +90,7 @@ class tmplink {
         this.direct.init(this);
         this.uploader.init(this);
         this.profile.init(this);
+        this.buy.init(this);
         this.setArea();
 
         //
