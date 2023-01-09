@@ -7,9 +7,17 @@ class profile {
     avatar_url = '/img/ico/logo-256x256.png'
     publish = 'no'
     publish_status = false
+    init_status = false
 
     init(parent_op) {
         this.parent_op = parent_op;
+    }
+
+    openModal(){
+        if(this.init_status===false){
+            this.init_details();
+        }
+        $('#profileModal').modal('show');
     }
 
     init_details() {
@@ -24,6 +32,7 @@ class profile {
                 this.intro = rsp.data.intro;
                 this.avatar_id = rsp.data.avatar_id;
             }
+            this.init_status = true;
             this.refresh();
         }, 'json');
     }
