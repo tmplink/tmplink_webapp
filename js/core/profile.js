@@ -17,7 +17,7 @@ class profile {
         if(this.init_status===false){
             this.init_details();
         }
-        $('#profileModal').modal('show');
+        $('#userModal').modal('show');
     }
 
     init_details() {
