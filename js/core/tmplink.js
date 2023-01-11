@@ -2862,6 +2862,7 @@ class tmplink {
                             dynamicView.workspace();
                             //登陆后更新一下用户信息
                             this.profile.init_details();
+                            this.storage_status_update();
                         });
                     } else {
                         $('#msg_notice').html(app.languageData.login_fail);
