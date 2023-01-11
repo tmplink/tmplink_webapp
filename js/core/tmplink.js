@@ -2860,6 +2860,8 @@ class tmplink {
                             //     window.history.back();
                             // }
                             dynamicView.workspace();
+                            //登陆后更新一下用户信息
+                            this.profile.init_details();
                         });
                     } else {
                         $('#msg_notice').html(app.languageData.login_fail);
