@@ -39,15 +39,15 @@ class profile {
 
     refresh() {
         
-        if(this.nickname===''){
-            $('#user_saved_nickname').html(app.languageData.user_saved_title);
+        if(this.nickname==='0'){
+            $('.user_saved_nickname').html(app.languageData.user_saved_title);
         }else{
-            $('#user_saved_nickname').html(this.nickname);
+            $('.user_saved_nickname').html(this.nickname);
         }
-        if(this.intro===''){
-            $('#user_saved_intro').html(app.languageData.user_saved_content);
+        if(this.intro==='0'){
+            $('.user_saved_intro').html(app.languageData.user_saved_content);
         }else{
-            $('#user_saved_intro').html(this.intro);
+            $('.user_saved_intro').html(this.intro);
         }
 
         let avatarUrl = '';
@@ -60,13 +60,15 @@ class profile {
         let avatar = new Image();
         avatar.src = avatarUrl;
         avatar.onload = () => {
-            $('#user_saved_logo').html(`<img src="${avatarUrl}" class="img-circle" alt="User Image" style="width:64px;height:64px;border-radius: 12px;">`);
+            $('.user_saved_logo > img').attr('src', avatarUrl);
         }
 
         if (this.publish == 'yes') {
             $("#userinfo_set_publish").attr('checked', 'checked');
+            $('.userinfo_set_publish_submit').show();
         } else {
             $("#userinfo_set_publish").removeAttr('checked');
+            $('.userinfo_set_publish_submit').hide();
         }
         this.userinfoStatus(this.publish_status);
     }
@@ -144,6 +146,12 @@ class profile {
 
     setPublish() {
         let publish = ($('#userinfo_set_publish').is(':checked')) ? 'yes' : 'no';
+
+        if(publish=='yes'){
+            $('.userinfo_set_publish_submit').show();
+        }else{
+            $('.userinfo_set_publish_submit').hide();
+        }
 
         $.post(this.parent_op.api_user, {
             'action': 'pf_userinfo_publish_set',

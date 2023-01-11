@@ -3064,6 +3064,8 @@ class tmplink {
         data.storage_used_text = bytetoconver(this.storage_used, true);
         data.percent = (this.storage_used / this.storage) * 100;
         $('#upload_storage_status').html(data.storage_used_text + ' | ' + data.storage_text);
+        $('.user_storage_used').html(data.storage_used_text);
+        $('.user_storage_total').html(data.storage_text);
         // $('#upload_storage_status').html(app.tpl('upload_storage_status_tpl', data));
     }
 

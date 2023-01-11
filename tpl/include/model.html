@@ -650,14 +650,14 @@
                 <hr />
                 <h3 i18n="storage_type">.</h3>
                 <div class="row">
-                    <div class="col-12 col-sm-6"  onclick="TL.buy.selectCode('#buy_storage_256','256GB',6)">
+                    <div class="col-12 col-sm-6" onclick="TL.buy.selectCode('#buy_storage_256','256GB',6)">
                         <div class="card shadow-sm" id="buy_storage_256">
                             <div class="card-body">
                                 <h4>256 GB</h4>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-6"  onclick="TL.buy.selectCode('#buy_storage_1024','1TB',18)">
+                    <div class="col-12 col-sm-6" onclick="TL.buy.selectCode('#buy_storage_1024','1TB',18)">
                         <div class="card shadow-sm" id="buy_storage_1024">
                             <div class="card-body">
                                 <h4>1 TB</h4>
@@ -1110,8 +1110,7 @@
             </div>
             <div class="modal-body">
                 <!--[成为赞助者]-->
-                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point"
-                    onclick="TL.buy.openSponsor();">
+                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point" onclick="TL.buy.openSponsor();">
                     <div class="col-12">
                         <div class="card-p3">
                             <div class="d-flex align-items-center">
@@ -1133,8 +1132,7 @@
                     </div>
                 </div>
                 <!-- 存储 -->
-                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point"
-                    onclick="TL.buy.openStorage();">
+                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point" onclick="TL.buy.openStorage();">
                     <div class="col-12">
                         <div class="card-p3">
                             <div class="d-flex align-items-center">
@@ -1157,8 +1155,7 @@
                     </div>
                 </div>
                 <!-- 直链 -->
-                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point"
-                    onclick="TL.buy.openQuato();">
+                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point" onclick="TL.buy.openQuato();">
                     <div class="col-12">
                         <div class="card-p3">
                             <div class="d-flex align-items-center">
@@ -1259,23 +1256,19 @@
                 <!--[已存储的用户个人信息]-->
                 <div class="card shadow-sm mb-2" id="user_saved">
                     <div class="d-flex align-items-center">
-                        <span class="p-3" id="user_saved_logo">
+                        <span class="p-3 user_saved_logo">
                             <img src="/img/loading.svg" class="img-circle" alt="User Image"
                                 style="width:64px;height:64px;border-radius: 12px;">
                         </span>
                         <div>
-                            <div class="mt-3" id="user_saved_nickname">
+                            <div class="mt-3 user_saved_nickname">
                                 .
                             </div>
-                            <p id="user_saved_intro">
+                            <p class="user_saved_intro">
                                 .
                             </p>
                         </div>
                     </div>
-                </div>
-                <div class="mx-auto text-center">
-                    <span id="user_status"></span>
-
                 </div>
                 <hr>
                 <div class="form-group" id="user_logo">
@@ -1319,15 +1312,21 @@
                     <input class="form-check-input" type="checkbox" id="userinfo_set_publish"
                         onclick="TL.profile.setPublish()">
                     <span class="form-check-label">
-                        <div i18n="user_set_publish">.</div>
+                        <div>
+                            <span i18n="user_set_publish">.</span>
+                            <span id="user_status"></span>
+                        </div>
                     </span>
                 </label>
-                <p i18n="user_review_notice1">.</p>
-                <p i18n="user_review_notice2">.</p>
-                <div class="text-center">
-                    <button type="button" class="btn btn-primary" id="user_post" i18n="user_submit"
-                        onclick="TL.profile.userinfoReview();" i18n="user_review_submit">.</button>
+                <div class="userinfo_set_publish_submit" style="display: none;">
+                    <p i18n="user_review_notice1">.</p>
+                    <p i18n="user_review_notice2">.</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary" id="user_post" i18n="user_submit"
+                            onclick="TL.profile.userinfoReview();" i18n="user_review_submit">.</button>
+                    </div>
                 </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>

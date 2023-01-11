@@ -474,7 +474,6 @@ class uploader {
             }
             last_time = new Date().getTime();
             last_uploaded = this.upload_slice_chunk_loaded;
-            console.log(`duration:${duration},Loaded:${this.upload_slice_chunk_loaded},speed_text:${speed_text}`);
             //计算进度条，计算方法，先计算每个分块的占比，根据已上传的分块加上目前正在上传的分块的占比得出已上传的占比
             let pp_success = slice_status.success / slice_status.total;
             //计算出单个分块在进度条中的占比

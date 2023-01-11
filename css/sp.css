@@ -66,3 +66,8 @@
 .card-selected{
   border: 2px solid #007bff;
 }
+
+.nav-units{
+  min-width: 100px;
+  display: inline-block;
+}
