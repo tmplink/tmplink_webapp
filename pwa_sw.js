@@ -1,5 +1,5 @@
 const allowedTypes = ["js", "css", "jpg", "png", "woff", "svg", "gif", "ico", "ttf", "eot", "woff2","html"];
-const resSet = "tmplink v5";
+const resSet = "tmplink v6";
 const assets = [
   '/',
 ];
