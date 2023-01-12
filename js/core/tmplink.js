@@ -201,6 +201,7 @@ class tmplink {
                 //     }
                 //     window.location.href = 'https://ttttt.link' + params;
                 // }
+                $('.btn_play').hide();
             } else {
                 this.area_cn = false;
             }
