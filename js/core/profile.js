@@ -71,6 +71,43 @@ class profile {
             $('.userinfo_set_publish_submit').hide();
         }
         this.userinfoStatus(this.publish_status);
+
+        //更新 myModal 中的内容
+        //设定徽章
+        let badge = '/img/level/'+this.parent_op.user_group.level+'.svg';
+        $('.user_badge').attr('src',badge);
+        //设定其它信息
+        $('.user_group_storage').html(this.parent_op.user_group.storage+' GB');
+        if(this.parent_op.user_group_highspeed==='1'){
+            $('.user_group_highspeed').html(app.languageData.opt_enable);
+            $('.user_group_highspeed').addClass('text-green');
+        }else{
+            $('.user_group_highspeed').html(app.languageData.opt_disable);
+            $('.user_group_highspeed').addClass('text-red');
+        }
+        if(this.parent_op.user_group_blue==='1'){
+            $('.user_group_blue').html(app.languageData.opt_enable);
+            $('.user_group_blue').addClass('text-green');
+        }else{
+            $('.user_group_blue').html(app.languageData.opt_disable);
+            $('.user_group_blue').addClass('text-red');
+        }
+
+        //如果是赞助者，需要标记已启用高速通道和蓝标
+        if(this.parent_op.sponsor){
+            $('.user_group_highspeed').html(app.languageData.opt_enable+ `(${app.languageData.service_code_hs})`);
+            $('.user_group_highspeed').addClass('text-green');
+            $('.user_group_blue').html(app.languageData.opt_enable + `(${app.languageData.service_code_hs})`);
+            $('.user_group_blue').addClass('text-green');
+        }
+    }
+
+    openGroup(){
+        $('#myModal').modal('hide');
+        setTimeout(() => {
+            $('#userGroupsModal').modal('show');
+        }
+        , 500);
     }
 
     avatarSet(logo) {

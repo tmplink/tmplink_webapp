@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke-width: 16px;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        fill-rule: evenodd;
+      }
+
+      .cls-1, .cls-3 {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .cls-4 {
+        fill: #f70000;
+      }
+
+      .cls-5 {
+        font-family: FZMHK--GBK1-0, FZMeiHei-M07;
+        font-size: 72px;
+      }
+
+      .cls-5, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #1dc4a8;
+      }
+
+      .cls-6 {
+        fill: #0080ff;
+      }
+
+      .cls-3 {
+        stroke-width: 10px;
+      }
+    </style>
+  </defs>
+  <circle class="cls-6" cx="256" cy="256" r="256"/>
+  <path class="cls-1" d="M124.68,244.87c0-28.97,23.48-52.47,52.47-52.47h150.86c28.97,0,52.47,23.5,52.47,52.47v114.79c0,28.99-23.5,52.47-52.47,52.47H177.16c-28.99,0-52.47-23.48-52.47-52.47v-114.79Z"/>
+  <path class="cls-1" d="M147.64,195.67v-50.83c0-28.97,23.66-52.47,52.87-52.47h104.14c29.21,0,52.89,23.5,52.89,52.47v50.83"/>
+  <path class="cls-2" d="M177.97,274.38c0-18.1,14.69-32.8,32.8-32.8h83.63c18.1,0,32.8,14.69,32.8,32.8v65.59c0,18.13-14.69,32.8-32.8,32.8h-83.63c-18.1,0-32.8-14.67-32.8-32.8v-65.59Z"/>
+  <path class="cls-3" d="M230.44,307.18c0-12.22,9.9-22.13,22.15-22.13s22.13,9.9,22.13,22.13-9.9,22.15-22.13,22.15-22.15-9.9-22.15-22.15Z"/>
+  <circle class="cls-4" cx="371.49" cy="407.88" r="47"/>
+  <text class="cls-5" transform="translate(351.81 433.75)"><tspan x="0" y="0">3</tspan></text>
+</svg>

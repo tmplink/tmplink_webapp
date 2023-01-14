@@ -5,187 +5,18 @@
 </div>
 
 <nav class="mainNav nav-desktop mx-auto container p-2 topnav glass" style="display: none;">
-    <!--[desktop]-->
-    <!-- <div class="container" style="display: none;">
-        <div class="row text-center">
-            <div class="col-2">
-                <div class="workspace-navbar">
-                    <div class="d-flex flex-column">
-                        <a class="btn p-0 topnav_workspace" href="/&listview=workspace"
-                            tmpui-action="dynamicView.workspace();">
-                            <div>
-                                <i class="fa-light fa-memo-pad fa-fw"></i>
-                            </div>
-                            <div>
-                                <span i18n="navbar_workspace">.</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-8">
-                <div class="row">
-                    <div class="col-3">
-                        <div class="workspace-navbar">
-                            <span>
-                                <button class="btn p-0" onclick="$('#myModal').modal('show');">
-                                    <div>
-                                        <i class="fa-solid fa-user fa-fw"></i>
-                                    </div>
-                                    <div>
-                                        <span i18n="navbar_my">.</span>
-                                    </div>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="workspace-navbar">
-                            <div class="d-flex flex-column">
-                                <a class="btn p-0 topnav_desktop" href="/&listview=room&mrid=0"
-                                    tmpui-action="dynamicView.room();">
-                                    <div><i class="fa-light fa-cabinet-filing fa-fw"></i></div>
-                                    <div><span i18n="navbar_meetingroom">.</span></div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="workspace-navbar">
-                            <div class="d-flex flex-column">
-                                <a class="btn p-0 topnav_direct" href="/&listview=direct"
-                                    tmpui-action="dynamicView.direct();">
-                                    <div>
-                                        <i class="fa-light fa-share-nodes fa-fw"></i>
-                                    </div>
-                                    <div>
-                                        <span i18n="navbar_direct">.</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="workspace-nologin">
-                            <div class="d-flex flex-column">
-                                <button class="btn p-0" onclick="dynamicView.reg();">
-                                    <div>
-                                        <i class="fa-solid fa-user-plus fa-fw"></i>
-                                    </div>
-                                    <div>
-                                        <span i18n="index_b2">.</span>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="workspace-nologin">
-                            <div class="d-flex flex-column">
-                                <button class="btn p-0" onclick="dynamicView.login();">
-                                    <div>
-                                        <i class="fa-solid fa-user fa-fw"></i>
-                                    </div>
-                                    <div>
-                                        <span i18n="index_b3">.</span>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="btn-group dropup workspace-navbar">
-                            <button type="button" class="btn" data-toggle="dropdown">
-                                <div class="d-flex flex-column">
-                                    <i class="fa-light fa-sliders-up fa-fw mx-auto"></i>
-                                    <span>
-                                        <span i18n="navbar_settings">.</span>
-                                        <span class="point-red"></span>
-                                    </span>
-                                </div>
-                            </button>
-                            <div class="dropdown-menu shadow">
-                                <a class="dropdown-item" href="javascript:void(0)" onclick="TL.profile.openModal()">
-                                    <i class="fa-light fa-user-astronaut"></i>
-                                    <span>
-                                        <span i18n="user_modal_title">.</span>
-                                        <span class="point-red"></span>
-                                    </span>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)"
-                                    onclick="$('#shopModal').modal('show');">
-                                    <i class="fa-light fa-bag-shopping"></i>
-                                    <span>
-                                        <span i18n="navbar_buy">.</span>
-                                        <span class="point-red"></span>
-                                    </span>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)"
-                                    onclick="$('#passwordModal').modal('show');">
-                                    <i class="fa-light fa-key"></i>
-                                    <span i18n="navbar_reset_password">.</span>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)"
-                                    onclick="$('#emailModal').modal('show');">
-                                    <i class="fa-light fa-envelope"></i>
-                                    <span i18n="navbar_reset_email">.</span>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)"
-                                    onclick="$('#profileModal').modal('show');">
-                                    <i class="fa-light fa-sliders-simple"></i>
-                                    <span>
-                                        <span i18n="navbar_profile">.</span>
-                                        <span class="point-red"></span>
-                                    </span>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)"
-                                    onclick="$('#ordersModal').modal('show');TL.orders_list();">
-                                    <i class="fa-light fa-star"></i>
-                                    <span i18n="navbar_orders">.</span>
-                                </a>
-                                <a class="dropdown-item show_for_sponsor text-success" href="javascript:void(0)"
-                                    onclick="alert('Thank you for your sponsorship');" style="display: none;">
-                                    <i class="fa-solid fa-heart-circle-check"></i>
-                                    <span i18n="service_code_hs">.</span>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)" onclick="TL.logout();">
-                                    <i class="fa-light fa-right-from-bracket"></i>
-                                    <span i18n="navbar_exit">.</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="btn-group dropup">
-                    <button type="button" class="btn" data-toggle="dropdown">
-                        <div class="d-flex flex-column">
-                            <i class="fa-light fa-language fa-fw mx-auto"></i>
-                            <span class="selected_lang">.</span>
-                        </div>
-                    </button>
-                    <div class="dropdown-menu shadow">
-                        <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('cn');">简体中文</a>
-                        <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('hk');">繁体中文</a>
-                        <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('en');">English</a>
-                        <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!--[新的导航]-->
     <div class="container">
-        <!--[左侧：头像+个人信息]-->
         <span onclick="$('#myModal').modal('show');" class="btn-pointer ml-3">
             <div class="workspace-navbar" style="display:inline-flex">
                 <span class="user_saved_logo mr-2">
                     <img src="/img/loading.svg" class="img-circle" alt="User Image"
                         style="width:40px;height:40px;border-radius: 6px;">
                 </span>
-                <!--[垂直居中]-->
                 <span>
                     <div style="font-size: 15px;">
                         <span class="user_saved_nickname">.</span>
-                        <i class="ml-1 fa-sharp fa-solid fa-badge-check show_for_sponsor text-azure" style="display: none;"></i>
+                        <i class="fa-solid fa-heart-circle-plus show_for_sponsor text-green"></i>
+                        <i class="fa-regular fa-gem ml-1 show_for_sponsor text-azure" style="display: none;"></i>
                     </div>
                     <div class="text-muted" style="font-size:13px;">
                         <span class="user_storage_used">.</span> / 
@@ -194,9 +25,7 @@
                 </span>
             </div>
         </span>
-        <!--[右侧：导航栏]-->
         <span class="float-right text-center">
-
             <div class="workspace-navbar nav-units">
                 <span>
                     <a class="btn p-0 topnav_workspace" href="/&listview=workspace"
@@ -210,7 +39,6 @@
                     </a>
                 </span>
             </div>
-
             <div class="workspace-nologin nav-units">
                 <span>
                     <button class="btn p-0" onclick="dynamicView.reg();">

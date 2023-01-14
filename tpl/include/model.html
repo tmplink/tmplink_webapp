@@ -1193,47 +1193,151 @@
                 <h4 class="modal-title"><i class="fa-fw mr-2 fa-solid fa-user"></i>我的</h4>
             </div>
             <div class="modal-body">
+                <div class="text-center btn-pointer mb-4" onclick="TL.profile.openGroup()">
+                    <img src="/img/level/1.svg" width="64"/>
+                </div>
                 <table class="table table-hover table-borderless">
                     <tbody>
                         <tr>
-                            <td><i class="fa-fw mr-2 fa-regular fa-crown"></i>排位</td>
+                            <td>
+                                <i class="fa-fw mr-2 fa-regular fa-crown text-yellow"></i>
+                                <span i18n="myprofile_rank">.</span>
+                            </td>
                             <td class="user_rank">.</td>
                         </tr>
                         <tr>
-                            <td><i class="fa-fw mr-2 fa-regular fa-user-plus"></i>加入于</td>
-                            <td class="user_join">2022-10-22</td>
+                            <td>
+                                <i class="fa-fw mr-2 fa-light fa-gauge-circle-bolt text-cyan"></i>
+                                <span i18n="user_group_highspeed">.</span>
+                            </td>
+                            <td class="user_group_highspeed"></td>
                         </tr>
                         <tr>
-                            <td><i class="fa-fw mr-2 fa-light fa-chart-network"></i>分享值</td>
+                            <td>
+                                <i class="fa-fw mr-2 fa-regular fa-gem text-azure"></i>
+                                <span i18n="user_group_blue">.</span>
+                            </td>
+                            <td class="user_group_blue"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="fa-fw mr-2 fa-solid fa-heart-circle-plus text-green"></i>
+                                <span i18n="myprofile_sponsor">.</span>
+                            </td>
+                            <td class="user_sponsor_time"><i class="fa-regular fa-circle-xmark text-red"></i></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="fa-fw mr-2 fa-light fa-chart-network"></i>
+                                <span i18n="user_group_value">.</span>
+                            </td>
                             <td class="user_acv">0</td>
                         </tr>
                         <tr>
-                            <td><i class="fa-fw mr-2 fa-regular fa-database"></i>分享获得的存储空间</td>
-                            <td class="user_acv_storage">0 GB</td>
+                            <td>
+                                <i class="fa-fw mr-2 fa-regular fa-database"></i>
+                                <span i18n="user_group_storage">.</span>
+                            </td>
+                            <td class="user_group_storage">0 GB</td>
                         </tr>
                         <tr>
-                            <td><i class="fa-fw mr-2 fa-light fa-share-nodes"></i>分享获得的直链流量</td>
-                            <td class="user_acv_dq">0 GB</td>
+                            <td>
+                                <i class="fa-fw mr-2 fa-regular fa-user-plus"></i>
+                                <span i18n="myprofile_join">.</span>
+                            </td>
+                            <td class="user_join">2022-10-22</td>
                         </tr>
                         <tr>
-                            <td><i class="fa-fw mr-2 fa-regular fa-file"></i>分享文件数量</td>
+                            <td>
+                                <i class="fa-fw mr-2 fa-regular fa-file"></i>
+                                <span i18n="myprofile_shared_files_count">.</span>
+                            </td>
                             <td class="user_total_files">0</td>
                         </tr>
                         <tr>
-                            <td><i class="fa-fw mr-2 fa-regular fa-files"></i>分享中的文件合计</td>
+                            <td>
+                                <i class="fa-fw mr-2 fa-regular fa-files"></i>
+                                <span i18n="myprofile_shared_files_size">.</span>
+                            </td>
                             <td class="user_total_filesize">0 GB</td>
                         </tr>
                         <tr>
-                            <td><i class="fa-fw mr-2 fa-regular fa-file-check"></i>总计分享</td>
+                            <td>
+                                <i class="fa-fw mr-2 fa-regular fa-file-check"></i>
+                                <span i18n="myprofile_shared_files_total">.</span>
+                            </td>
                             <td class="user_total_upload">0 GB</td>
                         </tr>
                     </tbody>
                 </table>
                 <div>
-                    <li>每拥有 1 点分享值，您可以获得 16MB 的存储空间。</li>
-                    <li>分享值可以在您分享文件给对方下载时获得，每日更新。</li>
-                    <li>分享文件给对方下载时，您还可以获得直链流量。</li>
+                    <li i18n="myprofile_gete_values1">.</li>
+                    <li i18n="myprofile_gete_values2">.</li>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 用户分组 -->
+<div class="modal" id="userGroupsModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="user_group_title">.</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover table-borderless text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col" i18n="user_group_level">.</th>
+                            <th scope="col" i18n="user_group_value">.</th>
+                            <th scope="col" i18n="user_group_storage">.</th>
+                            <th scope="col" i18n="user_group_highspeed">.</th>
+                            <th scope="col" i18n="user_group_blue">.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><img src="/img/level/1.svg" height="32"/></th>
+                            <td> 0 </td>
+                            <td><i class="fa-regular fa-circle-xmark text-red"></i></td>
+                            <td><i class="fa-regular fa-circle-xmark text-red"></i></td>
+                            <td><i class="fa-regular fa-circle-xmark text-red"></i></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><img src="/img/level/2.svg" height="32" /></th>
+                            <td> &raquo; 10</td>
+                            <td>1 GB</td>
+                            <td><i class="fa-regular fa-circle-xmark text-red"></i></td>
+                            <td><i class="fa-regular fa-circle-xmark text-red"></i></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><img src="/img/level/3.svg" height="32" /></th>
+                            <td> &raquo; 50</td>
+                            <td>3 GB</td>
+                            <td><i class="fa-regular fa-circle-check text-green"></i></td>
+                            <td><i class="fa-regular fa-circle-xmark text-red"></i></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><img src="/img/level/4.svg" height="32" /></th>
+                            <td> &raquo; 100</td>
+                            <td>5 GB</td>
+                            <td><i class="fa-regular fa-circle-check text-green"></i></td>
+                            <td><i class="fa-regular fa-circle-xmark text-red"></i></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><img src="/img/level/5.svg" height="32" /></th>
+                            <td> &raquo; 150</td>
+                            <td>10 GB</td>
+                            <td><i class="fa-regular fa-circle-check text-green"></i></td>
+                            <td><i class="fa-regular fa-circle-check text-green"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>

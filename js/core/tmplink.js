@@ -17,6 +17,7 @@ class tmplink {
     bgLoaded = false
 
     logined = 0
+    user_group = {}
     area_cn = false
     uid = 0
     email = null
@@ -614,8 +615,11 @@ class tmplink {
                 this.uid = rsp.data.uid;
                 this.storage_used = rsp.data.storage_used;
                 this.storage = rsp.data.storage;
-                this.high_speed_channel = rsp.data.highspeedchannel;
+                this.high_speed_channel = rsp.data.highspeed;
+                this.sponsor = rsp.data.sponsor;
+                this.sponsor_time = rsp.data.sponsor_time;
                 this.user_acv = rsp.data.acv;
+                this.user_group = rsp.data.group;
 
                 this.user_join = rsp.data.join;
                 this.user_total_files = rsp.data.total_files;
@@ -652,6 +656,9 @@ class tmplink {
                 $('.user_total_files').html(this.user_total_files);
                 $('.user_total_filesize').html(this.user_total_filesize);
                 $('.user_total_upload').html(this.user_total_upload);
+                if(this.sponsor){
+                    $('.user_sponsor_time').html(this.sponsor_time);
+                }
             } else {
                 $('.user-unlogin').show();
                 localStorage.setItem('app_login', 0);
