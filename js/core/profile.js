@@ -41,6 +41,7 @@ class profile {
         
         if(this.nickname==='0'){
             $('.user_saved_nickname').html(app.languageData.user_saved_title);
+            $('.no_profile').show();
         }else{
             $('.user_saved_nickname').html(this.nickname);
         }
@@ -48,6 +49,11 @@ class profile {
             $('.user_saved_intro').html(app.languageData.user_saved_content);
         }else{
             $('.user_saved_intro').html(this.intro);
+        }
+
+        //如果是已发布的状态，并且用户是赞助者或者分享值大于150，则显示已认证的图标
+        if(this.publish_status==='ok' && (this.parent_op.sponsor||this.parent_op.share>150)){
+            $('.show_for_verified').show();
         }
 
         let avatarUrl = '';

@@ -17,6 +17,10 @@
         border-color: rgb(14, 14, 14) !important;
     }
 
+    .modal-backdrop{
+        background-color: #fff;
+    }
+
     #bg_video, #background_wrap_video, #background_wrap_img{
         filter: invert(1) hue-rotate(.5turn);
     }

@@ -1,4 +1,5 @@
 {
+    "btn_goto_myprofile": "去設置頭像和暱稱",
     "opt_enable": "生效中",
     "opt_disable": "未生效",
     "user_group_title": "徽章說明",
@@ -391,9 +392,8 @@
     "model_upup_t1": "啟用多線程支持",
     "model_upup_d1_1": "啟用 Chrome 和 Edge 的多線程下載，通常可以獲得數倍下載速度提升。您無需安裝任何第三方軟體，也不需要為此付費。",
     "model_upup_d1_2": "請在瀏覽器地址欄輸入這個地址，然後將這個瀏覽器選項設置為 「Enabled」",
-    "model_upup_t2": "啟用高速通道",
-    "model_upup_d2_1": "不限速是我們的承諾，但是在下載尖峰時段，您可能會遇到下載速度降低的情況，因為下載的人實在太多了。<br>對於願意額外付出費用支持我們的用戶，我們為您準備了額外的伺服器以提供更好的下載體驗。",
-    "model_upup_d2_2": "若要啟用高速通道，請您回到首頁，然後在 「設置」 - 「高速通道」 中進行購買。感謝您的支持！",
+    "model_upup_t2": "用下載工具來下載",
+    "model_upup_d2_1": "第三方下載可以通過多線程等技術來加速下載文件，這通常會比瀏覽器直接下載快很多！請點擊右下角的按鈕來複製下載鏈接，然後在下載工具中新建下載任務。",
     "model_title_meetingroom_creat": "新文件夾",
     "model_meetingroom_create_notice": "創建新的文件夾",
     "model_meetingroom_create_name": "文件夾名稱",

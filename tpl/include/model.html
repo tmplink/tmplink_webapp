@@ -917,7 +917,6 @@
             <hr>
             <h3 i18n="model_upup_t2">.</h3>
             <p i18n="model_upup_d2_1">.</p>
-            <p i18n="model_upup_d2_2">.</p>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
@@ -1196,6 +1195,9 @@
                 <div class="text-center btn-pointer mb-4" onclick="TL.profile.openGroup()">
                     <img class="user_badge" src="/img/level/1.svg" width="64"/>
                 </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-success mx-auto no_profile" i18n="btn_goto_myprofile" onclick="$('#myModal').modal('hide');setTimeout(()=>{TL.profile.openModal()},100);" style="display: none;">.</button>
+                </div>
                 <table class="table table-hover table-borderless">
                     <tbody>
                         <tr>
@@ -1214,7 +1216,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <i class="fa-fw mr-2 fa-regular fa-gem text-azure"></i>
+                                <i class="fa-fw mr-2 fa-solid fa-badge-check text-azure"></i>
                                 <span i18n="user_group_blue">.</span>
                             </td>
                             <td class="user_group_blue"></td>
@@ -1271,8 +1273,10 @@
                     </tbody>
                 </table>
                 <div>
-                    <li i18n="myprofile_gete_values1">.</li>
-                    <li i18n="myprofile_gete_values2">.</li>
+                    <ul>
+                        <li i18n="myprofile_gete_values1">.</li>
+                        <li i18n="myprofile_gete_values2">.</li>
+                    </ul>
                 </div>
             </div>
             <div class="modal-footer">
