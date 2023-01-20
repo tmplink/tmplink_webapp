@@ -1,5 +1,5 @@
-const allowedTypes = ["js", "css", "jpg", "png", "woff", "svg", "gif", "ico", "ttf", "eot", "woff2","html"];
-const resSet = "tmplink v6";
+const allowedTypes = ["js", "css", "jpg", "png", "webp", "woff", "svg", "gif", "ico", "ttf", "eot", "woff2", "html"];
+const resSet = "tmplink v8";
 const assets = [
   '/',
 ];
@@ -50,7 +50,7 @@ self.addEventListener('fetch', event => {
 })
 
 function getExtension(path) {
-  if(path === '/index.html'){
+  if (path === '/index.html') {
     return '';
   }
   if (path.indexOf('.') === -1) {

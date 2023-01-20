@@ -64,8 +64,8 @@ class tmplink {
     mybg_light_key = 0
     mybg_dark_key = 0
     system_background = {
-        'light': ['/img/bg/l-2.jpg', '/img/bg/l-1.jpg', '/img/bg/l-3.jpg', '/img/bg/l-4.jpg','/img/bg/l-5.jpg'],
-        'dark': ['/img/bg/d-1.jpg', '/img/bg/d-2.jpg', '/img/bg/d-3.jpg', '/img/bg/d-4.jpg','/img/bg/d-5.jpg','/img/bg/d-6.jpg']
+        'light': ['/img/bg/l-2.webp', '/img/bg/l-1.webp',],
+        'dark': ['/img/bg/d-1.webp', '/img/bg/d-2.webp', '/img/bg/d-3.webp', '/img/bg/d-4.webp','/img/bg/d-5.webp']
     }
 
     constructor() {
@@ -292,30 +292,6 @@ class tmplink {
             $('#background_wrap_img').css('background-size', 'cover');
             $('#background_wrap_img').addClass('anime-fadein');
             $('#background_wrap_img').css('display', '');
-        });
-    }
-
-    bgLoadImg2(night) {
-        let imgSource = {
-            'light': ['/img/bg/light.jpg', '/img/bg/light_re.jpg'],
-        };
-        let imgSrc = '';
-        if (night) {
-            imgSrc = '/img/bg/dark.jpg';
-            if (window.orientation == 180 || window.orientation == 0) {
-                imgSrc = '/img/bg/dark_re.jpg';
-            }
-        } else {
-            imgSrc = '/img/bg/light.jpg';
-            if (window.orientation == 180 || window.orientation == 0) {
-                imgSrc = '/img/bg/light_re.jpg';
-            }
-        }
-        $('#background_wrap_img').fadeOut();
-        $.get(imgSrc, () => {
-            $('#background_wrap_img').css('background', `url("${imgSrc}") no-repeat center`);
-            $('#background_wrap_img').css('background-size', 'cover');
-            $('#background_wrap_img').fadeIn();
         });
     }
 
