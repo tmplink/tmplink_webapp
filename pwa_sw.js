@@ -1,5 +1,6 @@
 const allowedTypes = ["js", "css", "jpg", "png", "webp", "woff", "svg", "gif", "ico", "ttf", "eot", "woff2", "html"];
-const resSet = "tmplink v8";
+const allowedDomain = ["static.vx-cdn.com","tmp.link","ttttt.link","gstatic.com","127.0.0.1"];
+const resSet = "tmplink v9";
 const assets = [
   '/',
 ];
@@ -29,8 +30,9 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
+  const domain = url.hostname;
   let ext = getExtension(url.pathname);
-  if (isAllowedType(ext) && ext !== '') {
+  if (isAllowedType(ext) && ext !== '' && isAllowDomain(domain)) {
     event.respondWith(
       caches.match(event.request).then(response => {
         if (response) {
@@ -62,6 +64,15 @@ function getExtension(path) {
 function isAllowedType(ext) {
   for (let i = 0; i < allowedTypes.length; i++) {
     if (allowedTypes[i] === ext) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function isAllowDomain(domain){
+  for (let i = 0; i < allowedDomain.length; i++) {
+    if (allowedDomain[i] === domain) {
       return true;
     }
   }
