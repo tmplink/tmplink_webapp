@@ -561,9 +561,10 @@ class tmplink {
         $('#index_lang').fadeIn();
         $('.navbar_ready').show();
 
-        if (this.high_speed_channel) {
+        if (this.sponsor) {
             $('.show_for_sponsor').show();
         } else {
+            $('.show_for_sponsor').hide();
             $('.to_be_sponsor').show();
         }
         //set process bar to 100%
