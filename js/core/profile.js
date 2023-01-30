@@ -37,6 +37,25 @@ class profile {
         }, 'json');
     }
 
+    generateAvatar(){
+        //根据用户邮箱，生成一个指定数字范围内的ID，然后根据ID，从头像库中抽取一个头像
+        let str = this.parent_op.uid;
+        console.log(str);
+        let seed = 0;
+        let max = 16;
+        for (let i = 0; i < str.length; i++) {
+          seed += str.charCodeAt(i);
+        }
+        let avatar_id = (seed % max) + 1;
+
+        //格式化为两位数整数
+        if(avatar_id<10){
+            avatar_id = '0'+avatar_id;
+        }
+        this.avatar_url = '/img/avatar/1-'+avatar_id+'.svg';
+    }
+      
+
     refresh() {
         
         if(this.nickname==='0'){
@@ -60,6 +79,7 @@ class profile {
         if(this.avatar_id){
             avatarUrl = `https://tmp-static.vx-cdn.com/static/avatar?id=${this.avatar_id}`;
         }else{
+            this.generateAvatar();
             avatarUrl = this.avatar_url;
         }
         //load avatar
