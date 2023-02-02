@@ -128,7 +128,7 @@ class stream {
 
     //打开新标签页进行播放
     play(url){
-        let player = 'http://play.5t-cdn.com/?stream=' + btoa(url);
+        let player = 'https://ix.ng-ccc.com/go.html?stream=' + btoa(url);
         window.open(player);
     }
 }
