@@ -191,11 +191,36 @@
                                         <% obj[x].fname %>
                                     </a>
 
-                                    <% if(TL.stream.allow(obj[x].fname,obj[x].owner)){ %>
-                                        <span class="btn-point" onclick="TL.stream.request('<% obj[x].ukey %>')" onclick="event.stopPropagation();">
-                                            <i class="text-blue fa-fw fa-light fa-play-circle"></i>
+                                    <% if(TL.stream.allow(obj[x].fname,obj[x].owner)||TL.stream.checkForOpenOnApps(obj[x].fname,obj[x].owner)){ %>
+                                        <span class="dropdown">
+                                            <span role="button" type="button" class="btn-point" data-toggle="dropdown">
+                                                <i class="text-blue fa-fw fa-light fa-play-circle"></i>
+                                            </span>
+                                            <div class="dropdown-menu shadow">
+                                                <% if(TL.stream.allow(obj[x].fname,obj[x].owner)){ %>
+                                                    <button onclick="TL.stream.request('<% obj[x].ukey %>','web')" class="dropdown-item">
+                                                        <i class="fa-solid fa-browser"></i>
+                                                        <span >Browser</span>
+                                                    </button>
+                                                <% } %> 
+                                                <% if(TL.stream.checkForOpenOnApps(obj[x].fname,obj[x].owner)){ %>
+                                                    <hr>
+                                                    <button onclick="TL.stream.request('<% obj[x].ukey %>','potplayer')" class="dropdown-item">
+                                                        <i class="fa-regular fa-send-backward"></i>
+                                                        <span >potplayer</span>
+                                                    </button>
+                                                    <button onclick="TL.stream.request('<% obj[x].ukey %>','iina')" class="dropdown-item">
+                                                        <i class="fa-regular fa-send-backward"></i>
+                                                        <span >IINA</span>
+                                                    </button>
+                                                    <button onclick="TL.stream.request('<% obj[x].ukey %>','nplayer')" class="dropdown-item">
+                                                        <i class="fa-regular fa-send-backward"></i>
+                                                        <span >nplayer</span>
+                                                    </button>
+                                                <% } %> 
+                                            </div>
                                         </span>
-                                    <% } %>  
+                                    <% } %>   
                                     
                                     <% if(obj[x].model!=99){ %>
                                         <!--[在大屏幕上显示]-->

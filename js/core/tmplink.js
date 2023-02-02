@@ -69,6 +69,7 @@ class tmplink {
     }
 
     constructor() {
+        this.setArea();
         this.setDomain();
         this.api_init();
         this.bg_init();
@@ -92,7 +93,6 @@ class tmplink {
         this.uploader.init(this);
         this.profile.init(this);
         this.buy.init(this);
-        this.setArea();
 
         //
         $('.workspace-navbar').hide();

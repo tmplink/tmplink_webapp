@@ -44,7 +44,7 @@
                     </div>
                     <div class="float-left">
                         <span class="room_title display-4"></span>
-                        <div class="mt-2" >
+                        <div class="mt-2">
                             <i class="fa-fw fa-regular fa-folder-open text-yellow"></i>
                             <span id="room_total"></span>
                         </div>
@@ -342,9 +342,34 @@
                                         <% obj[x].fname %>
                                     </a>
 
-                                    <% if(TL.stream.allow(obj[x].fname,obj[x].owner)){ %>
-                                        <span class="btn-point" onclick="TL.stream.request('<% obj[x].ukey %>')" onclick="event.stopPropagation();">
-                                            <i class="text-blue fa-fw fa-light fa-play-circle"></i>
+                                    <% if(TL.stream.allow(obj[x].fname,obj[x].owner)||TL.stream.checkForOpenOnApps(obj[x].fname,obj[x].owner)){ %>
+                                        <span class="dropdown">
+                                            <span role="button" type="button" class="btn-point" data-toggle="dropdown">
+                                                <i class="text-blue fa-fw fa-light fa-play-circle"></i>
+                                            </span>
+                                            <div class="dropdown-menu shadow">
+                                                <% if(TL.stream.allow(obj[x].fname,obj[x].owner)){ %>
+                                                    <button onclick="TL.stream.request('<% obj[x].ukey %>','web')" class="dropdown-item">
+                                                        <i class="fa-solid fa-browser"></i>
+                                                        <span >Browser</span>
+                                                    </button>
+                                                <% } %> 
+                                                <% if(TL.stream.checkForOpenOnApps(obj[x].fname,obj[x].owner)){ %>
+                                                    <hr>
+                                                    <button onclick="TL.stream.request('<% obj[x].ukey %>','potplayer')" class="dropdown-item">
+                                                        <i class="fa-regular fa-send-backward"></i>
+                                                        <span >potplayer</span>
+                                                    </button>
+                                                    <button onclick="TL.stream.request('<% obj[x].ukey %>','iina')" class="dropdown-item">
+                                                        <i class="fa-regular fa-send-backward"></i>
+                                                        <span >IINA</span>
+                                                    </button>
+                                                    <button onclick="TL.stream.request('<% obj[x].ukey %>','nplayer')" class="dropdown-item">
+                                                        <i class="fa-regular fa-send-backward"></i>
+                                                        <span >nplayer</span>
+                                                    </button>
+                                                <% } %> 
+                                            </div>
                                         </span>
                                     <% } %> 
 
@@ -500,7 +525,7 @@
 <div id="tpl_footer"></div>
 <div id="tpl_model"></div>
 
-<div class="modal" id="mrFileModal" >
+<div class="modal" id="mrFileModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -533,7 +558,7 @@
     </div>
 </div>
 
-<div class="modal" id="mrUserModal" >
+<div class="modal" id="mrUserModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -559,7 +584,7 @@
     </div>
 </div>
 
-<div class="modal" id="mrCreaterModal" >
+<div class="modal" id="mrCreaterModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -595,7 +620,7 @@
     </div>
 </div>
 
-<div class="modal" id="performanceModal" >
+<div class="modal" id="performanceModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -640,7 +665,8 @@
                     <h5 i18n="modal_performance_direct">.</h5>
                     <div class="alert alert-warning" id="pf_allow_direct_notice">
                         <span i18n="modal_performance_direct_tip">.</span>
-                        <button class="btn btn-primary mt-1 my-sm-0 workspace-navbar" onclick="app.open('/&listview=direct');">
+                        <button class="btn btn-primary mt-1 my-sm-0 workspace-navbar"
+                            onclick="app.open('/&listview=direct');">
                             <i class="fa-light fa-share-nodes fa-fw"></i>
                             <span i18n="navbar_direct">.</span>
                         </button>
@@ -662,7 +688,7 @@
     </div>
 </div>
 
-<div class="modal" id="roomReportModal" >
+<div class="modal" id="roomReportModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">

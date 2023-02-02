@@ -10,6 +10,7 @@ class stream {
         ['video/3gpp','3gp'],
         ['video/mpeg','mpeg'],
     ];
+    open_on_apps_ext = ['mp4','webm','ogg','mov','3gp','mpeg','mkv','rm','rmvb','avi','m4v','flv','wmv'];
     waitting_list = [];
     current_stream = 0;
     current_stream_wait = 0;
@@ -30,8 +31,21 @@ class stream {
         }
     }
 
+    checkForOpenOnApps(filename,owner){
+        if (owner!==this.parent.uid) {
+            return false;
+        }
+        for (let i in this.open_on_apps_ext) {
+            let ext = filename.substring(filename.lastIndexOf('.') + 1, filename.length);
+            if (ext.toLowerCase().indexOf(this.open_on_apps_ext[i]) > -1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     allow(filename,owner) {
-        if (this.parent.area_cn&&owner!==this.parent.uid) {
+        if (owner!==this.parent.uid) {
             return false;
         }
         
@@ -49,7 +63,7 @@ class stream {
     }
 
     
-    request(ukey) {
+    request(ukey,app) {
         //未登录的情况下，跳转到登录界面
         if (this.parent.logined !== 1) {
             app.open('/&listview=login');
@@ -67,9 +81,8 @@ class stream {
             }, (req) => {
                 $('#loading_box').fadeOut();
                 if (req.status == 1) {
-                    //播放地址参数需要 base64 编码
-                    let player = 'http://play.5t-cdn.com/?stream=' + btoa(req.data);
-                    this.play(player);
+                    // let player = 'http://play.5t-cdn.com/?stream=' + btoa(req.data);
+                    this.playWith(req.data,app);
                 } else {
                     alert('error');
                 }
@@ -77,8 +90,45 @@ class stream {
         });
     }
 
+    playWith(url,app){
+        switch(app){
+            case 'vlc':
+                this.openWithVLC(url);
+                break;
+            case 'iina':
+                this.openWithIINA(url);
+                break;
+            case 'potplayer':
+                this.openWithPotPlayer(url);
+                break;
+            case 'nplayer':
+                this.openWithNplayer(url);
+                break;
+            default:
+                this.play(url);
+        }
+    }
+
+    openWithVLC(url){
+        window.open(`vlc://${url}`);
+    }
+
+    openWithIINA(url){
+        window.open(`iina://weblink?url=${url}`);
+    }
+
+    openWithPotPlayer(url){
+        window.open(`potplayer://${url}`);
+    }
+
+    openWithNplayer(url){
+        window.open(`nplayer-https://${url}`);
+    }
+    
+
     //打开新标签页进行播放
     play(url){
-        window.open(url);
+        let player = 'http://play.5t-cdn.com/?stream=' + btoa(url);
+        window.open(player);
     }
 }
