@@ -1186,12 +1186,20 @@ class tmplink {
                             });
 
                             //如果可以，显示播放按钮
-                            if (this.stream.allow(rsp.data.name, this.uid)) {
+                            if (this.stream.allow(rsp.data.name, this.uid)||this.stream.checkForOpenOnApps(rsp.data.name, this.uid)) {
                                 $('.btn_play').show();
-                                $('.btn_play').on('click', () => {
-                                    this.stream.request(params.ukey);
-                                    return true;
-                                });
+                                if(this.stream.allow(rsp.data.name, this.uid)){
+                                    $('.play_on_browser').attr('onclick',`TL.stream.request('${params.ukey}','web')`);
+                                    $('.play_on_browser').show();
+                                }
+                                if(this.stream.checkForOpenOnApps(rsp.data.name, this.uid)){
+                                    $('.play_on_potplayer').attr('onclick',`TL.stream.request('${params.ukey}','potplayer')`);
+                                    $('.play_on_potplayer').show();
+                                    $('.play_on_iina').attr('onclick',`TL.stream.request('${params.ukey}','iina')`);
+                                    $('.play_on_iina').show();
+                                    $('.play_on_nplayer').attr('onclick',`TL.stream.request('${params.ukey}','nplayer')`);
+                                    $('.play_on_nplayer').show();
+                                }
                             }
 
                             //复制链接按钮绑定

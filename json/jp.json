@@ -1,4 +1,7 @@
 {
+    "user_group_dvd": "DVD",
+    "myprofile_gete_values3": "DVD : オンラインで任意のビデオファイルを再生可能",
+    "sponsor_right_5": "DVD : オンラインであらゆるビデオファイルを再生できる。",
     "btn_goto_myprofile": "アバターとニックネームの設定に移動します",
     "opt_enable": "有効",
     "opt_disable": "無効",
@@ -29,7 +32,7 @@
     "sponsor_right_2": "50 GB の私有ストレージスペース",
     "sponsor_right_3": "毎月 88GB の直リンクトラフィッククオーター",
     "sponsor_right_4": "ファイルダウンロードページおよびフォルダーで、個人化されたアバターとサインを表示する",
-    "sponsor_right_5": "優先認定",
+    "sponsor_right_6": "優先認定",
     "user_set_publish": "個人情報を公開する",
     "user_modal_title": "個性化",
     "user_submit": "審査を送信する",

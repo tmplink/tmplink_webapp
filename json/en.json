@@ -1,4 +1,7 @@
 {
+    "user_group_dvd": "DVD",
+    "myprofile_gete_values3": "DVD : You can play any video file online.",
+    "sponsor_right_5": "DVD : Can play any video file online.",
     "btn_goto_myprofile": "Go to set avatar and nickname",
     "opt_enable": "Enable",
     "opt_disable": "Not Supported",
@@ -29,7 +32,7 @@
     "sponsor_right_2": "50 GB private storage space",
     "sponsor_right_3": "88GB direct link traffic quota per month",
     "sponsor_right_4": "Display your personalized avatar and signature on the file download page and folder",
-    "sponsor_right_5": "Priority certification",
+    "sponsor_right_6": "Priority certification",
     "user_modal_title": "Personalization",
     "user_submit": "Submit for Review",
     "user_save": "Save",

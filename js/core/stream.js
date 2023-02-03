@@ -10,7 +10,7 @@ class stream {
         ['video/3gpp','3gp'],
         ['video/mpeg','mpeg'],
     ];
-    open_on_apps_ext = ['mp4','webm','ogg','mov','3gp','mpeg','mkv','rm','rmvb','avi','m4v','flv','wmv'];
+    open_on_apps_ext = ['mp4','webm','ogg','mov','3gp','mpeg','mkv','rm','rmvb','avi','m4v','flv','wmv','mpv'];
     waitting_list = [];
     current_stream = 0;
     current_stream_wait = 0;
@@ -32,7 +32,7 @@ class stream {
     }
 
     checkForOpenOnApps(filename,owner){
-        if (owner!==this.parent.uid) {
+        if (owner!==this.parent.uid&&this.parent.sponsor===false) {
             return false;
         }
         for (let i in this.open_on_apps_ext) {
@@ -45,7 +45,7 @@ class stream {
     }
 
     allow(filename,owner) {
-        if (owner!==this.parent.uid) {
+        if (owner!==this.parent.uid&&this.parent.sponsor===false) {
             return false;
         }
         

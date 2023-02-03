@@ -1,4 +1,7 @@
 {
+    "user_group_dvd": "DVD",
+    "myprofile_gete_values3": "DVD：可以在線播放任意視頻檔案。",
+    "sponsor_right_5": "DVD功能：在線點播任意視頻。",
     "btn_goto_myprofile": "去設置頭像和暱稱",
     "opt_enable": "生效中",
     "opt_disable": "未生效",
@@ -29,7 +32,7 @@
     "sponsor_right_2": "50 GB 私有存儲空間",
     "sponsor_right_3": "每月 88GB 直鏈流量配額",
     "sponsor_right_4": "在文件下載頁和文件夾中展示您的個性化頭像和簽名",
-    "sponsor_right_5": "優先認證",
+    "sponsor_right_6": "優先認證",
     "user_modal_title": "個性化",
     "user_submit": "提交審核",
     "user_save": "保存",
