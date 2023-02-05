@@ -32,7 +32,7 @@ class stream {
     }
 
     checkForOpenOnApps(filename,owner){
-        if (owner!==this.parent.uid||this.parent.sponsor===false) {
+        if (owner!==this.parent.uid&&this.parent.sponsor!==true) {
             return false;
         }
         for (let i in this.open_on_apps_ext) {
@@ -45,7 +45,7 @@ class stream {
     }
 
     allow(filename,owner) {
-        if (owner!==this.parent.uid||this.parent.sponsor===false) {
+        if (owner!==this.parent.uid&&this.parent.sponsor!==true) {
             return false;
         }
         
