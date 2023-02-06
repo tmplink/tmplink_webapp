@@ -157,34 +157,12 @@
                         <!--[适用于桌面设备]-->
                         <div class="row d-none d-sm-flex">
 
-                            <div class="col-md-4 col-6 text-center mb-2 btn-point btn_play" style="display: none;">
+                            <div class="col-md-4 col-6 text-center mb-2 btn-point btn_play" style="display: none;" onclick="$('#openWithPlayerModal').modal('show');">
                                 <div class="fileicon mx-auto mb-1">
-                                    <i class="fa-light fa-play fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"  onclick="$('.onplayer').dropdown('toggle');"></i>
+                                    <i class="fa-light fa-play fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
                                 </div>
                                 <div>
-                                    <span class="dropdown onplayer">
-                                        <button role="button" type="button" class="btn btn-point" data-toggle="dropdown" i18n="file_btn_play">
-                                            .
-                                        </button>
-                                        <div class="dropdown-menu shadow">
-                                            <button  class="dropdown-item play_on_browser" style="display: none;">
-                                                <i class="fa-solid fa-browser"></i>
-                                                <span >Browser</span>
-                                            </button>
-                                            <button  class="dropdown-item play_on_potplayer" style="display: none;">
-                                                <i class="fa-regular fa-send-backward"></i>
-                                                <span >potplayer</span>
-                                            </button>
-                                            <button  class="dropdown-item play_on_iina" style="display: none;">
-                                                <i class="fa-regular fa-send-backward"></i>
-                                                <span >IINA</span>
-                                            </button>
-                                            <button class="dropdown-item play_on_nplayer" style="display: none;">
-                                                <i class="fa-regular fa-send-backward"></i>
-                                                <span >nplayer</span>
-                                            </button>
-                                        </div>
-                                    </span>
+                                    <button class="btn" i18n="file_btn_play">.</button>
                                 </div>
                             </div>
 

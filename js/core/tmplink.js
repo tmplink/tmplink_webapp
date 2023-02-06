@@ -1633,6 +1633,32 @@ class tmplink {
         }, 'json');
     }
 
+    download_direct(i) {
+        let ukey = this.list_data[i].ukey;
+        let title = this.list_data[i].fname;
+        let size = this.list_data[i].fsize_formated;
+        let type = this.list_data[i].ftype;
+
+        this.recaptcha_do('download_req', (recaptcha) => {
+            $.post(this.api_file, {
+                action: 'download_req',
+                ukey: ukey,
+                token: this.api_token,
+                captcha: recaptcha
+            }, (req) => {
+                if (req.status == 1) {
+                    window.open(req.data);
+                    this.ga('Download-' + title);
+                    return true;
+                }
+                if (req.status == 3) {
+                    this.alert(app.languageData.status_need_login);
+                    return false;
+                }
+            });
+        });
+    }
+
     download_file_btn(i) {
         let ukey = this.list_data[i].ukey;
         let title = this.list_data[i].fname;
