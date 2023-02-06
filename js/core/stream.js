@@ -101,6 +101,9 @@ class stream {
             case 'potplayer':
                 this.openWithPotPlayer(url);
                 break;
+            case 'kmplayer':
+                this.openWithKMPlayer(url);
+                break;
             case 'nplayer':
                 this.openWithNplayer(url);
                 break;
@@ -110,19 +113,23 @@ class stream {
     }
 
     openWithVLC(url){
-        window.open(`vlc://${url}`);
+        window.location.href = 'vlc://' + url;
     }
 
     openWithIINA(url){
-        window.open(`iina://weblink?url=${url}`, "_blank");
+        window.location.href = 'iina://weblink?url=' + url;
     }
 
     openWithPotPlayer(url){
-        window.open(`potplayer://${url}`, "_blank");
+        window.location.href = 'potplayer://' + url;
+    }
+
+    openWithKMPlayer(url){
+        window.location.href = 'kmplayer://' + url;
     }
 
     openWithNplayer(url){
-        window.open(`nplayer-https://${url}`, "_blank");
+        window.location.href = 'nplayer-https://' + url;
     }
     
     play(url){
