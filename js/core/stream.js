@@ -114,21 +114,19 @@ class stream {
     }
 
     openWithIINA(url){
-        window.open(`iina://weblink?url=${url}`);
+        window.open(`iina://weblink?url=${url}`, "_blank");
     }
 
     openWithPotPlayer(url){
-        window.open(`potplayer://${url}`);
+        window.open(`potplayer://${url}`, "_blank");
     }
 
     openWithNplayer(url){
-        window.open(`nplayer-https://${url}`);
+        window.open(`nplayer-https://${url}`, "_blank");
     }
     
-
-    //打开新标签页进行播放
     play(url){
         let player = 'https://ix.ng-ccc.com/go.html?stream=' + btoa(url);
-        window.open(player);
+        window.open(player, "_blank");
     }
 }

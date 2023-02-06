@@ -24,25 +24,25 @@
             window.location.href = '/version.html';
         }
 
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register('/pwa_sw.js');
-        }
+        // if ("serviceWorker" in navigator) {
+        //     navigator.serviceWorker.register('/pwa_sw.js');
+        // }
 
         // 暂时卸载 service worker
-        // if ("serviceWorker" in navigator) {
-        //     navigator.serviceWorker.getRegistrations().then(function (registrations) {
-        //         for (let registration of registrations) {
-        //             registration.unregister()
-        //         }
-        //     })
-        // }
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                for (let registration of registrations) {
+                    registration.unregister()
+                }
+            })
+        }
 
     </script>
 
     <script type="text/javascript" src="./tmpui.js?v=31"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 1000,
+            "version": 1001,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "googleAnalytics": "UA-96864664-3",
