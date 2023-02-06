@@ -127,6 +127,6 @@ class stream {
     
     play(url){
         let player = 'https://ix.ng-ccc.com/go.html?stream=' + btoa(url);
-        window.open(player, "_blank");
+        window.location.href = player;
     }
 }
