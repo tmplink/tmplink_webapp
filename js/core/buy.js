@@ -121,6 +121,6 @@ class buy {
         } else {
             payURL = `https://s12.tmp.link/payment/paypal/checkout_v2?price=${this.payment_price}&token=${this.parent_op.api_token}&prepare_type=${this.selected_type}&prepare_code=${this.selected_code}&prepare_times=${this.selected_times}`;
         }
-        window.open(payURL, '_blank');
+        window.location.href = payURL;
     }
 }

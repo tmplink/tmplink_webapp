@@ -469,7 +469,7 @@ class tmplink {
             this.alert(app.languageData.status_error_15);
             return false;
         }
-        window.open('https://' + this.site_domain + '/f/' + code);
+        window.location.href = 'https://' + this.site_domain + '/f/' + code;
     }
 
     loading_box_on() {
@@ -1175,7 +1175,7 @@ class tmplink {
                             //下载按钮绑定事件，触发下载
                             $('#file_download_btn').on('click', () => {
                                 //触发下载
-                                window.open(download_url, '_blank');
+                                window.location.href = download_url;
                                 return true;
                             });
 
@@ -1457,7 +1457,7 @@ class tmplink {
 
     openInMenubarX(link) {
         let openlink = `https://menubarx.app/open/?xurl=${link}&xwidth=375&xheight=677&xbar=0`;
-        window.open(openlink);
+        window.location.href = openlink;
     }
 
     isMobile() {
@@ -1478,22 +1478,7 @@ class tmplink {
     }
 
     download_queue_add(url, filename, ukey, filesize, filetype) {
-        // if (this.isWeixin()) {
-        //     this.alert(app.languageData.file_not_allow_in_wechat);
-        //     return false;
-        // }
-        // if (this.isMobile()) {
-        //     window.open(url, '_blank');
-        //     return false;
-        // }
         this.download_queue[ukey] = [url, filename, ukey, ukey];
-        // let html = app.tpl('download_list_tpl', {
-        //     index: ukey,
-        //     fname: filename,
-        //     ftype: filetype,
-        //     fsize_formated: filesize
-        // });
-        // $('#download_queue_list').prepend(html);
     }
 
     download_queue_del(index) {
@@ -1517,10 +1502,8 @@ class tmplink {
                 console.log("Downloading:" + data[0]);
                 this.download_queue_processing = true;
                 this.download_queue_progress_start(data[0], data[1], data[2], data[3]);
-                // $('#download_queue').show();
                 return true;
             } else {
-                // $('#download_queue').fadeOut();
                 console.log('Queue out.');
             }
         }
@@ -1647,7 +1630,7 @@ class tmplink {
                 captcha: recaptcha
             }, (req) => {
                 if (req.status == 1) {
-                    window.open(req.data);
+                    window.location.href = req.data;
                     this.ga('Download-' + title);
                     return true;
                 }
@@ -1970,9 +1953,9 @@ class tmplink {
         }
 
         if (this.buy_currency == 'cny') {
-            window.open("https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=direct&prepare_times=" + time, '_blank');
+            window.location.href = "https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=direct&prepare_times=" + time;
         } else {
-            window.open('https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=direct&prepare_code=' + code + '&prepare_times=' + time, '_blank');
+            window.location.href = 'https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=direct&prepare_code=' + code + '&prepare_times=' + time;
         }
     }
 
@@ -1995,9 +1978,9 @@ class tmplink {
         }
 
         if (this.buy_currency == 'cny') {
-            window.open("https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=addon&prepare_times=" + time, '_blank');
+            window.location.href = "https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=addon&prepare_times=" + time;
         } else {
-            window.open('https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=addon&prepare_code=' + code + '&prepare_times=' + time, '_blank');
+            window.location.href = 'https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=addon&prepare_code=' + code + '&prepare_times=' + time;
         }
     }
 
@@ -2030,9 +2013,9 @@ class tmplink {
                 break;
         }
         if (this.buy_currency == 'cny') {
-            window.open("https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=addon&prepare_times=" + time, '_blank');
+            window.location.href = "https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=addon&prepare_times=" + time;
         } else {
-            window.open('https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=addon&prepare_code=' + code + '&prepare_times=' + time, '_blank');
+            window.location.href = 'https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=addon&prepare_code=' + code + '&prepare_times=' + time;
         }
     }
 
@@ -2065,9 +2048,9 @@ class tmplink {
                 break;
         }
         if (this.buy_currency == 'cny') {
-            window.open("https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=addon&prepare_times=" + time, '_blank');
+            window.location.href = "https://pay.vezii.com/id4/pay_v2?price=" + price + "&token=" + this.api_token + "&prepare_code=" + code + "&prepare_type=addon&prepare_times=" + time;
         } else {
-            window.open('https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=addon&prepare_code=' + code + '&prepare_times=' + time, '_blank');
+            window.location.href = 'https://s12.tmp.link/payment/paypal/checkout_v2?price=' + price + '&token=' + this.api_token + '&prepare_type=addon&prepare_code=' + code + '&prepare_times=' + time;
         }
     }
 
@@ -3064,7 +3047,7 @@ class tmplink {
     find_file() {
         var ukey = $('#ukey').val();
         if (ukey !== '') {
-            window.open('https://' + this.site_domain + '/f/' + ukey);
+            window.location.href = 'https://' + this.site_domain + '/f/' + ukey;
         }
     }
 
