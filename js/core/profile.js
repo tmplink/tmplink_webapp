@@ -40,7 +40,6 @@ class profile {
     generateAvatar(){
         //根据用户邮箱，生成一个指定数字范围内的ID，然后根据ID，从头像库中抽取一个头像
         let str = this.parent_op.uid;
-        console.log(str);
         let seed = 0;
         let max = 16;
         for (let i = 0; i < str.length; i++) {

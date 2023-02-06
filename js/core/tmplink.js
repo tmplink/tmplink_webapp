@@ -1199,6 +1199,8 @@ class tmplink {
                                     $('.play_on_iina').show();
                                     $('.play_on_nplayer').attr('onclick',`TL.stream.request('${params.ukey}','nplayer')`);
                                     $('.play_on_nplayer').show();
+                                    $('.play_copy_url').attr('onclick',`TL.stream.request('${params.ukey}','copy')`);
+                                    $('.play_copy_url').show();
                                 }
                             }
 
@@ -1630,6 +1632,7 @@ class tmplink {
                 captcha: recaptcha
             }, (req) => {
                 if (req.status == 1) {
+                    $.notifi(`${app.languageData.on_select_download} : ${title}`, "success");
                     window.location.href = req.data;
                     this.ga('Download-' + title);
                     return true;
@@ -2680,7 +2683,6 @@ class tmplink {
                 return false;
             }
             this.ga('Room-' + rsp.data.name);
-            console.log(rsp.data);
             //更新统计信息
             this.room_total(rsp.data.mr_id);
             this.room.parent = rsp.data.parent;

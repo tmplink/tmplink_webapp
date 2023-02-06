@@ -90,8 +90,8 @@ class stream {
         });
     }
 
-    playWith(url,app){
-        switch(app){
+    playWith(url,apps){
+        switch(apps){
             case 'vlc':
                 this.openWithVLC(url);
                 break;
@@ -106,6 +106,10 @@ class stream {
                 break;
             case 'nplayer':
                 this.openWithNplayer(url);
+                break;
+            case 'copy':
+                $.notifi(app.languageData.copied, "success");
+                this.parent.copyToClip(url);
                 break;
             default:
                 this.play(url);
