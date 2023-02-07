@@ -24,25 +24,25 @@
             window.location.href = '/version.html';
         }
 
-        // if ("serviceWorker" in navigator) {
-        //     navigator.serviceWorker.register('/pwa_sw.js');
-        // }
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register('/pwa_sw.js');
+        }
 
         // 暂时卸载 service worker
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function (registrations) {
-                for (let registration of registrations) {
-                    registration.unregister()
-                }
-            })
-        }
+        // if ("serviceWorker" in navigator) {
+        //     navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        //         for (let registration of registrations) {
+        //             registration.unregister()
+        //         }
+        //     })
+        // }
 
     </script>
 
     <script type="text/javascript" src="./tmpui.js?v=31"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 1007,
+            "version": 1008,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "googleAnalytics": "UA-96864664-3",
@@ -108,7 +108,6 @@
                         "/js/init/init_workspace.js": { "type": "js" },
                         "/js/init/init_direct.js": { "type": "js" },
                         "/js/init/init_room.js": { "type": "js" },
-                        "/js/init/init_index.js": { "type": "js" },
                         "/js/init/init_login.js": { "type": "js" },
                         "/js/init/init_reg.js": { "type": "js" },
                         "/js/init/init_reset.js": { "type": "js" },
@@ -135,6 +134,7 @@
                     "body": {
                         "/tpl/index.html": { "type": "html", "target": { "type": "body" } },
                         "/js/tools/jquery.min.js": { "type": "js"},
+                        "/js/init/init_index.js": { "type": "js" },
                         "/plugin/bk/assets/vendor/aos/aos.js": { "type": "js" },
                         "/plugin/bootstrap4.6/js/bootstrap.bundle.min.js": { "type": "js"},
                         "/plugin/bk/assets/vendor/glightbox/js/glightbox.min.js": { "type": "js" },

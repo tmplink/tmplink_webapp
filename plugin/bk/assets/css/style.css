@@ -8,6 +8,10 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+.grecaptcha-badge { 
+  visibility: hidden;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
