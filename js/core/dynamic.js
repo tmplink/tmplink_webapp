@@ -83,13 +83,17 @@ class dynamic {
 
 
     preload() {
-        if(TL.logined == 0){
-            //未登录，跳转到登录页
-            this.login();
-        }else{
-            //已登录，进入 workspace
-            this.workspace();
-        }
+        TL.ready(
+            () => {
+                if(TL.logined == 0){
+                    //未登录，跳转到登录页
+                    this.login();
+                }else{
+                    //已登录，进入 workspace
+                    this.workspace();
+                }
+            }
+        );
     }
 
     index() {
