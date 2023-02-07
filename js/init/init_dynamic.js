@@ -13,6 +13,9 @@ app.ready(() => {
 
     let params = app.getUrlVars(window.location.href);
     switch (params.listview) {
+        case 'preload':
+            dynamicView.preload();
+            break;
         case 'workspace':
             dynamicView.workspace();
             break;
