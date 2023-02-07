@@ -18,6 +18,10 @@ class dynamic {
                 this.index();
                 break;
 
+            case 'preload':
+                this.preload();
+                break;
+
             case 'workspace':
                 this.workspace();
                 break;
@@ -45,8 +49,8 @@ class dynamic {
                 this.privacy();
                 break;
 
-
             default:
+                listview = 'index';
                 this.index();
                 break;
         }
@@ -77,15 +81,22 @@ class dynamic {
         });
     }
 
+
+    preload() {
+        if(TL.logined == 0){
+            //未登录，跳转到登录页
+            this.login();
+        }else{
+            //已登录，进入 workspace
+            this.workspace();
+        }
+    }
+
     index() {
         this.ga('Index');
-        $('#home_view').html(app.getFile('/tpl/listview/index.html'));
-        app.dynOpen('/&listview=index');
-        this.active('index');
-        TL.navbar.disabled();
-        INIT_index();
-        TL.languageBtnSet();
-        // app.linkRebindWith('div');
+        $('#background_wrap').remove();
+        $('#background_wrap_img').remove();
+        app.open('/welcome');
     }
 
     workspace() {
