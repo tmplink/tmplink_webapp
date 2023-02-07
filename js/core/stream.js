@@ -114,6 +114,7 @@ class stream {
             default:
                 this.play(url);
         }
+        $('#openWithPlayerModal').modal('off');
     }
 
     openWithVLC(url){
