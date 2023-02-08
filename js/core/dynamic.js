@@ -98,9 +98,7 @@ class dynamic {
 
     index() {
         this.ga('Index');
-        $('#background_wrap').remove();
-        $('#background_wrap_img').remove();
-        app.open('/welcome');
+        window.location.href = '/?tmpui_page=/welcome';
     }
 
     workspace() {
