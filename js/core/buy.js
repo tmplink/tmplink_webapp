@@ -32,6 +32,7 @@ class buy {
         this.selected_type = 'addon';
         this.selectCode('#buy_storage_256','256GB',6);
         $('#shopModal').modal('hide');
+        $('#uploadModal').modal('hide');
         setTimeout(()=>{
             $('#storageModal').modal('show');
         },300);
