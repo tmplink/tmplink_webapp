@@ -97,8 +97,18 @@ class dynamic {
     }
 
     index() {
-        this.ga('Index');
-        window.location.href = '/?tmpui_page=/welcome';
+        TL.ready(
+            () => {
+                if(TL.logined == 0){
+                    //未登录，跳转到登录页
+                    this.ga('Index');
+                    window.location.href = '/?tmpui_page=/welcome';
+                }else{
+                    //已登录，进入 workspace
+                    this.workspace();
+                }
+            }
+        );
     }
 
     workspace() {
