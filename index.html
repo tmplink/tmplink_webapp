@@ -24,25 +24,28 @@
             window.location.href = '/version.html';
         }
 
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register('/pwa_sw.js');
+        if (false) {
+            //禁用
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                    for (let registration of registrations) {
+                        registration.unregister()
+                    }
+                })
+            }
+        } else {
+            //启用
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register('/pwa_sw.js');
+            }
         }
-
-        // 暂时卸载 service worker
-        // if ("serviceWorker" in navigator) {
-        //     navigator.serviceWorker.getRegistrations().then(function (registrations) {
-        //         for (let registration of registrations) {
-        //             registration.unregister()
-        //         }
-        //     })
-        // }
 
     </script>
 
     <script type="text/javascript" src="./tmpui.js?v=31"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 1009,
+            "version": 1010,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "googleAnalytics": "UA-96864664-3",
@@ -133,22 +136,22 @@
                     "title": "TMP.link - Welcome",
                     "body": {
                         "/tpl/index.html": { "type": "html", "target": { "type": "body" } },
-                        "/js/tools/jquery.min.js": { "type": "js"},
+                        "/js/tools/jquery.min.js": { "type": "js" },
                         "/js/init/init_index.js": { "type": "js" },
                         "/plugin/bk/assets/vendor/aos/aos.js": { "type": "js" },
-                        "/plugin/bootstrap4.6/js/bootstrap.bundle.min.js": { "type": "js"},
+                        "/plugin/bootstrap4.6/js/bootstrap.bundle.min.js": { "type": "js" },
                         "/plugin/bk/assets/vendor/glightbox/js/glightbox.min.js": { "type": "js" },
                         "/plugin/bk/assets/vendor/isotope-layout/isotope.pkgd.min.js": { "type": "js" },
                         "/plugin/bk/assets/vendor/swiper/swiper-bundle.min.js": { "type": "js" },
                         "/plugin/bk/assets/vendor/php-email-form/validate.js": { "type": "js" },
                         "/plugin/bk/assets/js/main.js": { "type": "js" },
-                        "/plugin/bootstrap4.6/css/bootstrap.css": { "type": "css"},
-                        "/plugin/bk/assets/vendor/aos/aos.css": { "type": "css"},
-                        "/plugin/bk/assets/vendor/bootstrap-icons/bootstrap-icons.css": { "type": "css"},
-                        "/plugin/bk/assets/vendor/boxicons/css/boxicons.min.css": { "type": "css"},
-                        "/plugin/bk/assets/vendor/glightbox/css/glightbox.min.css": { "type": "css"},
-                        "/plugin/bk/assets/vendor/swiper/swiper-bundle.min.css": { "type": "css"},
-                        "/plugin/bk/assets/css/style.css": { "type": "css"},
+                        "/plugin/bootstrap4.6/css/bootstrap.css": { "type": "css" },
+                        "/plugin/bk/assets/vendor/aos/aos.css": { "type": "css" },
+                        "/plugin/bk/assets/vendor/bootstrap-icons/bootstrap-icons.css": { "type": "css" },
+                        "/plugin/bk/assets/vendor/boxicons/css/boxicons.min.css": { "type": "css" },
+                        "/plugin/bk/assets/vendor/glightbox/css/glightbox.min.css": { "type": "css" },
+                        "/plugin/bk/assets/vendor/swiper/swiper-bundle.min.css": { "type": "css" },
+                        "/plugin/bk/assets/css/style.css": { "type": "css" },
                     }
                 },
                 "/room": {
