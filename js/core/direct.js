@@ -202,7 +202,7 @@ class direct {
     filelist(page) {
 
         if (this.parent_op.logined != 1) {
-            app.open('/&listview=login');
+            app.open('/?tmpui_page=/app&listview=login');
         }
 
         if (this.domain == 0) {

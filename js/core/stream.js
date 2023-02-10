@@ -66,7 +66,7 @@ class stream {
     request(ukey,app) {
         //未登录的情况下，跳转到登录界面
         if (this.parent.logined !== 1) {
-            app.open('/&listview=login');
+            app.open('/?tmpui_page=/app&listview=login');
             return;
         }
 

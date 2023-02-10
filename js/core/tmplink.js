@@ -1059,7 +1059,7 @@ class tmplink {
                             $('#btn_add_to_workspace_mobile').html('<i class="fas fa-circle-check text-green mx-auto my-auto mb-2 fa-3x"></i>');
                             gtag("event", "login");
                         } else {
-                            app.open('/&listview=login');
+                            app.open('/?tmpui_page=/app&listview=login');
                         }
                     });
 
@@ -1239,7 +1239,7 @@ class tmplink {
                                     //移除监听
                                     $('#btn_add_to_workspace').off('click');
                                 } else {
-                                    app.open('/&listview=login');
+                                    app.open('/?tmpui_page=/app&listview=login');
                                 }
                             });
 
@@ -1248,7 +1248,7 @@ class tmplink {
                                 if (this.logined == 1) {
                                     $('#upupModal').modal('show');
                                 } else {
-                                    app.open('/&listview=login');
+                                    app.open('/?tmpui_page=/app&listview=login');
                                 }
                             });
 
@@ -2569,7 +2569,7 @@ class tmplink {
 
     mr_list() {
         if (localStorage.getItem('app_login') != 1) {
-            app.open('/&listview=login');
+            app.open('/?tmpui_page=/app&listview=login');
             return;
         }
         $('#mr_list_refresh_icon').html('<img src="/img/loading.svg" height="19" />');
@@ -2815,7 +2815,7 @@ class tmplink {
 
     favorite_add(mr_id) {
         if (!this.isLogin()) {
-            app.open('/&listview=login');
+            app.open('/?tmpui_page=/app&listview=login');
             return false;
         }
         alert(app.languageData.favorite_add_success);

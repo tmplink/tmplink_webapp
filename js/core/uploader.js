@@ -43,7 +43,7 @@ class uploader {
             $('#upload_cli_token').html(this.parent_op.api_token);
         } else {
             this.parent_op.alert(app.languageData.status_need_login);
-            app.open('/&listview=login');
+            app.open('/?tmpui_page=/app&listview=login');
         }
     }
 

@@ -114,7 +114,7 @@ class navbar {
         $('#navbar_model_icon').attr('class', 'fa-light fa-share-nodes fa-fw mx-auto');
         $('#navbar_model_text').html(app.languageData.navbar_direct);
         if (act === true) {
-            app.open('/&listview=direct');
+            app.open('/?tmpui_page=/app&listview=direct');
         }
         this.navbar_lightup('direct');
     }

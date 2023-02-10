@@ -106,7 +106,7 @@ class dynamic {
                 if(TL.logined == 0){
                     //未登录，跳转到登录页
                     this.ga('Index');
-                    window.location.href = '/?tmpui_page=/welcome';
+                    window.location.href = '/';
                 }else{
                     //已登录，进入 workspace
                     this.workspace();
@@ -119,7 +119,7 @@ class dynamic {
     workspace() {
         this.ga('Workspace');
         $('#home_view').html(app.getFile('/tpl/listview/workspace.html'));
-        app.dynOpen('/&listview=workspace');
+        app.dynOpen('/app&listview=workspace');
         this.active('workspace');
         INIT_workspace();
         TL.navbar.model_workspace();
@@ -128,7 +128,7 @@ class dynamic {
     room() {
         this.ga('Desktop');
         $('#home_view').html(app.getFile('/tpl/listview/room.html'));
-        // app.dynOpen('/&listview=room');
+        // app.dynOpen('/app&listview=room');
         this.active('room');
         INIT_room();
         TL.navbar.model_desktop();
@@ -137,7 +137,7 @@ class dynamic {
     direct() {
         this.ga('Direct');
         $('#home_view').html(app.getFile('/tpl/listview/direct.html'));
-        app.dynOpen('/&listview=direct');
+        app.dynOpen('/app&listview=direct');
         this.active('direct');
         TL.navbar.model_direct();
         INIT_direct();
@@ -146,7 +146,7 @@ class dynamic {
     login() {
         this.ga('Login');
         $('#home_view').html(app.getFile('/tpl/listview/login.html'));
-        app.dynOpen('/&listview=login');
+        app.dynOpen('/app&listview=login');
         TL.navbar.disabled();
         INIT_login();
     }
@@ -154,7 +154,7 @@ class dynamic {
     reg() {
         this.ga('Register');
         $('#home_view').html(app.getFile('/tpl/listview/reg.html'));
-        app.dynOpen('/&listview=reg');
+        app.dynOpen('/app&listview=reg');
         TL.navbar.disabled();
         INIT_reg();
     }
@@ -162,7 +162,7 @@ class dynamic {
     reset() {
         this.ga('Reset');
         $('#home_view').html(app.getFile('/tpl/listview/reset.html'));
-        app.dynOpen('/&listview=reset');
+        app.dynOpen('/app&listview=reset');
         TL.navbar.model_direct();
         INIT_reset();
     }
@@ -170,14 +170,14 @@ class dynamic {
     tos() {
         this.ga('Terms of Service');
         $('#home_view').html(app.getFile('/tpl/listview/tos.html'));
-        app.dynOpen('/&listview=tos');
+        app.dynOpen('/app&listview=tos');
         INIT_tos();
     }
 
     privacy() {
         this.ga('Privacy Policy');
         $('#home_view').html(app.getFile('/tpl/listview/privacy.html'));
-        app.dynOpen('/&listview=privacy');
+        app.dynOpen('/app&listview=privacy');
         INIT_privacy();
     }
 }
