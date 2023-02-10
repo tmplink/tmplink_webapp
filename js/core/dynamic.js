@@ -83,8 +83,11 @@ class dynamic {
 
 
     preload() {
+        
+        TL.loading_box_on();
         TL.ready(
             () => {
+                TL.loading_box_off();
                 if(TL.logined == 0){
                     //未登录，跳转到登录页
                     this.login();
@@ -97,6 +100,7 @@ class dynamic {
     }
 
     index() {
+        $('#tmpui_body').css('opacity', '0');
         TL.ready(
             () => {
                 if(TL.logined == 0){
@@ -106,6 +110,7 @@ class dynamic {
                 }else{
                     //已登录，进入 workspace
                     this.workspace();
+                    $('#tmpui_body').css('opacity', '1');
                 }
             }
         );
