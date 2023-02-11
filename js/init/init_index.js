@@ -3,8 +3,8 @@ app.ready(
         let lang = app.languageSetting;
         langset(lang);
         app.languageBuild();
-        $('title').html(app.languageData.title_index);
-        $('meta[name=description]').html(app.languageData.des_index);
+        document.title = app.languageData.title_index;
+        document.querySelector('meta[name=description]').setAttribute('content', app.languageData.des_index);
     }
 );
 
@@ -25,6 +25,6 @@ function langset(lang) {
     if (lang === 'jp') {
         span_lang = '日本語';
     }
-    $('.selected_lang').html(span_lang);
+    document.querySelector('.selected_lang').innerHTML = span_lang;
     app.languageSet(lang);
 }

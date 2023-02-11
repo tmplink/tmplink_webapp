@@ -7072,4 +7072,3 @@
   return index_umd;
 
 }));
-//# sourceMappingURL=bootstrap.bundle.js.map

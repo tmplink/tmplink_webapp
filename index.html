@@ -5,15 +5,13 @@
     <title>TMPLINK</title>
     <meta name="description" content="Free and easy to use temporary file transfer station">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport"
-        content="width=device-width, shrink-to-fit=no, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
     <meta name="renderer" content="webkit" />
+    <meta name="theme-color" content="#317EFB">
     <link rel="manifest" href="/app.webmanifest" />
-
     <link rel="icon" href="/img/ico/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon-precomposed" href="/img/ico/logo-new.svg" />
-    <link rel="stylesheet" href="https://static.vx-cdn.com/project/font-awesome/v6.2.1/css/all.min.css">
+    <link rel="apple-touch-icon" href="/img/ico/logo-new.svg" />
 
     <script type="text/javascript">
         'use strict';
@@ -45,7 +43,7 @@
     <script type="text/javascript" src="./tmpui.js?v=31"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 1015,
+            "version": 1016,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "googleAnalytics": "UA-96864664-3",
@@ -63,6 +61,7 @@
 
             "preload": {
                 "init": {
+                    "https://static.vx-cdn.com/project/font-awesome/v6.2.1/css/all.min.css": { "type": "css", "reload": false,'version':false },
                     "/js/tools/jquery.min.js": { "type": "js", "reload": false },
                     "/js/tools/clipboard.min.js": { "type": "js", "reload": false },
                     "/js/tools/jquery.cookie.js": { "type": "js", "reload": false },
@@ -136,16 +135,15 @@
                     "title": "TMP.link - Welcome",
                     "body": {
                         "/tpl/index.html": { "type": "html", "target": { "type": "body" } },
-                        "/js/tools/jquery.min.js": { "type": "js" },
                         "/js/init/init_index.js": { "type": "js" },
                         "/plugin/bk/assets/vendor/aos/aos.js": { "type": "js" },
-                        "/plugin/bootstrap4.6/js/bootstrap.bundle.min.js": { "type": "js" },
+                        "/plugin/bk/assets/vendor/bootstrap/js/bootstrap.bundle.min.js": { "type": "js" },
                         "/plugin/bk/assets/vendor/glightbox/js/glightbox.min.js": { "type": "js" },
                         "/plugin/bk/assets/vendor/isotope-layout/isotope.pkgd.min.js": { "type": "js" },
                         "/plugin/bk/assets/vendor/swiper/swiper-bundle.min.js": { "type": "js" },
                         "/plugin/bk/assets/vendor/php-email-form/validate.js": { "type": "js" },
                         "/plugin/bk/assets/js/main.js": { "type": "js" },
-                        "/plugin/bootstrap4.6/css/bootstrap.css": { "type": "css" },
+                        "/plugin/bk/assets/vendor/bootstrap/css/bootstrap.min.css": { "type": "css" },
                         "/plugin/bk/assets/vendor/aos/aos.css": { "type": "css" },
                         "/plugin/bk/assets/vendor/bootstrap-icons/bootstrap-icons.css": { "type": "css" },
                         "/plugin/bk/assets/vendor/boxicons/css/boxicons.min.css": { "type": "css" },
@@ -208,7 +206,7 @@
 <body>
     <div id="tmpui"></div>
     <div id="tmpui_body" class="d-flex flex-column"></div>
-    <script src="https://www.recaptcha.net/recaptcha/api.js?render=6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5"></script>
+    <script src="https://www.recaptcha.net/recaptcha/api.js?render=6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5" async></script>
 </body>
 
 </html>

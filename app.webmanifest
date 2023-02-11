@@ -1,28 +1,47 @@
 {
+  "id": "com.tmplink",
   "name": "TMPLINK",
   "short_name": "TMPLINK",
   "start_url": "/",
+  "orientation":"any",
   "scope": "/",
   "categories": "productivity",
   "display": "fullscreen",
   "background_color": "#fff",
+  "theme_color": "#317EFB",
   "description": "Simple sharing, easy management. Every day, users around the world create links and share files through Titanium Drive.",
   "icons": [
     {
-      "src": "/img/ico/logo-256x256.png",
-      "sizes": "256x256",
-      "type": "image/png"
+      "src": "/img/ico/logo-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "screenshots": [
     {
-      "src": "/img/screenshots/1.png",
-      "sizes": "828x1792",
+      "src": "/plugin/bk/assets/img/hero-img.png",
+      "sizes": "800x524",
       "type": "image/png"
     },
     {
-      "src": "/img/screenshots/2.png",
-      "sizes": "828x1792",
+      "src": "/plugin/bk/assets/img/features-1.png",
+      "sizes": "875x592",
+      "type": "image/png"
+    },
+    {
+      "src": "/plugin/bk/assets/img/features-2.png",
+      "sizes": "1053x585",
+      "type": "image/png"
+    },
+    {
+      "src": "/plugin/bk/assets/img/features-3.png",
+      "sizes": "925x617",
+      "type": "image/png"
+    },
+    {
+      "src": "/plugin/bk/assets/img/features-4.png",
+      "sizes": "999x641",
       "type": "image/png"
     }
   ]

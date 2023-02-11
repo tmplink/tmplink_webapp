@@ -99,6 +99,9 @@ class profile {
 
         //更新 myModal 中的内容
         //设定徽章
+        if(this.parent_op.user_group.level===undefined){
+            this.parent_op.user_group.level = 1;
+        }
         let badge = '/img/level/'+this.parent_op.user_group.level+'.svg';
         $('.user_badge').attr('src',badge);
         //设定其它信息
