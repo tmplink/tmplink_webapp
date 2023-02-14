@@ -32,6 +32,7 @@ self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   const domain = url.hostname;
   let ext = getExtension(url.pathname);
+  console.log(`${url}|${ext}`);
   if (isAllowedType(ext) && ext !== '' && isAllowDomain(domain)) {
     event.respondWith(
       caches.match(event.request).then(response => {
@@ -52,7 +53,7 @@ self.addEventListener('fetch', event => {
 })
 
 function getExtension(path) {
-  if (path === '/index.html') {
+  if (path === '/') {
     return 'index';
   }
   if (path.indexOf('.') === -1) {
