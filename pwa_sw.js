@@ -1,6 +1,6 @@
 const allowedTypes = ["js", "css", "jpg", "png", "webp", "woff", "svg", "gif", "ico", "ttf", "eot", "woff2", "html",'json','index'];
 const allowedDomain = ["static.vx-cdn.com","tmp.link","ttttt.link","gstatic.com","www.recaptcha.net","127.0.0.1"];
-const resSet = "tmplink v1029";
+const resSet = "tmplink v1030";
 const assets = [
   '/',
 ];
@@ -32,7 +32,6 @@ self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   const domain = url.hostname;
   let ext = getExtension(url.pathname);
-  console.log(`${url}|${ext}`);
   if (isAllowedType(ext) && ext !== '' && isAllowDomain(domain)) {
     event.respondWith(
       caches.match(event.request).then(response => {
