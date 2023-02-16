@@ -1611,3 +1611,7 @@ section {
   color: #fff;
   text-decoration: none;
 }
+
+.text-azure {
+  color: #45aaf2 !important;
+}
