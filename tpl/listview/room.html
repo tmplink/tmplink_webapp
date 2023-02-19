@@ -44,7 +44,7 @@
                     </div>
                     <div class="float-left">
                         <span class="room_title display-4"></span>
-                        <div class="mt-2">
+                        <div class="mt-2 room_subinfo">
                             <i class="fa-fw fa-regular fa-folder-open text-yellow"></i>
                             <span id="room_total"></span>
                         </div>
@@ -515,6 +515,9 @@
                                 <% if (obj[x].type === 'owner') { %>
                                     <button  onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-azure btn btn-sm btn-light mr-1"><i class="fa-fw fa-light fa-pen-to-square"></i></button>
                                     <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></button>
+                                <% } %>
+                                <% if (obj[x].fav == 1) { %>
+                                    <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light" onclick="TL.favorite_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></button>
                                 <% } %>
                             </div>
                         </div>

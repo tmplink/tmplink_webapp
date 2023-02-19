@@ -63,11 +63,59 @@
   cursor: pointer;
 }
 
-.card-selected{
+.card-selected {
   border: 2px solid #007bff;
 }
 
-.nav-units{
+.nav-units {
   min-width: 95px;
   display: inline-block;
+}
+
+.mobile_h2 {
+  font-size: 2rem;
+}
+
+.mobile_h3 {
+  font-size: 1.5rem;
+}
+
+.mobile-head-padding-desktop {
+  padding-top: 60px;
+}
+
+.mobile-head-padding-large {
+  padding-top: 180px;
+}
+
+.mobile-list-bar {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e9ecef;
+  list-style: none;
+}
+
+.mobile-list-vertical {
+  display: flex;
+  align-items: center;
+}
+
+/* 文件名不带换行完整展示 */
+.mobile-list-filename {
+  word-break: break-all;
+  white-space: pre-line;
+}
+
+.mobile-list-titlename {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-list-bar-dir {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e9ecef;
+  list-style: none;
 }

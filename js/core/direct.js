@@ -56,8 +56,13 @@ class direct {
 
             //如果有设定品牌
             if (rsp.data.brand_logo_id !== '0') {
+                let img_size = '64px';
+                console.log(this.parent_op.isMobile());
+                if(this.parent_op.isMobile()){
+                    img_size = '26px';
+                }
                 $('#brand_saved_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:64px;border-radius: 12px;" />`);
-                $('#direct_branded_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:64px;border-radius: 12px;" />`);
+                $('#direct_branded_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:${img_size};border-radius: 12px;" />`);
             }
             if (rsp.data.brand_title !== '0') {
                 $('#brand_saved_title').html(rsp.data.brand_title);
@@ -144,7 +149,6 @@ class direct {
                 //提示添加成功，并复制到剪贴板
                 let files = rsp.data;
                 $.notifi(app.languageData.direct_add_link_success, "success");
-                // this.parent_op.copyToClip(`${this.protocol}${this.domain}/files/${rsp.data}/${filename}`);
                 this.parent_op.bulkCopy(null, this.genLinkDirect(files[0].dkey, files[0].name).download, false);
             } else {
                 $.notifi(app.languageData.status_error_0, "success");
@@ -172,28 +176,26 @@ class direct {
     }
 
     delLink(direct_key) {
+        $(`.file_unit_${direct_key}`).remove();
         $.post(this.parent_op.api_direct, {
             'action': 'del_link',
             'direct_key': direct_key,
             'token': this.parent_op.api_token
-        }, () => {
-            $(`.file_unit_${direct_key}`).remove();
-        }, 'json');
+        });
     }
 
     delLinks(direct_key) {
         if (direct_key.length === 0) {
             return false;
         }
+        for (let i = 0; i < direct_key.length; i++) {
+            $(`.file_unit_${direct_key[i]}`).remove();
+        }
         $.post(this.parent_op.api_direct, {
             'action': 'del_link',
             'direct_key': direct_key,
             'token': this.parent_op.api_token
-        }, () => {
-            for (let i = 0; i < direct_key.length; i++) {
-                $(`.file_unit_${direct_key[i]}`).remove();
-            }
-        }, 'json');
+        });
     }
 
     /**

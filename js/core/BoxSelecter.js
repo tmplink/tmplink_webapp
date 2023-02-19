@@ -12,6 +12,17 @@ class BoxSelecter {
         this.site_domain = this.parent_op.site_domain;
     }
 
+    mobileHeadShow() {
+        if (this.parent_op.isMobile()) {
+            //如果有被选中的项目，则显示
+            if ($(`[data-check="true"]`).length > 0) {
+                $('.mobile-head-selector').show();
+            } else {
+                $('.mobile-head-selector').hide();
+            }
+        }
+    }
+
     onclickByList(node) {
         let n = node.getAttribute('data-check');
         if (n !== 'true') {
@@ -19,6 +30,7 @@ class BoxSelecter {
         } else {
             this.selectOff(node);
         }
+        this.mobileHeadShow();
     }
 
     boxOnclick(node) {
@@ -36,7 +48,7 @@ class BoxSelecter {
         if (itype === 'photo_card') {
             $(`.file_unit_${inode} .card`).css('background-color', 'rgb(220, 236, 245)');
         } else {
-            $(`.file_unit_${inode}`).css('border-radius', '5px');
+            // $(`.file_unit_${inode}`).css('border-radius', '5px');
             $(`.file_unit_${inode}`).css('border-width', '1px');
             $(`.file_unit_${inode}`).css('background-color', 'rgb(220, 236, 245)');
         }

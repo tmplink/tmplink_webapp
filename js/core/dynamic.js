@@ -8,6 +8,7 @@
 class dynamic {
 
     current = null
+    mobileHeadInstalled = false
 
     route() {
         let url = location.href;
@@ -31,7 +32,7 @@ class dynamic {
             case 'direct':
                 this.direct();
                 break;
-                
+
             case 'login':
                 this.login();
                 break;
@@ -41,7 +42,7 @@ class dynamic {
             case 'reset':
                 this.reset();
                 break;
-                
+
             case 'tos':
                 this.tos();
                 break;
@@ -72,6 +73,37 @@ class dynamic {
             TL.head_set();
         });
         app.linkRebind();
+        if(TL.isMobile()){
+            TL.bg_remove();
+            this.mobileHead();
+        }
+    }
+
+    mobileHead() {
+        //初始化
+        var headerL = '.mobile-head-large-title';
+        var headerT = '.mobile-head-top-title';
+        $(headerL).show();
+        $(headerT).hide();
+        if (this.mobileHeadInstalled) {
+            return;
+        }else{
+            this.mobileHeadInstalled = true;
+        }
+        window.addEventListener('scroll', function () {
+            var headerL = '.mobile-head-large-title';
+            var headerT = '.mobile-head-top-title';
+            var scrollTop = document.documentElement.scrollTop;
+            if (scrollTop >= 100) {
+                //向下滑动后超过 100px
+                $(headerT).show();
+                $(headerL).hide();
+            } else {
+                //向上滑动后小于 100px
+                $(headerT).hide();
+                $(headerL).show();
+            }
+        });
     }
 
     ga(target) {
@@ -83,15 +115,15 @@ class dynamic {
 
 
     preload() {
-        
+
         TL.loading_box_on();
         TL.ready(
             () => {
                 TL.loading_box_off();
-                if(TL.logined == 0){
+                if (TL.logined == 0) {
                     //未登录，跳转到登录页
                     this.login();
-                }else{
+                } else {
                     //已登录，进入 workspace
                     this.workspace();
                 }
@@ -103,11 +135,11 @@ class dynamic {
         $('#tmpui_body').css('opacity', '0');
         TL.ready(
             () => {
-                if(TL.logined == 0){
+                if (TL.logined == 0) {
                     //未登录，跳转到登录页
                     this.ga('Index');
                     window.location.href = '/';
-                }else{
+                } else {
                     //已登录，进入 workspace
                     this.workspace();
                     $('#tmpui_body').css('opacity', '1');
@@ -117,8 +149,12 @@ class dynamic {
     }
 
     workspace() {
+        if (TL.isMobile()) {
+            $('#home_view').html(app.getFile('/tpl/listview/mobile_workspace.html'));
+        } else {
+            $('#home_view').html(app.getFile('/tpl/listview/workspace.html'));
+        }
         this.ga('Workspace');
-        $('#home_view').html(app.getFile('/tpl/listview/workspace.html'));
         app.dynOpen('/app&listview=workspace');
         this.active('workspace');
         INIT_workspace();
@@ -126,8 +162,12 @@ class dynamic {
     }
 
     room() {
+        if (TL.isMobile()) {
+            $('#home_view').html(app.getFile('/tpl/listview/mobile_room.html'));
+        } else {
+            $('#home_view').html(app.getFile('/tpl/listview/room.html'));
+        }
         this.ga('Desktop');
-        $('#home_view').html(app.getFile('/tpl/listview/room.html'));
         // app.dynOpen('/app&listview=room');
         this.active('room');
         INIT_room();
@@ -135,8 +175,12 @@ class dynamic {
     }
 
     direct() {
+        if (TL.isMobile()) {
+            $('#home_view').html(app.getFile('/tpl/listview/mobile_direct.html'));
+        } else {
+            $('#home_view').html(app.getFile('/tpl/listview/direct.html'));
+        }
         this.ga('Direct');
-        $('#home_view').html(app.getFile('/tpl/listview/direct.html'));
         app.dynOpen('/app&listview=direct');
         this.active('direct');
         TL.navbar.model_direct();
@@ -180,4 +224,5 @@ class dynamic {
         app.dynOpen('/app&listview=privacy');
         INIT_privacy();
     }
+
 }

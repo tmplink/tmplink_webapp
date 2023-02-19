@@ -152,6 +152,10 @@ class tmplink {
         });
     }
 
+    isMobile() {
+        return window.screen.width < 675;
+    }
+
     matchNightModel() {
         let media = window.matchMedia('(prefers-color-scheme: dark)');
         return media.matches;
@@ -236,6 +240,11 @@ class tmplink {
             $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color:#eaeaea;"></div>');
             $('body').append(`<div id="background_wrap_img" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;display:none;width: 100%;"></div>`);
         }
+    }
+
+    bg_remove() {
+        $('#background_wrap').remove();
+        $('#background_wrap_img').remove();
     }
 
     bg_load() {
@@ -2611,6 +2620,7 @@ class tmplink {
     }
 
     room_total(mrid) {
+        $('.room_subinfo').hide();
         $('#room_total').html('');
         if (mrid == 0) {
             return false;
@@ -2619,8 +2629,10 @@ class tmplink {
             action: 'total', mr_id: mrid, token: this.api_token
         }, (rsp) => {
             if (rsp.data.nums > 0) {
+                $('.room_subinfo').show();
                 let total_size_text = bytetoconver(rsp.data.size, true);
                 $('#room_total').html(`${rsp.data.nums} ${app.languageData.total_units_of_file} , ${total_size_text}`);
+                this.room_mobile_topabr_fixed(mr_id);
             }
         }, 'json');
     }
@@ -2804,13 +2816,49 @@ class tmplink {
                 $('.btn_for_sub').show();
                 $('.btn_for_desktop').hide();
             }
-            $('#room_back_btn').html(app.tpl('room_back_btn_tpl', {}));
+
+            if(this.isMobile()){
+                this.room_mobile_prepare();
+            }else{
+                $('#room_back_btn').html(app.tpl('room_back_btn_tpl', {}));
+            }
+            
             $('#room_loading').hide();
             $('#room_loaded').show();
             //重新设定网页标题
             document.title = rsp.data.name;
             app.linkRebind();
         });
+    }
+
+    room_mobile_prepare(){
+        let mrid = this.room.mr_id===undefined?0:this.room.mr_id;
+        $('.dir_parent_room').attr('href',`/app&listview=room&mrid=${TL.room.parent}`);
+        $('.btn_upload').attr('onclick',`TL.uploader.open('${mrid}')`);
+        $('#mr_id').val(mrid);
+        $('#mr_parent_id').val(this.room.parent);
+        $('#mr_top_id').val(this.room.top);
+        $('.dir_parent_room').removeAttr('tmpui-app-rebind');
+        $('.btn_upload').removeAttr('tmpui-app-rebind');
+        app.linkRebind();
+        this.room_mobile_topabr_fixed(mrid);
+    }
+
+    room_mobile_topabr_fixed(mrid){
+        if(mrid===0){
+            $('.mobile-head-padding-large').css('padding-top','80px');
+            $('.btn_mobile_top').hide();
+            $('.btn_mobile_sub').show();
+        }else{
+            $('.btn_mobile_top').show();
+            $('.btn_mobile_sub').hide();
+            //根据 room_subinfo 的显示状态来设定 padding-top 的值
+            if($('.room_subinfo').css('display')==='none'){
+                $('.mobile-head-padding-large').css('padding-top','150px');
+            }else{
+                $('.mobile-head-padding-large').css('padding-top','170px');
+            }
+        }
     }
 
     favorite_add(mr_id) {
