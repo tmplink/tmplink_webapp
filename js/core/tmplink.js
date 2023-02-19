@@ -73,6 +73,7 @@ class tmplink {
         this.setDomain();
         this.api_init();
         this.bg_init();
+        this.setThemeColor();
 
         //初始化管理器
         this.Selecter = new BoxSelecter;
@@ -165,10 +166,20 @@ class tmplink {
         let media = window.matchMedia('(prefers-color-scheme: dark)');
         let callback = (e) => {
             let prefersDarkMode = e.matches;
+            this.setThemeColor();
             cb(prefersDarkMode);
         };
         if (typeof media.addEventListener === 'function') {
             media.addEventListener('change', callback);
+        }
+    }
+
+    // 如果是夜间模式，修改主题色为黑色
+    setThemeColor() {
+        if (this.matchNightModel()) {
+            $('meta[name="theme-color"]').attr('content', '#000');
+        }else{
+            $('meta[name="theme-color"]').attr('content', '#fff');
         }
     }
 
