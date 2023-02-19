@@ -2833,13 +2833,19 @@ class tmplink {
 
     room_mobile_prepare(){
         let mrid = this.room.mr_id===undefined?0:this.room.mr_id;
-        $('.dir_parent_room').attr('href',`/app&listview=room&mrid=${TL.room.parent}`);
+        if(mrid!==0){
+            let back_btn = `<a href="/app&listview=room&mrid=${TL.room.parent}" tmpui-action="TL.room_list()" class="text-azure mt-1 btn_for_sub"><i class="fa-solid fa-arrow-left fa-2x"></i></a>`;
+            $('#room_back').html(back_btn);
+        }else{
+            $('#room_back').html('');
+        }
+
         $('.btn_upload').attr('onclick',`TL.uploader.open('${mrid}')`);
+
         $('#mr_id').val(mrid);
         $('#mr_parent_id').val(this.room.parent);
         $('#mr_top_id').val(this.room.top);
-        $('.dir_parent_room').removeAttr('tmpui-app-rebind');
-        $('.btn_upload').removeAttr('tmpui-app-rebind');
+
         app.linkRebind();
         this.room_mobile_topabr_fixed(mrid);
     }
