@@ -320,12 +320,12 @@
                             </div>
                         </div>
                         <div class="col-3 p-0 pr-2 mobile-list-icon-center">
-                            <button href="javascript:void(0)" onclick="TL.download_direct('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-auto btn_download_<% obj[x].ukey %>">
+                            <button href="javascript:void(0)" onclick="TL.download_direct('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>">
                                 <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                             </button>
                             <% if (TL.room.owner == 1) { %>
                                 <span class="dropdown">
-                                    <button role="button" type="button" class="text-azure btn btn-sm btn-light mx-auto" data-toggle="dropdown">
+                                    <button role="button" type="button" class="text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown">
                                         <i class="fa-light fa-ellipsis fa-fw"></i>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right shadow">
@@ -412,7 +412,7 @@
 
             <script type="text/template" id="meetroom_grid_tpl">
             <% for (var x in obj) { %>
-            <div class="col-6 col-md-3 col-lg-2 p-2 text-center" id="meetingroom_id_<% obj[x].mr_id %>">
+            <div class="col-6 col-md-3 col-lg-2 p-2" id="meetingroom_id_<% obj[x].mr_id %>">
                 <a href="/app&listview=room&mrid=<% obj[x].mr_id %>" tmpui-app="true">
                     <div class="fileicon mx-auto mb-2 shadow-lg">
                         <i class="fa-light fa-folders fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
@@ -450,7 +450,7 @@
                                 <i class="fa-light fa-link text-cyan text-azureazure fa-2x"></i>
                             <% } %> 
                         </div>
-                        <div class="col-7 p-0 mobile-list-icon-center">
+                        <div class="col-7 p-0 mobile-list-filename">
                             <a href="/app&listview=room&mrid=<% obj[x].mr_id %>" class="mobile-list-filename filelist_link" tmpui-action="TL.room_list()">
                                 <% obj[x].name %>
                             </a>
@@ -458,12 +458,12 @@
                         <div class="col-3 p-0 pr-2 mobile-list-icon-center text-right">
 
                             <% if (obj[x].type === 'owner') { %>
-                                <button  onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-azure btn btn-sm btn-light mx-auto"><i class="fa-fw fa-light fa-pen-to-square"></i></button>
-                                <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light mx-auto" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></button>
+                                <button  onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-pen-to-square"></i></button>
+                                <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></button>
                             <% } %>
 
                             <% if (obj[x].fav == 1) { %>
-                                <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light mx-auto" onclick="TL.favorite_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></button>
+                                <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.favorite_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></button>
                             <% } %>
 
                         </div>
