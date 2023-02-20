@@ -50,6 +50,10 @@
             <div class="mobile-head-large-title text-left w-100">
                 <div class="mobile-list-titlename">
                     <div>
+                        <!-- 刷新按钮 -->
+                        <span class="text-azure" onclick="TL.direct.filelist(0);">
+                            <i class="fa-fw fa-light fa-sync"></i>
+                        </span>
                         <span id="direct_bind_domain_box">
                             <a href="#" target="_blank" id="direct_bind_domain">#</a>
                         </span>
@@ -62,10 +66,6 @@
                         <span>
                             <span i18n="direct_total_transfer">.</span>
                             <span id="direct_total_transfer">0</span>
-                        </span>
-                        <span>
-                            <span i18n="direct_total_downloads">.</span>
-                            <span id="direct_total_downloads">0</span>
                         </span>
                     </div>
                 </div>
@@ -143,7 +143,12 @@
     </div>
 </nav>
 
-<div class="mobile-head-padding-large"></div>
+<div class="mobile-head-padding-large" style="padding-top: 160px;"></div>
+
+<div class="text-center text-muted">
+    <span i18n="direct_total_downloads">.</span>
+    <span id="direct_total_downloads">0</span>
+</div>
 
 <div id="filelist" style="display: none;">
     <div id="filelist_model">
@@ -193,7 +198,7 @@
         <script type="text/template" id="direct_filelist_list_tpl">
             <% for (var x in obj) { %>
                 <div class="row mobile-list-bar file_unit_<% obj[x].direct_key %>">
-                    <div class="col-2 mobile-list-vertical text-center" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                    <div class="col-2 mobile-list-icon-center text-center" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
                         <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure fa-2x"></i>
                     </div>
                     <div class="col-7 p-0">
@@ -223,7 +228,7 @@
                             <% } %>  
                         </div>
                     </div>
-                    <div class="col-3 p-0 mobile-list-vertical">
+                    <div class="col-3 p-0 mobile-list-icon-center">
                         <button onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].direct_link}`) %>',true)" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
                         <button id="btn-rm-file_<% obj[x].direct_key %>" class="btn btn-sm btn-light mx-1" onclick="TL.direct.delLink('<% obj[x].direct_key %>')">
                             <i class="fa-fw fa-light fa-trash text-danger"></i>

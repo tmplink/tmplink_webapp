@@ -95,9 +95,22 @@
   list-style: none;
 }
 
-.mobile-list-vertical {
+.mobile-list-icon-center {
   display: flex;
   align-items: center;
+  justify-content: right;
+}
+
+.mobile-list-icon-left {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.mobile-list-icon-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 文件名不带换行完整展示 */

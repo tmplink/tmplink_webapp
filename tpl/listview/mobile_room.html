@@ -40,6 +40,7 @@
                                 <i class="fa-regular fa-gear fa-2x"></i>
                             </span>
                             <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
+                                
                                 <button class="dropdown-item room_btn_performance"
                                     onclick="TL.room_performance_open();">
                                     <i class="fa-fw fa-solid fa-gear"></i>
@@ -288,7 +289,7 @@
             <script type="text/template" id="dir_filelist_tpl">
                 <% for (var x in obj) { %>
                     <div class="row mobile-list-bar file_unit_<% obj[x].ukey %>">
-                        <div class="col-2 mobile-list-vertical text-center" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                        <div class="col-2 mobile-list-icon-center text-center" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
                             <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure fa-2x"></i>
                         </div>
                         <div class="col-7 p-0">
@@ -318,7 +319,7 @@
                                 <% } %>  
                             </div>
                         </div>
-                        <div class="col-3 p-0 pr-2 mobile-list-vertical">
+                        <div class="col-3 p-0 pr-2 mobile-list-icon-center">
                             <button href="javascript:void(0)" onclick="TL.download_direct('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-auto btn_download_<% obj[x].ukey %>">
                                 <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                             </button>
@@ -438,7 +439,7 @@
             <script type="text/template" id="dir_list_tpl">
                 <% for (var x in obj) { %>
                     <div class="row mobile-list-bar-dir" id="meetingroom_id_<% obj[x].mr_id %>">
-                        <div class="col-2 mobile-list-vertical">
+                        <div class="col-2 mobile-list-icon-center">
                             <% if (obj[x].fav == 0) { %>
                                 <% if (obj[x].model == 'public') { %>
                                     <i class="fa-light fa-folder text-cyan text-azure fa-2x"></i>
@@ -449,12 +450,12 @@
                                 <i class="fa-light fa-link text-cyan text-azureazure fa-2x"></i>
                             <% } %> 
                         </div>
-                        <div class="col-7 p-0 mobile-list-vertical">
+                        <div class="col-7 p-0 mobile-list-icon-center">
                             <a href="/app&listview=room&mrid=<% obj[x].mr_id %>" class="mobile-list-filename filelist_link" tmpui-action="TL.room_list()">
                                 <% obj[x].name %>
                             </a>
                         </div>
-                        <div class="col-3 p-0 pr-2 mobile-list-vertical text-right">
+                        <div class="col-3 p-0 pr-2 mobile-list-icon-center text-right">
 
                             <% if (obj[x].type === 'owner') { %>
                                 <button  onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-azure btn btn-sm btn-light mx-auto"><i class="fa-fw fa-light fa-pen-to-square"></i></button>
