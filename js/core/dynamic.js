@@ -149,8 +149,6 @@ class dynamic {
     }
 
     workspace() {
-        console.log(window.screen.width);
-        console.log(isMobileScreen());
         if (isMobileScreen()) {
             $('#home_view').html(app.getFile('/tpl/listview/mobile_workspace.html'));
         } else {

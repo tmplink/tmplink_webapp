@@ -747,7 +747,7 @@ class tmplink {
 
         $('#btn_preview_download').removeAttr('disabled');
         $('#btn_preview_download').html(app.languageData.on_select_download);
-        $('#btn_preview_download').attr('onclick', 'TL.download_file_btn(\'' + ukey + '\')');
+        $('#btn_preview_download').attr('onclick', 'TL.download_direct(\'' + ukey + '\')');
         $('#btn_preview_remove').attr('onclick', "TL.workspace_del('" + ukey + "')");
         $('#previewModal').modal('show');
     }

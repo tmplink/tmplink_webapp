@@ -1,6 +1,6 @@
 const allowedTypes = ["js", "css", "jpg", "png", "webp", "woff", "svg", "gif", "ico", "ttf", "eot", "woff2", "html",'json','index','webmanifest'];
 const allowedDomain = ["static.vx-cdn.com","tmp.link","ttttt.link","gstatic.com","www.recaptcha.net","127.0.0.1","googletagmanager.com","google-analytics.com"];
-const resSet = "tmplink v1052";
+const resSet = "tmplink v1053";
 const assets = [
   '/',
 ];
