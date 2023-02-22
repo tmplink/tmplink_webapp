@@ -73,7 +73,7 @@ class dynamic {
             TL.head_set();
         });
         app.linkRebind();
-        if(TL.isMobile()){
+        if(isMobileScreen()){
             TL.bg_remove();
             this.mobileHead();
         }
@@ -149,7 +149,9 @@ class dynamic {
     }
 
     workspace() {
-        if (TL.isMobile()) {
+        console.log(window.screen.width);
+        console.log(isMobileScreen());
+        if (isMobileScreen()) {
             $('#home_view').html(app.getFile('/tpl/listview/mobile_workspace.html'));
         } else {
             $('#home_view').html(app.getFile('/tpl/listview/workspace.html'));
@@ -162,7 +164,7 @@ class dynamic {
     }
 
     room() {
-        if (TL.isMobile()) {
+        if (isMobileScreen()) {
             $('#home_view').html(app.getFile('/tpl/listview/mobile_room.html'));
         } else {
             $('#home_view').html(app.getFile('/tpl/listview/room.html'));
@@ -175,7 +177,7 @@ class dynamic {
     }
 
     direct() {
-        if (TL.isMobile()) {
+        if (isMobileScreen()) {
             $('#home_view').html(app.getFile('/tpl/listview/mobile_direct.html'));
         } else {
             $('#home_view').html(app.getFile('/tpl/listview/direct.html'));

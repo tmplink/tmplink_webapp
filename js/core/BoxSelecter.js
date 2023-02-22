@@ -13,7 +13,7 @@ class BoxSelecter {
     }
 
     mobileHeadShow() {
-        if (this.parent_op.isMobile()) {
+        if (isMobileScreen()) {
             //如果有被选中的项目，则显示
             if ($(`[data-check="true"]`).length > 0) {
                 $('.mobile-head-selector').show();

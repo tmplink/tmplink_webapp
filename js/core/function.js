@@ -2,6 +2,18 @@ function isiPad() {
     return (/macintosh|mac os x/i.test(navigator.userAgent) && window.screen.height > window.screen.width && !navigator.userAgent.match(/(iPhone\sOS)\s([\d_]+)/)) || navigator.userAgent.match(/(iPad).*OS\s([\d_]+)/);
 }
 
+function isMobile() {
+    if (/(iphone|ipad|ipod|ios|android)/i.test(navigator.userAgent.toLowerCase())) {
+        return true;
+    } else {
+        return false;
+    };
+}
+
+function isMobileScreen() {
+    return window.screen.width < 675;
+}
+
 //if iphone or ipad
 function is_iphone_or_ipad() {
     //如果是 macos 或者 windows 设备

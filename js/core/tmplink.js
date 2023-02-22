@@ -153,10 +153,6 @@ class tmplink {
         });
     }
 
-    isMobile() {
-        return window.screen.width < 675;
-    }
-
     matchNightModel() {
         let media = window.matchMedia('(prefers-color-scheme: dark)');
         return media.matches;
@@ -338,7 +334,7 @@ class tmplink {
         //如果在首页，载入视频
         let url = get_url_params('tmpui_page');
         let page = url.tmpui_page;
-        if (page === '/' || page === undefined || this.isMobile() === false) {
+        if (page === '/' || page === undefined || isMobileScreen() === false) {
             let video = `<video muted id="bg_Video" style="height:auto;width:auto;min-height:100%;min-width:100%"><source src="${videoSrc}" type="video/mp4"></video>`;
             $('body').append(`<div id="background_wrap_video" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;display:none;width: 100%;">${video}</div>`);
             $('#background_wrap').hide();
@@ -364,7 +360,7 @@ class tmplink {
         //如果在首页，载入视频
         let url = get_url_params('tmpui_page');
         let page = url.tmpui_page;
-        if (page === '/' || page === undefined || this.isMobile() === false) {
+        if (page === '/' || page === undefined || isMobileScreen() === false) {
             $('#background_wrap_video').fadeOut();
             $('#bg_Video').attr('src', videoSrc);
             let v = document.getElementById('bg_Video');
@@ -1482,19 +1478,11 @@ class tmplink {
         window.location.href = openlink;
     }
 
-    isMobile() {
-        if (/(iphone|ipad|ipod|ios|android)/i.test(navigator.userAgent.toLowerCase())) {
-            return true;
-        } else {
-            return false;
-        };
-    }
-
     download_check() {
         // if (this.isWeixin()) {
         //     return false;
         // }
-        // if (this.isMobile()) {
+        // if (isMobileScreen()) {
         //     return false;
         // }
     }
@@ -1740,7 +1728,7 @@ class tmplink {
         }
         //在移动设备上无法使用全部下载功能
         let room_key = 'app_room_view_' + this.room.mr_id;
-        // if (this.isMobile()) {
+        // if (isMobileScreen()) {
         //     this.alert(app.languageData.alert_no_support);
         //     return false;
         // }
@@ -2828,7 +2816,7 @@ class tmplink {
                 $('.btn_for_desktop').hide();
             }
 
-            if(this.isMobile()){
+            if(isMobileScreen()){
                 this.room_mobile_prepare();
             }else{
                 $('#room_back_btn').html(app.tpl('room_back_btn_tpl', {}));

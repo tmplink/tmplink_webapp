@@ -159,9 +159,25 @@
     </div>
 </nav>
 
-<nav class="mainNav nav-mobile fixed-bottom p-2 nav-bottom-set glass" style="display: none;">
+<nav class="mainNav nav-mobile fixed-bottom p-2 nav-bottom-set  glass" style="display: none;">
     <!--[mobile]-->
     <div class="row text-center">
+        <div class="col-4">
+            <div class="btn-group dropup">
+                <button type="button" class="btn" data-toggle="dropdown">
+                    <div class="d-flex flex-column">
+                        <i class="fa-light fa-language fa-fw mx-auto"></i>
+                        <span class="selected_lang">.</span>
+                    </div>
+                </button>
+                <div class="dropdown-menu shadow">
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('cn');">简体中文</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('hk');">繁体中文</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('en');">English</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
+                </div>
+            </div>
+        </div>
         <div class="col-4">
             <!--[login]-->
             <div class="workspace-nologin">
@@ -266,22 +282,6 @@
                         <i class="fa-light fa-right-from-bracket"></i>
                         <span i18n="navbar_exit">.</span>
                     </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="btn-group dropup">
-                <button type="button" class="btn" data-toggle="dropdown">
-                    <div class="d-flex flex-column">
-                        <i class="fa-light fa-language fa-fw mx-auto"></i>
-                        <span class="selected_lang">.</span>
-                    </div>
-                </button>
-                <div class="dropdown-menu shadow">
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('cn');">简体中文</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('hk');">繁体中文</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('en');">English</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
                 </div>
             </div>
         </div>

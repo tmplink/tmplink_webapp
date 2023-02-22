@@ -57,8 +57,8 @@ class direct {
             //如果有设定品牌
             if (rsp.data.brand_logo_id !== '0') {
                 let img_size = '64px';
-                console.log(this.parent_op.isMobile());
-                if(this.parent_op.isMobile()){
+                console.log(isMobileScreen());
+                if(isMobileScreen()){
                     img_size = '26px';
                 }
                 $('#brand_saved_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:64px;border-radius: 12px;" />`);

@@ -14,6 +14,10 @@ class navbar {
         window.addEventListener('resize', () => {
             this.resetNavBar();
         });
+        //如果是 iphone，为底部导航加高度
+        if (this.isIPHONE()) {
+            $('.nav-mobile').addClass('topnav-iphone');
+        }
     }
 
     disabled() {
@@ -25,7 +29,7 @@ class navbar {
     }
 
     enabledMobile() {
-        if(this.isMobile()){
+        if(isMobileScreen()){
             $('.nav-mobile').show();
             $('.nav-desktop').hide();
         }else{
@@ -64,8 +68,8 @@ class navbar {
         }
     }
 
-    isMobile() {
-        return window.screen.width < 675;
+    isIPHONE() {
+        return navigator.userAgent.match(/iPhone/i);
     }
 
     model_select(model, act) {

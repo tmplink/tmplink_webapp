@@ -20353,23 +20353,6 @@ svg {
   content: "\ea06";
 }
 
-.nav-bottom-set{
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  box-shadow: 0rem 0rem 1rem rgb(0 0 0 / 15%);
-}
-
-.nav-top-set{
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%) !important;
-}
-
-/* css 实现降下效果的动画效果 */
-.nav-top-slidedown{
-  animation: nav-top-slidedown 0.5s ease-in-out;
-}
-
 @keyframes nav-top-slidedown {
   0% {
     transform: translateY(-100%);

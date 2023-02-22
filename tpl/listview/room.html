@@ -335,7 +335,7 @@
                 <script type="text/template" id="dir_filelist_tpl">
                     <% for (var x in obj) { %>
                         <div class="row line mx-0 mb-1 py-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
-                            <div class="col-12 col-md-8 col-lg-7 my-1 d-flex align-items-center listfontweight filename">
+                            <div class="col-7 my-1 d-flex align-items-center listfontweight filename">
                                 <div>
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
                                     <a href="/file?ukey=<% obj[x].ukey %>" class="filelist_link mr-1" tmpui-app="true" target="_blank" onclick="event.stopPropagation();">
@@ -391,10 +391,8 @@
                                     <% } %>  
                                 </div>
                             </div>
-                            <div class="col-12 col-md-4 col-lg-2 my-1 d-flex align-items-center justify-content-end">
-                                <% obj[x].ctime %>
-                            </div>
-                            <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].ukey %>">
+                            <div class="col-5 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].ukey %>">
+                                <span alt="<% obj[x].ctime %>" class="mr-2"><% obj[x].cctime %></span>
                                 <span class="mr-2">
                                     <% obj[x].fsize_formated %>
                                 </span>
@@ -441,7 +439,7 @@
                                     </span>
                                 <% } %>
                             </div>
-                            <div class="col-12 col-md-12 col-lg-3 my-1 d-flex flex-row align-items-center justify-content-center file_relay_<% obj[x].ukey %>">
+                            <div class="col-5 my-1 d-flex flex-row align-items-center justify-content-center file_relay_<% obj[x].ukey %>">
                                 <div class="d-block w-100">
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
