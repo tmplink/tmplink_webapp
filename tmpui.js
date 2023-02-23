@@ -853,7 +853,7 @@ class tmpUI {
                 this.htmlAppend('#tmpui_loading_content', '<img src="' + this.loadingIcon + '" style="vertical-align: middle;border-style: none;width:129px;height:129px;margin-bottom: 10px;"/>');
             } 
             if (this.loadingText !== false) {
-                this.htmlAppend('#tmpui_loading_content', '<div style="text-align:center;font-size: 38px;font-family: fa5-proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;">' + this.loadingText + '</div>');
+                this.htmlAppend('#tmpui_loading_content', '<div style="text-align:center;font-size: 38px;font-family: \'monospace\'">' + this.loadingText + '</div>');
             }
 
             this.loadingPageInit = true;
