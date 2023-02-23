@@ -224,13 +224,7 @@
                                         </span>
                                     <% } %>   
                                     
-                                    <% if(obj[x].model!=99){ %>
-                                        <!--[在大屏幕上显示]-->
-                                        <span>
-                                            <i class="fa-fw fa-light fa-stopwatch"></i> 
-                                            <span class="lefttime-remainder" id="wd_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
-                                        </span>
-                                    <% } %>
+                                    
                                     <% if(obj[x].like>0){ %>
                                         <span class="badge badge-pill badge-primary">
                                             <i class="fa-fw fa-solid fa-circle-star text-yellow"></i>
@@ -243,12 +237,20 @@
                                             <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
                                         </span>
                                     <% } %>
+                                    <% if(obj[x].model!=99){ %>
+                                        <!--[在大屏幕上显示]-->
+                                        <span>
+                                            <i class="fa-fw fa-light fa-stopwatch"></i> 
+                                            <span class="lefttime-remainder" id="wd_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
+                                        </span>
+                                    <% } %>
                                 </div>
 
                             </div>
                         </div>
                         <div class="col-5 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].ukey %>">
-                            <span alt="<% obj[x].ctime %>" class="mr-2"><% obj[x].cctime %></span>
+                            <!-- 在平板上不显示 -->
+                            <span alt="<% obj[x].ctime %>" class="mr-2 d-none d-lg-block"><% obj[x].cctime %></span>
                             <span class="mr-2"><% obj[x].fsize_formated %></span>
                             <button onclick="event.stopPropagation();TL.download_direct('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></button>
                             <button onclick="event.stopPropagation();TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/f/${obj[x].ukey}`) %>',true)" class="text-azure  btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
