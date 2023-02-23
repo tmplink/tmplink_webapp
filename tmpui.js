@@ -1,8 +1,8 @@
 /**
  * tmpUI.js
- * version: 35
+ * version: 36
  * Github : https://github.com/tmplink/tmpUI
- * Date :2023-02-15
+ * Date :2023-02-23
  */
 
 class tmpUI {
@@ -851,8 +851,9 @@ class tmpUI {
 
             if (this.loadingIcon !== false) {
                 this.htmlAppend('#tmpui_loading_content', '<img src="' + this.loadingIcon + '" style="vertical-align: middle;border-style: none;width:129px;height:129px;margin-bottom: 10px;"/>');
-            } else {
-                this.htmlAppend('#tmpui_loading_content', '<div style="text-align:center;font-family: fa5-proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;">' + this.loadingText + '</div>');
+            } 
+            if (this.loadingText !== false) {
+                this.htmlAppend('#tmpui_loading_content', '<div style="text-align:center;font-size: 38px;font-family: fa5-proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;">' + this.loadingText + '</div>');
             }
 
             this.loadingPageInit = true;
