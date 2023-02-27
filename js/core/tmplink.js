@@ -1,6 +1,7 @@
 class tmplink {
 
     api_url = 'https://tmp-api.vx-cdn.com/api_v2'
+    api_url_sec = 'https://tmplink-sec.vxtrans.com/api_v2'
     api_url_upload = this.api_url + '/file'
     api_file = this.api_url + '/file'
     api_pay = this.api_url + '/pay'
@@ -8,7 +9,7 @@ class tmplink {
     api_direct = this.api_url + '/direct'
     api_media = this.api_url + '/media'
     api_mr = this.api_url + '/meetingroom'
-    api_toks = this.api_url + '/token'
+    api_toks = this.api_url_sec + '/token'
     api_token = null
     site_domain = null
 
@@ -48,7 +49,7 @@ class tmplink {
     upload_model_selected_val = 0
     download_retry = 0
     download_retry_max = 10
-    recaptcha_op = true
+    recaptcha_op = false
     recaptcha_actions = [
         "token",
         "download_req", "upload_request_select2",
