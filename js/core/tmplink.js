@@ -181,6 +181,7 @@ class tmplink {
     }
 
     ga(target) {
+        return true;
         gtag('config', 'UA-96864664-3', {
             'page_title': target,
             'page_location': location.href,

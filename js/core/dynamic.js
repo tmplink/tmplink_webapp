@@ -106,14 +106,6 @@ class dynamic {
         });
     }
 
-    ga(target) {
-        gtag('config', 'UA-96864664-3', {
-            'page_title': target,
-            'page_location': location.href,
-        });
-    }
-
-
     preload() {
 
         TL.loading_box_on();
@@ -137,7 +129,7 @@ class dynamic {
             () => {
                 if (TL.logined == 0) {
                     //未登录，跳转到登录页
-                    this.ga('Index');
+                    TL.ga('Index');
                     window.location.href = '/';
                 } else {
                     //已登录，进入 workspace
@@ -154,7 +146,7 @@ class dynamic {
         } else {
             $('#home_view').html(app.getFile('/tpl/listview/workspace.html'));
         }
-        this.ga('Workspace');
+        TL.ga('Workspace');
         app.dynOpen('/app&listview=workspace');
         this.active('workspace');
         INIT_workspace();
@@ -167,7 +159,7 @@ class dynamic {
         } else {
             $('#home_view').html(app.getFile('/tpl/listview/room.html'));
         }
-        this.ga('Desktop');
+        TL.ga('Desktop');
         // app.dynOpen('/app&listview=room');
         this.active('room');
         INIT_room();
@@ -180,7 +172,7 @@ class dynamic {
         } else {
             $('#home_view').html(app.getFile('/tpl/listview/direct.html'));
         }
-        this.ga('Direct');
+        TL.ga('Direct');
         app.dynOpen('/app&listview=direct');
         this.active('direct');
         TL.navbar.model_direct();
@@ -188,7 +180,7 @@ class dynamic {
     }
 
     login() {
-        this.ga('Login');
+        TL.ga('Login');
         $('#home_view').html(app.getFile('/tpl/listview/login.html'));
         app.dynOpen('/app&listview=login');
         TL.navbar.disabled();
@@ -196,7 +188,7 @@ class dynamic {
     }
 
     reg() {
-        this.ga('Register');
+        TL.ga('Register');
         $('#home_view').html(app.getFile('/tpl/listview/reg.html'));
         app.dynOpen('/app&listview=reg');
         TL.navbar.disabled();
@@ -204,7 +196,7 @@ class dynamic {
     }
 
     reset() {
-        this.ga('Reset');
+        TL.ga('Reset');
         $('#home_view').html(app.getFile('/tpl/listview/reset.html'));
         app.dynOpen('/app&listview=reset');
         TL.navbar.model_direct();
@@ -212,14 +204,14 @@ class dynamic {
     }
 
     tos() {
-        this.ga('Terms of Service');
+        TL.ga('Terms of Service');
         $('#home_view').html(app.getFile('/tpl/listview/tos.html'));
         app.dynOpen('/app&listview=tos');
         INIT_tos();
     }
 
     privacy() {
-        this.ga('Privacy Policy');
+        TL.ga('Privacy Policy');
         $('#home_view').html(app.getFile('/tpl/listview/privacy.html'));
         app.dynOpen('/app&listview=privacy');
         INIT_privacy();
