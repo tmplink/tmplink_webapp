@@ -30,7 +30,6 @@ class tmplink {
     list_data = []
     dir_tree = {}
     subroom_data = []
-    recaptcha = '6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5'
     download_queue = []
     download_queue_processing = false
     download_index = 0
@@ -50,6 +49,7 @@ class tmplink {
     download_retry = 0
     download_retry_max = 10
     recaptcha_op = false
+    recaptcha = '0x4AAAAAAAC2gV-9041iXKUJ'
     recaptcha_actions = [
         "token",
         "download_req", "upload_request_select2",
@@ -175,13 +175,13 @@ class tmplink {
     setThemeColor() {
         if (this.matchNightModel()) {
             $('meta[name="theme-color"]').attr('content', '#000');
-        }else{
+        } else {
             $('meta[name="theme-color"]').attr('content', '#fff');
         }
     }
 
     ga(title) {
-        if(this.api_token == null){
+        if (this.api_token == null) {
             setTimeout(() => {
                 this.ga(title);
             }, 3000);
@@ -191,7 +191,7 @@ class tmplink {
             action: 'event_ui',
             token: this.api_token,
             title: title,
-            path: location.pathname+location.search,
+            path: location.pathname + location.search,
         });
     }
 
@@ -264,7 +264,7 @@ class tmplink {
     }
 
     bg_load() {
-        if(this.bgLoaded===false){
+        if (this.bgLoaded === false) {
             let night = this.matchNightModel();
             this.bgLoadImg1(night);
             this.matchNightModelListener((night) => {
@@ -517,7 +517,6 @@ class tmplink {
         //         return true;
         //     }
         // }
-
         if (this.recaptcha_op && this.recaptchaCheckAction(type)) {
             if (typeof grecaptcha === 'object') {
                 grecaptcha.ready(() => {
@@ -533,8 +532,11 @@ class tmplink {
                 }, 500);
             }
         } else {
-            cb(this.randomString(64));
-            return true;
+            $.post(this.api_toks, {
+                action: 'challenge',
+            }, (rsp) => {
+                cb(rsp.data);
+            });
         }
     }
 
@@ -658,7 +660,7 @@ class tmplink {
                 $('.user_total_files').html(this.user_total_files);
                 $('.user_total_filesize').html(this.user_total_filesize);
                 $('.user_total_upload').html(this.user_total_upload);
-                if(this.sponsor){
+                if (this.sponsor) {
                     $('.user_sponsor_time').html(this.sponsor_time);
                 }
             } else {
@@ -1089,9 +1091,9 @@ class tmplink {
                     });
 
                     //如果设置了个性化图标
-                    if(rsp.data.ui_publish==='yes' && rsp.data.ui_publish_status==='ok' && rsp.data.ui_pro==='yes'){
+                    if (rsp.data.ui_publish === 'yes' && rsp.data.ui_publish_status === 'ok' && rsp.data.ui_pro === 'yes') {
                         $('.userinfo_avatar').show();
-                        let avatarURL = `https://tmp-static.vx-cdn.com/static/avatar?id=${rsp.data.ui_avatar_id}`; 
+                        let avatarURL = `https://tmp-static.vx-cdn.com/static/avatar?id=${rsp.data.ui_avatar_id}`;
                         let img = new Image();
                         img.src = avatarURL;
                         img.onload = () => {
@@ -1100,10 +1102,10 @@ class tmplink {
                     }
 
                     //设定分享者信息
-                    if(rsp.data.ui_publish==='yes' && rsp.data.ui_publish_status==='ok'){
-                        if(rsp.data.ui_pro==='yes'){
+                    if (rsp.data.ui_publish === 'yes' && rsp.data.ui_publish_status === 'ok') {
+                        if (rsp.data.ui_pro === 'yes') {
                             $('.userinfo_pro').show();
-                        }else{
+                        } else {
                             $('.userinfo_sd').show();
                         }
                         $('.userinfo').show();
@@ -1211,20 +1213,20 @@ class tmplink {
                             });
 
                             //如果可以，显示播放按钮
-                            if (this.stream.allow(rsp.data.name, this.uid)||this.stream.checkForOpenOnApps(rsp.data.name, this.uid)) {
+                            if (this.stream.allow(rsp.data.name, this.uid) || this.stream.checkForOpenOnApps(rsp.data.name, this.uid)) {
                                 $('.btn_play').show();
-                                if(this.stream.allow(rsp.data.name, this.uid)){
-                                    $('.play_on_browser').attr('onclick',`TL.stream.request('${params.ukey}','web')`);
+                                if (this.stream.allow(rsp.data.name, this.uid)) {
+                                    $('.play_on_browser').attr('onclick', `TL.stream.request('${params.ukey}','web')`);
                                     $('.play_on_browser').show();
                                 }
-                                if(this.stream.checkForOpenOnApps(rsp.data.name, this.uid)){
-                                    $('.play_on_potplayer').attr('onclick',`TL.stream.request('${params.ukey}','potplayer')`);
+                                if (this.stream.checkForOpenOnApps(rsp.data.name, this.uid)) {
+                                    $('.play_on_potplayer').attr('onclick', `TL.stream.request('${params.ukey}','potplayer')`);
                                     $('.play_on_potplayer').show();
-                                    $('.play_on_iina').attr('onclick',`TL.stream.request('${params.ukey}','iina')`);
+                                    $('.play_on_iina').attr('onclick', `TL.stream.request('${params.ukey}','iina')`);
                                     $('.play_on_iina').show();
-                                    $('.play_on_nplayer').attr('onclick',`TL.stream.request('${params.ukey}','nplayer')`);
+                                    $('.play_on_nplayer').attr('onclick', `TL.stream.request('${params.ukey}','nplayer')`);
                                     $('.play_on_nplayer').show();
-                                    $('.play_copy_url').attr('onclick',`TL.stream.request('${params.ukey}','copy')`);
+                                    $('.play_copy_url').attr('onclick', `TL.stream.request('${params.ukey}','copy')`);
                                     $('.play_copy_url').show();
                                 }
                             }
@@ -2787,10 +2789,10 @@ class tmplink {
             }
 
             //如果有设定个性化设置
-            if(this.room.ui_publish==='yes' && this.room.ui_publish_status==='ok'){
-                if(this.room.ui_pro==='yes'){
+            if (this.room.ui_publish === 'yes' && this.room.ui_publish_status === 'ok') {
+                if (this.room.ui_pro === 'yes') {
                     $('.userinfo_pro').show();
-                }else{
+                } else {
                     $('.userinfo_sd').show();
                 }
                 $('.userinfo').show();
@@ -2825,12 +2827,12 @@ class tmplink {
                 $('.btn_for_desktop').hide();
             }
 
-            if(isMobileScreen()){
+            if (isMobileScreen()) {
                 this.room_mobile_prepare();
-            }else{
+            } else {
                 $('#room_back_btn').html(app.tpl('room_back_btn_tpl', {}));
             }
-            
+
             $('#room_loading').hide();
             $('#room_loaded').show();
             //重新设定网页标题
@@ -2839,16 +2841,16 @@ class tmplink {
         });
     }
 
-    room_mobile_prepare(){
-        let mrid = this.room.mr_id===undefined?0:this.room.mr_id;
-        if(mrid!==0){
+    room_mobile_prepare() {
+        let mrid = this.room.mr_id === undefined ? 0 : this.room.mr_id;
+        if (mrid !== 0) {
             let back_btn = `<a href="/app&listview=room&mrid=${TL.room.parent}" tmpui-action="TL.room_list()" class="text-azure mt-1 btn_for_sub"><i class="fa-solid fa-arrow-left fa-2x"></i></a>`;
             $('#room_back').html(back_btn);
-        }else{
+        } else {
             $('#room_back').html('');
         }
 
-        $('.btn_upload').attr('onclick',`TL.uploader.open('${mrid}')`);
+        $('.btn_upload').attr('onclick', `TL.uploader.open('${mrid}')`);
 
         $('#mr_id').val(mrid);
         $('#mr_parent_id').val(this.room.parent);
@@ -2858,19 +2860,19 @@ class tmplink {
         this.room_mobile_topabr_fixed(mrid);
     }
 
-    room_mobile_topabr_fixed(mrid){
-        if(mrid===0){
-            $('.mobile-head-padding-large').css('padding-top','80px');
+    room_mobile_topabr_fixed(mrid) {
+        if (mrid === 0) {
+            $('.mobile-head-padding-large').css('padding-top', '80px');
             $('.btn_mobile_top').hide();
             $('.btn_mobile_sub').show();
-        }else{
+        } else {
             $('.btn_mobile_top').show();
             $('.btn_mobile_sub').hide();
             //根据 room_subinfo 的显示状态来设定 padding-top 的值
-            if($('.room_subinfo').css('display')==='none'){
-                $('.mobile-head-padding-large').css('padding-top','150px');
-            }else{
-                $('.mobile-head-padding-large').css('padding-top','170px');
+            if ($('.room_subinfo').css('display') === 'none') {
+                $('.mobile-head-padding-large').css('padding-top', '150px');
+            } else {
+                $('.mobile-head-padding-large').css('padding-top', '170px');
             }
         }
     }

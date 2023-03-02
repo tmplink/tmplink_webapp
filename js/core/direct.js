@@ -57,7 +57,6 @@ class direct {
             //如果有设定品牌
             if (rsp.data.brand_logo_id !== '0') {
                 let img_size = '64px';
-                console.log(isMobileScreen());
                 if(isMobileScreen()){
                     img_size = '26px';
                 }
