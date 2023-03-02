@@ -180,11 +180,18 @@ class tmplink {
         }
     }
 
-    ga(target) {
-        return true;
-        gtag('config', 'UA-96864664-3', {
-            'page_title': target,
-            'page_location': location.href,
+    ga(title) {
+        if(this.api_token == null){
+            setTimeout(() => {
+                this.ga(title);
+            }, 3000);
+            return false;
+        }
+        $.post(this.api_user, {
+            action: 'event_ui',
+            token: this.api_token,
+            title: title,
+            path: location.pathname+location.search,
         });
     }
 
