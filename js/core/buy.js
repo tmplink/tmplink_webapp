@@ -33,6 +33,7 @@ class buy {
         this.selectCode('#buy_storage_256','256GB',6);
         $('#shopModal').modal('hide');
         $('#uploadModal').modal('hide');
+        $('#myModal').modal('hide');
         setTimeout(()=>{
             $('#storageModal').modal('show');
         },300);
@@ -45,6 +46,7 @@ class buy {
         this.selectPayment('cny');
         this.selected_code = 'HS';
         $('#shopModal').modal('hide');
+        $('#myModal').modal('hide');
         setTimeout(()=>{
             $('#sponsorModal').modal('show');
         },300);

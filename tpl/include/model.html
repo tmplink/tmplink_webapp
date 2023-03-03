@@ -166,8 +166,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="select-box p-2 btn-point"
-                            onclick="TL.buy.openStorage();">
+                        <div class="select-box p-2 btn-point" onclick="TL.buy.openStorage();">
                             <div class="d-flex align-items-center">
                                 <span class="stamp stamp-md bg-blue mr-3">
                                     <i class="mt-1 fa-light fa-layer-plus fa-fw"></i>
@@ -1194,10 +1193,12 @@
             </div>
             <div class="modal-body">
                 <div class="text-center btn-pointer mb-4" onclick="TL.profile.openGroup()">
-                    <img class="user_badge" src="/img/level/1.svg" width="64"/>
+                    <img class="user_badge" src="/img/level/1.svg" width="64" />
                 </div>
                 <div class="text-center">
-                    <button type="button" class="btn btn-success mx-auto no_profile" i18n="btn_goto_myprofile" onclick="$('#myModal').modal('hide');setTimeout(()=>{TL.profile.openModal()},100);" style="display: none;">.</button>
+                    <button type="button" class="btn btn-success mx-auto no_profile" i18n="btn_goto_myprofile"
+                        onclick="$('#myModal').modal('hide');setTimeout(()=>{TL.profile.openModal()},100);"
+                        style="display: none;">.</button>
                 </div>
                 <table class="table table-hover table-borderless">
                     <tbody>
@@ -1280,11 +1281,42 @@
                         </tr>
                     </tbody>
                 </table>
-                <div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" onclick="TL.buy.openSponsor()" i18n="model_title_sponsor">.</button>
+                </div>
+                <div class="mt-5">
                     <ul>
                         <li i18n="myprofile_gete_values1">.</li>
                         <li i18n="myprofile_gete_values2">.</li>
                         <li i18n="myprofile_gete_values3">.</li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="text-center">
+                    <h4 i18n="myprofile_storage_title">.</h4>
+                </div>
+                <span i18n="myprofile_storage_title_tmp">.</span>
+                <div class="progress mt-2 mb-2" style="height: 20px;">
+                    <div class="progress-bar bg-primary" role="progressbar"
+                        style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <span i18n="myprofile_storage_title_unlimit">.</span>
+                    </div>
+                </div>
+                <span i18n="myprofile_storage_title_private">.</span>
+                <span> - </span> 
+                <span class="user_storage_total"></span>
+                <div class="progress bg-success mt-2 mb-2" style="height: 20px;">
+                    <div class="progress-bar user_storage_total_percent" role="progressbar" aria-valuemax="100">
+                        <span class="private_storage_used mx-1"></span>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" onclick="TL.buy.openStorage()" i18n="model_btn_buy_storage">.</button>
+                </div>
+                <div class="mt-5">
+                    <ul>
+                        <li i18n="myprofile_storage_des_1">.</li>
+                        <li i18n="myprofile_storage_des_2">.</li>
                     </ul>
                 </div>
             </div>
@@ -1315,7 +1347,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row"><img src="/img/level/1.svg" height="32"/></th>
+                            <th scope="row"><img src="/img/level/1.svg" height="32" /></th>
                             <td> 0 </td>
                             <td><i class="fa-regular fa-circle-xmark text-red"></i></td>
                             <td><i class="fa-regular fa-circle-xmark text-red"></i></td>
@@ -1462,19 +1494,19 @@
             <div class="modal-body">
                 <button class="btn btn-lg btn-primary btn-block text-left play_on_browser" style="display: none;">
                     <i class="fa-solid fa-browser"></i>
-                    <span >Browser</span>
+                    <span>Browser</span>
                 </button>
                 <button class="btn btn-lg btn-success btn-block text-left  play_on_potplayer" style="display: none;">
                     <i class="fa-regular fa-send-backward"></i>
-                    <span >potplayer</span>
+                    <span>potplayer</span>
                 </button>
                 <button class="btn btn-lg btn-success btn-block text-left  play_on_iina" style="display: none;">
                     <i class="fa-regular fa-send-backward"></i>
-                    <span >IINA</span>
+                    <span>IINA</span>
                 </button>
                 <button class="btn btn-lg btn-success btn-block text-left  play_on_nplayer" style="display: none;">
                     <i class="fa-regular fa-send-backward"></i>
-                    <span >nplayer</span>
+                    <span>nplayer</span>
                 </button>
                 <button class="btn btn-lg btn-success btn-block text-left  play_copy_url" style="display: none;">
                     <i class="fa-regular fa-send-backward"></i>

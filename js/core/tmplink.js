@@ -619,6 +619,7 @@ class tmplink {
                 this.uid = rsp.data.uid;
                 this.storage_used = rsp.data.storage_used;
                 this.storage = rsp.data.storage;
+                this.private_storage_used = rsp.data.private_storage_used;
                 this.high_speed_channel = rsp.data.highspeed;
                 this.sponsor = rsp.data.sponsor;
                 this.sponsor_time = rsp.data.sponsor_time;
@@ -3133,10 +3134,14 @@ class tmplink {
         let data = {};
         data.storage_text = bytetoconver(this.storage, true);
         data.storage_used_text = bytetoconver(this.storage_used, true);
+        data.private_storage_used_text = bytetoconver(this.private_storage_used, true);
+        data.private_storage_used_percent = (this.private_storage_used / this.storage) * 100;
         data.percent = (this.storage_used / this.storage) * 100;
         $('#upload_storage_status').html(data.storage_used_text + ' | ' + data.storage_text);
         $('.user_storage_used').html(data.storage_used_text);
         $('.user_storage_total').html(data.storage_text);
+        $('.private_storage_used').html(data.private_storage_used_text);
+        $('.private_storage_used_percent').css('width', data.private_storage_used_percent + '%');
         // $('#upload_storage_status').html(app.tpl('upload_storage_status_tpl', data));
     }
 

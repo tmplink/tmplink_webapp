@@ -1,4 +1,10 @@
 {
+    "myprofile_storage_title": "儲存空間",
+    "myprofile_storage_title_tmp": "暫存空間",
+    "myprofile_storage_title_private": "私人空間",
+    "myprofile_storage_title_unlimit": "無限制",
+    "myprofile_storage_des_1": "當帳戶中用於儲存檔案的私人空間容量不足時，系統將依序刪除最近上傳到私人空間的檔案，直到與私人空間容量相符。",
+    "myprofile_storage_des_2": "當私人空間容量為0時，所有儲存在私人空間中的檔案將被刪除。",
     "i2023_new_index_title": "小檔案，大檔案，輕鬆傳遞。",
     "i2023_new_index_title2": "无限空间，不受速度限制，免费使用。",
     "i2023_new_index_getting_start": "開始",

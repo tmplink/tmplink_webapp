@@ -1,4 +1,10 @@
 {
+    "myprofile_storage_title": "ストレージ",
+    "myprofile_storage_title_tmp": "一時的なストレージ",
+    "myprofile_storage_title_private": "プライベートストレージ",
+    "myprofile_storage_title_unlimit": "制限なし",
+    "myprofile_storage_des_1": "プライベートストレージに保存するためのプライベートストレージの容量が不足している場合、システムは最近プライベートストレージにアップロードされたファイルから順に削除され、プライベートストレージの容量に合わせます。",
+    "myprofile_storage_des_2": "プライベートストレージの容量が 0 の場合、プライベートストレージに保存されているすべてのファイルが削除されます。",
     "i2023_new_index_title": "ファイル配信サービス",
     "i2023_new_index_title2": "容量の制限なし、速度の制限なし、無料！",
     "i2023_new_index_getting_start": "すぐに使用する",
