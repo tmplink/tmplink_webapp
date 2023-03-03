@@ -209,7 +209,7 @@ class tmplink {
     }
 
     setArea(cb) {
-        $.post(this.api_toks, {
+        $.post(this.api_tokx, {
             action: 'set_area',
         }, (rsp) => {
             if (rsp.data === 1) {
