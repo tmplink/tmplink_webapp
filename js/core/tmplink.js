@@ -10,6 +10,7 @@ class tmplink {
     api_media = this.api_url + '/media'
     api_mr = this.api_url + '/meetingroom'
     api_toks = this.api_url_sec + '/token'
+    api_tokx = this.api_url + '/token'
     api_token = null
     site_domain = null
 
@@ -106,7 +107,7 @@ class tmplink {
 
         let token = localStorage.getItem('app_token');
         this.recaptcha_do('token_check', (captcha) => {
-            $.post(this.api_toks, {
+            $.post(this.api_tokx, {
                 action: 'token_check',
                 captcha: captcha,
                 token: token
@@ -121,7 +122,7 @@ class tmplink {
 
                 if (rsp.status != 1) {
                     this.recaptcha_do('token', (captcha) => {
-                        $.post(this.api_toks, {
+                        $.post(this.api_tokx, {
                             action: 'token',
                             captcha: captcha,
                             token: token
@@ -532,7 +533,7 @@ class tmplink {
                 }, 500);
             }
         } else {
-            $.post(this.api_toks, {
+            $.post(this.api_tokx, {
                 action: 'challenge',
             }, (rsp) => {
                 cb(rsp.data);
