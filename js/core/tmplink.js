@@ -73,7 +73,7 @@ class tmplink {
     constructor() {
         this.setArea();
         this.setDomain();
-        this.api_init();
+        // this.api_init();
         this.bg_init();
         this.setThemeColor();
 
@@ -610,10 +610,15 @@ class tmplink {
     }
 
     get_details(cb) {
+        //获取当前
+        let url = get_url_params('tmpui_page');
+        let page = url.tmpui_page;
+
         $.post(this.api_user, {
             action: 'get_detail',
             token: this.api_token
         }, (rsp) => {
+
             if (rsp.status === 1) {
                 localStorage.setItem('app_login', 1);
                 this.logined = 1;
@@ -634,8 +639,7 @@ class tmplink {
                 this.user_acv_dq = bytetoconver(rsp.data.acv_dq * 1024 * 1024, true);
                 this.user_acv_storage = bytetoconver(this.user_acv * 16 * 1024 * 1024, true);
 
-                this.profile_confirm_delete_set(rsp.data.pf_confirm_delete);
-                this.profile_bulk_copy_set(rsp.data.pf_bulk_copy);
+
                 localStorage.setItem('app_lang', rsp.data.lang);
 
                 this.mybg_light = rsp.data.pf_mybg_light;
@@ -644,27 +648,32 @@ class tmplink {
                 this.mybg_dark_key = rsp.data.pf_mybg_dark_key;
 
                 app.languageSet(rsp.data.lang);
-                //console.log
-                this.dir_tree_get();
+                //文件下载页，不执行这个操作
+                if (page != '/file') {
+                    this.profile_confirm_delete_set(rsp.data.pf_confirm_delete);
+                    this.profile_bulk_copy_set(rsp.data.pf_bulk_copy);
+                    this.dir_tree_get();
+                    //更新到 myModal
+                    $('.user_rank').html(this.uid);
+                    $('.user_storage').html(bytetoconver(this.storage_used) + '/' + bytetoconver(this.storage));
+                    $('.user_acv').html(this.user_acv);
+                    $('.user_acv_dq').html(this.user_acv_dq);
+                    $('.user_acv_storage').html(this.user_acv_storage);
+                    $('.user_join').html(this.user_join);
+                    $('.user_total_files').html(this.user_total_files);
+                    $('.user_total_filesize').html(this.user_total_filesize);
+                    $('.user_total_upload').html(this.user_total_upload);
+                    if (this.sponsor) {
+                        $('.user_sponsor_time').html(this.sponsor_time);
+                    }
+                }
                 //激活标识
                 if (this.high_speed_channel) {
                     $('.hs-enabled').show();
                 } else {
                     $('.hs-disabled').show();
                 }
-                //更新到 myModal
-                $('.user_rank').html(this.uid);
-                $('.user_storage').html(bytetoconver(this.storage_used) + '/' + bytetoconver(this.storage));
-                $('.user_acv').html(this.user_acv);
-                $('.user_acv_dq').html(this.user_acv_dq);
-                $('.user_acv_storage').html(this.user_acv_storage);
-                $('.user_join').html(this.user_join);
-                $('.user_total_files').html(this.user_total_files);
-                $('.user_total_filesize').html(this.user_total_filesize);
-                $('.user_total_upload').html(this.user_total_upload);
-                if (this.sponsor) {
-                    $('.user_sponsor_time').html(this.sponsor_time);
-                }
+
             } else {
                 $('.user-unlogin').show();
                 localStorage.setItem('app_login', 0);

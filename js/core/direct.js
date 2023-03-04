@@ -28,6 +28,16 @@ class direct {
             cb();
             return false;
         }
+
+        //获取当前
+        let url = get_url_params('tmpui_page');
+        let page = url.tmpui_page;
+        let listview = url.listview;
+        if (page !== '/app'&&(listview==='direct'||listview==='room')) {
+            cb();
+            return false;
+        }
+
         $.post(this.parent_op.api_direct, {
             'action': 'details',
             'token': this.parent_op.api_token

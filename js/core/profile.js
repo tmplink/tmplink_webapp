@@ -21,6 +21,14 @@ class profile {
     }
 
     init_details() {
+        //获取当前
+        let url = get_url_params('tmpui_page');
+        let page = url.tmpui_page;
+        let listview = url.listview;
+        if (page !== '/app'&&(listview!=='login'||listview!=='reg')) {
+            return false;
+        }
+
         $.post(this.parent_op.api_user, {
             'action': 'pf_userinfo_get',
             'token': this.parent_op.api_token
