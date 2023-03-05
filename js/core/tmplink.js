@@ -1246,11 +1246,9 @@ class tmplink {
                             $('#file_download_url_copy').on('click', () => {
                                 //复制内容到剪贴板
                                 navigator.clipboard.writeText(share_url);
-                                $('#file_download_url_copy_icon').removeClass('text-cyan');
-                                $('#file_download_url_copy_icon').addClass('text-success');
+                                $('#file_download_url_copy_icon').html('<i class="fas fa-circle-check text-green mx-auto my-auto mb-2 fa-3x"></i>');
                                 setTimeout(() => {
-                                    $('#file_download_url_copy_icon').addClass('text-cyan');
-                                    $('#file_download_url_copy_icon').removeClass('text-success');
+                                    $('#file_download_url_copy_icon').html('<i class="fa-regular fa-share-all fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>');
                                 }, 3000);
                                 return true;
                             });
