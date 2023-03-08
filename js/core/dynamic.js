@@ -159,7 +159,6 @@ class dynamic {
         } else {
             $('#home_view').html(app.getFile('/tpl/listview/room.html'));
         }
-        TL.ga('Desktop');
         // app.dynOpen('/app&listview=room');
         this.active('room');
         INIT_room();
