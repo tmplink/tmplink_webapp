@@ -1,4 +1,7 @@
 {
+    "model_title_upload_tmpup": "使用 tmpUP 上傳檔案 (新)",
+    "model_title_upload_tmpup_des": "在命令列環境下，使用 tmpUP 上傳檔案。擁有易於操作的實用界面。",
+    "model_title_upload_tmpup_des2": "點擊這裡查看詳細的使用方法。",
     "myprofile_storage_title": "儲存空間",
     "myprofile_storage_title_tmp": "暫存空間",
     "myprofile_storage_title_private": "私人空間",

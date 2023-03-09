@@ -23,6 +23,34 @@ class uploader {
         this.parent_op = parent_op;
     }
 
+    tmpupGenerator() {
+        $('#tmpup').show();
+        this.parent_op.btn_copy_bind();
+    }
+
+    tmpupGeneratorView() {
+        //如果有设定文件夹
+        let mrid = get_page_mrid();
+        let model = localStorage.getItem('app_upload_model');
+        let token = this.parent_op.api_token;
+
+        //显示 Token
+        $('#tmpup_mrid_view').hide();
+        $('#tmpup_token').html(token);
+        $('#tmpup_copy_token').attr('onclick',`TL.directCopy(this,'${token}')`);
+        $('#tmpup_model').html(model);
+        $('#tmpup_copy_model').attr('onclick',`TL.directCopy(this,'${model}')`);
+
+        console.log(mrid);
+        if(mrid!==undefined){
+            $('#tmpup_mrid_view').show();
+            $('#tmpup_mrid').html(mrid);
+            $('#tmpup_copy_mrid').attr('onclick',`TL.directCopy(this,'${mrid}')`);
+        }else{
+            $('#tmpup_mrid_view').hide();
+        }
+    }
+
     skipUpload() {
         this.skip_upload = ($('#skip_upload').is(':checked')) ? true : false;
     }
@@ -76,6 +104,8 @@ class uploader {
         }
 
         $('#uploadModal').modal('show');
+
+        this.tmpupGeneratorView();
     }
 
     upload_start() {

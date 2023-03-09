@@ -3423,6 +3423,26 @@ class tmplink {
         }
     }
 
+    directCopy(dom, content, base64) {
+
+        //如果传递进来的内容是 base64 编码的内容，先解码
+        if (base64 === true) {
+            content = Base64Decode(content);
+        }
+
+        if (dom !== null) {
+            let tmp = $(dom).html();
+            $(dom).html('<i class="fa-fw fa-light fa-circle-check"></i>');
+            setTimeout(() => {
+                $(dom).html(tmp);
+            }, 3000);
+        }
+
+        //直接复制
+        $.notifi(app.languageData.copied, "success",);
+        this.copyToClip(content);
+    }
+
     copyToClip(content) {
         var aux = document.createElement("textarea");
         aux.value = content;

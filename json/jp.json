@@ -1,4 +1,7 @@
 {
+    "model_title_upload_tmpup": "tmpUPを使ったファイルのアップロード（新）", 
+    "model_title_upload_tmpup_des": "コマンドライン環境でtmpUPを使ってファイルをアップロードする。インターフェイスが良く、使いやすい。", 
+    "model_title_upload_tmpup_des2": "詳しい使い方はこちらをご覧ください。",
     "myprofile_storage_title": "ストレージ",
     "myprofile_storage_title_tmp": "一時的なストレージ",
     "myprofile_storage_title_private": "プライベートストレージ",
