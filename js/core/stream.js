@@ -32,8 +32,10 @@ class stream {
     }
 
     checkForOpenOnApps(filename,owner){
-        if (owner!==this.parent.uid&&this.parent.sponsor!==true) {
-            return false;
+        if (owner!==this.parent.uid) {
+            if(this.parent.sponsor===false){
+                return false;
+            }
         }
         for (let i in this.open_on_apps_ext) {
             let ext = filename.substring(filename.lastIndexOf('.') + 1, filename.length);
@@ -45,8 +47,10 @@ class stream {
     }
 
     allow(filename,owner) {
-        if (owner!==this.parent.uid&&this.parent.sponsor!==true) {
-            return false;
+        if (owner!=this.parent.uid) {
+            if(this.parent.sponsor===false){
+                return false;
+            }
         }
         
         if(this.allow_ext.length==0){

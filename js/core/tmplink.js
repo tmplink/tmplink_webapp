@@ -223,7 +223,7 @@ class tmplink {
                 //     }
                 //     window.location.href = 'https://ttttt.link' + params;
                 // }
-                $('.btn_play').hide();
+                // $('.btn_play').hide();
             } else {
                 this.area_cn = false;
             }
@@ -1077,6 +1077,7 @@ class tmplink {
 
         this.loading_box_on();
         var params = get_url_params();
+        var fileinfo = null;
         if (params.ukey !== undefined) {
             $.post(this.api_file, {
                 action: 'details',
@@ -1085,11 +1086,10 @@ class tmplink {
             }, (rsp) => {
                 if (rsp.status === 1) {
                     this.ga('D-' + rsp.data.name);
+                    fileinfo = rsp.data;
                     $('#file_box').show();
                     $('#filename').html(rsp.data.name);
                     $('#filesize').html(rsp.data.size);
-
-
 
                     $('#btn_add_to_workspace_mobile').on('click', () => {
                         if (this.logined == 1) {
@@ -1224,13 +1224,13 @@ class tmplink {
                             });
 
                             //如果可以，显示播放按钮
-                            if (this.stream.allow(rsp.data.name, this.uid) || this.stream.checkForOpenOnApps(rsp.data.name, this.uid)) {
+                            if (this.stream.allow(rsp.data.name, fileinfo.owner) || this.stream.checkForOpenOnApps(rsp.data.name, fileinfo.owner)) {
                                 $('.btn_play').show();
-                                if (this.stream.allow(rsp.data.name, this.uid)) {
+                                if (this.stream.allow(rsp.data.name, fileinfo.owner)) {
                                     $('.play_on_browser').attr('onclick', `TL.stream.request('${params.ukey}','web')`);
                                     $('.play_on_browser').show();
                                 }
-                                if (this.stream.checkForOpenOnApps(rsp.data.name, this.uid)) {
+                                if (this.stream.checkForOpenOnApps(rsp.data.name, fileinfo.owner)) {
                                     $('.play_on_potplayer').attr('onclick', `TL.stream.request('${params.ukey}','potplayer')`);
                                     $('.play_on_potplayer').show();
                                     $('.play_on_iina').attr('onclick', `TL.stream.request('${params.ukey}','iina')`);
