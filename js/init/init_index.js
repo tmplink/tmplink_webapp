@@ -59,16 +59,21 @@ async function autoLogin() {
                 if (responseData.status === 1) {
                     setTimeout(() => {
                         Login();
-                    }, 2000);
+                    }, 1000);
                 } else {
-                    document.querySelector('#index_start').innerHTML = `<a href="javascript:;" class="btn-get-started scrollto" onclick="Login()">${app.languageData.i2023_new_index_getting_start}</a>`;
+                    showBtn();
                 }
             } else {
-                console.error('请求失败：', response.status, response.statusText);
+                showBtn();
             }
         } catch (error) {
             console.error('请求出错：', error);
+            showBtn();
         }
     }
+}
+
+function showBtn(){
+    document.querySelector('#index_start').innerHTML = `<a href="javascript:;" class="btn-get-started scrollto" onclick="Login()">${app.languageData.i2023_new_index_getting_start}</a>`;
 }
 
