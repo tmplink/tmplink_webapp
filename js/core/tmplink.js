@@ -507,17 +507,6 @@ class tmplink {
     }
 
     recaptcha_do(type, cb) {
-        // if (type !== 'init') {
-        //     if (this.api_token === null) {
-        //         setTimeout(() => {
-        //             this.recaptcha_do(type, cb);
-        //         }, 500);
-        //         return false;
-        //     } else {
-        //         cb(Math.floor(Math.random() * 10));
-        //         return true;
-        //     }
-        // }
         if (this.recaptcha_op && this.recaptchaCheckAction(type)) {
             if (typeof grecaptcha === 'object') {
                 grecaptcha.ready(() => {
