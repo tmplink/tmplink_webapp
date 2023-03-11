@@ -57,6 +57,7 @@ async function autoLogin() {
             if (response.ok) {
                 const responseData = await response.json();
                 if (responseData.status === 1) {
+                    document.querySelector('#index_start').innerHTML = '<img src="/img/circle-check-regular.svg" height="67" style="padding:10px;"/>';
                     setTimeout(() => {
                         Login();
                     }, 1000);
@@ -70,6 +71,8 @@ async function autoLogin() {
             console.error('请求出错：', error);
             showBtn();
         }
+    }else{
+        showBtn();
     }
 }
 
