@@ -32,6 +32,9 @@ class stream {
     }
 
     checkForOpenOnApps(filename,owner){
+        if (this.parent.logined !== 1) {
+            return false;
+        }
         if (owner!==this.parent.uid) {
             if(this.parent.sponsor===false){
                 return false;
@@ -47,6 +50,10 @@ class stream {
     }
 
     allow(filename,owner) {
+        if (this.parent.logined !== 1) {
+            return false;
+        }
+        
         if (owner!=this.parent.uid) {
             if(this.parent.sponsor===false){
                 return false;
@@ -70,7 +77,7 @@ class stream {
     request(ukey,app) {
         //未登录的情况下，跳转到登录界面
         if (this.parent.logined !== 1) {
-            app.open('/?tmpui_page=/app&listview=login');
+            location.href = '/?tmpui_page=/app&listview=login';
             return;
         }
 
