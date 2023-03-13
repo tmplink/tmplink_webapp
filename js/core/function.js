@@ -35,6 +35,15 @@ function is_iphone_or_ipad() {
     return true;
 }
 
+/**
+ * 获取当前页面的 url
+ * @returns {string}
+ */
+function getCurrentURL() {
+    var url = window.location.href;
+    return url;
+}
+
 //倒计时函数，将剩余的时间格式化成时分秒并写入到指定的 html 中
 function countDown(id, time) {
     let now = time - 1;

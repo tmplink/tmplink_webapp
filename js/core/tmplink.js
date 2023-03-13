@@ -101,6 +101,12 @@ class tmplink {
         $('.workspace-navbar').hide();
         $('.workspace-nologin').hide();
 
+        //初始化 return_page
+        let return_page = localStorage.getItem('return_page');
+        if (return_page === null) {
+            localStorage.setItem('return_page', '0');
+        }
+
         // this.navbar.init(this); //此函数需要等待语言包加载完毕才可执行
 
         this.upload_model_selected_val = localStorage.getItem('app_upload_model') === null ? 0 : localStorage.getItem('app_upload_model');
@@ -1086,7 +1092,7 @@ class tmplink {
                             $('#btn_add_to_workspace_mobile').html('<i class="fas fa-circle-check text-green mx-auto my-auto mb-2 fa-3x"></i>');
                             gtag("event", "login");
                         } else {
-                            app.open('/?tmpui_page=/app&listview=login');
+                            app.open('/app&listview=login');
                         }
                     });
 
@@ -1199,10 +1205,32 @@ class tmplink {
                             $('.btn_copy_downloadurl_for_wget').attr('data-clipboard-text', `wget -O  "${rsp.data.name}" ${download_cmdurl}`);
 
                             //开始处理绑定的事件
+
                             //下载按钮绑定事件，触发下载
                             $('#file_download_btn').on('click', () => {
                                 //触发下载
                                 window.location.href = download_url;
+                                //添加按钮按下反馈
+                                $('#download_msg').fadeIn();
+                                $('#download_msg').html('<i class="fa-light fa-loader fa-spin fa-fw"></i> ' + app.languageData.file_btn_download_status2);
+                                $('#download_msg').attr('class', 'badge badge-pill badge-info');
+                                //3秒后解除
+                                setTimeout(() => {
+                                    $('#download_msg').fadeOut();
+                                }, 3000);
+                                return true;
+                            });
+                            
+                            // 移动设备上的按钮反馈
+                            $('#file_download_url').on('click', () => {
+                                //添加按钮按下反馈
+                                $('#download_msg').fadeIn();
+                                $('#download_msg').html('<i class="fa-light fa-loader fa-spin fa-fw"></i> ' + app.languageData.file_btn_download_status2);
+                                $('#download_msg').attr('class', 'badge badge-pill badge-info');
+                                //3秒后解除
+                                setTimeout(() => {
+                                    $('#download_msg').fadeOut();
+                                }, 3000);
                                 return true;
                             });
 
@@ -1264,17 +1292,15 @@ class tmplink {
                                     //移除监听
                                     $('#btn_add_to_workspace').off('click');
                                 } else {
-                                    app.open('/?tmpui_page=/app&listview=login');
+                                    //设定登录后跳转的页面
+                                    localStorage.setItem('return_page', getCurrentURL());
+                                    app.open('/app&listview=login');
                                 }
                             });
 
                             //下载提速按钮绑定
                             $('#btn_highdownload').on('click', () => {
-                                if (this.logined == 1) {
-                                    $('#upupModal').modal('show');
-                                } else {
-                                    app.open('/?tmpui_page=/app&listview=login');
-                                }
+                                $('#upupModal').modal('show');
                             });
 
                             //举报文件按钮绑定
@@ -1317,6 +1343,8 @@ class tmplink {
                     $('#file_messenger_msg_login').show();
                     $('#file_messenger').show();
                     this.ga(`Any-[${params.ukey}]`);
+                    //设定登录后跳转的页面
+                    localStorage.setItem('return_page', getCurrentURL());
                     return false;
                 }
 
@@ -2586,7 +2614,7 @@ class tmplink {
 
     mr_list() {
         if (localStorage.getItem('app_login') != 1) {
-            app.open('/?tmpui_page=/app&listview=login');
+            app.open('/app&listview=login');
             return;
         }
         $('#mr_list_refresh_icon').html('<img src="/img/loading.svg" height="19" />');
@@ -2877,7 +2905,7 @@ class tmplink {
 
     favorite_add(mr_id) {
         if (!this.isLogin()) {
-            app.open('/?tmpui_page=/app&listview=login');
+            app.open('/app&listview=login');
             return false;
         }
         alert(app.languageData.favorite_add_success);
@@ -2925,10 +2953,17 @@ class tmplink {
                             // } else {
                             //     window.history.back();
                             // }
-                            dynamicView.workspace();
                             //登陆后更新一下用户信息
                             this.profile.init_details();
                             this.storage_status_update();
+                            //如果有设置 return_page，则跳转到 return_page
+                            let return_page = localStorage.getItem('return_page');
+                            if(return_page!=='0'){
+                                location.href = return_page;
+                                localStorage.setItem('return_page', 0);
+                            }else{
+                                dynamicView.workspace();
+                            }
                         });
                     } else {
                         $('#msg_notice').html(app.languageData.login_fail);
