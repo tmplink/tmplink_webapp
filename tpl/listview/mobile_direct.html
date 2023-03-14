@@ -24,11 +24,11 @@
                             <span i18n="direct_btn_bind_domain">.</span>
                         </button>
                         <hr>
-                        <button class="dropdown-item" onclick="$('#directSSLModal').modal('show');" >
+                        <button class="dropdown-item" onclick="$('#directSSLModal').modal('show');">
                             <i class="fa-fw fa-solid fa-shield-halved"></i>
                             <span id="direct_bind_ssl"></span>
                         </button>
-                        <button class="dropdown-item" onclick="$('#brandModal').modal('show');" >
+                        <button class="dropdown-item" onclick="$('#brandModal').modal('show');">
                             <i class="fa-fw fa-solid fa-badge-check"></i>
                             <span i18n="brand_modal_title">.</span>
                         </button>
@@ -144,6 +144,18 @@
 </nav>
 
 <div class="mobile-head-padding-large" style="padding-top: 160px;"></div>
+
+<!-- 全局提醒区域 -->
+<div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" id="direct_notice_cname"
+        style="display: none;">
+        <span i18n="direct_notice_cname">.</span>
+    </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" id="direct_notice_usage"
+        style="display: none;">
+        <span i18n="direct_notice_usage">.</span>
+    </div>
+</div>
 
 <div class="text-center text-muted">
     <span i18n="direct_total_downloads">.</span>
@@ -270,16 +282,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="card p-3 shadow-sm">
-                    <h4 i18n="direct_modal_bind_domain_1">.</h4>
-                    <p i18n="direct_modal_bind_domain_2">.</p>
-                </div>
-                <div class="card p-3 shadow-sm" id="tmplink_subdomain">
-                    <h4 i18n="direct_modal_bind_domain_3">.</h4>
-                    <p i18n="direct_modal_bind_domain_4">.</p>
-                </div>
                 <!--[表单]-->
                 <div class="card p-3 shadow-sm">
+                    <!-- 提示框 -->
+                    <div class="alert alert-warning" role="alert" style="display: none;" id="direct_modal_msg">
+                        <i class="fa-fw fa-light fa-exclamation-triangle"></i>
+                        <span id="direct_modal_msg_text">.</span>
+                    </div>
                     <form id="form-direct-domain">
                         <div class="form-group">
                             <label for="direct-domain" i18n="direct_modal_bind_domain_5">.</label>
@@ -291,6 +300,14 @@
                                 onclick="TL.direct.setDomain()">绑定</button>
                         </div>
                     </form>
+                </div>
+                <div class="card p-3 shadow-sm">
+                    <h4 i18n="direct_modal_bind_domain_1">.</h4>
+                    <p i18n="direct_modal_bind_domain_2">.</p>
+                </div>
+                <div class="card p-3 shadow-sm" id="tmplink_subdomain">
+                    <h4 i18n="direct_modal_bind_domain_3">.</h4>
+                    <p i18n="direct_modal_bind_domain_4">.</p>
                 </div>
             </div>
         </div>

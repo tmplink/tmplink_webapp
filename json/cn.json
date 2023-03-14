@@ -547,6 +547,15 @@
     "direct_intro": "文件夹的 “偏好设置” 中新增 “直链” 设定，可以为文件夹生成专属直链。",
     "direct_intro_modal_title": "通过直接链接分享文件",
     "direct_intro_modal_body_title": "欢迎使用",
+
+    "direct_intro_modal_msg_1": "已完成",
+    "direct_intro_modal_msg_2": "无效的域名",
+    "direct_intro_modal_msg_3": "此域名已经被使用",
+    "direct_intro_modal_msg_4": "此域名的 CNAME 尚未指向 <span class=\"text-red\">direct.tmp.link</span>",
+    "direct_notice_cname": "绑定的域名还没有配置 CNAME 记录指向到 <span class=\"text-red\">direct.tmp.link</span>，请先完成该设定。否则无法启用直链功能。",
+    "direct_notice_usage": "剩余的流量配额不足 5GB，请及时补充。用完后，直链将无法使用。",
+    "direct_modal_bind_domain_2": "在绑定之前，请为想要绑定的域名添加一个 CNAME 记录，指向 <span class=\"text-red\">direct.tmp.link</span>，您需要到购买域名的地方完成此操作。",
+
     "direct_intro_modal_body_1": "直链是最快捷的文件分享方式，您可以从 “仓库” 选择任意文件加入到直链，然后分享给其它人下载。并且，您可以为同一个文件创建多份分享链接，您可以随时撤销文件的分享。",
     "direct_intro_modal_body_2": "若要使用本功能，您需要有自己的域名，请点击 “绑定域名” 绑定您自己的域名，然后将该域名通过 CNAME 解析到 direct.tmp.link。",
     "direct_intro_modal_body_3": "另外，请确保您的帐号有足够的直链流量配额，在您的直链被其他人使用时，会消耗该流量配额。",
@@ -573,7 +582,6 @@
     "direct_intro_8": "有可用的流量配额。",
     "direct_intro_9": "绑定好您的域名之后，您就可以在 “仓库” 或者 “桌面” 中，为已上传的文件创建直链了。",
     "direct_modal_bind_domain_1": "绑定自己的域名",
-    "direct_modal_bind_domain_2": "您可以绑定自己拥有的域名，绑定完成之后，请将对应域名做 CNAME 记录，指向 <span class=\"text-red\">direct.tmp.link</span>",
     "direct_modal_bind_domain_3": "钛盘二级域名",
     "direct_modal_bind_domain_4": "钛盘提供免费的二级域名给您使用，格式为 <span class=\"text-red\">*.5t-cdn.com</span>，比如您可以设置为 <span class=\"text-red\">myname.5t-cdn.com</span>",
     "direct_modal_bind_domain_5": "开始绑定域名",

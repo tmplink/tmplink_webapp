@@ -1,6 +1,6 @@
 <div id="filelist" class="card mt-5 shadow" style="display: none;">
     <div class="card-header pt-3">
-        <div class="mt-3 text-center mx-auto">
+        <div class="mt-3 mb-2 text-center mx-auto">
             <span id="direct_branded_logo"><i class="fa-4x fa-light fa-share-nodes"></i></span>
             <div class="lead mt-2">
                 <span class="badge badge-pill badge-info p-2 mx-1 mt-1">
@@ -134,7 +134,17 @@
                 </div>
             </div>
         </div>
-
+        <!-- 全局提醒区域 -->
+        <div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" id="direct_notice_cname"
+                style="display: none;">
+                <span i18n="direct_notice_cname">.</span>
+            </div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" id="direct_notice_usage"
+                style="display: none;">
+                <span i18n="direct_notice_usage">.</span>
+            </div>
+        </div>
         <div class="alert alert-info" i18n="direct_intro">
             .
         </div>
@@ -272,7 +282,7 @@
     </div>
 </div>
 
-<div class="modal" id="directEditDomainModal" >
+<div class="modal" id="directEditDomainModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -282,16 +292,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="card p-3 shadow-sm">
-                    <h4 i18n="direct_modal_bind_domain_1">.</h4>
-                    <p i18n="direct_modal_bind_domain_2">.</p>
-                </div>
-                <div class="card p-3 shadow-sm" id="tmplink_subdomain">
-                    <h4 i18n="direct_modal_bind_domain_3">.</h4>
-                    <p i18n="direct_modal_bind_domain_4">.</p>
-                </div>
                 <!--[表单]-->
                 <div class="card p-3 shadow-sm">
+                    <!-- 提示框 -->
+                    <div class="alert alert-warning" role="alert" style="display: none;" id="direct_modal_msg">
+                        <i class="fa-fw fa-light fa-exclamation-triangle"></i>
+                        <span id="direct_modal_msg_text">.</span>
+                    </div>
                     <form id="form-direct-domain">
                         <div class="form-group">
                             <label for="direct-domain" i18n="direct_modal_bind_domain_5">.</label>
@@ -303,6 +310,14 @@
                                 onclick="TL.direct.setDomain()">绑定</button>
                         </div>
                     </form>
+                </div>
+                <div class="card p-3 shadow-sm">
+                    <h4 i18n="direct_modal_bind_domain_1">.</h4>
+                    <p i18n="direct_modal_bind_domain_2">.</p>
+                </div>
+                <div class="card p-3 shadow-sm" id="tmplink_subdomain">
+                    <h4 i18n="direct_modal_bind_domain_3">.</h4>
+                    <p i18n="direct_modal_bind_domain_4">.</p>
                 </div>
             </div>
         </div>

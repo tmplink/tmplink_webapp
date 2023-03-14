@@ -81,6 +81,9 @@ class direct {
             }
             this.brandStatus(rsp.data.brand_status);
 
+            if (page === '/app'&& listview==='direct') {
+                this.ininOnDirectPage();
+            }
 
             if (typeof cb == 'function') {
                 cb();
@@ -88,11 +91,29 @@ class direct {
         }, 'json');
     }
 
+    ininOnDirectPage(){
+        //检查域名是否正确指向到 dicrect.tmp.link
+        $.post(this.parent_op.api_direct, {
+            'action': 'check_domain',
+            'token': this.parent_op.api_token
+        }, (rsp) => {
+            if (rsp.status == 0) {
+                $('#direct_notice_cname').show();
+            }
+        }, 'json');
+
+        //检查剩余的流量配额是否少于 5GB
+        if (this.quota < (1024*1024*1024*5)) {
+            $('#direct_notice_usage').show();
+        }
+    }
+
     openDomainEditor() {
         if (this.parent_op.area_cn) {
             $('#tmplink_subdomain').hide();
         }
         $('#directEditDomainModal').modal('show');
+        $('#direct_modal_msg').hide();
     }
 
     is_allow_play(filename) {
@@ -530,6 +551,9 @@ class direct {
             'domain': domain,
             'token': this.parent_op.api_token
         }, (rsp) => {
+            let msg = this.selectBingDomainText(rsp.status);
+            $('#direct_modal_msg').show();
+            $('#direct_modal_msg_text').html(msg);
             if (rsp.status == 1) {
                 alert(app.languageData.direct_btn_bind_prompt_ok);
                 $('#direct_bind_domain_box').show();
@@ -538,12 +562,22 @@ class direct {
 
                 $('#diredirect_bind_notice').html('');
                 window.location.reload();
-            } else {
-                $('#direct_bind_domain_box').hide();
-                alert(app.languageData.direct_btn_bind_prompt_error);
             }
             this.loading_box_off();
         }), 'json';
+    }
+
+    selectBingDomainText(number){
+        switch (number) {
+            case 1:
+                return app.languageData.direct_intro_modal_msg_1;
+            case 2:
+                return app.languageData.direct_intro_modal_msg_2;
+            case 3:
+                return app.languageData.direct_intro_modal_msg_3;
+            case 4:
+                return app.languageData.direct_intro_modal_msg_4;
+        }       
     }
 
     /**
