@@ -14,10 +14,6 @@ class navbar {
         window.addEventListener('resize', () => {
             this.resetNavBar();
         });
-        //如果是 iphone，为底部导航加高度
-        if (this.isIPHONE()) {
-            $('.nav-mobile').addClass('topnav-iphone');
-        }
     }
 
     disabled() {
