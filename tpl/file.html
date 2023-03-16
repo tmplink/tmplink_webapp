@@ -1,9 +1,9 @@
 <div style="height: 40px;"></div>
-<div class="loading-box" id="loading_box" style="display: none;">
+<!-- <div class="loading-box" id="loading_box" style="display: none;">
     <div class="text-center" style="border-radius: 10px;padding: 10px;">
         <img src="/img/loading.svg" height="80" />
     </div>
-</div>
+</div> -->
 
 <div class="container d-flex flex-grow-1">
     <div class="align-self-center w-100">
@@ -16,7 +16,7 @@
                     style="width:64px;height:64px;border-radius: 12px;">
             </span>
         </div>
-        <div id="file_messenger" class="align-self-center mx-auto"
+        <div id="file_messenger" class="align-self-center mx-auto default-box"
             style="display: none;margin-top: 20px;max-width: 550px;">
             <!-- <div class="text-center mb-5">
                 <a href="javascript:void(0)" onclick="app.open('/');">
@@ -24,21 +24,24 @@
                 </a>
             </div> -->
             <div class="card" style="border-radius: 24px;">
-                <div class="card-body p-5">
-                    <div class="text-center pt-2" id="file_messenger_icon"></div>
-                    <div class="text-center h3 mt-4" id="file_messenger_msg"></div>
-                    <div class="row p-5" style="display: none;" id="file_messenger_msg_login">
-                        <div class="col-md-6 col-12 text-center">
-                            <button class="btn btn-lg btn-primary btn-block workspace-nologin" type="button"
-                                onclick="app.open('/app&listview=login');" i18n="index_b3">
-                                .
-                            </button>
-                        </div>
-                        <div class="col-md-6 col-12 text-center">
-                            <button class="btn btn-lg btn-danger btn-block workspace-nologin" type="button"
-                                onclick="app.open('/app&listview=reg');" i18n="index_b2">
-                                .
-                            </button>
+                <div class="card-body p-5 default-box  d-flex flex-grow-1">
+                    <!-- 垂直居中 -->
+                    <div class="align-self-center w-100">
+                        <div class="text-center pt-2" id="file_messenger_icon"></div>
+                        <div class="text-center h3 mt-4" id="file_messenger_msg"></div>
+                        <div class="row p-5" style="display: none;" id="file_messenger_msg_login">
+                            <div class="col-md-6 col-12 text-center">
+                                <button class="btn btn-lg btn-primary btn-block workspace-nologin" type="button"
+                                    onclick="app.open('/app&listview=login');" i18n="index_b3">
+                                    .
+                                </button>
+                            </div>
+                            <div class="col-md-6 col-12 text-center">
+                                <button class="btn btn-lg btn-danger btn-block workspace-nologin" type="button"
+                                    onclick="app.open('/app&listview=reg');" i18n="index_b2">
+                                    .
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -51,7 +54,7 @@
                     <img src="/img/logo/logo2.svg" alt="tmp.link" style="width: 50%;" class="logo">
                 </a>
             </div> -->
-            <div class="card shadow-lg" id="file_info" style="margin-bottom: 8px;border-radius: 24px;">
+            <div class="card shadow-lg  default-box" id="file_info" style="margin-bottom: 8px;border-radius: 24px;">
                 <div class="card-body p-5">
                     <div class="alert alert-warning display-none" id="wechat_notice" role="alert"
                         i18n="filepage_mobile_notice">
@@ -181,7 +184,8 @@
 
                             <div class="col-md-4 col-6 text-center mb-2 btn-point" id="file_download_by_qrcode">
                                 <div class="fileicon mx-auto mb-1">
-                                    <i class="fa-regular fa-mobile-signal fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                                    <i
+                                        class="fa-regular fa-mobile-signal fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
                                 </div>
                                 <div>
                                     <button class="btn" i18n="file_btn_qr_mobile">.</button>

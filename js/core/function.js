@@ -14,6 +14,20 @@ function isMobileScreen() {
     return window.screen.width < 675;
 }
 
+// 调整透明度：隐藏
+function opacityHide(dom) {
+    var obj = document.querySelector(dom);
+    obj.style.opacity = 0;
+    obj.style.filter = "alpha(opacity=0)";
+}
+
+// 调整透明度：显示
+function opacityShow(dom) {
+    var obj = document.querySelector(dom);
+    obj.style.opacity = 1;
+    obj.style.filter = "alpha(opacity=100)";
+}
+
 //if iphone or ipad
 function is_iphone_or_ipad() {
     //如果是 macos 或者 windows 设备

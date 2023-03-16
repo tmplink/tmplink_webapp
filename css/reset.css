@@ -20390,3 +20390,7 @@ svg {
     opacity: 1;
   }
 }
+
+.default-box{
+  min-height: 550px;
+}

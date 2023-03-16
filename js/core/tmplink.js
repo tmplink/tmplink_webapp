@@ -1071,6 +1071,7 @@ class tmplink {
         }
 
         this.loading_box_on();
+        // opacityShow('#download_msg');
         var params = get_url_params();
         var fileinfo = null;
         if (params.ukey !== undefined) {
@@ -1179,7 +1180,8 @@ class tmplink {
                             // window.location.href = download_url;
                             // $('#download_msg').html('<i class="fa-light fa-circle-check fa-fw"></i> ' + app.languageData.status_file_3);
                             // $('#download_msg').attr('class', 'badge badge-pill badge-success');
-                            $('#download_msg').fadeOut();
+                            // $('#download_msg').fadeOut();
+                            opacityHide('#download_msg');
 
                             //分享链接
                             let share_url = 'https://' + this.site_domain + '/f/' + params.ukey;
@@ -1211,12 +1213,13 @@ class tmplink {
                                 //触发下载
                                 window.location.href = download_url;
                                 //添加按钮按下反馈
-                                $('#download_msg').fadeIn();
+                                opacityShow('#download_msg');
                                 $('#download_msg').html('<i class="fa-light fa-loader fa-spin fa-fw"></i> ' + app.languageData.file_btn_download_status2);
                                 $('#download_msg').attr('class', 'badge badge-pill badge-info');
                                 //3秒后解除
                                 setTimeout(() => {
-                                    $('#download_msg').fadeOut();
+                                    // $('#download_msg').fadeOut();
+                                    opacityHide('#download_msg');
                                 }, 3000);
                                 return true;
                             });
@@ -1224,12 +1227,14 @@ class tmplink {
                             // 移动设备上的按钮反馈
                             $('#file_download_url').on('click', () => {
                                 //添加按钮按下反馈
-                                $('#download_msg').fadeIn();
+                                opacityShow('#download_msg');
+                                // $('#download_msg').fadeIn();
                                 $('#download_msg').html('<i class="fa-light fa-loader fa-spin fa-fw"></i> ' + app.languageData.file_btn_download_status2);
                                 $('#download_msg').attr('class', 'badge badge-pill badge-info');
                                 //3秒后解除
                                 setTimeout(() => {
-                                    $('#download_msg').fadeOut();
+                                    // $('#download_msg').fadeOut();
+                                    opacityHide('#download_msg');
                                 }, 3000);
                                 return true;
                             });
