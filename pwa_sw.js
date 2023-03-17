@@ -1,6 +1,6 @@
 const allowedTypes = ["js", "css", "jpg", "png", "webp", "woff", "svg", "gif", "ico", "ttf", "eot", "woff2", "html",'json','index','webmanifest'];
 const allowedDomain = ["static.vx-cdn.com","tmp.link","ttttt.link","127.0.0.1"];
-const resSet = "tmplink v1092";
+const resSet = "tmplink v1093";
 const assets = [
   '/',
 ];

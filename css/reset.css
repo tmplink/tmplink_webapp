@@ -20394,3 +20394,9 @@ svg {
 .default-box{
   min-height: 550px;
 }
+
+.dropdown-menu-center {
+  top: auto !important;
+  bottom: 150% !important;
+  transform: translateX(-38%) !important;
+}
