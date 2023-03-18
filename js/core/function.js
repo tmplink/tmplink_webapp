@@ -182,3 +182,14 @@ function Base64Decode(str) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
 }
+
+function isIosPwaMode() {
+    // 检查是否运行在 Safari 浏览器中
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    // 检查是否启用了 PWA 模式
+    const isInStandaloneMode = ('standalone' in window.navigator) && window.navigator.standalone;
+
+    // 返回结果，如果同时满足 Safari 浏览器和 PWA 模式，则说明当前网页在 iOS PWA 模式下运行
+    return isSafari && isInStandaloneMode;
+}

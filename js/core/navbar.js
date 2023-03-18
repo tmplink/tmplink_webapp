@@ -28,6 +28,9 @@ class navbar {
         if(isMobileScreen()){
             $('.nav-mobile').show();
             $('.nav-desktop').hide();
+            if(isIosPwaMode()){
+                $('.nav-mobile-pwa').show();
+            }
         }else{
             $('.nav-desktop').show();
             $('.nav-mobile').hide();
