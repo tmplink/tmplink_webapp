@@ -6,6 +6,7 @@
   "orientation":"any",
   "scope": "/",
   "categories": "standalone",
+  "download": "true",
   "display": "fullscreen",
   "background_color": "#fff",
   "theme_color": "#fff",
