@@ -20395,6 +20395,10 @@ svg {
   min-height: 550px;
 }
 
+.default-filebox{
+  min-height: 440px;
+}
+
 .dropdown-menu-center {
   top: auto !important;
   bottom: 130% !important;

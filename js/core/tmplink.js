@@ -1262,6 +1262,8 @@ class tmplink {
                                     $('.play_copy_url').attr('onclick', `TL.stream.request('${params.ukey}','copy')`);
                                     $('.play_copy_url').show();
                                 }
+                                //隐藏一个按钮，使排位保持平衡
+                                $('#btn_highdownload').hide();
                             }
 
                             //复制链接按钮绑定
