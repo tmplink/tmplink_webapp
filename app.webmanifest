@@ -5,7 +5,7 @@
   "start_url": "/",
   "orientation":"any",
   "scope": "/",
-  "categories": "productivity",
+  "categories": "standalone",
   "display": "fullscreen",
   "background_color": "#fff",
   "theme_color": "#fff",
