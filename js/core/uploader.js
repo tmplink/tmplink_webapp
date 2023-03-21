@@ -37,16 +37,16 @@ class uploader {
         //显示 Token
         $('#tmpup_mrid_view').hide();
         $('#tmpup_token').html(token);
-        $('#tmpup_copy_token').attr('onclick',`TL.directCopy(this,'${token}')`);
+        $('#tmpup_copy_token').attr('onclick', `TL.directCopy(this,'${token}')`);
         $('#tmpup_model').html(model);
-        $('#tmpup_copy_model').attr('onclick',`TL.directCopy(this,'${model}')`);
+        $('#tmpup_copy_model').attr('onclick', `TL.directCopy(this,'${model}')`);
 
         console.log(mrid);
-        if(mrid!==undefined){
+        if (mrid !== undefined) {
             $('#tmpup_mrid_view').show();
             $('#tmpup_mrid').html(mrid);
-            $('#tmpup_copy_mrid').attr('onclick',`TL.directCopy(this,'${mrid}')`);
-        }else{
+            $('#tmpup_copy_mrid').attr('onclick', `TL.directCopy(this,'${mrid}')`);
+        } else {
             $('#tmpup_mrid_view').hide();
         }
     }
@@ -154,13 +154,13 @@ class uploader {
         }
 
         //如果要上传的文件是永久有效期，并且超过了私有空间的限制，则提示错误
-        if (model == 99) {
-            if (this.storage_used + file.size > this.storage) {
-                this.parent_op.alert(app.languageData.upload_limit_size);
-                $('#uq_' + id).fadeOut();
-                return false;
-            }
-        }
+        // if (model == 99) {
+        //     if (this.storage_used + file.size > this.storage) {
+        //         this.parent_op.alert(app.languageData.upload_limit_size);
+        //         $('#uq_' + id).fadeOut();
+        //         return false;
+        //     }
+        // }
 
         // if (this.parent_op.logined === false) {
         //     this.parent_op.alert(app.languageData.upload_model99_needs_login);
@@ -556,7 +556,7 @@ class uploader {
         xhr.overrideMimeType("application/octet-stream");
         xhr.open("POST", server);
 
-        this.parent_op.recaptcha_do('upload_slice',(recaptcha) => {
+        this.parent_op.recaptcha_do('upload_slice', (recaptcha) => {
             fd.append('captcha', recaptcha);
             xhr.send(fd);
         });
@@ -652,9 +652,8 @@ class uploader {
 
     upload_queue_add(f) {
         setTimeout(() => {
-            f.id = this.upload_queue_id;
-            this.upload_queue_file.push(f);
             let file = f.file;
+            f.id = this.upload_queue_id;
 
             //检查是否超出了可用的私有存储空间
             if (this.upload_model_get() == 99) {
@@ -664,7 +663,7 @@ class uploader {
                 }
             }
 
-
+            this.upload_queue_file.push(f);
             //如果未登录，添加队列到首页
             let target = this.parent_op.isLogin() ? '#upload_model_box' : '#upload_index_box';
             $(target).append(app.tpl('upload_list_wait_tpl', {
@@ -677,6 +676,7 @@ class uploader {
             //更新状态
             this.upload_btn_status_update();
             //自动启动上传
+            console.log(this.upload_queue_file.length);
             this.upload_start();
         }, 500, f);
     }
