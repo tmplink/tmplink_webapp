@@ -3176,7 +3176,7 @@ class tmplink {
         data.private_storage_used_text = bytetoconver(this.private_storage_used, true);
         data.private_storage_used_percent = (this.private_storage_used / this.storage) * 100;
         data.percent = (this.storage_used / this.storage) * 100;
-        $('#upload_storage_status').html(data.storage_used_text + ' | ' + data.storage_text);
+        $('#upload_storage_status').html(data.private_storage_used_text + ' | ' + data.storage_text);
         $('.user_storage_used').html(data.storage_used_text);
         $('.user_storage_total').html(data.storage_text);
         $('.private_storage_used').html(data.private_storage_used_text);
