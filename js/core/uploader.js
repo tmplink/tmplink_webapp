@@ -146,7 +146,8 @@ class uploader {
         $('#nav_upload_btn').html('<img src="/img/loading.svg"  />');
         let file = file_res.file;
         let id = file_res.id;
-        let model = this.upload_model_get();
+        let model = file_res.model;
+        let mrid = file_res.mrid;
         if (file.size > this.single_file_size) {
             this.parent_op.alert(app.languageData.upload_limit_size);
             $('#uq_' + id).fadeOut();
@@ -189,7 +190,7 @@ class uploader {
                 if (this.skip_upload) {
                     $.post(this.parent_op.api_file, {
                         'sha1': sha1,
-                        'mr_id': this.upload_mrid_get(),
+                        'mr_id': mrid,
                         'action': 'check_in_dir',
                         'token': this.parent_op.api_token
                     }, (rsp) => {
@@ -209,8 +210,8 @@ class uploader {
                                 $.post(this.parent_op.api_file, {
                                     'sha1': sha1,
                                     'filename': filename,
-                                    'model': this.upload_model_get(),
-                                    'mr_id': this.upload_mrid_get(),
+                                    'model': model,
+                                    'mr_id': mrid,
                                     'skip_upload': upload_skip,
                                     'action': 'prepare_v4',
                                     'token': this.parent_op.api_token
@@ -230,8 +231,8 @@ class uploader {
                     $.post(this.parent_op.api_file, {
                         'sha1': sha1,
                         'filename': filename,
-                        'model': this.upload_model_get(),
-                        'mr_id': this.upload_mrid_get(),
+                        'model': model,
+                        'mr_id': mrid,
                         'skip_upload': upload_skip,
                         'action': 'prepare_v4',
                         'token': this.parent_op.api_token
@@ -653,6 +654,10 @@ class uploader {
     upload_queue_add(f) {
         setTimeout(() => {
             let file = f.file;
+
+            //添加一些额外参数
+            f.model = this.upload_model_get();
+            f.mrid = this.upload_mrid_get();
             f.id = this.upload_queue_id;
 
             //检查是否超出了可用的私有存储空间
