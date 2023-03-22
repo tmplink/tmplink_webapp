@@ -369,7 +369,7 @@
     "file_name": "檔案名稱",
     "file_type": "檔案類型",
     "file_size": "檔案大小",
-    "file_downloads": "提取次數",
+    "file_downloads": "下載次數",
     "file_lefttime": "剩餘時間",
     "file_btn_download": "下載資料",
     "file_btn_download_opt": "下載：其它選項",
