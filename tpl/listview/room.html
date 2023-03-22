@@ -160,7 +160,7 @@
                                 aria-expanded="false">
                                 <i class="fa-light fa-list-check fa-fw"></i> <span i18n="on_select">.</span>
                             </button>
-                            <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownMenuButton">
                                 <button class="dropdown-item not_owner" onclick="TL.Selecter.delete()">
                                     <i class="fa-fw fa-light fa-trash"></i>
                                     <span i18n="on_select_delete">.</span>
@@ -169,10 +169,17 @@
                                     <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                     <span i18n="on_select_download">.</span>
                                 </button>
-                                <button class="dropdown-item" onclick="TL.Selecter.downloadURL()">
+                                
+                                <button class="dropdown-item btn_for_copy_in_dir" onclick="TL.Selecter.directCopy('staticDirLink')">
+                                    <i class="fa-fw fa-light fa-link-horizontal text-azure"></i>
+                                    <span i18n="on_select_copy_res_url_text">.</span>
+                                </button>
+
+                                <button class="dropdown-item btn_for_gen_link" onclick="TL.Selecter.downloadURL()">
                                     <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                     <span i18n="on_select_copy_download_url">.</span>
                                 </button>
+
                                 <button class="dropdown-item in-private-dir" onclick="TL.Selecter.share()">
                                     <i class="fa-fw fa-light fa-share-from-square"></i>
                                     <span i18n="on_select_share">.</span>
@@ -257,7 +264,7 @@
                     <% for (var x in obj) { %>
                         <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
                             <div class="col-lg-4 col-xl-3 col-md-6 col-12 file_unit_<% obj[x].ukey %>">
-                                <div class="card text-center" name="items_box" tldata="<% obj[x].ukey %>" tltype="photo_card" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                                <div class="card text-center" name="items_box" tldata="<% obj[x].ukey %>" tltype="photo_card" tldid="<% obj[x].direct_id %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
                                     
                                     <div class="card-body">
                                         <div style="height:220px;" class="mb-2">
@@ -334,7 +341,7 @@
 
                 <script type="text/template" id="dir_filelist_tpl">
                     <% for (var x in obj) { %>
-                        <div class="row line mx-0 mb-1 py-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                        <div class="row line mx-0 mb-1 py-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tldid="<% obj[x].direct_id %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
                             <div class="col-7 my-1 d-flex align-items-center listfontweight filename">
                                 <div>
                                     <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
@@ -400,9 +407,15 @@
                                     <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                 </button>
                                 <% if(TL.room.model=='public'){ %>
-                                    <button href="javascript:void(0)" onclick="event.stopPropagation();TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/f/${obj[x].ukey}`) %>',true )" class="in-private-dir text-azure btn btn-sm btn-light mr-1">
-                                        <i class="fa-fw fa-light fa-share-from-square"></i>
-                                    </button>
+                                    <% if(TL.room.owner == 1&&TL.direct.dir_btn_status===true){ %>
+                                        <button onclick="TL.direct.genLinkDirectForRoom('<% obj[x].direct_id %>','<% encodeURIComponent(obj[x].fname) %>')" class="text-azure btn btn-sm btn-light mr-1">
+                                            <i class="fa-fw fa-solid fa-link"></i>
+                                        </button>
+                                    <% }else{ %>
+                                        <button href="javascript:void(0)" onclick="event.stopPropagation();TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/f/${obj[x].ukey}`) %>',true )" class="in-private-dir text-azure btn btn-sm btn-light mr-1">
+                                            <i class="fa-fw fa-light fa-share-from-square"></i>
+                                        </button>
+                                    <% } %>
                                 <% } %>
                                 <% if (TL.room.owner == 1) { %>
                                     <span class="dropdown">
@@ -418,12 +431,6 @@
                                                 <i class="fa-fw fa-light fa-trash"></i>
                                                 <span i18n="menu_delete"><% app.languageData.menu_delete %></span>
                                             </button> 
-                                            <% if(TL.direct.is_allow()){ %>
-                                                <button onclick="TL.direct.addLink('<% obj[x].ukey %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item in-private-dir">
-                                                    <i class="fa-fw fa-light fa-share-nodes"></i>
-                                                    <span i18n="menu_addlink"><% app.languageData.menu_addlink %></span>
-                                                </button>
-                                            <% } %>  
                                             <!--[如果是图片，则可以被设置为背景]-->
                                             <% if(obj[x].ftype=='png'||obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'){ %>
                                                 <button onclick="TL.pf_mybg_set('light','<% obj[x].ukey %>')" class="dropdown-item">
@@ -435,6 +442,13 @@
                                                     <span i18n="mybg_set_dark"><% app.languageData.mybg_set_dark %></span>
                                                 </button>
                                             <% } %> 
+                                            <!--[检查此目录是否是直链目录]-->
+                                            <% if(TL.direct.dir_btn_status===false){ %>
+                                                <button onclick="TL.direct.genLinkDirectForRoom('<% obj[x].ukey %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item in-private-dir">
+                                                    <i class="fa-fw fa-light fa-share-nodes"></i>
+                                                    <span i18n="menu_addlink"><% app.languageData.menu_addlink %></span>
+                                                </button>
+                                            <% } %>
                                         </div>
                                     </span>
                                 <% } %>
@@ -489,12 +503,12 @@
                             <div class="col-12 col-md-6 col-lg-8 my-1 d-flex align-items-center listfontweight filename">
                                 <% if (obj[x].fav == 0) { %>
                                     <% if (obj[x].model == 'public') { %>
-                                        <i class="fa-light fa-folder text-cyan fa-fw d-none d-md-block"></i>
+                                        <i class="fa-solid fa-folder text-cyan fa-fw"></i>
                                     <% }else{ %>   
-                                        <i class="fa-light fa-lock text-cyan fa-fw d-none d-md-block"></i>
+                                        <i class="fa-light fa-lock text-cyan fa-fw"></i>
                                     <% } %>  
                                 <% }else{ %> 
-                                    <i class="fa-light fa-link text-cyan fa-fw d-none d-md-block"></i>
+                                    <i class="fa-light fa-link text-cyan fa-fw"></i>
                                 <% } %> 
                                 &nbsp
                                 <a href="/app&listview=room&mrid=<% obj[x].mr_id %>" class="filelist_link" tmpui-action="TL.room_list()">

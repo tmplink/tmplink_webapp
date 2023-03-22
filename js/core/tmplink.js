@@ -2848,7 +2848,6 @@ class tmplink {
             }
 
             this.btn_copy_bind();
-            //this.mr_file_list(0);
             this.mr_file_list('all');
 
             //是否需要设置上级目录返回按钮

@@ -227,10 +227,17 @@ class BoxSelecter {
                 //do something
                 let dkey = inode.getAttribute('tldata');
                 let fname = inode.getAttribute('tltitle');
+                let did = inode.getAttribute('tldid');
+                let dir_key = this.parent_op.direct.dir_key;
+                let direct_link_domain = this.parent_op.direct.domain;
+                let direct_link_protocol = this.parent_op.direct.protocol;
                 //get file url
                 let urldata = this.parent_op.direct.genLinkDirect(dkey, fname);
                 //create copy text
                 switch (type) {
+                    case 'staticDirLink':
+                        copyText += `${direct_link_protocol}${direct_link_domain}/dir/${dir_key}/${did}/${fname}\n\n`;
+                        break;
                     case 'downloadURLForText':
                         copyText += `${fname}\n${urldata.download}\n\n`;
                         break;

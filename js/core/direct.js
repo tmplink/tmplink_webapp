@@ -332,10 +332,17 @@ class direct {
                 this.dirRoomPfBtnUpdate();
             } else {
                 this.dir_btn_status = false;
+                this.dirRoomPfBtnUpdate();
             }
             //更新文件夹界面
             this.dirRoomUpdate();
         }, 'json');
+    }
+
+    genLinkDirectForRoom(direct_id,file_name){
+        let link = `${this.protocol}${this.domain}/dir/${this.dir_key}/${direct_id}/${file_name}`;
+        //添加到剪贴板
+        this.parent_op.bulkCopy(null,link,false);
     }
 
     dirToggle() {
@@ -384,6 +391,16 @@ class direct {
         } else {
             $('#pf_allow_direct').removeAttr('checked');
         }
+
+        //控制是否显示文件夹内的文件链接复制按钮
+        if (this.dir_btn_status) {
+            $('.btn_for_copy_in_dir').show();
+            $('.btn_for_gen_link').hide();
+        }else{
+            $('.btn_for_copy_in_dir').hide();
+            $('.btn_for_gen_link').show();
+        }
+
     }
 
     direct_filelist_model(type) {
