@@ -133,10 +133,16 @@
                                     <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                     <span i18n="on_select_download">.</span>
                                 </button>
-                                <button class="dropdown-item" onclick="TL.Selecter.downloadURL()">
+                                <button class="dropdown-item btn_for_copy_in_dir" onclick="TL.Selecter.directCopy('staticDirLink')">
+                                    <i class="fa-fw fa-light fa-link-horizontal text-azure"></i>
+                                    <span i18n="menu_addlink">.</span>
+                                </button>
+
+                                <button class="dropdown-item btn_for_gen_link" onclick="TL.Selecter.downloadURL()">
                                     <i class="fa-fw fa-light fa-cloud-arrow-down"></i>
                                     <span i18n="on_select_copy_download_url">.</span>
                                 </button>
+
                                 <button class="dropdown-item in-private-dir" onclick="TL.Selecter.share()">
                                     <i class="fa-fw fa-light fa-share-from-square"></i>
                                     <span i18n="on_select_share">.</span>
@@ -174,6 +180,10 @@
                 <i class="fa-fw fa-light fa-folder-plus"></i>
                 <span i18n="model_title_folder_title">.</span>
             </button>
+        </div>
+
+        <div class="lead my-1" id="room_direct_model">
+            <a href="#" id="room_link" target="_blank"></a>
         </div>
 
         <div class="mt-4 d-block d-sm-none">
@@ -343,7 +353,13 @@
                                             <i class="fa-fw fa-light fa-trash"></i>
                                             <span i18n="menu_delete"><% app.languageData.menu_delete %></span>
                                         </button> 
-                                        <% if(TL.direct.is_allow()){ %>
+                                        <!--[检查此目录是否是直链目录]-->
+                                        <% if(TL.room.owner == 1&&TL.direct.dir_btn_status===true){ %>
+                                            <button onclick="TL.direct.genLinkDirectForRoom('<% obj[x].direct_id %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item">
+                                                <i class="fa-fw fa-solid fa-link"></i>
+                                                <span i18n="menu_addlink"><% app.languageData.menu_addlink %></span>
+                                            </button>
+                                        <% }else{ %>
                                             <button onclick="TL.direct.addLink('<% obj[x].ukey %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item in-private-dir">
                                                 <i class="fa-fw fa-light fa-share-nodes"></i>
                                                 <span i18n="menu_addlink"><% app.languageData.menu_addlink %></span>
