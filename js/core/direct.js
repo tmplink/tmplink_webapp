@@ -371,6 +371,8 @@ class direct {
                 this.dirRoomPfBtnUpdate();
                 //更新文件夹界面
                 this.dirRoomUpdate();
+                //刷新列表
+                this.parent_op.room_list();
             }
         }, 'json');
     }
