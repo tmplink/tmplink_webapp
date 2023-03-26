@@ -3030,10 +3030,11 @@ class tmplink {
         this.logined = 0;
         this.storage_used = 0;
         this.storage = 0;
-        app.open('/');
         $.post(this.api_user, {
             action: 'logout',
             token: this.api_token
+        }, () => {
+            window.location.href = '/';
         });
     }
 
