@@ -260,7 +260,7 @@ class tmplink {
 
     bg_init() {
         if (document.querySelector('#background_wrap') == null) {
-            $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color:#eaeaea;"></div>');
+            $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;"></div>');
             $('body').append(`<div id="background_wrap_img" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;display:none;width: 100%;"></div>`);
         }
     }
@@ -290,6 +290,12 @@ class tmplink {
         let imgSrc = '';
         let imgSrcLight = '';
         let imgSrcDark = '';
+
+        if(night){
+            $('#background_wrap').css('background-color','#545454');
+        }else{
+            $('#background_wrap').css('background-color','#eaeaea');
+        }
 
         if (this.mybg_dark !== 0) {
             imgSrcDark = this.mybg_dark;

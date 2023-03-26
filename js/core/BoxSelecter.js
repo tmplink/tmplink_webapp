@@ -43,14 +43,24 @@ class BoxSelecter {
     }
 
     setOn(node) {
+        //获取是否处于深色模式
+        let dark_mode = this.parent_op.matchNightModel();
+        //如果是深色模式，使用不同的配色
+        let color = '';
+        if (dark_mode) {
+            color = '#6d6c6c';
+        } else {
+            color = 'rgb(220, 236, 245)';
+        }
+
         let inode = node.getAttribute('tldata');
         let itype = node.getAttribute('tltype');
         if (itype === 'photo_card') {
-            $(`.file_unit_${inode} .card`).css('background-color', 'rgb(220, 236, 245)');
+            $(`.file_unit_${inode} .card`).css('background-color', color);
         } else {
             // $(`.file_unit_${inode}`).css('border-radius', '5px');
             $(`.file_unit_${inode}`).css('border-width', '1px');
-            $(`.file_unit_${inode}`).css('background-color', 'rgb(220, 236, 245)');
+            $(`.file_unit_${inode}`).css('background-color', color);
         }
         node.setAttribute('data-check', 'true');
     }

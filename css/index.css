@@ -239,7 +239,7 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
 }
 
 .dir-icon:hover {
-    border-radius: 5px;
+    /* border-radius: 5px; */
     border-width: 1px;
     box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
     background-color: beige;
@@ -269,7 +269,7 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
     position: relative;
     margin-bottom: 0.5rem;
     width: 100%;
-    border-radius: 5px;
+    /* border-radius: 5px; */
 }
 
 .select-box:hover {
@@ -281,7 +281,7 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
     position: relative;
     margin-bottom: 0.5rem;
     width: 100%;
-    border-radius: 5px;
+    /* border-radius: 5px; */
 }
 
 .index-box {
@@ -289,11 +289,11 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
     position: relative;
     margin-bottom: 0.5rem;
     width: 100%;
-    border-radius: 5px;
+    /* border-radius: 5px; */
 }
 
 .list-bar:hover {
-    border-radius: 5px;
+    /* border-radius: 5px; */
     border-width: 1px;
     background-color: rgb(220, 236, 245);
 }
