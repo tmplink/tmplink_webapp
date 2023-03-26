@@ -292,7 +292,7 @@ class tmplink {
         let imgSrcDark = '';
 
         if(night){
-            $('#background_wrap').css('background-color','#545454');
+            $('#background_wrap').css('background-color','#6a6868');
         }else{
             $('#background_wrap').css('background-color','#eaeaea');
         }

@@ -443,12 +443,14 @@
                                                 </button>
                                             <% } %> 
                                             <!--[检查此目录是否是直链目录]-->
-                                            <% if(TL.direct.dir_btn_status===false){ %>
-                                                <button onclick="TL.direct.genLinkDirectForRoom('<% obj[x].ukey %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item in-private-dir">
-                                                    <i class="fa-fw fa-light fa-share-nodes"></i>
-                                                    <span i18n="menu_addlink"><% app.languageData.menu_addlink %></span>
-                                                </button>
-                                            <% } %>
+                                            <% if(TL.direct.is_allow()){ %>
+                                                <% if(TL.direct.dir_btn_status===false){ %>
+                                                    <button onclick="TL.direct.addLink('<% obj[x].ukey %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item">
+                                                        <i class="fa-fw fa-light fa-share-nodes"></i>
+                                                        <span i18n="menu_addlink"><% app.languageData.menu_addlink %></span>
+                                                    </button>
+                                                <% } %>
+                                            <% } %>   
                                         </div>
                                     </span>
                                 <% } %>

@@ -340,7 +340,7 @@ class direct {
     }
 
     genLinkDirectForRoom(direct_id,file_name){
-        let link = `${this.protocol}${this.domain}/dir/${this.dir_key}/${direct_id}/${file_name}`;
+        let link = `${this.protocol}${this.domain}/dir-download/${this.dir_key}/${direct_id}/${file_name}`;
         //添加到剪贴板
         this.parent_op.bulkCopy(null,link,false);
     }

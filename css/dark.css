@@ -84,15 +84,15 @@
 
     #footer {
         color: #fff;
-        background-color: #3e3e3e !important;
+        /* background-color: #3e3e3e !important; */
     }
 
-    #footer .copyright {
-        color: #fff;
+    #footer .list-inline-item a{
+        color: #fff !important;
     }
 
-    #footer .copyright a {
-        color: #fff;
+    #footer a {
+        color: #fff !important;
     }
 
     #topnav {
@@ -201,6 +201,14 @@
     .dropdown-menu {
         color: #d0cfcf !important;
         background-color: #3e3e3e !important;
+    }
+
+    .input-group-prepend > .btn {
+        border-color: rgb(123 123 123) !important;
+    }
+
+    .form-control {
+        border-color: rgb(123 123 123) !important;
     }
 
     .btn {
