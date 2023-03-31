@@ -428,32 +428,6 @@
                 <% } %>
             </script>
 
-            <script type="text/template" id="meetroom_grid_tpl">
-            <% for (var x in obj) { %>
-            <div class="col-6 col-md-3 col-lg-2 p-2" id="meetingroom_id_<% obj[x].mr_id %>">
-                <a href="/app&listview=room&mrid=<% obj[x].mr_id %>" tmpui-app="true">
-                    <div class="fileicon mx-auto mb-2 shadow-lg">
-                        <i class="fa-light fa-folders fa-fw mx-auto my-auto mb-2 fa-3x text-blue fileicon-sub text-cyan"></i>
-                    </div>
-                    <div class="max-width-90 mx-auto">
-                        <div class="text-truncate" alt="<% obj[x].name %>"><% obj[x].name %></div>
-                    </div>
-                </a>
-                
-                <div><% app.languageData.filelist_dir %></div>
-                <div>
-                    <a href="javascript:void(0)" onclick="TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/room/${obj[x].mr_id}`) %>',true)" class="mt-1 in-private-dir">
-                        <i class="fa-fw fa-light fa-share-from-square"></i>
-                    </a>
-                    <% if (obj[x].type === 'owner') { %>
-                        <a href="javascript:void(0)" onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-blue mt-1"><i class="fa-light fa-pen-to-square"></i></a>
-                        <a href="javascript:void(0)" id="btn-rm-file_<% obj[x].mr_id %>" class="text-red mt-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></a>
-                    <% } %>
-                </div>
-            </div>
-            <% } %>
-            </script>
-
             <script type="text/template" id="dir_list_tpl">
                 <% for (var x in obj) { %>
                     <div class="row mobile-list-bar-dir" id="meetingroom_id_<% obj[x].mr_id %>">
@@ -475,9 +449,29 @@
                         </div>
                         <div class="col-3 p-0 pr-2 mobile-list-icon-center text-right">
 
+                            <% if(TL.room.model=='public'){ %>
+                                <button onclick="TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/room/${obj[x].mr_id}`) %>',true)" class="in-public-dir text-azure btn btn-sm btn-light mx-1">
+                                    <i class="fa-fw fa-light fa-share-from-square"></i>
+                                </button>
+                            <% } %>
+
                             <% if (obj[x].type === 'owner') { %>
-                                <button  onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-pen-to-square"></i></button>
-                                <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.mr_del('<% obj[x].mr_id %>')"><i class="fa-fw fa-light fa-trash"></i></button>
+                                <span class="dropdown">
+                                    <button role="button" type="button" class="text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown">
+                                        <i class="fa-light fa-ellipsis fa-fw"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right shadow">
+                                        <button  onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="dropdown-item">
+                                            <i class="fa-fw fa-light fa-pen-to-square"></i>
+                                            <span i18n="menu_rename"><% app.languageData.menu_rename %></span>
+                                        </button>
+                                        <button  id="btn-rm-file_<% obj[x].mr_id %>" class="dropdown-item" onclick="TL.mr_del('<% obj[x].mr_id %>')">
+                                            <i class="fa-fw fa-light fa-trash"></i>
+                                            <span i18n="on_select_delete"><% app.languageData.on_select_delete %></span>
+                                        </button>
+                                    </div>
+                                </span>
+                                
                             <% } %>
 
                             <% if (obj[x].fav == 1) { %>
