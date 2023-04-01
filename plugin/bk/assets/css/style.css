@@ -32,7 +32,7 @@ a:hover {
 */
 .float-layer {
   position: fixed !important;
-  bottom: 10px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 999;
@@ -419,9 +419,6 @@ h6 {
   text-align: center;
 }
 
-#hero .container {
-  padding-top: 70px;
-}
 
 #hero h1 {
   margin: 0;
