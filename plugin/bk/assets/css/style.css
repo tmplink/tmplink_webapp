@@ -27,6 +27,17 @@ a:hover {
   text-decoration: none;
 }
 
+/**
+* 浮动层，底部浮动，居中
+*/
+.float-layer {
+  position: fixed !important;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+
 h1,
 h2,
 h3,
