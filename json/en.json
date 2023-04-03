@@ -1,4 +1,6 @@
 {
+    "navbar_more": "More",
+    "navbar_discuz": "Discuss",
     "direct_intro_modal_msg_1": "Completed",
     "direct_intro_modal_msg_2": "Invalid domain name",
     "direct_intro_modal_msg_3": "This domain name has already been used",

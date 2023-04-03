@@ -1,4 +1,6 @@
 {
+    "navbar_more": "メニュー",
+    "navbar_discuz":"けいじばん",
     "direct_intro_modal_msg_1": "完了しました",
     "direct_intro_modal_msg_2": "無効なドメイン",
     "direct_intro_modal_msg_3": "このドメインは既に使用されています",
