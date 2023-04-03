@@ -90,40 +90,48 @@
             </div>
 
             <div class="btn-group dropup nav-units workspace-navbar">
-                <button type="button" class="btn" data-toggle="dropdown">
-                    <div class="d-flex flex-column">
-                        <i class="fa-light fa-sliders-up fa-fw mx-auto"></i>
-                        <span>
-                            <span i18n="navbar_settings">.</span>
-                            <!-- <span class="point-red"></span> -->
-                        </span>
-                    </div>
-                </button>
+                <span class="btn" data-toggle="dropdown">
+                    <button class="btn p-0">
+                        <div>
+                            <i class="fa-fw fa-solid fa-chevrons-up"></i>
+                        </div>
+                        <div>
+                            <span i18n="navbar_more">.</span>
+                        </div>
+                    </button>
+                </span>
                 <div class="dropdown-menu  dropdown-menu-right shadow">
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.profile.openModal()">
-                        <i class="fa-light fa-user-astronaut"></i>
+                        <i class="fa-fw fa-light fa-user-astronaut"></i>
                         <span>
                             <span i18n="user_modal_title">.</span>
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
+                    <a class="dropdown-item" href="https://github.com/tmplink/tmplink_webapp/discussions" target="_blank">
+                        <i class="fa-fw fa-regular fa-comments"></i>
+                        <span>
+                            <span i18n="navbar_discuz">.</span>
+                            <span class="point-red"></span>
+                        </span>
+                    </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#shopModal').modal('show');">
-                        <i class="fa-light fa-bag-shopping"></i>
+                        <i class="fa-fw fa-light fa-bag-shopping"></i>
                         <span>
                             <span i18n="navbar_buy">.</span>
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');">
-                        <i class="fa-light fa-key"></i>
+                        <i class="fa-fw fa-light fa-key"></i>
                         <span i18n="navbar_reset_password">.</span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#emailModal').modal('show');">
-                        <i class="fa-light fa-envelope"></i>
+                        <i class="fa-fw fa-light fa-envelope"></i>
                         <span i18n="navbar_reset_email">.</span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#profileModal').modal('show');">
-                        <i class="fa-light fa-sliders-simple"></i>
+                        <i class="fa-fw fa-light fa-sliders-simple"></i>
                         <span>
                             <span i18n="navbar_profile">.</span>
                             <!-- <span class="point-red"></span> -->
@@ -131,23 +139,27 @@
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)"
                         onclick="$('#ordersModal').modal('show');TL.orders_list();">
-                        <i class="fa-light fa-star"></i>
+                        <i class="fa-fw fa-light fa-star"></i>
                         <span i18n="navbar_orders">.</span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.logout();">
-                        <i class="fa-light fa-right-from-bracket"></i>
+                        <i class="fa-fw fa-light fa-right-from-bracket"></i>
                         <span i18n="navbar_exit">.</span>
                     </a>
                 </div>
             </div>
 
             <div class="btn-group dropup nav-units">
-                <button type="button" class="btn" data-toggle="dropdown">
-                    <div class="d-flex flex-column">
-                        <i class="fa-light fa-language fa-fw mx-auto"></i>
-                        <span class="selected_lang">.</span>
-                    </div>
-                </button>
+                <span class="btn" data-toggle="dropdown">
+                    <button class="btn p-0">
+                        <div>
+                            <i class="fa-light fa-language fa-fw mx-auto"></i>
+                        </div>
+                        <div>
+                            <span class="selected_lang">.</span>
+                        </div>
+                    </button>
+                </span>
                 <div class="dropdown-menu  dropdown-menu-right shadow">
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('cn');">简体中文</a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('hk');">繁体中文</a>
@@ -232,54 +244,61 @@
             <div class="btn-group dropup workspace-navbar">
                 <button type="button" class="btn" data-toggle="dropdown">
                     <div class="d-flex flex-column">
-                        <i class="fa-light fa-sliders-up fa-fw mx-auto"></i>
+                        <i class="fa-solid fa-chevrons-up fa-fw mx-auto"></i>
                         <span>
-                            <span i18n="navbar_settings">.</span>
+                            <span i18n="navbar_more">.</span>
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </div>
                 </button>
                 <div class="dropdown-menu shadow">
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.profile.openModal()">
-                        <i class="fa-light fa-user-astronaut"></i>
+                        <i class="fa-fw fa-light fa-user-astronaut"></i>
                         <span>
                             <span i18n="user_modal_title">.</span>
-                            <span class="point-red"></span>
+                            <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#shopModal').modal('show');">
-                        <i class="fa-light fa-bag-shopping"></i>
+                        <i class="fa-fw fa-light fa-bag-shopping"></i>
                         <span>
                             <span i18n="navbar_buy">.</span>
-                            <span class="point-red"></span>
+                            <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#myModal').modal('show');">
-                        <i class="fa-solid fa-user"></i>
+                        <i class="fa-fw fa-solid fa-user"></i>
                         <span i18n="navbar_my">.</span>
                     </a>
+                    <a class="dropdown-item" href="https://github.com/tmplink/tmplink_webapp/discussions" target="_blank">
+                        <i class="fa-fw fa-regular fa-comments"></i>
+                        <span>
+                            <span i18n="navbar_discuz">.</span>
+                            <span class="point-red"></span>
+                        </span>
+                    </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');">
-                        <i class="fa-light fa-key"></i>
+                        <i class="fa-fw fa-light fa-key"></i>
                         <span i18n="navbar_reset_password">.</span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#emailModal').modal('show');">
-                        <i class="fa-light fa-envelope"></i>
+                        <i class="fa-fw fa-light fa-envelope"></i>
                         <span i18n="navbar_reset_email">.</span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#profileModal').modal('show');">
-                        <i class="fa-light fa-sliders-simple"></i>
+                        <i class="fa-fw fa-light fa-sliders-simple"></i>
                         <span>
                             <span i18n="navbar_profile">.</span>
-                            <span class="point-red"></span>
+                            <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)"
                         onclick="$('#ordersModal').modal('show');TL.orders_list();">
-                        <i class="fa-light fa-star"></i>
+                        <i class="fa-fw fa-light fa-star"></i>
                         <span i18n="navbar_orders">.</span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.logout();">
-                        <i class="fa-light fa-right-from-bracket"></i>
+                        <i class="fa-fw fa-light fa-right-from-bracket"></i>
                         <span i18n="navbar_exit">.</span>
                     </a>
                 </div>
