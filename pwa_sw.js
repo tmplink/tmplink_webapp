@@ -1,5 +1,5 @@
 const allowedDomain = ["static.vx-cdn.com","tmp.link","ttttt.link"];
-const resSet = "tmplink v1111";
+const resSet = "tmplink v1112";
 const assets = [
   '/',
 ];
