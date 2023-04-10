@@ -9,6 +9,7 @@ class tmplink {
     api_direct = this.api_url + '/direct'
     api_media = this.api_url + '/media'
     api_mr = this.api_url + '/meetingroom'
+    api_notes = this.api_url + '/notes'
     api_toks = this.api_url_sec + '/token'
     api_tokx = this.api_url + '/token'
     api_token = null
@@ -87,6 +88,7 @@ class tmplink {
         this.stream = new stream;
         this.profile = new profile;
         this.buy = new buy;
+        this.notes = new notes;
 
         this.stream.init(this);
         this.giftcard.init(this);
@@ -96,6 +98,7 @@ class tmplink {
         this.uploader.init(this);
         this.profile.init(this);
         this.buy.init(this);
+        this.notes.init(this);
 
         //
         $('.workspace-navbar').hide();
@@ -3030,6 +3033,7 @@ class tmplink {
         this.logined = 0;
         this.storage_used = 0;
         this.storage = 0;
+        this.notes.cleanKey();
         $.post(this.api_user, {
             action: 'logout',
             token: this.api_token

@@ -26,9 +26,11 @@ class dynamic {
             case 'workspace':
                 this.workspace();
                 break;
+
             case 'room':
                 this.room();
                 break;
+                w
             case 'direct':
                 this.direct();
                 break;
@@ -48,6 +50,10 @@ class dynamic {
                 break;
             case 'privacy':
                 this.privacy();
+                break;
+
+            case 'notes':
+                this.notes();
                 break;
 
             default:
@@ -73,7 +79,7 @@ class dynamic {
             TL.head_set();
         });
         app.linkRebind();
-        if(isMobileScreen()){
+        if (isMobileScreen()) {
             TL.bg_remove();
             this.mobileHead();
         }
@@ -87,7 +93,7 @@ class dynamic {
         $(headerT).hide();
         if (this.mobileHeadInstalled) {
             return;
-        }else{
+        } else {
             this.mobileHeadInstalled = true;
         }
         window.addEventListener('scroll', function () {
@@ -151,6 +157,19 @@ class dynamic {
         this.active('workspace');
         INIT_workspace();
         TL.navbar.model_workspace();
+    }
+
+    notes() {
+        if (isMobileScreen()) {
+            $('#home_view').html(app.getFile('/tpl/listview/mobile_notes.html'));
+        } else {
+            $('#home_view').html(app.getFile('/tpl/listview/notes.html'));
+        }
+        TL.ga('notes');
+        app.dynOpen('/app&listview=notes');
+        this.active('notes');
+        INIT_notes();
+        TL.navbar.model_notes();
     }
 
     room() {
