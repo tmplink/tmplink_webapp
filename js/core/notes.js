@@ -44,6 +44,11 @@ class notes {
     }
 
     open(id) {
+        //在没有密钥的情况下，不允许打开编辑器
+        if (this.key === null) {
+            alert(app.languageData.notes_keyinit_alert);
+            return false;
+        }
         //如果有传入 ID，则查找 ID 对应的笔记，写入到编辑器
         if (id !== 0) {
             let note = this.getNotesById(id);
