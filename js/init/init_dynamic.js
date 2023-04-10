@@ -40,6 +40,9 @@ app.ready(() => {
         case 'privacy':
             dynamicView.privacy();
             break;
+        case 'notes':
+            dynamicView.notes();
+            break;
         default:
             dynamicView.index();
     }

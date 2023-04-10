@@ -85,6 +85,9 @@ class navbar {
             case '/direct':
                 this.model_direct(act);
                 break;
+            case '/notes':
+                this.model_notes(act);
+                break;
 
         }
     }
@@ -102,6 +105,15 @@ class navbar {
             dynamicView.workspace();
         }
         this.navbar_lightup('workspace');
+    }
+
+    model_notes(act){
+        $('#navbar_model_icon').attr('class', 'fa-solid fa-pen fa-fw mx-auto');
+        $('#navbar_model_text').html(app.languageData.navbar_notes);
+        if (act === true) {
+            dynamicView.notes();
+        }
+        this.navbar_lightup('notes');
     }
 
     model_desktop(act) {

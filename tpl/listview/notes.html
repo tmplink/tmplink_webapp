@@ -1,0 +1,109 @@
+<div id="notes" class="card mt-5 shadow" style="display: none;">
+    <div class="card-header pt-3 card-radius">
+        <div class="mx-auto text-center mt-3">
+            <i class="fa-4x fa-light fa-book fa-fw"></i>
+            <span class="display-4">笔记 </span>
+            <span class="text-muted display-5">beta</span>
+            <div class="mt-4 mb-3">
+                <button onclick="TL.notes.open(0);" class="btn btn-sm btn-primary">
+                    <i class="fa-solid fa-pen fa-fw"></i>
+                    <span i18n="notes_create" class="d-none d-sm-inline">.</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="notes_model">
+
+        <div id="notes_list" class="mb-3">
+            <div class="mx-auto" style="margin-top: 100px;margin-bottom: 100px; max-width: 600px;">
+                <div class="alert alert-danger" role="alert" id="notes_keyfail_alert">
+                    <i class="fa-light fa-exclamation-triangle fa-fw"></i>
+                    <span i18n="notes_keyfail_alert">.</span>
+                </div>
+                <div class="alert alert-warning" role="alert" id="notes_keyinit_alert">
+                    <i class="fa-light fa-exclamation-triangle fa-fw"></i>
+                    <span i18n="notes_keyinit_alert">.</span>
+                </div>
+                <h4 i18n="notes_editor_key_title">.</h4>
+                <input type="text" id="notes_editor_key_setting" class="form-control mb-2" i18n="notes_editor_key_setting" i18nOnly="placeholder"
+                placeholder=".">
+                <hr>
+                <p i18n="notes_keyinit_des1">.</p>
+                <p i18n="notes_keyinit_des2">.</p>
+                <div class="mt-2 text-center">
+                    <button type="button" class="btn btn-danger mx-1" id="notes_reset_all" i18n="model_btn_resetall" onclick="TL.notes.keyReInit()">.</button>
+                    <button type="button" class="btn btn-primary mx-1" data-dismiss="modal" i18n="model_btn_ok" onclick="TL.notes.keySet()">.</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="no_notes" style="margin-top: 100px;margin-bottom: 100px;display: none;">
+            <div class="text-center mb-4">
+                <i class="fa-fw fa-light fa-folder-open fa-4x"></i>
+            </div>
+            <div class="text-center" i18n="page_no_notes">.</div>
+        </div>
+
+        <script type="text/template" id="notes_list_tpl">
+            <% for (var x in obj) { %>
+                <div class="shadow-sm p-3 m-2">
+                    <h4 class="btn-pointer" onclick="TL.notes.open('<% obj[x].id %>')">
+                        <% obj[x].title_text %>
+                    </h4>
+                    <div class="text-muted btn-pointer" onclick="TL.notes.open('<% obj[x].id %>')">
+                        <% obj[x].content_text %>
+                    </div>
+                    <div class="text-right">
+                        <!-- time -->
+                        <span class="mr-2">
+                            <i class="fa-light fa-clock fa-fw"></i>
+                            <% obj[x].etime %>
+                        </span>
+                        <button class="btn btn-sm btn-primary" onclick="TL.notes.open('<% obj[x].id %>')">
+                            <i class="fa-fw fa-light fa-pen"></i>
+                            <span i18n="notes_edit"><% app.languageData.notes_edit %></span>
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="TL.notes.delete('<% obj[x].id %>')">
+                            <i class="fa-fw fa-light fa-trash"></i>
+                            <span i18n="menu_delete"><% app.languageData.menu_delete %></span>
+                        </button>
+                    </div>
+                </div>
+            <% } %>
+        </script>
+    </div>
+</div>
+
+<!-- 创建新笔记窗口 -->
+<div class="modal" id="notesEditorModal">
+    <div class="modal-dialog  modal-lg modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span i18n="model_title_notes">.</span>
+                    <!-- 显示更新动画 -->
+                    <span id="notes_editor_updating" class="mr-1" style="display: none;">
+                        <i class="fa-light fa-spinner fa-spin fa-fw text-warning"></i>
+                    </span>
+                    <!-- 更新完成 -->
+                    <span id="notes_editor_updated" style="display: none;">
+                        <i class="fa-light fa-circle-check fa-fw text-green"></i>
+                    </span>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 标题 -->
+                <input type="text" id="notes_editor_title" class="form-control mb-2" i18n="notes_editor_title" i18nOnly="placeholder"
+                placeholder="." onchange="TL.notes.autoPost();">
+                <!-- 内容 -->
+                <textarea id="trumbowyg" onchange="TL.notes.autoPost();"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" i18n="user_save" onclick="TL.notes.autoPost()">.</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_title_sr_only">.</button>
+            </div>
+        </div>
+    </div>
+</div>
