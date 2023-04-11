@@ -37,6 +37,8 @@ class notes {
                 this.autoPost();
             }, 10000);
         }
+        //修补UI，移动设备时，修正按钮高度
+        $('.mobile-head-padding-large').css('padding-top','150px');
     }
 
     cleanKey(){
@@ -57,6 +59,9 @@ class notes {
             $('#notes_editor_title').val(this.de_content(note.title));
         } else {
             $('#trumbowyg').trumbowyg();
+            //清空编辑器
+            $('#trumbowyg').trumbowyg('html', '');
+            $('#notes_editor_title').val('');
         }
         $('#notesEditorModal').modal('show');
         this.current_id = id;
@@ -181,7 +186,6 @@ class notes {
 
             //先尝试解密第一条数据
             let test = this.de_content(rsp.data[0].content);
-            console.log(test);
             if (test === false) {
                 //显示未能解密的数据条数
                 $('#notes_keyinit_alert').hide();
@@ -218,8 +222,9 @@ class notes {
 
     decode_list(data) {
         for (let i = 0; i < data.length; i++) {
-            let raw_title = this.de_content(data[i].title);
-            let row_content = this.de_content(data[i].content);
+            let raw_title = stripTags(this.de_content(data[i].title));
+            let row_content = stripTags(this.de_content(data[i].content));
+            //移除 html 标签
             //如果 raw_title 超出 25 个字符，截取 25 个字符，超出的部分用 ... 代替
             if (raw_title.length > 25) {
                 data[i].title_text = raw_title.substring(0, 25) + '...';

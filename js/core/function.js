@@ -193,3 +193,13 @@ function isIosPwaMode() {
     // 返回结果，如果同时满足 Safari 浏览器和 PWA 模式，则说明当前网页在 iOS PWA 模式下运行
     return isSafari && isInStandaloneMode;
 }
+
+
+function stripTags(html) {
+    // 剔除 HTML 标签
+    const strippedHtml = html.replace(/(<([^>]+)>)/gi, '');
+    // 剔除转义字符
+    const strippedText = strippedHtml.replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/&quot;/gi, '"').replace(/&lt;/gi, '<').replace(/&gt;/gi, '>');
+
+    return strippedText;
+}
