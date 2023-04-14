@@ -15,7 +15,8 @@
     <div id="notes_model">
 
         <div id="notes_list" class="mb-3">
-            <div class="mx-auto" style="margin-top: 100px;margin-bottom: 100px; max-width: 600px;">
+            <div class="mx-auto" style="margin-top: 50px;margin-bottom: 100px; max-width: 600px;">
+                <img src="/img/notes/how2.png" class="mb-4"/>
                 <div class="alert alert-danger" role="alert" id="notes_keyfail_alert">
                     <i class="fa-light fa-exclamation-triangle fa-fw"></i>
                     <span i18n="notes_keyfail_alert">.</span>
@@ -28,8 +29,8 @@
                 <input type="text" id="notes_editor_key_setting" class="form-control mb-2" i18n="notes_editor_key_setting" i18nOnly="placeholder"
                 placeholder=".">
                 <hr>
-                <p i18n="notes_keyinit_des1">.</p>
-                <p i18n="notes_keyinit_des2">.</p>
+                <li i18n="notes_keyinit_des1">.</li>
+                <li i18n="notes_keyinit_des2">.</li>
                 <div class="mt-2 text-center">
                     <button type="button" class="btn btn-danger mx-1" id="notes_reset_all" i18n="model_btn_resetall" onclick="TL.notes.keyReInit()">.</button>
                     <button type="button" class="btn btn-primary mx-1" data-dismiss="modal" i18n="model_btn_ok" onclick="TL.notes.keySet()">.</button>
