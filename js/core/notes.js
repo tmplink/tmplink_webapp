@@ -196,6 +196,7 @@ class notes {
             if (rsp.status == 0) {
                 $('.no_notes').show();
                 $('#notes_list').hide();
+                $('.notes_ready_btn').show();
                 return false;
             }
 
@@ -212,12 +213,13 @@ class notes {
                 $('#notes_keyinit_alert').hide();
                 $('#notes_keyfail_alert').hide();
                 $('#notes_reset_all').hide();
-                $('.notes_ready_btn ').show();
+                $('.notes_ready_btn').show();
             }
 
             if (rsp.status == 1) {
                 let data = this.decode_list(rsp.data);
                 this.notes = data;
+                $('.notes_ready_btn').show();
                 $('#notes_list').html(app.tpl('notes_list_tpl', data));
             }
 
