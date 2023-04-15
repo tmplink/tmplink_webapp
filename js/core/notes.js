@@ -1,6 +1,5 @@
 class notes {
     parent_op = null
-    // key 先预置，之后需要修改。
     key = null
     monitor = false
     notes = null
@@ -20,11 +19,15 @@ class notes {
         //是否有设置密钥
         $('#notes_keyfail_alert').hide();
         $('#notes_keyinit_alert').hide();
+        //初始化创建笔记的按钮
+        $('.notes_ready_btn ').hide();
         this.key = localStorage.getItem('NotesKey');
         if (this.key === null) {
+            //如果没有设置密钥，显示设置密钥的提示
             $('#notes_list').fadeIn();
             $('#notes_keyinit_alert').show();
-        }else{
+        } else {
+            //如果有设置密钥，则请求笔记列表
             this.list();
         }
         //初始化页面
@@ -38,10 +41,10 @@ class notes {
             }, 10000);
         }
         //修补UI，移动设备时，修正按钮高度
-        $('.mobile-head-padding-large').css('padding-top','150px');
+        $('.mobile-head-padding-large').css('padding-top', '150px');
     }
 
-    cleanKey(){
+    cleanKey() {
         localStorage.removeItem('NotesKey');
     }
 
@@ -89,6 +92,10 @@ class notes {
         $('#notes_list').html(app.tpl('notes_list_tpl', data));
     }
 
+    /**
+     * 设置密钥
+     * @returns {undefined}
+     */
     keySet() {
         let new_key = $('#notes_editor_key_setting').val();
         if (new_key === '') {
@@ -98,8 +105,12 @@ class notes {
         // 存储密钥
         localStorage.setItem('NotesKey', new_key);
         this.key = new_key;
-        
-        //
+
+        //重置提示框
+        $('#notes_keyfail_alert').hide();
+        $('#notes_keyinit_alert').hide();
+
+        //调用数据更新
         this.list();
     }
 
@@ -171,6 +182,7 @@ class notes {
     }
 
     list() {
+        this.parent_op.loading_box_on();
         $('#notes_list').fadeIn();
         $('#notes_list_encrypt_error').hide();
         $('.no_notes').hide();
@@ -178,6 +190,9 @@ class notes {
             'action': 'list',
             'token': this.parent_op.api_token
         }, (rsp) => {
+            //close loading box
+            this.parent_op.loading_box_off();
+
             if (rsp.status == 0) {
                 $('.no_notes').show();
                 $('#notes_list').hide();
@@ -187,11 +202,17 @@ class notes {
             //先尝试解密第一条数据
             let test = this.de_content(rsp.data[0].content);
             if (test === false) {
+
                 //显示未能解密的数据条数
                 $('#notes_keyinit_alert').hide();
                 $('#notes_keyfail_alert').show();
                 $('#notes_reset_all').show();
                 return false;
+            }else{
+                $('#notes_keyinit_alert').hide();
+                $('#notes_keyfail_alert').hide();
+                $('#notes_reset_all').hide();
+                $('.notes_ready_btn ').show();
             }
 
             if (rsp.status == 1) {
@@ -199,6 +220,7 @@ class notes {
                 this.notes = data;
                 $('#notes_list').html(app.tpl('notes_list_tpl', data));
             }
+
         }, 'json');
     }
 
@@ -224,7 +246,6 @@ class notes {
         for (let i = 0; i < data.length; i++) {
             let raw_title = stripTags(this.de_content(data[i].title));
             let row_content = stripTags(this.de_content(data[i].content));
-            //移除 html 标签
             //如果 raw_title 超出 25 个字符，截取 25 个字符，超出的部分用 ... 代替
             if (raw_title.length > 25) {
                 data[i].title_text = raw_title.substring(0, 25) + '...';
@@ -251,7 +272,13 @@ class notes {
     }
 
     de_content(text) {
-        let content = CryptoJS.AES.decrypt(text, this.key).toString(CryptoJS.enc.Utf8);
+        let content = null;
+        //try to decrypt
+        try {
+            content = CryptoJS.AES.decrypt(text, this.key).toString(CryptoJS.enc.Utf8);
+        } catch (e) {
+            return false;
+        }
         //捕获错误，失败返回false
         try {
             content = JSON.parse(content);

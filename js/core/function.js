@@ -196,6 +196,16 @@ function isIosPwaMode() {
 
 
 function stripTags(html) {
+    //处理例外情况
+    if (typeof html !== 'string') {
+        return '';
+    }
+
+    //另外情况2，没有 replace 方法
+    if (!html.replace) {
+        return html;
+    }
+
     // 剔除 HTML 标签
     const strippedHtml = html.replace(/(<([^>]+)>)/gi, '');
     // 剔除转义字符

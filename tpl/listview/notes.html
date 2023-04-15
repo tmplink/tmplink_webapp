@@ -2,12 +2,16 @@
     <div class="card-header pt-3 card-radius">
         <div class="mx-auto text-center mt-3">
             <i class="fa-4x fa-light fa-book fa-fw"></i>
-            <span class="display-4">笔记 </span>
+            <span class="display-4" i18n="title_notes">. </span>
             <span class="text-muted display-5">beta</span>
             <div class="mt-4 mb-3">
-                <button onclick="TL.notes.open(0);" class="btn btn-sm btn-primary">
+                <button onclick="TL.notes.open(0);" class="notes_ready_btn  btn btn-sm btn-light text-azure">
                     <i class="fa-solid fa-pen fa-fw"></i>
                     <span i18n="notes_create" class="d-none d-sm-inline">.</span>
+                </button>
+                <!-- 刷新按钮 -->
+                <button onclick="TL.notes.list();" class="notes_ready_btn btn btn-sm btn-light text-azure">
+                    <i class="fa-solid fa-sync fa-fw"></i>
                 </button>
             </div>
         </div>
@@ -60,13 +64,13 @@
                             <i class="fa-light fa-clock fa-fw"></i>
                             <% obj[x].etime %>
                         </span>
-                        <button class="btn btn-sm btn-primary" onclick="TL.notes.open('<% obj[x].id %>')">
+                        <button class="btn btn-sm btn-light text-azure" onclick="TL.notes.open('<% obj[x].id %>')">
                             <i class="fa-fw fa-light fa-pen"></i>
                             <span i18n="notes_edit"><% app.languageData.notes_edit %></span>
                         </button>
-                        <button class="btn btn-sm btn-danger" onclick="TL.notes.delete('<% obj[x].id %>')">
+                        <button class="btn btn-sm btn-light text-red" onclick="TL.notes.delete('<% obj[x].id %>')">
                             <i class="fa-fw fa-light fa-trash"></i>
-                            <span i18n="menu_delete"><% app.languageData.menu_delete %></span>
+                            <span i18n="on_select_delete"><% app.languageData.on_select_delete %></span>
                         </button>
                     </div>
                 </div>
