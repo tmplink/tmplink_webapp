@@ -1090,6 +1090,9 @@ class tmplink {
                 token: this.api_token
             }, (rsp) => {
                 if (rsp.status === 1) {
+                    //隐藏信息提示窗口
+                    $('#file_messenger').hide();
+                    //
                     this.ga('D-' + rsp.data.name);
                     fileinfo = rsp.data;
                     $('#file_box').show();
@@ -1371,8 +1374,8 @@ class tmplink {
                     $('#file_messenger').show();
                     this.ga(`Sync-[${params.ukey}]`);
                     setTimeout(() => {
-                        window.location.reload();
-                    }, 10000);
+                        this.details_file();
+                    }, 60000);
                     return false;
                 }
 
