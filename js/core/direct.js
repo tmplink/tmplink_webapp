@@ -47,6 +47,7 @@ class direct {
             this.total_downloads = rsp.data.total_downloads;
             this.total_transfer = rsp.data.total_transfer;
             this.set = 1;
+            this.traffic_limit = rsp.data.traffic_limit;
             this.ssl = rsp.data.ssl_status === 'yes' ? true : false;
             //如果domain是 *.5t-cdn.com 作为子域名，生成的链接则应该是 https://
             if (this.domain.indexOf('.5t-cdn.com') != -1) {
@@ -54,6 +55,13 @@ class direct {
                 $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
             } else {
                 $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
+            }
+            //如果有设定限制单个 IP 的日流量
+            if (this.traffic_limit>0) {
+                $('#direct_traffic_limit').val(this.traffic_limit);
+                $('#direct_set_traffic_limit_title').html(app.languageData.direct_traffic_limit);
+            } else {
+                $('#direct_set_traffic_limit_title').html(app.languageData.direct_traffic_unlimit);
             }
             if (this.ssl) {
                 $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
@@ -89,6 +97,25 @@ class direct {
                 cb();
             }
         }, 'json');
+    }
+
+    setTrafficLimit(){
+        $('#box_set_traffic_limit').show();
+        let val = $('#direct_traffic_limit').val();
+        $.post(this.parent_op.api_direct, {
+            'action': 'set_traffic_limit',
+            'token': this.parent_op.api_token,
+            'val': val
+        }, () => {
+            if(val>0){
+                $('#direct_set_traffic_limit_title').html(app.languageData.direct_traffic_limit);
+            }else{
+                $('#direct_set_traffic_limit_title').html(app.languageData.direct_traffic_unlimit);
+            }
+            setTimeout(() => {
+            $('#box_set_traffic_limit').hide();
+            }, 1000);
+        });
     }
 
     ininOnDirectPage(){
