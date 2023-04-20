@@ -1,6 +1,11 @@
 {
+    "direct_traffic_title": "Traffic Limitation",
+    "direct_traffic_title2": "Preventing Abuse: Traffic Limitation Measures",
+    "direct_traffic_des": "Limitation of traffic by a multiplier based on file size. The restricted traffic is calculated by multiplying the file size by the number of downloads. For example, if the file size is 2GB and the value is set to 2, then a single IP address can consume up to 4GB of traffic within 24 hours. Setting the value to 0 disables the limitation.",
+    "direct_traffic_limit": "Traffic Limitation: Enabled",
+    "direct_traffic_unlimit": "Traffic Limitation: Disabled",
     "title_notes": "Notes",
-    "des_notes": "Record your ideas and access them anytime, anywhere.",
+    "des_notes": "Record your ideas and access them anytime, anywhere.", 
     "notes_create": "New",
     "page_no_notes": "You have no notes yet. Create your first note now~",
     "navbar_notes": "Notes",

@@ -19,6 +19,11 @@
                     <i class="fa-fw fa-solid fa-badge-check"></i>
                     <span i18n="brand_modal_title">.</span>
                 </span>
+                <span class="badge badge-pill badge-info p-2 mx-1 mt-1 btn-point"
+                    onclick="$('#limitTrafficModal').modal('show');">
+                    <i class="fa-fw fa-light fa-block-brick-fire"></i>
+                    <span id="direct_set_traffic_limit_title"></span>
+                </span>
             </div>
             <div class="lead mt-2">
                 <span class="badge badge-pill badge-info p-2 mx-1 mt-1">
@@ -145,9 +150,9 @@
                 <span i18n="direct_notice_usage">.</span>
             </div>
         </div>
-        <div class="alert alert-info" i18n="direct_intro">
+        <!-- <div class="alert alert-info" i18n="direct_intro">
             .
-        </div>
+        </div> -->
 
         <div id="direct_filelist"></div>
 

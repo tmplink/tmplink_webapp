@@ -612,6 +612,13 @@
     "direct_sponsor_freee_quota_msg_1": "领取成功。",
     "direct_sponsor_freee_quota_msg_2": "这是赞助者的专享权益，您目前还不是赞助者。请成为赞助者后再来",
     "direct_sponsor_freee_quota_msg_3": "您已经领取了本月的配额，请下个月再来。",
+
+    "direct_traffic_title": "流量限制",
+    "direct_traffic_title2": "防止滥用：流量限制措施",
+    "direct_traffic_des": "流量限定倍率。该值基于文件大小动态设定。其限制的流量为：文件大小 x 下载次数。比如文件为 2GB 时，设定值为 2，那么单个 IP 在 24 小时内最多能消耗 4GB 的流量。设定为 0 时不限制。",
+    "direct_traffic_limit": "流量限制：启用",
+    "direct_traffic_unlimit": "流量限制：停用",
+
     "direct_ssl": "安全传输",
     "direct_ssl_enbaled": "已启用",
     "direct_ssl_disabled": "未启用",

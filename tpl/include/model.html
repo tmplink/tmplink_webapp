@@ -1566,3 +1566,29 @@
         </div>
     </div>
 </div>
+
+<div class="modal" id="limitTrafficModal" >
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="direct_traffic_title">
+                    .
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h4>
+                    <span i18n="direct_traffic_title2">.</span>
+                    <small id="box_set_traffic_limit" style="text-align: center;display: none;">
+                        <i class="fa fa-spinner-third fa-spin"></i>
+                    </small>
+                </h4>
+                <input type="number" class="form-control" id="direct_traffic_limit" max="100" min="0" value="0" onchange="TL.direct.setTrafficLimit()" onkeydown="TL.direct.setTrafficLimit()">
+                <p class="mt-2" i18n="direct_traffic_des">.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
