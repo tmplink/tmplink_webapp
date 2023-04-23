@@ -210,6 +210,7 @@ class uploader {
                                 $.post(this.parent_op.api_file, {
                                     'sha1': sha1,
                                     'filename': filename,
+                                    'filesize': file.size,
                                     'model': model,
                                     'mr_id': mrid,
                                     'skip_upload': upload_skip,
@@ -231,6 +232,7 @@ class uploader {
                     $.post(this.parent_op.api_file, {
                         'sha1': sha1,
                         'filename': filename,
+                        'filesize': file.size,
                         'model': model,
                         'mr_id': mrid,
                         'skip_upload': upload_skip,
