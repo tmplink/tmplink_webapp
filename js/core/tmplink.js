@@ -297,7 +297,7 @@ class tmplink {
         if(night){
             $('#background_wrap').css('background-color','#6a6868');
         }else{
-            $('#background_wrap').css('background-color','#eaeaea');
+            $('#background_wrap').css('background-color','#ffffff');
         }
 
         if (this.mybg_dark !== 0) {

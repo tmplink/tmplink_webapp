@@ -119,11 +119,11 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
     width: 100%;
     height: 100px;
     clear: both;
-    color: #eaeaea;
+    color: #ffffff;
 }
 
 #footer a {
-    color: #eaeaea;
+    color: #ffffff;
 }
 
 .content-box {
