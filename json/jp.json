@@ -616,7 +616,7 @@
     "upload_limit_size": "現在,アップロードできるのは 50 GB 未満のファイルのみです。",
     "upload_cancel": "アップロードがキャンセルされたか,インターネット接続が切断されました。",
     "upload_ok": "アップロード済み",
-    "upload_upload_prepare": "ファイルを前処理しています。しばらくお待ちください。",
+    "upload_upload_prepare": "最適化中...",
     "upload_upload_processing": "アップロード",
     "upload_ready": "アップロードを待機しています",
     "upload_sync": "ストレージノードへの転送,これには時間がかかる場合があります。",

@@ -2826,7 +2826,6 @@ class tmplink {
             }
 
             //如果文件夹允许其他人上传文件
-            // console.log(this.room.allow_upload);
             if (this.room.allow_upload == 'yes') {
                 $('#pf_allow_upload').attr('checked', '');
             } else {
