@@ -42,7 +42,6 @@ class uploader {
         $('#tmpup_model').html(model);
         $('#tmpup_copy_model').attr('onclick', `TL.directCopy(this,'${model}')`);
 
-        console.log(mrid);
         if (mrid !== undefined) {
             $('#tmpup_mrid_view').show();
             $('#tmpup_mrid').html(mrid);
@@ -300,25 +299,65 @@ class uploader {
 
 
     upload_prepare(file, id, callback) {
+        // 定义块大小为 64KB
+        const blockSize = 64 * 1024;
+        // 定义 SHA-1 实例
+        const sha1 = CryptoJS.algo.SHA1.create();
+        // 定义当前块号和总块数
+        let currentBlock = 0;
+        const totalBlocks = Math.ceil(file.size / blockSize);
+        // 定义进度条元素
+        let uqpid = "#uqp_" + id;
+        const progressBar = $(uqpid);
 
-        //不支持FileReader，直接下一步。
+        // 提取信息
+        $('#uqnn_' + id).html(app.languageData.upload_upload_prepare);
+        
+        // 不支持 FileReader，直接下一步。
         if (!window.FileReader) {
             callback(file, 0, id);
             return false;
         }
-        //支持FileReader，计算sha1再进行下一步
-        var reader = new FileReader();
-        reader.onload = (event) => {
-            var file_sha1 = sha1(event.target.result);
-            callback(file, file_sha1, id);
+
+        // 支持 FileReader，计算 SHA-1 值
+        const reader = new FileReader();
+        reader.onload = function () {
+            // 读取当前块数据
+            const data = new Uint8Array(reader.result);
+            // 更新 SHA-1 实例
+            sha1.update(CryptoJS.lib.WordArray.create(data));
+            // 更新当前块号
+            currentBlock++;
+
+            // 更新进度条
+            const progress = currentBlock / totalBlocks * 100;
+            progressBar.css('width', `${progress}%`);
+
+            // 如果当前块号小于总块数，则继续读取下一块
+            if (currentBlock < totalBlocks) {
+                readNextBlock();
+            } else {
+                // 如果所有块都读取完毕，则计算最终 SHA-1 值并回调
+                const hash = sha1.finalize().toString();
+                callback(file, hash, id);
+            }
         };
-        //如果文件大小大于 sha1_size，则只计算前 sha1_size 字节的 sha1
-        if (file.size > this.sha1_size) {
-            reader.readAsArrayBuffer(file.slice(0, this.sha1_size));
-        } else {
-            reader.readAsArrayBuffer(file);
+
+        // 读取下一块数据
+        function readNextBlock() {
+            const start = currentBlock * blockSize;
+            const end = Math.min(start + blockSize, file.size);
+            reader.readAsArrayBuffer(file.slice(start, end));
         }
+
+        // 初始化进度条
+        progressBar.css('width', '0%');
+
+        // 从第一块开始读取数据
+        readNextBlock();
     }
+
+
 
     upload_worker(file, sha1, id, filename) {
         this.parent_op.recaptcha_do('upload_request_select2', (captcha) => {
@@ -689,7 +728,6 @@ class uploader {
             //更新状态
             this.upload_btn_status_update();
             //自动启动上传
-            console.log(this.upload_queue_file.length);
             this.upload_start();
         }, 500, f);
     }

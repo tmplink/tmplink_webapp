@@ -615,7 +615,7 @@
     "upload_limit_size": "Currently only files less than 50 GB can be uploaded.",
     "upload_cancel": "Upload has been canceled or your internet has been disconnected.",
     "upload_ok": "Uploaded",
-    "upload_upload_prepare": "Please wait, we're pre-processing your file.",
+    "upload_upload_prepare": "Optimizing the transmission...",
     "upload_upload_processing": "Uploading",
     "upload_ready": "Waiting for upload",
     "upload_sync": "Transferring to a storage node, this may take a while.",

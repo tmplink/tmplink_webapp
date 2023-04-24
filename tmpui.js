@@ -312,7 +312,6 @@ class tmpUI {
                         if (!newpage) {
                             atag[i].addEventListener('click', e => {
                                 e.preventDefault();
-                                // console.log(url);
                                 history.pushState({
                                     Page: 1
                                 }, window.title, url);
@@ -345,7 +344,6 @@ class tmpUI {
                         if (!newpage) {
                             atag[i].addEventListener('click', e => {
                                 e.preventDefault();
-                                // console.log(url);
                                 history.pushState({
                                     Page: 1
                                 }, window.title, url);
