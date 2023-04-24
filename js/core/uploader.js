@@ -9,6 +9,7 @@ class uploader {
     upload_processing = 0
     single_file_size = 50 * 1024 * 1024 * 1024
     slice_size = 32 * 1024 * 1024;
+    sha1_size = 1024 * 1024 * 1024;
 
     upload_slice_chunk_loaded = 0
     upload_slice_chunk_total = 0
@@ -311,7 +312,12 @@ class uploader {
             var file_sha1 = sha1(event.target.result);
             callback(file, file_sha1, id);
         };
-        reader.readAsArrayBuffer(file.slice(0, (1024 * 1024 * 32)));
+        //如果文件大小大于 sha1_size，则只计算前 sha1_size 字节的 sha1
+        if (file.size > this.sha1_size) {
+            reader.readAsArrayBuffer(file.slice(0, this.sha1_size));
+        } else {
+            reader.readAsArrayBuffer(file);
+        }
     }
 
     upload_worker(file, sha1, id, filename) {
