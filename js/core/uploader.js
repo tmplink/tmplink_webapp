@@ -12,13 +12,21 @@ class uploader {
     sha1_size = 1024 * 1024 * 1024;
 
     upload_slice_chunk_loaded = 0
+    upload_slice_chunk_speed = 0
+    upload_slice_chunk_time = 0
+    upload_slice_chunk_last = 0
     upload_slice_chunk_total = 0
+    upload_slice_lefttime = 0
 
     upload_progressbar_counter_total = []
     upload_progressbar_counter_loaded = []
     upload_progressbar_counter_count = []
     upload_progressbar_counter = []
     upload_s2_status = []
+
+    upload_speed_total = 0 //总速度
+    upload_speed_time = 0 //总速度计时器
+    upload_speed_send = 0   //上传速度
 
     init(parent_op) {
         this.parent_op = parent_op;
@@ -360,6 +368,9 @@ class uploader {
 
 
     upload_worker(file, sha1, id, filename) {
+        //初始化总大小，用于计算剩余时间
+        this.upload_slice_chunk_total = file.size;
+
         this.parent_op.recaptcha_do('upload_request_select2', (captcha) => {
             $.post(this.parent_op.api_url_upload, {
                 'token': this.parent_op.api_token,
@@ -500,9 +511,15 @@ class uploader {
      * 分片上传
      */
     worker_slice_uploader(server, id, sha1, file, slice_status, cb) {
+        //初始化上传任务
+        this.upload_slice_chunk_loaded = 0;
+        this.upload_slice_chunk_time = new Date().getTime();
+
         //从 file 中读取指定的分片
         let index = slice_status.next;
         let blob = file.slice(index * this.slice_size, (index + 1) * this.slice_size);
+        //重置上传数据
+        this.upload_slice_chunk_last = 0;
 
         //提交分片
         let xhr = new XMLHttpRequest();
@@ -538,29 +555,29 @@ class uploader {
         //绘制进度信息
         $(uqmid).html(`${app.languageData.upload_upload_processing} ${file.name} (${(slice_status.success + 1)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
 
-        let last_uploaded = 0;
         let last_time = new Date().getTime();
 
         //上传速度计算与进度计算，每隔一秒运行一次
         let speed_timer = setInterval(() => {
-            //计算上传速度，使用 lastime 来计算，计算方法，当前已上传的字节数减去上次已上传的字节数，得出差值，除以时间差，得出速度
+            //计算上传速度
             let speed_text = '0B/s';
-            let duration = (new Date().getTime() - last_time) / 1000;
-            let speed = (this.upload_slice_chunk_loaded - last_uploaded) / duration;
+            let duration_now = new Date().getTime();
+            let duration = (duration_now - this.upload_slice_chunk_time) / 1000;
+            let speed = this.upload_slice_chunk_loaded / duration;
             if (speed > 0) {
                 speed_text = bytetoconver(speed, true) + '/s';
             }
             last_time = new Date().getTime();
-            last_uploaded = this.upload_slice_chunk_loaded;
             //计算进度条，计算方法，先计算每个分块的占比，根据已上传的分块加上目前正在上传的分块的占比得出已上传的占比
             let pp_success = slice_status.success / slice_status.total;
             //计算出单个分块在进度条中的占比
             let pp_pie = 100 / slice_status.total;
+
             if (slice_status.success !== slice_status.total) {
                 //目前已上传的分块占比加上正在上传的分块占比
                 let pp_uploaded = slice_status.success * pp_pie;
                 //正在上传的部分的占比
-                let pp_uploading = this.upload_slice_chunk_loaded / this.upload_slice_chunk_total * pp_pie;
+                let pp_uploading = this.upload_slice_chunk_loaded / this.slice_size * pp_pie;
                 //合算
                 let progress_percent = pp_uploaded + pp_uploading;
                 $(uqpid).css('width', progress_percent + '%');
@@ -593,8 +610,16 @@ class uploader {
         //分块上传进度上报
         xhr.upload.onprogress = (evt) => {
             if (evt.lengthComputable) {
-                this.upload_slice_chunk_loaded = evt.loaded;
-                this.upload_slice_chunk_total = evt.total;
+                //计算上传速度，这里算出还剩下多少没上传
+                let left = evt.total - evt.loaded;
+                //计算出本次上传量
+                let loaded = evt.loaded - this.upload_slice_chunk_last;
+                //记录
+                this.upload_slice_chunk_speed = loaded;
+                //记录到已上传总量中
+                this.upload_slice_chunk_loaded += loaded;
+                //更新数据
+                this.upload_slice_chunk_last = evt.loaded;
             }
         };
 
