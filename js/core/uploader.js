@@ -1,32 +1,33 @@
 class uploader {
-    parent_op = null
+    parent_op   = null
 
-    skip_upload = false
-    mr_id = 0
-    upload_count = 0
-    upload_queue_id = 0
+    skip_upload       = false
+    prepare_sha1      = true
+    mr_id             = 0
+    upload_count      = 0
+    upload_queue_id   = 0
     upload_queue_file = []
     upload_processing = 0
-    single_file_size = 50 * 1024 * 1024 * 1024
-    slice_size = 32 * 1024 * 1024;
-    sha1_size = 1024 * 1024 * 1024;
+    single_file_size  = 50 * 1024 * 1024 * 1024
+    slice_size        = 32 * 1024 * 1024;
+    max_sha1_size     = 256 * 1024 * 1024;
 
     upload_slice_chunk_loaded = 0
-    upload_slice_chunk_speed = 0
-    upload_slice_chunk_time = 0
-    upload_slice_chunk_last = 0
-    upload_slice_chunk_total = 0
-    upload_slice_lefttime = 0
+    upload_slice_chunk_speed  = 0
+    upload_slice_chunk_time   = 0
+    upload_slice_chunk_last   = 0
+    upload_slice_chunk_total  = 0
+    upload_slice_lefttime     = 0
 
-    upload_progressbar_counter_total = []
+    upload_progressbar_counter_total  = []
     upload_progressbar_counter_loaded = []
-    upload_progressbar_counter_count = []
-    upload_progressbar_counter = []
-    upload_s2_status = []
+    upload_progressbar_counter_count  = []
+    upload_progressbar_counter        = []
+    upload_s2_status                  = []
 
-    upload_speed_total = 0 //总速度
-    upload_speed_time = 0 //总速度计时器
-    upload_speed_send = 0   //上传速度
+    upload_speed_total = 0  //总速度
+    upload_speed_time  = 0  //总速度计时器
+    upload_speed_send  = 0  //上传速度
 
     init(parent_op) {
         this.parent_op = parent_op;
@@ -181,6 +182,7 @@ class uploader {
         //     $('#uq_' + id).fadeOut();
         //     return false;
         // }
+        
         if (file.size > (this.storage - this.storage_used) && (model == 99)) {
             this.parent_op.alert(app.languageData.upload_fail_storage);
             $('#uq_' + id).fadeOut();
@@ -321,8 +323,8 @@ class uploader {
         // 提取信息
         $('#uqnn_' + id).html(app.languageData.upload_upload_prepare);
         
-        // 不支持 FileReader，直接下一步。
-        if (!window.FileReader) {
+        // 不支持 FileReader , 或者停用了秒传，或者文件大小超过了 max_sha1_size 直接下一步。
+        if (!window.FileReader||this.prepare_sha1===false || file.size > this.max_sha1_size) {
             callback(file, 0, id);
             return false;
         }
@@ -368,61 +370,23 @@ class uploader {
 
 
     upload_worker(file, sha1, id, filename) {
+        //sha1 在浏览器不支持 sha1 计算，或者停用了秒传，其值为 0
         //初始化总大小，用于计算剩余时间
         this.upload_slice_chunk_total = file.size;
 
+        //获取上传服务器的节点
         this.parent_op.recaptcha_do('upload_request_select2', (captcha) => {
             $.post(this.parent_op.api_url_upload, {
-                'token': this.parent_op.api_token,
-                'action': 'upload_request_select2',
+                'token'   : this.parent_op.api_token,
+                'action'  : 'upload_request_select2',
                 'filesize': file.size,
-                'captcha': captcha,
+                'captcha' : captcha,
             }, (rsp) => {
                 if (rsp.status == 1) {
-                    let api_sync = rsp.data.uploader + '/app/upload_sync';
                     //文件小于 32 MB，直接上传
-                    if (file.size <= this.slice_size) {
-                        this.parent_op.recaptcha_do('upload_direct', (captcha) => {
-                            console.log('upload::direct::' + file.name);
-                            var fd = new FormData();
-                            fd.append("file", file);
-                            fd.append("filename", filename);
-                            fd.append("utoken", rsp.data.utoken);
-                            fd.append("model", this.upload_model_get());
-                            fd.append("mr_id", this.upload_mrid_get());
-                            fd.append("token", this.parent_op.api_token);
-                            fd.append("captcha", captcha);
-                            this.upload_s2_status[id] = 0;
-                            var xhr = new XMLHttpRequest();
-                            xhr.upload.addEventListener("progress", (evt) => {
-                                this.upload_progress(evt, id)
-                            }, false);
-                            xhr.addEventListener("load", (evt) => {
-                                this.upload_complete(evt, file, id)
-                            }, false);
-                            xhr.addEventListener("error", (evt) => {
-                                //add retry
-                                if (this.download_retry < this.download_retry_max) {
-                                    this.download_retry++;
-                                    setTimeout(() => {
-                                        this.upload_worker(file, sha1, id, filename);
-                                    }, 1000);
-                                } else {
-                                    this.download_retry = 0;
-                                    this.upload_failed(evt, id);
-                                }
-                            }, false);
-                            xhr.addEventListener("abort", (evt) => {
-                                this.upload_canceled(evt, id)
-                            }, false);
-                            xhr.open("POST", api_sync);
-                            xhr.send(fd);
-                        });
-                    } else {
-                        console.log('upload::slice::' + file.name);
-                        let api_sync = rsp.data.uploader + '/app/upload_slice';
-                        this.worker_slice(api_sync, rsp.data.utoken, sha1, file, id);
-                    }
+                    console.log('upload::slice::' + file.name);
+                    let api_sync = rsp.data.uploader + '/app/upload_slice';
+                    this.worker_slice(api_sync, rsp.data.utoken, sha1, file, id);
                 } else {
                     //无法获得可用的上传服务器
                     this.parent_op.alert('上传失败，无法获得可用的服务器。');
@@ -438,9 +402,12 @@ class uploader {
      * @param {*} filename 
      */
     worker_slice(server, utoken, sha1, file, id) {
+        //创建分片任务的ID，算法 uid+文件路径+文件大小 的 sha1 值
+        let uptoken = CryptoJS.SHA1(this.parent_op.api_uid + file.name + file.size).toString();
+
         //查询分片信息
         $.post(server, {
-            'token': this.parent_op.api_token,
+            'token': this.parent_op.api_token,'uptoken': uptoken,
             'action': 'prepare',
             'sha1': sha1, 'filename': file.name, 'filesize': file.size, 'slice_size': this.slice_size,
             'utoken': utoken, 'mr_id': this.upload_mrid_get(), 'model': this.upload_model_get()
@@ -490,7 +457,7 @@ class uploader {
                     break;
                 case 3:
                     //获得一个需要上传的分片编号,开始处理上传
-                    this.worker_slice_uploader(server, id, sha1, file, rsp.data, () => {
+                    this.worker_slice_uploader(server, id, uptoken, file, rsp.data, () => {
                         //回归
                         this.worker_slice(server, utoken, sha1, file, id);
                     });
@@ -510,7 +477,7 @@ class uploader {
     /**
      * 分片上传
      */
-    worker_slice_uploader(server, id, sha1, file, slice_status, cb) {
+    worker_slice_uploader(server, id, uptoken, file, slice_status, cb) {
         //初始化上传任务
         this.upload_slice_chunk_loaded = 0;
         this.upload_slice_chunk_time = new Date().getTime();
@@ -526,7 +493,7 @@ class uploader {
         //构建参数
         let fd = new FormData();
         fd.append("filedata", blob, 'slice');
-        fd.append("sha1", sha1);
+        fd.append("uptoken", uptoken);
         fd.append("index", index);
         fd.append("action", 'upload_slice');
         fd.append("slice_size", this.slice_size);
