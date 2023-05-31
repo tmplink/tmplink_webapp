@@ -2385,7 +2385,7 @@ class tmplink {
     profile_bulk_copy_set(status) {
         localStorage.setItem('user_profile_bulk_copy', status);
         if (status == 'yes') {
-            $('#bulk_copy_status').attr('checked', 'checked');
+            $('#bulk_copy_status').prop('checked', true);
             this.bulkCopyStatus = true;
         }
     }
@@ -2414,7 +2414,7 @@ class tmplink {
     profile_confirm_delete_set(status) {
         localStorage.setItem('user_profile_confirm_delete', status);
         if (status == 'yes') {
-            $('#confirm_delete_status').attr('checked', 'checked');
+            $('#confirm_delete_status').prop('checked', true);
         }
     }
 
@@ -2827,9 +2827,10 @@ class tmplink {
 
             //如果文件夹允许其他人上传文件
             if (this.room.allow_upload == 'yes') {
-                $('#pf_allow_upload').attr('checked', '');
+                $('#pf_allow_upload').prop('checked', true);
+
             } else {
-                $('#pf_allow_upload').removeAttr('checked');
+                $('#pf_allow_upload').prop('checked', false);
             }
 
             //如果有设定个性化设置
