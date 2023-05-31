@@ -417,6 +417,8 @@
     "model_title_upload_max_des": "单个文件最大支持 50 GB。",
     "model_title_skip": "跳过",
     "model_title_skip_des": "当要上传的文件已经存在于当前文件夹中时，跳过。",
+    "model_title_quick_upload": "秒传",
+    "model_title_quick_upload_des": "如果文件已经被其他人上传过，上传过程将被省略。需要花费时间计算文件指纹。",
     "model_upload_cli_path": "文件路径",
     "model_upload_cli_copy": "生成上传命令",
     "model_upload_cli_note1": "使用命令行上传文件需要 curl 的支持。",
