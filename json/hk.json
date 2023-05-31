@@ -1,4 +1,6 @@
 {
+    "model_title_quick_upload": "秒傳",
+    "model_title_quick_upload_des": "若檔案已經被其他人上傳過，將省略上傳流程。需花費時間計算檔案指紋。",
     "direct_traffic_title": "流量限制",
     "direct_traffic_title2": "防止濫用：流量限制措施",
     "direct_traffic_des": "以檔案大小為基礎的乘數限制流量。受限流量是根據檔案大小乘上下載次數所計算的。例如，若檔案大小為2GB且值設定為2，則單一IP在24小時內最多可消耗4GB的流量。將值設定為0可停用限制。",

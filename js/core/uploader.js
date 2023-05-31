@@ -2,7 +2,7 @@ class uploader {
     parent_op   = null
 
     skip_upload       = false
-    prepare_sha1      = true
+    prepare_sha1      = false
     mr_id             = 0
     upload_count      = 0
     upload_queue_id   = 0
@@ -62,6 +62,23 @@ class uploader {
 
     skipUpload() {
         this.skip_upload = ($('#skip_upload').is(':checked')) ? true : false;
+        //启用此功能，需要同时启用秒传 quickUpload
+        if (this.prepare_sha1===false&&this.skip_upload===true) {
+            console.log('Enable quick upload');
+            this.prepare_sha1 = true;
+            $('#quick_upload').prop('checked', true);
+        }
+
+    }
+
+    quickUpload() {
+        this.prepare_sha1 = ($('#quick_upload').is(':checked')) ? true : false;
+        //如果此功能被设置为 false，那么需要同时关闭跳过上传
+        if (this.skip_upload===true&&this.prepare_sha1===false) {
+            console.log('Disable skip upload');
+            this.skip_upload = false;
+            $('#skip_upload').prop('checked', false);
+        }
     }
 
     upload_queue_clean() {
@@ -324,7 +341,7 @@ class uploader {
         $('#uqnn_' + id).html(app.languageData.upload_upload_prepare);
         
         // 不支持 FileReader , 或者停用了秒传，或者文件大小超过了 max_sha1_size 直接下一步。
-        if (!window.FileReader||this.prepare_sha1===false || file.size > this.max_sha1_size) {
+        if (!window.FileReader||this.prepare_sha1===false) {
             callback(file, 0, id);
             return false;
         }
