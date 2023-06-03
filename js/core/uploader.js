@@ -552,8 +552,7 @@ class uploader {
                 speed_text = bytetoconver(speed, true) + '/s';
             }
             last_time = new Date().getTime();
-            //计算进度条，计算方法，先计算每个分块的占比，根据已上传的分块加上目前正在上传的分块的占比得出已上传的占比
-            let pp_success = slice_status.success / slice_status.total;
+
             //计算出单个分块在进度条中的占比
             let pp_pie = 100 / slice_status.total;
 
@@ -575,6 +574,18 @@ class uploader {
         //上传完成后，关闭计时器
         xhr.addEventListener("loadend", (evt) => {
             clearInterval(speed_timer);
+            //如果已经完成分块的上传，直接填满对应部分的进度条。
+            let rsp = JSON.parse(evt.target.response);
+            if (rsp.status == 5) {
+                let pp_pie = 100 / slice_status.total;
+                let pp_uploaded = (slice_status.success+1) * pp_pie;
+                $(uqpid).css('width', pp_uploaded + '%');
+
+                //如果已上传的总数等于总数，则表示上传完成，显示已完成
+                if ((slice_status.success + 1) >= slice_status.total) {
+                    $(uqgid).html(app.languageData.upload_sync_onprogress);
+                }
+            }
         });
 
         //上传速度计算,上传结束时启动
