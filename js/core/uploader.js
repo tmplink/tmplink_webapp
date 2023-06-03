@@ -12,12 +12,14 @@ class uploader {
     slice_size        = 32 * 1024 * 1024;
     max_sha1_size     = 256 * 1024 * 1024;
 
-    upload_slice_chunk_loaded = 0
-    upload_slice_chunk_speed  = 0
-    upload_slice_chunk_time   = 0
-    upload_slice_chunk_last   = 0
-    upload_slice_chunk_total  = 0
-    upload_slice_lefttime     = 0
+    upload_queue = 0;
+    upload_queue_max = 5;
+
+    upload_slice_chunk_loaded = []
+    upload_slice_chunk_speed  = []
+    upload_slice_chunk_time   = []
+    upload_slice_chunk_last   = []
+    upload_slice_chunk_total  = []
 
     upload_progressbar_counter_total  = []
     upload_progressbar_counter_loaded = []
@@ -134,16 +136,30 @@ class uploader {
         this.tmpupGeneratorView();
     }
 
+    /**
+     * 开始上传，如果没有超过最大上传数，启动新的上传任务
+     */
     upload_start() {
-        if (this.upload_processing == 1) {
+
+        //如果没有需要上传的文件，退出
+        if (this.upload_queue_file.length == 0) {
             return false;
         }
-        if (this.upload_queue_file.length > 0) {
-            let f = this.upload_queue_file.shift();
-            if (typeof f === 'object') {
-                this.upload_processing = 1;
-                this.upload_core(f, f.is_dir);
-            }
+
+        //如果超过最大上传数，等待 1 秒后再次检查
+        if (this.upload_queue>this.upload_queue_max) {
+            //等待 1 秒后再次检查
+            setTimeout( ()=> {
+                this.upload_start();
+            }, 1000);
+            return false;
+        }
+
+        //启动新的上传任务
+        let f = this.upload_queue_file.shift();
+        this.upload_queue++;
+        if (typeof f === 'object') {
+            this.upload_core(f, f.is_dir);
         }
     }
 
@@ -177,32 +193,14 @@ class uploader {
         if (file.size > this.single_file_size) {
             this.parent_op.alert(app.languageData.upload_limit_size);
             $('#uq_' + id).fadeOut();
+            this.upload_queue--;
             return false;
         }
-
-        //如果要上传的文件是永久有效期，并且超过了私有空间的限制，则提示错误
-        // if (model == 99) {
-        //     if (this.storage_used + file.size > this.storage) {
-        //         this.parent_op.alert(app.languageData.upload_limit_size);
-        //         $('#uq_' + id).fadeOut();
-        //         return false;
-        //     }
-        // }
-
-        // if (this.parent_op.logined === false) {
-        //     this.parent_op.alert(app.languageData.upload_model99_needs_login);
-        //     $('#uq_' + id).fadeOut();
-        //     return false;
-        // }
-        // if (this.storage == 0) {
-        //     this.parent_op.alert(app.languageData.upload_buy_storage);
-        //     $('#uq_' + id).fadeOut();
-        //     return false;
-        // }
         
         if (file.size > (this.storage - this.storage_used) && (model == 99)) {
             this.parent_op.alert(app.languageData.upload_fail_storage);
             $('#uq_' + id).fadeOut();
+            this.upload_queue--;
             return false;
         }
         $('#uq_delete_' + id).hide();
@@ -229,8 +227,6 @@ class uploader {
                             //文件已被上传，并且已经在文件夹中
                             case '1':
                                 this.upload_final(rsp, file, id, true);
-                                this.upload_processing = 0;
-                                this.upload_start();
                                 break;
                             //文件已被上传,但是不在文件中，调用 prepare 处理
                             case '2':
@@ -246,8 +242,6 @@ class uploader {
                                 }, (rsp) => {
                                     if (rsp.status === 1) {
                                         this.upload_final(rsp, file, id);
-                                        this.upload_processing = 0;
-                                        this.upload_start();
                                     } else {
                                         this.upload_worker(f, sha1, id, filename);
                                     }
@@ -268,8 +262,6 @@ class uploader {
                     }, (rsp) => {
                         if (rsp.status === 1) {
                             this.upload_final(rsp, file, id);
-                            this.upload_processing = 0;
-                            this.upload_start();
                         } else {
                             this.upload_worker(f, sha1, id, filename);
                         }
@@ -389,7 +381,7 @@ class uploader {
     upload_worker(file, sha1, id, filename) {
         //sha1 在浏览器不支持 sha1 计算，或者停用了秒传，其值为 0
         //初始化总大小，用于计算剩余时间
-        this.upload_slice_chunk_total = file.size;
+        this.upload_slice_chunk_total[id] = file.size;
 
         //获取上传服务器的节点
         this.parent_op.recaptcha_do('upload_request_select2', (captcha) => {
@@ -445,26 +437,20 @@ class uploader {
                  */
                 case 1:
                     //已完成上传
-                    this.upload_processing = 0;
                     this.upload_final({ status: rsp.status, data: { ukey: rsp.data } }, file, id);
-                    this.upload_start();
                     break;
                 case 6:
                     //已完成上传
                     //重置 rsp.stustus = 1
                     rsp.status = 1;
-                    this.upload_processing = 0;
                     this.upload_final({ status: rsp.status, data: { ukey: rsp.data } }, file, id);
-                    this.upload_start();
                     break;
                 case 8:
                     //已完成上传
                     //重置 rsp.stustus = 1
                     //重置 rsp.ukey = rsp.data ，模板中需要用到
                     rsp.status = 1;
-                    this.upload_processing = 0;
                     this.upload_final({ status: rsp.status, data: { ukey: rsp.data } }, file, id);
-                    this.upload_start();
                     break;
                 case 2:
                     //没有可上传分片，等待所有分片完成
@@ -482,9 +468,7 @@ class uploader {
                 case 9:
                     //重置 rsp.stustus = 1
                     rsp.status = 1;
-                    this.upload_processing = 0;
                     this.upload_final({ status: rsp.status, data: { ukey: rsp.data } }, file, id);
-                    this.upload_start();
                     break;
 
             }
@@ -496,14 +480,14 @@ class uploader {
      */
     worker_slice_uploader(server, id, uptoken, file, slice_status, cb) {
         //初始化上传任务
-        this.upload_slice_chunk_loaded = 0;
-        this.upload_slice_chunk_time = new Date().getTime();
+        this.upload_slice_chunk_loaded[id] = 0;
+        this.upload_slice_chunk_time[id] = new Date().getTime();
 
         //从 file 中读取指定的分片
         let index = slice_status.next;
         let blob = file.slice(index * this.slice_size, (index + 1) * this.slice_size);
         //重置上传数据
-        this.upload_slice_chunk_last = 0;
+        this.upload_slice_chunk_last[id] = 0;
 
         //提交分片
         let xhr = new XMLHttpRequest();
@@ -546,8 +530,8 @@ class uploader {
             //计算上传速度
             let speed_text = '0B/s';
             let duration_now = new Date().getTime();
-            let duration = (duration_now - this.upload_slice_chunk_time) / 1000;
-            let speed = this.upload_slice_chunk_loaded / duration;
+            let duration = (duration_now - this.upload_slice_chunk_time[id]) / 1000;
+            let speed = this.upload_slice_chunk_loaded[id] / duration;
             if (speed > 0) {
                 speed_text = bytetoconver(speed, true) + '/s';
             }
@@ -560,7 +544,7 @@ class uploader {
                 //目前已上传的分块占比加上正在上传的分块占比
                 let pp_uploaded = slice_status.success * pp_pie;
                 //正在上传的部分的占比
-                let pp_uploading = this.upload_slice_chunk_loaded / this.slice_size * pp_pie;
+                let pp_uploading = this.upload_slice_chunk_loaded[id] / this.slice_size * pp_pie;
                 //合算
                 let progress_percent = pp_uploaded + pp_uploading;
                 $(uqpid).css('width', progress_percent + '%');
@@ -588,15 +572,6 @@ class uploader {
             }
         });
 
-        //上传速度计算,上传结束时启动
-        // xhr.addEventListener("loadend", (evt) => {
-        //     //计算上传速度
-        //     let end_time = new Date().getTime();
-        //     let speed = (this.slice_size / (end_time - start_time)) * 1000;
-        //     $(uqmid).html(`${app.languageData.upload_upload_processing} ${file.name} (${(slice_status.success + 1)}/${(slice_status.total)}) <span id="uqg_${id}"></span>`);
-        //     $(uqgid).html(`${bytetoconver(speed, true)}/s`);
-        // });
-
         //上传发生错误，重启
         xhr.addEventListener("error", (evt) => {
             cb();
@@ -608,13 +583,13 @@ class uploader {
                 //计算上传速度，这里算出还剩下多少没上传
                 let left = evt.total - evt.loaded;
                 //计算出本次上传量
-                let loaded = evt.loaded - this.upload_slice_chunk_last;
+                let loaded = evt.loaded - this.upload_slice_chunk_last[id];
                 //记录
-                this.upload_slice_chunk_speed = loaded;
+                this.upload_slice_chunk_speed[id] = loaded;
                 //记录到已上传总量中
-                this.upload_slice_chunk_loaded += loaded;
+                this.upload_slice_chunk_loaded[id] += loaded;
                 //更新数据
-                this.upload_slice_chunk_last = evt.loaded;
+                this.upload_slice_chunk_last[id] = evt.loaded;
             }
         };
 
@@ -628,24 +603,6 @@ class uploader {
             fd.append('captcha', recaptcha);
             xhr.send(fd);
         });
-    }
-
-    upload_progressbar_draw(id) {
-        let speed = this.upload_progressbar_counter_count[id];
-        let left_time = formatTime(Math.ceil((this.upload_progressbar_counter_total[id] - this.upload_progressbar_counter_loaded[id]) / speed));
-        let msg = bytetoconver(this.upload_progressbar_counter_loaded[id], true) + ' / ' + bytetoconver(this.upload_progressbar_counter_total[id], true);
-        let uqmid = "#uqm_" + id;
-        let uqpid = "#uqp_" + id;
-        msg += ' | ' + bytetoconver(speed, true) + '/s | ' + left_time;
-        $(uqmid).html(msg);
-        var percentComplete = Math.round(this.upload_progressbar_counter_loaded[id] * 100 / this.upload_progressbar_counter_total[id]);
-        $(uqpid).css('width', percentComplete + '%');
-        this.upload_s2_status[id] = this.upload_progressbar_counter_loaded[id];
-        this.upload_progressbar_counter_count[id] = 0;
-        //更新上传按钮的速度指示器
-        $('.upload_speed').show();
-        $('.upload_speed').html(bytetoconver(speed, true) + '/s');
-
     }
 
     selected(dom) {
@@ -713,9 +670,6 @@ class uploader {
             }
         }
 
-        if (this.upload_processing == 0) {
-            this.upload_start();
-        }
     }
 
     upload_queue_add(f) {
@@ -747,7 +701,7 @@ class uploader {
             this.upload_queue_id++;
             //更新状态
             this.upload_btn_status_update();
-            //自动启动上传
+            //启动上传
             this.upload_start();
         }, 500, f);
     }
@@ -766,41 +720,6 @@ class uploader {
         }
     }
 
-    upload_progress(evt, id) {
-        if (evt.lengthComputable) {
-            if (evt.total === evt.loaded) {
-                $('#uqnn_' + id).html(app.languageData.upload_sync);
-                $('#uqp_' + id).css('width', '100%');
-                $('#uqp_' + id).addClass('progress-bar-striped');
-                $('#uqp_' + id).addClass('progress-bar-animated');
-                $('#uqm_' + id).fadeOut();
-                clearInterval(this.upload_progressbar_counter[id]);
-                //移除按钮上的速度指示器
-                $('.upload_speed').hide();
-                this.upload_progressbar_counter[id] = null;
-                //执行下一个上传
-                // delete this.upload_queue_file[id];
-                // this.upload_queue_file.length--;
-                this.upload_processing = 0;
-                this.upload_start();
-            } else {
-                //
-                $('#uqnn_' + id).html(app.languageData.upload_sync);
-                this.upload_progressbar_counter_count[id] += evt.loaded - this.upload_s2_status[id];
-                this.upload_s2_status[id] = evt.loaded;
-                //
-                this.upload_progressbar_counter_total[id] = evt.total;
-                this.upload_progressbar_counter_loaded[id] = evt.loaded;
-                //检查进度条是否运行
-                if (this.upload_progressbar_counter[id] === undefined) {
-                    this.upload_progressbar_counter[id] = setInterval(() => {
-                        this.upload_progressbar_draw(id);
-                    }, 1000);
-                }
-            }
-        }
-    }
-
     upload_complete(evt, file, id) {
         this.download_retry = 0;
         clearInterval(this.upload_progressbar_counter[id]);
@@ -813,21 +732,20 @@ class uploader {
         clearInterval(this.upload_progressbar_counter[id]);
         this.upload_progressbar_counter[id] = null;
         this.parent_op.alert(app.languageData.upload_fail);
+        this.upload_queue--;
         $('#uq_' + id).fadeOut();
-        this.upload_processing = 0;
-        this.upload_start();
     }
 
     upload_canceled(evt, id) {
         clearInterval(this.upload_progressbar_counter[id]);
         this.upload_progressbar_counter[id] = null;
         this.parent_op.alert(app.languageData.upload_cancel);
+        this.upload_queue--;
         $('#uq_' + id).fadeOut();
-        this.upload_processing = 0;
-        this.upload_start();
     }
 
     upload_final(rsp, file, id, skip) {
+        this.upload_queue--;
         if (skip === undefined) {
             skip = false;
         }
@@ -863,13 +781,6 @@ class uploader {
                 }));
                 this.parent_op.btn_copy_bind();
             }
-
-            // $('#uploaded_file_box').append(app.tpl('upload_list_ok_tpl', {
-            //     name: file.name,
-            //     size: bytetoconver(file.size, true),
-            //     ukey: rsp.data.ukey
-            // }));
-            //this.btn_copy_bind();
         } else {
             //根据错误代码显示错误信息
             let error_msg = app.languageData.upload_fail;
@@ -911,8 +822,6 @@ class uploader {
             $('#uqnn_' + id).html(`<span class="text-red">${error_msg}</span>`);
         }
 
-        // this.upload_processing = 0;
-        // this.upload_start();
         //更新上传统计
         this.upload_count++;
     }

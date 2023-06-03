@@ -1866,7 +1866,7 @@ class tmplink {
         let text_model = `-F "model=${model}"`;
         let text_token = `-F "token=${this.api_token}"`;
 
-        let text = `curl -k ${text_path} ${text_token} ${text_model} ${text_mr} -X POST "https://connect.tmp.link/api_v2/cli_uploader"`;
+        let text = `curl -k ${text_path} ${text_token} ${text_model} ${text_mr} -X POST "https://tmp-cli.vx-cdn.com/app/upload_cli"`;
 
         $('#cliuploader').show();
         $('#cliuploader_show').html(text);
