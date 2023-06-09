@@ -411,8 +411,9 @@ class uploader {
      * @param {*} filename 
      */
     worker_slice(server, utoken, sha1, file, id) {
+        
         //创建分片任务的ID，算法 uid+文件路径+文件大小 的 sha1 值
-        let uptoken = CryptoJS.SHA1(this.parent_op.api_uid + file.name + file.size).toString();
+        let uptoken = CryptoJS.SHA1(this.parent_op.uid + file.name + file.size).toString();
 
         //查询分片信息
         $.post(server, {
