@@ -64,10 +64,10 @@ class media {
         let dombtnc = 'add-to-media-btn-' + ukey;
         $(dom).attr('disabled', 'disabled');
         //修改图标为加载中
-        $(dom).html(`<i class="fa-fw fa fa-spinner fa-spin ${dombtnc}"></i>`);
+        $(dom).html(`<iconpark-icon name="spinner" class="fa-fw fa-spin text-red ${dombtnc}"></iconpark-icon>`);
         this.video_add(ukey, (status, text) => {
             //恢复图标
-            $(dom).html(`<i class="fa-fw fab fa-youtube ${dombtnc}"></i>`);
+            $(dom).html(`<iconpark-icon name="youtube" class="fa-fw ${dombtnc}"></iconpark-icon>`);
             if (status) {
                 $(dombtn).addClass('text-red');
             } else {

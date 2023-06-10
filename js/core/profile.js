@@ -155,7 +155,7 @@ class profile {
 
     avatarSet(logo) {
         $('.user_logo_postmsg').html(app.languageData.direct_user_logo_set_process);
-        $('#user_set_upload_status').html('<i class="fa fa-spinner fa-spin text-blu"></i>');
+        $('#user_set_upload_status').html('<iconpark-icon name="spinner" class="fa-fw fa-spin text-green"></iconpark-icon>');
         let xhr = new XMLHttpRequest();
         let formData = new FormData();
         formData.append('action', 'pf_avatar_set');
@@ -177,7 +177,7 @@ class profile {
             } else {
                 $('.user_logo_postmsg').html(app.languageData.status_error_0);
             }
-            $('#user_set_upload_status').html('<i class="fa fa-check text-green"></i>');
+            $('#user_set_upload_status').html('<iconpark-icon name="check" class="fa-fw text-green"></iconpark-icon>');
             this.init_details();
         }
         xhr.send(formData);
@@ -197,10 +197,10 @@ class profile {
             'intro': userIntro
         }, (rsp) => {
             if (rsp.status == 1) {
-                $('.user_setting_status').html('<i class="fa fa-check text-green"></i>');
+                $('.user_setting_status').html('<iconpark-icon name="check" class="fa-fw text-green"></iconpark-icon>');
                 // this.init_details();
             } else {
-                $('.user_setting_status').html('<i class="fa fa-times text-red"></i>');
+                $('.user_setting_status').html('<iconpark-icon name="times" class="fa-fw text-red"></iconpark-icon>');
             }
             this.init_details();
         }, 'json');
@@ -244,16 +244,16 @@ class profile {
     userinfoStatus(status) {
         switch (status) {
             case 'ok':
-                $('#user_status').html('<i class="mr-1 fa-tw fa-light fa-circle-check text-green"></i>'+app.languageData.brand_status_ok);
+                $('#user_status').html('<iconpark-icon name="circle-check" class="fa-fw text-green mr-1"></iconpark-icon>'+app.languageData.brand_status_ok);
                 break;
             case 'reject':
-                $('#user_status').html('<i class="mr-1 fa-tw fa-light fa-times text-red"></i>'+app.languageData.brand_status_reject);
+                $('#user_status').html('<iconpark-icon name="times" class="fa-fw text-red mr-1"></iconpark-icon>'+app.languageData.brand_status_reject);
                 break;
             case 'wait':
-                $('#user_status').html('<i class="mr-1 fa-tw fa-light fa-timer text-blue"></i>'+app.languageData.brand_status_wait);
+                $('#user_status').html('<iconpark-icon name="timer" class="fa-fw text-blue mr-1"></iconpark-icon>'+app.languageData.brand_status_wait);
                 break;
             case 'review':
-                $('#user_status').html('<i class="mr-1 fa-tw  fa-light fa-circle-user text-blue"></i>'+app.languageData.brand_status_review);
+                $('#user_status').html('<iconpark-icon name="circle-user" class="fa-fw text-blue mr-1"></iconpark-icon>'+app.languageData.brand_status_review);
                 break;
         }
     }

@@ -15,9 +15,9 @@
                 <span>
                     <div style="font-size: 15px;">
                         <span class="user_saved_nickname">.</span>
-                        <i class="fa-solid fa-heart-circle-plus show_for_sponsor text-green"></i>
-                        <i class="fa-regular fa-disc-drive ml-1 show_for_sponsor text-red" style="display: none;"></i>
-                        <i class="fa-solid fa-badge-check ml-1 show_for_verified text-azure" style="display: none;"></i>
+                        <iconpark-icon name="heart-circle-plus" class="fa-fw text-green show_for_sponsor"></iconpark-icon>
+                        <iconpark-icon name="disc-drive" class="ml-1 fa-fw show_for_sponsor text-red" style="display: none;"></iconpark-icon>
+                        <iconpark-icon name="badge-check" class="fa-fw ml-1 show_for_verified text-azure" style="display: none;"></iconpark-icon>
                     </div>
                     <div class="text-muted" style="font-size:13px;">
                         <span class="user_storage_used">.</span> / 
@@ -32,7 +32,7 @@
                     <a class="btn p-0 topnav_workspace" href="/app&listview=workspace"
                         tmpui-action="dynamicView.workspace();">
                         <div>
-                            <i class="fa-light fa-memo-pad fa-fw"></i>
+                            <iconpark-icon name="memo-pad" class="fa-fw"></iconpark-icon>
                         </div>
                         <div>
                             <span i18n="navbar_workspace">.</span>
@@ -46,7 +46,7 @@
                     <a class="btn p-0 topnav_notes" href="/app&listview=notes"
                         tmpui-action="dynamicView.notes();">
                         <div>
-                            <i class="fa-solid fa-pen fa-fw"></i>
+                            <iconpark-icon name="pencil" class="fa-fw"></iconpark-icon>
                         </div>
                         <div>
                             <span i18n="navbar_notes">.</span>
@@ -59,7 +59,7 @@
                 <span>
                     <button class="btn p-0" onclick="dynamicView.login();">
                         <div>
-                            <i class="fa-solid fa-user fa-fw"></i>
+                            <iconpark-icon name="user" class="fa-fw"></iconpark-icon>
                         </div>
                         <div>
                             <span i18n="index_b3">.</span>
@@ -72,7 +72,7 @@
                 <span>
                     <button class="btn p-0" onclick="dynamicView.reg();">
                         <div>
-                            <i class="fa-solid fa-user-plus fa-fw"></i>
+                            <iconpark-icon name="user-plus" class="fa-fw"></iconpark-icon>
                         </div>
                         <div>
                             <span i18n="index_b2">.</span>
@@ -84,7 +84,7 @@
             <div class="workspace-navbar nav-units">
                 <span>
                     <a class="btn p-0 topnav_desktop" href="/app&listview=room&mrid=0" tmpui-action="dynamicView.room();">
-                        <div><i class="fa-light fa-cabinet-filing fa-fw"></i></div>
+                        <div><iconpark-icon name="cabinet-filing" class="fa-fw"></iconpark-icon></div>
                         <div><span i18n="navbar_meetingroom">.</span></div>
                     </a>
                 </span>
@@ -94,7 +94,7 @@
                 <span>
                     <a class="btn p-0 topnav_direct" href="/app&listview=direct" tmpui-action="dynamicView.direct();">
                         <div>
-                            <i class="fa-light fa-share-nodes fa-fw"></i>
+                            <iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon>
                         </div>
                         <div>
                             <span i18n="navbar_direct">.</span>
@@ -107,7 +107,7 @@
                 <span class="btn" data-toggle="dropdown">
                     <button class="btn p-0">
                         <div>
-                            <i class="fa-fw fa-solid fa-bars"></i>
+                            <iconpark-icon name="bars" class="fa-fw"></iconpark-icon>
                         </div>
                         <div>
                             <span i18n="navbar_more">.</span>
@@ -116,36 +116,36 @@
                 </span>
                 <div class="dropdown-menu  dropdown-menu-right shadow">
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.profile.openModal()">
-                        <i class="fa-fw fa-light fa-user-astronaut"></i>
+                        <iconpark-icon name="user-astronaut" class="fa-fw"></iconpark-icon>
                         <span>
                             <span i18n="user_modal_title">.</span>
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
                     <a class="dropdown-item" href="https://bbs.tmp.link" target="_blank">
-                        <i class="fa-fw fa-regular fa-comments"></i>
+                        <iconpark-icon name="comments" class="fa-fw"></iconpark-icon>
                         <span>
                             <span i18n="navbar_discuz">.</span>
                             <span class="point-red"></span>
                         </span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#shopModal').modal('show');">
-                        <i class="fa-fw fa-light fa-bag-shopping"></i>
+                        <iconpark-icon name="bag-shopping" class="fa-fw"></iconpark-icon>
                         <span>
                             <span i18n="navbar_buy">.</span>
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');">
-                        <i class="fa-fw fa-light fa-key"></i>
+                        <iconpark-icon name="key" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_reset_password">.</span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#emailModal').modal('show');">
-                        <i class="fa-fw fa-light fa-envelope"></i>
+                        <iconpark-icon name="envelope" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_reset_email">.</span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#profileModal').modal('show');">
-                        <i class="fa-fw fa-light fa-sliders-simple"></i>
+                        <iconpark-icon name="sliders-simple" class="fa-fw"></iconpark-icon>
                         <span>
                             <span i18n="navbar_profile">.</span>
                             <!-- <span class="point-red"></span> -->
@@ -153,11 +153,11 @@
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)"
                         onclick="$('#ordersModal').modal('show');TL.orders_list();">
-                        <i class="fa-fw fa-light fa-star"></i>
+                        <iconpark-icon name="star" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_orders">.</span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.logout();">
-                        <i class="fa-fw fa-light fa-right-from-bracket"></i>
+                        <iconpark-icon name="right-from-bracket" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_exit">.</span>
                     </a>
                 </div>
@@ -167,7 +167,9 @@
                 <span class="btn" data-toggle="dropdown">
                     <button class="btn p-0">
                         <div>
-                            <i class="fa-light fa-language fa-fw mx-auto"></i>
+                            <span class="mx-auto">
+                                <iconpark-icon name="language" class="fa-fw"></iconpark-icon>
+                            </span>
                         </div>
                         <div>
                             <span class="selected_lang">.</span>
@@ -192,7 +194,9 @@
             <div class="btn-group dropup">
                 <button type="button" class="btn" data-toggle="dropdown">
                     <div class="d-flex flex-column">
-                        <i class="fa-light fa-language fa-fw mx-auto"></i>
+                        <span class="mx-auto">
+                            <iconpark-icon name="language" class="fa-fw"></iconpark-icon>
+                        </span>
                         <span class="selected_lang">.</span>
                     </div>
                 </button>
@@ -210,7 +214,7 @@
                 <div class="d-flex flex-column">
                     <button class="btn p-0" onclick="dynamicView.login();">
                         <div>
-                            <i class="fa-solid fa-user fa-fw"></i>
+                            <iconpark-icon name="user" class="fa-fw"></iconpark-icon>
                         </div>
                         <div>
                             <span i18n="index_b3">.</span>
@@ -221,25 +225,27 @@
             <div class="btn-group dropup workspace-navbar">
                 <button type="button" class="btn" data-toggle="dropdown">
                     <div class="d-flex flex-column">
-                        <i class="fa-light fa-sliders-up fa-fw mx-auto" id="navbar_model_icon"></i>
+                        <span class="mx-auto">
+                            <iconpark-icon name="sliders-up" class="fa-fw" id="navbar_model_icon"></iconpark-icon>
+                        </span>
                         <span id="navbar_model_text"></span>
                     </div>
                 </button>
                 <div class="dropdown-menu dropdown-menu-center shadow">
                     <a class="dropdown-item" href="/app&listview=workspace" tmpui-action="dynamicView.workspace();">
-                        <i class="fa-light fa-memo-pad fa-fw"></i>
+                        <iconpark-icon name="memo-pad" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_workspace">.</span>
                     </a>
                     <a class="dropdown-item" href="/app&listview=room&mrid=0" tmpui-action="dynamicView.room();">
-                        <i class="fa-light fa-cabinet-filing fa-fw"></i>
+                        <iconpark-icon name="cabinet-filing" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_meetingroom">.</span>
                     </a>
                     <a class="dropdown-item" href="/app&listview=direct" tmpui-action="dynamicView.direct();">
-                        <i class="fa-light fa-share-nodes fa-fw"></i>
+                        <iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_direct">.</span>
                     </a>
                     <a class="dropdown-item" href="/app&listview=notes" tmpui-action="dynamicView.notes();">
-                        <i class="fa-solid fa-pen fa-fw"></i>
+                        <iconpark-icon name="pencil" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_notes">.</span>
                     </a>
                 </div>
@@ -251,7 +257,7 @@
                 <div class="d-flex flex-column">
                     <button class="btn p-0" onclick="dynamicView.reg();">
                         <div>
-                            <i class="fa-solid fa-user-plus fa-fw"></i>
+                            <iconpark-icon name="user-plus" class="fa-fw"></iconpark-icon>
                         </div>
                         <div>
                             <span i18n="index_b2">.</span>
@@ -262,7 +268,9 @@
             <div class="btn-group dropup workspace-navbar">
                 <button type="button" class="btn" data-toggle="dropdown">
                     <div class="d-flex flex-column">
-                        <i class="fa-solid fa-bars fa-fw mx-auto"></i>
+                        <span class="mx-auto">
+                            <iconpark-icon name="bars" class="fa-fw"></iconpark-icon>
+                        </span>
                         <span>
                             <span i18n="navbar_more">.</span>
                             <!-- <span class="point-red"></span> -->
@@ -271,40 +279,40 @@
                 </button>
                 <div class="dropdown-menu shadow">
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.profile.openModal()">
-                        <i class="fa-fw fa-light fa-user-astronaut"></i>
+                        <iconpark-icon name="user-astronaut" class="fa-fw"></iconpark-icon>
                         <span>
                             <span i18n="user_modal_title">.</span>
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#shopModal').modal('show');">
-                        <i class="fa-fw fa-light fa-bag-shopping"></i>
+                        <iconpark-icon name="bag-shopping" class="fa-fw"></iconpark-icon>
                         <span>
                             <span i18n="navbar_buy">.</span>
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#myModal').modal('show');">
-                        <i class="fa-fw fa-solid fa-user"></i>
+                        <iconpark-icon name="user" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_my">.</span>
                     </a>
                     <a class="dropdown-item" href="https://bbs.tmp.link" target="_blank">
-                        <i class="fa-fw fa-regular fa-comments"></i>
+                        <iconpark-icon name="comments" class="fa-fw"></iconpark-icon>
                         <span>
                             <span i18n="navbar_discuz">.</span>
                             <span class="point-red"></span>
                         </span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');">
-                        <i class="fa-fw fa-light fa-key"></i>
+                        <iconpark-icon name="key" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_reset_password">.</span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#emailModal').modal('show');">
-                        <i class="fa-fw fa-light fa-envelope"></i>
+                        <iconpark-icon name="envelope" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_reset_email">.</span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#profileModal').modal('show');">
-                        <i class="fa-fw fa-light fa-sliders-simple"></i>
+                        <iconpark-icon name="sliders-simple" class="fa-fw"></iconpark-icon>
                         <span>
                             <span i18n="navbar_profile">.</span>
                             <!-- <span class="point-red"></span> -->
@@ -312,11 +320,11 @@
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)"
                         onclick="$('#ordersModal').modal('show');TL.orders_list();">
-                        <i class="fa-fw fa-light fa-star"></i>
+                        <iconpark-icon name="star" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_orders">.</span>
                     </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.logout();">
-                        <i class="fa-fw fa-light fa-right-from-bracket"></i>
+                        <iconpark-icon name="right-from-bracket" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_exit">.</span>
                     </a>
                 </div>

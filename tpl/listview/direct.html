@@ -1,43 +1,43 @@
 <div id="filelist" class="card mt-5 shadow" style="display: none;">
     <div class="card-header pt-3">
         <div class="mt-3 mb-2 text-center mx-auto">
-            <span id="direct_branded_logo"><i class="fa-4x fa-light fa-share-nodes"></i></span>
+            <span id="direct_branded_logo"><iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon></span>
             <div class="lead mt-2">
                 <span class="badge badge-pill badge-info p-2 mx-1 mt-1">
-                    <i class="fa-fw fa-solid fa-link"></i>
+                    <iconpark-icon name="link" class="fa-fw"></iconpark-icon>
                     <span id="direct_bind_domain_box">
                         <a href="#" target="_blank" id="direct_bind_domain" class="text-white">#</a>
                     </span>
                 </span>
                 <span class="badge badge-pill badge-info p-2 mx-1 mt-1 btn-point"
                     onclick="$('#directSSLModal').modal('show');">
-                    <i class="fa-fw fa-solid fa-shield-halved"></i>
+                    <iconpark-icon name="shield-halved" class="fa-fw"></iconpark-icon>
                     <span id="direct_bind_ssl"></span>
                 </span>
                 <span class="badge badge-pill badge-info p-2 mx-1 mt-1 btn-point"
                     onclick="$('#brandModal').modal('show');">
-                    <i class="fa-fw fa-solid fa-badge-check"></i>
+                    <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
                     <span i18n="brand_modal_title">.</span>
                 </span>
                 <span class="badge badge-pill badge-info p-2 mx-1 mt-1 btn-point"
                     onclick="$('#limitTrafficModal').modal('show');">
-                    <i class="fa-fw fa-light fa-block-brick-fire"></i>
+                    <iconpark-icon name="block-brick-fire" class="fa-fw"></iconpark-icon>
                     <span id="direct_set_traffic_limit_title"></span>
                 </span>
             </div>
             <div class="lead mt-2">
                 <span class="badge badge-pill badge-info p-2 mx-1 mt-1">
-                    <i class="fa-fw fa-solid fa-battery-three-quarters"></i>
+                    <iconpark-icon name="battery-three-quarters" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_quota">.</span>
                     <span id="direct_quota">0</span>
                 </span>
                 <span class="badge badge-pill badge-info p-2 mx-1 mt-1">
-                    <i class="fa-fw fa-solid fa-download"></i>
+                    <iconpark-icon name="download" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_total_downloads">.</span>
                     <span id="direct_total_downloads">0</span>
                 </span>
                 <span class="badge badge-pill badge-info p-2 mx-1 mt-1">
-                    <i class="fa-fw fa-solid fa-arrow-up-arrow-down"></i>
+                    <iconpark-icon name="arrow-up-arrow-down" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_total_transfer">.</span>
                     <span id="direct_total_transfer">0</span>
                 </span>
@@ -64,28 +64,23 @@
             <!--[主要控制器]-->
             <div class="mb-1">
                 <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.direct.filelist(0);">
-                    <i class="fa-light fa-rotate fa-fw" id="filelist_refresh_icon"></i>
+                    <iconpark-icon name="rotate" class="fa-fw" id="filelist_refresh_icon"></iconpark-icon>
                 </button>
                 <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.openDomainEditor();">
-                    <i class="fa-fw fa-light fa-signal-stream"></i>
+                    <iconpark-icon name="signal-stream" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_btn_bind_domain" class="d-none d-sm-inline">.</span>
                 </button>
                 <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.buy.openQuato();">
-                    <i class="fa-fw fa-light fa-battery-bolt"></i>
+                    <iconpark-icon name="battery-bolt" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_btn_buy_quota" class="d-none d-sm-inline">.</span>
                 </button>
                 <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.getFreeQuotaOfSponsor();">
-                    <i class="fa-fw fa-light fa-battery-bolt"></i>
+                    <iconpark-icon name="battery-bolt" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_btn_free_quota" class="d-none d-sm-inline">.</span>
                 </button>
-                <!-- <button class="btn btn-light btn-sm  text-azure mr-1 mt-1"
-                        onclick="$('#directIntroModal').modal('show');">
-                        <i class="fa-fw fa-light fa-book-open"></i>
-                        <span i18n="direct_btn_intro" class="d-none d-sm-inline">.</span>
-                    </button> -->
                 <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.sortModal();"
                     id="filelist_filter">
-                    <i class="fa-fw fa-light fa-list"></i>
+                    <iconpark-icon name="list" class="fa-fw"></iconpark-icon>
                     <span i18n="sort_title" class="d-none d-sm-inline">.</span>
                 </button>
             </div>
@@ -93,46 +88,29 @@
             <!--[选择器]-->
             <div>
                 <button onclick="TL.Selecter.setAll();" class="btn btn-light text-azure btn-sm mr-1 mt-1">
-                    <i class="fa-solid fa-square-check fa-fw"></i>
+                    <iconpark-icon name="square-check" class="fa-fw"></iconpark-icon>
                     <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
                 </button>
                 <button onclick="TL.Selecter.setNone();" class="btn btn-light text-azure btn-sm mr-1 mt-1">
-                    <i class="fa-light fa-square-check fa-fw"></i>
+                    <iconpark-icon name="square-check" class="fa-fw"></iconpark-icon>
                     <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
                 </button>
                 <div class="dropdown">
                     <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
                         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa-light fa-list-check fa-fw"></i> <span i18n="on_select">.</span>
+                        <iconpark-icon name="list-check" class="fa-fw"></iconpark-icon> <span i18n="on_select">.</span>
                     </button>
                     <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
-
-                        <!-- <button class="dropdown-item" onclick="TL.Selecter.directCopy('downloadURLForText')">
-                            <i class="fa-fw fa-light fa-download text-azure"></i>
-                            <span i18n="on_select_copy_direct_url_text">.</span>
-                        </button>
-                        <button class="dropdown-item" onclick="TL.Selecter.directCopy('downloadURLForHTML')">
-                            <i class="fa-fw fa-light fa-download text-azure"></i>
-                            <span i18n="on_select_copy_direct_url_html">.</span>
-                        </button> -->
                         <button class="dropdown-item" onclick="TL.Selecter.directCopy('resURLForText')">
-                            <i class="fa-fw fa-light fa-link-horizontal text-azure"></i>
+                            <iconpark-icon name="link-horizontal" class="fa-fw text-azure"></iconpark-icon>
                             <span i18n="on_select_copy_res_url_text">.</span>
                         </button>
                         <button class="dropdown-item" onclick="TL.Selecter.directCopy('resURLForHTML')">
-                            <i class="fa-fw fa-light fa-link-horizontal text-azure"></i>
+                            <iconpark-icon name="link-horizontal" class="fa-fw text-azure"></iconpark-icon>
                             <span i18n="on_select_copy_res_url_html">.</span>
                         </button>
-                        <!-- <button class="dropdown-item" onclick="TL.Selecter.directCopy('streamURLForText')">
-                            <i class="fa-fw fa-light fa-play-circle text-azure"></i>
-                            <span i18n="on_select_copy_stream_url_text">.</span>
-                        </button>
-                        <button class="dropdown-item" onclick="TL.Selecter.directCopy('streamURLForHTML')">
-                            <i class="fa-fw fa-light fa-play-circle text-azure"></i>
-                            <span i18n="on_select_copy_stream_url_html">.</span>
-                        </button> -->
                         <button class="dropdown-item" onclick="TL.Selecter.directDelete()">
-                            <i class="fa-fw fa-light fa-trash text-red"></i>
+                            <iconpark-icon name="trash" class="fa-fw text-red"></iconpark-icon>
                             <span i18n="on_select_delete">.</span>
                         </button>
                     </div>
@@ -158,13 +136,13 @@
 
         <div class="no_photos" style="margin-top: 20px;margin-bottom: 100px;display: none;">
             <div class="text-center mb-4">
-                <i class="fa-fw fa-4x fa-light fa-camera"></i>
+                <iconpark-icon name="camera" class="fa-fw fa-4x"></iconpark-icon>
             </div>
             <div class="text-center" i18n="page_no_photos">.</div>
         </div>
         <div class="no_files" style="margin-top: 100px;margin-bottom: 100px;display: none;">
             <div class="text-center mb-4">
-                <i class="fa-fw fa-light fa-folder-open fa-4x"></i>
+                <iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon>
             </div>
             <!-- <div class="text-center" i18n="page_no_files">.</div> -->
         </div>
@@ -202,39 +180,39 @@
                         <div class="col-12 col-md-8 col-lg-7 d-flex align-items-center listfontweight filename">
                             <div class="row">
                                 <div class="col-12 filename">
-                                    <i class="<% TL.fileicon(obj[x].ftype) %> fa-fw text-azure"></i>
+                                    <iconpark-icon name="<% TL.fileicon(obj[x].ftype) %>" class="fa-fw text-azure"></iconpark-icon>
                                     <a href="<% obj[x].direct_link %>" class="filelist_link" target="_blank" onclick="event.stopPropagation();">
                                         <% obj[x].fname %>
                                     </a>
                                     
                                     <% if(TL.direct.is_allow_play(obj[x].fname)){ %>
                                         <a href="<% obj[x].play_link %>" target="_blank" onclick="event.stopPropagation();">
-                                            <i class="fa-solid fa-circle-play fa-fw"></i>
+                                            <iconpark-icon name="circle-play" class="fa-fw"></iconpark-icon>
                                         </a>
                                     <% } %>
 
                                     <% if(obj[x].model!=99){ %>
                                         <!--[在大屏幕上显示]-->
                                         <span class="d-none d-lg-inline">
-                                            <i class="fa-fw fa-solid fa-timer"></i> 
+                                            <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
                                             <span class="lefttime-remainder" id="wd_<% obj[x].direct_key %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
                                         </span>
                                     <% } %>
 
                                     <% if(obj[x].like>0){ %>
                                         <span class="badge badge-pill badge-primary">
-                                            <i class="fa-fw fa-solid fa-circle-star text-yellow"></i>
+                                            <iconpark-icon name="circle-star" class="fa-fw text-yellow"></iconpark-icon>
                                             <% obj[x].like %>
                                         </span>
                                     <% } %>
 
                                     <% if(obj[x].dir_name!=null){ %>
                                         <div class="d-none d-lg-block" onclick="event.stopPropagation();">
-                                            <i class="fa-light fa-folder-open fa-fw text-cyan"></i>
+                                            <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
                                             <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
                                         </div>
                                         <span class="d-inline d-lg-none" onclick="event.stopPropagation();">
-                                            <i class="fa-light fa-folder-open fa-fw text-cyan"></i>
+                                            <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
                                             <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
                                         </span>
                                     <% } %>
@@ -242,7 +220,7 @@
                                     <% if(obj[x].model!=99){ %>
                                         <!--[在小屏幕上显示]-->
                                         <span class="d-inline d-lg-none">
-                                            <i class="fa-fw fa-solid fa-timer"></i> 
+                                            <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
                                             <span class="lefttime-remainder" id="wm_<% obj[x].direct_key %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
                                         </span>
                                     <% } %>
@@ -255,10 +233,10 @@
                         </div>
                         <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].direct_key %>" onclick="event.stopPropagation();">
                             <span class="mr-2"><% obj[x].fsize_formated %></span>
-                            <a href="<% obj[x].direct_link %>" target="_blank" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-cloud-arrow-down"></i></a>
-                            <button onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].direct_link}`) %>',true)" class="text-azure btn btn-sm btn-light mx-1"><i class="fa-fw fa-light fa-share-from-square"></i></button>
+                            <a href="<% obj[x].direct_link %>" target="_blank" class="text-azure btn btn-sm btn-light mx-1"><iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon></a>
+                            <button onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].direct_link}`) %>',true)" class="text-azure btn btn-sm btn-light mx-1"><iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon></button>
                             <button id="btn-rm-file_<% obj[x].direct_key %>" class="btn btn-sm btn-light mx-1" onclick="TL.direct.delLink('<% obj[x].direct_key %>')">
-                                <i class="fa-fw fa-light fa-trash text-danger"></i>
+                                <iconpark-icon name="trash" class="fa-fw text-danger"></iconpark-icon>
                             </button>
                         </div>
                     </div>
@@ -301,7 +279,7 @@
                 <div class="card p-3 shadow-sm">
                     <!-- 提示框 -->
                     <div class="alert alert-warning" role="alert" style="display: none;" id="direct_modal_msg">
-                        <i class="fa-fw fa-light fa-exclamation-triangle"></i>
+                        <iconpark-icon name="exclamation-triangle" class="fa-fw"></iconpark-icon>
                         <span id="direct_modal_msg_text">.</span>
                     </div>
                     <form id="form-direct-domain">
@@ -362,7 +340,7 @@
             </div>
             <div class="modal-footer">
                 <span id="box_post_doing" style="text-align: center;display: none;">
-                    <i class="fa fa-spinner-third fa-spin"></i>
+                    <iconpark-icon name="spinner-third" class="fa-fw"></iconpark-icon>
                 </span>
                 <button id="box_disable_ssl" type="button" onclick="TL.direct.disableSSL()"
                     class="btn btn-danger btn-radius" i18n="direct_box_ssl_stop">.</button>
@@ -379,7 +357,7 @@
         <div class="modal-content shadow-lg">
             <div class="modal-header">
                 <h4 class="modal-title">
-                    <i class="fa-fw mr-2 fa-solid fa-badge-check"></i>
+                    <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
                     <span i18n="brand_modal_title">.</span>
                 </h4>
             </div>
@@ -388,7 +366,7 @@
                 <div class="card p-3 shadow-sm" id="brand_saved">
                     <div class="d-flex align-items-center">
                         <span class="mr-3" id="brand_saved_logo">
-                            <i class="fa-fw fa-solid fa-image fa-2x"></i>
+                            <iconpark-icon name="images" class="fa-fw fa-2x"></iconpark-icon>
                         </span>
                         <div>
                             <h4 class="m-0" i18n="brand_saved_title" id="brand_saved_title">

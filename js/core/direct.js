@@ -313,7 +313,7 @@ class direct {
             $('#filelist_refresh_icon').removeAttr('disabled');
             if (rsp.status === 0) {
                 if (page == 0) {
-                    $('#direct_filelist').html('<div class="text-center"><i class="fa-fw fa-light fa-folder-open fa-4x"></i></div>');
+                    $('#direct_filelist').html('<div class="text-center"><iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon></div>');
                 }
                 this.autoload = false;
             } else {
@@ -657,7 +657,7 @@ class direct {
      */
     brandLogoSet(logo) {
         $('.brand_logo_postmsg').html(app.languageData.direct_brand_logo_set_process);
-        $('#brand_set_upload_status').html('<i class="fa fa-spinner fa-spin text-blu"></i>');
+        $('#brand_set_upload_status').html('<iconpark-icon name="spinner" class="fa-fw fa-spin text-green"></iconpark-icon>');
         let xhr = new XMLHttpRequest();
         let formData = new FormData();
         formData.append('action', 'brand_set_logo');
@@ -679,7 +679,7 @@ class direct {
             } else {
                 $('.brand_logo_postmsg').html(app.languageData.status_error_0);
             }
-            $('#brand_set_upload_status').html('<i class="fa fa-check text-green"></i>');
+            $('#brand_set_upload_status').html('<iconpark-icon name="check" class="fa-fw text-green"></iconpark-icon>');
             this.init_details();
         }
         xhr.send(formData);
@@ -702,10 +702,10 @@ class direct {
             'brand_content': brandContent
         }, (rsp) => {
             if (rsp.status == 1) {
-                $('.brand_setting_status').html('<i class="fa fa-check text-green"></i>');
+                $('.brand_setting_status').html('<iconpark-icon name="check" class="fa-fw text-green"></iconpark-icon>');
                 this.init_details();
             } else {
-                $('.brand_setting_status').html('<i class="fa fa-times text-red"></i>');
+                $('.brand_setting_status').html('<iconpark-icon name="times" class="fa-fw text-red"></iconpark-icon>');
             }
         }, 'json');
     }
@@ -727,16 +727,16 @@ class direct {
     brandStatus(status) {
         switch (status) {
             case 'ok':
-                $('#brand_status').html('<i class="mr-1 fa-tw fa-light fa-circle-check text-green"></i>'+app.languageData.brand_status_ok);
+                $('#brand_status').html('<iconpark-icon name="circle-check" class="fa-fw text-green mr-1"></iconpark-icon>'+app.languageData.brand_status_ok);
                 break;
             case 'reject':
-                $('#brand_status').html('<i class="mr-1 fa-tw fa-light fa-times text-red"></i>'+app.languageData.brand_status_reject);
+                $('#brand_status').html('<iconpark-icon name="times" class="fa-fw text-red mr-1"></iconpark-icon>'+app.languageData.brand_status_reject);
                 break;
             case 'wait':
-                $('#brand_status').html('<i class="mr-1 fa-tw fa-light fa-timer text-blue"></i>'+app.languageData.brand_status_wait);
+                $('#brand_status').html('<iconpark-icon name="timer" class="fa-fw text-blue mr-1"></iconpark-icon>'+app.languageData.brand_status_wait);
                 break;
             case 'review':
-                $('#brand_status').html('<i class="mr-1 fa-tw  fa-light fa-circle-user text-blue"></i>'+app.languageData.brand_status_review);
+                $('#brand_status').html('<iconpark-icon name="circle-user" class="fa-fw text-blue mr-1"></iconpark-icon>'+app.languageData.brand_status_review);
                 break;
         }
     }
