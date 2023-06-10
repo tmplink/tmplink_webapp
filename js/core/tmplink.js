@@ -1159,8 +1159,7 @@ class tmplink {
                         $('.user-login').hide();
                     }
 
-                    $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ' + app.languageData.status_file_1);
-                    $('#download_msg').attr('class', 'badge badge-pill badge-info');
+                    $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ');
 
                     //请求下载地址
                     this.recaptcha_do('download_req', (recaptcha) => {
@@ -1172,8 +1171,7 @@ class tmplink {
                         }, (req) => {
                             this.ga('D-' + rsp.data.name);
                             if (req.status != 1) {
-                                $('#download_msg').html('<iconpark-icon name="circle-exclamation" class="fa-fw"></iconpark-icon> ' + app.languageData.status_file_2);
-                                $('#download_msg').attr('class', 'badge badge-pill badge-danger');
+                                $('#download_msg').html('<iconpark-icon name="circle-exclamation" class="fa-fw"></iconpark-icon> ');
                                 $('#file_download_btn_1').hide();
                                 $('#file_download_btn_2').hide();
                                 $('#file_download_by_qrcode').hide();
@@ -1224,8 +1222,7 @@ class tmplink {
                                 window.location.href = download_url;
                                 //添加按钮按下反馈
                                 opacityShow('#download_msg');
-                                $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ' + app.languageData.file_btn_download_status2);
-                                $('#download_msg').attr('class', 'badge badge-pill badge-info');
+                                $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ');
                                 //3秒后解除
                                 setTimeout(() => {
                                     // $('#download_msg').fadeOut();
@@ -1239,8 +1236,7 @@ class tmplink {
                                 //添加按钮按下反馈
                                 opacityShow('#download_msg');
                                 // $('#download_msg').fadeIn();
-                                $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ' + app.languageData.file_btn_download_status2);
-                                $('#download_msg').attr('class', 'badge badge-pill badge-info');
+                                $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ');
                                 //3秒后解除
                                 setTimeout(() => {
                                     // $('#download_msg').fadeOut();

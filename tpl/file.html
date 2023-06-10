@@ -64,7 +64,6 @@
                     <div class="row m-0 mt-2">
                         <div class="p-0 col-md-2 col-12 text-center align-self-center d-sm-block d-none">
                             <iconpark-icon name="file-lines" class="fa-fw text-azure fa-3x" id="file-icon"></iconpark-icon>
-                            
                         </div>
                         <div class="p-0 col-md-10 col-12">
                             <div class="h3 font-weight-light fc-1 filename mb-2" id="filename">.</div>
@@ -94,14 +93,14 @@
                     </div>
 
                     <div class="text-center">
-                        <span id="download_msg">.</span>
+                        <span id="download_msg" class="text-green">.</span>
 
                     </div>
 
                     <hr />
 
                     <!-- 居中显示 -->
-                    <div id="file_op" style="display: none;">
+                    <div id="file_op" class="my-auto" style="display: none;">
                         <!-- <div class="single_download_progress_bar" style="display:none">
                             <div class="single_download_msg"></div>
                             <div>在下载完成之前请不要关闭这个网页，你可以同时下载其它文件。</div>
@@ -116,14 +115,14 @@
                         <div class="d-block d-sm-none">
 
                             <a class="btn btn-success btn-lg btn-block file_download_url">
-                                <iconpark-icon name="cloud-arrow-down" class="fa-fw mx-auto my-auto mb-2 fa-3x"></iconpark-icon>
+                                <iconpark-icon name="cloud-arrow-down" class="fa-fw mx-auto my-auto mb-2"></iconpark-icon>
                                 <span i18n="file_btn_download">.</span>
                             </a>
 
                             <span class="dropdown btn-block btn_play" style="display: none;">
                                 <button role="button" type="button" class="btn btn-primary btn-lg btn-block"
                                     data-toggle="dropdown">
-                                    <iconpark-icon name="play" class="fa-fw mx-auto my-auto mb-2 fa-3x"></iconpark-icon>
+                                    <iconpark-icon name="play" class="fa-fw mx-auto my-auto mb-2"></iconpark-icon>
                                     <span i18n="file_btn_play">.</span>
                                 </button>
                                 <div class="dropdown-menu shadow w-100">
@@ -151,17 +150,17 @@
                             </span>
 
                             <button class="btn btn-primary btn-lg btn-block" id="btn_add_to_workspace_mobile">
-                                <iconpark-icon name="circle-heart" class="fa-fw mx-auto my-auto mb-2 fa-3x"></iconpark-icon>
+                                <iconpark-icon name="circle-heart" class="fa-fw mx-auto my-auto mb-2"></iconpark-icon>
                                 <span i18n="file_btn_workspace">.</span>
                             </button>
 
                             <button class="btn btn-primary btn-lg btn-block btn_copy btn_copy_fileurl">
-                                <iconpark-icon name="link-horizontal" class="fa-fw mx-auto my-auto mb-2 fa-3x"></iconpark-icon>
+                                <iconpark-icon name="link-horizontal" class="fa-fw mx-auto my-auto mb-2"></iconpark-icon>
                                 <span i18n="file_btn_copy">.</span>
                             </button>
 
                             <button class="btn btn-danger btn-lg btn-block" onclick="$('#reportModal').modal('show')">
-                                <iconpark-icon name="circle-exclamation" class="fa-fw mx-auto my-auto mb-2 fa-3x"></iconpark-icon>
+                                <iconpark-icon name="circle-exclamation" class="fa-fw mx-auto my-auto mb-2"></iconpark-icon>
                                 <span i18n="file_btn_report">.</span>
                             </button>
                         </div>
@@ -171,8 +170,7 @@
 
                             <div class="col-md-4 col-6 text-center mb-2">
                                 <div class="fileicon mx-auto mb-1">
-                                    <i
-                                        class="fa-solid fa-laptop-arrow-down fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                                    <iconpark-icon name="laptop-arrow-down" class="fa-fw mx-auto fa-3x my-auto mb-2 text-cyan"></iconpark-icon>
                                 </div>
                                 <div>
                                     <div class="btn-group">
@@ -205,7 +203,7 @@
                             <div class="col-md-4 col-6 text-center mb-2 btn-point btn_play" style="display: none;"
                                 onclick="$('#openWithPlayerModal').modal('show');">
                                 <div class="fileicon mx-auto mb-1">
-                                    <iconpark-icon name="play" class="fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></iconpark-icon>
+                                    <iconpark-icon name="play" class="fa-fw mx-auto fa-3x my-auto mb-2 text-cyan"></iconpark-icon>
                                 </div>
                                 <div>
                                     <button class="btn" i18n="file_btn_play">.</button>
@@ -214,8 +212,7 @@
 
                             <div class="col-md-4 col-6 text-center mb-2 btn-point" id="file_download_by_qrcode">
                                 <div class="fileicon mx-auto mb-1">
-                                    <i
-                                        class="fa-regular fa-mobile-signal fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                                    <iconpark-icon name="mobile-signal" class="fa-fw mx-auto fa-3x my-auto mb-2 text-cyan"></iconpark-icon>
                                 </div>
                                 <div>
                                     <button class="btn" i18n="file_btn_qr_mobile">.</button>
@@ -223,7 +220,7 @@
                             </div>
                             <div class="col-md-4 col-6 text-center mb-2 btn-point" id="file_download_url_copy">
                                 <div class="fileicon mx-auto mb-1" id="file_download_url_copy_icon">
-                                    <iconpark-icon name="share-all" class="fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></iconpark-icon>
+                                    <iconpark-icon name="share-all" class="fa-fw mx-auto fa-3x my-auto mb-2 text-cyan"></iconpark-icon>
                                 </div>
                                 <div>
                                     <button class="btn" i18n="file_btn_copy">.</button>
@@ -232,7 +229,7 @@
 
                             <div class="col-md-4 col-6 text-center mb-2 btn-point" id="btn_add_to_workspace">
                                 <div class="fileicon mx-auto mb-1" id="btn_add_to_workspace_icon">
-                                    <iconpark-icon name="like" class="fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></iconpark-icon>
+                                    <iconpark-icon name="like" class="fa-fw mx-auto fa-3x my-auto mb-2 text-cyan"></iconpark-icon>
                                 </div>
                                 <div>
                                     <button class="btn" i18n="file_btn_workspace">.</button>
@@ -241,8 +238,7 @@
 
                             <div class="col-md-4 col-6 text-center mb-2 btn-point" id="btn_highdownload">
                                 <div class="fileicon mx-auto mb-1">
-                                    <i
-                                        class="fa-regular fa-rocket-launch fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>
+                                    <iconpark-icon name="rocket-launch" class="fa-fw mx-auto fa-3x my-auto mb-2 text-cyan"></iconpark-icon>
                                 </div>
                                 <div>
                                     <button class="btn">
@@ -253,8 +249,7 @@
 
                             <div class="col-md-4 col-6 text-center mb-2 btn-point" id="btn_report_file">
                                 <div class="fileicon mx-auto mb-1">
-                                    <i
-                                        class="fa-regular fa-circle-exclamation fa-fw mx-auto my-auto mb-2 fa-3x text-red"></i>
+                                    <iconpark-icon name="circle-exclamation" class="fa-fw mx-auto fa-3x my-auto mb-2 text-red"></iconpark-icon>
                                 </div>
                                 <div>
                                     <button class="btn">
