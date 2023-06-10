@@ -356,3 +356,8 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
     line-height: 20px;
     text-align: center;
 }
+
+/* 图片 hover 效果 */
+.img-hover :hover {
+    background-color: rgb(191 241 235);
+}

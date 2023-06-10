@@ -1,17 +1,17 @@
 <div id="notes" class="card mt-5 shadow" style="display: none;">
     <div class="card-header pt-3 card-radius">
         <div class="mx-auto text-center mt-3">
-            <i class="fa-4x fa-light fa-book fa-fw"></i>
+            <iconpark-icon name="book" class="fa-fw fa-4x"></iconpark-icon>
             <span class="display-4" i18n="title_notes">. </span>
             <span class="text-muted display-5">beta</span>
             <div class="mt-4 mb-3">
                 <button onclick="TL.notes.open(0);" class="notes_ready_btn  btn btn-sm btn-light text-azure">
-                    <i class="fa-solid fa-pen fa-fw"></i>
+                    <iconpark-icon name="pencil" class="fa-fw"></iconpark-icon>
                     <span i18n="notes_create" class="d-none d-sm-inline">.</span>
                 </button>
                 <!-- 刷新按钮 -->
                 <button onclick="TL.notes.list();" class="notes_ready_btn btn btn-sm btn-light text-azure">
-                    <i class="fa-solid fa-sync fa-fw"></i>
+                    <iconpark-icon name="rotate" class="fa-fw"></iconpark-icon>
                 </button>
             </div>
         </div>
@@ -22,11 +22,11 @@
             <div class="mx-auto" style="margin-top: 50px;margin-bottom: 100px; max-width: 600px;">
                 <img src="/img/notes/how2.png" class="mb-4"/>
                 <div class="alert alert-danger" role="alert" id="notes_keyfail_alert">
-                    <i class="fa-light fa-exclamation-triangle fa-fw"></i>
+                    <iconpark-icon name="exclamation-triangle" class="fa-fw"></iconpark-icon>
                     <span i18n="notes_keyfail_alert">.</span>
                 </div>
                 <div class="alert alert-warning" role="alert" id="notes_keyinit_alert">
-                    <i class="fa-light fa-exclamation-triangle fa-fw"></i>
+                    <iconpark-icon name="exclamation-triangle" class="fa-fw"></iconpark-icon>
                     <span i18n="notes_keyinit_alert">.</span>
                 </div>
                 <h4 i18n="notes_editor_key_title">.</h4>
@@ -44,7 +44,7 @@
 
         <div class="no_notes" style="margin-top: 100px;margin-bottom: 100px;display: none;">
             <div class="text-center mb-4">
-                <i class="fa-fw fa-light fa-folder-open fa-4x"></i>
+                <iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon>
             </div>
             <div class="text-center" i18n="page_no_notes">.</div>
         </div>
@@ -61,15 +61,15 @@
                     <div class="text-right">
                         <!-- time -->
                         <span class="mr-2">
-                            <i class="fa-light fa-clock fa-fw"></i>
+                            <iconpark-icon name="clock" class="fa-fw"></iconpark-icon>
                             <% obj[x].etime %>
                         </span>
                         <button class="btn btn-sm btn-light text-azure" onclick="TL.notes.open('<% obj[x].id %>')">
-                            <i class="fa-fw fa-light fa-pen"></i>
+                            <iconpark-icon name="pencil" class="fa-fw"></iconpark-icon>
                             <span i18n="notes_edit"><% app.languageData.notes_edit %></span>
                         </button>
                         <button class="btn btn-sm btn-light text-red" onclick="TL.notes.delete('<% obj[x].id %>')">
-                            <i class="fa-fw fa-light fa-trash"></i>
+                            <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
                             <span i18n="on_select_delete"><% app.languageData.on_select_delete %></span>
                         </button>
                     </div>
@@ -88,11 +88,11 @@
                     <span i18n="model_title_notes">.</span>
                     <!-- 显示更新动画 -->
                     <span id="notes_editor_updating" class="mr-1" style="display: none;">
-                        <i class="fa-light fa-spinner fa-spin fa-fw text-warning"></i>
+                        <iconpark-icon name="spinner " class="fa-fw fa-spin text-warning"></iconpark-icon>
                     </span>
                     <!-- 更新完成 -->
                     <span id="notes_editor_updated" style="display: none;">
-                        <i class="fa-light fa-circle-check fa-fw text-green"></i>
+                        <iconpark-icon name="circle-check" class="fa-fw text-green"></iconpark-icon>
                     </span>
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>

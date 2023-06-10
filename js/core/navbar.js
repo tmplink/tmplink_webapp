@@ -99,7 +99,7 @@ class navbar {
     }
 
     model_workspace(act) {
-        $('#navbar_model_icon').attr('class', 'fa-light fa-memo-pad fa-fw mx-auto');
+        $('#navbar_model_icon').attr('name', 'memo-pad');
         $('#navbar_model_text').html(app.languageData.navbar_workspace);
         if (act === true) {
             dynamicView.workspace();
@@ -108,7 +108,7 @@ class navbar {
     }
 
     model_notes(act){
-        $('#navbar_model_icon').attr('class', 'fa-solid fa-pen fa-fw mx-auto');
+        $('#navbar_model_icon').attr('name', 'pen');
         $('#navbar_model_text').html(app.languageData.navbar_notes);
         if (act === true) {
             dynamicView.notes();
@@ -117,7 +117,7 @@ class navbar {
     }
 
     model_desktop(act) {
-        $('#navbar_model_icon').attr('class', 'fa-light fa-cabinet-filing fa-fw mx-auto');
+        $('#navbar_model_icon').attr('name', 'cabinet-filing');
         $('#navbar_model_text').html(app.languageData.navbar_meetingroom);
         if (act === true) {
             app.open('/room&mrid=0');
@@ -126,7 +126,7 @@ class navbar {
     }
 
     model_direct(act) {
-        $('#navbar_model_icon').attr('class', 'fa-light fa-share-nodes fa-fw mx-auto');
+        $('#navbar_model_icon').attr('name', 'share-nodes');
         $('#navbar_model_text').html(app.languageData.navbar_direct);
         if (act === true) {
             app.open('/app&listview=direct');

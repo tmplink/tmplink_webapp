@@ -828,9 +828,7 @@ class tmplink {
         }, (rsp) => {
             if (animated === false) {
                 return false;
-            } else {
-                // $(id).html('<i class="fa-light fa-circle-check" aria-hidden="true"></i>');
-            }
+            } 
         }, 'json');
     }
 
@@ -931,7 +929,7 @@ class tmplink {
             $('#filelist_refresh_icon').removeAttr('disabled');
             if (rsp.status === 0) {
                 if (page == 0) {
-                    $('#workspace_filelist').html('<div class="text-center"><i class="fa-fw fa-light fa-folder-open fa-4x"></i></div>');
+                    $('#workspace_filelist').html('<div class="text-center"><iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon></div>');
                 }
                 this.autoload = false;
             } else {
@@ -1007,14 +1005,14 @@ class tmplink {
     }
 
     workspace_btn_active_reset() {
-        $('#ws_btn_file_list').removeClass('bg-dark');
-        $('#ws_btn_file_grid').removeClass('bg-dark');
-        $('#ws_btn_file_photo').removeClass('bg-dark');
+        $('#ws_btn_file_list').removeClass('text-blue');
+        $('#ws_btn_file_grid').removeClass('text-blue');
+        $('#ws_btn_file_photo').removeClass('text-blue');
     }
 
     workspace_filelist_by_photo(data, page) {
         this.workspace_btn_active_reset();
-        $('#ws_btn_file_photo').addClass('bg-dark');
+        $('#ws_btn_file_photo').addClass('text-blue');
         if (page == 0 && data == false) {
             $('.no_photos').show();
         }
@@ -1033,7 +1031,7 @@ class tmplink {
 
     workspace_filelist_by_list(data, page) {
         this.workspace_btn_active_reset();
-        $('#ws_btn_file_list').addClass('bg-dark');
+        $('#ws_btn_file_list').addClass('text-blue');
         if (page == 0 && data == false) {
             $('.no_files').show();
         }
@@ -1070,7 +1068,7 @@ class tmplink {
 
     details_file() {
         if (this.isWeixin()) {
-            $('#file_messenger_icon').html('<i class="fa-light fa-cloud-arrow-down fa-fw fa-4x"></i>');
+            $('#file_messenger_icon').html('<iconpark-icon name="cloud-arrow-down" class="fa-fw fa-4x"></iconpark-icon>');
             $('#file_messenger_msg').removeClass('display-4');
             $('#file_messenger_msg').html('请复制链接后，在外部浏览器打开进行下载。');
             $('#file_messenger').show();
@@ -1102,7 +1100,7 @@ class tmplink {
                     $('#btn_add_to_workspace_mobile').on('click', () => {
                         if (this.logined == 1) {
                             this.workspace_add('#btn_add_to_workspace_mobile', params.ukey);
-                            $('#btn_add_to_workspace_mobile').html('<i class="fas fa-circle-check text-green mx-auto my-auto mb-2 fa-3x"></i>');
+                            $('#btn_add_to_workspace_mobile').html('<iconpark-icon name="circle-check" class="fa-fw mx-auto my-auto mb-2text-green fa-3x"></iconpark-icon>');
                             gtag("event", "login");
                         } else {
                             app.open('/app&listview=login');
@@ -1133,7 +1131,7 @@ class tmplink {
 
                     //更换图标
                     let icon = this.fileicon(rsp.data.type);
-                    $('#file-icon').attr('class', 'fa-fw text-azure fa-3x ' + icon);
+                    $('#file-icon').attr('name',icon);
 
                     //更新title
                     document.title = rsp.data.name;
@@ -1161,7 +1159,7 @@ class tmplink {
                         $('.user-login').hide();
                     }
 
-                    $('#download_msg').html('<i class="fa-light fa-loader fa-spin fa-fw"></i> ' + app.languageData.status_file_1);
+                    $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ' + app.languageData.status_file_1);
                     $('#download_msg').attr('class', 'badge badge-pill badge-info');
 
                     //请求下载地址
@@ -1174,7 +1172,7 @@ class tmplink {
                         }, (req) => {
                             this.ga('D-' + rsp.data.name);
                             if (req.status != 1) {
-                                $('#download_msg').html('<i class="fa-light fa-circle-exclamation fa-fw"></i> ' + app.languageData.status_file_2);
+                                $('#download_msg').html('<iconpark-icon name="circle-exclamation" class="fa-fw"></iconpark-icon> ' + app.languageData.status_file_2);
                                 $('#download_msg').attr('class', 'badge badge-pill badge-danger');
                                 $('#file_download_btn_1').hide();
                                 $('#file_download_btn_2').hide();
@@ -1190,9 +1188,9 @@ class tmplink {
 
                             //自动启动下载
                             // window.location.href = download_url;
-                            // $('#download_msg').html('<i class="fa-light fa-circle-check fa-fw"></i> ' + app.languageData.status_file_3);
                             // $('#download_msg').attr('class', 'badge badge-pill badge-success');
                             // $('#download_msg').fadeOut();
+
                             opacityHide('#download_msg');
 
                             //分享链接
@@ -1226,7 +1224,7 @@ class tmplink {
                                 window.location.href = download_url;
                                 //添加按钮按下反馈
                                 opacityShow('#download_msg');
-                                $('#download_msg').html('<i class="fa-light fa-loader fa-spin fa-fw"></i> ' + app.languageData.file_btn_download_status2);
+                                $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ' + app.languageData.file_btn_download_status2);
                                 $('#download_msg').attr('class', 'badge badge-pill badge-info');
                                 //3秒后解除
                                 setTimeout(() => {
@@ -1241,7 +1239,7 @@ class tmplink {
                                 //添加按钮按下反馈
                                 opacityShow('#download_msg');
                                 // $('#download_msg').fadeIn();
-                                $('#download_msg').html('<i class="fa-light fa-loader fa-spin fa-fw"></i> ' + app.languageData.file_btn_download_status2);
+                                $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ' + app.languageData.file_btn_download_status2);
                                 $('#download_msg').attr('class', 'badge badge-pill badge-info');
                                 //3秒后解除
                                 setTimeout(() => {
@@ -1282,9 +1280,9 @@ class tmplink {
                             $('#file_download_url_copy').on('click', () => {
                                 //复制内容到剪贴板
                                 navigator.clipboard.writeText(share_url);
-                                $('#file_download_url_copy_icon').html('<i class="fas fa-circle-check text-green mx-auto my-auto mb-2 fa-3x"></i>');
+                                $('#file_download_url_copy_icon').html('<iconpark-icon name="circle-check" class="fa-fw mx-auto my-auto mb-2text-green fa-3x"></iconpark-icon>');
                                 setTimeout(() => {
-                                    $('#file_download_url_copy_icon').html('<i class="fa-regular fa-share-all fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></i>');
+                                    $('#file_download_url_copy_icon').html('<iconpark-icon name="share-all" class="fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></iconpark-icon>');
                                 }, 3000);
                                 return true;
                             });
@@ -1306,7 +1304,7 @@ class tmplink {
                             $('#btn_add_to_workspace').on('click', () => {
                                 if (this.logined == 1) {
                                     //更换图标为完成的标志
-                                    $('#btn_add_to_workspace_icon').html('<i class="fas fa-circle-check text-green mx-auto my-auto mb-2 fa-3x"></i>');
+                                    $('#btn_add_to_workspace_icon').html('<iconpark-icon name="circle-check" class="fa-fw mx-auto my-auto mb-2 text-green fa-3x"></iconpark-icon>');
                                     this.workspace_add('#btn_add_to_workspace', params.ukey, false);
                                     //移除监听
                                     $('#btn_add_to_workspace').off('click');
@@ -1357,7 +1355,7 @@ class tmplink {
 
                 //file need to login
                 if (rsp.status === 3) {
-                    $('#file_messenger_icon').html('<i class="fa-solid fa-shield-keyhole fa-7x"></i>');
+                    $('#file_messenger_icon').html('<iconpark-icon name="shield-keyhole" class="fa-fw fa-7x"></iconpark-icon>');
                     $('#file_messenger_msg').html(app.languageData.status_need_login);
                     $('#file_messenger_msg_login').show();
                     $('#file_messenger').show();
@@ -1381,7 +1379,7 @@ class tmplink {
 
                 //file unavailable in china
                 if (rsp.status === 4) {
-                    $('#file_messenger_icon').html('<i class="fa-solid fa-earth-asia fa-7x"></i>');
+                    $('#file_messenger_icon').html('<iconpark-icon name="earth-asia" class="fa-fw fa-7x"></iconpark-icon>');
                     $('#file_messenger_msg').html(app.languageData.status_area);
                     $('#file_messenger').show();
                     this.ga(`Area-[${params.ukey}]`);
@@ -1390,7 +1388,7 @@ class tmplink {
 
                 //file is private
                 if (rsp.status === 5) {
-                    $('#file_messenger_icon').html('<i class="fa-solid fa-lock-alt fa-7x"></i>');
+                    $('#file_messenger_icon').html('<iconpark-icon name="lock-alt" class="fa-fw fa-7x"></iconpark-icon>');
                     $('#file_messenger_msg').html(app.languageData.file_private);
                     $('#file_messenger').show();
                     this.ga(`Private-[${params.ukey}]`);
@@ -1398,7 +1396,7 @@ class tmplink {
                 }
 
                 //file unavailable
-                $('#file_messenger_icon').html('<i class="fa-light fa-folder-xmark  fa-4x"></i>');
+                $('#file_messenger_icon').html('<iconpark-icon name="folder-xmark" class="fa-fw fa-4x></iconpark-icon>');
                 $('#file_messenger_msg').html(app.languageData.file_unavailable);
                 $('#file_messenger').show();
                 this.ga(`Unavailable-[${params.ukey}]`);
@@ -1645,7 +1643,7 @@ class tmplink {
         //$('.download_progress_bar_' + index).hide();
         //恢复进度条样式
         $('.btn_download_' + index).removeAttr('disabled');
-        $('.btn_download_' + index).html('<i class="fa-fw fa-light fa-cloud-arrow-down"></i>');
+        $('.btn_download_' + index).html('<iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>');
 
         delete this.download_queue[index];
         this.download_queue_run();
@@ -1717,7 +1715,7 @@ class tmplink {
 
         //新的方案
         $('.btn_download_' + ukey).attr('disabled', 'true');
-        $('.btn_download_' + ukey).html('<i class="fa-light fa-loader fa-spin fa-fw"></i>');
+        $('.btn_download_' + ukey).html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon>');
 
         this.recaptcha_do('download_req', (recaptcha) => {
             $.post(this.api_file, {
@@ -1742,7 +1740,7 @@ class tmplink {
                     //使用 href 提供下载
                     // location.href = req.data;
                     // $('.btn_download_' + ukey).removeAttr('disabled');
-                    // $('.btn_download_' + ukey).html('<i class="fa-fw fa-light fa-cloud-arrow-down"></i>');
+                    // $('.btn_download_' + ukey).html('<iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>');
                     return true;
                 }
                 if (req.status == 3) {
@@ -1751,7 +1749,7 @@ class tmplink {
                 }
                 this.alert('发生了错误，请重试。');
                 $('.btn_download_' + ukey).removeAttr('disabled');
-                $('.btn_download_' + ukey).html('<i class="fa-fw fa-light fa-cloud-arrow-down"></i>');
+                $('.btn_download_' + ukey).html('<iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>');
             });
         });
     }
@@ -2128,7 +2126,7 @@ class tmplink {
             //captcha: recaptcha
         }, (rsp) => {
             if (rsp.data.service == 0) {
-                $('#orders_addon_contents').html('<div class="text-center"><i class="fa-fw fa-light fa-folder-open fa-4x"></i></div>');
+                $('#orders_addon_contents').html('<div class="text-center"><iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon></div>');
             } else {
                 $('#orders_addon_contents').html('<div class="row" id="orders_services_contents"></div>');
                 var service_list = rsp.data.service;
@@ -2152,17 +2150,17 @@ class tmplink {
                 case 'hs':
                     r[i].name = app.languageData.service_code_hs;
                     r[i].des = app.languageData.service_code_hs_des;
-                    r[i].icon = 'fa-solid fa-heart-circle-check';
+                    r[i].icon = 'heart-circle-check';
                     break;
                 case 'storage':
                     r[i].name = app.languageData.service_code_storage + ' (' + bytetoconver(data[i].val, true) + ')';
                     r[i].des = app.languageData.service_code_storage_des;
-                    r[i].icon = 'fa-light fa-album-circle-plus';
+                    r[i].icon = 'album-circle-plus';
                     break;
                 case 'media-video':
                     r[i].name = app.languageData.service_code_media + ' (' + bytetoconver(data[i].val, true) + ')';
                     r[i].des = app.languageData.service_code_media_des;
-                    r[i].icon = 'fa-light fa-circle-video';
+                    r[i].icon = 'circle-video';
                     break;
             }
         }
@@ -2179,7 +2177,7 @@ class tmplink {
             mr_id: params.mrid
         }, (rsp) => {
             if (rsp.status == 0) {
-                $('#mrfile_add_list').html('<div class="mx-auto"><i class="fa-fw fa-light fa-folder-open fa-4x"></i></div>');
+                $('#mrfile_add_list').html('<div class="mx-auto"><iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon></div>');
             } else {
                 $('#mrfile_add_list').html(app.tpl('mrfile_add_list_tpl', rsp.data));
             }
@@ -2443,9 +2441,9 @@ class tmplink {
     }
 
     room_btn_active_reset() {
-        $('#room_btn_file_list').removeClass('bg-dark');
-        $('#room_btn_file_grid').removeClass('bg-dark');
-        $('#room_btn_file_photo').removeClass('bg-dark');
+        $('#room_btn_file_list').removeClass('text-blue');
+        $('#room_btn_file_grid').removeClass('text-blue');
+        $('#room_btn_file_photo').removeClass('text-blue');
     }
 
     dir_list_autoload_enabled() {
@@ -2467,7 +2465,7 @@ class tmplink {
     mr_file_by_list(data, page) {
         let url_params = this.get_url_params();
         this.room_btn_active_reset();
-        $('#room_btn_file_list').addClass('bg-dark');
+        $('#room_btn_file_list').addClass('text-blue');
         if (page == 0 || page == 'all') {
             $('#dir_list').html('');
             if (this.subroom_data.length != 0) {
@@ -2494,7 +2492,7 @@ class tmplink {
 
     mr_file_by_photo(data, page) {
         this.room_btn_active_reset();
-        $('#room_btn_file_photo').addClass('bg-dark');
+        $('#room_btn_file_photo').addClass('text-blue');
         if (page == 0 || page == 'all') {
             $('#dir_list').html('');
             if (this.subroom_data.length != 0) {
@@ -2645,15 +2643,15 @@ class tmplink {
         }, (rsp) => {
             this.loading_box_off();
             if (rsp.status == 0) {
-                $('#meetroom_list').html('<div class="mx-auto"><i class="fa-fw fa-light fa-folder-open fa-4x"></i></div>');
-                $('#mr_list_refresh_icon').html('<i class="fa-fw fa-light fa-rotate"></i>');
+                $('#meetroom_list').html('<div class="mx-auto"><iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon></div>');
+                $('#mr_list_refresh_icon').html('<iconpark-icon name="rotate" class="fa-fw“></iconpark-icon>');
                 $('#mr_list_refresh_icon').removeAttr('disabled');
                 return false;
             } else {
                 $('#meetroom_list').html(app.tpl('dir_list_tpl', rsp.data));
                 this.btn_copy_bind();
             }
-            $('#mr_list_refresh_icon').html('<i class="fa-fw fa-light fa-rotate"></i>');
+            $('#mr_list_refresh_icon').html('<iconpark-icon name="rotate" class="fa-fw“></iconpark-icon>');
             $('#mr_list_refresh_icon').removeAttr('disabled');
             app.linkRebind();
         });
@@ -2715,7 +2713,7 @@ class tmplink {
                 this.room.top = 0;
                 this.room.ownner = 0;
                 this.room.mr_id = 0;
-                $('#file_messenger_icon').html('<i class="fa-light fa-folder-xmark  fa-4x"></i>');
+                $('#file_messenger_icon').html('<iconpark-icon name="folder-xmark" class="fa-fw fa-4x></iconpark-icon>');
                 $('#file_messenger_msg').html(app.languageData.room_status_fail);
                 $('#file_messenger').show();
                 $('#room_loaded').html('');
@@ -2729,7 +2727,7 @@ class tmplink {
                 this.room.top = 0;
                 this.room.ownner = 0;
                 this.room.mr_id = 0;
-                $('#file_messenger_icon').html('<i class="fa-light fa-folder-xmark  fa-4x"></i>');
+                $('#file_messenger_icon').html('<iconpark-icon name="folder-xmark" class="fa-fw fa-4x></iconpark-icon>');
                 $('#file_messenger_msg').html(app.languageData.room_status_fail);
                 $('#file_messenger').show();
                 $('#room_loaded').html('');
@@ -2740,7 +2738,7 @@ class tmplink {
 
             //room need to login
             if (rsp.status === 3) {
-                $('#file_messenger_icon').html('<i class="fa-light fa-user-robot fa-7x"></i>');
+                $('#file_messenger_icon').html('<iconpark-icon name="user-robot" class="fa-fw fa-7x></iconpark-icon>');
                 $('#file_messenger_msg').html(app.languageData.status_need_login);
                 $('#file_messenger_msg_login').show();
                 $('#file_messenger').show();
@@ -2888,7 +2886,7 @@ class tmplink {
     room_mobile_prepare() {
         let mrid = this.room.mr_id === undefined ? 0 : this.room.mr_id;
         if (mrid !== 0) {
-            let back_btn = `<a href="/app&listview=room&mrid=${TL.room.parent}" tmpui-action="TL.room_list()" class="text-azure mt-1 btn_for_sub"><i class="fa-solid fa-arrow-left fa-2x"></i></a>`;
+            let back_btn = `<a href="/app&listview=room&mrid=${TL.room.parent}" tmpui-action="TL.room_list()" class="text-azure mt-1 btn_for_sub"><iconpark-icon name="arrow-left" class="fa-fw fa-2x></iconpark-icon></a>`;
             $('#room_back').html(back_btn);
         } else {
             $('#room_back').html('');
@@ -3222,202 +3220,202 @@ class tmplink {
     }
 
     fileicon(type) {
-        var r = 'fa-light fa-file-lines';
+        var r = 'file-lines';
         switch (type) {
             case 'pdf':
-                r = 'fa-light fa-file-pdf';
+                r = 'file-pdf';
                 break;
             case 'zip':
-                r = 'fa-light fa-file-zipper';
+                r = 'file-zipper';
                 break;
             case 'rar':
-                r = 'fa-light fa-file-zipper';
+                r = 'file-zipper';
                 break;
             case '7z':
-                r = 'fa-light fa-file-zipper';
+                r = 'file-zipper';
                 break;
             case 'gz':
-                r = 'fa-light fa-file-zipper';
+                r = 'file-zipper';
                 break;
             case 'tar':
-                r = 'fa-light fa-file-zipper';
+                r = 'file-zipper';
                 break;
             case 'msixbundle':
-                r = 'fa-light fa-file-zipper';
+                r = 'file-zipper';
                 break;
 
             case 'doc':
-                r = 'fa-light fa-file-word';
+                r = 'file-word';
                 break;
             case 'wps':
-                r = 'fa-light fa-file-word';
+                r = 'file-word';
                 break;
             case 'docx':
-                r = 'fa-light fa-file-word';
+                r = 'file-word';
                 break;
 
             case 'c':
-                r = 'fa-light fa-file-code';
+                r = 'file-code';
                 break;
             case 'go':
-                r = 'fa-light fa-file-code';
+                r = 'file-code';
                 break;
             case 'cpp':
-                r = 'fa-light fa-file-code';
+                r = 'file-code';
                 break;
             case 'php':
-                r = 'fa-light fa-file-code';
+                r = 'file-code';
                 break;
             case 'java':
-                r = 'fa-light fa-file-code';
+                r = 'file-code';
                 break;
             case 'js':
-                r = 'fa-light fa-file-code';
+                r = 'file-code';
                 break;
             case 'vb':
-                r = 'fa-light fa-file-code';
+                r = 'file-code';
                 break;
             case 'py':
-                r = 'fa-light fa-file-code';
+                r = 'file-code';
                 break;
             case 'css':
-                r = 'fa-light fa-file-code';
+                r = 'file-code';
                 break;
             case 'html':
-                r = 'fa-light fa-file-code';
+                r = 'file-code';
                 break;
             case 'tar':
-                r = 'fa-light fa-file-code';
+                r = 'file-code';
                 break;
             case 'asm':
-                r = 'fa-light fa-file-code';
+                r = 'file-code';
                 break;
 
             case 'ogg':
-                r = 'fa-light fa-file-music';
+                r = 'file-music';
                 break;
             case 'm4a':
-                r = 'fa-light fa-file-music';
+                r = 'file-music';
                 break;
             case 'mp3':
-                r = 'fa-light fa-file-music';
+                r = 'file-music';
                 break;
             case 'wav':
-                r = 'fa-light fa-file-music';
+                r = 'file-music';
                 break;
             case 'weba':
-                r = 'fa-light fa-file-music';
+                r = 'file-music';
                 break;
             case 'mp4':
-                r = 'fa-light fa-file-video';
+                r = 'file-video';
                 break;
             case 'rm':
-                r = 'fa-light fa-file-video';
+                r = 'file-video';
                 break;
             case 'rmvb':
-                r = 'fa-light fa-file-video';
+                r = 'file-video';
                 break;
             case 'avi':
-                r = 'fa-light fa-file-video';
+                r = 'file-video';
                 break;
             case 'mkv':
-                r = 'fa-light fa-file-video';
+                r = 'file-video';
                 break;
             case 'webm':
-                r = 'fa-light fa-file-video';
+                r = 'file-video';
                 break;
             case 'wmv':
-                r = 'fa-light fa-file-video';
+                r = 'file-video';
                 break;
             case 'flv':
-                r = 'fa-light fa-file-video';
+                r = 'file-video';
                 break;
             case 'mpg':
-                r = 'fa-light fa-file-video';
+                r = 'file-video';
                 break;
             case 'mpeg':
-                r = 'fa-light fa-file-video';
+                r = 'file-video';
                 break;
             case 'ts':
-                r = 'fa-light fa-file-video';
+                r = 'file-video';
                 break;
             case 'mov':
-                r = 'fa-light fa-file-video';
+                r = 'file-video';
                 break;
             case 'vob':
-                r = 'fa-light fa-file-video';
+                r = 'file-video';
                 break;
 
             case 'png':
-                r = 'fa-light fa-file-image';
+                r = 'file-image';
                 break;
             case 'gif':
-                r = 'fa-light fa-file-image';
+                r = 'file-image';
                 break;
             case 'bmp':
-                r = 'fa-light fa-file-image';
+                r = 'file-image';
                 break;
             case 'jpg':
-                r = 'fa-light fa-file-image';
+                r = 'file-image';
                 break;
             case 'jpeg':
-                r = 'fa-light fa-file-image';
+                r = 'file-image';
                 break;
             case 'webp':
-                r = 'fa-light fa-file-image';
+                r = 'file-image';
                 break;
 
             case 'ppt':
-                r = 'fa-light fa-file-powerpoint';
+                r = 'file-powerpoint';
                 break;
             case 'pptx':
-                r = 'fa-light fa-file-powerpoint';
+                r = 'file-powerpoint';
                 break;
 
             case 'xls':
-                r = 'fa-light fa-file-excel';
+                r = 'file-excel';
                 break;
             case 'xlsx':
-                r = 'fa-light fa-file-excel';
+                r = 'file-excel';
                 break;
             case 'xlsm':
-                r = 'fa-light fa-file-excel';
+                r = 'file-excel';
                 break;
 
             case 'exe':
-                r = 'fa-light fa-window';
+                r = 'window';
                 break;
             case 'bin':
-                r = 'fa-light fa-window';
+                r = 'window';
                 break;
             case 'msi':
-                r = 'fa-light fa-window';
+                r = 'window';
                 break;
             case 'bat':
-                r = 'fa-light fa-window';
+                r = 'window';
                 break;
             case 'sh':
-                r = 'fa-light fa-window';
+                r = 'window';
                 break;
 
             case 'rpm':
-                r = 'fa-light fa-cube';
+                r = 'cube';
                 break;
             case 'deb':
-                r = 'fa-light fa-cube';
+                r = 'cube';
                 break;
             case 'msi':
-                r = 'fa-light fa-cube';
+                r = 'cube';
                 break;
             case 'dmg':
-                r = 'fa-light fa-cube';
+                r = 'cube';
                 break;
             case 'apk':
-                r = 'fa-light fa-cube';
+                r = 'cube';
                 break;
 
             case 'torrent':
-                r = 'fa-light fa-acorn';
+                r = 'acorn';
                 break;
 
         }
@@ -3433,7 +3431,7 @@ class tmplink {
 
         if (dom !== null) {
             let tmp = $(dom).html();
-            $(dom).html('<i class="fa-fw fa-light fa-circle-check"></i>');
+            $(dom).html('<iconpark-icon name="circle-check" class="fa-fw"></iconpark-icon>');
             setTimeout(() => {
                 $(dom).html(tmp);
             }, 3000);
@@ -3476,7 +3474,7 @@ class tmplink {
 
         if (dom !== null) {
             let tmp = $(dom).html();
-            $(dom).html('<i class="fa-fw fa-light fa-circle-check"></i>');
+            $(dom).html('<iconpark-icon name="circle-check" class="fa-fw"></iconpark-icon>');
             setTimeout(() => {
                 $(dom).html(tmp);
             }, 3000);
