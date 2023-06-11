@@ -1384,7 +1384,7 @@ class tmplink {
 
                 //file is private
                 if (rsp.status === 5) {
-                    $('#file_messenger_icon').html('<iconpark-icon name="lock-alt" class="fa-fw fa-7x"></iconpark-icon>');
+                    $('#file_messenger_icon').html('<iconpark-icon name="lock" class="fa-fw fa-7x"></iconpark-icon>');
                     $('#file_messenger_msg').html(app.languageData.file_private);
                     $('#file_messenger').show();
                     this.ga(`Private-[${params.ukey}]`);
