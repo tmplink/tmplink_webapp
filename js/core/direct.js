@@ -188,7 +188,8 @@ class direct {
     }
 
     genLinkDirect(dkey, filename) {
-        let filename2 = encodeURI(filename);
+        // let filename2 = encodeURI(filename);
+        let filename2 = filename;
         return {
             download: `${this.protocol}${this.domain}/files/${dkey}/${filename2}`,
             res: `${this.protocol}${this.domain}/res/${dkey}/${filename2}`,
