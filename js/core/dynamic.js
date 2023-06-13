@@ -201,6 +201,7 @@ class dynamic {
         TL.ga('Login');
         $('#home_view').html(app.getFile('/tpl/listview/login.html'));
         app.dynOpen('/app&listview=login');
+        app.linkRebind();
         TL.navbar.disabled();
         INIT_login();
     }
@@ -209,6 +210,7 @@ class dynamic {
         TL.ga('Register');
         $('#home_view').html(app.getFile('/tpl/listview/reg.html'));
         app.dynOpen('/app&listview=reg');
+        app.linkRebind();
         TL.navbar.disabled();
         INIT_reg();
     }
@@ -217,6 +219,7 @@ class dynamic {
         TL.ga('Reset');
         $('#home_view').html(app.getFile('/tpl/listview/reset.html'));
         app.dynOpen('/app&listview=reset');
+        app.linkRebind();
         TL.navbar.model_direct();
         INIT_reset();
     }
