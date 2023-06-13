@@ -7,7 +7,7 @@
 
 <div class="container d-flex flex-grow-1">
     <div class="align-self-center w-100">
-        <div class="text-center mb-7">
+        <div class="text-center mb-6">
             <a href="/">
                 <img src="/img/ico/logo-new.svg" alt="tmp.link" style="width: 64px;">
             </a>
@@ -168,7 +168,7 @@
                         <!--[适用于桌面设备]-->
                         <div class="row d-none d-sm-flex">
 
-                            <div class="col-md-4 col-6 text-center mt-4">
+                            <div class="col-md-4 col-6 text-center mb-4">
                                 <div class="fileicon mx-auto mb-1">
                                     <iconpark-icon name="laptop-arrow-down" class="fa-fw mx-auto fa-3x my-auto mb-2 text-cyan"></iconpark-icon>
                                 </div>
@@ -200,17 +200,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 col-6 text-center mt-4 btn-point btn_play" style="display: none;"
-                                onclick="$('#openWithPlayerModal').modal('show');">
-                                <div class="fileicon mx-auto mb-1">
-                                    <iconpark-icon name="play" class="fa-fw mx-auto fa-3x my-auto mb-2 text-cyan"></iconpark-icon>
-                                </div>
-                                <div>
-                                    <button class="btn" i18n="file_btn_play">.</button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 col-6 text-center mt-4 btn-point" id="file_download_by_qrcode">
+                            <div class="col-md-4 col-6 text-center mb-4 btn-point" id="file_download_by_qrcode">
                                 <div class="fileicon mx-auto mb-1">
                                     <iconpark-icon name="mobile-signal" class="fa-fw mx-auto fa-3x my-auto mb-2 text-cyan"></iconpark-icon>
                                 </div>
@@ -218,12 +208,22 @@
                                     <button class="btn" i18n="file_btn_qr_mobile">.</button>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-6 text-center mt-4 btn-point" id="file_download_url_copy">
+                            <div class="col-md-4 col-6 text-center mb-4 btn-point" id="file_download_url_copy">
                                 <div class="fileicon mx-auto mb-1" id="file_download_url_copy_icon">
                                     <iconpark-icon name="share-all" class="fa-fw mx-auto fa-3x my-auto mb-2 text-cyan"></iconpark-icon>
                                 </div>
                                 <div>
                                     <button class="btn" i18n="file_btn_copy">.</button>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-6 text-center mt-4 btn-point btn_play" style="display: none;"
+                                onclick="$('#openWithPlayerModal').modal('show');">
+                                <div class="fileicon mx-auto mb-1">
+                                    <iconpark-icon name="play" class="fa-fw mx-auto fa-3x my-auto mb-2 text-cyan"></iconpark-icon>
+                                </div>
+                                <div>
+                                    <button class="btn" i18n="file_btn_play">.</button>
                                 </div>
                             </div>
 
