@@ -3,40 +3,40 @@
         <div class="mt-3 mb-2 text-center mx-auto">
             <span id="direct_branded_logo"><iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon></span>
             <div class="lead mt-2">
-                <span class="badge badge-pill badge-info p-2 mx-1 mt-1">
+                <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
                     <iconpark-icon name="link" class="fa-fw"></iconpark-icon>
                     <span id="direct_bind_domain_box">
-                        <a href="#" target="_blank" id="direct_bind_domain" class="text-white">#</a>
+                        <a href="#" target="_blank" id="direct_bind_domain">#</a>
                     </span>
                 </span>
-                <span class="badge badge-pill badge-info p-2 mx-1 mt-1 btn-point"
+                <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
                     onclick="$('#directSSLModal').modal('show');">
                     <iconpark-icon name="shield-halved" class="fa-fw"></iconpark-icon>
                     <span id="direct_bind_ssl"></span>
                 </span>
-                <span class="badge badge-pill badge-info p-2 mx-1 mt-1 btn-point"
+                <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
                     onclick="$('#brandModal').modal('show');">
                     <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
                     <span i18n="brand_modal_title">.</span>
                 </span>
-                <span class="badge badge-pill badge-info p-2 mx-1 mt-1 btn-point"
+                <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
                     onclick="$('#limitTrafficModal').modal('show');">
                     <iconpark-icon name="block-brick-fire" class="fa-fw"></iconpark-icon>
                     <span id="direct_set_traffic_limit_title"></span>
                 </span>
             </div>
             <div class="lead mt-2">
-                <span class="badge badge-pill badge-info p-2 mx-1 mt-1">
+                <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
                     <iconpark-icon name="battery-three-quarters" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_quota">.</span>
                     <span id="direct_quota">0</span>
                 </span>
-                <span class="badge badge-pill badge-info p-2 mx-1 mt-1">
+                <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
                     <iconpark-icon name="download" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_total_downloads">.</span>
                     <span id="direct_total_downloads">0</span>
                 </span>
-                <span class="badge badge-pill badge-info p-2 mx-1 mt-1">
+                <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
                     <iconpark-icon name="arrow-up-arrow-down" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_total_transfer">.</span>
                     <span id="direct_total_transfer">0</span>
@@ -46,7 +46,7 @@
     </div>
     <div id="filelist_model" class="card-body">
 
-        <div class="card shadow-sm p-3">
+        <div class="p-3">
             <!--[搜索栏]-->
             <form autocomplete="off">
                 <div class="input-group mb-1">
@@ -62,7 +62,7 @@
             </form>
 
             <!--[主要控制器]-->
-            <div class="mb-1">
+            <div class="mb-2 mt-2">
                 <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.direct.filelist(0);">
                     <iconpark-icon name="rotate" class="fa-fw" id="filelist_refresh_icon"></iconpark-icon>
                 </button>
