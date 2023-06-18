@@ -2692,6 +2692,10 @@ class tmplink {
         $('.permission-room-file').hide();
         $('.permission-room-user').hide();
         $('.data_loading').show();
+        //清理数据
+        $('#dir_list').html('');
+        $('#room_direct_model').hide();
+        $('.room_subinfo').hide();
         //this.loading_box_on();
         //获取基本信息
         $.post(this.api_mr, {
@@ -2849,10 +2853,6 @@ class tmplink {
                 this.subroom_data = 0;
             }
 
-            if (this.room.owner === 0) {
-                $('.not_owner').hide();
-            }
-
             this.btn_copy_bind();
             this.mr_file_list('all');
 
@@ -2863,6 +2863,11 @@ class tmplink {
             } else {
                 $('.btn_for_sub').show();
                 $('.btn_for_desktop').hide();
+            }
+
+            //如果不是拥有者
+            if (this.room.owner === 0) {
+                $('.not_owner').hide();
             }
 
             if (isMobileScreen()) {
@@ -2882,7 +2887,7 @@ class tmplink {
     room_mobile_prepare() {
         let mrid = this.room.mr_id === undefined ? 0 : this.room.mr_id;
         if (mrid !== 0) {
-            let back_btn = `<a href="/app&listview=room&mrid=${TL.room.parent}" tmpui-action="TL.room_list()" class="text-azure mt-1 btn_for_sub"><iconpark-icon name="arrow-left" class="fa-fw fa-2x></iconpark-icon></a>`;
+            let back_btn = `<a href="/app&listview=room&mrid=${TL.room.parent}" tmpui-action="TL.room_list()" class="text-azure mt-1 btn_for_sub"><iconpark-icon name="left-c" class="fa-fw fa-2x"></iconpark-icon></a>`;
             $('#room_back').html(back_btn);
         } else {
             $('#room_back').html('');
