@@ -545,7 +545,8 @@ class direct {
     enableSSL() {
         this.loading_box_on();
 
-        var ssl_cert = $('#set_ssl_cert').val() + "\n" + $('#set_ssl_cert_ca').val() + "\n" + $('#set_ssl_cert_chain').val();
+        // var ssl_cert = $('#set_ssl_cert').val() + "\n" + $('#set_ssl_cert_ca').val() + "\n" + $('#set_ssl_cert_chain').val();
+        var ssl_cert = $('#set_ssl_cert').val();
         var ssl_key = $('#set_ssl_key').val();
 
         $.post(this.parent_op.api_direct, {
