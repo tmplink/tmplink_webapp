@@ -600,6 +600,7 @@ class direct {
             'token': this.parent_op.api_token
         }, (rsp) => {
             let msg = this.selectBingDomainText(rsp.status);
+            console.log(msg);
             $('#direct_modal_msg').show();
             $('#direct_modal_msg_text').html(msg);
             if (rsp.status == 1) {
@@ -609,23 +610,32 @@ class direct {
                 $('#direct_bind_domain').attr('href', this.protocol + domain);
 
                 $('#diredirect_bind_notice').html('');
-                window.location.reload();
+                //window.location.reload();
+            }else{
+                
             }
             this.loading_box_off();
         }), 'json';
     }
 
     selectBingDomainText(number){
+        console.log(number);
+        let msg = '';
         switch (number) {
             case 1:
-                return app.languageData.direct_intro_modal_msg_1;
+                msg =  app.languageData.direct_intro_modal_msg_1;
+                break;
             case 2:
-                return app.languageData.direct_intro_modal_msg_2;
-            case 3:
-                return app.languageData.direct_intro_modal_msg_3;
+                msg =  app.languageData.direct_intro_modal_msg_2;
+                break;
             case 4:
-                return app.languageData.direct_intro_modal_msg_4;
+                msg =  app.languageData.direct_intro_modal_msg_3;
+                break;
+            case 3:
+                msg =  app.languageData.direct_intro_modal_msg_4;
+                break;
         }       
+        return msg;
     }
 
     /**
