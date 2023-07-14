@@ -33,6 +33,7 @@ class uploader {
 
     init(parent_op) {
         this.parent_op = parent_op;
+        this.quickUploadInit();
     }
 
     tmpupGenerator() {
@@ -73,7 +74,23 @@ class uploader {
 
     }
 
+    quickUploadInit() {
+        if (localStorage.getItem('app_upload_quick') === null) {
+            localStorage.setItem('app_upload_quick', 0);
+        }else{
+            if (localStorage.getItem('app_upload_quick') === '1') {
+                $('#quick_upload').prop('checked', true);
+                this.prepare_sha1 = true;
+            } else {
+                $('#quick_upload').prop('checked', false);
+                this.prepare_sha1 = false;
+            }
+        }
+    }
+
     quickUpload() {
+        //写入到存储
+        localStorage.setItem('app_upload_quick', ($('#quick_upload').is(':checked')) ? 1 : 0);
         this.prepare_sha1 = ($('#quick_upload').is(':checked')) ? true : false;
         //如果此功能被设置为 false，那么需要同时关闭跳过上传
         if (this.skip_upload===true&&this.prepare_sha1===false) {
