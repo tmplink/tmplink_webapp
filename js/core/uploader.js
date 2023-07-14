@@ -466,6 +466,12 @@ class uploader {
                         this.worker_slice(server, utoken, sha1, file, id);
                     });
                     break;
+                case 7:
+                    //上传失败，文件名中包含了不受支持的字符串
+                    //重置 rsp.stustus = 10
+                    rsp.status = 10;
+                    this.upload_final({ status: rsp.status, data: { ukey: rsp.data } }, file, id);
+                    break;
                 case 9:
                     //重置 rsp.stustus = 1
                     rsp.status = 1;
@@ -818,9 +824,14 @@ class uploader {
                     //上传失败，操作失败，无法获取节点信息
                     error_msg = app.languageData.upload_fail_node;
                     break;
+                case 10:
+                    //上传失败，文件名中包含了不允许的字符
+                    error_msg = app.languageData.upload_fail_name;
             }
             console.log(rsp.status + ':' + error_msg);
             $('#uqnn_' + id).html(`<span class="text-red">${error_msg}</span>`);
+            //清除上传进度条
+            $('.uqinfo_' + id).remove();
         }
 
         //更新上传统计
