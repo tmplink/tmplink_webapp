@@ -49,30 +49,21 @@
                             <span id="room_total"></span>
                         </div>
                         <div class="userinfo mt-2" style="display: none;">
-                            <span class="userinfo_sd" style="display: none;">
-                                <iconpark-icon name="user-tie" class="fa-fw"></iconpark-icon>
-                            </span>
-                            <span class="userinfo_pro" style="display: none;">
-                                <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
-                            </span>
-                            <span class="userinfo_nickname"></span>
-                        </div>
-                        <div>
-                            <div class="fav-enabled" style="display: none;">
+                            <span class="fav-enabled" style="display: none;">
                                 <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
-                                <span id="favorite_count">0</span>
-                            </div>
-                            <div class="badge badge-pill badge-dark btn-point user-unlogin"
+                                <span id="favorite_count" class="text-pink">0</span>
+                            </span>
+                            <span class="badge badge-pill badge-dark btn-point user-unlogin"
                                 onclick="app.open('/app&listview=login')" style="display: none;">
                                 <span i18n="need_login_of_dir">.</span>
-                            </div>
-                            <div class="mt-1">
+                            </span>
+                            <span>
                                 <span class="upload_queue" style="display: none;">
                                     <iconpark-icon name="circle-arrow-up" class="fa-fw"></iconpark-icon>
                                     <span class="upload_queue_counter"></span>
                                     <span class="upload_speed"></span>
                                 </span>
-                            </div>
+                            </span>
                         </div>
                         <div class="lead mt-2" id="room_direct_model">
                             <a href="#" id="room_link" target="_blank"></a>
@@ -255,6 +246,16 @@
                     <div class="text-center" i18n="page_no_dir">.</div>
                 </div>
 
+                <div class="text-right userinfo text-muted mt-3" style="display: none;font-size: 14px;">
+                    <span i18n="filepage_publicby_0">.</span> 
+                    <span class="userinfo_sd" style="display: none;"></span>
+                    <span class="userinfo_pro text-azure" style="display: none;">
+                        <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
+                    </span>
+                    <span class="userinfo_nickname"></span> 
+                    <span i18n="filepage_publicby_2">.</span>
+                </div>
+
                 <script type="text/template" id="dir_photolist_tpl">
                     <div class="row" id="room_file_content">
                     <% for (var x in obj) { %>
@@ -312,8 +313,8 @@
                                                     <% obj[x].fsize_formated %>
                                                 </span>
                                                 <% if(obj[x].like>0){ %>
-                                                    <iconpark-icon name="circle-star" class="fa-fw text-yellow"></iconpark-icon>
-                                                    <% obj[x].like %>
+                                                    <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
+                                                    <span class="text-pink"><% obj[x].like %><span>
                                                 <% } %>
                                             </div>
                                         </div>
@@ -378,8 +379,8 @@
                                     <% } %> 
 
                                     <% if(obj[x].like>0){ %>
-                                        <iconpark-icon name="circle-star" class="fa-fw text-yellow"></iconpark-icon>
-                                        <% obj[x].like %>
+                                        <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
+                                        <span class="text-pink"><% obj[x].like %><span>
                                     <% } %>
                                     <% if(obj[x].model!=99){ %>
                                         <!--[这里处理剩余时间]-->

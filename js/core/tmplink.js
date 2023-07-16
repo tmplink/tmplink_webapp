@@ -2839,7 +2839,7 @@ class tmplink {
                     $('.userinfo_sd').show();
                 }
                 $('.userinfo').show();
-                $('.userinfo_nickname').html(`${this.room.ui_nickname} - ${this.room.ui_intro}`);
+                $('.userinfo_nickname').html(`${this.room.ui_nickname}`);
             }
 
 

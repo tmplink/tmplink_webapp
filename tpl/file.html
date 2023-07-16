@@ -80,7 +80,7 @@
                                 <span id="lefttime"></span>
                             </div>
                             <!--[分享者信息]-->
-                            <div class="userinfo" style="display: none;">
+                            <!-- <div class="userinfo" style="display: none;">
                                 <span class="userinfo_sd" style="display: none;">
                                     <iconpark-icon name="user-tie" class="fa-fw"></iconpark-icon>
                                 </span>
@@ -88,13 +88,18 @@
                                     <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
                                 </span>
                                 <span class="userinfo_nickname"></span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 
-                    <div class="text-center">
-                        <span id="download_msg" class="text-green">.</span>
-
+                    <div class="text-right userinfo text-muted" style="display: none;font-size: 14px;">
+                        <span i18n="filepage_publicby_1">.</span> 
+                        <span class="userinfo_sd" style="display: none;"></span>
+                        <span class="userinfo_pro text-azure" style="display: none;">
+                            <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
+                        </span>
+                        <span class="userinfo_nickname"></span> 
+                        <span i18n="filepage_publicby_2">.</span>
                     </div>
 
                     <hr />
@@ -262,8 +267,12 @@
 
 
                         <div class="clearfix"></div>
+
                     </div>
 
+                    <div class="text-center">
+                        <span id="download_msg" class="text-green">.</span>
+                    </div>
 
 
                 </div>

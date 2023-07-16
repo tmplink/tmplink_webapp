@@ -216,6 +216,16 @@
                 <div class="text-center" i18n="page_no_dir">.</div>
             </div>
 
+            <div class="text-center userinfo text-muted mt-3" style="display: none;font-size: 14px;">
+                <span i18n="filepage_publicby_0">.</span> 
+                <span class="userinfo_sd" style="display: none;"></span>
+                <span class="userinfo_pro text-azure" style="display: none;">
+                    <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
+                </span>
+                <span class="userinfo_nickname"></span> 
+                <span i18n="filepage_publicby_2">.</span>
+            </div>
+
             <script type="text/template" id="dir_photolist_tpl">
                 <div class="row" id="room_file_content">
                 <% for (var x in obj) { %>
@@ -274,8 +284,8 @@
                                             </span>
                                             <% if(obj[x].like>0){ %>
                                                 <span class="badge badge-pill badge-primary">
-                                                    <iconpark-icon name="circle-star" class="fa-fw text-yellow"></iconpark-icon>
-                                                    <% obj[x].like %>
+                                                    <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
+                                                    <span class="text-pink"><% obj[x].like %><span>
                                                 </span>
                                             <% } %>
                                         </div>
@@ -314,8 +324,8 @@
                                 </span>
                                 <% if(obj[x].like>0){ %>
                                     <span>
-                                        <iconpark-icon name="circle-star" class="fa-fw text-yellow"></iconpark-icon>
-                                        <% obj[x].like %>
+                                        <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
+                                        <span class="text-pink"><% obj[x].like %><span>
                                     </span>
                                 <% } %>
                             </div>

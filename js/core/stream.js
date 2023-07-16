@@ -149,7 +149,8 @@ class stream {
     }
     
     play(url){
+        //通过新标签页打开
         let player = 'https://ix.ng-ccc.com/go.html?stream=' + btoa(url);
-        window.location.href = player;
+        window.open(player, '_blank');
     }
 }
