@@ -1392,7 +1392,7 @@ class tmplink {
                 }
 
                 //file unavailable
-                $('#file_messenger_icon').html('<iconpark-icon name="folder-xmark" class="fa-fw fa-4x></iconpark-icon>');
+                $('#file_messenger_icon').html('<iconpark-icon name="folder-xmark" class="fa-fw fa-4x"></iconpark-icon>');
                 $('#file_messenger_msg').html(app.languageData.file_unavailable);
                 $('#file_messenger').show();
                 this.ga(`Unavailable-[${params.ukey}]`);
@@ -2713,7 +2713,7 @@ class tmplink {
                 this.room.top = 0;
                 this.room.ownner = 0;
                 this.room.mr_id = 0;
-                $('#file_messenger_icon').html('<iconpark-icon name="folder-xmark" class="fa-fw fa-4x></iconpark-icon>');
+                $('#file_messenger_icon').html('<iconpark-icon name="folder-xmark" class="fa-fw fa-4x"></iconpark-icon>');
                 $('#file_messenger_msg').html(app.languageData.room_status_fail);
                 $('#file_messenger').show();
                 $('#room_loaded').html('');
@@ -2727,7 +2727,7 @@ class tmplink {
                 this.room.top = 0;
                 this.room.ownner = 0;
                 this.room.mr_id = 0;
-                $('#file_messenger_icon').html('<iconpark-icon name="folder-xmark" class="fa-fw fa-4x></iconpark-icon>');
+                $('#file_messenger_icon').html('<iconpark-icon name="folder-xmark" class="fa-fw fa-4x"></iconpark-icon>');
                 $('#file_messenger_msg').html(app.languageData.room_status_fail);
                 $('#file_messenger').show();
                 $('#room_loaded').html('');
@@ -2738,7 +2738,7 @@ class tmplink {
 
             //room need to login
             if (rsp.status === 3) {
-                $('#file_messenger_icon').html('<iconpark-icon name="user-robot" class="fa-fw fa-7x></iconpark-icon>');
+                $('#file_messenger_icon').html('<iconpark-icon name="user-robot" class="fa-fw fa-7x"></iconpark-icon>');
                 $('#file_messenger_msg').html(app.languageData.status_need_login);
                 $('#file_messenger_msg_login').show();
                 $('#file_messenger').show();
