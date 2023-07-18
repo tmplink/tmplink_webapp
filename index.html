@@ -39,6 +39,11 @@
             }
         }
 
+        // 检查，如果域名开头不是 www. 跳转到 www. 127.0.0.1 时跳过
+        if (window.location.host.indexOf('www.') != 0 && window.location.host !== '127.0.0.1') {
+            window.location.href = 'https://www.' + window.location.host + window.location.pathname + window.location.search;
+        }
+        
     </script>
 
     <script type="text/javascript" src="./tmpui.js"></script>
