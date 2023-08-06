@@ -2576,6 +2576,8 @@ class tmplink {
             action: 'delete',
             token: this.api_token,
             mr_id: mrid
+        }, () => {
+            this.room_list();
         });
     }
 

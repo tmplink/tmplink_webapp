@@ -410,9 +410,9 @@ class uploader {
             }, (rsp) => {
                 if (rsp.status == 1) {
                     //文件小于 32 MB，直接上传
-                    console.log('upload::slice::' + file.name);
+                    console.log('upload::slice::' + filename);
                     let api_sync = rsp.data.uploader + '/app/upload_slice';
-                    this.worker_slice(api_sync, rsp.data.utoken, sha1, file, id);
+                    this.worker_slice(api_sync, rsp.data.utoken, sha1, file, id, filename);
                 } else {
                     //无法获得可用的上传服务器
                     this.parent_op.alert('上传失败，无法获得可用的服务器。');
@@ -427,7 +427,7 @@ class uploader {
      * @param {*} id 
      * @param {*} filename 
      */
-    worker_slice(server, utoken, sha1, file, id) {
+    worker_slice(server, utoken, sha1, file, id, filename) {
         
         //创建分片任务的ID，算法 uid+文件路径+文件大小 的 sha1 值
         let uptoken = CryptoJS.SHA1(this.parent_op.uid + file.name + file.size).toString();
@@ -436,7 +436,7 @@ class uploader {
         $.post(server, {
             'token': this.parent_op.api_token,'uptoken': uptoken,
             'action': 'prepare',
-            'sha1': sha1, 'filename': file.name, 'filesize': file.size, 'slice_size': this.slice_size,
+            'sha1': sha1, 'filename': filename, 'filesize': file.size, 'slice_size': this.slice_size,
             'utoken': utoken, 'mr_id': this.upload_mrid_get(), 'model': this.upload_model_get()
         }, (rsp) => {
             switch (rsp.status) {
@@ -672,7 +672,7 @@ class uploader {
             }
         }
         //清空文件选择框
-        dom.value = '';
+        // dom.value = '';
     }
 
 
@@ -699,6 +699,7 @@ class uploader {
     upload_queue_add(f) {
         setTimeout(() => {
             let file = f.file;
+            console.log(file);
 
             //添加一些额外参数
             f.model = this.upload_model_get();
