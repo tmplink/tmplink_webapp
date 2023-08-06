@@ -473,14 +473,14 @@ class uploader {
                 case 2:
                     //没有可上传分片，等待所有分片完成
                     setTimeout(() => {
-                        this.worker_slice(server, utoken, sha1, file, id);
+                        this.worker_slice(server, utoken, sha1, file, id,filename);
                     }, 10000);
                     break;
                 case 3:
                     //获得一个需要上传的分片编号,开始处理上传
-                    this.worker_slice_uploader(server, id, uptoken, file, rsp.data, () => {
+                    this.worker_slice_uploader(server, id, uptoken, file, rsp.data,filename, () => {
                         //回归
-                        this.worker_slice(server, utoken, sha1, file, id);
+                        this.worker_slice(server, utoken, sha1, file, id,filename);
                     });
                     break;
                 case 7:
@@ -502,7 +502,7 @@ class uploader {
     /**
      * 分片上传
      */
-    worker_slice_uploader(server, id, uptoken, file, slice_status, cb) {
+    worker_slice_uploader(server, id, uptoken, file, slice_status,filename, cb) {
         //初始化上传任务
         this.upload_slice_chunk_loaded[id] = 0;
         this.upload_slice_chunk_time[id] = new Date().getTime();
@@ -519,6 +519,7 @@ class uploader {
         let fd = new FormData();
         fd.append("filedata", blob, 'slice');
         fd.append("uptoken", uptoken);
+        fd.append("filename", filename);
         fd.append("index", index);
         fd.append("action", 'upload_slice');
         fd.append("slice_size", this.slice_size);
