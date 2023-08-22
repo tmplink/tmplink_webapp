@@ -8,7 +8,7 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-.grecaptcha-badge { 
+.grecaptcha-badge {
   visibility: hidden;
 }
 
@@ -457,7 +457,15 @@ h6 {
 
 #hero .hero-img {
   max-width: 60%;
+  max-height: 60%;
   margin-top: 40px;
+}
+
+/* 当宽度小于 780 时，transform 倍数为 0.8 */
+@media (max-height: 780px) {
+  #hero {
+    transform: scale(0.8);
+  }
 }
 
 @media (max-width: 992px) {
