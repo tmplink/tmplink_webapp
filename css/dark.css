@@ -73,6 +73,10 @@
         color: #fff !important;
     }
 
+    body {
+        background-color: #3e3e3e !important;
+    }
+
     #hero {
         background-color: #3e3e3e !important;
         border-bottom: 2px solid #3e3e3e !important;
@@ -85,6 +89,10 @@
     #footer {
         color: #fff;
         /* background-color: #3e3e3e !important; */
+    }
+
+    .footer-spe{
+        background-color: #3e3e3e !important;
     }
 
     #footer .list-inline-item a{
