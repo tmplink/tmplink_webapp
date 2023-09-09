@@ -462,7 +462,7 @@ h6 {
 }
 
 /* 当宽度小于 780 时，transform 倍数为 0.8 */
-@media (max-height: 780px) {
+@media (max-height: 800px) {
   #hero {
     transform: scale(0.8);
   }
