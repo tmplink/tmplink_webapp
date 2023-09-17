@@ -500,6 +500,7 @@
     "model_buy_select_cny_des": "使用人民幣付款",
     "model_buy_select_usd_title": "PayPal",
     "model_buy_select_usd_des": "使用當地貨幣付款",
+    "model_buy_nums": "數量",
     "model_buy_select_service_storage": "擴展私有空間",
     "model_buy_select_service_storage_des": "存儲長期存放的檔案",
     "model_buy_btn": "付款",

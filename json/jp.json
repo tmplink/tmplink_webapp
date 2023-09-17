@@ -342,6 +342,7 @@
     "model_buy_select_cny_des": "人民元で支払う",
     "model_buy_select_usd_title": "PayPal",
     "model_buy_select_usd_des": "現地通貨で支払う",
+    "model_buy_nums": "数量",
     "model_buy_btn": "支払い",
     "total_units_of_file": "ファイル",
     "total_units_of_dirs": "フォルダ",

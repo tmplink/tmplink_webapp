@@ -344,6 +344,7 @@
     "model_buy_select_cny_des": "Pay with CNY",
     "model_buy_select_usd_title": "PayPal",
     "model_buy_select_usd_des": "Pay with local currency",
+    "model_buy_nums": "Quantity",
     "model_buy_btn": "Payment",
     "total_units_of_file": "Files",
     "total_units_of_dirs": "Folders",

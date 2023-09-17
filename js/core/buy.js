@@ -18,6 +18,7 @@ class buy {
     openQuato(){
         this.selected_times = 1;
         this.selected_type = 'direct';
+        this.selectNums();
         this.selectPayment('cny');
         this.selectCode('#buy_direct_quota_1','D20',6);
         $('#shopModal').modal('hide');
@@ -81,6 +82,18 @@ class buy {
             });
         }
         this.computePrice();
+    }
+
+    selectNums(){
+        let nums = document.querySelector('#buy_direct_quota_nums').value;
+        nums = parseInt(nums);
+        if(nums>0){
+            this.selected_times = nums;
+            this.computePrice();
+        }else{
+            this.selected_times = 1;
+            this.computePrice();
+        }
     }
 
     selectPayment(payment){

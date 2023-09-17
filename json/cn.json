@@ -321,6 +321,7 @@
     "highspeed_price_cny1": "￥6 / 一个月",
     "highspeed_price_usd1": "$1 / 一个月",
     "highspeed_times": "购买时长",
+    "model_buy_nums": "购买数量",
     "highspeed_type": "价格",
     "highspeed_buy_alipay": "使用支付宝购买",
     "payment_total": "总计",
