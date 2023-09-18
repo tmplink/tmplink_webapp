@@ -354,7 +354,7 @@ class direct {
         }, (rsp) => {
             if (rsp.status == 1) {
                 this.dir_btn_status = true;
-                this.dir_link = `${this.protocol}${this.domain}/dir/${rsp.data}`;
+                this.dir_link = `${this.protocol}${this.domain}/share/${rsp.data}/`;
                 this.dir_key = rsp.data;
                 //操作按钮
                 this.dirRoomPfBtnUpdate();
@@ -393,7 +393,7 @@ class direct {
                 } else {
                     this.dir_btn_status = true;
                     this.dir_key = rsp.data;
-                    this.dir_link = `${this.protocol}${this.domain}/dir/${rsp.data}`;
+                    this.dir_link = `${this.protocol}${this.domain}/share/${rsp.data}/`;
                 }
                 //操作按钮
                 this.dirRoomPfBtnUpdate();
