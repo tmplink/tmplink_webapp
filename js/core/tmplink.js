@@ -50,13 +50,10 @@ class tmplink {
     upload_model_selected_val = 0
     download_retry = 0
     download_retry_max = 10
-    recaptcha_op = false
-    recaptcha = '0x4AAAAAAAC2gV-9041iXKUJ'
+    recaptcha_op = true
+    recaptcha = '6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5'
     recaptcha_actions = [
-        "token",
-        "download_req", "upload_request_select2",
-        "login", "checkcode_send",
-        "stream_req", "upload_direct", "upload_slice"
+        "token", "download_req", "stream_req",
     ]
 
     bulkCopyStatus = false
@@ -115,37 +112,34 @@ class tmplink {
         this.upload_model_selected_val = localStorage.getItem('app_upload_model') === null ? 0 : localStorage.getItem('app_upload_model');
 
         let token = localStorage.getItem('app_token');
-        this.recaptcha_do('token_check', (captcha) => {
-            $.post(this.api_tokx, {
-                action: 'token_check',
-                captcha: captcha,
-                token: token
-            }, (rsp) => {
+        $.post(this.api_tokx, {
+            action: 'token_check',
+            token: token
+        }, (rsp) => {
 
-                if (rsp.status == 3) {
-                    let html = app.tpl('initFail', {});
-                    $('#tmpui_body').html(html);
-                    app.languageBuild();
-                    return false;
-                }
+            if (rsp.status == 3) {
+                let html = app.tpl('initFail', {});
+                $('#tmpui_body').html(html);
+                app.languageBuild();
+                return false;
+            }
 
-                if (rsp.status != 1) {
-                    this.recaptcha_do('token', (captcha) => {
-                        $.post(this.api_tokx, {
-                            action: 'token',
-                            captcha: captcha,
-                            token: token
-                        }, (rsp) => {
-                            this.api_token = rsp.data;
-                            localStorage.setItem('app_token', rsp.data);
-                            this.details_init();
-                        });
+            if (rsp.status != 1) {
+                this.recaptcha_do('token', (captcha) => {
+                    $.post(this.api_tokx, {
+                        action: 'token',
+                        captcha: captcha,
+                        token: token
+                    }, (rsp) => {
+                        this.api_token = rsp.data;
+                        localStorage.setItem('app_token', rsp.data);
+                        this.details_init();
                     });
-                } else {
-                    this.api_token = token;
-                    this.details_init();
-                }
-            });
+                });
+            } else {
+                this.api_token = token;
+                this.details_init();
+            }
         });
 
         $(document).on({
@@ -294,10 +288,10 @@ class tmplink {
         let imgSrcLight = '';
         let imgSrcDark = '';
 
-        if(night){
-            $('#background_wrap').css('background-color','#6a6868');
-        }else{
-            $('#background_wrap').css('background-color','#ffffff');
+        if (night) {
+            $('#background_wrap').css('background-color', '#6a6868');
+        } else {
+            $('#background_wrap').css('background-color', '#ffffff');
         }
 
         if (this.mybg_dark !== 0) {
@@ -828,7 +822,7 @@ class tmplink {
         }, (rsp) => {
             if (animated === false) {
                 return false;
-            } 
+            }
         }, 'json');
     }
 
@@ -1131,7 +1125,7 @@ class tmplink {
 
                     //更换图标
                     let icon = this.fileicon(rsp.data.type);
-                    $('#file-icon').attr('name',icon);
+                    $('#file-icon').attr('name', icon);
 
                     //更新title
                     document.title = rsp.data.name;
@@ -1230,7 +1224,7 @@ class tmplink {
                                 }, 3000);
                                 return true;
                             });
-                            
+
                             // 移动设备上的按钮反馈
                             $('#file_download_url').on('click', () => {
                                 //添加按钮按下反馈
@@ -2977,10 +2971,10 @@ class tmplink {
                             this.storage_status_update();
                             //如果有设置 return_page，则跳转到 return_page
                             let return_page = localStorage.getItem('return_page');
-                            if(return_page!=='0'){
+                            if (return_page !== '0') {
                                 location.href = return_page;
                                 localStorage.setItem('return_page', 0);
-                            }else{
+                            } else {
                                 dynamicView.workspace();
                             }
                         });
