@@ -147,7 +147,7 @@
 
 /* css 实现降下效果的动画效果 */
 .nav-top-slidedown{
-  animation: nav-top-slidedown 0.5s ease-in-out;
+  animation: nav-top-slidedown 0.2s ease-in-out;
 }
 
 .topnav-iphone{

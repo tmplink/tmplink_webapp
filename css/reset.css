@@ -20363,7 +20363,7 @@ svg {
 }
 
 .nav-bottom-slideup{
-  animation: nav-bottom-slideup 0.5s ease-in-out;
+  animation: nav-bottom-slideup 0.2s ease-in-out;
 }
 
 @keyframes nav-bottom-slideup {
@@ -20379,7 +20379,7 @@ svg {
   * 实现淡入的动画效果
   */
 .anime-fadein{
-  animation: anime-fadein 0.7s ease-in-out;
+  animation: anime-fadein 0.1s ease-in-out;
 }
 
 @keyframes anime-fadein {
