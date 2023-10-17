@@ -1071,7 +1071,8 @@ class tmplink {
             $('#wechat_notice').show();
         }
 
-        this.loading_box_on();
+        // this.loading_box_on();
+
         // opacityShow('#download_msg');
         var params = get_url_params();
         var fileinfo = null;
@@ -1081,6 +1082,10 @@ class tmplink {
                 ukey: params.ukey,
                 token: this.api_token
             }, (rsp) => {
+
+                //更新 Logo
+                $('#top_loggo').attr('src', '/img/ico/logo-new.svg');
+
                 if (rsp.status === 1) {
                     //隐藏信息提示窗口
                     $('#file_messenger').hide();

@@ -9,7 +9,7 @@
     <div class="align-self-center w-100">
         <div class="text-center mb-6">
             <a href="/">
-                <img src="/img/ico/logo-new.svg" alt="tmp.link" style="width: 64px;">
+                <img id="top_loggo" src="/img/loading.svg" alt="tmp.link" style="width: 64px;">
             </a>
             <span class="userinfo_avatar ml-3" style="display: none;">
                 <img src="/img/loading.svg" class="img-circle userinfo_avatar_img" alt="User Image"
@@ -101,6 +101,10 @@
                         <span class="userinfo_nickname"></span> 
                         <span i18n="filepage_publicby_2">.</span>
                     </div>
+                    <div class="d-none d-sm-flex">
+                        <!-- 下载按钮 -->
+                        <button type="button" class="btn btn-lg btn-success mx-auto mt-5 mb-2" style="min-width: 400px;" id="file_download_btn" i18n="file_btn_download">.</button>
+                    </div>
 
                     <hr />
 
@@ -172,21 +176,14 @@
 
                         <!--[适用于桌面设备]-->
                         <div class="row d-none d-sm-flex">
-
                             <div class="col-md-4 col-6 text-center mb-4">
                                 <div class="fileicon mx-auto mb-1">
                                     <iconpark-icon name="laptop-arrow-down" class="fa-fw mx-auto fa-3x my-auto mb-2 text-cyan"></iconpark-icon>
                                 </div>
                                 <div>
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-outline-success" id="file_download_btn"
-                                            i18n="file_btn_download">.</button>
-                                        <button type="button"
-                                            class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
-                                            id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false" data-reference="parent">
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                        </button>
+                                        <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                            i18n="file_btn_download_opt">.</button>
                                         <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuReference">
                                             <button class="dropdown-item btn_copy btn_copy_downloadurl_for_other">
                                                 <iconpark-icon name="rectangle-terminal" class="fa-fw"></iconpark-icon>
