@@ -1,3 +1,4 @@
+setThemeColor();
 app.ready(
     () => {
         let lang = app.languageSetting;
@@ -80,3 +81,22 @@ function showBtn(){
     document.querySelector('#index_start').innerHTML = `<a href="javascript:;" class="btn-get-started scrollto" onclick="Login()">${app.languageData.i2023_new_index_getting_start}</a>`;
 }
 
+// 如果是夜间模式，修改主题色为黑色
+function setThemeColor() {
+    if (matchNightModel()) {
+        let tc = document.querySelector('meta[name="theme-color"]');
+        if (tc !== null) {
+            tc.setAttribute('content', '#000');
+        }
+    } else {
+        let tc = document.querySelector('meta[name="theme-color"]');
+        if (tc !== null) {
+            tc.setAttribute('content', '#fff');
+        }
+    }
+}
+
+function matchNightModel() {
+    let media = window.matchMedia('(prefers-color-scheme: dark)');
+    return media.matches;
+}
