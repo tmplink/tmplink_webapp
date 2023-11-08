@@ -14,6 +14,7 @@ class tmplink {
     api_tokx = this.api_url + '/token'
     api_token = null
     site_domain = null
+    isSponsor = false
 
     pageReady = false
     readyFunction = []
@@ -209,6 +210,11 @@ class tmplink {
             $('.logo').attr('src', '/img/logo/logo2.svg');
             $('#head_logo').html('ttttt.link');
         }
+    }
+
+    setBtnForSponsor() {
+        $('.btn-upload').removeClass('btn-primary');
+        $('.btn-upload').addClass('btn-red');
     }
 
     setArea(cb) {
@@ -418,6 +424,11 @@ class tmplink {
             this.storage_status_update();
             this.head_set();
             this.bg_load();
+            //如果是赞助者，激活特定按钮的颜色
+            if (this.sponsor) {
+                this.isSponsor = true;
+                this.setBtnForSponsor();
+            }
             //初始化直链
             this.direct.init_details(() => {
                 this.readyExec();
@@ -2879,6 +2890,11 @@ class tmplink {
 
             $('#room_loading').hide();
             $('#room_loaded').show();
+            
+            //如果用户是赞助者
+            if (this.isSponsor == true) {
+                this.setBtnForSponsor();
+            }
             //重新设定网页标题
             document.title = rsp.data.name;
             app.linkRebind();
