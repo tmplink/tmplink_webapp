@@ -1,49 +1,114 @@
 <div id="filelist" class="card mt-5 shadow" style="display: none;">
-    <div class="card-header pt-3">
-        <div class="mt-3 mb-2 text-center mx-auto">
-            <span id="direct_branded_logo"><iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon></span>
-            <div class="lead mt-4">
-                <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
-                    <iconpark-icon name="link" class="fa-fw"></iconpark-icon>
-                    <span id="direct_bind_domain_box">
-                        <a href="#" target="_blank" id="direct_bind_domain">#</a>
+    <div class="row p-5">
+        <div class="col-3">
+            <div class="mx-auto">
+                <div class="text-center" onmouseenter="$('.btn-set-brand').css('opacity',1);" onmouseleave="$('.btn-set-brand').css('opacity',0);">
+                    <div>
+                        <span id="direct_branded_logo">
+                            <iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon>
+                        </span>
+                    </div>
+                    <div class="btn-set-brand" style="opacity: 0;">
+                        <span class="btn btn-sm btn-light text-azure mt-1 btn-point"
+                        onclick="$('#brandModal').modal('show');">
+                            <span i18n="modal_settings_submit">.</span>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="mt-2">
+                    <div onmouseenter="$(this).children('.btn').css('opacity',1);" onmouseleave="$(this).children('.btn').css('opacity',0);">
+                        <iconpark-icon name="link" class="fa-fw"></iconpark-icon>
+                        <span id="direct_bind_domain_box">
+                            <a href="#" target="_blank" id="direct_bind_domain">#</a>
+                        </span>
+                        <span class="btn btn-sm btn-light text-azure btn-point" onclick="TL.direct.openDomainEditor();" style="opacity: 0;">
+                            <span i18n="modal_settings_submit">.</span>
+                        </span>
+                    </div>
+                    <div onmouseenter="$(this).children('.btn').css('opacity',1);" onmouseleave="$(this).children('.btn').css('opacity',0);">
+                        <iconpark-icon name="shield-halved" class="fa-fw"></iconpark-icon>
+                        <span id="direct_bind_ssl"></span>
+
+                        <span class="btn btn-sm btn-light text-azure btn-point" onclick="$('#directSSLModal').modal('show');"  style="opacity: 0;">
+                            <span i18n="modal_settings_submit">.</span>
+                        </span>
+                    </div>
+                    <div onmouseenter="$(this).children('.btn').css('opacity',1);" onmouseleave="$(this).children('.btn').css('opacity',0);">
+                        <iconpark-icon name="block-brick-fire" class="fa-fw"></iconpark-icon>
+                        <span id="direct_set_traffic_limit_title"></span>
+
+                        <span class="btn btn-sm btn-light text-azure btn-point" onclick="$('#limitTrafficModal').modal('show');"  style="opacity: 0;">
+                            <span i18n="modal_settings_submit">.</span>
+                        </span>
+                    </div>
+
+                    <div onmouseenter="$(this).children('.btn').css('opacity',1);" onmouseleave="$(this).children('.btn').css('opacity',0);">
+                        <iconpark-icon name="battery-three-quarters" class="fa-fw"></iconpark-icon>
+                        <span i18n="direct_total_transfer">.</span>
+                        <span id="direct_total_transfer">0</span>
+                        
+                        <span class="btn btn-sm btn-light text-azure btn-point" onclick="TL.buy.openQuato();"  style="opacity: 0;">
+                            <span i18n="direct_btn_buy_quota">.</span>
+                        </span>
+                    </div>
+
+                </div>
+                <!-- <div class="lead mt-4">
+                    <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
+                        <iconpark-icon name="link" class="fa-fw"></iconpark-icon>
+                        <span id="direct_bind_domain_box">
+                            <a href="#" target="_blank" id="direct_bind_domain">#</a>
+                        </span>
                     </span>
-                </span>
-                <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
-                    onclick="$('#directSSLModal').modal('show');">
-                    <iconpark-icon name="shield-halved" class="fa-fw"></iconpark-icon>
-                    <span id="direct_bind_ssl"></span>
-                </span>
-                <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
-                    onclick="$('#brandModal').modal('show');">
-                    <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
-                    <span i18n="brand_modal_title">.</span>
-                </span>
-                <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
-                    onclick="$('#limitTrafficModal').modal('show');">
-                    <iconpark-icon name="block-brick-fire" class="fa-fw"></iconpark-icon>
-                    <span id="direct_set_traffic_limit_title"></span>
-                </span>
+                    <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
+                        onclick="$('#directSSLModal').modal('show');">
+                        <iconpark-icon name="shield-halved" class="fa-fw"></iconpark-icon>
+                        <span id="direct_bind_ssl"></span>
+                    </span>
+                    <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
+                        onclick="$('#brandModal').modal('show');">
+                        <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
+                        <span i18n="brand_modal_title">.</span>
+                    </span>
+                    <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
+                        onclick="$('#limitTrafficModal').modal('show');">
+                        <iconpark-icon name="block-brick-fire" class="fa-fw"></iconpark-icon>
+                        <span id="direct_set_traffic_limit_title"></span>
+                    </span>
+                </div> -->
+                <!-- <div class="lead mt-2">
+                    <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
+                        <iconpark-icon name="battery-three-quarters" class="fa-fw"></iconpark-icon>
+                        <span i18n="direct_quota">.</span>
+                        <span id="direct_quota">0</span>
+                    </span>
+                    <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
+                        <iconpark-icon name="download" class="fa-fw"></iconpark-icon>
+                        <span i18n="direct_total_downloads">.</span>
+                        <span id="direct_total_downloads">0</span>
+                    </span>
+                    <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
+                        <iconpark-icon name="arrow-up-arrow-down" class="fa-fw"></iconpark-icon>
+                        <span i18n="direct_total_transfer">.</span>
+                        <span id="direct_total_transfer">0</span>
+                    </span>
+                </div> -->
             </div>
-            <div class="lead mt-2">
-                <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
-                    <iconpark-icon name="battery-three-quarters" class="fa-fw"></iconpark-icon>
-                    <span i18n="direct_quota">.</span>
-                    <span id="direct_quota">0</span>
-                </span>
-                <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
-                    <iconpark-icon name="download" class="fa-fw"></iconpark-icon>
-                    <span i18n="direct_total_downloads">.</span>
-                    <span id="direct_total_downloads">0</span>
-                </span>
-                <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
-                    <iconpark-icon name="arrow-up-arrow-down" class="fa-fw"></iconpark-icon>
-                    <span i18n="direct_total_transfer">.</span>
-                    <span id="direct_total_transfer">0</span>
-                </span>
+        </div>
+        <div class="col-9">
+            <div id="x2_chart_usage" style="max-width: 100%;"></div>
+            <div style="text-align: center">
+                <button  onclick="TL.direct.refreshUsage(2, '24小时');"
+                    class="btn btn-sm btn-radius btn-outline-info">24小时</button>
+                <button  onclick="TL.direct.refreshUsage(3, '一周');"
+                    class="btn btn-sm btn-radius btn-outline-info">过去一周</button>
+                <button  onclick="TL.direct.refreshUsage(4, '最近30天');"
+                    class="btn btn-sm btn-radius btn-outline-info">最近30天</button>
             </div>
         </div>
     </div>
+    <hr>
     <div id="filelist_model" class="card-body">
 
         <div class="p-3">
@@ -66,14 +131,14 @@
                 <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.direct.filelist(0);">
                     <iconpark-icon name="rotate" class="fa-fw" id="filelist_refresh_icon"></iconpark-icon>
                 </button>
-                <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.openDomainEditor();">
+                <!-- <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.openDomainEditor();">
                     <iconpark-icon name="signal-stream" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_btn_bind_domain" class="d-none d-sm-inline">.</span>
                 </button>
                 <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.buy.openQuato();">
                     <iconpark-icon name="battery-bolt" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_btn_buy_quota" class="d-none d-sm-inline">.</span>
-                </button>
+                </button> -->
                 <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.getFreeQuotaOfSponsor();">
                     <iconpark-icon name="battery-bolt" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_btn_free_quota" class="d-none d-sm-inline">.</span>

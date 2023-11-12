@@ -54,7 +54,7 @@
     <script type="text/javascript" src="./tmpui.js"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 1182,
+            "version": 1183,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "loadingText": "TMP.LINK",
@@ -74,6 +74,8 @@
 
             "preload": {
                 "init": {
+                    "/plugin/apexcharts/dist/apexcharts.min.js": { "type": "js", "reload": false },
+
                     "/js/tools/jquery.min.js": { "type": "js", "reload": false },
                     "/js/tools/clipboard.min.js": { "type": "js", "reload": false },
                     "/js/tools/jquery.cookie.js": { "type": "js", "reload": false },

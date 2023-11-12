@@ -9,6 +9,7 @@ class direct {
     allow_ext = ['mp4', 'm4v', 'webm', 'mov', 'ogg', 'mp3']
     set = false
     ssl = false
+    traffic_chart = null
 
     sort_by = 0
     sort_type = 0
@@ -33,10 +34,13 @@ class direct {
         let url = get_url_params('tmpui_page');
         let page = url.tmpui_page;
         let listview = url.listview;
-        if (page !== '/app'&&(listview==='direct'||listview==='room')) {
+        if (page !== '/app' && (listview === 'direct' || listview === 'room')) {
             cb();
             return false;
         }
+
+        //更新下载统计图
+        this.refreshUsage(2, '24小时');
 
         $.post(this.parent_op.api_direct, {
             'action': 'details',
@@ -57,7 +61,7 @@ class direct {
                 $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
             }
             //如果有设定限制单个 IP 的日流量
-            if (this.traffic_limit>0) {
+            if (this.traffic_limit > 0) {
                 $('#direct_traffic_limit').val(this.traffic_limit);
                 $('#direct_set_traffic_limit_title').html(app.languageData.direct_traffic_limit);
             } else {
@@ -75,7 +79,7 @@ class direct {
             //如果有设定品牌
             if (rsp.data.brand_logo_id !== '0') {
                 let img_size = '64px';
-                if(isMobileScreen()){
+                if (isMobileScreen()) {
                     img_size = '26px';
                 }
                 $('#brand_saved_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:64px;border-radius: 12px;" />`);
@@ -89,7 +93,7 @@ class direct {
             }
             this.brandStatus(rsp.data.brand_status);
 
-            if (page === '/app'&& listview==='direct') {
+            if (page === '/app' && listview === 'direct') {
                 this.ininOnDirectPage();
             }
 
@@ -99,7 +103,7 @@ class direct {
         }, 'json');
     }
 
-    setTrafficLimit(){
+    setTrafficLimit() {
         $('#box_set_traffic_limit').show();
         let val = $('#direct_traffic_limit').val();
         $.post(this.parent_op.api_direct, {
@@ -107,18 +111,18 @@ class direct {
             'token': this.parent_op.api_token,
             'val': val
         }, () => {
-            if(val>0){
+            if (val > 0) {
                 $('#direct_set_traffic_limit_title').html(app.languageData.direct_traffic_limit);
-            }else{
+            } else {
                 $('#direct_set_traffic_limit_title').html(app.languageData.direct_traffic_unlimit);
             }
             setTimeout(() => {
-            $('#box_set_traffic_limit').hide();
+                $('#box_set_traffic_limit').hide();
             }, 1000);
         });
     }
 
-    ininOnDirectPage(){
+    ininOnDirectPage() {
         //检查域名是否正确指向到 dicrect.tmp.link
         $.post(this.parent_op.api_direct, {
             'action': 'check_domain',
@@ -130,7 +134,7 @@ class direct {
         }, 'json');
 
         //检查剩余的流量配额是否少于 5GB
-        if (this.quota < (1024*1024*1024*5)) {
+        if (this.quota < (1024 * 1024 * 1024 * 5)) {
             $('#direct_notice_usage').show();
         }
     }
@@ -367,10 +371,10 @@ class direct {
         }, 'json');
     }
 
-    genLinkDirectForRoom(direct_id,file_name){
+    genLinkDirectForRoom(direct_id, file_name) {
         let link = `${this.protocol}${this.domain}/dir-download/${this.dir_key}/${direct_id}/${file_name}`;
         //添加到剪贴板
-        this.parent_op.bulkCopy(null,link,false);
+        this.parent_op.bulkCopy(null, link, false);
     }
 
     dirToggle() {
@@ -426,7 +430,7 @@ class direct {
         if (this.dir_btn_status) {
             $('.btn_for_copy_in_dir').show();
             $('.btn_for_gen_link').hide();
-        }else{
+        } else {
             $('.btn_for_copy_in_dir').hide();
             $('.btn_for_gen_link').show();
         }
@@ -611,30 +615,30 @@ class direct {
 
                 $('#diredirect_bind_notice').html('');
                 //window.location.reload();
-            }else{
-                
+            } else {
+
             }
             this.loading_box_off();
         }), 'json';
     }
 
-    selectBingDomainText(number){
+    selectBingDomainText(number) {
         console.log(number);
         let msg = '';
         switch (number) {
             case 1:
-                msg =  app.languageData.direct_intro_modal_msg_1;
+                msg = app.languageData.direct_intro_modal_msg_1;
                 break;
             case 2:
-                msg =  app.languageData.direct_intro_modal_msg_2;
+                msg = app.languageData.direct_intro_modal_msg_2;
                 break;
             case 4:
-                msg =  app.languageData.direct_intro_modal_msg_3;
+                msg = app.languageData.direct_intro_modal_msg_3;
                 break;
             case 3:
-                msg =  app.languageData.direct_intro_modal_msg_4;
+                msg = app.languageData.direct_intro_modal_msg_4;
                 break;
-        }       
+        }
         return msg;
     }
 
@@ -700,10 +704,10 @@ class direct {
     /**
      * 设置品牌名称和描述
      */
-    brandSet(){
+    brandSet() {
         let brandTitle = $('#brand_name_input').val();
         let brandContent = $('#brand_content_input').val();
-        if(brandTitle == ''||brandContent == ''){
+        if (brandTitle == '' || brandContent == '') {
             alert(app.languageData.direct_brand_name_empty);
             return false;
         }
@@ -722,7 +726,7 @@ class direct {
         }, 'json');
     }
 
-    brandReview(){
+    brandReview() {
         $.post(this.parent_op.api_direct, {
             'action': 'brand_review',
             'token': this.parent_op.api_token
@@ -739,18 +743,109 @@ class direct {
     brandStatus(status) {
         switch (status) {
             case 'ok':
-                $('#brand_status').html('<iconpark-icon name="circle-check" class="fa-fw text-green mr-1"></iconpark-icon>'+app.languageData.brand_status_ok);
+                $('#brand_status').html('<iconpark-icon name="circle-check" class="fa-fw text-green mr-1"></iconpark-icon>' + app.languageData.brand_status_ok);
                 break;
             case 'reject':
-                $('#brand_status').html('<iconpark-icon name="times" class="fa-fw text-red mr-1"></iconpark-icon>'+app.languageData.brand_status_reject);
+                $('#brand_status').html('<iconpark-icon name="times" class="fa-fw text-red mr-1"></iconpark-icon>' + app.languageData.brand_status_reject);
                 break;
             case 'wait':
-                $('#brand_status').html('<iconpark-icon name="timer" class="fa-fw text-blue mr-1"></iconpark-icon>'+app.languageData.brand_status_wait);
+                $('#brand_status').html('<iconpark-icon name="timer" class="fa-fw text-blue mr-1"></iconpark-icon>' + app.languageData.brand_status_wait);
                 break;
             case 'review':
-                $('#brand_status').html('<iconpark-icon name="circle-user" class="fa-fw text-blue mr-1"></iconpark-icon>'+app.languageData.brand_status_review);
+                $('#brand_status').html('<iconpark-icon name="circle-user" class="fa-fw text-blue mr-1"></iconpark-icon>' + app.languageData.brand_status_review);
                 break;
         }
+    }
+
+    refreshUsage(rt) {
+        var post = {
+            token: this.parent_op.api_token,
+            rt: rt,
+            action: 'chart_get_usage'
+        };
+        
+        $.post(this.parent_op.api_direct, post, (rsp) => {
+            var options = {
+                series: [{
+                    name: app.languageData.direct_total_transfer,
+                    data: rsp.data.traffic
+                }],
+                chart: {
+                    height: 200,
+                    type: 'bar',
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 10,
+                        dataLabels: {
+                            position: 'top', // top, center, bottom
+                        },
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function (val) {
+                        return bytetoconver(val,true);
+                    },
+                    offsetY: -20,
+                    style: {
+                        fontSize: '12px',
+                        colors: ["#304758"]
+                    }
+                },
+
+                xaxis: {
+                    categories: rsp.data.time,
+                    position: 'top',
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false
+                    },
+                    crosshairs: {
+                        fill: {
+                            type: 'gradient',
+                            gradient: {
+                                colorFrom: '#D8E3F0',
+                                colorTo: '#BED1E6',
+                                stops: [0, 100],
+                                opacityFrom: 0.4,
+                                opacityTo: 0.5,
+                            }
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                    }
+                },
+                yaxis: {
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false,
+                    },
+                    labels: {
+                        show: false,
+                    }
+
+                },
+                title: {
+                    floating: true,
+                    offsetY: 330,
+                    align: 'center',
+                    style: {
+                        color: '#444'
+                    }
+                }
+            };
+            if(this.traffic_chart!==null){
+                this.traffic_chart.destroy();
+            }
+            this.traffic_chart = new ApexCharts(document.querySelector("#x2_chart_usage"), options);
+            this.traffic_chart.render();
+        }, 'json');
     }
 
     loading_box_on() {
