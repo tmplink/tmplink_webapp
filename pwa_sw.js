@@ -1,5 +1,5 @@
 const allowedDomain = ["tmp.link","ttttt.link","www.tmp.link","www.ttttt.link"];
-const resSet = "1183";
+const resSet = "1185";
 const assets = [
   '/',
 ];

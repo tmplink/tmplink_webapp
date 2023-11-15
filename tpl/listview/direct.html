@@ -2,7 +2,8 @@
     <div class="row p-5">
         <div class="col-3">
             <div class="mx-auto">
-                <div class="text-center" onmouseenter="$('.btn-set-brand').css('opacity',1);" onmouseleave="$('.btn-set-brand').css('opacity',0);">
+                <div class="text-center" onmouseenter="$('.btn-set-brand').css('opacity',1);"
+                    onmouseleave="$('.btn-set-brand').css('opacity',0);">
                     <div>
                         <span id="direct_branded_logo">
                             <iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon>
@@ -10,48 +11,69 @@
                     </div>
                     <div class="btn-set-brand" style="opacity: 0;">
                         <span class="btn btn-sm btn-light text-azure mt-1 btn-point"
-                        onclick="$('#brandModal').modal('show');">
+                            onclick="$('#brandModal').modal('show');">
                             <span i18n="modal_settings_submit">.</span>
                         </span>
                     </div>
                 </div>
-                
+
                 <div class="mt-2">
-                    <div onmouseenter="$(this).children('.btn').css('opacity',1);" onmouseleave="$(this).children('.btn').css('opacity',0);">
+                    <div onmouseenter="$(this).children('.btn').css('opacity',1);"
+                        onmouseleave="$(this).children('.btn').css('opacity',0);">
                         <iconpark-icon name="link" class="fa-fw"></iconpark-icon>
                         <span id="direct_bind_domain_box">
                             <a href="#" target="_blank" id="direct_bind_domain">#</a>
                         </span>
-                        <span class="btn btn-sm btn-light text-azure btn-point" onclick="TL.direct.openDomainEditor();" style="opacity: 0;">
+                        <span class="btn btn-sm btn-light text-azure btn-point" onclick="TL.direct.openDomainEditor();"
+                            style="opacity: 0;">
                             <span i18n="modal_settings_submit">.</span>
                         </span>
                     </div>
-                    <div onmouseenter="$(this).children('.btn').css('opacity',1);" onmouseleave="$(this).children('.btn').css('opacity',0);">
+                    <div onmouseenter="$(this).children('.btn').css('opacity',1);"
+                        onmouseleave="$(this).children('.btn').css('opacity',0);">
                         <iconpark-icon name="shield-halved" class="fa-fw"></iconpark-icon>
                         <span id="direct_bind_ssl"></span>
 
-                        <span class="btn btn-sm btn-light text-azure btn-point" onclick="$('#directSSLModal').modal('show');"  style="opacity: 0;">
+                        <span class="btn btn-sm btn-light text-azure btn-point"
+                            onclick="$('#directSSLModal').modal('show');" style="opacity: 0;">
                             <span i18n="modal_settings_submit">.</span>
                         </span>
                     </div>
-                    <div onmouseenter="$(this).children('.btn').css('opacity',1);" onmouseleave="$(this).children('.btn').css('opacity',0);">
+                    <div onmouseenter="$(this).children('.btn').css('opacity',1);"
+                        onmouseleave="$(this).children('.btn').css('opacity',0);">
                         <iconpark-icon name="block-brick-fire" class="fa-fw"></iconpark-icon>
                         <span id="direct_set_traffic_limit_title"></span>
 
-                        <span class="btn btn-sm btn-light text-azure btn-point" onclick="$('#limitTrafficModal').modal('show');"  style="opacity: 0;">
+                        <span class="btn btn-sm btn-light text-azure btn-point"
+                            onclick="$('#limitTrafficModal').modal('show');" style="opacity: 0;">
                             <span i18n="modal_settings_submit">.</span>
                         </span>
                     </div>
 
-                    <div onmouseenter="$(this).children('.btn').css('opacity',1);" onmouseleave="$(this).children('.btn').css('opacity',0);">
-                        <iconpark-icon name="battery-three-quarters" class="fa-fw"></iconpark-icon>
+                    <div onmouseenter="$(this).children('.btn').css('opacity',1);"
+                        onmouseleave="$(this).children('.btn').css('opacity',0);">
+                        <iconpark-icon name="arrow-up-arrow-down" class="fa-fw"></iconpark-icon>
                         <span i18n="direct_total_transfer">.</span>
                         <span id="direct_total_transfer">0</span>
-                        
-                        <span class="btn btn-sm btn-light text-azure btn-point" onclick="TL.buy.openQuato();"  style="opacity: 0;">
+
+                        <span class="btn btn-sm btn-light text-azure btn-point" onclick="TL.buy.openQuato();"
+                            style="opacity: 0;">
                             <span i18n="direct_btn_buy_quota">.</span>
                         </span>
                     </div>
+
+                    <div onmouseenter="$(this).children('.btn').css('opacity',1);"
+                        onmouseleave="$(this).children('.btn').css('opacity',0);">
+                        <iconpark-icon name="battery-three-quarters" class="fa-fw"></iconpark-icon>
+                        <span i18n="direct_quota">.</span>
+                        <span id="direct_quota">0</span>
+
+                        <span class="btn btn-sm btn-light text-azure btn-point" onclick="TL.buy.openQuato();"
+                            style="opacity: 0;">
+                            <span i18n="direct_btn_buy_quota">.</span>
+                        </span>
+                    </div>
+
 
                 </div>
                 <!-- <div class="lead mt-4">
@@ -97,18 +119,20 @@
             </div>
         </div>
         <div class="col-9">
-            <div id="x2_chart_usage" style="max-width: 100%;"></div>
-            <div style="text-align: center">
-                <button  onclick="TL.direct.refreshUsage(2, '24小时');"
-                    class="btn btn-sm btn-radius btn-outline-info">24小时</button>
-                <button  onclick="TL.direct.refreshUsage(3, '一周');"
-                    class="btn btn-sm btn-radius btn-outline-info">过去一周</button>
-                <button  onclick="TL.direct.refreshUsage(4, '最近30天');"
-                    class="btn btn-sm btn-radius btn-outline-info">最近30天</button>
+            <div>
+                <div id="x2_chart_usage" style="max-width: 100%;"></div>
+                <div style="text-align: center;">
+                    <button onclick="TL.direct.refreshUsage(2, '24小时');"
+                        class="btn btn-sm btn-radius btn-outline-info">24小时</button>
+                    <button onclick="TL.direct.refreshUsage(3, '一周');"
+                        class="btn btn-sm btn-radius btn-outline-info">过去一周</button>
+                    <button onclick="TL.direct.refreshUsage(4, '最近30天');"
+                        class="btn btn-sm btn-radius btn-outline-info">最近30天</button>
+                </div>
             </div>
         </div>
     </div>
-    <hr>
+    <hr class="mt-1">
     <div id="filelist_model" class="card-body">
 
         <div class="p-3">
@@ -308,7 +332,7 @@
     </div>
 </div>
 
-<div class="modal" id="directIntroModal" >
+<div class="modal" id="directIntroModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -370,7 +394,7 @@
     </div>
 </div>
 
-<div class="modal" id="directSSLModal" >
+<div class="modal" id="directSSLModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -409,7 +433,7 @@
 </div>
 
 <!-- brand pages -->
-<div class="modal" id="brandModal" >
+<div class="modal" id="brandModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -443,23 +467,28 @@
                     <div class="input-group">
                         <div class="custom-file">
                             <!--[只接受 jpg 与 png]-->
-                            <input type="file" class="custom-file-input" id="brand_logo_file" accept="image/png, image/jpeg" onchange="TL.direct.brandLogoSet(this)">
-                            <label class="custom-file-label brand_logo_postmsg" for="brand_logo_file" i18n="brand_logo_selector">.</label>
+                            <input type="file" class="custom-file-input" id="brand_logo_file"
+                                accept="image/png, image/jpeg" onchange="TL.direct.brandLogoSet(this)">
+                            <label class="custom-file-label brand_logo_postmsg" for="brand_logo_file"
+                                i18n="brand_logo_selector">.</label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group" id="brand_name">
                     <label for="brand_name" i18n="brand_title">.</label>
                     <span class="ml-2 brand_setting_status"></span>
-                    <input type="text" class="form-control" id="brand_name_input" i18n="brand_title_input" placeholder=".">
+                    <input type="text" class="form-control" id="brand_name_input" i18n="brand_title_input"
+                        placeholder=".">
                 </div>
                 <div class="form-group" id="brand_content">
                     <label for="brand_content" i18n="brand_content">.</label>
                     <span class="ml-2 brand_setting_status"></span>
-                    <input type="text" class="form-control" id="brand_content_input" i18n="brand_content_input" placeholder=".">
+                    <input type="text" class="form-control" id="brand_content_input" i18n="brand_content_input"
+                        placeholder=".">
                 </div>
                 <div class="text-center">
-                    <button type="button" class="btn btn-primary" id="brand_save" i18n="brand_save" onclick="TL.direct.brandSet()">.</button>
+                    <button type="button" class="btn btn-primary" id="brand_save" i18n="brand_save"
+                        onclick="TL.direct.brandSet()">.</button>
                 </div>
                 <hr>
                 <div i18n="brand_review_tos">.</div>
@@ -470,7 +499,8 @@
                 </ul>
                 <p i18n="brand_review_notice">.</p>
                 <div class="text-center">
-                    <button type="button" class="btn btn-primary" id="brand_post" i18n="brand_submit" onclick="TL.direct.brandReview();" i18n="brand_review_submit">.</button>
+                    <button type="button" class="btn btn-primary" id="brand_post" i18n="brand_submit"
+                        onclick="TL.direct.brandReview();" i18n="brand_review_submit">.</button>
                 </div>
             </div>
             <div class="modal-footer">
