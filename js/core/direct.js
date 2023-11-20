@@ -39,9 +39,6 @@ class direct {
             return false;
         }
 
-        //更新下载统计图
-        this.refreshUsage(2, '24小时');
-
         $.post(this.parent_op.api_direct, {
             'action': 'details',
             'token': this.parent_op.api_token
@@ -92,6 +89,8 @@ class direct {
                 $('#brand_saved_content').html(rsp.data.brand_content);
             }
             this.brandStatus(rsp.data.brand_status);
+            //更新下载统计图
+            this.refreshUsage(2, '24小时');
 
             if (page === '/app' && listview === 'direct') {
                 this.ininOnDirectPage();
