@@ -202,7 +202,7 @@ class tmplink {
 
     setDomain() {
         //获取当前域名
-        this.site_domain = window.location.hostname == 'ttttt.link' ? 'ttttt.link' : 'tmp.link';
+        this.site_domain = window.location.hostname == 'www.ttttt.link' ? 'ttttt.link' : 'tmp.link';
         if (this.site_domain === 'tmp.link') {
             $('.logo').attr('src', '/img/logo/2.png');
             $('#head_logo').html('tmp.link');
