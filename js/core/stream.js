@@ -54,10 +54,15 @@ class stream {
             return false;
         }
         
-        if (owner!=this.parent.uid) {
-            if(this.parent.sponsor===false){
-                return false;
-            }
+        // if (owner!=this.parent.uid) {
+        //     if(this.parent.sponsor===false){
+        //         return false;
+        //     }
+        // }
+
+        //is isSponsor
+        if(this.parent.sponsor===false){
+            return false;
         }
         
         if(this.allow_ext.length==0){
