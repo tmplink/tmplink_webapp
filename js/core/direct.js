@@ -382,6 +382,12 @@ class direct {
         this.parent_op.bulkCopy(null, link, false);
     }
 
+    genLinkDirectForRoomV2(file_name) {
+        let link = `${this.protocol}${this.domain}/share/${this.dir_key}/${file_name}`;
+        //添加到剪贴板
+        this.parent_op.bulkCopy(null, link, false);
+    }
+
     dirToggle() {
         let status = $('#pf_allow_direct').is(':checked') ? true : false;
         let post_params = {};

@@ -366,7 +366,7 @@
                                         <!--[检查此目录是否是直链目录]-->
                                         <% if(TL.room.owner == 1 && TL.direct.is_allow()){ %>
                                             <% if(TL.direct.dir_btn_status===true){ %>
-                                                <button onclick="TL.direct.genLinkDirectForRoom('<% obj[x].direct_id %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item">
+                                                <button onclick="TL.direct.genLinkDirectForRoomV2('<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item">
                                                     <iconpark-icon name="link" class="fa-fw"></iconpark-icon>
                                                     <span i18n="menu_addlink"><% app.languageData.menu_addlink %></span>
                                                 </button>

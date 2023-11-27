@@ -401,7 +401,7 @@
                                 </button>
                                 <% if(TL.room.model=='public'){ %>
                                     <% if(TL.room.owner == 1&&TL.direct.dir_btn_status===true){ %>
-                                        <button onclick="TL.direct.genLinkDirectForRoom('<% obj[x].direct_id %>','<% encodeURIComponent(obj[x].fname) %>')" class="text-azure btn btn-sm btn-light mr-1">
+                                        <button onclick="TL.direct.genLinkDirectForRoomV2('<% encodeURIComponent(obj[x].fname) %>')" class="text-azure btn btn-sm btn-light mr-1">
                                             <iconpark-icon name="link" class="fa-fw"></iconpark-icon>
                                         </button>
                                     <% }else{ %>
