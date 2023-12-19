@@ -276,8 +276,9 @@
     </div>
 </div>
 
+
 <div class="modal" id="directEditDomainModal">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
                 <h4 class="modal-title" i18n="direct_btn_bind_domain">
@@ -295,62 +296,59 @@
                     </div>
                     <form id="form-direct-domain">
                         <div class="form-group">
+                            <iconpark-icon name="memory-one" class="fa-fw"></iconpark-icon>
                             <label for="direct-domain" i18n="direct_modal_bind_domain_5">.</label>
                             <input type="text" class="form-control" id="direct-domain" placeholder="."
-                                i18n="direct_modal_bind_domain_6" i18n-placeholder="true">
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-primary btn-block"
-                                onclick="TL.direct.setDomain()">绑定</button>
+                                i18n="direct_modal_bind_domain_6" i18n-placeholder="true" onkeyup="TL.direct.checkInput()" onchange="TL.direct.checkInput()">
+                            <div>
+                                <small id="domainHelpError" i18n="direct_ssl_check_input_notice1" class="form-text text-muted text-red mt-1" style="display: none;">
+                                    .
+                                </small>
+                            </div>
+                            <div>
+                                <small id="domainHelp" class="form-text text-muted mt-1" style="display: none;">
+                                    <div i18n="direct_ssl_check_input_notice2">.</div>
+                                    <div class="req_new_acme_domain text-green">_acme-challenge.abc.com</div> 
+                                    <div class="text-red">_acme-challenge.ng-ccc.com</div>
+                                </small>
+                            </div>
+                            <div>
+                                <small id="domainHelpCNAME" class="form-text text-muted mt-1" style="display: none;">
+                                    <div i18n="direct_ssl_check_input_notice2">.</div>
+                                    <span class="req_new_cname_domain text-green"></span>
+                                    <span class="text-red">direct.tmp.link</span>
+                                </small>
+                            </div>
                         </div>
                     </form>
+                    <!-- 启用安全传输 -->
+                    <div class="form-group" id="enable_ssl_box">
+                        <iconpark-icon name="shield-halved" class="fa-fw"></iconpark-icon>
+                        <label for="enable_ssl" i18n="direct_ssl_enable_title">.</label>
+                        <div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="enable_ssl1" name="enable_ssl" class="custom-control-input" onchange="TL.direct.checkInput()" value="yes" checked>
+                                <label class="custom-control-label" for="enable_ssl1" i18n="btn_enable">.</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="enable_ssl2" name="enable_ssl" class="custom-control-input" onchange="TL.direct.checkInput()" value="no">
+                                <label class="custom-control-label" for="enable_ssl2" i18n="btn_close">.</label>
+                            </div>
+                        </div>
+                        
+                        <small id="sslHelp" i18n="direct_ssl_enable_intro" class="form-text text-muted">
+                            .
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-block"
+                            onclick="TL.direct.setDomain()" i18n="btn_save_settings">.</button>
+                    </div>
                 </div>
-                <div class="card p-3 shadow-sm">
-                    <h4 i18n="direct_modal_bind_domain_1">.</h4>
-                    <p i18n="direct_modal_bind_domain_2">.</p>
-                </div>
-                <div class="card p-3 shadow-sm" id="tmplink_subdomain">
+                <div id="tmplink_subdomain" class="card p-3 shadow-sm">
                     <h4 i18n="direct_modal_bind_domain_3">.</h4>
                     <p i18n="direct_modal_bind_domain_4">.</p>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal" id="directSSLModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content shadow-lg">
-            <div class="modal-header">
-                <h4 class="modal-title" i18n="direct_box_ssl_title">
-                    .
-                </h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h4 i18n="direct_box_ssl_des1">.</h4>
-                <p i18n="direct_box_ssl_des2">.</p>
-                <div class="card p-3 mt-3  shadow-sm">
-                    <div class="form-group">
-                        <label for="set_ssl_cert" i18n="direct_box_ssl_cert">.</label>
-                        <textarea class="form-control" id="set_ssl_cert" rows="2"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="set_ssl_key" i18n="direct_box_ssl_key">.</label>
-                        <textarea class="form-control" id="set_ssl_key" rows="2"></textarea>
-                    </div>
-                    <div class="text-muted" i18n="direct_box_ssl_tips1">.</div>
-                    <div class="text-muted" i18n="direct_box_ssl_tips2">.</div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <span id="box_post_doing" style="text-align: center;display: none;">
-                    <iconpark-icon name="spinner-third" class="fa-fw"></iconpark-icon>
-                </span>
-                <button id="box_disable_ssl" type="button" onclick="TL.direct.disableSSL()"
-                    class="btn btn-danger btn-radius" i18n="direct_box_ssl_stop">.</button>
-                <button id="box_post" type="button" onclick="TL.direct.enableSSL()" class="btn btn-primary btn-radius"
-                    i18n="direct_box_ssl_post">.</button>
             </div>
         </div>
     </div>

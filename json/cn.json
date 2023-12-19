@@ -649,6 +649,22 @@
     "direct_brand_logo_set_size": "图片大小超过限制",
     "direct_brand_logo_set_unknow": "网络错误，请重试",
     "direct_brand_name_empty": "名称与描述不能为空",
+
+    "direct_ssl_check_input_notice1": "不是一个有效的域名",
+    "direct_ssl_check_input_notice2": "请为域名添加 CNAME 记录 :",
+    "direct_ssl_check_input_msg_cname": "此域名的 CNAME 尚未指向 direct.tmp.link",
+    "direct_ssl_check_input_msg_acme": "此域名的 CNAME 尚未指向 _acme-challenge.ng-ccc.com",
+    "direct_ssl_check_input_msg_txt": "此域名存在与 CNAME 同名的 TXT 记录，请清除。",
+    "direct_ssl_enable_title": "启用安全传输",
+    "direct_ssl_enable_intro": "为您的直链启用 HTTPS，以保护您的隐私和数据安全。",
+
+    "btn_enable": "启用",
+    "btn_disable": "停用",
+    "btn_save": "保存",
+    "btn_cancel": "取消",
+    "btn_close": "关闭",
+    "btn_save_settings": "保存设定",
+
     "brand_submit": "提交审核",
     "brand_save": "保存",
     "brand_modal_title": "品牌化",

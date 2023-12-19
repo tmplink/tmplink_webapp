@@ -20,7 +20,7 @@
                 <div class="mt-2">
                     <div onmouseenter="$(this).children('.btn').css('opacity',1);"
                         onmouseleave="$(this).children('.btn').css('opacity',0);">
-                        <iconpark-icon name="link" class="fa-fw"></iconpark-icon>
+                        <iconpark-icon name="memory-one" class="fa-fw"></iconpark-icon>
                         <span id="direct_bind_domain_box">
                             <a href="#" target="_blank" id="direct_bind_domain">#</a>
                         </span>
@@ -29,15 +29,9 @@
                             <span i18n="modal_settings_submit">.</span>
                         </span>
                     </div>
-                    <div onmouseenter="$(this).children('.btn').css('opacity',1);"
-                        onmouseleave="$(this).children('.btn').css('opacity',0);">
+                    <div>
                         <iconpark-icon name="shield-halved" class="fa-fw"></iconpark-icon>
                         <span id="direct_bind_ssl"></span>
-
-                        <span class="btn btn-sm btn-light text-azure btn-point"
-                            onclick="$('#directSSLModal').modal('show');" style="opacity: 0;">
-                            <span i18n="modal_settings_submit">.</span>
-                        </span>
                     </div>
                     <div onmouseenter="$(this).children('.btn').css('opacity',1);"
                         onmouseleave="$(this).children('.btn').css('opacity',0);">
@@ -264,71 +258,71 @@
         </div>
 
         <script type="text/template" id="direct_filelist_list_tpl">
-                <% for (var x in obj) { %>
-                    <div class="row mx-0 mb-1 p-1 line list-bar file_unit_<% obj[x].direct_key %>" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
-                        <div class="col-12 col-md-8 col-lg-7 d-flex align-items-center listfontweight filename">
-                            <div class="row">
-                                <div class="col-12 filename">
-                                    <iconpark-icon name="<% TL.fileicon(obj[x].ftype) %>" class="fa-fw text-azure"></iconpark-icon>
-                                    <a href="<% obj[x].direct_link %>" class="filelist_link" target="_blank" onclick="event.stopPropagation();">
-                                        <% obj[x].fname %>
+            <% for (var x in obj) { %>
+                <div class="row mx-0 mb-1 p-1 line list-bar file_unit_<% obj[x].direct_key %>" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                    <div class="col-12 col-md-8 col-lg-7 d-flex align-items-center listfontweight filename">
+                        <div class="row">
+                            <div class="col-12 filename">
+                                <iconpark-icon name="<% TL.fileicon(obj[x].ftype) %>" class="fa-fw text-azure"></iconpark-icon>
+                                <a href="<% obj[x].direct_link %>" class="filelist_link" target="_blank" onclick="event.stopPropagation();">
+                                    <% obj[x].fname %>
+                                </a>
+                                
+                                <% if(TL.direct.is_allow_play(obj[x].fname)){ %>
+                                    <a href="<% obj[x].direct_link %>" target="_blank" onclick="event.stopPropagation();">
+                                        <iconpark-icon name="circle-play" class="fa-fw"></iconpark-icon>
                                     </a>
-                                    
-                                    <% if(TL.direct.is_allow_play(obj[x].fname)){ %>
-                                        <a href="<% obj[x].direct_link %>" target="_blank" onclick="event.stopPropagation();">
-                                            <iconpark-icon name="circle-play" class="fa-fw"></iconpark-icon>
-                                        </a>
-                                    <% } %>
+                                <% } %>
 
-                                    <% if(obj[x].model!=99){ %>
-                                        <!--[在大屏幕上显示]-->
-                                        <span class="d-none d-lg-inline">
-                                            <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
-                                            <span class="lefttime-remainder" id="wd_<% obj[x].direct_key %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
-                                        </span>
-                                    <% } %>
+                                <% if(obj[x].model!=99){ %>
+                                    <!--[在大屏幕上显示]-->
+                                    <span class="d-none d-lg-inline">
+                                        <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
+                                        <span class="lefttime-remainder" id="wd_<% obj[x].direct_key %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
+                                    </span>
+                                <% } %>
 
-                                    <% if(obj[x].like>0){ %>
-                                        <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
-                                        <span class="text-pink"><% obj[x].like %><span>
-                                    <% } %>
+                                <% if(obj[x].like>0){ %>
+                                    <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
+                                    <span class="text-pink"><% obj[x].like %><span>
+                                <% } %>
 
-                                    <% if(obj[x].dir_name!=null){ %>
-                                        <div class="d-none d-lg-block" onclick="event.stopPropagation();">
-                                            <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
-                                            <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
-                                        </div>
-                                        <span class="d-inline d-lg-none" onclick="event.stopPropagation();">
-                                            <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
-                                            <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
-                                        </span>
-                                    <% } %>
+                                <% if(obj[x].dir_name!=null){ %>
+                                    <div class="d-none d-lg-block" onclick="event.stopPropagation();">
+                                        <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
+                                        <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
+                                    </div>
+                                    <span class="d-inline d-lg-none" onclick="event.stopPropagation();">
+                                        <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
+                                        <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
+                                    </span>
+                                <% } %>
 
-                                    <% if(obj[x].model!=99){ %>
-                                        <!--[在小屏幕上显示]-->
-                                        <span class="d-inline d-lg-none">
-                                            <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
-                                            <span class="lefttime-remainder" id="wm_<% obj[x].direct_key %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
-                                        </span>
-                                    <% } %>
-                                </div>
-
+                                <% if(obj[x].model!=99){ %>
+                                    <!--[在小屏幕上显示]-->
+                                    <span class="d-inline d-lg-none">
+                                        <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
+                                        <span class="lefttime-remainder" id="wm_<% obj[x].direct_key %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
+                                    </span>
+                                <% } %>
                             </div>
-                        </div>
-                        <div class="col-12 col-md-4 col-lg-2 my-1 d-flex align-items-center justify-content-end">
-                            <% obj[x].ctime %>
-                        </div>
-                        <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].direct_key %>" onclick="event.stopPropagation();">
-                            <span class="mr-2"><% obj[x].fsize_formated %></span>
-                            <a href="<% obj[x].direct_link %>" target="_blank" class="text-azure btn btn-sm btn-light mx-1"><iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon></a>
-                            <button onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].direct_link}`) %>',true)" class="text-azure btn btn-sm btn-light mx-1"><iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon></button>
-                            <button id="btn-rm-file_<% obj[x].direct_key %>" class="btn btn-sm btn-light mx-1" onclick="TL.direct.delLink('<% obj[x].direct_key %>')">
-                                <iconpark-icon name="trash" class="fa-fw text-danger"></iconpark-icon>
-                            </button>
+
                         </div>
                     </div>
-                <% } %>
-            </script>
+                    <div class="col-12 col-md-4 col-lg-2 my-1 d-flex align-items-center justify-content-end">
+                        <% obj[x].ctime %>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].direct_key %>" onclick="event.stopPropagation();">
+                        <span class="mr-2"><% obj[x].fsize_formated %></span>
+                        <a href="<% obj[x].direct_link %>" target="_blank" class="text-azure btn btn-sm btn-light mx-1"><iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon></a>
+                        <button onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].direct_link}`) %>',true)" class="text-azure btn btn-sm btn-light mx-1"><iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon></button>
+                        <button id="btn-rm-file_<% obj[x].direct_key %>" class="btn btn-sm btn-light mx-1" onclick="TL.direct.delLink('<% obj[x].direct_key %>')">
+                            <iconpark-icon name="trash" class="fa-fw text-danger"></iconpark-icon>
+                        </button>
+                    </div>
+                </div>
+            <% } %>
+        </script>
     </div>
 </div>
 
@@ -353,7 +347,7 @@
 </div>
 
 <div class="modal" id="directEditDomainModal">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
                 <h4 class="modal-title" i18n="direct_btn_bind_domain">
@@ -371,62 +365,59 @@
                     </div>
                     <form id="form-direct-domain">
                         <div class="form-group">
+                            <iconpark-icon name="memory-one" class="fa-fw"></iconpark-icon>
                             <label for="direct-domain" i18n="direct_modal_bind_domain_5">.</label>
                             <input type="text" class="form-control" id="direct-domain" placeholder="."
-                                i18n="direct_modal_bind_domain_6" i18n-placeholder="true">
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-primary btn-block"
-                                onclick="TL.direct.setDomain()">绑定</button>
+                                i18n="direct_modal_bind_domain_6" i18n-placeholder="true" onkeyup="TL.direct.checkInput()" onchange="TL.direct.checkInput()">
+                            <div>
+                                <small id="domainHelpError" i18n="direct_ssl_check_input_notice1" class="form-text text-muted text-red mt-1" style="display: none;">
+                                    .
+                                </small>
+                            </div>
+                            <div>
+                                <small id="domainHelp" class="form-text text-muted mt-1" style="display: none;">
+                                    <span i18n="direct_ssl_check_input_notice2">.</span>
+                                    <span class="req_new_acme_domain text-green">_acme-challenge.abc.com</span> 
+                                    <span class="text-red">_acme-challenge.ng-ccc.com</span>
+                                </small>
+                            </div>
+                            <div>
+                                <small id="domainHelpCNAME" class="form-text text-muted mt-1" style="display: none;">
+                                    <span i18n="direct_ssl_check_input_notice2">.</span>
+                                    <span class="req_new_cname_domain text-green"></span>
+                                    <span class="text-red">direct.tmp.link</span>
+                                </small>
+                            </div>
                         </div>
                     </form>
+                    <!-- 启用安全传输 -->
+                    <div class="form-group" id="enable_ssl_box">
+                        <iconpark-icon name="shield-halved" class="fa-fw"></iconpark-icon>
+                        <label for="enable_ssl" i18n="direct_ssl_enable_title">.</label>
+                        <div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="enable_ssl1" name="enable_ssl" class="custom-control-input" onchange="TL.direct.checkInput()" value="yes" checked>
+                                <label class="custom-control-label" for="enable_ssl1" i18n="btn_enable">.</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="enable_ssl2" name="enable_ssl" class="custom-control-input" onchange="TL.direct.checkInput()" value="no">
+                                <label class="custom-control-label" for="enable_ssl2" i18n="btn_close">.</label>
+                            </div>
+                        </div>
+                        
+                        <small id="sslHelp" i18n="direct_ssl_enable_intro" class="form-text text-muted">
+                            .
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-block"
+                            onclick="TL.direct.setDomain()" i18n="btn_save_settings">.</button>
+                    </div>
                 </div>
-                <div class="card p-3 shadow-sm">
-                    <h4 i18n="direct_modal_bind_domain_1">.</h4>
-                    <p i18n="direct_modal_bind_domain_2">.</p>
-                </div>
-                <div class="card p-3 shadow-sm" id="tmplink_subdomain">
+                <div id="tmplink_subdomain" class="card p-3 shadow-sm">
                     <h4 i18n="direct_modal_bind_domain_3">.</h4>
                     <p i18n="direct_modal_bind_domain_4">.</p>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal" id="directSSLModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content shadow-lg">
-            <div class="modal-header">
-                <h4 class="modal-title" i18n="direct_box_ssl_title">
-                    .
-                </h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h4 i18n="direct_box_ssl_des1">.</h4>
-                <p i18n="direct_box_ssl_des2">.</p>
-                <div class="card p-3 mt-3  shadow-sm">
-                    <div class="form-group">
-                        <label for="set_ssl_cert" i18n="direct_box_ssl_cert">.</label>
-                        <textarea class="form-control" id="set_ssl_cert" rows="2"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="set_ssl_key" i18n="direct_box_ssl_key">.</label>
-                        <textarea class="form-control" id="set_ssl_key" rows="2"></textarea>
-                    </div>
-                    <li class="text-muted" i18n="direct_box_ssl_tips1">.</li>
-                    <li class="text-muted" i18n="direct_box_ssl_tips2">.</li>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <span id="box_post_doing" style="text-align: center;display: none;">
-                    <iconpark-icon name="spinner-third" class="fa-fw"></iconpark-icon>
-                </span>
-                <button id="box_disable_ssl" type="button" onclick="TL.direct.disableSSL()"
-                    class="btn btn-danger btn-radius" i18n="direct_box_ssl_stop">.</button>
-                <button id="box_post" type="button" onclick="TL.direct.enableSSL()" class="btn btn-primary btn-radius"
-                    i18n="direct_box_ssl_post">.</button>
             </div>
         </div>
     </div>

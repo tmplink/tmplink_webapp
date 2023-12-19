@@ -9,6 +9,7 @@ class direct {
     allow_ext = ['mp4', 'm4v', 'webm', 'mov', 'ogg', 'mp3']
     set = false
     ssl = false
+    ssl_auto = false
     traffic_chart = null
 
     sort_by = 0
@@ -43,7 +44,7 @@ class direct {
             //如果是移动设备，不执行
             if (!isMobileScreen()) {
                 //更新下载统计图
-                this.refreshUsage(2, '24小时');
+                this.refreshUsage(2, '24H');
             }
         }
 
@@ -56,29 +57,41 @@ class direct {
             this.total_downloads = rsp.data.total_downloads;
             this.total_transfer = rsp.data.total_transfer;
             this.set = 1;
+            this.ssl_auto = rsp.data.ssl_auto === 'yes' ? true : false;
             this.traffic_limit = rsp.data.traffic_limit;
             this.ssl = rsp.data.ssl_status === 'yes' ? true : false;
+            this.ssl_acme = rsp.data.ssl_acme === 'disable' ? false : true;
             //如果domain是 *.5t-cdn.com 作为子域名，生成的链接则应该是 https://
             if (this.domain.indexOf('.5t-cdn.com') != -1) {
                 this.protocol = 'https://';
                 $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
             } else {
-                $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
+
+                if (this.ssl) {
+                    $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
+                    $('#box_disable_ssl').show();
+                    this.protocol = 'https://';
+                } else {
+                    $('#box_disable_ssl').hide();
+                    $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
+                }
+    
+                //如果 ssl_acme 是 true，标记为自动申请证书
+                if (this.ssl_acme) {
+                    this.protocol = 'https://';
+                    $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
+                } else {
+                    $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
+                }
+
             }
+            
             //如果有设定限制单个 IP 的日流量
             if (this.traffic_limit > 0) {
                 $('#direct_traffic_limit').val(this.traffic_limit);
                 $('#direct_set_traffic_limit_title').html(app.languageData.direct_traffic_limit);
             } else {
                 $('#direct_set_traffic_limit_title').html(app.languageData.direct_traffic_unlimit);
-            }
-            if (this.ssl) {
-                $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
-                $('#box_disable_ssl').show();
-                this.protocol = 'https://';
-            } else {
-                $('#box_disable_ssl').hide();
-                $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
             }
 
             //如果有设定品牌
@@ -605,6 +618,8 @@ class direct {
         this.loading_box_on();
 
         let domain = $('#direct-domain').val();
+        let enable_ssl = $('input[name="enable_ssl"]:checked').val();
+
         //检查输入的是否是正确的域名
         if (domain == null) {
             return false;
@@ -612,6 +627,7 @@ class direct {
         $.post(this.parent_op.api_direct, {
             'action': 'direct_set_domain',
             'domain': domain,
+            'ssl_enable': enable_ssl,
             'token': this.parent_op.api_token
         }, (rsp) => {
             let msg = this.selectBingDomainText(rsp.status);
@@ -623,7 +639,6 @@ class direct {
                 $('#direct_bind_domain_box').show();
                 $('#direct_bind_domain').html(domain);
                 $('#direct_bind_domain').attr('href', this.protocol + domain);
-
                 $('#diredirect_bind_notice').html('');
                 //window.location.reload();
             } else {
@@ -635,7 +650,7 @@ class direct {
 
     selectBingDomainText(number) {
         console.log(number);
-        let msg = '';
+        let msg = '未知错误';
         switch (number) {
             case 1:
                 msg = app.languageData.direct_intro_modal_msg_1;
@@ -648,6 +663,15 @@ class direct {
                 break;
             case 3:
                 msg = app.languageData.direct_intro_modal_msg_4;
+                break;
+            case 5:
+                msg = app.languageData.direct_ssl_check_input_msg_cname;
+                break;
+            case 6:
+                msg = app.languageData.direct_ssl_check_input_msg_acme;
+                break;
+            case 7:
+                msg = app.languageData.direct_ssl_check_input_msg_txt;
                 break;
         }
         return msg;
@@ -857,6 +881,51 @@ class direct {
             this.traffic_chart = new ApexCharts(document.querySelector("#x2_chart_usage"), options);
             this.traffic_chart.render();
         }, 'json');
+    }
+
+    checkInput(){
+        let domain = $('#direct-domain').val();
+
+        //如果域名是 *.5t-cdn.com 作为子域名(但不是三级域名，比如 app.app.5t-cdn.com) ，则不执行任何检查
+        if (domain.indexOf('.5t-cdn.com') != -1) {
+            //不能是三级域名
+            if (domain.split('.').length > 3) {
+                $('#domainHelp').hide();
+                $('#domainHelpError').show();
+                return false;
+            }
+            $('#domainHelp').hide();
+            $('#domainHelpError').hide();
+            $('#domainHelpCNAME').hide();
+            $('#enable_ssl_box').hide();
+            return true;
+        }
+
+        let enable_ssl = $('input[name="enable_ssl"]:checked').val();
+        let reg = /^([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
+        $('.req_new_acme_domain').text(`_acme-challenge.` + domain + ' -> ');
+        $('.req_new_cname_domain').text(domain+ ' -> ');
+        $('#enable_ssl_box').show();
+
+        //如果有设定启用 SSL，显示对应的提示
+        if (enable_ssl == 'yes') {
+            $('#direct_ssl_notice').show();
+            $('#domainHelp').show();
+        } else {
+            $('#direct_ssl_notice').hide();
+            $('#domainHelp').hide();
+        }
+
+        // 通过正则检查输入的域名是否符合规范
+        if (!reg.test(domain)) {
+            $('#domainHelp').hide();
+            $('#domainHelpError').show();
+            return false;
+        }
+        
+        //没有问题，显示提示
+        $('#domainHelpError').hide();
+        $('#domainHelpCNAME').show();
     }
 
     loading_box_on() {
