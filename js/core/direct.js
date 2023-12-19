@@ -640,9 +640,7 @@ class direct {
                 $('#direct_bind_domain').html(domain);
                 $('#direct_bind_domain').attr('href', this.protocol + domain);
                 $('#diredirect_bind_notice').html('');
-                //window.location.reload();
-            } else {
-
+                window.location.reload();
             }
             this.loading_box_off();
         }), 'json';
