@@ -158,11 +158,9 @@ class direct {
     }
 
     openDomainEditor() {
-        if (this.parent_op.area_cn) {
-            $('#tmplink_subdomain').hide();
-        }
-        $('#directEditDomainModal').modal('show');
-        $('#direct_modal_msg').hide();
+        $('#direct_domain_set_title').text(app.languageData.direct_btn_bind_domain);
+        $('#direct_domain_set').fadeIn();
+        $('#filelist').hide();
     }
 
     is_allow_play(filename) {
@@ -189,12 +187,33 @@ class direct {
 
 
         if (this.domain != 0) {
+            $('#filelist').show();
             $('#direct_bind_domain_box').show();
             $('#direct_bind_domain').html(this.domain);
             $('#direct_bind_domain').attr('href', this.protocol + this.domain);
+            //如果启用了 SSL，则更换图标
+            if (this.ssl) {
+                $('#direct_bind_domain_icon').attr('name', 'shield-halved');
+            } 
         } else {
+            $('#filelist').hide();
+            $('#direct_domain_set').fadeIn();
             $('#direct_bind_domain_box').hide();
             $('.no_direct_domains').fadeIn();
+            $('#direct_domain_set_title').text(app.languageData.direct_intro_modal_body_title);
+            setTimeout(() => {
+                //3 秒后 淡出
+                $('#direct_domain_set_title').addClass('fade-out');
+                setTimeout(() => {
+                    //淡入
+                    $('#direct_domain_set_title').addClass('fade-in');
+                    $('#direct_domain_set_title').removeClass('fade-out');
+                    $('#direct_domain_set_title').text(app.languageData.direct_btn_bind_domain);
+                    setTimeout(() => {
+                        $('#direct_domain_set_title').removeClass('fade-in');
+                    }, 2000);
+                }, 1000);
+            }, 3000);
         }
 
         $('#direct_quota').html(quota);
@@ -288,7 +307,6 @@ class direct {
         }
 
         if (this.domain == 0) {
-            $('#filelist').show();
             return false;
         }
 
@@ -346,7 +364,6 @@ class direct {
                     this.list_data[rsp.data[i].ukey] = rsp.data[i];
                 }
             }
-            $('#filelist').show();
             this.loading_box_off();
             //cancel
             if (rsp.status == 0 || rsp.data.length < 50) {

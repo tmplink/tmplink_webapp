@@ -158,3 +158,13 @@
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
 }
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}

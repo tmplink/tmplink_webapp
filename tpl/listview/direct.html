@@ -1,12 +1,102 @@
+<div id="direct_domain_set" class="card mt-5 shadow" style="display: none;">
+    <div class="p-5">
+        <div id="direct_domain_set_title" class="display-3 text-center" style="margin-top: 100px;">
+            欢迎
+        </div>
+        <div class="mx-auto" style="max-width: 620px;margin-top: 100px;margin-bottom: 100px;">
+            <!-- 提示框 -->
+            <div class="alert alert-warning" role="alert" style="display: none;" id="direct_modal_msg">
+                <iconpark-icon name="circle-exclamation" class="fa-fw"></iconpark-icon>
+                <span id="direct_modal_msg_text">.</span>
+            </div>
+            <form id="form-direct-domain">
+                <div class="form-group">
+                    <iconpark-icon name="memory-one" class="fa-fw"></iconpark-icon>
+                    <label for="direct-domain" i18n="direct_modal_bind_domain_5">.</label>
+                    <input type="text" class="form-control" id="direct-domain" placeholder="."
+                        i18n="direct_modal_bind_domain_6" i18n-placeholder="true" onkeyup="TL.direct.checkInput()" onchange="TL.direct.checkInput()">
+                    <div>
+                        <small id="domainHelpError" i18n="direct_ssl_check_input_notice1" class="form-text text-muted text-red mt-1" style="display: none;">
+                            .
+                        </small>
+                    </div>
+                    <div>
+                        <small id="domainHelp" class="form-text text-muted mt-1" style="display: none;">
+                            <span i18n="direct_ssl_check_input_notice2">.</span>
+                            <span class="req_new_acme_domain text-green">_acme-challenge.abc.com</span> 
+                            <span class="text-red">_acme-challenge.ng-ccc.com</span>
+                        </small>
+                    </div>
+                    <div>
+                        <small id="domainHelpCNAME" class="form-text text-muted mt-1" style="display: none;">
+                            <span i18n="direct_ssl_check_input_notice2">.</span>
+                            <span class="req_new_cname_domain text-green"></span>
+                            <span class="text-red">direct.tmp.link</span>
+                        </small>
+                    </div>
+                </div>
+            </form>
+            <!-- 启用安全传输 -->
+            <div class="form-group" id="enable_ssl_box">
+                <iconpark-icon name="shield-halved" class="fa-fw"></iconpark-icon>
+                <label for="enable_ssl" i18n="direct_ssl_enable_title">.</label>
+                <div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="enable_ssl1" name="enable_ssl" class="custom-control-input" onchange="TL.direct.checkInput()" value="yes" checked>
+                        <label class="custom-control-label" for="enable_ssl1" i18n="btn_enable">.</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="enable_ssl2" name="enable_ssl" class="custom-control-input" onchange="TL.direct.checkInput()" value="no">
+                        <label class="custom-control-label" for="enable_ssl2" i18n="btn_close">.</label>
+                    </div>
+                </div>
+                
+                <small id="sslHelp" i18n="direct_ssl_enable_intro" class="form-text text-muted">
+                    .
+                </small>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary btn-block"
+                    onclick="TL.direct.setDomain()" i18n="btn_save_settings">.</button>
+            </div>
+        </div>
+        <div class="no_direct_domains mx-auto"
+            style="display: none;max-width: 620px;">
+            <hr>
+            <div>
+                <p i18n="direct_intro_1">.</p>
+                <ul>
+                    <li i18n="direct_intro_2">.</li>
+                    <li i18n="direct_intro_3">.</li>
+                    <li i18n="direct_intro_4">.</li>
+                    <li i18n="direct_intro_5">.</li>
+                    <li i18n="direct_intro_6">.</li>
+                </ul>
+
+                <p i18n="direct_intro_7">.</p>
+                <ul>
+                    <li i18n="direct_intro_8">.</li>
+                    <li>
+                        <span class="btn-point" onclick="TL.direct.openDomainEditor()">
+                            <span i18n="direct_btn_bind_domain">.</span>。
+                        </span>
+                    </li>
+                </ul>
+                <p i18n="direct_intro_9">.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="filelist" class="card mt-5 shadow" style="display: none;">
     <div class="row p-5">
-        <div class="col-3">
-            <div class="mx-auto">
+        <div class="col-12">
+            <div class="mx-auto text-center">
                 <div class="text-center" onmouseenter="$('.btn-set-brand').css('opacity',1);"
                     onmouseleave="$('.btn-set-brand').css('opacity',0);">
                     <div>
                         <span id="direct_branded_logo">
-                            <iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon>
+                            <iconpark-icon name="share-nodes" class="fa-fw fa-4x"></iconpark-icon>
                         </span>
                     </div>
                     <div class="btn-set-brand" style="opacity: 0;">
@@ -16,72 +106,13 @@
                         </span>
                     </div>
                 </div>
-
-                <div class="mt-2">
-                    <div onmouseenter="$(this).children('.btn').css('opacity',1);"
-                        onmouseleave="$(this).children('.btn').css('opacity',0);">
-                        <iconpark-icon name="memory-one" class="fa-fw"></iconpark-icon>
-                        <span id="direct_bind_domain_box">
-                            <a href="#" target="_blank" id="direct_bind_domain">#</a>
-                        </span>
-                        <span class="btn btn-sm btn-light text-azure btn-point" onclick="TL.direct.openDomainEditor();"
-                            style="opacity: 0;">
-                            <span i18n="modal_settings_submit">.</span>
-                        </span>
-                    </div>
-                    <div>
-                        <iconpark-icon name="shield-halved" class="fa-fw"></iconpark-icon>
-                        <span id="direct_bind_ssl"></span>
-                    </div>
-                    <div onmouseenter="$(this).children('.btn').css('opacity',1);"
-                        onmouseleave="$(this).children('.btn').css('opacity',0);">
-                        <iconpark-icon name="block-brick-fire" class="fa-fw"></iconpark-icon>
-                        <span id="direct_set_traffic_limit_title"></span>
-
-                        <span class="btn btn-sm btn-light text-azure btn-point"
-                            onclick="$('#limitTrafficModal').modal('show');" style="opacity: 0;">
-                            <span i18n="modal_settings_submit">.</span>
-                        </span>
-                    </div>
-
-                    <div onmouseenter="$(this).children('.btn').css('opacity',1);"
-                        onmouseleave="$(this).children('.btn').css('opacity',0);">
-                        <iconpark-icon name="arrow-up-arrow-down" class="fa-fw"></iconpark-icon>
-                        <span i18n="direct_total_transfer">.</span>
-                        <span id="direct_total_transfer">0</span>
-
-                        <span class="btn btn-sm btn-light text-azure btn-point" onclick="TL.buy.openQuato();"
-                            style="opacity: 0;">
-                            <span i18n="direct_btn_buy_quota">.</span>
-                        </span>
-                    </div>
-
-                    <div onmouseenter="$(this).children('.btn').css('opacity',1);"
-                        onmouseleave="$(this).children('.btn').css('opacity',0);">
-                        <iconpark-icon name="battery-three-quarters" class="fa-fw"></iconpark-icon>
-                        <span i18n="direct_quota">.</span>
-                        <span id="direct_quota">0</span>
-
-                        <span class="btn btn-sm btn-light text-azure btn-point" onclick="TL.buy.openQuato();"
-                            style="opacity: 0;">
-                            <span i18n="direct_btn_buy_quota">.</span>
-                        </span>
-                    </div>
-
-
+                <div class="text-center">
+                    <iconpark-icon name="globe" class="fa-fw text-green" id="direct_bind_domain_icon"></iconpark-icon>
+                    <span id="direct_bind_domain_box">
+                        <a href="#" target="_blank" id="direct_bind_domain">#</a>
+                    </span>
                 </div>
-                <!-- <div class="lead mt-4">
-                    <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
-                        <iconpark-icon name="link" class="fa-fw"></iconpark-icon>
-                        <span id="direct_bind_domain_box">
-                            <a href="#" target="_blank" id="direct_bind_domain">#</a>
-                        </span>
-                    </span>
-                    <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
-                        onclick="$('#directSSLModal').modal('show');">
-                        <iconpark-icon name="shield-halved" class="fa-fw"></iconpark-icon>
-                        <span id="direct_bind_ssl"></span>
-                    </span>
+                <div class="lead mt-2">
                     <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
                         onclick="$('#brandModal').modal('show');">
                         <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
@@ -92,8 +123,6 @@
                         <iconpark-icon name="block-brick-fire" class="fa-fw"></iconpark-icon>
                         <span id="direct_set_traffic_limit_title"></span>
                     </span>
-                </div> -->
-                <!-- <div class="lead mt-2">
                     <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
                         <iconpark-icon name="battery-three-quarters" class="fa-fw"></iconpark-icon>
                         <span i18n="direct_quota">.</span>
@@ -104,59 +133,32 @@
                         <span i18n="direct_total_downloads">.</span>
                         <span id="direct_total_downloads">0</span>
                     </span>
-                    <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
+                    <span class="btn btn-sm btn-light text-azure mx-1 mt-1" onclick="$('#directTrafficModal').modal('show');">
                         <iconpark-icon name="arrow-up-arrow-down" class="fa-fw"></iconpark-icon>
                         <span i18n="direct_total_transfer">.</span>
                         <span id="direct_total_transfer">0</span>
                     </span>
-                </div> -->
-            </div>
-        </div>
-        <div class="col-9">
-            <div>
-                <div id="x2_chart_usage" style="max-width: 100%;"></div>
-                <div style="text-align: center;">
-                    <button onclick="TL.direct.refreshUsage(2, '24小时');"
-                        class="btn btn-sm btn-radius btn-outline-info">24小时</button>
-                    <button onclick="TL.direct.refreshUsage(3, '一周');"
-                        class="btn btn-sm btn-radius btn-outline-info">过去一周</button>
-                    <button onclick="TL.direct.refreshUsage(4, '最近30天');"
-                        class="btn btn-sm btn-radius btn-outline-info">最近30天</button>
                 </div>
             </div>
         </div>
     </div>
-    <hr class="mt-1">
+    <hr class="my-0">
     <div id="filelist_model" class="card-body">
 
-        <div class="p-3">
-            <!--[搜索栏]-->
-            <form autocomplete="off">
-                <div class="input-group mb-1">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary" type="button" onclick="TL.direct_filelist(0);"
-                            i18n="search_btn">.</button>
-                    </div>
-                    <input type="search" id="direct_search" class="form-control" placeholder="." i18n="search_plh"
-                        onkeyup="if(event.keyCode==13)TL.direct.filelist(0);"
-                        style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
-                </div>
-                <input style="display:none;">
-            </form>
-
+        <div>
             <!--[主要控制器]-->
             <div class="mb-2 mt-2">
                 <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.direct.filelist(0);">
                     <iconpark-icon name="rotate" class="fa-fw" id="filelist_refresh_icon"></iconpark-icon>
                 </button>
-                <!-- <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.openDomainEditor();">
+                <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.openDomainEditor();">
                     <iconpark-icon name="signal-stream" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_btn_bind_domain" class="d-none d-sm-inline">.</span>
                 </button>
                 <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.buy.openQuato();">
                     <iconpark-icon name="battery-bolt" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_btn_buy_quota" class="d-none d-sm-inline">.</span>
-                </button> -->
+                </button>
                 <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.getFreeQuotaOfSponsor();">
                     <iconpark-icon name="battery-bolt" class="fa-fw"></iconpark-icon>
                     <span i18n="direct_btn_free_quota" class="d-none d-sm-inline">.</span>
@@ -199,6 +201,7 @@
                     </div>
                 </div>
             </div>
+        
         </div>
         <!-- 全局提醒区域 -->
         <div>
@@ -215,7 +218,7 @@
             .
         </div> -->
 
-        <div id="direct_filelist"></div>
+        <div id="direct_filelist" class="mt-2"></div>
 
         <div class="no_photos" style="margin-top: 20px;margin-bottom: 100px;display: none;">
             <div class="text-center mb-4">
@@ -227,35 +230,9 @@
             <div class="text-center mb-4">
                 <iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon>
             </div>
-            <!-- <div class="text-center" i18n="page_no_files">.</div> -->
+            <div class="text-center" i18n="direct_intro_modal_body_1">.</div>
         </div>
-        <div class="no_direct_domains mx-auto"
-            style="margin-top: 100px;margin-bottom: 100px;display: none;max-width: 620px;">
-            <div class="text-center">
-                <h3 i18n="direct_intro_welcome">.</h3>
-            </div>
-            <div>
-                <p i18n="direct_intro_1">.</p>
-                <ul>
-                    <li i18n="direct_intro_2">.</li>
-                    <li i18n="direct_intro_3">.</li>
-                    <li i18n="direct_intro_4">.</li>
-                    <li i18n="direct_intro_5">.</li>
-                    <li i18n="direct_intro_6">.</li>
-                </ul>
-
-                <p i18n="direct_intro_7">.</p>
-                <ul>
-                    <li i18n="direct_intro_8">.</li>
-                    <li>
-                        <span class="btn-point" onclick="TL.direct.openDomainEditor()">
-                            <span i18n="direct_btn_bind_domain">.</span>。
-                        </span>
-                    </li>
-                </ul>
-                <p i18n="direct_intro_9">.</p>
-            </div>
-        </div>
+        
 
         <script type="text/template" id="direct_filelist_list_tpl">
             <% for (var x in obj) { %>
@@ -326,6 +303,30 @@
     </div>
 </div>
 
+<div class="modal" id="directTrafficModal">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="direct_quota">.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div id="x2_chart_usage" style="max-width: 100%;"></div>
+                    <div style="text-align: center;">
+                        <button onclick="TL.direct.refreshUsage(2, '24小时');"
+                            class="btn btn-sm btn-radius btn-outline-info">24小时</button>
+                        <button onclick="TL.direct.refreshUsage(3, '一周');"
+                            class="btn btn-sm btn-radius btn-outline-info">过去一周</button>
+                        <button onclick="TL.direct.refreshUsage(4, '最近30天');"
+                            class="btn btn-sm btn-radius btn-outline-info">最近30天</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal" id="directIntroModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">
@@ -357,63 +358,7 @@
             </div>
             <div class="modal-body">
                 <!--[表单]-->
-                <div class="card p-3 shadow-sm">
-                    <!-- 提示框 -->
-                    <div class="alert alert-warning" role="alert" style="display: none;" id="direct_modal_msg">
-                        <iconpark-icon name="circle-exclamation" class="fa-fw"></iconpark-icon>
-                        <span id="direct_modal_msg_text">.</span>
-                    </div>
-                    <form id="form-direct-domain">
-                        <div class="form-group">
-                            <iconpark-icon name="memory-one" class="fa-fw"></iconpark-icon>
-                            <label for="direct-domain" i18n="direct_modal_bind_domain_5">.</label>
-                            <input type="text" class="form-control" id="direct-domain" placeholder="."
-                                i18n="direct_modal_bind_domain_6" i18n-placeholder="true" onkeyup="TL.direct.checkInput()" onchange="TL.direct.checkInput()">
-                            <div>
-                                <small id="domainHelpError" i18n="direct_ssl_check_input_notice1" class="form-text text-muted text-red mt-1" style="display: none;">
-                                    .
-                                </small>
-                            </div>
-                            <div>
-                                <small id="domainHelp" class="form-text text-muted mt-1" style="display: none;">
-                                    <span i18n="direct_ssl_check_input_notice2">.</span>
-                                    <span class="req_new_acme_domain text-green">_acme-challenge.abc.com</span> 
-                                    <span class="text-red">_acme-challenge.ng-ccc.com</span>
-                                </small>
-                            </div>
-                            <div>
-                                <small id="domainHelpCNAME" class="form-text text-muted mt-1" style="display: none;">
-                                    <span i18n="direct_ssl_check_input_notice2">.</span>
-                                    <span class="req_new_cname_domain text-green"></span>
-                                    <span class="text-red">direct.tmp.link</span>
-                                </small>
-                            </div>
-                        </div>
-                    </form>
-                    <!-- 启用安全传输 -->
-                    <div class="form-group" id="enable_ssl_box">
-                        <iconpark-icon name="shield-halved" class="fa-fw"></iconpark-icon>
-                        <label for="enable_ssl" i18n="direct_ssl_enable_title">.</label>
-                        <div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="enable_ssl1" name="enable_ssl" class="custom-control-input" onchange="TL.direct.checkInput()" value="yes" checked>
-                                <label class="custom-control-label" for="enable_ssl1" i18n="btn_enable">.</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="enable_ssl2" name="enable_ssl" class="custom-control-input" onchange="TL.direct.checkInput()" value="no">
-                                <label class="custom-control-label" for="enable_ssl2" i18n="btn_close">.</label>
-                            </div>
-                        </div>
-                        
-                        <small id="sslHelp" i18n="direct_ssl_enable_intro" class="form-text text-muted">
-                            .
-                        </small>
-                    </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-primary btn-block"
-                            onclick="TL.direct.setDomain()" i18n="btn_save_settings">.</button>
-                    </div>
-                </div>
+                
                 <div id="tmplink_subdomain" class="card p-3 shadow-sm">
                     <h4 i18n="direct_modal_bind_domain_3">.</h4>
                     <p i18n="direct_modal_bind_domain_4">.</p>

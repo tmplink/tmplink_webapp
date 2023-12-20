@@ -7,6 +7,16 @@ app.ready(
         document.title = app.languageData.title_index;
         document.querySelector('meta[name=description]').setAttribute('content', app.languageData.des_index);
         autoLogin();
+
+        //添加监听，页面向下滚动超过 300px 时，隐藏 #translater-btn
+        window.addEventListener('scroll', function () {
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            if (scrollTop > 300) {
+                document.getElementById('translater-btn').style.display = 'none';
+            } else {
+                document.getElementById('translater-btn').style.display = 'block';
+            }
+        }, false);
     }
 );
 

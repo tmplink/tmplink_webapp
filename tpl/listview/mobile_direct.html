@@ -149,24 +149,115 @@
 
 <div class="mobile-head-padding-large" style="padding-top: 160px;"></div>
 
-<!-- 全局提醒区域 -->
-<div>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert" id="direct_notice_cname"
-        style="display: none;">
-        <span i18n="direct_notice_cname">.</span>
-    </div>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert" id="direct_notice_usage"
-        style="display: none;">
-        <span i18n="direct_notice_usage">.</span>
-    </div>
-</div>
-
-<div class="text-center text-muted">
+<!-- <div class="text-center text-muted">
     <span i18n="direct_total_downloads">.</span>
     <span id="direct_total_downloads">0</span>
+</div> -->
+
+<div id="direct_domain_set" style="display: none;">
+    <div class="p-5">
+        <div id="direct_domain_set_title" class="display-3 text-center">
+            欢迎
+        </div>
+        <div class="mx-auto" style="margin-top: 50px;margin-bottom: 50px;">
+            <!-- 提示框 -->
+            <div class="alert alert-warning" role="alert" style="display: none;" id="direct_modal_msg">
+                <iconpark-icon name="circle-exclamation" class="fa-fw"></iconpark-icon>
+                <span id="direct_modal_msg_text">.</span>
+            </div>
+            <form id="form-direct-domain">
+                <div class="form-group">
+                    <iconpark-icon name="memory-one" class="fa-fw"></iconpark-icon>
+                    <label for="direct-domain" i18n="direct_modal_bind_domain_5">.</label>
+                    <input type="text" class="form-control" id="direct-domain" placeholder="."
+                        i18n="direct_modal_bind_domain_6" i18n-placeholder="true" onkeyup="TL.direct.checkInput()" onchange="TL.direct.checkInput()">
+                    <div>
+                        <small id="domainHelpError" i18n="direct_ssl_check_input_notice1" class="form-text text-muted text-red mt-1" style="display: none;">
+                            .
+                        </small>
+                    </div>
+                    <div>
+                        <small id="domainHelp" class="form-text text-muted mt-1" style="display: none;">
+                            <span i18n="direct_ssl_check_input_notice2">.</span>
+                            <span class="req_new_acme_domain text-green">_acme-challenge.abc.com</span> 
+                            <span class="text-red">_acme-challenge.ng-ccc.com</span>
+                        </small>
+                    </div>
+                    <div>
+                        <small id="domainHelpCNAME" class="form-text text-muted mt-1" style="display: none;">
+                            <span i18n="direct_ssl_check_input_notice2">.</span>
+                            <span class="req_new_cname_domain text-green"></span>
+                            <span class="text-red">direct.tmp.link</span>
+                        </small>
+                    </div>
+                </div>
+            </form>
+            <!-- 启用安全传输 -->
+            <div class="form-group" id="enable_ssl_box">
+                <iconpark-icon name="shield-halved" class="fa-fw"></iconpark-icon>
+                <label for="enable_ssl" i18n="direct_ssl_enable_title">.</label>
+                <div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="enable_ssl1" name="enable_ssl" class="custom-control-input" onchange="TL.direct.checkInput()" value="yes" checked>
+                        <label class="custom-control-label" for="enable_ssl1" i18n="btn_enable">.</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="enable_ssl2" name="enable_ssl" class="custom-control-input" onchange="TL.direct.checkInput()" value="no">
+                        <label class="custom-control-label" for="enable_ssl2" i18n="btn_close">.</label>
+                    </div>
+                </div>
+                
+                <small id="sslHelp" i18n="direct_ssl_enable_intro" class="form-text text-muted">
+                    .
+                </small>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary btn-block"
+                    onclick="TL.direct.setDomain()" i18n="btn_save_settings">.</button>
+            </div>
+        </div>
+        <div class="no_direct_domains mx-auto"
+            style="display: none;max-width: 620px;">
+            <hr>
+            <div>
+                <p i18n="direct_intro_1">.</p>
+                <ul>
+                    <li i18n="direct_intro_2">.</li>
+                    <li i18n="direct_intro_3">.</li>
+                    <li i18n="direct_intro_4">.</li>
+                    <li i18n="direct_intro_5">.</li>
+                    <li i18n="direct_intro_6">.</li>
+                </ul>
+
+                <p i18n="direct_intro_7">.</p>
+                <ul>
+                    <li i18n="direct_intro_8">.</li>
+                    <li>
+                        <span class="btn-point" onclick="TL.direct.openDomainEditor()">
+                            <span i18n="direct_btn_bind_domain">.</span>。
+                        </span>
+                    </li>
+                </ul>
+                <p i18n="direct_intro_9">.</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div id="filelist" style="display: none;">
+
+    <!-- 全局提醒区域 -->
+    <div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="direct_notice_cname"
+            style="display: none;">
+            <span i18n="direct_notice_cname">.</span>
+        </div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="direct_notice_usage"
+            style="display: none;">
+            <span i18n="direct_notice_usage">.</span>
+        </div>
+    </div>
+
     <div id="filelist_model">
 
 
@@ -181,6 +272,7 @@
         <div class="no_files" style="margin-top: 100px;margin-bottom: 100px;display: none;">
             <div class="text-center mb-4">
                 <iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon>
+                <div i18n="direct_intro_modal_body_1">.</div>
             </div>
         </div>
         <div class="no_direct_domains mx-auto"
