@@ -3,14 +3,14 @@
     <div class="container text-center">
         <div class="row px-2">
             <div class="col-2 text-left px-0">
-                <span id="direct_branded_logo">
-                    <iconpark-icon name="share-nodes" class="fa-fw fa-2x"></iconpark-icon>
+                <span class="text-azure" onclick="TL.direct.filelist(0);">
+                    <iconpark-icon name="rotate" class="fa-fw fa-2x"></iconpark-icon>
                 </span>
             </div>
             <div class="col-8">
-                <div>
-                    <div class="mobile_h3" i18n="navbar_direct">.</div>
-                </div>
+                <span id="direct_branded_logo">
+                    <img src="/img/ico/logo-256x256.png" style="width:32px;border-radius: 8px;" />
+                </span>
             </div>
             <div class="col-2 text-right px-0">
                 <div class="dropdown btn_for_sub">
@@ -53,24 +53,25 @@
             </div>
             <div class="mobile-head-large-title text-left w-100">
                 <div class="mobile-list-titlename">
-                    <div>
-                        <!-- 刷新按钮 -->
-                        <span class="text-azure" onclick="TL.direct.filelist(0);">
-                            <iconpark-icon name="rotate" class="fa-fw"></iconpark-icon>
-                        </span>
+                    <div class="text-center">
+                        <iconpark-icon name="globe" class="fa-fw text-green" id="direct_bind_domain_icon"></iconpark-icon>
                         <span id="direct_bind_domain_box">
                             <a href="#" target="_blank" id="direct_bind_domain">#</a>
                         </span>
                     </div>
                     <div class="text-muted">
-                        <span>
+                        <div>
                             <span i18n="direct_quota">.</span>
                             <span id="direct_quota">0</span>
-                        </span>
-                        <span>
+                        </div>
+                        <div>
+                            <span i18n="direct_quota_free">.</span>
+                            <span id="direct_quota_free">0</span>
+                        </div>
+                        <!-- <span>
                             <span i18n="direct_total_transfer">.</span>
                             <span id="direct_total_transfer">0</span>
-                        </span>
+                        </span> -->
                     </div>
                 </div>
             </div>
@@ -227,16 +228,6 @@
                     <li i18n="direct_intro_4">.</li>
                     <li i18n="direct_intro_5">.</li>
                     <li i18n="direct_intro_6">.</li>
-                </ul>
-
-                <p i18n="direct_intro_7">.</p>
-                <ul>
-                    <li i18n="direct_intro_8">.</li>
-                    <li>
-                        <span class="btn-point" onclick="TL.direct.openDomainEditor()">
-                            <span i18n="direct_btn_bind_domain">.</span>。
-                        </span>
-                    </li>
                 </ul>
                 <p i18n="direct_intro_9">.</p>
             </div>

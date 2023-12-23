@@ -66,6 +66,9 @@
             <div>
                 <p i18n="direct_intro_1">.</p>
                 <ul>
+                    <li class="text-red">
+                        <span i18n="direct_quota_free">.</span><span id="direct_quota_free">0</span>
+                    </li>
                     <li i18n="direct_intro_2">.</li>
                     <li i18n="direct_intro_3">.</li>
                     <li i18n="direct_intro_4">.</li>
@@ -73,15 +76,7 @@
                     <li i18n="direct_intro_6">.</li>
                 </ul>
 
-                <p i18n="direct_intro_7">.</p>
-                <ul>
-                    <li i18n="direct_intro_8">.</li>
-                    <li>
-                        <span class="btn-point" onclick="TL.direct.openDomainEditor()">
-                            <span i18n="direct_btn_bind_domain">.</span>。
-                        </span>
-                    </li>
-                </ul>
+                
                 <p i18n="direct_intro_9">.</p>
             </div>
         </div>
@@ -96,7 +91,7 @@
                     onmouseleave="$('.btn-set-brand').css('opacity',0);">
                     <div>
                         <span id="direct_branded_logo">
-                            <iconpark-icon name="share-nodes" class="fa-fw fa-4x"></iconpark-icon>
+                            <img src="/img/ico/logo-256x256.png" style="width:64px;border-radius: 12px;" />
                         </span>
                     </div>
                     <div class="btn-set-brand" style="opacity: 0;">
@@ -113,11 +108,11 @@
                     </span>
                 </div>
                 <div class="lead mt-2">
-                    <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
+                    <!-- <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
                         onclick="$('#brandModal').modal('show');">
                         <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
                         <span i18n="brand_modal_title">.</span>
-                    </span>
+                    </span> -->
                     <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
                         onclick="$('#limitTrafficModal').modal('show');">
                         <iconpark-icon name="block-brick-fire" class="fa-fw"></iconpark-icon>
@@ -129,10 +124,15 @@
                         <span id="direct_quota">0</span>
                     </span>
                     <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
+                        <iconpark-icon name="battery-three-quarters" class="fa-fw"></iconpark-icon>
+                        <span i18n="direct_quota_free">.</span>
+                        <span id="direct_quota_free">0</span>
+                    </span>
+                    <!-- <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
                         <iconpark-icon name="download" class="fa-fw"></iconpark-icon>
                         <span i18n="direct_total_downloads">.</span>
                         <span id="direct_total_downloads">0</span>
-                    </span>
+                    </span> -->
                     <span class="btn btn-sm btn-light text-azure mx-1 mt-1" onclick="$('#directTrafficModal').modal('show');">
                         <iconpark-icon name="arrow-up-arrow-down" class="fa-fw"></iconpark-icon>
                         <span i18n="direct_total_transfer">.</span>
@@ -340,7 +340,11 @@
                 </p>
                 <p>
                 <div i18n="direct_intro_modal_body_2">.</div>
-                <div i18n="direct_intro_modal_body_3">.</div>
+                <div class="text-red text-center">
+                    <span i18n="direct_quota_free">.</span>
+                    <span id="direct_quota_free">0</span>
+                </div>
+                <!-- <div i18n="direct_intro_modal_body_3">.</div> -->
                 </p>
             </div>
         </div>

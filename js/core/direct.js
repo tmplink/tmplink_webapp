@@ -54,6 +54,7 @@ class direct {
         }, (rsp) => {
             this.domain = rsp.data.domain;
             this.quota = rsp.data.quota;
+            this.quota_free = rsp.data.quota_free;
             this.total_downloads = rsp.data.total_downloads;
             this.total_transfer = rsp.data.total_transfer;
             this.set = 1;
@@ -98,10 +99,10 @@ class direct {
             if (rsp.data.brand_logo_id !== '0') {
                 let img_size = '64px';
                 if (isMobileScreen()) {
-                    img_size = '26px';
+                    img_size = '32px';
                 }
-                $('#brand_saved_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:64px;border-radius: 12px;" />`);
-                $('#direct_branded_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:${img_size};border-radius: 12px;" />`);
+                $('#brand_saved_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:48px;border-radius: 8px;" />`);
+                $('#direct_branded_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:${img_size};border-radius: 8px;" />`);
             }
             if (rsp.data.brand_title !== '0') {
                 $('#brand_saved_title').html(rsp.data.brand_title);
@@ -152,7 +153,7 @@ class direct {
         }, 'json');
 
         //检查剩余的流量配额是否少于 5GB
-        if (this.quota < (1024 * 1024 * 1024 * 5)) {
+        if (this.quota < (1024 * 1024 * 1024 * 5) && this.quota_free < (1024 * 1024 * 1024 * 5)) {
             $('#direct_notice_usage').show();
         }
     }
@@ -183,6 +184,7 @@ class direct {
             }, 1000);
         }
         let quota = bytetoconver(this.quota, true);
+        let quota_free = bytetoconver(this.quota_free, true);
         let total_transfer = bytetoconver(this.total_transfer, true);
 
 
@@ -217,6 +219,7 @@ class direct {
         }
 
         $('#direct_quota').html(quota);
+        $('#direct_quota_free').html(quota_free);
         $('#direct_total_transfer').html(total_transfer);
         $('#direct_total_downloads').html(this.total_downloads);
     }
