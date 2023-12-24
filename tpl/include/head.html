@@ -103,6 +103,20 @@
                 </span>
             </div>
 
+            <!-- 限时：兑换礼物 -->
+            <div class="workspace-navbar nav-units">
+                <span>
+                    <a class="btn p-0 topnav_gift text-red" href="javascript:void(0)" onclick="TL.giftcard.active();">
+                        <div>
+                            <iconpark-icon name="gift-card" class="fa-fw"></iconpark-icon>
+                        </div>
+                        <div>
+                            <span>兑换</span>
+                        </div>
+                    </a>
+                </span>
+            </div>
+
             <div class="btn-group dropup nav-units workspace-navbar">
                 <span class="btn" data-toggle="dropdown">
                     <button class="btn p-0">
@@ -190,7 +204,7 @@
 <nav class="mainNav nav-mobile fixed-bottom p-2 nav-bottom-set glass" style="display: none;">
     <!--[mobile]-->
     <div class="row text-center">
-        <div class="col-3">
+        <div class="col-4">
             <div class="btn-group dropup">
                 <button type="button" class="btn" data-toggle="dropdown">
                     <div class="d-flex flex-column">
@@ -208,7 +222,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-4">
             <!--[login]-->
             <div class="workspace-nologin">
                 <div class="d-flex flex-column">
@@ -251,7 +265,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-4">
             <!--[reg]-->
             <div class="workspace-nologin">
                 <div class="d-flex flex-column">
@@ -273,11 +287,17 @@
                         </span>
                         <span>
                             <span i18n="navbar_more">.</span>
-                            <!-- <span class="point-red"></span> -->
+                            <span class="point-red"></span>
                         </span>
                     </div>
                 </button>
                 <div class="dropdown-menu shadow">
+                    <!-- 兑换礼物 -->
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.giftcard.active();">
+                        <iconpark-icon name="gift-card" class="fa-fw text-red"></iconpark-icon>
+                        <span class="text-red">兑换</span>
+                    </a>
+
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.profile.openModal()">
                         <iconpark-icon name="user-astronaut" class="fa-fw"></iconpark-icon>
                         <span>
