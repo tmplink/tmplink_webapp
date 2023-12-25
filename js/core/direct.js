@@ -102,7 +102,7 @@ class direct {
                     img_size = '32px';
                 }
                 $('#brand_saved_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:48px;border-radius: 8px;" />`);
-                $('#direct_branded_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:${img_size};border-radius: 8px;" />`);
+                $('#direct_branded_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:${img_size};border-radius: 12px;" />`);
             }
             if (rsp.data.brand_title !== '0') {
                 $('#brand_saved_title').html(rsp.data.brand_title);
