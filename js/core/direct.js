@@ -219,7 +219,7 @@ class direct {
         }
 
         $('#direct_quota').html(quota);
-        $('#direct_quota_free').html(quota_free);
+        $('.direct_quota_free').html(quota_free);
         $('#direct_total_transfer').html(total_transfer);
         $('#direct_total_downloads').html(this.total_downloads);
     }
@@ -300,6 +300,15 @@ class direct {
         });
     }
 
+    delRoom(key) {
+        $(`.room_unit_${key}`).remove();
+        $.post(this.parent_op.api_direct, {
+            'action': 'room_del',
+            'direct_key': key,
+            'token': this.parent_op.api_token
+        });
+    }
+
     /**
      * 初始化页面
      */
@@ -371,6 +380,40 @@ class direct {
             //cancel
             if (rsp.status == 0 || rsp.data.length < 50) {
                 this.list_autoload_disabled();
+            }
+        });
+    }
+
+    room_list(){
+        if (this.parent_op.logined != 1) {
+            app.open('/app&listview=login');
+        }
+
+        if (this.domain == 0) {
+            return false;
+        }
+
+        $('.no_files').fadeOut();
+        $('.no_dir').fadeOut();
+        $('.no_photos').fadeOut();
+        //when page is 0,page will be init
+        this.page_number = 0;
+        $('#direct_filelist').html('');
+        this.list_data = [];
+
+        if (localStorage.getItem('app_login') != 1) {
+            this.logout();
+            return false;
+        }
+        
+        $.post(this.parent_op.api_direct, {
+            action: 'room_list',
+            token: this.parent_op.api_token,
+        }, (rsp) => {
+            if (rsp.status === 0) {
+                $('.no_direct_room').fadeIn();
+            } else {
+                $('#direct_room_list').append(app.tpl('direct_room_list_tpl', rsp.data));
             }
         });
     }

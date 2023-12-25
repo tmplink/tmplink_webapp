@@ -133,28 +133,28 @@
   list-style: none;
 }
 
-.nav-bottom-set{
+.nav-bottom-set {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   box-shadow: 0rem 0rem 1rem rgb(0 0 0 / 15%);
 }
 
-.nav-top-set{
+.nav-top-set {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%) !important;
 }
 
 /* css 实现降下效果的动画效果 */
-.nav-top-slidedown{
+.nav-top-slidedown {
   animation: nav-top-slidedown 0.2s ease-in-out;
 }
 
-.topnav-iphone{
+.topnav-iphone {
   padding-bottom: 20px !important;
 }
 
-.card-radius{
+.card-radius {
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
 }
@@ -167,4 +167,12 @@
 .fade-out {
   opacity: 0;
   transition: opacity 1s ease-in-out;
+}
+
+.nav-link {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 10px !important;
 }

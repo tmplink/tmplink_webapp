@@ -1,4 +1,6 @@
 {
+    "file":"檔案",
+    "folder":"資料夾",
     "direct_ssl_check_input_notice1": "不是有效的域名",
     "direct_ssl_check_input_notice2": "請為該域名添加CNAME記錄：",
     "direct_ssl_check_input_msg_cname": "該域名的CNAME尚未指向direct.tmp.link",
@@ -346,6 +348,7 @@
     "page_no_photos": "當前沒有可供顯示的圖片，點擊 <i class=\"fa-fw fa-light fa-list-radio text-azure\"></i> 查看所有檔案。",
     "page_no_files": "當前沒有可供顯示的檔案，請先上傳檔案。",
     "page_no_dir": "您的桌面空空如也，請先建立資料夾，然後再進入資料夾上傳檔案。 <br> 當桌面有了資料夾之後，您可以在 “倉庫” 中將檔案移動到資料夾中。",
+    "page_no_direct_dir": "這將顯示您所有的直鏈文件夾，您目前還沒有設置任何直鏈文件夾。<br>請到桌面中進行直鏈文件夾的設置。",
     "alert_no_support": "抱歉，由於瀏覽器限制，目前無法在此設備上使用這個功能.",
     "ad_file_1_1": "人生苦短...",
     "ad_file_1_2": "通過高速通道下載，走自己的路。<br>每月僅需 6 元。",

@@ -67,7 +67,7 @@
                 <p i18n="direct_intro_1">.</p>
                 <ul>
                     <li class="text-red">
-                        <span i18n="direct_quota_free">.</span><span id="direct_quota_free">0</span>
+                        <span i18n="direct_quota_free">.</span><span class="direct_quota_free">0</span>
                     </li>
                     <li i18n="direct_intro_2">.</li>
                     <li i18n="direct_intro_3">.</li>
@@ -84,6 +84,7 @@
 </div>
 
 <div id="filelist" class="card mt-5 shadow" style="display: none;">
+    <!-- 头部 -->
     <div class="row p-5">
         <div class="col-12">
             <div class="mx-auto text-center">
@@ -108,11 +109,6 @@
                     </span>
                 </div>
                 <div class="lead mt-2">
-                    <!-- <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
-                        onclick="$('#brandModal').modal('show');">
-                        <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
-                        <span i18n="brand_modal_title">.</span>
-                    </span> -->
                     <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
                         onclick="$('#limitTrafficModal').modal('show');">
                         <iconpark-icon name="block-brick-fire" class="fa-fw"></iconpark-icon>
@@ -126,13 +122,8 @@
                     <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
                         <iconpark-icon name="battery-three-quarters" class="fa-fw"></iconpark-icon>
                         <span i18n="direct_quota_free">.</span>
-                        <span id="direct_quota_free">0</span>
+                        <span class="direct_quota_free">0</span>
                     </span>
-                    <!-- <span class="btn btn-sm btn-light text-azure mx-1 mt-1">
-                        <iconpark-icon name="download" class="fa-fw"></iconpark-icon>
-                        <span i18n="direct_total_downloads">.</span>
-                        <span id="direct_total_downloads">0</span>
-                    </span> -->
                     <span class="btn btn-sm btn-light text-azure mx-1 mt-1" onclick="$('#directTrafficModal').modal('show');">
                         <iconpark-icon name="arrow-up-arrow-down" class="fa-fw"></iconpark-icon>
                         <span i18n="direct_total_transfer">.</span>
@@ -143,163 +134,221 @@
         </div>
     </div>
     <hr class="my-0">
-    <div id="filelist_model" class="card-body">
 
-        <div>
-            <!--[主要控制器]-->
-            <div class="mb-2 mt-2">
-                <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.direct.filelist(0);">
-                    <iconpark-icon name="rotate" class="fa-fw" id="filelist_refresh_icon"></iconpark-icon>
-                </button>
-                <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.openDomainEditor();">
-                    <iconpark-icon name="signal-stream" class="fa-fw"></iconpark-icon>
-                    <span i18n="direct_btn_bind_domain" class="d-none d-sm-inline">.</span>
-                </button>
-                <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.buy.openQuato();">
-                    <iconpark-icon name="battery-bolt" class="fa-fw"></iconpark-icon>
-                    <span i18n="direct_btn_buy_quota" class="d-none d-sm-inline">.</span>
-                </button>
-                <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.getFreeQuotaOfSponsor();">
-                    <iconpark-icon name="battery-bolt" class="fa-fw"></iconpark-icon>
-                    <span i18n="direct_btn_free_quota" class="d-none d-sm-inline">.</span>
-                </button>
-                <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.sortModal();"
-                    id="filelist_filter">
-                    <iconpark-icon name="list" class="fa-fw"></iconpark-icon>
-                    <span i18n="sort_title" class="d-none d-sm-inline">.</span>
-                </button>
-            </div>
+    <!-- 内容区 -->
+    <!-- 全局提醒区域 -->
+    <div class="mt-3">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="direct_notice_cname"
+            style="display: none;">
+            <span i18n="direct_notice_cname">.</span>
+        </div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="direct_notice_usage"
+            style="display: none;">
+            <span i18n="direct_notice_usage">.</span>
+        </div>
+    </div>
 
-            <!--[选择器]-->
-            <div>
-                <button onclick="TL.Selecter.setAll();" class="btn btn-light text-azure btn-sm mr-1 mt-1">
-                    <iconpark-icon name="square-check" class="fa-fw"></iconpark-icon>
-                    <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
-                </button>
-                <button onclick="TL.Selecter.setNone();" class="btn btn-light text-azure btn-sm mr-1 mt-1">
-                    <iconpark-icon name="square-check" class="fa-fw"></iconpark-icon>
-                    <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
-                </button>
-                <div class="dropdown">
-                    <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
-                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <iconpark-icon name="list-check" class="fa-fw"></iconpark-icon> <span i18n="on_select">.</span>
-                    </button>
-                    <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
-                        <button class="dropdown-item" onclick="TL.Selecter.directCopy('resURLForText')">
-                            <iconpark-icon name="link-horizontal" class="fa-fw text-azure"></iconpark-icon>
-                            <span i18n="on_select_copy_res_url_text">.</span>
+    <div class="nav nav-pills d-flex justify-content-center mt-3" id="nav-tab" role="tablist">
+        <a class="nav-link active" id="nav-direct-filelist" data-toggle="tab"
+            href="#v-direct_filelist" role="tab" aria-controls="v-direct_filelist"
+            aria-selected="true" i18n="file">.</a>
+        <a class="nav-link" id="nav-direct-room" data-toggle="tab"
+            href="#v-direct_room" role="tab" aria-controls="v-direct_room"
+            aria-selected="false" i18n="folder">.</a>
+    </div>
+    <div class="tab-content p-2">
+        <div class="tab-pane fade show active" id="v-direct_filelist" role="tabpanel"
+            aria-labelledby="nav-direct-filelist">
+            <div id="filelist_model" class="card-body">
+                <div>
+                    <!--[主要控制器]-->
+                    <div class="mb-2 mt-2">
+                        <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.direct.filelist(0);">
+                            <iconpark-icon name="rotate" class="fa-fw" id="filelist_refresh_icon"></iconpark-icon>
                         </button>
-                        <button class="dropdown-item" onclick="TL.Selecter.directCopy('resURLForHTML')">
-                            <iconpark-icon name="link-horizontal" class="fa-fw text-azure"></iconpark-icon>
-                            <span i18n="on_select_copy_res_url_html">.</span>
+                        <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.openDomainEditor();">
+                            <iconpark-icon name="signal-stream" class="fa-fw"></iconpark-icon>
+                            <span i18n="direct_btn_bind_domain" class="d-none d-sm-inline">.</span>
                         </button>
-                        <button class="dropdown-item" onclick="TL.Selecter.directDelete()">
-                            <iconpark-icon name="trash" class="fa-fw text-red"></iconpark-icon>
-                            <span i18n="on_select_delete">.</span>
+                        <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.buy.openQuato();">
+                            <iconpark-icon name="battery-bolt" class="fa-fw"></iconpark-icon>
+                            <span i18n="direct_btn_buy_quota" class="d-none d-sm-inline">.</span>
+                        </button>
+                        <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.getFreeQuotaOfSponsor();">
+                            <iconpark-icon name="battery-bolt" class="fa-fw"></iconpark-icon>
+                            <span i18n="direct_btn_free_quota" class="d-none d-sm-inline">.</span>
+                        </button>
+                        <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.direct.sortModal();"
+                            id="filelist_filter">
+                            <iconpark-icon name="list" class="fa-fw"></iconpark-icon>
+                            <span i18n="sort_title" class="d-none d-sm-inline">.</span>
                         </button>
                     </div>
+
+                    <!--[选择器]-->
+                    <div>
+                        <button onclick="TL.Selecter.setAll();" class="btn btn-light text-azure btn-sm mr-1 mt-1">
+                            <iconpark-icon name="square-check" class="fa-fw"></iconpark-icon>
+                            <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
+                        </button>
+                        <button onclick="TL.Selecter.setNone();" class="btn btn-light text-azure btn-sm mr-1 mt-1">
+                            <iconpark-icon name="square-check" class="fa-fw"></iconpark-icon>
+                            <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <iconpark-icon name="list-check" class="fa-fw"></iconpark-icon> <span i18n="on_select">.</span>
+                            </button>
+                            <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
+                                <button class="dropdown-item" onclick="TL.Selecter.directCopy('resURLForText')">
+                                    <iconpark-icon name="link-horizontal" class="fa-fw text-azure"></iconpark-icon>
+                                    <span i18n="on_select_copy_res_url_text">.</span>
+                                </button>
+                                <button class="dropdown-item" onclick="TL.Selecter.directCopy('resURLForHTML')">
+                                    <iconpark-icon name="link-horizontal" class="fa-fw text-azure"></iconpark-icon>
+                                    <span i18n="on_select_copy_res_url_html">.</span>
+                                </button>
+                                <button class="dropdown-item" onclick="TL.Selecter.directDelete()">
+                                    <iconpark-icon name="trash" class="fa-fw text-red"></iconpark-icon>
+                                    <span i18n="on_select_delete">.</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                
                 </div>
+
+                <div id="direct_filelist" class="mt-2"></div>
+
+                <div class="no_photos" style="margin-top: 20px;margin-bottom: 100px;display: none;">
+                    <div class="text-center mb-4">
+                        <iconpark-icon name="camera" class="fa-fw fa-4x"></iconpark-icon>
+                    </div>
+                    <div class="text-center" i18n="page_no_photos">.</div>
+                </div>
+                <div class="no_files mx-auto" style="margin-top: 100px;margin-bottom: 100px;display: none;max-width: 500px;">
+                    <div class="text-center mb-4">
+                        <iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon>
+                    </div>
+                    <div class="text-center" i18n="direct_intro_modal_body_1">.</div>
+                </div>
+                
+
+                <script type="text/template" id="direct_filelist_list_tpl">
+                    <% for (var x in obj) { %>
+                        <div class="row mx-0 mb-1 p-1 line list-bar file_unit_<% obj[x].direct_key %>" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].name %>" onclick="TL.Selecter.onclickByList(this);">
+                            <div class="col-12 col-md-8 col-lg-7 d-flex align-items-center listfontweight filename">
+                                <div class="row">
+                                    <div class="col-12 filename">
+                                        <iconpark-icon name="<% TL.fileicon(obj[x].ftype) %>" class="fa-fw text-azure"></iconpark-icon>
+                                        <a href="<% obj[x].direct_link %>" class="filelist_link" target="_blank" onclick="event.stopPropagation();">
+                                            <% obj[x].fname %>
+                                        </a>
+                                        
+                                        <% if(TL.direct.is_allow_play(obj[x].fname)){ %>
+                                            <a href="<% obj[x].direct_link %>" target="_blank" onclick="event.stopPropagation();">
+                                                <iconpark-icon name="circle-play" class="fa-fw"></iconpark-icon>
+                                            </a>
+                                        <% } %>
+
+                                        <% if(obj[x].model!=99){ %>
+                                            <!--[在大屏幕上显示]-->
+                                            <span class="d-none d-lg-inline">
+                                                <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
+                                                <span class="lefttime-remainder" id="wd_<% obj[x].direct_key %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
+                                            </span>
+                                        <% } %>
+
+                                        <% if(obj[x].like>0){ %>
+                                            <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
+                                            <span class="text-pink"><% obj[x].like %><span>
+                                        <% } %>
+
+                                        <% if(obj[x].dir_name!=null){ %>
+                                            <div class="d-none d-lg-block" onclick="event.stopPropagation();">
+                                                <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
+                                                <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
+                                            </div>
+                                            <span class="d-inline d-lg-none" onclick="event.stopPropagation();">
+                                                <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
+                                                <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
+                                            </span>
+                                        <% } %>
+
+                                        <% if(obj[x].model!=99){ %>
+                                            <!--[在小屏幕上显示]-->
+                                            <span class="d-inline d-lg-none">
+                                                <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
+                                                <span class="lefttime-remainder" id="wm_<% obj[x].direct_key %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
+                                            </span>
+                                        <% } %>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 col-lg-2 my-1 d-flex align-items-center justify-content-end">
+                                <% obj[x].ctime %>
+                            </div>
+                            <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].direct_key %>" onclick="event.stopPropagation();">
+                                <span class="mr-2"><% obj[x].fsize_formated %></span>
+                                <a href="<% obj[x].direct_link %>" target="_blank" class="text-azure btn btn-sm btn-light mx-1"><iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon></a>
+                                <button onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].direct_link}`) %>',true)" class="text-azure btn btn-sm btn-light mx-1"><iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon></button>
+                                <button id="btn-rm-file_<% obj[x].direct_key %>" class="btn btn-sm btn-light mx-1" onclick="TL.direct.delLink('<% obj[x].direct_key %>')">
+                                    <iconpark-icon name="trash" class="fa-fw text-danger"></iconpark-icon>
+                                </button>
+                            </div>
+                        </div>
+                    <% } %>
+                </script>
             </div>
-        
         </div>
-        <!-- 全局提醒区域 -->
-        <div>
-            <div class="alert alert-warning alert-dismissible fade show" role="alert" id="direct_notice_cname"
-                style="display: none;">
-                <span i18n="direct_notice_cname">.</span>
+        <div class="tab-pane fade" id="v-direct_room" role="tabpanel"
+            aria-labelledby="nav-direct-room">
+            <div class="no_direct_room mx-auto" style="margin-top: 100px;margin-bottom: 100px;display: none;max-width: 500px;">
+                <div class="text-center mb-4">
+                    <iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon>
+                </div>
+                <div class="text-center" i18n="page_no_direct_dir">.</div>
             </div>
-            <div class="alert alert-warning alert-dismissible fade show" role="alert" id="direct_notice_usage"
-                style="display: none;">
-                <span i18n="direct_notice_usage">.</span>
-            </div>
-        </div>
-        <!-- <div class="alert alert-info" i18n="direct_intro">
-            .
-        </div> -->
+            <div id="direct_room_list"></div>
+            <script type="text/template" id="direct_room_list_tpl">
+                <% for (var x in obj) { %>
+                    <div class="row mx-0 mb-1 p-1 line list-bar room_unit_<% obj[x].direct_key %>" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                        <div class="col-12 col-md-8 col-lg-7 d-flex align-items-center listfontweight filename">
+                            <div class="row">
+                                <div class="col-12 filename">
 
-        <div id="direct_filelist" class="mt-2"></div>
-
-        <div class="no_photos" style="margin-top: 20px;margin-bottom: 100px;display: none;">
-            <div class="text-center mb-4">
-                <iconpark-icon name="camera" class="fa-fw fa-4x"></iconpark-icon>
-            </div>
-            <div class="text-center" i18n="page_no_photos">.</div>
-        </div>
-        <div class="no_files mx-auto" style="margin-top: 100px;margin-bottom: 100px;display: none;max-width: 500px;">
-            <div class="text-center mb-4">
-                <iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon>
-            </div>
-            <div class="text-center" i18n="direct_intro_modal_body_1">.</div>
-        </div>
-        
-
-        <script type="text/template" id="direct_filelist_list_tpl">
-            <% for (var x in obj) { %>
-                <div class="row mx-0 mb-1 p-1 line list-bar file_unit_<% obj[x].direct_key %>" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
-                    <div class="col-12 col-md-8 col-lg-7 d-flex align-items-center listfontweight filename">
-                        <div class="row">
-                            <div class="col-12 filename">
-                                <iconpark-icon name="<% TL.fileicon(obj[x].ftype) %>" class="fa-fw text-azure"></iconpark-icon>
-                                <a href="<% obj[x].direct_link %>" class="filelist_link" target="_blank" onclick="event.stopPropagation();">
-                                    <% obj[x].fname %>
-                                </a>
-                                
-                                <% if(TL.direct.is_allow_play(obj[x].fname)){ %>
-                                    <a href="<% obj[x].direct_link %>" target="_blank" onclick="event.stopPropagation();">
-                                        <iconpark-icon name="circle-play" class="fa-fw"></iconpark-icon>
-                                    </a>
-                                <% } %>
-
-                                <% if(obj[x].model!=99){ %>
-                                    <!--[在大屏幕上显示]-->
-                                    <span class="d-none d-lg-inline">
-                                        <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
-                                        <span class="lefttime-remainder" id="wd_<% obj[x].direct_key %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
-                                    </span>
-                                <% } %>
-
-                                <% if(obj[x].like>0){ %>
-                                    <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
-                                    <span class="text-pink"><% obj[x].like %><span>
-                                <% } %>
-
-                                <% if(obj[x].dir_name!=null){ %>
                                     <div class="d-none d-lg-block" onclick="event.stopPropagation();">
                                         <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
-                                        <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
+                                        <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].name %></a>
                                     </div>
                                     <span class="d-inline d-lg-none" onclick="event.stopPropagation();">
                                         <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
-                                        <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
+                                        <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].name %></a>
                                     </span>
-                                <% } %>
 
-                                <% if(obj[x].model!=99){ %>
-                                    <!--[在小屏幕上显示]-->
-                                    <span class="d-inline d-lg-none">
-                                        <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
-                                        <span class="lefttime-remainder" id="wm_<% obj[x].direct_key %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
-                                    </span>
-                                <% } %>
+                                </div>
+
                             </div>
-
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-2 my-1 d-flex align-items-center justify-content-end">
+                            <% obj[x].ctime %>
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].direct_key %>" onclick="event.stopPropagation();">
+                            <!-- 直达 -->
+                            <a href="<% TL.direct.protocol %><% TL.direct.domain %>/share/<% obj[x].direct_key %>/" target="_blank" class="text-azure btn btn-sm btn-light mx-1">
+                                <iconpark-icon name="circle-location-arrow" class="fa-fw"></iconpark-icon>
+                            </a>
+                            <!-- 删除 -->
+                            <button id="btn-rm-file_<% obj[x].direct_key %>" class="btn btn-sm btn-light mx-1" onclick="TL.direct.delRoom('<% obj[x].direct_key %>')">
+                                <iconpark-icon name="trash" class="fa-fw text-danger"></iconpark-icon>
+                            </button>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-2 my-1 d-flex align-items-center justify-content-end">
-                        <% obj[x].ctime %>
-                    </div>
-                    <div class="col-12 col-md-12 col-lg-3 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].direct_key %>" onclick="event.stopPropagation();">
-                        <span class="mr-2"><% obj[x].fsize_formated %></span>
-                        <a href="<% obj[x].direct_link %>" target="_blank" class="text-azure btn btn-sm btn-light mx-1"><iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon></a>
-                        <button onclick="TL.bulkCopy(this,'<% Base64Encode(`${obj[x].direct_link}`) %>',true)" class="text-azure btn btn-sm btn-light mx-1"><iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon></button>
-                        <button id="btn-rm-file_<% obj[x].direct_key %>" class="btn btn-sm btn-light mx-1" onclick="TL.direct.delLink('<% obj[x].direct_key %>')">
-                            <iconpark-icon name="trash" class="fa-fw text-danger"></iconpark-icon>
-                        </button>
-                    </div>
-                </div>
-            <% } %>
-        </script>
+                <% } %>
+            </script>
+        </div>
     </div>
 </div>
 
@@ -322,30 +371,6 @@
                             class="btn btn-sm btn-radius btn-outline-info">最近30天</button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal" id="directIntroModal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content shadow-lg">
-            <div class="modal-header">
-                <h4 class="modal-title" i18n="direct_intro_modal_title">.</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p i18n="direct_intro_modal_body_1">
-                    .
-                </p>
-                <p>
-                <div i18n="direct_intro_modal_body_2">.</div>
-                <div class="text-red text-center">
-                    <span i18n="direct_quota_free">.</span>
-                    <span id="direct_quota_free">0</span>
-                </div>
-                <!-- <div i18n="direct_intro_modal_body_3">.</div> -->
-                </p>
             </div>
         </div>
     </div>
