@@ -78,12 +78,13 @@
 
             <div class="workspace-navbar nav-units">
                 <span>
-                    <a class="btn p-0 topnav_direct" href="/app&listview=direct" tmpui-action="dynamicView.direct();">
+                    <a class="btn p-0 topnav_notes" href="/app&listview=notes"
+                        tmpui-action="dynamicView.notes();">
                         <div>
-                            <iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon>
+                            <iconpark-icon name="lock" class="fa-fw"></iconpark-icon>
                         </div>
                         <div>
-                            <span i18n="navbar_direct">.</span>
+                            <span i18n="navbar_notes">.</span>
                         </div>
                     </a>
                 </span>
@@ -91,13 +92,12 @@
 
             <div class="workspace-navbar nav-units">
                 <span>
-                    <a class="btn p-0 topnav_notes" href="/app&listview=notes"
-                        tmpui-action="dynamicView.notes();">
+                    <a class="btn p-0 topnav_direct" href="/app&listview=direct" tmpui-action="dynamicView.direct();">
                         <div>
-                            <iconpark-icon name="pencil" class="fa-fw"></iconpark-icon>
+                            <iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon>
                         </div>
                         <div>
-                            <span i18n="navbar_notes">.</span>
+                            <span i18n="navbar_direct">.</span>
                         </div>
                     </a>
                 </span>
@@ -245,13 +245,13 @@
                         <iconpark-icon name="cabinet-filing" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_meetingroom">.</span>
                     </a>
+                    <a class="dropdown-item" href="/app&listview=notes" tmpui-action="dynamicView.notes();">
+                        <iconpark-icon name="lock" class="fa-fw"></iconpark-icon>
+                        <span i18n="navbar_notes">.</span>
+                    </a>
                     <a class="dropdown-item" href="/app&listview=direct" tmpui-action="dynamicView.direct();">
                         <iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_direct">.</span>
-                    </a>
-                    <a class="dropdown-item" href="/app&listview=notes" tmpui-action="dynamicView.notes();">
-                        <iconpark-icon name="pencil" class="fa-fw"></iconpark-icon>
-                        <span i18n="navbar_notes">.</span>
                     </a>
                 </div>
             </div>

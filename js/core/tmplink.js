@@ -2781,6 +2781,15 @@ class tmplink {
             this.room.ui_pro = rsp.data.ui_pro;
             this.room_performance_init(this.room.mr_id);
 
+            //如果 room id 是0，则显示特定的顶部
+            if (params.mrid == 0) {
+                $('#title_of_root').show();
+                $('#title_of_sub').hide();
+            } else {
+                $('#title_of_root').hide();
+                $('#title_of_sub').show();
+            }
+
             //如果用户是拥有者，显示直链相关的信息，并初始化
             if (this.room.owner == 1) {
                 this.direct.dirRoomInit();

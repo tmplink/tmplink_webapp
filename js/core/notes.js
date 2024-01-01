@@ -34,12 +34,13 @@ class notes {
         $('#notes').show();
         //设置 SVG
         $.trumbowyg.svgPath = '/plugin/trumbowyg/ui/icons.svg';
-        if (this.monitor === false) {
-            this.monitor = true;
-            setInterval(() => {
-                this.autoPost();
-            }, 10000);
-        }
+        //禁止使用自动保存
+        // if (this.monitor === false) {
+        //     this.monitor = true;
+        //     setInterval(() => {
+        //         this.autoPost();
+        //     }, 10000);
+        // }
         //修补UI，移动设备时，修正按钮高度
         $('.mobile-head-padding-large').css('padding-top', '150px');
     }
@@ -137,8 +138,10 @@ class notes {
     autoPost() {
         let raw_title = $('#notes_editor_title').val();
         let raw_content = $('#trumbowyg').trumbowyg('html');
-        if (raw_title === '' || raw_content === '') {
-            return false;
+
+        // 如果没有设定标题，则把标题设置为 untitled
+        if (raw_title === '') {
+            raw_title = 'untitled';
         }
 
         //如果标题和内容没有变化，不需要提交

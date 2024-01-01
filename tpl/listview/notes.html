@@ -1,9 +1,8 @@
 <div id="notes" class="card mt-5 shadow" style="display: none;">
     <div class="card-header pt-3 card-radius">
         <div class="mx-auto text-center mt-3">
-            <iconpark-icon name="book" class="fa-fw fa-4x"></iconpark-icon>
-            <span class="display-4" i18n="title_notes">. </span>
-            <span class="text-muted display-5">beta</span>
+            <iconpark-icon name="lock" class="fa-fw fa-2x"></iconpark-icon>
+            <span i18n="title_notes" style="font-size: 25px;vertical-align: bottom;">.</span>
             <div class="mt-4 mb-3">
                 <button onclick="TL.notes.open(0);" class="notes_ready_btn  btn btn-sm btn-light text-azure">
                     <iconpark-icon name="pencil" class="fa-fw"></iconpark-icon>
@@ -100,9 +99,9 @@
             <div class="modal-body">
                 <!-- 标题 -->
                 <input type="text" id="notes_editor_title" class="form-control mb-2" i18n="notes_editor_title" i18nOnly="placeholder"
-                placeholder="." onchange="TL.notes.autoPost();">
+                placeholder=".">
                 <!-- 内容 -->
-                <textarea id="trumbowyg" onchange="TL.notes.autoPost();"></textarea>
+                <textarea id="trumbowyg"></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" i18n="user_save" onclick="TL.notes.autoPost()">.</button>

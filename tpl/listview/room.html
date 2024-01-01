@@ -35,7 +35,13 @@
         </div>
 
         <div id="dir_list_box" class="card mt-5 hideOnLoad shadow">
-
+            <div id="title_of_root" class="card-header pt-3">
+                <div class="mx-auto text-center mt-3 mb-3">
+                    <iconpark-icon name="cabinet-filing" class="fa-fw fa-2x"></iconpark-icon>
+                    <span i18n="navbar_meetingroom" style="font-size: 25px;vertical-align: bottom;">.</span>
+                </div>
+                
+            </div>
             <div class="card-body card-radius">
                 <div class="clearfix mb-3 px-3">
                     <div class="float-right mr-2 d-none d-sm-inline">
@@ -43,10 +49,12 @@
                         <img src="" class="room_img" style="display: none;border-radius: 8px;height: 120px;">
                     </div>
                     <div class="float-left">
-                        <span class="room_title display-4"></span>
-                        <div class="mt-2 room_subinfo">
-                            <iconpark-icon name="folder-open" class="fa-fw text-yellow"></iconpark-icon>
-                            <span id="room_total"></span>
+                        <div id="title_of_sub">
+                            <span class="room_title display-4"></span>
+                            <div class="mt-2 room_subinfo">
+                                <iconpark-icon name="folder-open" class="fa-fw text-yellow"></iconpark-icon>
+                                <span id="room_total"></span>
+                            </div>
                         </div>
                         <div class="userinfo mt-2" style="display: none;">
                             <span class="fav-enabled" style="display: none;">
