@@ -108,7 +108,7 @@ class navbar {
     }
 
     model_notes(act){
-        $('#navbar_model_icon').attr('name', 'pen');
+        $('#navbar_model_icon').attr('name', 'lock');
         $('#navbar_model_text').html(app.languageData.navbar_notes);
         if (act === true) {
             dynamicView.notes();
