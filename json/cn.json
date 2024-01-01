@@ -693,6 +693,7 @@
     "brand_review_tos_3": "被用于非法用途，比如协助实施诈骗",
     "brand_review_notice": "在编辑好资料后，请先点击“保存”，然后再提请审核。审核通过后，您的品牌设定将会生效。 <br>请注意，上传新的 Logo 或者是修改名称及描述，都会导致品牌设定进入到等待状态。需要重新提请审核。<br>每次提请审核，将会在一个工作日内处理完成。",
     "user_modal_title": "个性化",
+    "user_giftcard": "兑换礼品",
     "user_submit": "提交审核",
     "user_save": "保存",
     "user_avatar": "头像",
