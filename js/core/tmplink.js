@@ -262,6 +262,10 @@ class tmplink {
     }
 
     bg_init() {
+        //如果是移动设备，不执行背景载入
+        if (isMobileScreen()) {
+            return false;
+        }
         if (document.querySelector('#background_wrap') == null) {
             $('body').append('<div id="background_wrap" style="z-index: -2;position: fixed;top: 0;left: 0;height: 100%;width: 100%;"></div>');
             $('body').append(`<div id="background_wrap_img" style="z-index: -1;position: fixed;top: 0;left: 0;height: 100%;display:none;width: 100%;"></div>`);
