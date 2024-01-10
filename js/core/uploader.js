@@ -846,6 +846,10 @@ class uploader {
                 case 10:
                     //上传失败，文件名中包含了不允许的字符
                     error_msg = app.languageData.upload_fail_name;
+                    break;
+                default:
+                    //默认错误
+                    error_msg = app.languageData.upload_fail_unknown+` ${rsp.status}`;
             }
             console.log(rsp.status + ':' + error_msg);
             $('#uqnn_' + id).html(`<span class="text-red">${error_msg}</span>`);

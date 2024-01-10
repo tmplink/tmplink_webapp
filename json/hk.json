@@ -292,6 +292,7 @@
     "upload_fail_permission": "上傳失敗，您沒有權限上傳檔案至此資料夾。",
     "upload_fail_node": "上傳失敗，無法獲得節點信息。",
     "upload_fail_name": "上傳失敗，檔名中包含了不受支援的字元。",
+    "upload_fail_unknown":"上傳失敗：",
     "video_player_prepare": "正在處理",
     "video_player_proccess": "影片正在準備中，請稍等...",
     "video_player_fail": "無法播放",

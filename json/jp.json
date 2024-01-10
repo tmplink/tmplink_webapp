@@ -290,6 +290,7 @@
     "upload_fail_permission": "アップロードに失敗しました。このフォルダーにファイルをアップロードする権限がありません。",
     "upload_fail_node": "アップロードに失敗しました、ノード情報が利用できません。",
     "upload_fail_name": "アップロードに失敗しました。ファイル名が無効です。",
+    "upload_fail_unknown": "アップロードに失敗しました。エラーコード：",
     "video_player_prepare": "処理中",
     "video_player_proccess": "ビデオは準備中です、お待ちください...",
     "video_player_fail": "再生に失敗しました",

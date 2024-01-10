@@ -292,6 +292,7 @@
     "upload_fail_permission": "Upload failed, you do not have permission to upload files to this folder.",
     "upload_fail_node": "Upload failed, could not get node information.",
     "upload_fail_name": "Upload failed. The file name contains unsupported characters.",
+    "upload_fail_unknown": "Upload failed ,error code :",
     "video_player_prepare": "Processing",
     "video_player_proccess": "The video is in preparation, please wait...",
     "video_player_fail": "Failed to play",
