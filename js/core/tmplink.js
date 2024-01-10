@@ -1120,6 +1120,8 @@ class tmplink {
                     //如果设置了个性化图标
                     if (rsp.data.ui_publish === 'yes' && rsp.data.ui_publish_status === 'ok' && rsp.data.ui_pro === 'yes') {
                         $('.userinfo_avatar').show();
+                        //hide default avatar
+                        $('#top_loggo').hide();
                         let avatarURL = `https://tmp-static.vx-cdn.com/static/avatar?id=${rsp.data.ui_avatar_id}`;
                         let img = new Image();
                         img.src = avatarURL;
