@@ -11,6 +11,7 @@ class direct {
     ssl = false
     ssl_auto = false
     traffic_chart = null
+    key = 0
 
     sort_by = 0
     sort_type = 0
@@ -52,6 +53,7 @@ class direct {
             'action': 'details',
             'token': this.parent_op.api_token
         }, (rsp) => {
+            this.key = rsp.data.key;
             this.domain = rsp.data.domain;
             this.quota = rsp.data.quota;
             this.quota_free = rsp.data.quota_free;
@@ -87,6 +89,13 @@ class direct {
 
             }
             
+            //如果 API key 是 0，说明没有设置 API key，显示提示
+            if (this.key == 0) {
+                $('#api_key').html(app.languageData.direct_api_key_not_set);
+            } else {
+                $('#api_key').html(this.key);
+            }
+            
             //如果有设定限制单个 IP 的日流量
             if (this.traffic_limit > 0) {
                 $('#direct_traffic_limit').val(this.traffic_limit);
@@ -120,6 +129,21 @@ class direct {
                 cb();
             }
         }, 'json');
+    }
+
+    resetAPIKey() {
+        $('#direct_api_key_reset_btn').attr('disabled', true);
+        $.post(this.parent_op.api_direct, {
+            'action': 'generate_key',
+            'token': this.parent_op.api_token,
+        }, () => {
+            $('#direct_api_key_reset_btn').removeAttr('disabled');
+            this.init_details();
+        });
+    }
+
+    copyAPIKey() {
+        this.parent_op.directCopy('#direct_api_key_copy_btn', this.key, false);
     }
 
     setTrafficLimit() {
