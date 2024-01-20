@@ -364,14 +364,87 @@
                     <div class="text-muted d-flex align-items-center">
                         <span class="badge-primary badge-pill mr-2">API Key <span id="api_key"></span></span>
                         <!-- 复制按钮 -->
-                        <button class="btn btn-sm btn-light text-azure ml-2" onclick="TL.direct.copyAPIKey();" id="direct_api_key_copy_btn">
+                        <button class="btn btn-sm btn-light text-azure ml-2" onclick="TL.direct.copyAPIKey();"
+                            id="direct_api_key_copy_btn">
                             <span i18n="copy">复制</span>
                         </button>
                         <!-- 重置按钮 -->
-                        <button class="btn btn-sm btn-light text-azure ml-2" onclick="TL.direct.resetAPIKey();" id="direct_api_key_reset_btn">
+                        <button class="btn btn-sm btn-light text-azure ml-2" onclick="TL.direct.resetAPIKey();"
+                            id="direct_api_key_reset_btn">
                             <span i18n="generate">重新生成</span>
                         </button>
                     </div>
+                </div>
+            </div>
+            <div class="row p-3 filelist-card shadow-sm mb-2 mx-1">
+                <div class="col-12">
+                    <div class="card-title">
+                        <div class="h4" i18n="direct_api_title_7">上传文件</div>
+                        <div class="text-muted">POST https://tmp-cli.vx-cdn.com/app/upload_cli</div>
+                        <p class="mt-3" i18n="direct_api_upload_des">此接口即为 CLI 上传文件的接口，因此使用标准表单来提交需要上传的文件，可以使用 curl 或者
+                            wget 等常用工具来完成上传。下面的代码是使用 curl 上传时的例子：</p>
+                        <code>
+                            curl -k -F "file=@/root/test.bin" -F "key=API key" -X POST "https://tmp-cli.vx-cdn.com/app/upload_cli"
+                        </code>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th i18n="direct_api_params">参数</th>
+                                <th i18n="direct_api_return">返回值</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <ul>
+                                        <li><code>key</code> API Key</li>
+                                        <li><code>mrid</code> <span i18n="direct_api_params_mrid">文件有效期</span></li>
+                                        <li>
+                                            <code>model</code> <span i18n="direct_api_params_model">文件有效期</span>
+                                            <ul>
+                                                <li>
+                                                    <code>99</code>
+                                                    <span i18n="modal_settings_upload_model99">永久</span>
+                                                </li>
+                                                <li>
+                                                    <code>0</code>
+                                                    <span i18n="modal_settings_upload_model1">这个文件在 24 后将被自动销毁</span>
+                                                </li>
+                                                <li>
+                                                    <code>1</code>
+                                                    <span i18n="modal_settings_upload_model2">有效期：3天</span>
+                                                </li>
+                                                <li>
+                                                    <code>2</code>
+                                                    <span i18n="modal_settings_upload_model3">有效期：7天</span>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <p>
+                                        <strong>Status:</strong>
+                                        <li i18n="direct_api_upload_status_1">1 : 上传完成，此时返回的 Data 数据为文件的 UKEY。</li>
+                                        <li i18n="direct_api_upload_status_0">0 : 上传失败，无效的请求。</li>
+                                        <li i18n="direct_api_upload_status_2">2 : 上传失败，文件大小超过限制。</li>
+                                        <li i18n="direct_api_upload_status_3">3 : 上传失败，服务器繁忙，无法处理此次请求。</li>
+                                        <li i18n="direct_api_upload_status_4">4 : 上传失败，私有空间不足，无法存储文件。</li>
+                                        <li i18n="direct_api_upload_status_5">5 : 上传失败，目前上传的文件总量已经超出了当日配额。存储至私有空间时不受限制。
+                                        </li>
+                                        <li i18n="direct_api_upload_status_6">6 : 上传失败，API Key 已失效。</li>
+                                    </p>
+                                    <p>
+                                        <strong>Data : String</strong>
+                                        <li><span i18n="direct_api_data_upload">上传成功时，返回的数据为文件的
+                                                UKEY。上传失败时，返回数据是错误信息。</span></li>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="row p-3 filelist-card shadow-sm mb-2 mx-1">
@@ -432,7 +505,8 @@
                                     <ul>
                                         <li><code>action</code> list_of_workspace</li>
                                         <li><code>key</code> API Key</li>
-                                        <li><code>page</code> <span i18n="direct_api_params_page">页码，每页显示 1000 条数据</span></li>
+                                        <li><code>page</code> <span i18n="direct_api_params_page">页码，每页显示 1000
+                                                条数据</span></li>
                                     </ul>
                                 </td>
                                 <td>
@@ -473,7 +547,8 @@
                                     <ul>
                                         <li><code>action</code> list_of_direct</li>
                                         <li><code>key</code> API Key</li>
-                                        <li><code>page</code> <span i18n="direct_api_params_page">页码，每页显示 1000 条数据</span></li>
+                                        <li><code>page</code> <span i18n="direct_api_params_page">页码，每页显示 1000
+                                                条数据</span></li>
                                     </ul>
                                 </td>
                                 <td>
@@ -514,7 +589,7 @@
                                     <ul>
                                         <li><code>action</code> link_add</li>
                                         <li><code>key</code> API Key</li>
-                                        <li><code>ukey</code> <span i18n="direct_api_params_ukey">>文件 UKEY</span</li>
+                                        <li><code>ukey</code> <span i18n="direct_api_params_ukey">>文件 UKEY</span< /li>
                                     </ul>
                                 </td>
                                 <td>
@@ -551,7 +626,8 @@
                                         <li><code>action</code> link_del</li>
                                         <li><code>key</code> API Key</li>
                                         <li><code>dkey</code> <span i18n="direct_api_params_dkey">直链 DKEY</span></li>
-                                        <li><code>delete</code> <span i18n="direct_api_params_delete">是否同时删除文件，如果设定为 true，将删除对应的文件，其它设定为此文件的直链也会一同删除。默认为 false。</span></li>
+                                        <li><code>delete</code> <span i18n="direct_api_params_delete">是否同时删除文件，如果设定为
+                                                true，将删除对应的文件，其它设定为此文件的直链也会一同删除。默认为 false。</span></li>
                                     </ul>
                                 </td>
                                 <td>
