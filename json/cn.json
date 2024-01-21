@@ -706,6 +706,9 @@
     "direct_api_upload_status_5": "5 : 上传失败，目前上传的文件总量已经超出了当日配额。存储至私有空间时不受限制。",
     "direct_api_upload_status_6": "6 : 上传失败，API Key 已失效。",
     "direct_api_data_upload": "上传成功时，返回的数据为文件的 UKEY。上传失败时，返回数据是错误信息。",
+    
+    "direct_api_params_vaild_time": "（可选参数）链接有效期，单位为分钟，默认为 0 ，一直有效",
+    "direct_api_data_etime" :"链接有效期",
 
     "btn_enable": "启用",
     "btn_disable": "停用",

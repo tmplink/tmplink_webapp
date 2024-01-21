@@ -1,4 +1,6 @@
 {
+    "direct_api_params_vaild_time": "(Optional) Link validity period in minutes, default is 0, which means it is always valid",
+    "direct_api_data_etime" :"Link validity period",
     "direct_api_title_7": "Upload Files",
     "direct_api_params_model": "File validity period, with the default parameter being 0.",
     "direct_api_params_mrid": "Folder ID, an optional parameter. If set, the file will be uploaded to the specified folder. If not set, the file will be uploaded to the repository.",

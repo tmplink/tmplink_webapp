@@ -260,11 +260,11 @@
                                             </a>
                                         <% } %>
 
-                                        <% if(obj[x].model!=99){ %>
+                                        <% if(obj[x].link_etime!=='0000-00-00 00:00:00'){ %>
                                             <!--[在大屏幕上显示]-->
-                                            <span class="d-none d-lg-inline">
+                                            <span>
                                                 <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
-                                                <span class="lefttime-remainder" id="wd_<% obj[x].direct_key %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
+                                                <span><% obj[x].link_etime %></span>
                                             </span>
                                         <% } %>
 
@@ -281,14 +281,6 @@
                                             <span class="d-inline d-lg-none" onclick="event.stopPropagation();">
                                                 <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
                                                 <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
-                                            </span>
-                                        <% } %>
-
-                                        <% if(obj[x].model!=99){ %>
-                                            <!--[在小屏幕上显示]-->
-                                            <span class="d-inline d-lg-none">
-                                                <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
-                                                <span class="lefttime-remainder" id="wm_<% obj[x].direct_key %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
                                             </span>
                                         <% } %>
                                     </div>
@@ -547,8 +539,7 @@
                                     <ul>
                                         <li><code>action</code> list_of_direct</li>
                                         <li><code>key</code> API Key</li>
-                                        <li><code>page</code> <span i18n="direct_api_params_page">页码，每页显示 1000
-                                                条数据</span></li>
+                                        <li><code>page</code> <span i18n="direct_api_params_page">页码，每页显示 1000 条数据</span></li>
                                     </ul>
                                 </td>
                                 <td>
@@ -559,10 +550,11 @@
                                     </p>
                                     <p>
                                         <strong>Data : Array</strong>
-                                        <li>dkey : <span i18n="direct_api_data_dkey">直链 DKEY</span></li>
-                                        <li>link : <span i18n="direct_api_data_link">下载链接</span></li>
-                                        <li>name : <span i18n="direct_api_data_name">文件名</span></li>
-                                        <li>size : <span i18n="direct_api_data_size">文件大小</span></li>
+                                        <li>dkey  : <span i18n="direct_api_data_dkey">直链 DKEY</span></li>
+                                        <li>link  : <span i18n="direct_api_data_link">下载链接</span></li>
+                                        <li>name  : <span i18n="direct_api_data_name">文件名</span></li>
+                                        <li>size  : <span i18n="direct_api_data_size">文件大小</span></li>
+                                        <li>etime : <span i18n="direct_api_data_etime">链接有效期</span></li>
                                     </p>
                                 </td>
                             </tr>
@@ -589,7 +581,8 @@
                                     <ul>
                                         <li><code>action</code> link_add</li>
                                         <li><code>key</code> API Key</li>
-                                        <li><code>ukey</code> <span i18n="direct_api_params_ukey">>文件 UKEY</span< /li>
+                                        <li><code>ukey</code> <span i18n="direct_api_params_ukey">文件 UKEY</span</li>
+                                        <li><code>vaild_time</code> <span i18n="direct_api_params_vaild_time">（可选参数）链接有效期，单位为分钟，默认为 0 ，一直有效</span</li>
                                     </ul>
                                 </td>
                                 <td>

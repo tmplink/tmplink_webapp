@@ -1,4 +1,6 @@
 {
+    "direct_api_params_vaild_time": "（可選參數）連結有效期，單位為分鐘，預設為 0 ，永久有效",
+    "direct_api_data_etime" :"連結有效期",
     "direct_api_title_7": "上傳檔案",
     "direct_api_params_model": "檔案有效期限，預設參數為0。",
     "direct_api_params_mrid": "資料夾ID，選用參數。若設定此參數，檔案將會上傳至指定資料夾。若未設定此參數，檔案將會上傳至儲存庫。",
