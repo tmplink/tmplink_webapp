@@ -580,16 +580,14 @@ class direct {
         if (page == 0 && data == false) {
             $('.no_files').show();
         }
-        if (data.length == 0) {
-            return false;
-        }
 
         //为 data 增加直链单元
-        for (let i = 0; i < data.length; i++) {
+        for (let i in data) {
             let filename = encodeURIComponent(data[i].fname);
             data[i].direct_link = this.genLinkDirect(data[i].direct_key, filename).download;
             data[i].play_link = this.genLinkDirect(data[i].direct_key, filename).play;
         }
+
         $('#direct_filelist').append(app.tpl('direct_filelist_list_tpl', data));
         $('.lefttime-remainder').each((i, e) => {
             let id = $(e).attr('id');
