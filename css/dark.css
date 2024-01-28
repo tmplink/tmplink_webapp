@@ -133,7 +133,11 @@
     }
 
     .glass {
-        background-color: #464343 !important;
+        /* background-color: #464343 !important; */
+        background-color: rgba(65, 64, 64, 0.9) !important;
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: saturate(180%) blur(20px);
+        background-clip: padding-box;
     }
 
     .filelist_link{
@@ -174,7 +178,7 @@
     }
 
     .card {
-        background-color: #555454 !important;
+        /* background-color: #555454 !important; */
     }
 
     .table {

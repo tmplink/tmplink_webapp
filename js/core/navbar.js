@@ -33,7 +33,7 @@ class navbar {
             }
         }else{
             $('.nav-desktop').show();
-            $('.nav-mobile').hide();
+            $('.nav-mobile').hide(); 
         }
     }
 

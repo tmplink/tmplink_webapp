@@ -54,7 +54,8 @@
             <div class="mobile-head-large-title text-left w-100">
                 <div class="mobile-list-titlename">
                     <div class="text-center">
-                        <iconpark-icon name="globe" class="fa-fw text-green" id="direct_bind_domain_icon"></iconpark-icon>
+                        <iconpark-icon name="globe" class="fa-fw text-green"
+                            id="direct_bind_domain_icon"></iconpark-icon>
                         <span id="direct_bind_domain_box">
                             <a href="#" target="_blank" id="direct_bind_domain">#</a>
                         </span>
@@ -171,16 +172,18 @@
                     <iconpark-icon name="memory-one" class="fa-fw"></iconpark-icon>
                     <label for="direct-domain" i18n="direct_modal_bind_domain_5">.</label>
                     <input type="text" class="form-control" id="direct-domain" placeholder="."
-                        i18n="direct_modal_bind_domain_6" i18n-placeholder="true" onkeyup="TL.direct.checkInput()" onchange="TL.direct.checkInput()">
+                        i18n="direct_modal_bind_domain_6" i18n-placeholder="true" onkeyup="TL.direct.checkInput()"
+                        onchange="TL.direct.checkInput()">
                     <div>
-                        <small id="domainHelpError" i18n="direct_ssl_check_input_notice1" class="form-text text-muted text-red mt-1" style="display: none;">
+                        <small id="domainHelpError" i18n="direct_ssl_check_input_notice1"
+                            class="form-text text-muted text-red mt-1" style="display: none;">
                             .
                         </small>
                     </div>
                     <div>
                         <small id="domainHelp" class="form-text text-muted mt-1" style="display: none;">
                             <span i18n="direct_ssl_check_input_notice2">.</span>
-                            <span class="req_new_acme_domain text-green">_acme-challenge.abc.com</span> 
+                            <span class="req_new_acme_domain text-green">_acme-challenge.abc.com</span>
                             <span class="text-red">_acme-challenge.ng-ccc.com</span>
                         </small>
                     </div>
@@ -199,26 +202,27 @@
                 <label for="enable_ssl" i18n="direct_ssl_enable_title">.</label>
                 <div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="enable_ssl1" name="enable_ssl" class="custom-control-input" onchange="TL.direct.checkInput()" value="yes" checked>
+                        <input type="radio" id="enable_ssl1" name="enable_ssl" class="custom-control-input"
+                            onchange="TL.direct.checkInput()" value="yes" checked>
                         <label class="custom-control-label" for="enable_ssl1" i18n="btn_enable">.</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="enable_ssl2" name="enable_ssl" class="custom-control-input" onchange="TL.direct.checkInput()" value="no">
+                        <input type="radio" id="enable_ssl2" name="enable_ssl" class="custom-control-input"
+                            onchange="TL.direct.checkInput()" value="no">
                         <label class="custom-control-label" for="enable_ssl2" i18n="btn_close">.</label>
                     </div>
                 </div>
-                
+
                 <small id="sslHelp" i18n="direct_ssl_enable_intro" class="form-text text-muted">
                     .
                 </small>
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-primary btn-block"
-                    onclick="TL.direct.setDomain()" i18n="btn_save_settings">.</button>
+                <button type="button" class="btn btn-primary btn-block" onclick="TL.direct.setDomain()"
+                    i18n="btn_save_settings">.</button>
             </div>
         </div>
-        <div class="no_direct_domains mx-auto"
-            style="display: none;max-width: 620px;">
+        <div class="no_direct_domains mx-auto" style="display: none;max-width: 620px;">
             <hr>
             <div>
                 <p i18n="direct_intro_1">.</p>
@@ -250,20 +254,19 @@
     </div>
 
     <div class="nav nav-pills d-flex justify-content-center mt-3" id="nav-tab" role="tablist">
-        <a class="nav-link active" id="nav-direct-filelist" data-toggle="tab"
-            href="#v-direct_filelist" role="tab" aria-controls="v-direct_filelist"
-            aria-selected="true" i18n="file">.</a>
-        <a class="nav-link" id="nav-direct-room" data-toggle="tab"
-            href="#v-direct_room" role="tab" aria-controls="v-direct_room"
-            aria-selected="false" i18n="folder">.</a>
+        <a class="nav-link active" id="nav-direct-filelist" data-toggle="tab" href="#v-direct_filelist" role="tab"
+            aria-controls="v-direct_filelist" aria-selected="true" i18n="file">.</a>
+        <a class="nav-link" id="nav-direct-room" data-toggle="tab" href="#v-direct_room" role="tab"
+            aria-controls="v-direct_room" aria-selected="false" i18n="folder">.</a>
+        <a class="nav-link" id="nav-direct-api" data-toggle="tab" href="#v-direct_api" role="tab"
+            aria-controls="v-direct_api" aria-selected="false" i18n="direct_api_key_nav">接口</a>
     </div>
 
     <div class="tab-content p-2">
-        <div class="tab-pane show active" id="v-direct_filelist" role="tabpanel"
-            aria-labelledby="nav-direct-filelist">
+        <div class="tab-pane show active" id="v-direct_filelist" role="tabpanel" aria-labelledby="nav-direct-filelist">
             <div id="filelist_model">
                 <div id="direct_filelist"></div>
-        
+
                 <div class="no_photos" style="margin-top: 20px;margin-bottom: 100px;display: none;">
                     <div class="text-center mb-4">
                         <iconpark-icon name="camera" class="fa-fw fa-4x"></iconpark-icon>
@@ -276,7 +279,7 @@
                         <div i18n="direct_intro_modal_body_1">.</div>
                     </div>
                 </div>
-        
+
                 <script type="text/template" id="direct_filelist_list_tpl">
                     <% for (var x in obj) { %>
                         <div class="row mobile-list-bar file_unit_<% obj[x].direct_key %>">
@@ -319,11 +322,11 @@
                         </div>
                     <% } %>
                 </script>
-            </div>    
+            </div>
         </div>
-        <div class="tab-pane" id="v-direct_room" role="tabpanel"
-            aria-labelledby="nav-direct-room">
-            <div class="no_direct_room mx-auto" style="margin-top: 100px;margin-bottom: 100px;display: none;max-width: 500px;">
+        <div class="tab-pane" id="v-direct_room" role="tabpanel" aria-labelledby="nav-direct-room">
+            <div class="no_direct_room mx-auto"
+                style="margin-top: 100px;margin-bottom: 100px;display: none;max-width: 500px;">
                 <div class="text-center mb-4">
                     <iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon>
                 </div>
@@ -357,6 +360,237 @@
                     </div>
                 <% } %>
             </script>
+        </div>
+        <div class="tab-pane" id="v-direct_api" role="tabpanel" aria-labelledby="nav-direct-api">
+            <div class="row mb-2 mt-2">
+                <div class="col-12">
+                    <div class="h3" i18n="direct_api_title_1">欢迎使用 API</div>
+                    <div class="text-muted">
+                        <div>
+                            <span class="mr-2">API Key <span id="api_key"></span></span>
+                        </div>
+                        <div>
+                            <!-- 复制按钮 -->
+                            <button class="btn btn-sm btn-light text-azure" onclick="TL.direct.copyAPIKey();"
+                                id="direct_api_key_copy_btn">
+                                <span i18n="copy">复制</span>
+                            </button>
+                            <!-- 重置按钮 -->
+                            <button class="btn btn-sm btn-light text-azure ml-2" onclick="TL.direct.resetAPIKey();"
+                                id="direct_api_key_reset_btn">
+                                <span i18n="generate">重新生成</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_title_7">上传文件</div>
+                    <div class="text-muted">POST https://tmp-cli.vx-cdn.com/app/upload_cli</div>
+                    <p class="mt-3" i18n="direct_api_upload_des">此接口即为 CLI 上传文件的接口，因此使用标准表单来提交需要上传的文件，可以使用 curl 或者
+                        wget 等常用工具来完成上传。下面的代码是使用 curl 上传时的例子：</p>
+                    <code>
+                                                        curl -k -F "file=@/root/test.bin" -F "key=API key" -X POST "https://tmp-cli.vx-cdn.com/app/upload_cli"
+                                                    </code>
+                </div>
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_params">参数</div>
+                    <ul>
+                        <li><code>key</code> API Key</li>
+                        <li><code>mrid</code> <span i18n="direct_api_params_mrid">文件有效期</span></li>
+                        <li>
+                            <code>model</code> <span i18n="direct_api_params_model">文件有效期</span>
+                            <ul>
+                                <li>
+                                    <code>99</code>
+                                    <span i18n="modal_settings_upload_model99">永久</span>
+                                </li>
+                                <li>
+                                    <code>0</code>
+                                    <span i18n="modal_settings_upload_model1">这个文件在 24 后将被自动销毁</span>
+                                </li>
+                                <li>
+                                    <code>1</code>
+                                    <span i18n="modal_settings_upload_model2">有效期：3天</span>
+                                </li>
+                                <li>
+                                    <code>2</code>
+                                    <span i18n="modal_settings_upload_model3">有效期：7天</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_return">返回值</div>
+                    <p>
+                        <strong>Status:</strong>
+                    </p>
+                    <ul>
+                        <li i18n="direct_api_upload_status_1">1 : 上传完成，此时返回的 Data 数据为文件的 UKEY。</li>
+                        <li i18n="direct_api_upload_status_0">0 : 上传失败，无效的请求。</li>
+                        <li i18n="direct_api_upload_status_2">2 : 上传失败，文件大小超过限制。</li>
+                        <li i18n="direct_api_upload_status_3">3 : 上传失败，服务器繁忙，无法处理此次请求。</li>
+                        <li i18n="direct_api_upload_status_4">4 : 上传失败，私有空间不足，无法存储文件。</li>
+                        <li i18n="direct_api_upload_status_5">5 : 上传失败，目前上传的文件总量已经超出了当日配额。存储至私有空间时不受限制。</li>
+                        <li i18n="direct_api_upload_status_6">6 : 上传失败，API Key 已失效。</li>
+                    </ul>
+                    <p>
+                        <strong>Data : String</strong>
+                    </p>
+                    <ul>
+                        <li><span i18n="direct_api_data_upload">上传成功时，返回的数据为文件的 UKEY。上传失败时，返回数据是错误信息。</span></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_title_6">获取直链流量配额</div>
+                    <div class="text-muted">POST https://tmp-api.vx-cdn.com/services/direct</div>
+                </div>
+
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_params">参数</div>
+                    <ul>
+                        <li><code>action</code> quota</li>
+                        <li><code>key</code> API Key</li>
+                    </ul>
+                </div>
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_return">返回值</div>
+                    <p>
+                        <strong>Status:</strong>
+                        <li i18n="direct_api_status_1">1 : 有数据</li>
+                        <li i18n="direct_api_status_0">0 : 没有数据</li>
+                    </p>
+                    <p>
+                        <strong>Data : Array</strong>
+                        <li>quota : <span i18n="direct_api_data_quota">已购买的配额</span></li>
+                        <li>quota_free : <span i18n="direct_api_data_quota_free">月度免费配额</span></li>
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_title_2">获取仓库文件列表</div>
+                    <div class="text-muted">POST https://tmp-api.vx-cdn.com/services/direct</div>
+                </div>
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_params">参数</div>
+                    <ul>
+                        <li><code>action</code> list_of_workspace</li>
+                        <li><code>key</code> API Key</li>
+                        <li><code>page</code> <span i18n="direct_api_params_page">页码，每页显示 1000 条数据</span></li>
+                    </ul>
+                </div>
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_return">返回值</div>
+                    <p>
+                        <strong>Status:</strong>
+                        <li i18n="direct_api_status_1">1 : 有数据</li>
+                        <li i18n="direct_api_status_0">0 : 没有数据</li>
+                    </p>
+                    <p>
+                        <strong>Data : Array</strong>
+                        <li>ukey : <span i18n="direct_api_data_ukey">文件 UKEY</span></li>
+                        <li>name : <span i18n="direct_api_data_name">文件名</span></li>
+                        <li>size : <span i18n="direct_api_data_size">文件大小</span></li>
+                    </p>
+                </div>
+
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_title_3">获取直链文件列表</div>
+                    <div class="text-muted">POST https://tmp-api.vx-cdn.com/services/direct</div>
+                </div>
+
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_params">参数</div>
+                    <ul>
+                        <li><code>action</code> list_of_direct</li>
+                        <li><code>key</code> API Key</li>
+                        <li><code>page</code> <span i18n="direct_api_params_page">页码，每页显示 1000 条数据</span></li>
+                    </ul>
+                </div>
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_return">返回值</div>
+                    <p>
+                        <strong>Status:</strong>
+                        <li i18n="direct_api_status_1">1 : 有数据</li>
+                        <li i18n="direct_api_status_0">0 : 没有数据</li>
+                    </p>
+                    <p>
+                        <strong>Data : Array</strong>
+                        <li>dkey : <span i18n="direct_api_data_dkey">直链 DKEY</span></li>
+                        <li>link : <span i18n="direct_api_data_link">下载链接</span></li>
+                        <li>name : <span i18n="direct_api_data_name">文件名</span></li>
+                        <li>size : <span i18n="direct_api_data_size">文件大小</span></li>
+                        <li>etime : <span i18n="direct_api_data_etime">链接有效期</span></li>
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_title_4">添加直链</div>
+                    <div class="text-muted">POST https://tmp-api.vx-cdn.com/services/direct</div>
+                </div>
+
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_params">参数</div>
+                    <ul>
+                        <li><code>action</code> link_add</li>
+                        <li><code>key</code> API Key</li>
+                        <li><code>ukey</code> <span i18n="direct_api_params_ukey">文件 UKEY</span></li>
+                        <li><code>vaild_time</code> <span i18n="direct_api_params_vaild_time">（可选参数）链接有效期，单位为分钟，默认为 0
+                                ，一直有效</span></li>
+                    </ul>
+                </div>
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_return">返回值</div>
+                    <p>
+                        <strong>Status:</strong>
+                        <li i18n="direct_api_status_1_b">1 : 完成</li>
+                        <li i18n="direct_api_status_0_b">0 : 失败</li>
+                        <li i18n="direct_api_status_1001">1001 : 失败，文件不存在</li>
+                        <li i18n="direct_api_status_1002">1002 : 失败，内部错误</li>
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_title_5">移除直链</div>
+                    <div class="text-muted">POST https://tmp-api.vx-cdn.com/services/direct</div>
+                </div>
+
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_params">参数</div>
+                    <ul>
+                        <li><code>action</code> link_del</li>
+                        <li><code>key</code> API Key</li>
+                        <li><code>dkey</code> <span i18n="direct_api_params_dkey">直链 DKEY</span></li>
+                        <li><code>delete</code> <span i18n="direct_api_params_delete">是否同时删除文件，如果设定为
+                                true，将删除对应的文件，其它设定为此文件的直链也会一同删除。默认为 false。</span></li>
+                    </ul>
+                </div>
+                <div class="col-12 pb-2">
+                    <div class="h4" i18n="direct_api_return">返回值</div>
+                    <p>
+                        <strong>Status:</strong>
+                        <li i18n="direct_api_status_1_b">1 : 完成</li>
+                        <li i18n="direct_api_status_0_b">0 : 失败</li>
+                        <li i18n="direct_api_status_1003">1003 : 失败，没有找到对应的直链</li>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -404,16 +638,18 @@
                             <iconpark-icon name="memory-one" class="fa-fw"></iconpark-icon>
                             <label for="direct-domain" i18n="direct_modal_bind_domain_5">.</label>
                             <input type="text" class="form-control" id="direct-domain" placeholder="."
-                                i18n="direct_modal_bind_domain_6" i18n-placeholder="true" onkeyup="TL.direct.checkInput()" onchange="TL.direct.checkInput()">
+                                i18n="direct_modal_bind_domain_6" i18n-placeholder="true"
+                                onkeyup="TL.direct.checkInput()" onchange="TL.direct.checkInput()">
                             <div>
-                                <small id="domainHelpError" i18n="direct_ssl_check_input_notice1" class="form-text text-muted text-red mt-1" style="display: none;">
+                                <small id="domainHelpError" i18n="direct_ssl_check_input_notice1"
+                                    class="form-text text-muted text-red mt-1" style="display: none;">
                                     .
                                 </small>
                             </div>
                             <div>
                                 <small id="domainHelp" class="form-text text-muted mt-1" style="display: none;">
                                     <div i18n="direct_ssl_check_input_notice2">.</div>
-                                    <div class="req_new_acme_domain text-green">_acme-challenge.abc.com</div> 
+                                    <div class="req_new_acme_domain text-green">_acme-challenge.abc.com</div>
                                     <div class="text-red">_acme-challenge.ng-ccc.com</div>
                                 </small>
                             </div>
@@ -432,22 +668,24 @@
                         <label for="enable_ssl" i18n="direct_ssl_enable_title">.</label>
                         <div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="enable_ssl1" name="enable_ssl" class="custom-control-input" onchange="TL.direct.checkInput()" value="yes" checked>
+                                <input type="radio" id="enable_ssl1" name="enable_ssl" class="custom-control-input"
+                                    onchange="TL.direct.checkInput()" value="yes" checked>
                                 <label class="custom-control-label" for="enable_ssl1" i18n="btn_enable">.</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="enable_ssl2" name="enable_ssl" class="custom-control-input" onchange="TL.direct.checkInput()" value="no">
+                                <input type="radio" id="enable_ssl2" name="enable_ssl" class="custom-control-input"
+                                    onchange="TL.direct.checkInput()" value="no">
                                 <label class="custom-control-label" for="enable_ssl2" i18n="btn_close">.</label>
                             </div>
                         </div>
-                        
+
                         <small id="sslHelp" i18n="direct_ssl_enable_intro" class="form-text text-muted">
                             .
                         </small>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary btn-block"
-                            onclick="TL.direct.setDomain()" i18n="btn_save_settings">.</button>
+                        <button type="button" class="btn btn-primary btn-block" onclick="TL.direct.setDomain()"
+                            i18n="btn_save_settings">.</button>
                     </div>
                 </div>
                 <div id="tmplink_subdomain" class="card p-3 shadow-sm">

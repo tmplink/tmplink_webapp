@@ -1,206 +1,206 @@
-<div class="container d-flex flex-grow-1">
-    <div id="file_messenger" class="align-self-center w-100" style="display: none;">
-        <div class="card align-self-center mx-auto shadow" style="margin-top: 20px;padding:100px;max-width: 550px;">
-            <div class="text-center mb-4" id="file_messenger_icon"></div>
-            <div class="text-center display-4" id="file_messenger_msg"></div>
-            <div class="row p-5" style="display: none;" id="file_messenger_msg_login">
-                <div class="col-md-6 col-12 text-center">
-                    <button class="btn btn-lg btn-primary btn-block workspace-nologin" type="button"
-                        onclick="app.open('/app&listview=login');" i18n="index_b3">
-                        .
-                    </button>
-                </div>
-                <div class="col-md-6 col-12 text-center">
-                    <button class="btn btn-lg btn-danger btn-block workspace-nologin" type="button"
-                        onclick="app.open('/app&listview=reg');" i18n="index_b2">
-                        .
-                    </button>
-                </div>
+<div id="file_messenger" class="align-self-center w-100" style="display: none;">
+    <div class="card align-self-center mx-auto shadow" style="margin-top: 20px;padding:100px;max-width: 550px;">
+        <div class="text-center mb-4" id="file_messenger_icon"></div>
+        <div class="text-center display-4" id="file_messenger_msg"></div>
+        <div class="row p-5" style="display: none;" id="file_messenger_msg_login">
+            <div class="col-md-6 col-12 text-center">
+                <button class="btn btn-lg btn-primary btn-block workspace-nologin" type="button"
+                    onclick="app.open('/app&listview=login');" i18n="index_b3">
+                    .
+                </button>
+            </div>
+            <div class="col-md-6 col-12 text-center">
+                <button class="btn btn-lg btn-danger btn-block workspace-nologin" type="button"
+                    onclick="app.open('/app&listview=reg');" i18n="index_b2">
+                    .
+                </button>
             </div>
         </div>
     </div>
+</div>
 
 
-    <div id="room_loaded" class="w-100" style="display: none;">
+<div id="room_loaded" class="w-100" style="display: none;">
 
-        <div id="download_queue" class="card mt-4 shadow" style="display: none;">
-            <div id="filelist_model" class="card-body">
-                <div id="download_queue_list"></div>
-            </div>
+    <div id="download_queue" class="card mt-4 shadow" style="display: none;">
+        <div id="filelist_model" class="card-body">
+            <div id="download_queue_list"></div>
         </div>
+    </div>
 
-        <div class="mt-4 d-block d-sm-none">
-            <!--[这里显示文件夹预设图片]-->
-            <img src="" class="room_img" style="display: none;border-radius: 8px;width: 100%;">
-        </div>
+    <div class="mt-4 d-block d-sm-none">
+        <!--[这里显示文件夹预设图片]-->
+        <img src="" class="room_img" style="display: none;border-radius: 8px;width: 100%;">
+    </div>
 
-        <div id="dir_list_box" class="card mt-5 hideOnLoad shadow">
-            <div id="title_of_root" class="card-header pt-3">
+    <div id="dir_list_box" class="card mt-5 hideOnLoad shadow glass">
+
+        <div class="card-body card-radius">
+            <div id="title_of_root" class="pt-3">
                 <div class="mx-auto text-center mt-3 mb-3">
                     <iconpark-icon name="cabinet-filing" class="fa-fw fa-2x"></iconpark-icon>
                     <span i18n="navbar_meetingroom" style="font-size: 25px;vertical-align: bottom;">.</span>
                 </div>
-                
             </div>
-            <div class="card-body card-radius">
-                <div class="clearfix mb-3 px-3">
-                    <div class="float-right mr-2 d-none d-sm-inline">
-                        <!--[这里显示文件夹预设图片]-->
-                        <img src="" class="room_img" style="display: none;border-radius: 8px;height: 120px;">
+            <div class="clearfix mb-3 px-3">
+                <div class="float-right mr-2 d-none d-sm-inline">
+                    <!--[这里显示文件夹预设图片]-->
+                    <img src="" class="room_img" style="display: none;border-radius: 8px;height: 120px;">
+                </div>
+                <div class="float-left">
+                    <div id="title_of_sub">
+                        <span class="room_title display-4"></span>
+                        <div class="mt-2 room_subinfo">
+                            <iconpark-icon name="folder-open" class="fa-fw text-yellow"></iconpark-icon>
+                            <span id="room_total"></span>
+                        </div>
                     </div>
-                    <div class="float-left">
-                        <div id="title_of_sub">
-                            <span class="room_title display-4"></span>
-                            <div class="mt-2 room_subinfo">
-                                <iconpark-icon name="folder-open" class="fa-fw text-yellow"></iconpark-icon>
-                                <span id="room_total"></span>
-                            </div>
-                        </div>
-                        <div class="userinfo mt-2" style="display: none;">
-                            <span class="fav-enabled" style="display: none;">
-                                <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
-                                <span id="favorite_count" class="text-pink">0</span>
+                    <div class="userinfo mt-2" style="display: none;">
+                        <span class="fav-enabled" style="display: none;">
+                            <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
+                            <span id="favorite_count" class="text-pink">0</span>
+                        </span>
+                        <span class="badge badge-pill badge-dark btn-point user-unlogin"
+                            onclick="app.open('/app&listview=login')" style="display: none;">
+                            <span i18n="need_login_of_dir">.</span>
+                        </span>
+                        <span>
+                            <span class="upload_queue" style="display: none;">
+                                <iconpark-icon name="circle-arrow-up" class="fa-fw"></iconpark-icon>
+                                <span class="upload_queue_counter"></span>
+                                <span class="upload_speed"></span>
                             </span>
-                            <span class="badge badge-pill badge-dark btn-point user-unlogin"
-                                onclick="app.open('/app&listview=login')" style="display: none;">
-                                <span i18n="need_login_of_dir">.</span>
-                            </span>
-                            <span>
-                                <span class="upload_queue" style="display: none;">
-                                    <iconpark-icon name="circle-arrow-up" class="fa-fw"></iconpark-icon>
-                                    <span class="upload_queue_counter"></span>
-                                    <span class="upload_speed"></span>
-                                </span>
-                            </span>
-                        </div>
-                        <div class="lead mt-2" id="room_direct_model">
-                            <a href="#" id="room_link" target="_blank"></a>
-                        </div>
+                        </span>
+                    </div>
+                    <div class="lead mt-2" id="room_direct_model">
+                        <a href="#" id="room_link" target="_blank"></a>
                     </div>
                 </div>
+            </div>
 
-                <div class="clearfix mt-3"></div>
-                <div class="p-3">
-                    <form autocomplete="off" class="btn_for_sub">
-                        <div class="input-group mb-1">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary" type="button" onclick="TL.mr_file_list(0);"
-                                    i18n="search_btn">.</button>
-                            </div>
-                            <input type="search" name="room_search" id="room_search" class="form-control"
-                                placeholder="." i18n="search_plh" onkeyup="if(event.keyCode==13)TL.mr_file_list(0);"
-                                style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
+            <div class="clearfix mt-3"></div>
+            <div class="p-3">
+                <form autocomplete="off" class="btn_for_sub">
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary" type="button" onclick="TL.mr_file_list(0);"
+                                i18n="search_btn">.</button>
                         </div>
-                        <input style="display:none;">
-                    </form>
-
-                    <div class="mb-2"></div>
-
-                    <div class="btn_for_desktop">
-                        <button class="btn btn-light text-azure btn-sm mr-1 mt-1 not_owner"
-                            onclick="$('#mrCreaterModal').modal('show');$('#mr_id').val('0');$('#mr_parent_id').val('0');$('#mr_top_id').val('0');">
-                            <iconpark-icon name="folder-plus" class="fa-fw"></iconpark-icon>
-                            <span i18n="model_title_folder_title" class="d-none d-sm-inline">.</span>
-                        </button>
-                        <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.room_list()">
-                            <iconpark-icon name="rotate" class="fa-fw mr_filelist_refresh_icon"></iconpark-icon>
-                        </button>
+                        <input type="search" name="room_search" id="room_search" class="form-control" placeholder="."
+                            i18n="search_plh" onkeyup="if(event.keyCode==13)TL.mr_file_list(0);"
+                            style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
                     </div>
+                    <input style="display:none;">
+                </form>
 
-                    <div class="btn_for_sub">
-                        <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
-                            id="filelist_filter">
-                            <iconpark-icon name="list" class="fa-fw"></iconpark-icon>
-                            <span i18n="sort_title" class="d-none d-sm-inline">.</span>
-                        </button>
-                        <button id="room_btn_file_list" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
-                            onclick="TL.dir_list_model('list');">
-                            <iconpark-icon name="list-radio" class="fa-fw"></iconpark-icon>
-                            <span i18n="model_list" class="d-none d-sm-inline">.</span>
-                        </button>
-                        <button id="room_btn_file_photo" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
-                            onclick="TL.dir_list_model('photo');">
-                            <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
-                            <span i18n="model_photo" class="d-none d-sm-inline">.</span>
-                        </button>
-                        <button class="btn btn-light btn-sm mr-1 mt-1 text-azure room_btn_performance"
-                            onclick="TL.room_performance_open();">
-                            <iconpark-icon name="gear" class="fa-fw"></iconpark-icon>
-                            <span class="d-none d-sm-inline" i18n="btn_performance">.</span>
-                        </button>
-                        <button class="btn btn-light btn-sm mr-1 mt-1 btn_copy text-azure in-private-dir" id="mr_copy">
-                            <iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon>
-                            <span i18n="model_copy" class="d-none d-sm-inline">.</span>
-                        </button>
-                        <button id="room_btn_favorate" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
-                            style="display: none;">
-                            <iconpark-icon name="folder-plus" class="fa-fw"></iconpark-icon>
-                            <span class="d-none d-sm-inline" i18n="btn_favorite">.</span>
-                        </button>
-                        <button id="room_btn_report" class="btn btn-light text-azure btn-sm mr-1 mt-1"
-                            onclick="$('#roomReportModal').modal('show')" style="display: none;">
-                            <iconpark-icon name="circle-exclamation" class="fa-fw text-danger"></iconpark-icon>
-                            <span class="d-none d-sm-inline" i18n="file_btn_report">.</span>
-                        </button>
-                        <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.mr_file_list(0)">
-                            <iconpark-icon name="rotate" class="fa-fw mr_filelist_refresh_icon"></iconpark-icon>
-                        </button>
-                    </div>
+                <div class="mb-2"></div>
 
-                    <div class="btn_for_sub mt-2">
-                        <span id="room_back_btn"></span>
-                        <button onclick="TL.Selecter.setAll();" class="btn btn-light text-azure btn-sm mr-1  mt-1">
-                            <iconpark-icon name="square-check" class="fa-fw"></iconpark-icon>
-                            <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
+                <div class="btn_for_desktop">
+                    <button class="btn btn-light text-azure btn-sm mr-1 mt-1 not_owner"
+                        onclick="$('#mrCreaterModal').modal('show');$('#mr_id').val('0');$('#mr_parent_id').val('0');$('#mr_top_id').val('0');">
+                        <iconpark-icon name="folder-plus" class="fa-fw"></iconpark-icon>
+                        <span i18n="model_title_folder_title" class="d-none d-sm-inline">.</span>
+                    </button>
+                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.room_list()">
+                        <iconpark-icon name="rotate" class="fa-fw mr_filelist_refresh_icon"></iconpark-icon>
+                    </button>
+                </div>
+
+                <div class="btn_for_sub">
+                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
+                        id="filelist_filter">
+                        <iconpark-icon name="list" class="fa-fw"></iconpark-icon>
+                        <span i18n="sort_title" class="d-none d-sm-inline">.</span>
+                    </button>
+                    <button id="room_btn_file_list" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
+                        onclick="TL.dir_list_model('list');">
+                        <iconpark-icon name="list-radio" class="fa-fw"></iconpark-icon>
+                        <span i18n="model_list" class="d-none d-sm-inline">.</span>
+                    </button>
+                    <button id="room_btn_file_photo" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
+                        onclick="TL.dir_list_model('photo');">
+                        <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
+                        <span i18n="model_photo" class="d-none d-sm-inline">.</span>
+                    </button>
+                    <button class="btn btn-light btn-sm mr-1 mt-1 text-azure room_btn_performance"
+                        onclick="TL.room_performance_open();">
+                        <iconpark-icon name="gear" class="fa-fw"></iconpark-icon>
+                        <span class="d-none d-sm-inline" i18n="btn_performance">.</span>
+                    </button>
+                    <button class="btn btn-light btn-sm mr-1 mt-1 btn_copy text-azure in-private-dir" id="mr_copy">
+                        <iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon>
+                        <span i18n="model_copy" class="d-none d-sm-inline">.</span>
+                    </button>
+                    <button id="room_btn_favorate" class="btn btn-light btn-sm mr-1 mt-1 text-azure"
+                        style="display: none;">
+                        <iconpark-icon name="folder-plus" class="fa-fw"></iconpark-icon>
+                        <span class="d-none d-sm-inline" i18n="btn_favorite">.</span>
+                    </button>
+                    <button id="room_btn_report" class="btn btn-light text-azure btn-sm mr-1 mt-1"
+                        onclick="$('#roomReportModal').modal('show')" style="display: none;">
+                        <iconpark-icon name="circle-exclamation" class="fa-fw text-danger"></iconpark-icon>
+                        <span class="d-none d-sm-inline" i18n="file_btn_report">.</span>
+                    </button>
+                    <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.mr_file_list(0)">
+                        <iconpark-icon name="rotate" class="fa-fw mr_filelist_refresh_icon"></iconpark-icon>
+                    </button>
+                </div>
+
+                <div class="btn_for_sub mt-2">
+                    <span id="room_back_btn"></span>
+                    <button onclick="TL.Selecter.setAll();" class="btn btn-light text-azure btn-sm mr-1  mt-1">
+                        <iconpark-icon name="square-check" class="fa-fw"></iconpark-icon>
+                        <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
+                    </button>
+                    <button onclick="TL.Selecter.setNone();" class="btn btn-light text-azure btn-sm mr-1 mt-1">
+                        <iconpark-icon name="square-check" class="fa-fw"></iconpark-icon>
+                        <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <iconpark-icon name="list-check" class="fa-fw"></iconpark-icon> <span
+                                i18n="on_select">.</span>
                         </button>
-                        <button onclick="TL.Selecter.setNone();" class="btn btn-light text-azure btn-sm mr-1 mt-1">
-                            <iconpark-icon name="square-check" class="fa-fw"></iconpark-icon>
-                            <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
-                        </button>
-                        <div class="dropdown">
-                            <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <iconpark-icon name="list-check" class="fa-fw"></iconpark-icon> <span i18n="on_select">.</span>
+                        <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownMenuButton">
+                            <button class="dropdown-item not_owner" onclick="TL.Selecter.delete()">
+                                <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
+                                <span i18n="on_select_delete">.</span>
                             </button>
-                            <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownMenuButton">
-                                <button class="dropdown-item not_owner" onclick="TL.Selecter.delete()">
-                                    <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
-                                    <span i18n="on_select_delete">.</span>
-                                </button>
-                                <button class="dropdown-item" onclick="TL.Selecter.download()">
-                                    <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
-                                    <span i18n="on_select_download">.</span>
-                                </button>
-                                
-                                <button class="dropdown-item btn_for_copy_in_dir" onclick="TL.Selecter.directCopy('staticDirLink')">
-                                    <iconpark-icon name="link-horizontal" class="fa-fw text-azure"></iconpark-icon>
-                                    <span i18n="menu_addlink">.</span>
-                                </button>
+                            <button class="dropdown-item" onclick="TL.Selecter.download()">
+                                <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
+                                <span i18n="on_select_download">.</span>
+                            </button>
 
-                                <button class="dropdown-item btn_for_gen_link" onclick="TL.Selecter.downloadURL()">
-                                    <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
-                                    <span i18n="on_select_copy_download_url">.</span>
-                                </button>
+                            <button class="dropdown-item btn_for_copy_in_dir"
+                                onclick="TL.Selecter.directCopy('staticDirLink')">
+                                <iconpark-icon name="link-horizontal" class="fa-fw text-azure"></iconpark-icon>
+                                <span i18n="menu_addlink">.</span>
+                            </button>
 
-                                <button class="dropdown-item in-private-dir" onclick="TL.Selecter.share()">
-                                    <iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon>
-                                    <span i18n="on_select_share">.</span>
-                                </button>
-                                <button class="dropdown-item" onclick="TL.Selecter.directAddlinks()">
-                                    <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
-                                    <span i18n="on_select_addto_direct">.</span>
-                                </button>
-                                <button class="dropdown-item not_owner" onclick="TL.Selecter.moveToModel('room')">
-                                    <iconpark-icon name="folder-plus" class="fa-fw"></iconpark-icon>
-                                    <span i18n="on_select_move">.</span>
-                                </button>
-                            </div>
+                            <button class="dropdown-item btn_for_gen_link" onclick="TL.Selecter.downloadURL()">
+                                <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
+                                <span i18n="on_select_copy_download_url">.</span>
+                            </button>
+
+                            <button class="dropdown-item in-private-dir" onclick="TL.Selecter.share()">
+                                <iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon>
+                                <span i18n="on_select_share">.</span>
+                            </button>
+                            <button class="dropdown-item" onclick="TL.Selecter.directAddlinks()">
+                                <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
+                                <span i18n="on_select_addto_direct">.</span>
+                            </button>
+                            <button class="dropdown-item not_owner" onclick="TL.Selecter.moveToModel('room')">
+                                <iconpark-icon name="folder-plus" class="fa-fw"></iconpark-icon>
+                                <span i18n="on_select_move">.</span>
+                            </button>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <script type="text/template" id="room_back_btn_tpl">
+            <script type="text/template" id="room_back_btn_tpl">
                     <% if(TL.room.owner==1 || (TL.room.allow_upload=='yes'&&TL.isLogin())){ %>
                         <button onclick="TL.uploader.open('<% TL.room.mr_id %>');" tmpui-app="true" class="btn btn-sm btn-primary btn-upload mr-1 mt-1">
                             <iconpark-icon name="cloud-arrow-up" class="fa-fw"></iconpark-icon>
@@ -229,42 +229,42 @@
                     <% } %>
                 </script>
 
-                <!-- <div class="alert alert-info room_btn_performance" i18n="direct_intro">
+            <!-- <div class="alert alert-info room_btn_performance" i18n="direct_intro">
                     .
                 </div> -->
 
-                <div id="dir_list"></div>
+            <div id="dir_list"></div>
 
-                <div class="no_photos" style="margin-top: 100px;margin-bottom: 100px;display: none;">
-                    <div class="text-center mb-4">
-                        <iconpark-icon name="camera" class="fa-fw fa-4x"></iconpark-icon>
-                    </div>
-                    <div class="text-center" i18n="page_no_photos">.</div>
+            <div class="no_photos" style="margin-top: 100px;margin-bottom: 100px;display: none;">
+                <div class="text-center mb-4">
+                    <iconpark-icon name="camera" class="fa-fw fa-4x"></iconpark-icon>
                 </div>
-                <div class="no_files" style="margin-top: 100px;margin-bottom: 100px;display: none;">
-                    <div class="text-center mb-4">
-                        <iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon>
-                    </div>
-                    <div class="text-center" i18n="page_no_files">.</div>
+                <div class="text-center" i18n="page_no_photos">.</div>
+            </div>
+            <div class="no_files" style="margin-top: 100px;margin-bottom: 100px;display: none;">
+                <div class="text-center mb-4">
+                    <iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon>
                 </div>
-                <div class="no_dir" style="margin-top: 100px;margin-bottom: 100px;display: none;">
-                    <div class="text-center mb-4">
-                        <iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon>
-                    </div>
-                    <div class="text-center" i18n="page_no_dir">.</div>
+                <div class="text-center" i18n="page_no_files">.</div>
+            </div>
+            <div class="no_dir" style="margin-top: 100px;margin-bottom: 100px;display: none;">
+                <div class="text-center mb-4">
+                    <iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon>
                 </div>
+                <div class="text-center" i18n="page_no_dir">.</div>
+            </div>
 
-                <div class="text-right userinfo text-muted mt-3" style="display: none;font-size: 14px;">
-                    <span i18n="filepage_publicby_0">.</span> 
-                    <span class="userinfo_sd" style="display: none;"></span>
-                    <span class="userinfo_pro text-azure" style="display: none;">
-                        <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
-                    </span>
-                    <span class="userinfo_nickname"></span> 
-                    <span i18n="filepage_publicby_2">.</span>
-                </div>
+            <div class="text-right userinfo text-muted mt-3" style="display: none;font-size: 14px;">
+                <span i18n="filepage_publicby_0">.</span>
+                <span class="userinfo_sd" style="display: none;"></span>
+                <span class="userinfo_pro text-azure" style="display: none;">
+                    <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
+                </span>
+                <span class="userinfo_nickname"></span>
+                <span i18n="filepage_publicby_2">.</span>
+            </div>
 
-                <script type="text/template" id="dir_photolist_tpl">
+            <script type="text/template" id="dir_photolist_tpl">
                     <div class="row" id="room_file_content">
                     <% for (var x in obj) { %>
                         <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
@@ -342,7 +342,7 @@
                     </div>
                 </script>
 
-                <script type="text/template" id="dir_filelist_tpl">
+            <script type="text/template" id="dir_filelist_tpl">
                     <% for (var x in obj) { %>
                         <div class="row line mx-0 mb-1 py-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tldata="<% obj[x].ukey %>" tldid="<% obj[x].direct_id %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
                             <div class="col-7 my-1 d-flex align-items-center listfontweight filename">
@@ -474,7 +474,7 @@
                     <% } %>
                 </script>
 
-                <script type="text/template" id="meetroom_grid_tpl">
+            <script type="text/template" id="meetroom_grid_tpl">
                 <% for (var x in obj) { %>
                 <div class="col-6 col-md-3 col-lg-2 p-2 text-center" id="meetingroom_id_<% obj[x].mr_id %>">
                     <a href="/app&listview=room&mrid=<% obj[x].mr_id %>" tmpui-app="true">
@@ -502,7 +502,7 @@
                 <% } %>
                 </script>
 
-                <script type="text/template" id="dir_list_tpl">
+            <script type="text/template" id="dir_list_tpl">
                     <% for (var x in obj) { %>
                         <div class="row line mx-0 my-0 py-1 list-bar" id="meetingroom_id_<% obj[x].mr_id %>">
                             <div class="col-7 my-1 d-flex align-items-center listfontweight filename">
@@ -540,7 +540,6 @@
                         </div>
                     <% } %>
                 </script>
-            </div>
         </div>
     </div>
 </div>

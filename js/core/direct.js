@@ -18,7 +18,7 @@ class direct {
 
     page_number = 0
     list_Data = []
-    autoload = false
+    autoload = true
 
     init(parent_op) {
         this.parent_op = parent_op;
@@ -343,6 +343,10 @@ class direct {
         }
 
         if (this.domain == 0) {
+            return false;
+        }
+
+        if (this.autoload===false) {
             return false;
         }
 
@@ -716,7 +720,6 @@ class direct {
             'token': this.parent_op.api_token
         }, (rsp) => {
             let msg = this.selectBingDomainText(rsp.status);
-            console.log(msg);
             $('#direct_modal_msg').show();
             $('#direct_modal_msg_text').html(msg);
             if (rsp.status == 1) {
@@ -732,7 +735,6 @@ class direct {
     }
 
     selectBingDomainText(number) {
-        console.log(number);
         let msg = '未知错误';
         switch (number) {
             case 1:
