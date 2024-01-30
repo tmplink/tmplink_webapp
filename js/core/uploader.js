@@ -484,10 +484,9 @@ class uploader {
                     });
                     break;
                 case 7:
-                    //上传失败，文件名中包含了不受支持的字符串
-                    //重置 rsp.stustus = 10
-                    rsp.status = 10;
-                    this.upload_final({ status: rsp.status, data: { ukey: rsp.data } }, file, id);
+                    //上传失败
+                    //rsp.data 中的数值为错误代码
+                    this.upload_final({ status: rsp.data, data: { ukey: rsp.data } }, file, id);
                     break;
                 case 9:
                     //重置 rsp.stustus = 1
@@ -859,5 +858,40 @@ class uploader {
 
         //更新上传统计
         this.upload_count++;
+    }
+
+    upload_final_error_text(status){
+        switch (status) {
+            case 2:
+                //上传失败，无效请求
+                return app.languageData.upload_fail_utoken;
+            case 3:
+                //上传失败，不能上传空文件
+                return app.languageData.upload_fail_empty;
+            case 4:
+                //上传失败，上传的文件大小超出了系统允许的大小
+                return app.languageData.upload_limit_size;
+            case 5:
+                //上传失败，超出了单日允许的最大上传量
+                return app.languageData.upload_limit_day;
+            case 6:
+                //上传失败，没有权限上传到这个文件夹
+                return app.languageData.upload_fail_permission;
+            case 7:
+                //要上传的文件超出了私有存储空间限制
+                return app.languageData.upload_fail_storage;
+            case 8:
+                //上传失败，目前暂时无法为这个文件分配存储空间
+                return app.languageData.upload_fail_prepare;
+            case 9:
+                //上传失败，操作失败，无法获取节点信息
+                return app.languageData.upload_fail_node;
+            case 10:
+                //上传失败，文件名中包含了不允许的字符
+                return app.languageData.upload_fail_name;
+            default:
+                //默认错误
+                return app.languageData.upload_fail_unknown+` ${status}`;
+        }
     }
 }
