@@ -987,6 +987,7 @@ class tmplink {
     }
 
     workspace_filelist_model(type) {
+        console.log(type);
         switch (type) {
             case 'photo':
                 localStorage.setItem('app_workspace_view', 'photo');
