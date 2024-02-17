@@ -53,6 +53,8 @@ class tmplink {
     download_retry_max = 10
     recaptcha_op = true
     recaptcha = '0x4AAAAAAAC2gV-9041iXKUJ'
+
+    //下面这段代码不适用
     recaptcha_actions = [
         "token", "download_req", "stream_req",
     ]
@@ -531,7 +533,7 @@ class tmplink {
     }
 
     recaptcha_do(type, cb) {
-        if (this.recaptcha_op && this.recaptchaCheckAction(type)) {
+        if (this.recaptcha_op) {
             turnstile.ready( ()=> {
                 turnstile.execute('body', {
                     sitekey: this.recaptcha,
