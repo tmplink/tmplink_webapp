@@ -532,21 +532,19 @@ class tmplink {
 
     recaptcha_do(type, cb) {
         if (this.recaptcha_op && this.recaptchaCheckAction(type)) {
-            if (typeof turnstile === 'object') {
-                turnstile.ready( ()=> {
-                    turnstile.execute('#cf-turnstile', {
-                        sitekey: this.recaptcha,
-                        callback: (token) => {
-                            cb(token);
-                            console.log(`Challenge Success ${token}`);
-                        },
-                    });
+            turnstile.ready( ()=> {
+                turnstile.execute('body', {
+                    sitekey: this.recaptcha,
+                    action : type,
+                    callback: (token) => {
+                        // turnstile.reset();
+                        cb(token);
+                        // turnstile.reset();
+                        console.log(`Action ${type} Challenge Success ${token}`);
+                    },
                 });
-            } else {
-                setTimeout(() => {
-                    this.recaptcha_do(type, cb);
-                }, 500);
-            }
+                turnstile.reset();
+            });
         } else {
             $.post(this.api_tokx, {
                 action: 'challenge',
