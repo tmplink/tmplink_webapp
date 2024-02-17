@@ -51,8 +51,8 @@ class tmplink {
     upload_model_selected_val = 0
     download_retry = 0
     download_retry_max = 10
-    recaptcha_op = false
-    recaptcha = '6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5'
+    recaptcha_op = true
+    recaptcha = '0x4AAAAAAAC2gV-9041iXKUJ'
     recaptcha_actions = [
         "token", "download_req", "stream_req",
     ]
@@ -532,12 +532,14 @@ class tmplink {
 
     recaptcha_do(type, cb) {
         if (this.recaptcha_op && this.recaptchaCheckAction(type)) {
-            if (typeof grecaptcha === 'object') {
-                grecaptcha.ready(() => {
-                    grecaptcha.execute(this.recaptcha, {
-                        action: type
-                    }).then((token) => {
-                        cb(token);
+            if (typeof turnstile === 'object') {
+                turnstile.ready( ()=> {
+                    turnstile.execute('#cf-turnstile', {
+                        sitekey: this.recaptcha,
+                        callback: (token) => {
+                            cb(token);
+                            console.log(`Challenge Success ${token}`);
+                        },
                     });
                 });
             } else {

@@ -12,6 +12,7 @@
     <link rel="manifest" href="/app.webmanifest" />
     <link rel="icon" href="/img/ico/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/img/ico/logo-new.svg" />
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
     <script defer src="/plugin/icon/lib.js"></script>
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
         data-cf-beacon='{"token": "be868d628453447a8566eeef6ae7874e"}'></script>
@@ -53,7 +54,7 @@
     <script type="text/javascript" src="./tmpui.js"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 1213,
+            "version": 1215,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "loadingText": "TMP.LINK",
@@ -237,6 +238,7 @@
 <body>
     <div id="tmpui"></div>
     <div id="tmpui_body" class="d-flex flex-column"></div>
+    <div id="cf-turnstile"></div>
 </body>
 
 </html>
