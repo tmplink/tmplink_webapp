@@ -533,26 +533,24 @@ class tmplink {
     }
 
     recaptcha_do(type, cb) {
-        if (this.recaptcha_op) {
+        if (this.recaptcha_op&&this.recaptchaCheckAction(type)) {
             turnstile.ready( ()=> {
                 turnstile.execute('body', {
                     sitekey: this.recaptcha,
                     action : type,
                     callback: (token) => {
-                        // turnstile.reset();
                         cb(token);
-                        // turnstile.reset();
-                        console.log(`Action ${type} Challenge Success ${token}`);
                     },
                 });
                 turnstile.reset();
             });
         } else {
-            $.post(this.api_tokx, {
-                action: 'challenge',
-            }, (rsp) => {
-                cb(rsp.data);
-            });
+            cb(true);
+            // $.post(this.api_tokx, {
+            //     action: 'challenge',
+            // }, (rsp) => {
+            //     cb(rsp.data);
+            // });
         }
     }
 
