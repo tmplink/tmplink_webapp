@@ -1177,7 +1177,9 @@ class tmplink {
                     }
 
                     $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ');
-
+                    //现在按钮显示准备中
+                    $('#file_download_btn').addClass('btn-dark');
+                    $('#file_download_btn').html(app.languageData.status_file_1);
                     //请求下载地址
                     this.recaptcha_do('download_req', (recaptcha) => {
                         $.post(this.api_file, {
@@ -1186,13 +1188,16 @@ class tmplink {
                             token: this.api_token,
                             captcha: recaptcha
                         }, (req) => {
+                            //修改按钮状态
+                            $('#file_download_btn').removeClass('btn-dark');
+                            $('#file_download_btn').addClass('btn-success');
+                            $('#file_download_btn').html(app.languageData.file_btn_download);
                             this.ga('D-' + rsp.data.name);
                             if (req.status != 1) {
                                 $('#download_msg').html('<iconpark-icon name="circle-exclamation" class="fa-fw"></iconpark-icon> ');
                                 $('#file_download_btn_1').hide();
                                 $('#file_download_btn_2').hide();
                                 $('#file_download_by_qrcode').hide();
-
                                 return false;
                             }
                             let download_link = req.data;
