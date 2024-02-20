@@ -98,10 +98,15 @@
                             <img src="/img/ico/logo-256x256.png" style="width:64px;border-radius: 12px;" />
                         </span>
                     </div>
-                    <div class="btn-set-brand" style="opacity: 0;">
-                        <span class="btn btn-sm btn-light text-azure mt-1 btn-point"
+                    <div class="btn-set-brand mt-2" style="opacity: 0;">
+                        <span class="btn btn-sm btn-light text-azure mr-2 btn-point"
                             onclick="$('#brandModal').modal('show');">
                             <span i18n="modal_settings_submit">.</span>
+                        </span>
+                        <!-- 停用服务按钮 -->
+                        <span class="btn btn-sm btn-light text-danger mt-1 btn-point"
+                            onclick="TL.direct.disableService()">
+                            <span i18n="direct_stop_btn">停用</span>
                         </span>
                     </div>
                 </div>

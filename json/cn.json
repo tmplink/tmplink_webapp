@@ -710,6 +710,9 @@
     "direct_api_params_vaild_time": "（可选参数）链接有效期，单位为分钟，默认为 0 ，一直有效",
     "direct_api_data_etime" :"链接有效期",
 
+    "direct_stop_btn":"停用",
+    "direct_stop":"确定要停用服务吗？停用服务会解除绑定的域名，并移除所有已创建的直链。",
+
     "btn_enable": "启用",
     "btn_disable": "停用",
     "btn_save": "保存",

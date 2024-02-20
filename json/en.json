@@ -1,4 +1,6 @@
 {
+    "direct_stop_btn":"Stop",
+    "direct_stop":"Are you sure you want to stop the service? Stopping the service will unbind the domain and remove all created direct links.",
     "direct_api_params_vaild_time": "(Optional) Link validity period in minutes, default is 0, which means it is always valid",
     "direct_api_data_etime" :"Link validity period",
     "direct_api_title_7": "Upload Files",

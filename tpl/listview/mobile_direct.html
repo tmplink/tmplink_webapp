@@ -23,7 +23,6 @@
                             <iconpark-icon name="signal-stream" class="fa-fw"></iconpark-icon>
                             <span i18n="direct_btn_bind_domain">.</span>
                         </button>
-                        <hr>
                         <button class="dropdown-item" onclick="$('#limitTrafficModal').modal('show');">
                             <iconpark-icon name="block-brick-fire" class="fa-fw"></iconpark-icon>
                             <span id="direct_set_traffic_limit_title"></span>
@@ -47,6 +46,12 @@
                         <button class="dropdown-item" onclick="TL.direct.sortModal();" id="filelist_filter">
                             <iconpark-icon name="list" class="fa-fw"></iconpark-icon>
                             <span i18n="sort_title">.</span>
+                        </button>
+                        <hr>
+                        <!-- 停用 -->
+                        <button class="dropdown-item" onclick="TL.direct.disableService();">
+                            <iconpark-icon name="circle-exclamation" class="fa-fw text-red"></iconpark-icon>
+                            <span i18n="direct_stop_btn" class="text-red">.</span>
                         </button>
                     </div>
                 </div>

@@ -700,6 +700,20 @@ class direct {
         }), 'json';
     }
 
+    // 停用服务
+    disableService() {
+        if (!confirm(app.languageData.direct_stop)) {
+            return false;
+        }
+        this.loading_box_on();
+        $.post(this.parent_op.api_direct, {
+            'action': 'set_off',
+            'token': this.parent_op.api_token
+        }, () => {
+            window.location.reload();
+        }), 'json';
+    }
+
     /**
      * 设置域名
      */

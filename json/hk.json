@@ -1,4 +1,6 @@
 {
+    "direct_stop_btn":"停用",
+    "direct_stop":"確定要停用服務嗎？停用服務會解除綁定的域名，並移除所有已建立的直鏈。",
     "direct_api_params_vaild_time": "（可選參數）連結有效期，單位為分鐘，預設為 0 ，永久有效",
     "direct_api_data_etime" :"連結有效期",
     "direct_api_title_7": "上傳檔案",

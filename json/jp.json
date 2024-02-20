@@ -1,4 +1,6 @@
 {
+    "direct_stop_btn":"停止",
+    "direct_stop":"サービスを停止しますか？サービスの停止により、ドメインのバインドが解除され、作成されたすべてのダイレクトリンクが削除されます。",
     "direct_api_params_vaild_time": "（オプション）リンクの有効期間（分単位）、デフォルトは0で、常に有効です",
     "direct_api_data_etime" :"リンクの有効期間",
     "direct_api_title_7": "ファイルのアップロード",
