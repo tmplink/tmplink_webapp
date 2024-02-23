@@ -53,6 +53,7 @@ class tmplink {
     download_retry_max = 10
     recaptcha_op = true
     recaptcha = '0x4AAAAAAAC2gV-9041iXKUJ'
+    recaptchaToken = '0'
 
     //下面这段代码不适用
     recaptcha_actions = [
@@ -534,15 +535,14 @@ class tmplink {
 
     recaptcha_do(type, cb) {
         if (this.recaptcha_op&&this.recaptchaCheckAction(type)) {
-            turnstile.ready( ()=> {
-                turnstile.execute('body', {
-                    sitekey: this.recaptcha,
-                    action : type,
-                    callback: (token) => {
-                        cb(token);
-                    },
-                });
-                turnstile.reset();
+            turnstile.execute('body', {
+                sitekey: this.recaptcha,
+                action : type,
+                retry  : 'never',
+                callback: (token) => {
+                    cb(token);
+                    turnstile.remove('body');
+                },
             });
         } else {
             cb(true);
