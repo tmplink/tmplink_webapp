@@ -1245,10 +1245,20 @@ class tmplink {
                                 //添加按钮按下反馈
                                 opacityShow('#download_msg');
                                 $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ');
+                                //修改按钮颜色
+                                $('#file_download_btn').removeClass('btn-success');
+                                $('#file_download_btn').addClass('btn-azure');
+                                //修改文本为开始下载，并且禁用
+                                $('#file_download_btn').html(app.languageData.status_file_3);
+                                $('#file_download_btn').attr('disabled', true);
                                 //3秒后解除
                                 setTimeout(() => {
                                     // $('#download_msg').fadeOut();
                                     opacityHide('#download_msg');
+                                    $('#file_download_btn').removeClass('btn-azure');
+                                    $('#file_download_btn').addClass('btn-success');
+                                    $('#file_download_btn').html(app.languageData.file_btn_download);
+                                    $('#file_download_btn').attr('disabled', false);
                                 }, 3000);
                                 return true;
                             });
