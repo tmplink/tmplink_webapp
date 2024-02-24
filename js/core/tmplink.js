@@ -52,7 +52,7 @@ class tmplink {
     download_retry = 0
     download_retry_max = 10
     recaptcha_op = true
-    recaptcha = '0x4AAAAAAAC2gV-9041iXKUJ'
+    recaptcha = '6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5'
     recaptchaToken = '0'
 
     //下面这段代码不适用
@@ -534,15 +534,13 @@ class tmplink {
     }
 
     recaptcha_do(type, cb) {
-        if (this.recaptcha_op&&this.recaptchaCheckAction(type)) {
-            turnstile.execute('body', {
-                sitekey: this.recaptcha,
-                action : type,
-                retry  : 'never',
-                callback: (token) => {
+        if (this.recaptcha_op && this.recaptchaCheckAction(type)) {
+            grecaptcha.ready(() => {
+                grecaptcha.execute(this.recaptcha, {
+                    action: type
+                }).then((token) => {
                     cb(token);
-                    turnstile.remove('body');
-                },
+                });
             });
         } else {
             cb(true);
@@ -2921,7 +2919,7 @@ class tmplink {
 
             $('#room_loading').hide();
             $('#room_loaded').show();
-            
+
             //如果用户是赞助者
             if (this.isSponsor == true) {
                 this.setBtnForSponsor();
