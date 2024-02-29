@@ -51,7 +51,7 @@ class tmplink {
     upload_model_selected_val = 0
     download_retry = 0
     download_retry_max = 10
-    recaptcha_op = true
+    recaptcha_op = false
     recaptcha = '6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5'
     recaptchaToken = '0'
 
@@ -543,12 +543,12 @@ class tmplink {
                 });
             });
         } else {
-            cb(true);
-            // $.post(this.api_tokx, {
-            //     action: 'challenge',
-            // }, (rsp) => {
-            //     cb(rsp.data);
-            // });
+            // cb(true);
+            $.post(this.api_tokx, {
+                action: 'challenge',
+            }, (rsp) => {
+                cb(rsp.data);
+            });
         }
     }
 
