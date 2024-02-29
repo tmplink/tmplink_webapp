@@ -57,9 +57,9 @@ class profile {
 
         //格式化为两位数整数
         if(avatar_id<10){
-            avatar_id = '0'+avatar_id;
+            avatar_id = avatar_id;
         }
-        this.avatar_url = '/img/avatar/1-'+avatar_id+'.svg';
+        this.avatar_url = '/img/avatar/2-'+avatar_id+'.svg';
     }
       
 
@@ -112,6 +112,7 @@ class profile {
         }
         let badge = '/img/level/'+this.parent_op.user_group.level+'.svg';
         $('.user_badge').attr('src',badge);
+        $('.user_level_icon').attr('src',badge);
         //设定其它信息
         $('.user_group_storage').html(this.parent_op.user_group.storage+' GB');
         if(this.parent_op.user_group_highspeed==='1'){

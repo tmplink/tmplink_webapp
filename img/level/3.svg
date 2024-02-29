@@ -1,53 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="_图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: none;
-        stroke-width: 16px;
-      }
-
-      .cls-1, .cls-2, .cls-3 {
-        fill-rule: evenodd;
-      }
-
-      .cls-1, .cls-3 {
-        stroke: #000;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-
-      .cls-4 {
-        fill: #f70000;
-      }
-
-      .cls-5 {
-        font-family: FZMHK--GBK1-0, FZMeiHei-M07;
-        font-size: 72px;
-      }
-
-      .cls-5, .cls-3 {
-        fill: #fff;
-      }
-
-      .cls-2 {
-        fill: #1dc4a8;
-      }
-
-      .cls-6 {
-        fill: #0080ff;
-      }
-
-      .cls-3 {
-        stroke-width: 10px;
-      }
-    </style>
-  </defs>
-  <circle class="cls-6" cx="256" cy="256" r="256"/>
-  <path class="cls-1" d="M124.68,244.87c0-28.97,23.48-52.47,52.47-52.47h150.86c28.97,0,52.47,23.5,52.47,52.47v114.79c0,28.99-23.5,52.47-52.47,52.47H177.16c-28.99,0-52.47-23.48-52.47-52.47v-114.79Z"/>
-  <path class="cls-1" d="M147.64,195.67v-50.83c0-28.97,23.66-52.47,52.87-52.47h104.14c29.21,0,52.89,23.5,52.89,52.47v50.83"/>
-  <path class="cls-2" d="M177.97,274.38c0-18.1,14.69-32.8,32.8-32.8h83.63c18.1,0,32.8,14.69,32.8,32.8v65.59c0,18.13-14.69,32.8-32.8,32.8h-83.63c-18.1,0-32.8-14.67-32.8-32.8v-65.59Z"/>
-  <path class="cls-3" d="M230.44,307.18c0-12.22,9.9-22.13,22.15-22.13s22.13,9.9,22.13,22.13-9.9,22.15-22.13,22.15-22.15-9.9-22.15-22.15Z"/>
-  <circle class="cls-4" cx="371.49" cy="407.88" r="47"/>
-  <text class="cls-5" transform="translate(351.81 433.75)"><tspan x="0" y="0">3</tspan></text>
-</svg>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+<g id="SVGRepo_bgCarrier" stroke-width="0"/>
+<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="SVGRepo_iconCarrier"> <g id="a"/> <g id="b"/> <g id="c"/> <g id="d"/> <g id="e"/> <g id="f"/> <g id="g"/> <g id="h"/> <g id="i"/> <g id="j"/> <g id="k"> <path d="M5.04,25.35c.01,.27,.12,.53,.3,.73l25.96,26.77c.15,.15,.35,.24,.56,.26h.3c.21-.03,.4-.12,.55-.26l25.96-26.77c.19-.2,.31-.45,.34-.73l-26.74-5.09L5.04,25.35Z" fill="#f3c9dd" id="l"/> <path d="M41.46,25.35H23.04l8.8,27.76c.1,.02,.2,.02,.3,0l9.31-27.76Z" fill="#edb0ce" id="m"/> <path d="M15.47,11.07c-.28,.14-.53,.35-.72,.6L5.24,24.53c-.16,.24-.23,.53-.2,.81H58.99c.03-.29-.05-.59-.22-.83l-9.08-12.83c-.18-.26-.42-.46-.7-.61H15.47Z" fill="#edb0ce" id="n"/> <path d="M32.23,10.86l-9.18,14.48h18.41l-9.23-14.48Z" fill="#f3c9dd" id="o"/> <path d="M32.23,10.86l9.23,14.48,7.53-14.26c-.28-.14-.59-.22-.9-.22h-15.86Z" fill="#e495bb" id="p"/> <path d="M16.37,10.86c-.31,0-.62,.07-.9,.21l7.58,14.27,9.18-14.48h-15.86Z" fill="#e495bb" id="q"/> <path d="M50.51,11.11c-.55-.78-1.46-1.25-2.42-1.25H16.37c-.95,0-1.85,.46-2.42,1.22L4.43,23.94c-.64,.87-.56,2.06,.19,2.83l25.95,26.77c.74,.76,1.97,.85,2.85,0l25.95-26.77c.74-.77,.84-1.96,.22-2.83l-9.08-12.83Zm-10.44,15.24l-8.05,24-7.61-24h15.66Zm-15.21-2l7.37-11.62,7.4,11.62h-14.77Zm9.19-12.49h13.39l-6.07,11.5-7.32-11.5Zm-10.93,11.5l-6.1-11.5h13.39l-7.29,11.5Zm6.64,26.47L6.99,26.35h15.32l7.45,23.48Zm12.42-23.48h14.82l-22.67,23.4,7.85-23.4Zm.94-2l6.11-11.58,8.2,11.58h-14.31ZM15.22,12.73l6.17,11.62H6.62L15.22,12.73Z"/> </g> <g id="r"/> <g id="s"/> <g id="t"/> <g id="u"/> <g id="v"/> <g id="w"/> <g id="x"/> <g id="y"/> <g id="a`"/> <g id="aa"/> <g id="ab"/> <g id="ac"/> <g id="ad"/> <g id="ae"/> <g id="af"/> <g id="ag"/> <g id="ah"/> <g id="ai"/> <g id="aj"/> <g id="ak"/> <g id="al"/> <g id="am"/> <g id="an"/> <g id="ao"/> <g id="ap"/> <g id="aq"/> <g id="ar"/> <g id="as"/> <g id="at"/> <g id="au"/> <g id="av"/> <g id="aw"/> <g id="ax"/> <g id="ay"/> <g id="b`"/> <g id="ba"/> <g id="bb"/> <g id="bc"/> <g id="bd"/> </g>
+</svg>
