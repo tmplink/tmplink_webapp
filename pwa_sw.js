@@ -1,4 +1,4 @@
-const allowedDomain = ["cdn.code.so","gstatic.com","recaptcha.net","tmp.link","ttttt.link"];
+const allowedDomain = ["cdn.code.so","www.tmp.link","www.ttttt.link"];
 const resSet = "tmplink-static-1228";
 const assets = [
   '/',
