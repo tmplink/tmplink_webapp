@@ -33,16 +33,19 @@ self.addEventListener('fetch', event => {
   }
   const url = new URL(event.request.url);
   const domain = url.hostname;
+  const path = url.pathname; 
+  const cacheKey = domain + path; 
+
   if (isAllowDomain(domain)) {
     event.respondWith(
-      caches.match(event.request).then(response => {
+      caches.match(cacheKey).then(response => {
         if (response) {
           return response;
         }
         return fetch(event.request).then(response => {
           if (response.status === 200) {
             caches.open(resSet).then(cache => {
-              cache.put(event.request, response);
+              cache.put(cacheKey, response);
             });
           }
           return response.clone();
