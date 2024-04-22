@@ -1,4 +1,8 @@
 {
+    "direct_cf_notice": "If your domain is managed by Cloudflare, please use a subdomain.",
+    "direct_cf_modal_title": "CloudFlare",
+    "direct_cf_modal_body_1": "If you use CloudFlare to manage your domain, please use a subdomain as the direct link domain.",
+    "direct_cf_modal_body_2": "For example, if your domain is abc.com, you should use download.abc.com as the direct link domain. Also, do not enable HTTP proxy for the corresponding domain, as it will reduce download speed.",
     "direct_stop_btn":"Stop",
     "direct_stop":"Are you sure you want to stop the service? Stopping the service will unbind the domain and remove all created direct links.",
     "direct_api_params_vaild_time": "(Optional) Link validity period in minutes, default is 0, which means it is always valid",

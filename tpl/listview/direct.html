@@ -34,6 +34,10 @@
                             <span i18n="direct_ssl_check_input_notice2">.</span>
                             <span class="req_new_cname_domain text-green"></span>
                             <span class="text-red">cdn.5t-cdn.com</span>
+                            <div onclick="$('#cloudflareModal').modal('show');" class="btn-pointer mt-2">
+                                <iconpark-icon name="circle-exclamation" class="fa-fw"></iconpark-icon>
+                                <span i18n="direct_cf_notice">如果您的域名由 Cloudflare 管理，请使用二级域名。</span>
+                            </div>
                         </small>
                     </div>
                 </div>
@@ -763,6 +767,26 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--[CNAME]-->
+<div class="modal" id="cloudflareModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="direct_cf_modal_title">CloudFlare</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p i18n="direct_cf_modal_body_1">
+                    如果您使用 CloudFlare 管理您的域名，那么请使用二级域名作为直链域名。
+                </p>
+                <p i18n="direct_cf_modal_body_2">
+                    比如，如果您的域名是 abc.com ，那么您应该使用 download.abc.com 来作为直链域名。
+                </p>
             </div>
         </div>
     </div>

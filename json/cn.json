@@ -582,6 +582,11 @@
     "direct_intro_modal_title": "通过直接链接分享文件",
     "direct_intro_modal_body_title": "欢迎使用",
 
+    "direct_cf_notice":"如果您的域名由 Cloudflare 管理，请使用二级域名。",
+    "direct_cf_modal_title":"CloudFlare",
+    "direct_cf_modal_body_1":"如果您使用 CloudFlare 管理您的域名，那么请使用二级域名作为直链域名。",
+    "direct_cf_modal_body_2":"比如，如果您的域名是 abc.com ，那么您应该使用 download.abc.com 来作为直链域名。并且，不要启用对应域名的 HTTP 代理，这会降低下载速度。",
+
     "direct_intro_modal_msg_1": "已完成",
     "direct_intro_modal_msg_2": "无效的域名",
     "direct_intro_modal_msg_3": "此域名已经被使用",

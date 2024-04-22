@@ -1,4 +1,8 @@
 {
+    "direct_cf_notice":"如果您的域名由 Cloudflare 管理，請使用二級域名。",
+    "direct_cf_modal_title":"CloudFlare",
+    "direct_cf_modal_body_1":"如果您使用 CloudFlare 管理您的域名，那麼請使用二級域名作為直鏈域名。",
+    "direct_cf_modal_body_2":"比如，如果您的域名是 abc.com ，那麼您應該使用 download.abc.com 來作為直鏈域名。並且，不要啟用對應域名的 HTTP 代理，這會降低下載速度。",
     "direct_stop_btn":"停用",
     "direct_stop":"確定要停用服務嗎？停用服務會解除綁定的域名，並移除所有已建立的直鏈。",
     "direct_api_params_vaild_time": "（可選參數）連結有效期，單位為分鐘，預設為 0 ，永久有效",
