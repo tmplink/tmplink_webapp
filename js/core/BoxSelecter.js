@@ -246,29 +246,29 @@ class BoxSelecter {
                 //create copy text
                 switch (type) {
                     case 'staticDirLink':
-                        copyText += `${direct_link_protocol}${direct_link_domain}/dir/${dir_key}/${did}/${fname}\n\n`;
+                        copyText += `${direct_link_protocol}${direct_link_domain}/dir/${dir_key}/${did}/${fname}\n`;
                         break;
                     case 'downloadURLForText':
-                        copyText += `${fname}\n${urldata.download}\n\n`;
+                        copyText += `${fname}\n${urldata.download}\n`;
                         break;
                     case 'downloadURLForHTML':
                         copyText += `<a href="${urldata.download}" target="_blank">${fname}</a>\n`;
                         break;
                     case 'streamURLForText':
                         if (this.parent_op.direct.is_allow_play(fname)) {
-                            copyText += `${fname}\n${urldata.play}\n\n`;
+                            copyText += `${fname}\n${urldata.play}\n`;
                         }
                         break;
                     case 'streamURLForHTML':
                         if (this.parent_op.direct.is_allow_play(fname)) {
-                            copyText += `<a href="${urldata.play}" target="_blank">${fname}</a>\n\n`;
+                            copyText += `<a href="${urldata.play}" target="_blank">${fname}</a>\n`;
                         }
                         break;
                     case 'resURLForText':
-                        copyText += `${fname}\n${urldata.res}\n\n`;
+                        copyText += `${urldata.download}\n`;
                         break;
                     case 'resURLForHTML':
-                        copyText += `<a href="${urldata.res}" target="_blank">${fname}</a>\n\n`;
+                        copyText += `<a href="${urldata.download}" target="_blank">${fname}</a>\n`;
                         break;
                 }
             }
