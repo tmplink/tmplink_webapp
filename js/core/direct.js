@@ -219,8 +219,8 @@ class direct {
             $('#direct_bind_domain').attr('href', this.protocol + this.domain);
             //如果启用了 SSL，则更换图标
             if (this.ssl) {
-                $('#direct_bind_domain_icon').attr('name', 'shield-halved');
-            } 
+                $('#direct_bind_domain_icon').attr('name', 'lock-solid');
+            }
         } else {
             $('#filelist').hide();
             $('#direct_domain_set').fadeIn();
