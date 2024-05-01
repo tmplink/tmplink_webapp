@@ -20,7 +20,7 @@ class profile {
         $('#userModal').modal('show');
     }
 
-    init_details() {
+    init_details(cb) {
         //获取当前
         let url = get_url_params('tmpui_page');
         let page = url.tmpui_page;
@@ -41,6 +41,12 @@ class profile {
                 this.avatar_id = rsp.data.avatar_id;
             }
             this.init_status = true;
+
+            //如果是赞助者，激活特定按钮的颜色
+            if(typeof cb === 'function'){
+                cb();
+            }
+
             this.refresh();
         }, 'json');
     }

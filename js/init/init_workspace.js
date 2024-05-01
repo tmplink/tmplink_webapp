@@ -12,9 +12,5 @@ function INIT_workspace() {
         app.languageBuild();
         $('title').html(app.languageData.title_workspace);
         $('meta[name=description]').html(app.languageData.des_workspace);
-
-        if(TL.isSponsor){
-            TL.setBtnForSponsor();
-        }
     });
 }

@@ -431,11 +431,6 @@ class tmplink {
             this.storage_status_update();
             this.head_set();
             this.bg_load();
-            //如果是赞助者，激活特定按钮的颜色
-            if (this.sponsor) {
-                this.isSponsor = true;
-                this.setBtnForSponsor();
-            }
             //初始化直链
             this.direct.init_details(() => {
                 this.readyExec();
@@ -606,6 +601,13 @@ class tmplink {
             $('.show_for_sponsor').hide();
             $('.to_be_sponsor').show();
         }
+
+        //如果是赞助者，激活特定按钮的颜色
+        if (this.sponsor) {
+            this.isSponsor = true;
+            this.setBtnForSponsor();
+        }
+        
         //set process bar to 100%
         // setTimeout(() => {
         //     $('#index_userinfo_loading').fadeOut();
