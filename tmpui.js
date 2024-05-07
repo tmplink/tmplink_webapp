@@ -216,6 +216,9 @@ class tmpUI {
         if (config.errorOnloading !== undefined) {
             this.errorOnloading = config.errorOnloading;
         }
+        if (config.extendStaticHost !== undefined) {
+            this.extendStaticHost = config.extendStaticHost;
+        }
 
         //Add GoogleAnalytics
         if (config.googleAnalytics !== false) {
@@ -467,7 +470,7 @@ class tmpUI {
             //如果启用了动态配置
             if (this.dynamicRouter !== null) {
                 //尝试找到这个配置
-                let configure_url = this.resPath + this.dynamicRouter + url + '.json';
+                let configure_url = this.extendStaticHost + this.resPath + this.dynamicRouter + url + '.json';
                 let xhttp = new XMLHttpRequest();
                 xhttp.onloadend = () => {
                     if (xhttp.status == 200 || xhttp.status == 304) {
@@ -871,7 +874,7 @@ class tmpUI {
             if (this.loadingIcon !== false) {
                 document.querySelector('#tmpui_loading_icon').innerHTML = preloadingIcon;
                 let xhr = new XMLHttpRequest();
-                xhr.open('GET', this.loadingIcon, true);
+                xhr.open('GET', this.extendStaticHost + this.loadingIcon, true);
                 xhr.responseType = 'blob';
                 xhr.addEventListener('load', (e) => {
                     if (xhr.status === 200) {
