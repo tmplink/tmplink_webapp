@@ -1,8 +1,8 @@
 /**
  * tmpUI.js
- * version: 39
+ * version: 50
  * Github : https://github.com/tmplink/tmpUI
- * Date :2023-03-21
+ * Date :2024-05-07
  */
 
 class tmpUI {
@@ -43,6 +43,7 @@ class tmpUI {
     onExitfunction = []
     filesCache = []
     statusLastPage = ''
+    extendStaticHost = ''
 
     constructor(config) {
         this.state = {
@@ -674,9 +675,9 @@ class tmpUI {
             }
             //如果配置了 version:false，就不加版本号
             if (this.config.path[target].res[i].version === false) {
-                xhttp.open("GET", this.resPath + i, true);
+                xhttp.open("GET", this.extendStaticHost + this.resPath + i, true);
             } else {
-                xhttp.open("GET", this.resPath + i + '?v=' + this.version, true);
+                xhttp.open("GET", this.extendStaticHost + this.resPath + i + '?v=' + this.version, true);
             }
             xhttp.send();
         }
