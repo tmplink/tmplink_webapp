@@ -435,6 +435,8 @@ class direct {
                 $('.no_direct_room').fadeIn();
             } else {
                 $('#direct_room_list').append(app.tpl('direct_room_list_tpl', rsp.data));
+                //重写绑定
+                app.linkRebind();
             }
         });
     }
