@@ -262,6 +262,8 @@
     "on_select_copy_res_url_text": "複製資源連接網址（文本）",
     "on_select_copy_res_url_html": "複製資源連接網址（代碼）",
     "direct_intro_welcome": "歡迎使用直接連結功能",
+    "direct_intro_free1": "完全免費。",
+    "direct_intro_free2": "當您的帳號中含有直接連結流量配額時，直接連結的下載速度會更快。當直接連結流量配額耗盡時，將與其他用戶共享網絡帶寬，高峰時段的下載速度可能會降低。",
     "direct_intro_1": "直接連結功能可以讓您將上傳至鈦盤的檔案，以資源連結的方式與朋友分享。",
     "direct_intro_2": "直接下載，不需要進入檔案提取網頁。",
     "direct_intro_3": "可支持線上播放。",
