@@ -236,6 +236,10 @@
             <div>
                 <p i18n="direct_intro_1">.</p>
                 <ul>
+                    <li class="text-red" i18n="direct_intro_free1">.</li>
+                    <li class="text-red">
+                        <span i18n="direct_quota_free">.</span><span class="direct_quota_free">0</span><span> *</span>
+                    </li>
                     <li i18n="direct_intro_2">.</li>
                     <li i18n="direct_intro_3">.</li>
                     <li i18n="direct_intro_4">.</li>
@@ -243,6 +247,7 @@
                     <li i18n="direct_intro_6">.</li>
                 </ul>
                 <p i18n="direct_intro_9">.</p>
+                <p class="text-muted">* <span i18n="direct_intro_free2">.</span></p>
             </div>
         </div>
     </div>
@@ -399,6 +404,7 @@
                 <div class="col-12 pb-2">
                     <div class="h4" i18n="direct_api_title_7">上传文件</div>
                     <div class="text-muted">POST https://tmp-cli.vx-cdn.com/app/upload_cli</div>
+                    <div class="text-muted">Content-Type application/x-www-form-urlencoded</div>
                     <p class="mt-3" i18n="direct_api_upload_des">此接口即为 CLI 上传文件的接口，因此使用标准表单来提交需要上传的文件，可以使用 curl 或者
                         wget 等常用工具来完成上传。下面的代码是使用 curl 上传时的例子：</p>
                     <code>
@@ -460,6 +466,7 @@
                 <div class="col-12 pb-2">
                     <div class="h4" i18n="direct_api_title_6">获取直链流量配额</div>
                     <div class="text-muted">POST https://tmp-api.vx-cdn.com/services/direct</div>
+                    <div class="text-muted">Content-Type application/x-www-form-urlencoded</div>
                 </div>
 
                 <div class="col-12 pb-2">
@@ -488,6 +495,7 @@
                 <div class="col-12 pb-2">
                     <div class="h4" i18n="direct_api_title_2">获取仓库文件列表</div>
                     <div class="text-muted">POST https://tmp-api.vx-cdn.com/services/direct</div>
+                    <div class="text-muted">Content-Type application/x-www-form-urlencoded</div>
                 </div>
                 <div class="col-12 pb-2">
                     <div class="h4" i18n="direct_api_params">参数</div>
@@ -518,6 +526,7 @@
                 <div class="col-12 pb-2">
                     <div class="h4" i18n="direct_api_title_3">获取直链文件列表</div>
                     <div class="text-muted">POST https://tmp-api.vx-cdn.com/services/direct</div>
+                    <div class="text-muted">Content-Type application/x-www-form-urlencoded</div>
                 </div>
 
                 <div class="col-12 pb-2">
@@ -550,6 +559,7 @@
                 <div class="col-12 pb-2">
                     <div class="h4" i18n="direct_api_title_4">添加直链</div>
                     <div class="text-muted">POST https://tmp-api.vx-cdn.com/services/direct</div>
+                    <div class="text-muted">Content-Type application/x-www-form-urlencoded</div>
                 </div>
 
                 <div class="col-12 pb-2">
@@ -578,6 +588,7 @@
                 <div class="col-12 pb-2">
                     <div class="h4" i18n="direct_api_title_5">移除直链</div>
                     <div class="text-muted">POST https://tmp-api.vx-cdn.com/services/direct</div>
+                    <div class="text-muted">Content-Type application/x-www-form-urlencoded</div>
                 </div>
 
                 <div class="col-12 pb-2">

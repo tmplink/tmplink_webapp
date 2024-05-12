@@ -64,29 +64,22 @@ class direct {
             this.traffic_limit = rsp.data.traffic_limit;
             this.ssl = rsp.data.ssl_status === 'yes' ? true : false;
             this.ssl_acme = rsp.data.ssl_acme === 'disable' ? false : true;
-            //如果domain是 *.5t-cdn.com 作为子域名，生成的链接则应该是 https://
-            if (this.domain.indexOf('.5t-cdn.com') != -1) {
+
+            if (this.ssl) {
+                $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
+                $('#box_disable_ssl').show();
+                this.protocol = 'https://';
+            } else {
+                $('#box_disable_ssl').hide();
+                $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
+            }
+
+            //如果 ssl_acme 是 true，标记为自动申请证书
+            if (this.ssl_acme) {
                 this.protocol = 'https://';
                 $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
             } else {
-
-                if (this.ssl) {
-                    $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
-                    $('#box_disable_ssl').show();
-                    this.protocol = 'https://';
-                } else {
-                    $('#box_disable_ssl').hide();
-                    $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
-                }
-    
-                //如果 ssl_acme 是 true，标记为自动申请证书
-                if (this.ssl_acme) {
-                    this.protocol = 'https://';
-                    $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
-                } else {
-                    $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
-                }
-
+                $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
             }
             
             //如果 API key 是 0，说明没有设置 API key，显示提示

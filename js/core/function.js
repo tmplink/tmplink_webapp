@@ -118,6 +118,12 @@ function countDown(id, time) {
 }
 
 function bytetoconver(val, label) {
+
+    //if undefined,return 0 B
+    if (val === undefined) {
+        return '0 B';
+    }
+
     if (val < 1) {
         return '0 B';
     }
