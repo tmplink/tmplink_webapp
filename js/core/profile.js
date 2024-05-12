@@ -119,8 +119,13 @@ class profile {
         let badge = '/img/level/'+this.parent_op.user_group.level+'.svg';
         $('.user_badge').attr('src',badge);
         $('.user_level_icon').attr('src',badge);
+        
         //设定其它信息
+        if(this.parent_op.user_group.storage === undefined){
+            this.parent_op.user_group.storage = 0;
+        }
         $('.user_group_storage').html(this.parent_op.user_group.storage+' GB');
+
         if(this.parent_op.user_group_highspeed==='1'){
             $('.user_group_highspeed').html(app.languageData.opt_enable);
             $('.user_group_highspeed').addClass('text-green');
