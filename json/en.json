@@ -448,6 +448,7 @@
     "status_error_13": "Please select the destination folder.",
     "status_error_14": "Your account currently has no folders.",
     "status_error_15": "Access code error.",
+    "status_error_16": "The download has started, but the selected files contain folders, which will not be downloaded unless you use the \"Download as Zip\" feature.",
     "alert_no_support": "Sorry, due to browser restrictions, this feature is temporarily unavailable on this device.",
     "on_select_all": "Select All",
     "on_select_cancel": "Deselect All",
