@@ -135,10 +135,10 @@ class BoxSelecter {
     toClicpboard(data) {
         let ctext = '';
         for (let x in data) {
-            if(type==='dir'){
-                ctext = ctext + '[' + data[x].title + '] https://' + this.site_domain + '/room/' + data[x].ukey + "\r";
+            if(data[x].type==='dir'){
+                ctext = ctext + '📂' + data[x].title + ' https://' + this.site_domain + '/room/' + data[x].ukey + "\r";
             }else{
-                ctext = ctext + '[' + data[x].title + '] https://' + this.site_domain + '/f/' + data[x].ukey + "\r";
+                ctext = ctext + '📃' + data[x].title + ' https://' + this.site_domain + '/f/' + data[x].ukey + "\r";
             }
         }
         this.parent_op.copyToClip(ctext);
@@ -160,14 +160,20 @@ class BoxSelecter {
                 if (check === 'true'&&inode.getAttribute('tlunit')==='dir') {
                     //do something
                     dirs.push(inode.getAttribute('tldata'));
-                }
+                } 
                 if (check === 'true'&&inode.getAttribute('tlunit')==='file') {
                     //do something
                     ukey.push(inode.getAttribute('tldata'));
                 }
             }
-            this.parent_op.workspace_del(ukey, true);
-            this.parent_op.mr_del(dirs, true);
+
+            if (dirs.length!==0) {
+                this.parent_op.mr_del(dirs, true);
+            }
+
+            if (ukey.length!==0) {
+                this.parent_op.workspace_del(ukey, true);
+            }
         }
     }
 
@@ -175,14 +181,15 @@ class BoxSelecter {
         var node = document.getElementsByName(this.items_name);
         let dir_hit = false;
         for (let i = 0; i < node.length; i++) {
-            var inode = node[i];
+            let inode = node[i];
             let check = inode.getAttribute('data-check');
-            if (check === 'true'&&inode.getAttribute('tlunit')==='file') {
+            let unit_type = inode.getAttribute('tlunit');//是否是文件夹又或者是文件
+            if (check === 'true'&&unit_type==='file') {
                 //do something
                 let ukey = inode.getAttribute('tldata');
                 this.parent_op.download_file_btn(ukey);
             }
-            if (check === 'true'&&inode.getAttribute('tlunit')==='dir') {
+            if (check === 'true'&&unit_type==='dir') {
                 dir_hit = true;
             }
         }
@@ -234,7 +241,7 @@ class BoxSelecter {
                 this.parent_op.dir_tree_display(0);
                 this.dir_tree_init = true;
             }
-            if (check === 'true' && inode.getAttribute('tlunit') === 'file'){
+            if (check === 'true'){
                 $('#movefileModal').modal('show');
                 return true;
             }
@@ -246,17 +253,18 @@ class BoxSelecter {
 
     moveToDir() {
         var node = document.getElementsByName(this.items_name);
-        let ukeys = [];
+        let data = [];
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
             let check = inode.getAttribute('data-check');
-            if (check === 'true' && inode.getAttribute('tlunit') === 'file'){
+            let id = inode.getAttribute('tldata');
+            let unit_type = inode.getAttribute('tlunit');
+            if (check === 'true'){
                 //do something
-                ukeys.push(inode.getAttribute('tldata'));
-
+                data.push({'id':id,'type':unit_type});
             }
         }
-        this.parent_op.move_to_dir(ukeys, this.move_place);
+        this.parent_op.move_to_dir(data, this.move_place);
     }
 
     directCopy(type) {
@@ -336,7 +344,8 @@ class BoxSelecter {
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
             let check = inode.getAttribute('data-check');
-            if (check === 'true') {
+            let unit_type = inode.getAttribute('tlunit');//是否是文件夹又或者是文件
+            if (check === 'true'&&unit_type==='file') {
                 //do something
                 let ukey = inode.getAttribute('tldata');
                 ukeys.push(ukey);

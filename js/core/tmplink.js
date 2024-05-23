@@ -491,23 +491,23 @@ class tmplink {
         return false;
     }
 
-    move_to_dir(ukey, place) {
+    move_to_dir(data, place) {
         let target = $("input[name='dir_tree']:checked").val();
         if (target === undefined) {
             alert(this.language_get.status_error_13);
             return false;
         }
         $.post(this.api_mr, {
-            action: 'move_to_dir',
+            action: 'move_to_dir2',
             token: this.api_token,
-            ukey: ukey,
+            data: data,
             mr_id: target
         }, (rsp) => {
             $('#movefileModal').modal('hide');
             if (place == 'workspace') {
                 this.workspace_filelist(0);
             } else {
-                this.mr_file_list(0);
+                this.room_list();
             }
         });
     }
@@ -2587,6 +2587,8 @@ class tmplink {
                     $('#notice_meetingroom_create').html(app.languageData.notice_meetingroom_status_mrcreated);
                     this.room_list();
                     $('#mrCreaterModal').modal('hide');
+                    //更新文件夹树形图
+                    this.dir_tree_get();
                 } else {
                     $('#notice_meetingroom_create').html(app.languageData.notice_meetingroom_status_mrcreat_fail);
                 }
@@ -2597,13 +2599,22 @@ class tmplink {
         });
     }
 
-    mr_del(mrid) {
-        if (this.profile_confirm_delete_get()) {
+    mr_del(mrid,group_delete = false) {
+        if (this.profile_confirm_delete_get()&&group_delete===false) {
             if (!confirm(app.languageData.confirm_delete)) {
                 return false;
             }
         }
-        $('#meetingroom_id_' + mrid).fadeOut();
+
+        //if mrid is array, then delete all
+        if(group_delete){
+            for (let i in mrid) {
+                $('#meetingroom_id_' + mrid[i]).fadeOut();
+            }
+        }else{
+            $('#meetingroom_id_' + mrid).fadeOut();
+        }
+
         $.post(this.api_mr, {
             action: 'delete',
             token: this.api_token,
