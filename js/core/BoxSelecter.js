@@ -55,12 +55,18 @@ class BoxSelecter {
 
         let inode = node.getAttribute('tldata');
         let itype = node.getAttribute('tltype');
-        if (itype === 'photo_card') {
-            $(`.file_unit_${inode} .card`).css('background-color', color);
-        } else {
-            // $(`.file_unit_${inode}`).css('border-radius', '5px');
-            $(`.file_unit_${inode}`).css('border-width', '1px');
-            $(`.file_unit_${inode}`).css('background-color', color);
+        let unit_type = node.getAttribute('tlunit');//是否是文件夹又或者是文件
+        if(unit_type === 'dir'){
+            $(`.dir_${inode}`).css('border-width', '1px');
+            $(`.dir_${inode}`).css('background-color', color);
+        }else{
+            if (itype === 'photo_card') {
+                $(`.file_unit_${inode} .card`).css('background-color', color);
+            } else {
+                // $(`.file_unit_${inode}`).css('border-radius', '5px');
+                $(`.file_unit_${inode}`).css('border-width', '1px');
+                $(`.file_unit_${inode}`).css('background-color', color);
+            }
         }
         node.setAttribute('data-check', 'true');
     }
@@ -68,12 +74,17 @@ class BoxSelecter {
     selectOff(node) {
         let inode = node.getAttribute('tldata');
         let itype = node.getAttribute('tltype');
-        if (itype === 'photo_card') {
-            $(`.file_unit_${inode} .card`).css('background-color', '');
-        } else {
-            $(`.file_unit_${inode}`).css('border-radius', '');
-            $(`.file_unit_${inode}`).css('border-width', '');
-            $(`.file_unit_${inode}`).css('background-color', '');
+        if(node.getAttribute('tlunit') === 'dir'){
+            $(`.dir_${inode}`).css('border-width', '');
+            $(`.dir_${inode}`).css('background-color', '');
+        }else{
+            if (itype === 'photo_card') {
+                $(`.file_unit_${inode} .card`).css('background-color', '');
+            } else {
+                $(`.file_unit_${inode}`).css('border-radius', '');
+                $(`.file_unit_${inode}`).css('border-width', '');
+                $(`.file_unit_${inode}`).css('background-color', '');
+            }
         }
         node.setAttribute('data-check', 'false');
     }
@@ -113,7 +124,8 @@ class BoxSelecter {
                 //do something
                 ukeys.push({
                     'ukey': inode.getAttribute('tldata'),
-                    'title': inode.getAttribute('tltitle')
+                    'title': inode.getAttribute('tltitle'),
+                    'type': inode.getAttribute('tlunit'),
                 });
             }
         }
@@ -123,7 +135,11 @@ class BoxSelecter {
     toClicpboard(data) {
         let ctext = '';
         for (let x in data) {
-            ctext = ctext + '[' + data[x].title + '] https://' + this.site_domain + '/f/' + data[x].ukey + "\r";
+            if(data[x].type==='dir'){
+                ctext = ctext + '📂' + data[x].title + ' https://' + this.site_domain + '/room/' + data[x].ukey + "\r";
+            }else{
+                ctext = ctext + '📃' + data[x].title + ' https://' + this.site_domain + '/f/' + data[x].ukey + "\r";
+            }
         }
         this.parent_op.copyToClip(ctext);
     }
@@ -135,30 +151,52 @@ class BoxSelecter {
             }
         }
         let ukey = [];
+        let dirs = [];
         var node = document.getElementsByName(this.items_name);
         if (node.length > 0) {
             for (let i = 0; i < node.length; i++) {
                 var inode = node[i];
                 let check = inode.getAttribute('data-check');
-                if (check === 'true') {
+                if (check === 'true'&&inode.getAttribute('tlunit')==='dir') {
+                    //do something
+                    dirs.push(inode.getAttribute('tldata'));
+                } 
+                if (check === 'true'&&inode.getAttribute('tlunit')==='file') {
                     //do something
                     ukey.push(inode.getAttribute('tldata'));
                 }
             }
-            this.parent_op.workspace_del(ukey, true);
+
+            if (dirs.length!==0) {
+                this.parent_op.mr_del(dirs, true);
+            }
+
+            if (ukey.length!==0) {
+                this.parent_op.workspace_del(ukey, true);
+            }
         }
     }
 
     download() {
         var node = document.getElementsByName(this.items_name);
+        let dir_hit = false;
         for (let i = 0; i < node.length; i++) {
-            var inode = node[i];
+            let inode = node[i];
             let check = inode.getAttribute('data-check');
-            if (check === 'true') {
+            let unit_type = inode.getAttribute('tlunit');//是否是文件夹又或者是文件
+            if (check === 'true'&&unit_type==='file') {
                 //do something
                 let ukey = inode.getAttribute('tldata');
                 this.parent_op.download_file_btn(ukey);
             }
+            if (check === 'true'&&unit_type==='dir') {
+                dir_hit = true;
+            }
+        }
+
+        //如果下载的选中项中包含了文件夹，则提示可以使用打包下载
+        if (dir_hit) {
+            alert(app.languageData.status_error_16);
         }
     }
 
@@ -192,6 +230,7 @@ class BoxSelecter {
         $('#copyModal').modal('show');
     }
 
+    //todo: 移动文件到文件夹，如果选中的项目包含了文件夹，则提示不会对文件夹进行移动
     moveToModel(type) {
         var node = document.getElementsByName(this.items_name);
         this.move_place = type;
@@ -202,7 +241,7 @@ class BoxSelecter {
                 this.parent_op.dir_tree_display(0);
                 this.dir_tree_init = true;
             }
-            if (check === 'true') {
+            if (check === 'true'){
                 $('#movefileModal').modal('show');
                 return true;
             }
@@ -214,17 +253,18 @@ class BoxSelecter {
 
     moveToDir() {
         var node = document.getElementsByName(this.items_name);
-        let ukeys = [];
+        let data = [];
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
             let check = inode.getAttribute('data-check');
-            if (check === 'true') {
+            let id = inode.getAttribute('tldata');
+            let unit_type = inode.getAttribute('tlunit');
+            if (check === 'true'){
                 //do something
-                ukeys.push(inode.getAttribute('tldata'));
-
+                data.push({'id':id,'type':unit_type});
             }
         }
-        this.parent_op.move_to_dir(ukeys, this.move_place);
+        this.parent_op.move_to_dir(data, this.move_place);
     }
 
     directCopy(type) {
@@ -304,7 +344,8 @@ class BoxSelecter {
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
             let check = inode.getAttribute('data-check');
-            if (check === 'true') {
+            let unit_type = inode.getAttribute('tlunit');//是否是文件夹又或者是文件
+            if (check === 'true'&&unit_type==='file') {
                 //do something
                 let ukey = inode.getAttribute('tldata');
                 ukeys.push(ukey);
