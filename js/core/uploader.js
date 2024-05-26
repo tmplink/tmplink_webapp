@@ -9,11 +9,15 @@ class uploader {
     upload_queue_file = []
     upload_processing = 0
     single_file_size  = 50 * 1024 * 1024 * 1024
-    slice_size        = 32 * 1024 * 1024;
+    slice_size        = 8 * 1024 * 1024;
     max_sha1_size     = 256 * 1024 * 1024;
 
     upload_queue = 0;
     upload_queue_max = 5;
+
+    // 单个文件的上传线程数
+    upload_worker_queue = [];
+    upload_worker_queue_max = 5;
 
     upload_slice_chunk_loaded = []
     upload_slice_chunk_speed  = []
@@ -423,6 +427,8 @@ class uploader {
 
     /**
      * 分片上传
+     * 分片上传功能，首先会查询服务器是否有需要上传的分片，如果有则返回分片编号，如果没有则返回需要上传的分片编号
+     * @param {*} server
      * @param {*} file 
      * @param {*} id 
      * @param {*} filename 
@@ -431,6 +437,20 @@ class uploader {
         
         //创建分片任务的ID，算法 uid+文件路径+文件大小 的 sha1 值
         let uptoken = CryptoJS.SHA1(this.parent_op.uid + file.name + file.size).toString();
+
+        //当前任务的多线程上传队列状态是否已经建立
+        if (this.upload_worker_queue[id] === undefined) {
+            this.upload_worker_queue[id] = 0;
+        }
+
+        //当前上传队列是否已经超过最大值
+        if (this.upload_worker_queue[id] > this.upload_worker_queue_max) {
+            //等待 1 秒后再次检查
+            setTimeout(() => {
+                this.worker_slice(server, utoken, sha1, file, id, filename);
+            }, 1000);
+            return false;
+        }
 
         //查询分片信息
         $.post(server, {
@@ -509,6 +529,7 @@ class uploader {
         //从 file 中读取指定的分片
         let index = slice_status.next;
         let blob = file.slice(index * this.slice_size, (index + 1) * this.slice_size);
+
         //重置上传数据
         this.upload_slice_chunk_last[id] = 0;
 
