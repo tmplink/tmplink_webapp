@@ -80,7 +80,10 @@
             ondragover="$(this).addClass('shadow-lg');$('#tmp_upload_btn2').removeClass('bg-blue').addClass('bg-success');"
             ondragleave="$(this).removeClass('shadow-lg');$('#tmp_upload_btn2').removeClass('bg-success').addClass('bg-blue');">
             <div class="modal-header">
-                <h4 class="modal-title" i18n="model_title_upload">.</h4>
+                <h4 class="modal-title">
+                    <span i18n="model_title_upload">.</span>
+                    <small class="upload_speed_show_inner">.</small>
+                </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -388,7 +391,7 @@
                         <div class="col-12 my-1 text-muted" id="uqnn_<% obj.id %>"></div>
                         <div class="col-12 text-muted uqinfo_<% obj.id %>" id="uqm_<% obj.id %>"></div>
                         <div class="col-12 uqinfo_<% obj.id %>">
-                            <div class="progress progress-sm mt-2">
+                            <div class="progress progress-sm my-2">
                                 <div class="progress-bar bg-green" style="width: 0%" id="uqp_<% obj.id %>"></div>
                             </div>
                         </div>
