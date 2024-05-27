@@ -557,7 +557,7 @@ class uploader {
         //初始化
         let uqmid = "#uqm_" + id;
         let uqpid = "#uqp_" + id;
-        let main_t = thread ? '主线程' : '子线程';
+        let main_t = thread === 0 ? '主线程' : '子线程';
 
         //如果是最后一个分片，只有主线程才执行这项工作，其他线程直接退出
         // if(index>=(this.upload_slice_total[id]-2)&&thread===false){
