@@ -1,4 +1,9 @@
 {
+    "model_title_upload_slice": "効率設定",
+    "model_title_upload_slice_des": "分割サイズの変更、スレッド数の増加、スポンサー専用機能",
+    "model_title_upload_slice_size": "分割サイズ（MB）",
+    "model_title_upload_slice_thread": "最大スレッド数",
+    "model_title_upload_slice_task": "同時にアップロードできるファイルの最大数",
     "direct_cf_notice":"ドメインがCloudflareで管理されている場合は、サブドメインを使用してください。",
     "direct_cf_modal_title":"CloudFlare",
     "direct_cf_modal_body_1":"ドメインをCloudFlareで管理している場合は、サブドメインをダイレクトリンクのドメインとして使用してください。",

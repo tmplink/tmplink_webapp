@@ -227,6 +227,38 @@
                         </label>
                     </div>
                     <div class="select-box p-2 btn-point">
+                        <div class="d-flex align-items-center" onclick="$('#upload_slice_settings').toggle();">
+                            <span class="stamp-md mr-3">
+                                <iconpark-icon name="gauge-circle-bolt" class="fa-fw fa-2x text-blue"></iconpark-icon>
+                            </span>
+                            <div>
+                                <h4 class="m-0" i18n="model_title_upload_slice">
+                                    效率设定
+                                </h4>
+                                <small class="text-muted" i18n="model_title_upload_slice_des">
+                                    更改分片大小，增加线程数，赞助者专用功能
+                                </small>
+                            </div>
+                        </div>
+                        <div id="upload_slice_settings" style="display: none;"> 
+                            <!-- 设定项目：分片大小 -->
+                            <div class="form-group">
+                                <label for="upload_slice_size" i18n="model_title_upload_slice_size">分片大小(MB)</label>
+                                <input type="number" class="form-control" id="upload_slice_size" min="1" max="100" onchange="TL.uploader.auto_set_upload_pf(this)" onkeyup="TL.uploader.auto_set_upload_pf(this)">
+                            </div>
+                            <!-- 设定项目：线程数 -->
+                            <div class="form-group">
+                                <label for="upload_slice_thread_max" i18n="model_title_upload_slice_thread">最大线程数</label>
+                                <input type="number" class="form-control" id="upload_slice_thread_max" min="1" max="100" onchange="TL.uploader.auto_set_upload_pf(this)" onkeyup="TL.uploader.auto_set_upload_pf(this)">
+                            </div>
+                            <!-- 设定项目：同时上传的任务数量 -->
+                            <div class="form-group">
+                                <label for="upload_slice_queue_max" i18n="model_title_upload_slice_task">同时上传的任务数量</label>
+                                <input type="number" class="form-control" id="upload_slice_queue_max" min="1" max="100" onchange="TL.uploader.auto_set_upload_pf(this)" onkeyup="TL.uploader.auto_set_upload_pf(this)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="select-box p-2 btn-point">
                         <div class="d-flex align-items-center">
                             <span class="stamp-md mr-3">
                                 <iconpark-icon name="forward" class="fa-fw fa-2x text-blue"></iconpark-icon>

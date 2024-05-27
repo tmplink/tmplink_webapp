@@ -797,6 +797,13 @@
     "upload_files": "上传文件",
     "upload_dirs": "上传文件夹",
     "upload_dirs_des": "点击选择一个文件夹进行上传。",
+
+    "model_title_upload_slice": "效率设定",
+    "model_title_upload_slice_des": "更改分片大小，增加线程数，赞助者专用功能",
+    "model_title_upload_slice_size": "分片大小（MB）",
+    "model_title_upload_slice_thread": "最大线程数（每个文件）",
+    "model_title_upload_slice_task": "同时上传的文件数量",
+
     "download_run": "正在下载:",
     "download_add": "下载任务已添加:",
     "download_speed": "您尚未登录，登录后可免费提升下载速度。",

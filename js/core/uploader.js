@@ -32,6 +32,80 @@ class uploader {
         this.speed_updater();
     }
 
+    init_upload_pf(){
+        $.post(this.parent_op.api_user, {
+            'action': 'pf_upload_get',
+            'token': this.parent_op.api_token
+        }, (rsp) => {
+            if (rsp.status === 1) {
+                this.upload_worker_queue_max = rsp.data.upload_slice_thread_max;
+                this.upload_queue_max = rsp.data.upload_slice_queue_max;
+                this.slice_size = rsp.data.upload_slice_size * (1024*1024);
+                //更新到界面
+                $('#upload_slice_size').val(rsp.data.upload_slice_size);
+                $('#upload_slice_queue_max').val(rsp.data.upload_slice_queue_max);
+                $('#upload_slice_thread_max').val(rsp.data.upload_slice_thread_max);
+            }
+        }, 'json');
+        //如果用户还不是赞助者，将不支持修改上传参数
+        if(this.parent_op.isSponsor===false){
+            $('#upload_slice_size').attr('disabled','disabled');
+            $('#upload_slice_queue_max').attr('disabled','disabled');
+            $('#upload_slice_thread_max').attr('disabled','disabled');
+        }
+    }
+
+    auto_set_upload_pf(dom){
+        //获取当前值
+        let val = $(dom).val();
+        //输入的值不能大于 100，不能小于 1
+        if(val>100){
+            val = 100;
+        }
+        if(val<1){
+            val = 1;
+        }
+        //获取当前的 ID
+        let id = $(dom).attr('id');
+        //更新前，更改输入框的颜色
+        $(dom).addClass('text-yellow');
+        //更新
+        $.post(this.parent_op.api_user, {
+            'action': 'pf_upload_set',
+            'token': this.parent_op.api_token,
+            'key': id,
+            'val': val
+        }, (rsp) => {
+            //恢复输入框的颜色
+            $(dom).removeClass('text-yellow');
+            if (rsp.status === 1) {
+                //将输入框设置为绿色
+                $(dom).addClass('text-success');
+                setTimeout(() => {
+                    $(dom).removeClass('text-success');
+                }, 1000);
+                //更新本地配置的对应值
+                switch(id){
+                    case 'upload_slice_size':
+                        this.slice_size = val * (1024*1024);
+                        break;
+                    case 'upload_slice_queue_max':
+                        this.upload_queue_max = val;
+                        break;
+                    case 'upload_slice_thread_max':
+                        this.upload_worker_queue_max = val;
+                        break;
+                }
+            } else {
+                //将输入框设置为红色
+                $(dom).addClass('text-danger');
+                setTimeout(() => {
+                    $(dom).removeClass('text-danger');
+                }, 1000);
+            }
+        }, 'json');
+    }
+
     tmpupGenerator() {
         $('#tmpup').show();
         this.parent_op.btn_copy_bind();

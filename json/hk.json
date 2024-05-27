@@ -1,4 +1,9 @@
 {
+    "model_title_upload_slice": "效率設定",
+    "model_title_upload_slice_des": "更改分片大小，增加線程數，贊助者專用功能",
+    "model_title_upload_slice_size": "分片大小（MB）",
+    "model_title_upload_slice_thread": "最大線程數（每个任務）",
+    "model_title_upload_slice_task": "同時上傳的任務數量",
     "direct_cf_notice":"如果您的域名由 Cloudflare 管理，請使用二級域名。",
     "direct_cf_modal_title":"CloudFlare",
     "direct_cf_modal_body_1":"如果您使用 CloudFlare 管理您的域名，那麼請使用二級域名作為直鏈域名。",

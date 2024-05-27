@@ -1,4 +1,9 @@
 {
+    "model_title_upload_slice": "Efficiency Settings",
+    "model_title_upload_slice_des": "Change slice size, increase thread count, features exclusive to sponsors",
+    "model_title_upload_slice_size": "Slice Size (MB)",
+    "model_title_upload_slice_thread": "Maximum Thread (Per File)",
+    "model_title_upload_slice_task": "Maximum Number of Files Uploaded at the Same Time",
     "direct_cf_notice": "If your domain is managed by Cloudflare, please use a subdomain.",
     "direct_cf_modal_title": "CloudFlare",
     "direct_cf_modal_body_1": "If you use CloudFlare to manage your domain, please use a subdomain as the direct link domain.",
