@@ -607,6 +607,9 @@ class tmplink {
             this.isSponsor = true;
             this.setBtnForSponsor();
         }
+
+        //更新上传器的设定
+        this.uploader.init_upload_pf();
         
         //set process bar to 100%
         // setTimeout(() => {
