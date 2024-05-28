@@ -1,11 +1,30 @@
-<div class="form-sp">
-    <div class="text-center mb-7">
-        <a href="javascript:void(0)" onclick="app.open('/');">
-            <img src="/img/ico/logo-red.svg" alt="tmp.link" style="width: 64px;">
-        </a>
-    </div>
-    <div class="card shadow p-4">
-        <h3 i18n="page_503_content" class="text-center">.</h3>
-        <a href="/" class="btn btn-lg btn-primary btn-block mt-4" i18n="return_index">.</a>
+<div class="container d-flex flex-grow-1">
+    <div class="align-self-center w-100">
+        <div class="text-center mb-6">
+            <a href="/">
+                <img id="top_loggo" src="/img/ico/logo-red.svg" alt="tmp.link" style="width: 64px;">
+            </a>
+        </div>
+        <div id="file_messenger" class="align-self-center mx-auto default-filebox"
+            style="margin-top: 20px;max-width: 550px;">
+            <div class="card shadow" style="border-radius: 24px;">
+                <div class="card-body p-5 default-filebox  d-flex flex-grow-1">
+                    <!-- 垂直居中 -->
+                    <div class="align-self-center w-100">
+                        <div class="text-center pt-2">
+                            <h3 i18n="page_503_title" class="text-center">服务器繁忙</h3>
+                        </div>
+                        <div class="text-center h3 mt-4">
+                            <h4 i18n="page_503_content" class="text-center">.</h4>
+                        </div>
+                        <div class="row p-5">
+                            <div class="col-12 text-center">
+                                <a href="/" class="btn btn-lg btn-primary btn-block mt-4" i18n="return_index">.</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

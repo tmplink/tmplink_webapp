@@ -179,8 +179,12 @@
     "model_profile_title": "偏好设定",
     "model_profile_confirm_delete": "是否启用删除前确认？",
     "model_profile_bulk_copy": "是否启用连续复制？<br>启用后您可以连续点击复制按钮以复制多个文件链接。",
-    "page_503_content": "当前有下载任务正在进行中，请等待该任务结束后再开始新的下载。",
-    "page_404_content": "无法找到对应的页面。",
+
+    "page_503_title": "服务器繁忙",
+    "page_404_title": "404",
+    "page_503_content": "服务器暂时无法响应请求，请稍后再访问。",
+    "page_404_content": "无法找到您访问的页面。",
+
     "return_index": "返回首页",
     "model_list": "列表",
     "model_grid": "图标",
