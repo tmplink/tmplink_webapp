@@ -532,12 +532,12 @@ class uploader {
         //当前任务的多线程上传队列状态是否已经建立
         if (this.upload_worker_queue[id] === undefined) {
             this.upload_worker_queue[id] = 1;
-            console.log(`任务 ${id} 主线程 1 已启动。`);
+            // console.log(`任务 ${id} 主线程 1 已启动。`);
         }
 
         //如果当前处理进度 -1 等于总数，并且不是主线程，则退出
         if ((this.upload_slice_process[id] - 3) >= numbers_of_slice && thread > 0) {
-            console.log(`任务 ${id} 子线程已退出。`);
+            // console.log(`任务 ${id} 子线程已退出。`);
             return false;
         } else {
             //更新进度
@@ -547,7 +547,7 @@ class uploader {
                 let thread_id = this.upload_worker_queue[id]+1;
                 this.upload_worker_queue[id] = thread_id;
                 this.worker_slice(server, utoken, sha1, file, id, filename, thread_id);
-                console.log(`任务 ${id} 子线程 ${thread_id} 已启动。`);
+                // console.log(`任务 ${id} 子线程 ${thread_id} 已启动。`);
             }
         }
 
@@ -639,7 +639,7 @@ class uploader {
         //     return false;
         // }
 
-        console.log(`任务 ${id} ${main_t} ${thread} 正在上传分片 ${index}。`);
+        // console.log(`任务 ${id} ${main_t} ${thread} 正在上传分片 ${index}。`);
 
         //初始化上传任务的已上传数据计数器
         if (this.upload_slice_chunk[id][index] === undefined) {
