@@ -56,6 +56,11 @@
                             <div class="text-center h2" >
                                 <!-- <iconpark-icon name="file-lines" class="text-azure"
                                 id="file-icon"></iconpark-icon> -->
+                                <style>
+                                #filename {
+                                    word-wrap: break-word;
+                                }
+                                </style>
                                 <span id="filename"></span>
                             </div>
                             <div class="text-center">
@@ -65,7 +70,12 @@
                                     <iconpark-icon name="like" class="fa-fw"></iconpark-icon>
                                     <span id="likes_count">0</span>
                                 </span>
+                                <span class="hs-model ml-2">
+                                    <iconpark-icon name="gauge-circle-bolt" class="fa-fw"></iconpark-icon>
+                                    <span class="hs-model-title" i18n="hs_title">.</span>
+                                </span>
                             </div>
+                            
                             <div id="lefttime_show" class="text-center">
                                 <span><iconpark-icon name="timer" class="fa-fw"></iconpark-icon></span>
                                 <span id="lefttime"></span>
@@ -82,21 +92,16 @@
                         <span class="userinfo_nickname"></span>
                         <span i18n="filepage_publicby_2">.</span>
                     </div>
-                    <div class="d-none d-sm-flex">
-                        <!-- 下载按钮 -->
-                        <button type="button" class="btn btn-lg btn-success mx-auto mt-5 mb-2" style="min-width: 400px;"
-                            id="file_download_btn" i18n="file_btn_download">.</button>
-                    </div>
 
                     <hr />
 
                     <!-- 居中显示 -->
                     <div id="file_op" class="my-auto" style="display: none;">
 
-                        <a class="btn btn-success btn-lg btn-block file_download_url">
+                        <button class="btn btn-success btn-lg btn-block" id="file_download_btn">
                             <iconpark-icon name="cloud-arrow-down" class="fa-fw mx-auto my-auto mb-2"></iconpark-icon>
                             <span i18n="file_btn_download">.</span>
-                        </a>
+                        </button>
 
                         <span class="dropdown btn-block btn_play" style="display: none;">
                             <button role="button" type="button" class="btn btn-primary btn-lg btn-block"
