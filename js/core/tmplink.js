@@ -683,12 +683,6 @@ class tmplink {
                         $('.user_sponsor_time').html(this.sponsor_time);
                     }
                 }
-                //激活标识
-                if (this.high_speed_channel) {
-                    $('.hs-enabled').show();
-                } else {
-                    $('.hs-disabled').show();
-                }
 
             } else {
                 $('.user-unlogin').show();
@@ -1079,6 +1073,33 @@ class tmplink {
         }, 'json');
     }
 
+    ui_hs_change(status){
+        let st = $('.hs-model-title').html();
+        switch(status){
+            case 'ready':
+                if(st!==app.languageData.hs_ready){
+                    $('.hs-model').fadeOut(()=>{
+                        $('.hs-model-title').html(app.languageData.hs_ready);
+                        $('.hs-model').fadeIn();
+                        $('.hs-model').addClass('text-blue');
+                    });
+                }
+                break;
+            case 'enhanced':
+                if(st!==app.languageData.hs_enhanced){
+                    $('.hs-model').fadeOut(()=>{
+                        if(st===app.languageData.hs_ready){
+                            $('.hs-model').removeClass('text-blue');
+                        }
+                        $('.hs-model-title').html(app.languageData.hs_enhanced);
+                        $('.hs-model').fadeIn();
+                        $('.hs-model').addClass('text-green');
+                    });
+                }
+                break;
+        }
+    }
+
     details_file() {
         if (this.isWeixin()) {
             $('#file_messenger_icon').html('<iconpark-icon name="cloud-arrow-down" class="fa-fw fa-4x"></iconpark-icon>');
@@ -1192,6 +1213,7 @@ class tmplink {
                             captcha: recaptcha
                         }, (req) => {
                             //修改按钮状态
+                            this.ui_hs_change('ready');
                             $('#file_download_btn').removeClass('btn-dark');
                             $('#file_download_btn').addClass('btn-success');
                             $('#file_download_btn').html(app.languageData.file_btn_download);
@@ -1243,6 +1265,10 @@ class tmplink {
 
                             //下载按钮绑定事件，触发下载
                             $('#file_download_btn').on('click', () => {
+                                //更新 UI
+                                if(this.sponsor){
+                                    this.ui_hs_change('enhanced');
+                                }
                                 //触发下载
                                 window.location.href = download_url;
                                 //添加按钮按下反馈

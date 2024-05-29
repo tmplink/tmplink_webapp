@@ -364,7 +364,11 @@
     "status_file_3": "Start downloading",
     "modal_performance_share": "Collaboration",
     "modal_performance_share_des": "Allow other users to upload files to this folder",
-    "hs_enabled": "Highspeed channel - Active",
+    
+    "hs_title": "HTunnel",
+    "hs_ready": "Ready",
+    "hs_enhanced": "Enhanced",
+
     "please_login": "Sign In",
     "status_media_not_added": "This video has not been added to the media library and cannot be played online. Please add it to the media library first. \nThe media library can convert the video to support browser online streaming.",
     "status_media_not_ready": "This video is being converted to a video that supports online streaming, please wait. \nYou can check the conversion progress in the media library.",
