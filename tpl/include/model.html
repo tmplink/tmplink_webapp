@@ -105,7 +105,8 @@
                         <div class="select-box p-2 btn-point" onclick="TL.uploader.model_selected(0)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp-md mr-3">
-                                    <iconpark-icon name="rectangle-vertical-history" class="fa-fw fa-2x text-blue"></iconpark-icon>
+                                    <iconpark-icon name="rectangle-vertical-history"
+                                        class="fa-fw fa-2x text-blue"></iconpark-icon>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="modal_settings_upload_model1">
@@ -120,7 +121,8 @@
                         <div class="select-box p-2 btn-point" onclick="TL.uploader.model_selected(1)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp-md mr-3">
-                                    <iconpark-icon name="rectangle-vertical-history" class="fa-fw fa-2x text-blue"></iconpark-icon>
+                                    <iconpark-icon name="rectangle-vertical-history"
+                                        class="fa-fw fa-2x text-blue"></iconpark-icon>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="modal_settings_upload_model2">
@@ -135,7 +137,8 @@
                         <div class="select-box p-2 btn-point" onclick="TL.uploader.model_selected(2)">
                             <div class="d-flex align-items-center">
                                 <span class="stamp-md mr-3">
-                                    <iconpark-icon name="rectangle-vertical-history" class="fa-fw fa-2x text-blue"></iconpark-icon>
+                                    <iconpark-icon name="rectangle-vertical-history"
+                                        class="fa-fw fa-2x text-blue"></iconpark-icon>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="modal_settings_upload_model3">
@@ -240,21 +243,29 @@
                                 </small>
                             </div>
                         </div>
-                        <div id="upload_slice_settings" style="display: none;"> 
+                        <div id="upload_slice_settings" style="display: none;">
                             <!-- 设定项目：分片大小 -->
                             <div class="form-group">
                                 <label for="upload_slice_size" i18n="model_title_upload_slice_size">分片大小(MB)</label>
-                                <input type="number" class="form-control" id="upload_slice_size" min="1" max="100" onchange="TL.uploader.auto_set_upload_pf(this)" onkeyup="TL.uploader.auto_set_upload_pf(this)">
+                                <input type="number" class="form-control" id="upload_slice_size" min="1" max="100"
+                                    onchange="TL.uploader.auto_set_upload_pf(this)"
+                                    onkeyup="TL.uploader.auto_set_upload_pf(this)">
                             </div>
                             <!-- 设定项目：线程数 -->
                             <div class="form-group">
-                                <label for="upload_slice_thread_max" i18n="model_title_upload_slice_thread">最大线程数</label>
-                                <input type="number" class="form-control" id="upload_slice_thread_max" min="1" max="100" onchange="TL.uploader.auto_set_upload_pf(this)" onkeyup="TL.uploader.auto_set_upload_pf(this)">
+                                <label for="upload_slice_thread_max"
+                                    i18n="model_title_upload_slice_thread">最大线程数</label>
+                                <input type="number" class="form-control" id="upload_slice_thread_max" min="1" max="100"
+                                    onchange="TL.uploader.auto_set_upload_pf(this)"
+                                    onkeyup="TL.uploader.auto_set_upload_pf(this)">
                             </div>
                             <!-- 设定项目：同时上传的任务数量 -->
                             <div class="form-group">
-                                <label for="upload_slice_queue_max" i18n="model_title_upload_slice_task">同时上传的任务数量</label>
-                                <input type="number" class="form-control" id="upload_slice_queue_max" min="1" max="100" onchange="TL.uploader.auto_set_upload_pf(this)" onkeyup="TL.uploader.auto_set_upload_pf(this)">
+                                <label for="upload_slice_queue_max"
+                                    i18n="model_title_upload_slice_task">同时上传的任务数量</label>
+                                <input type="number" class="form-control" id="upload_slice_queue_max" min="1" max="100"
+                                    onchange="TL.uploader.auto_set_upload_pf(this)"
+                                    onkeyup="TL.uploader.auto_set_upload_pf(this)">
                             </div>
                         </div>
                     </div>
@@ -701,7 +712,8 @@
                 <!-- 设定购买的数量 -->
                 <h3 i18n="model_buy_nums">.</h3>
                 <input type="number" class="form-control text-center mb-3" id="buy_direct_quota_nums" value="1"
-                    onchange="TL.buy.selectNums(this.value);" onkeypress="TL.buy.selectNums(this.value);" min="1" max="99"/>
+                    onchange="TL.buy.selectNums(this.value);" onkeypress="TL.buy.selectNums(this.value);" min="1"
+                    max="99" />
                 <h3 i18n="model_title_buy_select">.</h3>
                 <div class="row">
                     <div class="col-6" onclick="TL.buy.selectPayment('cny')">
@@ -1026,22 +1038,25 @@
             </div>
             <div class="modal-body">
                 <h3 i18n="model_upup_t1">.</h3>
-                <p i18n="model_upup_d1_1"">.</p>
+                <p i18n="model_upup_d1_1">.</p>
                 <code>
                     chrome://flags/#enable-parallel-downloading
                 </code>
-                <div class=" text-center mt-2">
+                <div class="text-center mt-2">
                     <img class="img-thumbnail" src="/img/pd.png" />
+                </div>
+                <hr>
+                <h3 i18n="model_upup_t2">.</h3>
+                <p i18n="model_upup_d2_1">.</p>
+                <hr>
+                <h3 i18n="model_upup_t3">.</h3>
+                <p i18n="model_upup_d3_1">.</p>
             </div>
-            <hr>
-            <h3 i18n="model_upup_t2">.</h3>
-            <p i18n="model_upup_d2_1">.</p>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <div class="modal" id="copyModal">
@@ -1233,7 +1248,8 @@
                         <div class="card-p3">
                             <div class="d-flex align-items-center">
                                 <span class="stamp-md mr-3">
-                                    <iconpark-icon name="heart-circle-plus" class="fa-fw fa-2x text-blue"></iconpark-icon>
+                                    <iconpark-icon name="heart-circle-plus"
+                                        class="fa-fw fa-2x text-blue"></iconpark-icon>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="model_title_sponsor">
@@ -1255,7 +1271,8 @@
                         <div class="card-p3">
                             <div class="d-flex align-items-center">
                                 <span class="stamp-md mr-3">
-                                    <iconpark-icon name="album-circle-plus" class="fa-fw fa-2x text-blue"></iconpark-icon>
+                                    <iconpark-icon name="album-circle-plus"
+                                        class="fa-fw fa-2x text-blue"></iconpark-icon>
                                 </span>
                                 <div>
                                     <h4 class="m-0" i18n="model_title_buy_storage">
@@ -1354,7 +1371,8 @@
                                 <img src="/img/level/like.svg" width="22" style="margin-top: -2px;" />
                                 <span i18n="myprofile_sponsor">.</span>
                             </td>
-                            <td class="user_sponsor_time"><iconpark-icon name="circle-xmark" class="fa-fw text-red"></iconpark-icon></td>
+                            <td class="user_sponsor_time"><iconpark-icon name="circle-xmark"
+                                    class="fa-fw text-red"></iconpark-icon></td>
                         </tr>
                         <tr>
                             <td>
@@ -1640,7 +1658,7 @@
     </div>
 </div>
 
-<div class="modal" id="limitTrafficModal" >
+<div class="modal" id="limitTrafficModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
             <div class="modal-header">
@@ -1656,7 +1674,8 @@
                         <iconpark-icon name="spinner-third" class="fa-fw"></iconpark-icon>
                     </small>
                 </h4>
-                <input type="number" class="form-control" id="direct_traffic_limit" max="100" min="0" value="0" onchange="TL.direct.setTrafficLimit()" onkeydown="TL.direct.setTrafficLimit()">
+                <input type="number" class="form-control" id="direct_traffic_limit" max="100" min="0" value="0"
+                    onchange="TL.direct.setTrafficLimit()" onkeydown="TL.direct.setTrafficLimit()">
                 <p class="mt-2" i18n="direct_traffic_des">.</p>
             </div>
             <div class="modal-footer">

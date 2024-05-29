@@ -435,6 +435,8 @@
     "model_upup_d1_2": "Please enter this address in the browser address bar, and then set this browser option to \"Enabled\"",
     "model_upup_t2": "Use a download tool to download",
     "model_upup_d2_1": "Third-party downloads can speed up the download of files by using techniques such as multi-threading, which is usually much faster than direct browser downloads! Please click the button in the bottom right corner to copy the download link and then create a new download task in the download tool.",
+    "model_upup_t3": "Download via HTunnel (automatic)",
+    "model_upup_d3_1": "The HTunnel is a set of additional servers used to provide download services to sponsors.",
     "modal_settings_upload_buy_storage": "Extending Private Storage",
     "modal_settings_upload_buy_storage_des": "Available specifications : 256GB , 1TB",
     "index_d1": "Capacity",

@@ -555,6 +555,8 @@
     "model_upup_d1_2": "請在瀏覽器網址欄輸入這個網址，然後將這個瀏覽器選項設置為 「Enabled」",
     "model_upup_t2": "用下載工具來下載",
     "model_upup_d2_1": "第三方下載可以通過多線程等技術來加速下載檔案，這通常會比瀏覽器直接下載快很多！請點擊右下角的按鈕來複製下載連結，然後在下載工具中新建下載任務。",
+    "model_upup_t3": "透過高速通道下載（自動）",
+    "model_upup_d3_1": "高速通道是一組額外的伺服器，用於向贊助者提供下載服務。",
     "model_title_meetingroom_creat": "新資料夾",
     "model_meetingroom_create_notice": "建立新的資料夾",
     "model_meetingroom_create_name": "資料夾名稱",
