@@ -137,7 +137,7 @@ class uploader {
         this.skip_upload = ($('#skip_upload').is(':checked')) ? true : false;
         //启用此功能，需要同时启用秒传 quickUpload
         if (this.prepare_sha1 === false && this.skip_upload === true) {
-            console.log('Enable quick upload');
+            debug('Enable quick upload');
             this.prepare_sha1 = true;
             $('#quick_upload').prop('checked', true);
         }
@@ -164,7 +164,7 @@ class uploader {
         this.prepare_sha1 = ($('#quick_upload').is(':checked')) ? true : false;
         //如果此功能被设置为 false，那么需要同时关闭跳过上传
         if (this.skip_upload === true && this.prepare_sha1 === false) {
-            console.log('Disable skip upload');
+            debug('Disable skip upload');
             this.skip_upload = false;
             $('#skip_upload').prop('checked', false);
         }
@@ -478,7 +478,7 @@ class uploader {
             }, (rsp) => {
                 if (rsp.status == 1) {
                     //文件小于 32 MB，直接上传
-                    console.log('upload::slice::' + filename);
+                    debug('upload::slice::' + filename);
                     let api_sync = rsp.data.uploader + '/app/upload_slice';
                     this.worker_slice(api_sync, rsp.data.utoken, sha1, file, id, filename, 0);
                 } else {
@@ -499,14 +499,11 @@ class uploader {
      */
     worker_slice(server, utoken, sha1, file, id, filename, thread = 0) {
 
-        //如果没有初始化，则初始化，并将当前任务设置为主线程，只有主线程才能更新界面
-        if(thread === 0){
-            if (this.upload_slice_chunk[id] === undefined) {
-                this.upload_slice_chunk[id] = [];
-            }
-            if(this.upload_slice_process[id] === undefined){
-                this.upload_slice_process[id] = 0;
-            }
+        //如果上传队列中存在正在上传的文件，隐藏出了上传按钮之外的其他选项
+        if(this.upload_queue>0){
+            $('.uploader_opt').hide();
+        }else{
+            $('.uploader_opt').show();
         }
 
         //创建分片任务的ID，算法 uid+文件路径+文件大小 的 sha1 值
@@ -517,6 +514,17 @@ class uploader {
         //根据当前分片限制，以及文件的总大小，计算出是否启动多线程上传
         if (file.size > this.slice_size) {
             numbers_of_slice = Math.ceil(file.size / this.slice_size);
+        }
+
+        //如果没有初始化，则初始化，并将当前任务设置为主线程，只有主线程才能更新界面
+        if(thread === 0){
+            if (this.upload_slice_chunk[id] === undefined) {
+                this.upload_slice_chunk[id] = [];
+                debug(`文件名 ${filename} 的分片数量 ${numbers_of_slice} 任务已初始化。`);
+            }
+            if(this.upload_slice_process[id] === undefined){
+                this.upload_slice_process[id] = 0;
+            }
         }
 
         //如果分片数量大于上传线程数量，则线程数量设定为 upload_queue_max,否则设定为 numbers_of_slice
@@ -532,22 +540,23 @@ class uploader {
         //当前任务的多线程上传队列状态是否已经建立
         if (this.upload_worker_queue[id] === undefined) {
             this.upload_worker_queue[id] = 1;
-            // console.log(`任务 ${id} 主线程 1 已启动。`);
+            debug(`任务 ${id} 主线程 1 已启动。`);
         }
 
+        //更新进度
+        this.upload_slice_process[id]++;
+
         //如果当前处理进度 -1 等于总数，并且不是主线程，则退出
-        if ((this.upload_slice_process[id] - 3) >= numbers_of_slice && thread > 0) {
-            // console.log(`任务 ${id} 子线程已退出。`);
+        if ((this.upload_slice_process[id] + 3) >= numbers_of_slice && thread > 0) {
+            debug(`任务 ${id} 子线程已退出。`);
             return false;
         } else {
-            //更新进度
-            this.upload_slice_process[id]++;
             //是否超出上传线程数？没有超出的话，启动新的上传任务
             if (this.upload_worker_queue[id] < upload_queue_max) {
                 let thread_id = this.upload_worker_queue[id]+1;
                 this.upload_worker_queue[id] = thread_id;
                 this.worker_slice(server, utoken, sha1, file, id, filename, thread_id);
-                // console.log(`任务 ${id} 子线程 ${thread_id} 已启动。`);
+                debug(`任务 ${id} 子线程 ${thread_id} 已启动。`);
             }
         }
 
@@ -635,11 +644,11 @@ class uploader {
 
         //如果是最后一个分片，只有主线程才执行这项工作，其他线程直接退出
         // if(index>=(this.upload_slice_total[id]-2)&&thread===false){
-        //     console.log(`任务 ${id} ${main_t} 已退出。`);
+        //     debug(`任务 ${id} ${main_t} 已退出。`);
         //     return false;
         // }
 
-        // console.log(`任务 ${id} ${main_t} ${thread} 正在上传分片 ${index}。`);
+        debug(`任务 ${id} ${main_t} ${thread} 正在上传分片 ${index}。`);
 
         //初始化上传任务的已上传数据计数器
         if (this.upload_slice_chunk[id][index] === undefined) {
@@ -887,6 +896,14 @@ class uploader {
         if (skip === undefined) {
             skip = false;
         }
+
+        //如果上传队列中存在正在上传的文件，隐藏出了上传按钮之外的其他选项
+        if(this.upload_queue>0){
+            $('.uploader_opt').hide();
+        }else{
+            $('.uploader_opt').show();
+        }
+        
         //$('#nav_upload_btn').html(app.languageData.nav_upload);
         if (rsp.status === 1) {
             $('#uqnn_' + id).html(app.languageData.upload_ok);
@@ -963,7 +980,7 @@ class uploader {
                     //默认错误
                     error_msg = app.languageData.upload_fail_unknown + ` ${rsp.status}`;
             }
-            console.log(rsp.status + ':' + error_msg);
+            debug(rsp.status + ':' + error_msg);
             $('#uqnn_' + id).html(`<span class="text-red">${error_msg}</span>`);
             //清除上传进度条
             $('.uqinfo_' + id).remove();

@@ -984,7 +984,7 @@ class tmplink {
     }
 
     workspace_filelist_model(type) {
-        console.log(type);
+        debug(type);
         switch (type) {
             case 'photo':
                 localStorage.setItem('app_workspace_view', 'photo');
@@ -1620,12 +1620,12 @@ class tmplink {
         for (let x in this.download_queue) {
             let data = this.download_queue[x];
             if (data !== undefined) {
-                console.log("Downloading:" + data[0]);
+                debug("Downloading:" + data[0]);
                 this.download_queue_processing = true;
                 this.download_queue_progress_start(data[0], data[1], data[2], data[3]);
                 return true;
             } else {
-                console.log('Queue out.');
+                debug('Queue out.');
             }
         }
         $('#download_queue').fadeOut();
@@ -3093,7 +3093,7 @@ class tmplink {
         app.languageSet(lang);
         //重新初始化导航，目前有一个小问题，无法刷新导航，暂时不管。
         this.navbar.init(this);
-        //console.log('navbar reinit');
+        //debug('navbar reinit');
     }
 
     languageBtnSet() {

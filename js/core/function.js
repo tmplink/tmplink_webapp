@@ -1,3 +1,9 @@
+function debug(log) {
+    if (true) {
+        console.log(log);
+    }
+}
+
 function isiPad() {
     return (/macintosh|mac os x/i.test(navigator.userAgent) && window.screen.height > window.screen.width && !navigator.userAgent.match(/(iPhone\sOS)\s([\d_]+)/)) || navigator.userAgent.match(/(iPad).*OS\s([\d_]+)/);
 }
