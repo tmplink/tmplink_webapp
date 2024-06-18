@@ -1140,7 +1140,6 @@ class tmplink {
                         if (this.logined == 1) {
                             this.workspace_add('#btn_add_to_workspace_mobile', params.ukey);
                             $('#btn_add_to_workspace_mobile').html('<iconpark-icon name="circle-check" class="fa-fw mx-auto my-auto mb-2text-green fa-3x"></iconpark-icon>');
-                            gtag("event", "login");
                         } else {
                             app.open('/app&listview=login');
                         }
@@ -3159,7 +3158,6 @@ class tmplink {
                             dynamicView.workspace();
                         }, 3000);
                     });
-                    gtag("event", "sign_up");
                 } else {
                     $('#msg_notice').html(rsp.data);
                     $('#submit').html(app.languageData.form_btn_login);
