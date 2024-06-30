@@ -3143,6 +3143,7 @@ class tmplink {
         var email = $('#email_new').val();
         var password = $('#password').val();
         var rpassword = $('#rpassword').val();
+        var lang = this.currentLanguage;
         var code = $('#checkcode').val();
         $('#msg_notice').show();
         $('#msg_notice').html(app.languageData.form_btn_processing);
@@ -3156,6 +3157,7 @@ class tmplink {
                 password: password,
                 captcha: recaptcha,
                 rpassword: rpassword,
+                lang: lang,
                 code: code
             }, (rsp) => {
                 if (rsp.status === 1) {

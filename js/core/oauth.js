@@ -20,6 +20,7 @@ class oauth{
         $.post(this.parent_op.api_user, {
             'action': 'oauth_google_login',
             'type': 'login', //登录google
+            'lang': this.parent_op.currentLanguage, //语言
             'token': this.parent_op.api_token,
         }, (rsp) => {
             if (rsp.status == 1) {
