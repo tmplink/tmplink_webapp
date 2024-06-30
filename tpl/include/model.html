@@ -467,6 +467,30 @@
     </div>
 </div>
 
+<div class="modal" id="connectedModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" i18n="model_title_connected">便捷登录</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 连接到谷歌账号 -->
+                <h4 i18n="connect_to_google_title">连接到谷歌账号</h4>
+                <button class="btn btn-outline-success" onclick="TL.oauth.google_connect()" id="google_connect">
+                    <iconpark-icon name="google"></iconpark-icon> <span id="google_connect_msg">Connect to Google</span>
+                </button>
+                <button class="btn btn-red" id="google_disconnect" onclick="TL.oauth.google_disconnect()">
+                    <span i18n="connect_to_google_disconnect">Disconnect Google</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal" id="findModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content shadow-lg">

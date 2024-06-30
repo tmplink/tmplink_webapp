@@ -811,6 +811,11 @@
     "model_title_upload_slice_thread": "最大线程数（每个文件）",
     "model_title_upload_slice_task": "同时上传的文件数量",
 
+    "navbar_connected": "账号互联",
+    "model_title_connected": "便捷登录设定",
+    "connect_to_google_title": "连接到谷歌账号",
+    "connect_to_google_disconnect": "解除连接",
+
     "chart_title_direct_uage": "直链使用情况",
     "download_run": "正在下载:",
     "download_add": "下载任务已添加:",

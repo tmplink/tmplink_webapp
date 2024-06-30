@@ -1,4 +1,8 @@
 {
+    "navbar_connected": "帳號互聯",
+    "model_title_connected": "便捷登錄設定",
+    "connect_to_google_title": "連接到Google帳號",
+    "connect_to_google_disconnect": "解除連接",
     "direct_notice_usage": "剩餘的優先配額不足 5GB。",
     "direct_intro_modal_body_3": "持有優先配額時，優先分配下載頻寬。",
     "direct_quota": "已購優先配額",

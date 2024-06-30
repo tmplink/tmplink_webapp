@@ -1,4 +1,8 @@
 {
+    "navbar_connected": "Account Connection",
+    "model_title_connected": "Convenient Login Settings",
+    "connect_to_google_title": "Connect to Google Account",
+    "connect_to_google_disconnect": "Disconnect",
     "direct_notice_usage": "Insufficient remaining priority quota of 5GB.",
     "direct_intro_modal_body_3": "When you have priority quota, download bandwidth is allocated preferentially.",
     "direct_quota": "Purchased Priority Quota",

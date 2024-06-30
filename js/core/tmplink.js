@@ -1,6 +1,6 @@
 class tmplink {
 
-    api_url = 'https://tmplink.code.so/api_v2'
+    api_url = 'https://tmp-api.vx-cdn.com/api_v2'
     api_url_sec = 'https://tmplink-sec.vxtrans.com/api_v2'
     api_url_upload = this.api_url + '/file'
     api_file = this.api_url + '/file'
@@ -90,6 +90,7 @@ class tmplink {
         this.profile = new profile;
         this.buy = new buy;
         this.notes = new notes;
+        this.oauth = new oauth;
 
         this.stream.init(this);
         this.giftcard.init(this);
@@ -100,6 +101,7 @@ class tmplink {
         this.profile.init(this);
         this.buy.init(this);
         this.notes.init(this);
+        this.oauth.init(this);
 
         //
         $('.workspace-navbar').hide();
@@ -437,6 +439,8 @@ class tmplink {
             });
             //初始化用户个性化信息
             this.profile.init_details();
+            //初始化账号互联状态
+            this.oauth.init_details();
         });
     }
 
