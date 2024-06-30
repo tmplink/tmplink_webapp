@@ -3079,6 +3079,10 @@ class tmplink {
                         $('#submit').removeAttr('disabled');
                     }
                 });
+            }else{
+                $('#msg_notice').html(app.languageData.login_fail);
+                $('#submit').html(app.languageData.form_btn_login);
+                $('#submit').removeAttr('disabled');
             }
         });
     }
