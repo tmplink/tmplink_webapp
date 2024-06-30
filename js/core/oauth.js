@@ -16,6 +16,7 @@ class oauth {
     google_login() {
         //禁用按钮
         $('#google_login').attr('disabled', true);
+        let oauth = window.open('', '_blank');
         //发送请求获取google登录的url
         $.post(this.parent_op.api_user, {
             'action': 'oauth_google_login',
@@ -24,18 +25,9 @@ class oauth {
             'token': this.parent_op.api_token,
         }, (rsp) => {
             if (rsp.status == 1) {
-                //如果请求成功，通过另外的小窗口打开google登录的url，然后启动监听进程
-                let oauth = window.open(rsp.data, 'oauth2Popup', 'width=600,height=400');
-                // 监听来自 popup 窗口的消息
-                const messageHandler = (event) => {
-                    if (event.origin === window.location.origin) {
-                        // 处理令牌
-                        this.google_login_callback();
-                        // 移除事件
-                        window.removeEventListener('message', messageHandler);
-                    }
-                };
-                window.addEventListener('message', messageHandler);
+                oauth.location = rsp.data;
+                // 处理令牌
+                this.google_login_callback();
             }
         }, 'json');
     }
@@ -71,7 +63,7 @@ class oauth {
                 $('#google_login_msg').html(app.languageData.form_btn_processing);
                 setTimeout(() => {
                     this.google_login_callback();
-                }, 3000);
+                }, 2000);
             }
         }, 'json');
     }
@@ -104,6 +96,7 @@ class oauth {
     google_connect() {
         //禁用按钮
         $('#google_connect').attr('disabled', true);
+        let oauth = window.open('', '_blank');
         //发送请求获取google登录的url
         $.post(this.parent_op.api_user, {
             'action': 'oauth_google_login',
@@ -112,10 +105,8 @@ class oauth {
         }, (rsp) => {
             if (rsp.status == 1) {
                 //如果请求成功，通过另外的小窗口打开google登录的url，然后启动监听进程
-                window.open(rsp.data, '_blank', 'width=800,height=600');
-                setTimeout(() => {
-                    this.google_connect_callback();
-                }, 3000);
+                oauth.location = rsp.data;
+                this.google_connect_callback();
             }
         }, 'json');
     }
@@ -132,7 +123,7 @@ class oauth {
                 $('#google_connect_msg').html(app.languageData.login_ok);
                 setTimeout(() => {
                     this.google_connect_status();
-                }, 1000);
+                }, 2000);
             }
 
             //失败
@@ -151,7 +142,7 @@ class oauth {
                 $('#google_connect_msg').html(app.languageData.form_btn_processing);
                 setTimeout(() => {
                     this.google_connect_callback();
-                }, 3000);
+                }, 2000);
             }
         }, 'json');
     }
