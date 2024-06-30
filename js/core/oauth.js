@@ -1,19 +1,19 @@
-class oauth{
+class oauth {
     parent_op = null
 
     init(parent_op) {
         this.parent_op = parent_op;
     }
 
-    init_details(){
-        if(this.parent_op.isLogin===false){
+    init_details() {
+        if (this.parent_op.isLogin === false) {
             return;
         }
         //初始化google登录状态
         this.google_connect_status();
     }
 
-    google_login(){
+    google_login() {
         //禁用按钮
         $('#google_login').attr('disabled', true);
         //发送请求获取google登录的url
@@ -25,15 +25,22 @@ class oauth{
         }, (rsp) => {
             if (rsp.status == 1) {
                 //如果请求成功，通过另外的小窗口打开google登录的url，然后启动监听进程
-                window.open(rsp.data, '_blank', 'width=800,height=600');
-                setTimeout(() => {
-                    this.google_login_callback();
-                }, 3000);
+                let oauth = window.open(rsp.data, 'oauth2Popup', 'width=600,height=400');
+                // 监听来自 popup 窗口的消息
+                const messageHandler = (event) => {
+                    if (event.origin === window.location.origin) {
+                        // 处理令牌
+                        this.google_login_callback();
+                        // 移除事件
+                        window.removeEventListener('message', messageHandler);
+                    }
+                };
+                window.addEventListener('message', messageHandler);
             }
         }, 'json');
     }
 
-    google_login_callback(){
+    google_login_callback() {
         //发送请求获取google登录的状态
         $.post(this.parent_op.api_user, {
             'action': 'oauth_google_status',
@@ -49,7 +56,7 @@ class oauth{
             }
 
             //登录失败
-            if (rsp.data == 'GOOGLE_LOGIN_FAIL2'||rsp.data == 'GOOGLE_LOGIN_FAIL3'||rsp.data == 'GOOGLE_LOGIN_FAIL4') {
+            if (rsp.data == 'GOOGLE_LOGIN_FAIL2' || rsp.data == 'GOOGLE_LOGIN_FAIL3' || rsp.data == 'GOOGLE_LOGIN_FAIL4') {
                 $('#google_login_msg').html(app.languageData.status_error_0);
                 //启用按钮
                 setTimeout(() => {
@@ -69,7 +76,7 @@ class oauth{
         }, 'json');
     }
 
-    google_connect_status(){
+    google_connect_status() {
         $('#google_disconnect').hide();
         //发送请求获取google登录的状态
         $.post(this.parent_op.api_user, {
@@ -85,7 +92,7 @@ class oauth{
                 $('#google_disconnect').attr('disabled', false);
                 //显示解除绑定的连接
                 $('#google_disconnect').show();
-            }else{
+            } else {
                 //失败，设定界面状态
                 $('#google_connect_msg').html('Connect with Google');
                 $('#google_connect').attr('disabled', false);
@@ -94,7 +101,7 @@ class oauth{
         }, 'json');
     }
 
-    google_connect(){
+    google_connect() {
         //禁用按钮
         $('#google_connect').attr('disabled', true);
         //发送请求获取google登录的url
@@ -113,7 +120,7 @@ class oauth{
         }, 'json');
     }
 
-    google_connect_callback(){
+    google_connect_callback() {
         //发送请求获取google登录的状态
         $.post(this.parent_op.api_user, {
             'action': 'oauth_google_status',
@@ -149,7 +156,7 @@ class oauth{
         }, 'json');
     }
 
-    google_disconnect(){
+    google_disconnect() {
         //禁用按钮
         $('#google_disconnect').attr('disabled', true);
         //发送请求获取google登录的url
