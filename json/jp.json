@@ -612,7 +612,7 @@
     "file_btn_download_opt_curl": "<span class=\"text-red\"> curl </span>に適用可能なダウンロードコードをコピーします",
     "file_btn_download_opt_wget": "<span class=\"text-red\"> wget </span>に適用可能なダウンロードコードをコピーします",
     "file_btn_download_opt_tips": "アカウントでExpressChannelを購入した場合、<br>ダウンロード時に自動的にExpress Channelに切り替わります",
-    "file_btn_workspace": "収集 ",
+    "file_btn_workspace": "保存",
     "file_btn_copy": "共有ファイル",
     "file_btn_copy2": "ファイルのコピー",
     "file_btn_report": "報告する",
