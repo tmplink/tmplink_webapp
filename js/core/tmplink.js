@@ -3061,7 +3061,7 @@ class tmplink {
                             // } else {
                             //     window.history.back();
                             // }
-                            //登陆后更新一下用户信息
+                            //登录后更新一下用户信息
                             this.profile.init_details();
                             this.storage_status_update();
                             //如果有设置 return_page，则跳转到 return_page
