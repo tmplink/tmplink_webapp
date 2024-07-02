@@ -476,11 +476,10 @@
             </div>
             <div class="modal-body">
                 <!-- 连接到谷歌账号 -->
-                <h4 i18n="connect_to_google_title">连接到谷歌账号</h4>
-                <button class="btn btn-outline-success" onclick="TL.oauth.google_connect()" id="google_connect">
+                <button class="btn btn-light" onclick="TL.oauth.google_connect()" id="google_connect">
                     <iconpark-icon name="google"></iconpark-icon> <span id="google_connect_msg">Connect to Google</span>
                 </button>
-                <button class="btn btn-red" id="google_disconnect" onclick="TL.oauth.google_disconnect()">
+                <button class="btn btn-outline-danger" id="google_disconnect" onclick="TL.oauth.google_disconnect()">
                     <span i18n="connect_to_google_disconnect">Disconnect Google</span>
                 </button>
             </div>

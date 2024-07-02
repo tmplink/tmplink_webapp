@@ -1,6 +1,6 @@
 {
-    "navbar_connected": "Account Connection",
-    "model_title_connected": "Convenient Login Settings",
+    "navbar_connected": "Link Account",
+    "model_title_connected": "OAuth Settings",
     "connect_to_google_title": "Connect to Google Account",
     "connect_to_google_disconnect": "Disconnect",
     "direct_notice_usage": "Insufficient remaining priority quota of 5GB.",
