@@ -2279,11 +2279,6 @@ class tmplink {
         $('.no_dir').fadeOut();
         $('.no_photos').fadeOut();
 
-        let key = this.room_key_get();
-
-        let room_sort_by = localStorage.getItem(key.sort_by);
-        let room_sort_type = localStorage.getItem(key.sort_type);
-
         if (page == 0) {
             this.page_number = 0;
             $('#dir_list').html('');
@@ -2301,10 +2296,6 @@ class tmplink {
             this.page_number = 'all';
         }
 
-        //初始化排序选项的状态
-        $("#sort_by option[value='" + room_sort_by + "']").attr("selected", "selected");
-        $("#sort_type option[value='" + room_sort_type + "']").attr("selected", "selected");
-
         //if search
         let search = $('#room_search').val();
 
@@ -2313,9 +2304,14 @@ class tmplink {
         $('.mr_filelist_refresh_icon').attr('disabled', true);
         this.loading_box_on();
         var params = get_url_params();
+
+        let room_sort_by = this.room_performance_get(params.mrid, 'sort_by');
+        let room_sort_type = this.room_performance_get(params.mrid, 'sort_type');
+        let room_display = this.room_performance_get(params.mrid, 'display');
+
         this.recaptcha_do('mr_list', (recaptcha) => {
             let photo = 0;
-            if (localStorage.getItem(key.view) == 'photo') {
+            if (room_display == 'photo') {
                 photo = 1;
             }
             $.post(this.api_mr, {
@@ -2359,33 +2355,21 @@ class tmplink {
     }
 
     room_performance_init(room_id) {
-        let room_key_display = 'app_room_view_' + room_id;
-        let storage_room_display = localStorage.getItem(room_key_display);
-        let room_display = storage_room_display === null ? this.room.display : storage_room_display;
-        localStorage.setItem(room_key_display, room_display);
-        $("#pf_display option[value='" + this.room.display + "']").attr("selected", "selected");
+        this.room_performance_set(room_id, 'display', this.room.display);
+        this.room_performance_set(room_id, 'sort_by', this.room.sort_by);
+        this.room_performance_set(room_id, 'sort_type', this.room.sort_type);
+    }
 
-        let room_key_sort_by = 'app_room_view_sort_by_' + room_id;
-        let storage_room_sort_by = localStorage.getItem(room_key_sort_by);
-        let room_sort_by = storage_room_sort_by === null ? this.room.sort_by : storage_room_sort_by;
-        localStorage.setItem(room_key_sort_by, room_sort_by);
-        $("#pf_sort_by option[value='" + this.room.sort_by + "']").attr("selected", "selected");
+    room_performance_set(id, key, val) {
+        let room_key = 'app_room_view_' + id;
+        localStorage.setItem(room_key + '_' + key, val);
+        $("#pf_" + key + " option[value='" + val + "']").attr("selected", "selected");
+    }
 
-        let room_key_sort_type = 'app_room_view_sort_type_' + room_id;
-        let storage_room_sort_type = localStorage.getItem(room_key_sort_type);
-        let room_sort_type = storage_room_sort_type === null ? this.room.sort_type : storage_room_sort_type;
-        localStorage.setItem(room_key_sort_type, room_sort_type);
-        $("#pf_sort_type option[value='" + this.room.sort_type + "']").attr("selected", "selected");
-
-        // let room_key_allow_upload = 'app_room_view_allow_upload_' + room_id;
-        // let storage_room_allow_upload = localStorage.getItem(room_key_allow_upload);
-        // let room_allow_upload = storage_room_allow_upload === null ? this.room.allow_upload : storage_room_allow_upload;
-        // localStorage.setItem(room_key_allow_upload, room_allow_upload);
-        // if (storage_room_allow_upload == 'yes') {
-        //     $('#pf_allow_upload').attr('checked', 'checked');
-        // } else {
-        //     $('#pf_allow_upload').removeAttr('checked');
-        // }
+    room_performance_get(id, key) {
+        let room_key = 'app_room_view_' + id;
+        let storage_val = localStorage.getItem(room_key + '_' + key);
+        return storage_val === null ? this.room[key] : storage_val;
     }
 
     room_performance_open() {
@@ -2406,6 +2390,13 @@ class tmplink {
             sort_type: pf_sort_type,
             pf_upload: pf_allow_upload,
             mr_id: mrid
+        }, (rsp) => {
+            //更新本地存储
+            this.room_performance_set(mrid, 'display', pf_display);
+            this.room_performance_set(mrid, 'sort_by', pf_sort_by);
+            this.room_performance_set(mrid, 'sort_type', pf_sort_type);
+            //重新载入此文件夹
+            this.mr_file_list(0);
         });
     }
 
@@ -2696,7 +2687,7 @@ class tmplink {
             if (get_page_mrid() == undefined) {
                 this.workspace_filelist(0);
             } else {
-                this.mr_file_list('all')
+                this.mr_file_list(0)
             }
         });
     }
@@ -2940,7 +2931,7 @@ class tmplink {
             }
 
             this.btn_copy_bind();
-            this.mr_file_list('all');
+            this.mr_file_list(0);
 
             //是否需要设置上级目录返回按钮
             if (this.room.top == 99) {
