@@ -181,9 +181,11 @@
     "model_profile_bulk_copy": "是否启用连续复制？<br>启用后您可以连续点击复制按钮以复制多个文件链接。",
 
     "page_503_title": "服务器繁忙",
-    "page_404_title": "404",
+    "page_404_title": "未找到该内容",
     "page_503_content": "服务器暂时无法响应请求，请稍后再访问。",
     "page_404_content": "无法找到您访问的页面。",
+    "page_403_title": "禁止访问",
+    "page_403_content": "您无法访问此内容",
 
     "return_index": "返回首页",
     "model_list": "列表",
@@ -383,8 +385,6 @@
     "login_reg": "还没有账号？来这里注册",
     "login_found": "忘记密码？来这里找回",
     "login_fail": "登录失败，密码错误。",
-    "login_btn_email": "文件分享模式",
-    "login_btn_password": "文件分享模式",
     "reg_title": "注册",
     "reg_term": "注册即代表您已阅读并同意服务条款",
     "reg_supported_emails": "查看可用于注册的邮箱地址",
