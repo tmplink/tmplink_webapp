@@ -655,7 +655,7 @@
     "modal_settings_upload_model2_des": "誰かがダウンロードすると自動的に拡張されます。",
     "modal_settings_upload_model3_des": "誰かがダウンロードすると自動的にこの期間を延長する",
     "modal_settings_upload_model4_des": "誰かがダウンロードすると自動的にこの期間を延長する",
-    "modal_settings_upload_model99": "Permanent",
+    "modal_settings_upload_model99": "長期有効",
     "modal_settings_upload_model99_des": "常にサーバーに保存されます。",
     "modal_settings_submit": "設定",
     "modal_settings_upload": "ファイル共有モード",
