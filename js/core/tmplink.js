@@ -2781,11 +2781,7 @@ class tmplink {
                 this.room.top = 0;
                 this.room.ownner = 0;
                 this.room.mr_id = 0;
-                $('#file_messenger_icon').html('<iconpark-icon name="folder-xmark" class="fa-fw fa-4x"></iconpark-icon>');
-                $('#file_messenger_msg').html(app.languageData.room_status_fail);
-                $('#file_messenger').show();
-                $('#room_loaded').html('');
-                $('#room_loaded').hide();
+                app.open('/404');
                 this.ga('Room-Unavailable');
                 return false;
             }
@@ -2795,24 +2791,14 @@ class tmplink {
                 this.room.top = 0;
                 this.room.ownner = 0;
                 this.room.mr_id = 0;
-                $('#file_messenger_icon').html('<iconpark-icon name="folder-xmark" class="fa-fw fa-4x"></iconpark-icon>');
-                $('#file_messenger_msg').html(app.languageData.room_status_fail);
-                $('#file_messenger').show();
-                $('#room_loaded').html('');
-                $('#room_loaded').hide();
+                app.open('/404');
                 this.ga('Room-Reported');
                 return false;
             }
 
             //room need to login
             if (rsp.status === 3) {
-                $('#file_messenger_icon').html('<iconpark-icon name="user-robot" class="fa-fw fa-7x"></iconpark-icon>');
-                $('#file_messenger_msg').html(app.languageData.status_need_login);
-                $('#file_messenger_msg_login').show();
-                $('#file_messenger').show();
-                $('#room_loaded').html('');
-                $('#room_loaded').hide();
-                this.ga('Room-Need-Login');
+                app.open('/app&listview=login');
                 return false;
             }
             this.ga('Room-' + rsp.data.name);
