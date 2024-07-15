@@ -9,7 +9,7 @@ function INIT_direct() {
         TL.direct.init_details(()=>{
             TL.direct.list_autoload_enabled();
             TL.direct.filelist(0);
-            TL.direct.room_list();
+            TL.direct.open();
             TL.direct.prepare();
         });
         app.languageBuild();

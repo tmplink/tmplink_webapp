@@ -42,7 +42,7 @@
                             <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
                                 
                                 <button class="dropdown-item room_btn_performance"
-                                    onclick="TL.room_performance_open();">
+                                    onclick="TL.dir.performanceOpen();">
                                     <iconpark-icon name="gear" class="fa-fw"></iconpark-icon>
                                     <span i18n="btn_performance">.</span>
                                 </button>
@@ -99,11 +99,11 @@
                     <form autocomplete="off" class="w-100 mt-1 btn_for_sub">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary" type="button" onclick="TL.mr_file_list(0);"
+                                <button class="btn btn-outline-secondary" type="button" onclick="TL.dir.filelist(0);"
                                     i18n="search_btn">.</button>
                             </div>
                             <input type="search" id="room_search" class="form-control" placeholder="."
-                                i18n="search_plh" onkeyup="if(event.keyCode==13)TL.mr_file_list(0);"
+                                i18n="search_plh" onkeyup="if(event.keyCode==13)TL.dir.filelist(0);"
                                 style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
                         </div>
                         <input style="display:none;">
@@ -257,7 +257,7 @@
                                                 <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1">
                                                     <iconpark-icon name="pen-to-square" class="fa-fw"></iconpark-icon>
                                                 </button>
-                                                <button class="text-red btn btn-sm btn-light" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
+                                                <button class="text-red btn btn-sm btn-light" onclick="TL.dir.deleteFile('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
                                                     <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
                                                 </button>
                                             <% } %>
@@ -359,7 +359,7 @@
                                             <iconpark-icon name="pen-to-square" class="fa-fw"></iconpark-icon>
                                             <span i18n="menu_rename"><% app.languageData.menu_rename %></span>
                                         </button>
-                                        <button class="dropdown-item" onclick="TL.mr_file_del('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
+                                        <button class="dropdown-item" onclick="TL.dir.deleteFile('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
                                             <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
                                             <span i18n="menu_delete"><% app.languageData.menu_delete %></span>
                                         </button> 
@@ -454,7 +454,7 @@
                             <% } %> 
                         </div>
                         <div class="col-7 p-0 mobile-list-filename">
-                            <a href="/app&listview=room&mrid=<% obj[x].mr_id %>" class="mobile-list-filename filelist_link" tmpui-action="TL.room_list()">
+                            <a href="/app&listview=room&mrid=<% obj[x].mr_id %>" class="mobile-list-filename filelist_link" tmpui-action="TL.dir.open()">
                                 <% obj[x].name %>
                             </a>
                         </div>
@@ -472,11 +472,11 @@
                                         <iconpark-icon name="ellipsis" class="fa-fw"></iconpark-icon>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right shadow">
-                                        <button  onclick="TL.mr_newname('<% obj[x].mr_id %>')" class="dropdown-item">
+                                        <button  onclick="TL.dir.reName('<% obj[x].mr_id %>')" class="dropdown-item">
                                             <iconpark-icon name="pen-to-square" class="fa-fw"></iconpark-icon>
                                             <span i18n="menu_rename"><% app.languageData.menu_rename %></span>
                                         </button>
-                                        <button  id="btn-rm-file_<% obj[x].mr_id %>" class="dropdown-item" onclick="TL.mr_del('<% obj[x].mr_id %>')">
+                                        <button  id="btn-rm-file_<% obj[x].mr_id %>" class="dropdown-item" onclick="TL.dir.delete('<% obj[x].mr_id %>')">
                                             <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
                                             <span i18n="on_select_delete"><% app.languageData.on_select_delete %></span>
                                         </button>
@@ -486,7 +486,7 @@
                             <% } %>
 
                             <% if (obj[x].fav == 1) { %>
-                                <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.favorite_del('<% obj[x].mr_id %>')"><iconpark-icon name="trash" class="fa-fw"></iconpark-icon></button>
+                                <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.dir.favoriteDel('<% obj[x].mr_id %>')"><iconpark-icon name="trash" class="fa-fw"></iconpark-icon></button>
                             <% } %>
 
                         </div>
@@ -519,7 +519,7 @@
                             <div class="text-truncate" alt="<% obj[x].fname %>" title="<% obj[x].fname %>"><% obj[x].fname %></div>
                         </div>
                         <div>
-                            <a href="javascript:void(0)" id="btn-mraddlist-<% obj[x].ukey%>" class="text-azure mt-1 mr-1" onclick="TL.mr_file_add('<% obj[x].ukey%>')"><iconpark-icon name="circle-plus" class="fa-fw"></iconpark-icon></a>
+                            <a href="javascript:void(0)" id="btn-mraddlist-<% obj[x].ukey%>" class="text-azure mt-1 mr-1" onclick="TL.dir.fileAdd('<% obj[x].ukey%>')"><iconpark-icon name="circle-plus" class="fa-fw"></iconpark-icon></a>
                         </div>
                     </div>
                 </div>
@@ -589,7 +589,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
                 <button type="button" class="btn btn-primary" id="modal_meetingroom_create_btn" i18n="model_btn_ok"
-                    onclick="TL.mr_add();">.</button>
+                    onclick="TL.dir.create();">.</button>
             </div>
         </div>
     </div>
@@ -613,7 +613,7 @@
 
                 <h5 i18n="modal_performance_sort">.</h5>
                 <div class="form-group">
-                    <select class="form-control" id="pf_sort_by" onchange="TL.room_performance_post()">
+                    <select class="form-control" id="pf_sort_by" onchange="TL.dir.performancePost()">
                         <option value="0" i18n-only="html" i18n="sort_by_id">.</option>
                         <option value="1" i18n-only="html" i18n="sort_by_name">.</option>
                         <option value="2" i18n-only="html" i18n="sort_by_size">.</option>
@@ -621,7 +621,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control" id="pf_sort_type" onchange="TL.room_performance_post()">
+                    <select class="form-control" id="pf_sort_type" onchange="TL.dir.performancePost()">
                         <option value="0" i18n-only="html" i18n="sort_desc">.</option>
                         <option value="1" i18n-only="html" i18n="sort_asc">.</option>
                     </select>
@@ -630,7 +630,7 @@
                 <h5 i18n="modal_performance_share">.</h5>
                 <label class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="pf_allow_upload"
-                        onclick="TL.room_performance_post()">
+                        onclick="TL.dir.performancePost()">
                     <span class="form-check-label" i18n="modal_performance_share_des">
                         .
                     </span>

@@ -405,7 +405,7 @@ class direct {
         });
     }
 
-    room_list(){
+    open(){
         if (this.parent_op.logined != 1) {
             app.open('/app&listview=login');
         }
@@ -514,7 +514,7 @@ class direct {
                 //更新文件夹界面
                 this.dirRoomUpdate();
                 //刷新列表
-                this.parent_op.room_list();
+                this.parent_op.dir.open();
             }
         }, 'json');
     }

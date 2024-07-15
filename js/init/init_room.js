@@ -1,6 +1,6 @@
 function INIT_room(){
     TL.ready(() => {
-        TL.room_list(0);
+        TL.dir.open(0);
         TL.dir_list_autoload_enabled();
         $('.nav_upload').attr('disabled', true);
         app.languageBuild();

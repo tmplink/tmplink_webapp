@@ -168,7 +168,7 @@ class BoxSelecter {
             }
 
             if (dirs.length!==0) {
-                this.parent_op.mr_del(dirs, true);
+                this.parent_op.dir.delete(dirs, true);
             }
 
             if (ukey.length!==0) {
@@ -238,7 +238,7 @@ class BoxSelecter {
             var inode = node[i];
             let check = inode.getAttribute('data-check');
             if (this.dir_tree_init === false) {
-                this.parent_op.dir_tree_display(0);
+                this.parent_op.dir.treeShow(0);
                 this.dir_tree_init = true;
             }
             if (check === 'true'){
@@ -264,7 +264,7 @@ class BoxSelecter {
                 data.push({'id':id,'type':unit_type});
             }
         }
-        this.parent_op.move_to_dir(data, this.move_place);
+        this.parent_op.dir.moveTo(data, this.move_place);
     }
 
     directCopy(type) {

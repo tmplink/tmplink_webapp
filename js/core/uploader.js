@@ -911,7 +911,7 @@ class uploader {
             //如果未登录状态下上传，则不隐藏上传完成后的信息
             if (this.parent_op.isLogin()) {
                 if (get_page_mrid() != undefined && this.upload_queue_file.length == 0) {
-                    this.parent_op.room_list();
+                    this.parent_op.dir.open();
                 }
                 if (get_page_mrid() == undefined && this.upload_queue_file.length == 0) {
                     this.parent_op.workspace_filelist(0);

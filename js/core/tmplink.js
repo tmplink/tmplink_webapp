@@ -91,6 +91,7 @@ class tmplink {
         this.buy = new buy;
         this.notes = new notes;
         this.oauth = new oauth;
+        this.dir = new dir;
 
         this.stream.init(this);
         this.giftcard.init(this);
@@ -102,6 +103,7 @@ class tmplink {
         this.buy.init(this);
         this.notes.init(this);
         this.oauth.init(this);
+        this.dir.init(this);
 
         //
         $('.workspace-navbar').hide();
@@ -458,64 +460,6 @@ class tmplink {
         }
     }
 
-    dir_tree_get() {
-        $.post(this.api_mr, {
-            action: 'get_dir_tree',
-            token: this.api_token
-        }, (rsp) => {
-            if (rsp.status === 1) {
-                this.dir_tree = rsp.data;
-            } else {
-                $('#mv_box_0').html(app.languageData.status_error_14);
-            }
-        });
-    }
-
-    dir_tree_display(parent) {
-        for (let i in this.dir_tree) {
-            if (this.dir_tree_have_children(this.dir_tree[i].id)) {
-                this.dir_tree[i].children = true;
-            } else {
-                this.dir_tree[i].children = false;
-            }
-            if (this.dir_tree[i].parent == parent) {
-                $('#mv_box_' + parent).append(app.tpl('mv_box_tpl', this.dir_tree[i]));
-                $('#mv_box_' + parent).slideDown();
-                $('#mv_select_box_' + parent).removeAttr('onclick');
-            }
-        }
-    }
-
-    dir_tree_have_children(parent) {
-        for (let i in this.dir_tree) {
-            if (this.dir_tree[i].parent == parent) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    move_to_dir(data, place) {
-        let target = $("input[name='dir_tree']:checked").val();
-        if (target === undefined) {
-            alert(this.language_get.status_error_13);
-            return false;
-        }
-        $.post(this.api_mr, {
-            action: 'move_to_dir2',
-            token: this.api_token,
-            data: data,
-            mr_id: target
-        }, (rsp) => {
-            $('#movefileModal').modal('hide');
-            if (place == 'workspace') {
-                this.workspace_filelist(0);
-            } else {
-                this.room_list();
-            }
-        });
-    }
-
     get_file(code) {
         if (code.length !== 13) {
             this.alert(app.languageData.status_error_15);
@@ -569,13 +513,13 @@ class tmplink {
     sort_confirm() {
         this.sort_by = $('#sort_by').val();
         this.sort_type = $('#sort_type').val();
-        let key = this.room_key_get();
+        let key = this.dir.getKeys();
         localStorage.setItem(key.sort_by, this.sort_by);
         localStorage.setItem(key.sort_type, this.sort_type);
 
         if (get_page_mrid() !== undefined) {
             //刷新文件夹
-            this.mr_file_list(0);
+            this.dir.filelist(0);
         } else {
             //刷新流
             this.workspace_filelist(0);
@@ -672,7 +616,7 @@ class tmplink {
                 if (page != '/file') {
                     this.profile_confirm_delete_set(rsp.data.pf_confirm_delete);
                     this.profile_bulk_copy_set(rsp.data.pf_bulk_copy);
-                    this.dir_tree_get();
+                    this.dir.treeGet();
                     //更新到 myModal
                     $('.user_rank').html(this.uid);
                     $('.user_storage').html(bytetoconver(this.storage_used) + '/' + bytetoconver(this.storage));
@@ -915,7 +859,7 @@ class tmplink {
         this.workspace_total();
 
         //获取排序
-        let key = this.room_key_get();
+        let key = this.dir.getKeys();
         let sort_by = localStorage.getItem(key.sort_by);
         let sort_type = localStorage.getItem(key.sort_type);
 
@@ -1741,6 +1685,7 @@ class tmplink {
     }
 
     download_direct(i) {
+        console.log(i);
         let ukey = this.list_data[i].ukey;
         let title = this.list_data[i].fname;
         let size = this.list_data[i].fsize_formated;
@@ -1867,7 +1812,7 @@ class tmplink {
                     this.autoload = true;
                     this.list_data = rsp.data;
                     //在下载全部文件之前，需要先刷新列表
-                    this.mr_file_view(rsp.data, 0, params.mrid);
+                    this.dir.listModel(rsp.data, 0, params.mrid);
                     //关闭自动载入功能
                     this.dir_list_autoload_disabled();
                     //启动下载
@@ -2227,179 +2172,6 @@ class tmplink {
         return r;
     }
 
-    mr_file_addlist() {
-        var params = get_url_params();
-        $('#mrfile_add_list').html('<img src="/img/loading.svg"  />');
-        $.post(this.api_mr, {
-            action: 'file_addlist',
-            token: this.api_token,
-            //captcha: recaptcha,
-            mr_id: params.mrid
-        }, (rsp) => {
-            if (rsp.status == 0) {
-                $('#mrfile_add_list').html('<div class="mx-auto"><iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon></div>');
-            } else {
-                $('#mrfile_add_list').html(app.tpl('mrfile_add_list_tpl', rsp.data));
-            }
-        });
-    }
-
-    mr_file_add(ukey) {
-        var params = get_url_params();
-        $('#btn-mraddlist-' + ukey).fadeOut(300);
-        this.recaptcha_do('mr_add', (recaptcha) => {
-            $.post(this.api_mr, {
-                action: 'file_add',
-                token: this.api_token,
-                //captcha: recaptcha,
-                mr_id: params.mrid,
-                ukey: ukey
-            }, (rsp) => {
-                $('#mraddlist-' + ukey).fadeOut(500);
-            });
-        });
-    }
-
-    room_key_get() {
-        let key = get_page_mrid();
-        if (key == undefined) {
-            key = 'workspace';
-        }
-
-        return {
-            view: 'app_room_view_' + key,
-            sort_by: 'app_room_view_sort_by_' + key,
-            sort_type: 'app_room_view_sort_type_' + key,
-        }
-
-    }
-
-    mr_file_list(page) {
-        $('.no_files').fadeOut();
-        $('.no_dir').fadeOut();
-        $('.no_photos').fadeOut();
-
-        if (page == 0) {
-            this.page_number = 0;
-            $('#dir_list').html('');
-            this.list_data = [];
-        } else {
-            this.page_number++;
-        }
-
-        //清空数据
-        //$('#dir_list').html('');
-
-
-        //如果是全页加载
-        if (page === 'all') {
-            this.page_number = 'all';
-        }
-
-        //if search
-        let search = $('#room_search').val();
-
-        $('#dir_list_box').show();
-        $('.mr_filelist_refresh_icon').addClass('fa-spin');
-        $('.mr_filelist_refresh_icon').attr('disabled', true);
-        this.loading_box_on();
-        var params = get_url_params();
-
-        let room_sort_by = this.room_performance_get(params.mrid, 'sort_by');
-        let room_sort_type = this.room_performance_get(params.mrid, 'sort_type');
-        let room_display = this.room_performance_get(params.mrid, 'display');
-
-        this.recaptcha_do('mr_list', (recaptcha) => {
-            let photo = 0;
-            if (room_display == 'photo') {
-                photo = 1;
-            }
-            $.post(this.api_mr, {
-                action: 'file_list_page',
-                token: this.api_token,
-                //captcha: recaptcha,
-                page: this.page_number,
-                photo: photo,
-                mr_id: params.mrid,
-                sort_by: room_sort_by,
-                sort_type: room_sort_type,
-                search: search
-            }, (rsp) => {
-                $('.data_loading').hide();
-                $('.mr_filelist_refresh_icon').removeClass('fa-spin');
-                $('.mr_filelist_refresh_icon').removeAttr('disabled');
-                this.mr_file_view(rsp.data, page, params.mrid);
-                if (rsp.status != 0) {
-                    this.autoload = true;
-                    for (let i in rsp.data) {
-                        this.list_data[rsp.data[i].ukey] = rsp.data[i];
-                    }
-                } else {
-                    this.autoload = false;
-                }
-
-                //cancel
-                if (rsp.status == 0 || rsp.data.length < 50) {
-                    this.dir_list_autoload_disabled();
-                }
-
-                //如果是全页加载
-                if (page === 'all') {
-                    this.dir_list_autoload_disabled();
-                    this.autoload = false;
-                }
-
-                this.loading_box_off();
-            });
-        });
-    }
-
-    room_performance_init(room_id) {
-        this.room_performance_set(room_id, 'display', this.room.display);
-        this.room_performance_set(room_id, 'sort_by', this.room.sort_by);
-        this.room_performance_set(room_id, 'sort_type', this.room.sort_type);
-    }
-
-    room_performance_set(id, key, val) {
-        let room_key = 'app_room_view_' + id;
-        localStorage.setItem(room_key + '_' + key, val);
-        $("#pf_" + key + " option[value='" + val + "']").attr("selected", "selected");
-    }
-
-    room_performance_get(id, key) {
-        let room_key = 'app_room_view_' + id;
-        let storage_val = localStorage.getItem(room_key + '_' + key);
-        return storage_val === null ? this.room[key] : storage_val;
-    }
-
-    room_performance_open() {
-        $('#performanceModal').modal('show');
-    }
-
-    room_performance_post() {
-        let pf_display = $('#pf_display').val();
-        let pf_sort_by = $('#pf_sort_by').val();
-        let pf_sort_type = $('#pf_sort_type').val();
-        let pf_allow_upload = $('#pf_allow_upload').is(':checked') ? 'yes' : 'no';
-        let mrid = this.room.mr_id;
-        $.post(this.api_mr, {
-            action: 'pf_set',
-            token: this.api_token,
-            pf_display: pf_display,
-            sort_by: pf_sort_by,
-            sort_type: pf_sort_type,
-            pf_upload: pf_allow_upload,
-            mr_id: mrid
-        }, (rsp) => {
-            //更新本地存储
-            this.room_performance_set(mrid, 'display', pf_display);
-            this.room_performance_set(mrid, 'sort_by', pf_sort_by);
-            this.room_performance_set(mrid, 'sort_type', pf_sort_type);
-            //重新载入此文件夹
-            this.mr_file_list(0);
-        });
-    }
-
     pf_mybg_set(type, ukey) {
         this.loading_box_on();
         $.post(this.api_user, {
@@ -2488,13 +2260,7 @@ class tmplink {
             default:
                 localStorage.setItem(room_key, 'list');
         }
-        this.mr_file_list(0);
-    }
-
-    room_btn_active_reset() {
-        $('#room_btn_file_list').removeClass('text-blue');
-        $('#room_btn_file_grid').removeClass('text-blue');
-        $('#room_btn_file_photo').removeClass('text-blue');
+        this.dir.filelist(0);
     }
 
     dir_list_autoload_enabled() {
@@ -2503,7 +2269,7 @@ class tmplink {
             if ($(event.currentTarget).scrollTop() + $(window).height() + 100 >= $(document).height() && $(event.currentTarget).scrollTop() > 100) {
                 if (this.autoload == true) {
                     this.autoload = false;
-                    this.mr_file_list(1);
+                    this.dir.filelist(1);
                 }
             }
         });
@@ -2511,165 +2277,6 @@ class tmplink {
 
     dir_list_autoload_disabled() {
         $(window).off("scroll");
-    }
-
-    mr_file_by_list(data, page) {
-        let url_params = this.get_url_params();
-        this.room_btn_active_reset();
-        $('#room_btn_file_list').addClass('text-blue');
-        if (page == 0 || page == 'all') {
-            $('#dir_list').html('');
-            if (this.subroom_data.length != 0) {
-                $('#dir_list').append(app.tpl('dir_list_tpl', this.subroom_data));
-            }
-            if (data === false && this.subroom_data == 0 && url_params.mrid != 0) {
-                $('.no_files').show();
-            }
-            if (data === false && this.subroom_data == 0 && url_params.mrid == '0') {
-                $('.no_dir').show();
-            }
-        }
-        if (data.length != 0) {
-            $('#dir_list').append(app.tpl('dir_filelist_tpl', data));
-        }
-        $('.lefttime-remainder').each((i, e) => {
-            let id = $(e).attr('id');
-            let time = $(e).attr('data-tmplink-lefttime');
-            this.countTimeDown(id, time);
-        });
-        this.btn_copy_bind();
-        app.linkRebind();
-    }
-
-    mr_file_by_photo(data, page) {
-        this.room_btn_active_reset();
-        $('#room_btn_file_photo').addClass('text-blue');
-        if (page == 0 || page == 'all') {
-            $('#dir_list').html('');
-            if (this.subroom_data.length != 0) {
-                $('#dir_list').append(app.tpl('dir_list_tpl', this.subroom_data));
-            }
-            if (data === false && this.subroom_data == 0) {
-                $('.no_photos').show();
-            }
-        }
-        if (data.length != 0) {
-            $('#dir_list').append(app.tpl('dir_photolist_tpl', data));
-        }
-        this.btn_copy_bind();
-        app.linkRebind();
-        this.lazyload('.lazyload');
-    }
-
-    mr_file_del(ukey) {
-        var params = get_url_params();
-        if (this.profile_confirm_delete_get()) {
-            if (!confirm(app.languageData.confirm_delete)) {
-                return false;
-            }
-        }
-        $('.file_unit_' + ukey).hide();
-        $.post(this.api_mr, {
-            action: 'file_del',
-            token: this.api_token,
-            //captcha: recaptcha,
-            mr_id: params.mrid,
-            ukey: ukey
-        }, () => {
-            //this.mr_file_list();
-        });
-    }
-
-    mr_add() {
-        var name = $('#modal_meetingroom_create_name').val();
-        var model = $('#modal_meetingroom_create_type').val();
-        var mr_id = $('#mr_id').val();
-        var parent = $('#mr_parent_id').val();
-        var top = $('#mr_top_id').val();
-        if (model == '' && name == '') {
-            $('#notice_meetingroom_create').html(app.languageData.notice_meetingroom_status_mrcreat_fail);
-            return false;
-        }
-        if (parent > 0) {
-            model = 0;
-        }
-        $('#modal_meetingroom_create_btn').attr('disabled', true);
-        $('#notice_meetingroom_create').html(app.languageData.notice_meetingroom_status_proccessing);
-        this.recaptcha_do('mr_add', (recaptcha) => {
-            $.post(this.api_mr, {
-                action: 'create',
-                token: this.api_token,
-                //captcha: recaptcha,
-                name: name,
-                mr_id: mr_id,
-                parent: parent,
-                top: top,
-                model: model
-            }, (rsp) => {
-                if (rsp.status == 1) {
-                    $('#notice_meetingroom_create').html(app.languageData.notice_meetingroom_status_mrcreated);
-                    this.room_list();
-                    $('#mrCreaterModal').modal('hide');
-                    //更新文件夹树形图
-                    this.dir_tree_get();
-                } else {
-                    $('#notice_meetingroom_create').html(app.languageData.notice_meetingroom_status_mrcreat_fail);
-                }
-                setTimeout(() => {
-                    $('#modal_meetingroom_create_btn').removeAttr('disabled');
-                }, 2000);
-            });
-        });
-    }
-
-    mr_del(mrid,group_delete = false) {
-        if (this.profile_confirm_delete_get()&&group_delete===false) {
-            if (!confirm(app.languageData.confirm_delete)) {
-                return false;
-            }
-        }
-
-        //if mrid is array, then delete all
-        if(group_delete){
-            for (let i in mrid) {
-                $('#meetingroom_id_' + mrid[i]).fadeOut();
-            }
-        }else{
-            $('#meetingroom_id_' + mrid).fadeOut();
-        }
-
-        $.post(this.api_mr, {
-            action: 'delete',
-            token: this.api_token,
-            mr_id: mrid
-        }, () => {
-            this.room_list();
-        });
-    }
-
-    mr_exit(mrid) {
-        $('#meetingroom_id_' + mrid).hide();
-        $.post(this.api_mr, {
-            action: 'exit',
-            token: this.api_token,
-            //captcha: recaptcha,
-            mr_id: mrid
-        });
-    }
-
-    mr_newname(mrid) {
-        var newname = prompt(app.languageData.modal_meetingroom_newname, "");
-        if (newname === null) {
-            return false;
-        }
-        $.post(this.api_mr, {
-            action: 'rename',
-            token: this.api_token,
-            name: newname,
-            mr_id: mrid
-        }, (rsp) => {
-            this.room_list();
-        });
     }
 
     file_rename(ukey, default_name) {
@@ -2687,326 +2294,8 @@ class tmplink {
             if (get_page_mrid() == undefined) {
                 this.workspace_filelist(0);
             } else {
-                this.mr_file_list(0)
+                this.dir.filelist(0)
             }
-        });
-    }
-
-
-    mr_list() {
-        if (localStorage.getItem('app_login') != 1) {
-            app.open('/app&listview=login');
-            return;
-        }
-        $('#mr_list_refresh_icon').html('<img src="/img/loading.svg" height="19" />');
-        $('#mr_list_refresh_icon').attr('disabled', true);
-        this.loading_box_on();
-        $.post(this.api_mr, {
-            action: 'list',
-            token: this.api_token,
-        }, (rsp) => {
-            this.loading_box_off();
-            if (rsp.status == 0) {
-                $('#meetroom_list').html('<div class="mx-auto"><iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon></div>');
-                $('#mr_list_refresh_icon').html('<iconpark-icon name="rotate" class="fa-fw“></iconpark-icon>');
-                $('#mr_list_refresh_icon').removeAttr('disabled');
-                return false;
-            } else {
-                $('#meetroom_list').html(app.tpl('dir_list_tpl', rsp.data));
-                this.btn_copy_bind();
-            }
-            $('#mr_list_refresh_icon').html('<iconpark-icon name="rotate" class="fa-fw“></iconpark-icon>');
-            $('#mr_list_refresh_icon').removeAttr('disabled');
-            app.linkRebind();
-        });
-    }
-
-    mr_file_view(data, page, room_id) {
-        let room_key = 'app_room_view_' + room_id;
-        switch (localStorage.getItem(room_key)) {
-            case 'photo':
-                this.mr_file_by_photo(data, page);
-                break;
-            case 'list':
-                this.mr_file_by_list(data, page);
-                break;
-            default:
-                this.mr_file_by_list(data, page);
-        }
-        this.is_file_ok_check(data);
-    }
-
-    room_total(mrid) {
-        $('.room_subinfo').hide();
-        $('#room_total').html('');
-        if (mrid == 0) {
-            return false;
-        }
-        $.post(this.api_mr, {
-            action: 'total', mr_id: mrid, token: this.api_token
-        }, (rsp) => {
-            if (rsp.data.nums > 0) {
-                $('.room_subinfo').show();
-                let total_size_text = bytetoconver(rsp.data.size, true);
-                $('#room_total').html(`${rsp.data.nums} ${app.languageData.total_units_of_file} , ${total_size_text}`);
-                this.room_mobile_topabr_fixed(mr_id);
-            }
-        }, 'json');
-    }
-
-    room_list() {
-        var params = get_url_params();
-        $('#room_userlist').hide();
-        $('.permission-room-file').hide();
-        $('.permission-room-user').hide();
-        $('.data_loading').show();
-        //清理数据
-        $('#dir_list').html('');
-        $('#room_direct_model').hide();
-        $('.room_subinfo').hide();
-        //this.loading_box_on();
-        //获取基本信息
-        $.post(this.api_mr, {
-            action: 'details',
-            //captcha: recaptcha,
-            token: this.api_token,
-            mr_id: params.mrid
-        }, (rsp) => {
-            this.room_data = rsp.data;
-            $('.data_loading').hide();
-            this.loading_box_off();
-            if (rsp.status === 0) {
-                //会议室不存在了
-                this.room.parent = 0;
-                this.room.top = 0;
-                this.room.ownner = 0;
-                this.room.mr_id = 0;
-                app.open('/404');
-                this.ga('Room-Unavailable');
-                return false;
-            }
-            //会议室不可用
-            if (rsp.data.status == 'reported' && rsp.data.owner == 0) {
-                this.room.parent = 0;
-                this.room.top = 0;
-                this.room.ownner = 0;
-                this.room.mr_id = 0;
-                app.open('/404');
-                this.ga('Room-Reported');
-                return false;
-            }
-
-            //room need to login
-            if (rsp.status === 3) {
-                app.open('/app&listview=login');
-                return false;
-            }
-            this.ga('Room-' + rsp.data.name);
-            //更新统计信息
-            this.room_total(rsp.data.mr_id);
-            this.room.parent = rsp.data.parent;
-            this.room.top = rsp.data.top;
-            this.room.owner = rsp.data.owner;
-            this.room.mr_id = rsp.data.mr_id;
-            this.room.display = rsp.data.display;
-            this.room.sort_by = rsp.data.sort_by;
-            this.room.sort_type = rsp.data.sort_type;
-            this.room.status = rsp.data.status;
-            this.room.allow_upload = rsp.data.allow_upload;
-            this.room.img_link = rsp.data.img_link;
-            this.room.model = rsp.data.model;
-            this.room.ui_avatar_id = rsp.data.ui_avatar_id;
-            this.room.ui_publish = rsp.data.ui_publish;
-            this.room.ui_publish_status = rsp.data.ui_publish_status;
-            this.room.ui_nickname = rsp.data.ui_nickname;
-            this.room.ui_intro = rsp.data.ui_intro;
-            this.room.ui_pro = rsp.data.ui_pro;
-            this.room_performance_init(this.room.mr_id);
-
-            //如果 room id 是0，则显示特定的顶部
-            if (params.mrid == 0) {
-                $('#title_of_root').show();
-                $('#title_of_sub').hide();
-            } else {
-                $('#title_of_root').hide();
-                $('#title_of_sub').show();
-            }
-
-            //如果用户是拥有者，显示直链相关的信息，并初始化
-            if (this.room.owner == 1) {
-                this.direct.dirRoomInit();
-                $('.room_direct_model').show();
-            } else {
-                $('.room_direct_model').hide();
-            }
-
-            //如果用户不是文件夹的拥有者，则显示出加入收藏夹的按钮
-            if (this.room.owner == 0) {
-                $('#room_btn_favorate').on('click', () => {
-                    this.favorite_add(rsp.data.mr_id);
-                });
-                $('#room_btn_favorate').show();
-            }
-
-            //如果用户不是文件夹的拥有者，则显示举报按钮
-            if (this.room.owner == 0) {
-                $('#room_btn_report').show();
-            }
-
-            //如果这个文件夹有人收藏，则显示出收藏数量
-            if (rsp.data.favorites > 0) {
-                $('.fav-enabled').show();
-                $('#favorite_count').html(rsp.data.favorites);
-            }
-
-            //如果文件夹不是用户的，则隐藏偏好设定
-            if (this.room.owner == 0) {
-                $('.room_btn_performance').hide();
-            }
-
-            //如果文件夹有设置图片
-            if (this.room.img_link != '0') {
-                //设置占位图
-                $('.room_img').attr('src', '/img/loading.svg');
-                //先请求图片，就绪后再显示
-                let img = new Image();
-                img.src = this.room.img_link;
-                img.onload = () => {
-                    $('.room_img').attr('src', this.room.img_link);
-                }
-                $('.room_img').show();
-            } else {
-                $('.room_img').hide();
-            }
-
-            //如果是私有文件夹
-            if (this.room.model == 'private') {
-                $('.in-private-dir').hide();
-            } else {
-                $('.in-private-dir').show();
-            }
-
-            //如果文件夹允许其他人上传文件
-            if (this.room.allow_upload == 'yes') {
-                $('#pf_allow_upload').prop('checked', true);
-
-            } else {
-                $('#pf_allow_upload').prop('checked', false);
-            }
-
-            //如果有设定个性化设置
-            if (this.room.ui_publish === 'yes' && this.room.ui_publish_status === 'ok') {
-                if (this.room.ui_pro === 'yes') {
-                    $('.userinfo_pro').show();
-                } else {
-                    $('.userinfo_sd').show();
-                }
-                $('.userinfo').show();
-                $('.userinfo_nickname').html(`${this.room.ui_nickname}`);
-            }
-
-
-            $('#mr_copy').attr('data-clipboard-text', 'https://' + this.site_domain + '/room/' + rsp.data.mr_id);
-            $('.room_title').html(rsp.data.name);
-            $('#dir_list').show();
-
-            if (rsp.data.sub_rooms !== 0) {
-                this.subroom_data = rsp.data.sub_rooms;
-            } else {
-                this.subroom_data = 0;
-            }
-
-            this.btn_copy_bind();
-            this.mr_file_list(0);
-
-            //是否需要设置上级目录返回按钮
-            if (this.room.top == 99) {
-                $('.btn_for_sub').hide();
-                $('.btn_for_desktop').show();
-            } else {
-                $('.btn_for_sub').show();
-                $('.btn_for_desktop').hide();
-            }
-
-            //如果不是拥有者
-            if (this.room.owner === 0) {
-                $('.not_owner').hide();
-            }
-
-            if (isMobileScreen()) {
-                this.room_mobile_prepare();
-            } else {
-                $('#room_back_btn').html(app.tpl('room_back_btn_tpl', {}));
-            }
-
-            $('#room_loading').hide();
-            $('#room_loaded').show();
-
-            //如果用户是赞助者
-            if (this.isSponsor == true) {
-                this.setBtnForSponsor();
-            }
-            //重新设定网页标题
-            document.title = rsp.data.name;
-            app.linkRebind();
-        });
-    }
-
-    room_mobile_prepare() {
-        let mrid = this.room.mr_id === undefined ? 0 : this.room.mr_id;
-        if (mrid !== 0) {
-            let back_btn = `<a href="/app&listview=room&mrid=${TL.room.parent}" tmpui-action="TL.room_list()" class="text-azure mt-1 btn_for_sub"><iconpark-icon name="left-c" class="fa-fw fa-2x"></iconpark-icon></a>`;
-            $('#room_back').html(back_btn);
-        } else {
-            $('#room_back').html('');
-        }
-
-        $('.btn_upload').attr('onclick', `TL.uploader.open('${mrid}')`);
-
-        $('#mr_id').val(mrid);
-        $('#mr_parent_id').val(this.room.parent);
-        $('#mr_top_id').val(this.room.top);
-
-        app.linkRebind();
-        this.room_mobile_topabr_fixed(mrid);
-    }
-
-    room_mobile_topabr_fixed(mrid) {
-        if (mrid === 0) {
-            $('.mobile-head-padding-large').css('padding-top', '80px');
-            $('.btn_mobile_top').hide();
-            $('.btn_mobile_sub').show();
-        } else {
-            $('.btn_mobile_top').show();
-            $('.btn_mobile_sub').hide();
-            //根据 room_subinfo 的显示状态来设定 padding-top 的值
-            if ($('.room_subinfo').css('display') === 'none') {
-                $('.mobile-head-padding-large').css('padding-top', '150px');
-            } else {
-                $('.mobile-head-padding-large').css('padding-top', '170px');
-            }
-        }
-    }
-
-    favorite_add(mr_id) {
-        if (!this.isLogin()) {
-            app.open('/app&listview=login');
-            return false;
-        }
-        alert(app.languageData.favorite_add_success);
-        $.post(this.api_mr, {
-            action: 'favorite_add',
-            token: this.api_token,
-            mr_id: mr_id,
-        });
-    }
-
-    favorite_del(mr_id) {
-        $('#meetingroom_id_' + mr_id).hide();
-        $.post(this.api_mr, {
-            action: 'favorite_del',
-            token: this.api_token,
-            mr_id: mr_id,
         });
     }
 

@@ -1030,7 +1030,7 @@
                     <li class="list-unstyled">
                         <input type="radio" id="target_dir_<% obj.id %>"  name="dir_tree" value="<% obj.id %>">
                         <% if(obj.children){ %>
-                            <label for="mv_select_box_<% obj.id %>" id="mv_select_box_<% obj.id %>" onclick="TL.dir_tree_display('<% obj.id %>')" style="margin-bottom: 0px">
+                            <label for="mv_select_box_<% obj.id %>" id="mv_select_box_<% obj.id %>" onclick="TL.dir.treeShow('<% obj.id %>')" style="margin-bottom: 0px">
                                 <iconpark-icon name="folder-plus" class="fa-fw"></iconpark-icon> <% obj.name %>
                             </label>
                         <% }else{ %>

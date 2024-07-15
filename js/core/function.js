@@ -1,3 +1,11 @@
+function listDataPrepare(data) {
+    let new_data = {};
+    for (let i in data) {
+        new_data[data[i].ukey] = data[i];
+    }
+    return new_data;
+}
+
 function debug(log) {
     if (true) {
         console.log(log);
