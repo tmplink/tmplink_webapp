@@ -15,6 +15,7 @@ class direct {
 
     sort_by = 0
     sort_type = 0
+    hp_time = 0
 
     page_number = 0
     list_Data = []
@@ -59,6 +60,7 @@ class direct {
             this.quota_free = rsp.data.quota_free;
             this.total_downloads = rsp.data.total_downloads;
             this.total_transfer = rsp.data.total_transfer;
+            this.hp_time = parseInt(rsp.data.hp_time);
             this.set = 1;
             this.ssl_auto = rsp.data.ssl_auto === 'yes' ? true : false;
             this.traffic_limit = rsp.data.traffic_limit;
@@ -106,6 +108,7 @@ class direct {
                 $('#brand_saved_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:48px;border-radius: 8px;" />`);
                 $('#direct_branded_logo').html(`<img src="https://tmp-static.vx-cdn.com/static/logo?id=${rsp.data.brand_logo_id}" style="width:${img_size};border-radius: 12px;" />`);
             }
+
             if (rsp.data.brand_title !== '0') {
                 $('#brand_saved_title').html(rsp.data.brand_title);
             }
@@ -122,6 +125,29 @@ class direct {
                 cb();
             }
         }, 'json');
+    }
+
+    isReady(){
+        this.hp_time--;
+        if(this.hp_time<1){
+            //已完成部署
+            $('#direct_ready').show();
+            $('#direct_progress').hide();
+        }else{
+            //尚未完成部署，计算进度条，进度计算方式，300 秒为 100% 进度， hp_time 是剩余的秒数
+            console.log(this.hp_time);
+            let percent = 100;
+            if(this.hp_time>1){
+                percent = 100 - (this.hp_time / 300 * 100);
+            }
+            $('#direct_progress').show();
+            $('#direct_progress_bar').css('width', percent + '%');
+            $('#direct_ready').hide();
+            //一秒后再次检查
+            setTimeout(()=>{
+                this.isReady();
+            },1000);
+        }
     }
 
     resetAPIKey() {
@@ -203,6 +229,9 @@ class direct {
         let quota = bytetoconver(this.quota, true);
         let quota_free = bytetoconver(this.quota_free, true);
         let total_transfer = bytetoconver(this.total_transfer, true);
+
+        //根据
+        this.isReady();
 
 
         if (this.domain != 0) {
@@ -493,7 +522,7 @@ class direct {
 
         if (status) {
             post_params.action = 'add_dir';
-            post_params.mrid = this.parent_op.room.mr_id;
+            post_params.mrid = get_page_mrid();
         } else {
             post_params.action = 'del_dir';
             post_params.direct_key = this.dir_key;

@@ -1,4 +1,5 @@
 {
+    "modal_performance_direct_des2": "このディレクトリに対する変更（ファイルの追加や削除、ソートの設定など）は、ダイレクトリンクフォルダにも反映され、最大10分以内に有効になります。",
     "modal_settings_upload_model1": "有効期間: 24時間",
     "modal_settings_upload_model2": "有効期間: 3日間",
     "modal_settings_upload_model3": "有効期間: 7日間",

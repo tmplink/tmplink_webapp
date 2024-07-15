@@ -54,12 +54,25 @@
             </div>
             <div class="mobile-head-large-title text-left w-100">
                 <div class="mobile-list-titlename">
-                    <div class="text-center">
-                        <iconpark-icon name="globe" class="fa-fw text-green"
-                            id="direct_bind_domain_icon"></iconpark-icon>
-                        <span id="direct_bind_domain_box">
-                            <a href="#" target="_blank" id="direct_bind_domain">#</a>
-                        </span>
+                    <div>
+                        <!-- 已经准备好 -->
+                        <div id="direct_ready" class="text-center">
+                            <iconpark-icon name="globe" class="fa-fw text-green"
+                                id="direct_bind_domain_icon"></iconpark-icon>
+                            <span id="direct_bind_domain_box">
+                                <a href="#" target="_blank" id="direct_bind_domain">#</a>
+                            </span>
+                        </div>
+                        <!-- 尚未就绪，显示进度条 -->
+                        <div id="direct_progress" class="text-center">
+                            <div class="progress my-1 mx-auto" style="height: 5px;width: 200px;">
+                                <div class="progress-bar bg-green progress-bar-animated progress-bar-striped" role="progressbar" style="width: 100%;"
+                                    id="direct_progress_bar"></div>
+                            </div>
+                            <div>
+                                <span i18n="media_processing">正在处理中..</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="text-muted">
                         <div>

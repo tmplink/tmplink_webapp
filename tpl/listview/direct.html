@@ -109,11 +109,25 @@
                         </span>
                     </div>
                 </div>
-                <div class="text-center">
-                    <iconpark-icon name="globe" class="fa-fw text-green" id="direct_bind_domain_icon"></iconpark-icon>
-                    <span id="direct_bind_domain_box">
-                        <a href="#" target="_blank" id="direct_bind_domain">#</a>
-                    </span>
+                <div>
+                    <!-- 已经准备好 -->
+                    <div id="direct_ready" class="text-center">
+                        <iconpark-icon name="globe" class="fa-fw text-green"
+                            id="direct_bind_domain_icon"></iconpark-icon>
+                        <span id="direct_bind_domain_box">
+                            <a href="#" target="_blank" id="direct_bind_domain">#</a>
+                        </span>
+                    </div>
+                    <!-- 尚未就绪，显示进度条 -->
+                    <div id="direct_progress" class="text-center">
+                        <div class="progress my-1 mx-auto" style="height: 5px;width: 200px;">
+                            <div class="progress-bar bg-green progress-bar-animated progress-bar-striped" role="progressbar" style="width: 100%;"
+                                id="direct_progress_bar"></div>
+                        </div>
+                        <div>
+                            <span i18n="media_processing">正在处理中..</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="lead mt-2">
                     <span class="btn btn-sm btn-light text-azure mx-1 mt-1 btn-point"
@@ -542,7 +556,8 @@
                                     <ul>
                                         <li><code>action</code> list_of_direct</li>
                                         <li><code>key</code> API Key</li>
-                                        <li><code>page</code> <span i18n="direct_api_params_page">页码，每页显示 1000 条数据</span></li>
+                                        <li><code>page</code> <span i18n="direct_api_params_page">页码，每页显示 1000
+                                                条数据</span></li>
                                     </ul>
                                 </td>
                                 <td>
@@ -553,10 +568,10 @@
                                     </p>
                                     <p>
                                         <strong>Data : Array</strong>
-                                        <li>dkey  : <span i18n="direct_api_data_dkey">直链 DKEY</span></li>
-                                        <li>link  : <span i18n="direct_api_data_link">下载链接</span></li>
-                                        <li>name  : <span i18n="direct_api_data_name">文件名</span></li>
-                                        <li>size  : <span i18n="direct_api_data_size">文件大小</span></li>
+                                        <li>dkey : <span i18n="direct_api_data_dkey">直链 DKEY</span></li>
+                                        <li>link : <span i18n="direct_api_data_link">下载链接</span></li>
+                                        <li>name : <span i18n="direct_api_data_name">文件名</span></li>
+                                        <li>size : <span i18n="direct_api_data_size">文件大小</span></li>
                                         <li>etime : <span i18n="direct_api_data_etime">链接有效期</span></li>
                                     </p>
                                 </td>
@@ -585,8 +600,10 @@
                                     <ul>
                                         <li><code>action</code> link_add</li>
                                         <li><code>key</code> API Key</li>
-                                        <li><code>ukey</code> <span i18n="direct_api_params_ukey">文件 UKEY</span</li>
-                                        <li><code>vaild_time</code> <span i18n="direct_api_params_vaild_time">（可选参数）链接有效期，单位为分钟，默认为 0 ，一直有效</span</li>
+                                        <li><code>ukey</code> <span i18n="direct_api_params_ukey">文件 UKEY</span< /li>
+                                        <li><code>vaild_time</code> <span
+                                                i18n="direct_api_params_vaild_time">（可选参数）链接有效期，单位为分钟，默认为 0 ，一直有效</span<
+                                                    /li>
                                     </ul>
                                 </td>
                                 <td>
