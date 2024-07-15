@@ -462,20 +462,6 @@ class dir {
         });
     }
 
-    getKeys() {
-        let key = get_page_mrid();
-        if (key == undefined) {
-            key = 'workspace';
-        }
-
-        return {
-            view: 'app_room_view_' + key,
-            sort_by: 'app_room_view_sort_by_' + key,
-            sort_type: 'app_room_view_sort_type_' + key,
-        }
-
-    }
-
     filelist(page) {
         $('.no_files').fadeOut();
         $('.no_dir').fadeOut();
@@ -496,9 +482,12 @@ class dir {
         this.loadingON();
         var params = get_url_params();
 
-        let room_sort_by = this.performanceGet(params.mrid, 'sort_by');
-        let room_sort_type = this.performanceGet(params.mrid, 'sort_type');
-        let room_display = this.performanceGet(params.mrid, 'display');
+
+        //获取文件夹关于排序的设定
+        let key = this.parent_op.sort_keys();
+        let room_sort_by = localStorage.getItem(key.sort_by);
+        let room_sort_type = localStorage.getItem(key.sort_type);
+        let room_display = localStorage.getItem(key.display);
 
         this.parent_op.recaptcha_do('mr_list', (recaptcha) => {
             let photo = 0;

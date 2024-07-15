@@ -454,7 +454,7 @@ class direct {
             $('#pf_allow_direct_notice').hide();
         }
 
-        let mrid = this.parent_op.room.mr_id;
+        let mrid = get_page_mrid();
         $.post(this.parent_op.api_direct, {
             'action': 'dir_details',
             'mrid': mrid,

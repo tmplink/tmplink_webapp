@@ -513,7 +513,9 @@ class tmplink {
     sort_confirm() {
         this.sort_by = $('#sort_by').val();
         this.sort_type = $('#sort_type').val();
-        let key = this.dir.getKeys();
+        
+        let key = this.sort_keys();
+        localStorage.setItem(key.display, this.display);
         localStorage.setItem(key.sort_by, this.sort_by);
         localStorage.setItem(key.sort_type, this.sort_type);
 
@@ -525,6 +527,21 @@ class tmplink {
             this.workspace_filelist(0);
         }
         $('#sortModal').modal('hide');
+    }
+
+    sort_keys() {
+        let key = get_page_mrid();
+
+        if (key === undefined) {
+            key = 'workspace';
+        }
+
+        return {
+            display: 'app_room_view_display_' + key,
+            sort_by: 'app_room_view_sort_by_' + key,
+            sort_type: 'app_room_view_sort_type_' + key,
+        }
+
     }
 
     head_set() {
