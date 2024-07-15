@@ -257,7 +257,8 @@ class dir {
             this.room.ui_nickname = rsp.data.ui_nickname;
             this.room.ui_intro = rsp.data.ui_intro;
             this.room.ui_pro = rsp.data.ui_pro;
-            this.performanceInit(this.room.mr_id);
+
+            this.performanceInit(this.room.display, this.room.sort_by, this.room.sort_type);
 
             //如果 room id 是0，则显示特定的顶部
             if (params.mrid == 0) {
@@ -518,28 +519,49 @@ class dir {
         });
     }
 
-    performanceInit(room_id) {
-        this.performanceSet(room_id, 'display', this.room.display);
-        this.performanceSet(room_id, 'sort_by', this.room.sort_by);
-        this.performanceSet(room_id, 'sort_type', this.room.sort_type);
-    }
+    performanceInit(display,sort_by,sort_type) {
+        //先检查这个文件夹是否已经有排序设定
+        let keys = this.parent_op.sort_keys();
 
-    performanceSet(id, key, val) {
-        let room_key = 'app_room_view_' + id;
-        localStorage.setItem(room_key + '_' + key, val);
-        $("#pf_" + key + " option[value='" + val + "']").attr("selected", "selected");
-    }
+        let r_display = localStorage.getItem(keys.display);
+        let r_sort_by = localStorage.getItem(keys.sort_by);
+        let r_sort_type = localStorage.getItem(keys.sort_type);
 
-    performanceGet(id, key) {
-        let room_key = 'app_room_view_' + id;
-        let storage_val = localStorage.getItem(room_key + '_' + key);
-        return storage_val === null ? this.room[key] : storage_val;
+        //打印当前设定
+        console.log('display:' + display, 'sort_by:' + sort_by, 'sort_type:' + sort_type);
+        //打印本地存储的设定
+        console.log('r_display:' + r_display, 'r_sort_by:' + r_sort_by, 'r_sort_type:' + r_sort_type);
+
+        //初始化远端设定的选定值
+        $('#pf_display').val(display);
+        $('#pf_sort_by').val(sort_by);
+        $('#pf_sort_type').val(sort_type);
+
+        //如果本地没有存储，则使用文件夹的远端设定
+        if (r_display === null) {
+            localStorage.setItem(keys.display, display);
+        }
+        if (r_sort_by === null) {
+            localStorage.setItem(keys.sort_by, sort_by);
+            r_sort_by = sort_by;
+        }
+        if (r_sort_type === null) {
+            localStorage.setItem(keys.sort_type, sort_type);
+            r_sort_type = sort_type;
+        }
+
+        //初始化本地存储的选定值
+        $('#sort_by').val(r_sort_by);
+        $('#sort_type').val(r_sort_type);
     }
 
     performanceOpen() {
         $('#performanceModal').modal('show');
     }
 
+    /**
+     * 保存用户的设定   
+     */
     performancePost() {
         let pf_display = $('#pf_display').val();
         let pf_sort_by = $('#pf_sort_by').val();
@@ -554,13 +576,6 @@ class dir {
             sort_type: pf_sort_type,
             pf_upload: pf_allow_upload,
             mr_id: mrid
-        }, (rsp) => {
-            //更新本地存储
-            this.performanceSet(mrid, 'display', pf_display);
-            this.performanceSet(mrid, 'sort_by', pf_sort_by);
-            this.performanceSet(mrid, 'sort_type', pf_sort_type);
-            //重新载入此文件夹
-            this.dir.filelist(0);
         });
     }
 
