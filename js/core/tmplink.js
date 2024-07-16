@@ -514,7 +514,7 @@ class tmplink {
         this.sort_by = $('#sort_by').val();
         this.sort_type = $('#sort_type').val();
         
-        let key = this.getSortKeys();
+        let key = getSortKeys();
         localStorage.setItem(key.display, this.display);
         localStorage.setItem(key.sort_by, this.sort_by);
         localStorage.setItem(key.sort_type, this.sort_type);

@@ -485,7 +485,7 @@ class dir {
 
 
         //获取文件夹关于排序的设定
-        let key = this.parent_op.getSortKeys();
+        let key = getSortKeys();
         let room_sort_by = localStorage.getItem(key.sort_by);
         let room_sort_type = localStorage.getItem(key.sort_type);
         let room_display = localStorage.getItem(key.display);
@@ -521,7 +521,7 @@ class dir {
 
     performanceInit(display,sort_by,sort_type) {
         //先检查这个文件夹是否已经有排序设定
-        let keys = this.parent_op.getSortKeys();
+        let keys = getSortKeys();
 
         let r_display = localStorage.getItem(keys.display);
         let r_sort_by = localStorage.getItem(keys.sort_by);
