@@ -485,7 +485,7 @@ class dir {
 
 
         //获取文件夹关于排序的设定
-        let key = this.parent_op.sort_keys();
+        let key = this.parent_op.getSortKeys();
         let room_sort_by = localStorage.getItem(key.sort_by);
         let room_sort_type = localStorage.getItem(key.sort_type);
         let room_display = localStorage.getItem(key.display);
@@ -521,16 +521,11 @@ class dir {
 
     performanceInit(display,sort_by,sort_type) {
         //先检查这个文件夹是否已经有排序设定
-        let keys = this.parent_op.sort_keys();
+        let keys = this.parent_op.getSortKeys();
 
         let r_display = localStorage.getItem(keys.display);
         let r_sort_by = localStorage.getItem(keys.sort_by);
         let r_sort_type = localStorage.getItem(keys.sort_type);
-
-        //打印当前设定
-        console.log('display:' + display, 'sort_by:' + sort_by, 'sort_type:' + sort_type);
-        //打印本地存储的设定
-        console.log('r_display:' + r_display, 'r_sort_by:' + r_sort_by, 'r_sort_type:' + r_sort_type);
 
         //初始化远端设定的选定值
         $('#pf_display').val(display);

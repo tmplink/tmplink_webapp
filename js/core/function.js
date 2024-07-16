@@ -1,3 +1,18 @@
+function getSortKeys() {
+    let key = get_page_mrid();
+
+    if (key === undefined) {
+        key = 'workspace';
+    }
+
+    return {
+        display: 'app_room_view_display_' + key,
+        sort_by: 'app_room_view_sort_by_' + key,
+        sort_type: 'app_room_view_sort_type_' + key,
+    }
+
+}
+
 function listDataPrepare(data) {
     let new_data = {};
     for (let i in data) {

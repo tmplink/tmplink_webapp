@@ -514,7 +514,7 @@ class tmplink {
         this.sort_by = $('#sort_by').val();
         this.sort_type = $('#sort_type').val();
         
-        let key = this.sort_keys();
+        let key = this.getSortKeys();
         localStorage.setItem(key.display, this.display);
         localStorage.setItem(key.sort_by, this.sort_by);
         localStorage.setItem(key.sort_type, this.sort_type);
@@ -529,7 +529,7 @@ class tmplink {
         $('#sortModal').modal('hide');
     }
 
-    sort_keys() {
+    getSortKeys() {
         let key = get_page_mrid();
 
         if (key === undefined) {
@@ -876,7 +876,7 @@ class tmplink {
         this.workspace_total();
 
         //获取排序
-        let key = this.dir.getKeys();
+        let key = getSortKeys();
         let sort_by = localStorage.getItem(key.sort_by);
         let sort_type = localStorage.getItem(key.sort_type);
 
