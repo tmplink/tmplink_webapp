@@ -314,6 +314,9 @@ class dir {
                 $('.room_img').show();
             } else {
                 $('.room_img').hide();
+                //调整 UI
+                $('#dir_title').removeClass('col-8').addClass('col-12');
+                $('#dir_img').removeClass('col-4');
             }
 
             //如果是私有文件夹
