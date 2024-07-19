@@ -346,7 +346,7 @@ class dir {
             }
 
 
-            $('#mr_copy').attr('data-clipboard-text', 'https://' + this.site_domain + '/room/' + rsp.data.mr_id);
+            $('#mr_copy').attr('data-clipboard-text', 'https://' + this.parent_op.site_domain + '/room/' + rsp.data.mr_id);
             $('.room_title').html(rsp.data.name);
             $('#dir_list').show();
 
