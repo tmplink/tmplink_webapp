@@ -43,39 +43,47 @@
                 </div>
             </div>
             <div class="clearfix mb-3 px-3">
-                <div class="float-right mr-2 d-none d-sm-inline">
-                    <!--[这里显示文件夹预设图片]-->
-                    <img src="" class="room_img" style="display: none;border-radius: 8px;height: 120px;">
-                </div>
-                <div class="float-left">
-                    <div id="title_of_sub">
-                        <span class="room_title display-4"></span>
-                        <div class="mt-2 room_subinfo">
-                            <iconpark-icon name="folder-open" class="fa-fw text-yellow"></iconpark-icon>
-                            <span id="room_total"></span>
+                <div class="row">
+                    <div class="col-8" id="dir_title">
+                        <div>
+                            <div id="title_of_sub">
+                                <span class="room_title display-4"></span>
+                                <div class="mt-2 room_subinfo">
+                                    <iconpark-icon name="folder-open" class="fa-fw text-yellow"></iconpark-icon>
+                                    <span id="room_total"></span>
+                                </div>
+                            </div>
+                            <div class="userinfo mt-2" style="display: none;">
+                                <span class="fav-enabled" style="display: none;">
+                                    <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
+                                    <span id="favorite_count" class="text-pink">0</span>
+                                </span>
+                                <span class="badge badge-pill badge-dark btn-point user-unlogin"
+                                    onclick="app.open('/app&listview=login')" style="display: none;">
+                                    <span i18n="need_login_of_dir">.</span>
+                                </span>
+                                <span>
+                                    <span class="upload_queue" style="display: none;">
+                                        <iconpark-icon name="circle-arrow-up" class="fa-fw"></iconpark-icon>
+                                        <span class="upload_queue_counter"></span>
+                                        <span class="upload_speed"></span>
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="lead mt-2" id="room_direct_model">
+                                <a href="#" id="room_link" target="_blank"></a>
+                            </div>
                         </div>
                     </div>
-                    <div class="userinfo mt-2" style="display: none;">
-                        <span class="fav-enabled" style="display: none;">
-                            <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
-                            <span id="favorite_count" class="text-pink">0</span>
-                        </span>
-                        <span class="badge badge-pill badge-dark btn-point user-unlogin"
-                            onclick="app.open('/app&listview=login')" style="display: none;">
-                            <span i18n="need_login_of_dir">.</span>
-                        </span>
-                        <span>
-                            <span class="upload_queue" style="display: none;">
-                                <iconpark-icon name="circle-arrow-up" class="fa-fw"></iconpark-icon>
-                                <span class="upload_queue_counter"></span>
-                                <span class="upload_speed"></span>
-                            </span>
-                        </span>
-                    </div>
-                    <div class="lead mt-2" id="room_direct_model">
-                        <a href="#" id="room_link" target="_blank"></a>
+                    <div class="col-4" id="dir_img">
+                        <div class="text-right">
+                            <!--[这里显示文件夹预设图片]-->
+                            <img src="" class="room_img" style="display: none;border-radius: 8px;max-height: 150px;">
+                        </div>
                     </div>
                 </div>
+                
+                
             </div>
 
             <div class="clearfix mt-3"></div>
