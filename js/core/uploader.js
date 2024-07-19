@@ -506,8 +506,8 @@ class uploader {
             $('.uploader_opt').show();
         }
 
-        //创建分片任务的ID，算法 uid+文件路径+文件大小 的 sha1 值
-        let uptoken = CryptoJS.SHA1(this.parent_op.uid + file.name + file.size).toString();
+        //创建分片任务的ID，算法 uid+文件路径+文件大小+分片设定 的 sha1 值
+        let uptoken = CryptoJS.SHA1(this.parent_op.uid + file.name + file.size + this.slice_size).toString();
         let upload_queue_max = this.upload_worker_queue_max;
         let numbers_of_slice = 1;
 

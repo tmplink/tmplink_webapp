@@ -529,21 +529,6 @@ class tmplink {
         $('#sortModal').modal('hide');
     }
 
-    getSortKeys() {
-        let key = get_page_mrid();
-
-        if (key === undefined) {
-            key = 'workspace';
-        }
-
-        return {
-            display: 'app_room_view_display_' + key,
-            sort_by: 'app_room_view_sort_by_' + key,
-            sort_type: 'app_room_view_sort_type_' + key,
-        }
-
-    }
-
     head_set() {
         var login = localStorage.getItem('app_login');
         if (login != null && login != 0) {
