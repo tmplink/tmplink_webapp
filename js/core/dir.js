@@ -395,7 +395,7 @@ class dir {
     mobilePrepare() {
         let mrid = this.room.mr_id === undefined ? 0 : this.room.mr_id;
         if (mrid !== 0) {
-            let back_btn = `<a href="/app&listview=room&mrid=${TL.room.parent}" tmpui-action="TL.open()" class="text-azure mt-1 btn_for_sub"><iconpark-icon name="left-c" class="fa-fw fa-2x"></iconpark-icon></a>`;
+            let back_btn = `<a href="/app&listview=room&mrid=${this.room.parent}" tmpui-action="TL.dir.open()" class="text-azure mt-1 btn_for_sub"><iconpark-icon name="left-c" class="fa-fw fa-2x"></iconpark-icon></a>`;
             $('#room_back').html(back_btn);
         } else {
             $('#room_back').html('');
