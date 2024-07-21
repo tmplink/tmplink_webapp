@@ -1,35 +1,38 @@
-<div class="container d-flex flex-grow-1 vh-100" style="padding-bottom: 20%;">
+<div class="container d-flex flex-grow-1 vh-100 px-0">
     <div class="form-sp align-self-center w-100">
         <div class="text-center mb-6 btn-pointer" onclick="dynamicView.index()">
             <img src="/img/ico/logo-new.svg" alt="tmp.link" style="width: 64px;">
         </div>
 
-        <div class="card shadow-lg p-5 glass">
+        <div>
             <div class="alert alert-warning text-left" style="display: none;" role="alert" id="msg_notice">
             </div>
 
-            <input type="email" autocomplete="off" id="email_new" class="form-control form-sp-top" i18n="form_email"
+            <h1 class="h3 mb-3 font-weight-normal" i18n="form_email">.</h1>
+            <input type="email" autocomplete="off" id="email_new" class="form-control" i18n="form_email"
                 placeholder="." required>
 
-            <div class="input-group form-sp-top">
-                <input type="text" id="checkcode" class="form-control form-sp-mid" i18n="form_code" placeholder="."
+            <h1 class="h3 mt-3 mb-3 font-weight-normal" i18n="form_checkcode">.</h1>
+            <div class="input-group">
+                <input type="text" id="checkcode" class="form-control" i18n="form_code" placeholder="."
                     autocomplete="off" required>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary form-sp-btn" type="button" id="button-reg-checkcode"
+                    <button class="btn btn-secondary" type="button" id="button-reg-checkcode"
                         i18n="form_getcode" onclick="TL.cc_send()">.</button>
                 </div>
             </div>
 
-            <input type="password" autocomplete="off" id="password" class="form-control form-sp-mid"
+            <h1 class="h3 mt-3 mb-3 font-weight-normal" i18n="form_password">.</h1>
+            <input type="password" autocomplete="off" id="password" class="form-control"
                 i18n="form_password" placeholder="." required>
 
-            <input type="password" autocomplete="new-password" id="rpassword" class="form-control form-sp-bottom"
+            <h1 class="h3 mt-3 mb-3 font-weight-normal" i18n="form_repassword">.</h1>
+            <input type="password" autocomplete="new-password" id="rpassword" class="form-control"
                 i18n="form_repassword" placeholder="." required>
 
-            <button id="submit" class="btn btn-lg btn-primary btn-block mt-2" i18n="form_btn_reg"
+            <button id="submit" class="btn btn-lg btn-primary btn-block mt-4" i18n="form_btn_reg"
                 onclick="TL.register();">.</button>
-            
-            <button class="btn btn-lg btn-light btn-block mt-2" onclick="TL.oauth.google_login()" id="google_login">
+            <button class="btn btn-lg btn-light btn-block mt-4" onclick="TL.oauth.google_login()" id="google_login">
                 <iconpark-icon name="google"></iconpark-icon> <span id="google_login_msg" i18n="oauth_btn_google_login">Login with Google</span>
             </button>
             <hr>

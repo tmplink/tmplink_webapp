@@ -1,21 +1,25 @@
-<div class="container d-flex flex-grow-1 vh-100" style="padding-bottom: 20%;">
+<div class="container d-flex flex-grow-1 vh-100 px-0">
     <div class="form-sp align-self-center w-100">
         <div class="text-center mb-6 btn-pointer" onclick="dynamicView.index()">
             <img src="/img/ico/logo-new.svg" alt="tmp.link" style="width: 64px;">
         </div>
 
-        <div class="card shadow-lg p-5 glass">
+        <div class="">
             <div class="alert alert-warning text-left" style="display: none;" role="alert" id="msg_notice">
             </div>
-
-            <input type="email" id="email" class="form-control form-sp-top" i18n="form_email" i18nOnly="placeholder"
+            <h1 class="h3 mb-3 font-weight-normal" i18n="form_email">.</h1>
+            <input type="email" id="email" class="form-control" i18n="form_email" i18nOnly="placeholder"
                 placeholder="." required autofocus>
-
-            <input type="password" id="password" class="form-control form-sp-bottom" i18n="form_password"
+            
+            <h1 class="h3 mt-3 mb-3 font-weight-normal" i18n="form_password">.</h1>
+            <input type="password" id="password" class="form-control" i18n="form_password"
                 i18nOnly="placeholder" placeholder="." required onkeyup="if(event.keyCode==13){TL.login()}">
 
             <button id="submit" class="btn btn-lg btn-primary btn-block mt-4" i18n="form_btn_login"
                 onclick="TL.login();">.</button>
+            <button class="btn btn-lg btn-light btn-block mt-4" onclick="TL.oauth.google_login()" id="google_login">
+                <iconpark-icon name="google"></iconpark-icon> <span id="google_login_msg" i18n="oauth_btn_google_login">Login with Google</span>
+            </button>
             <div class="mt-2">
                 
                 <div class="text-right">
@@ -23,12 +27,7 @@
                         data-dl-root="true">.</a>
                 </div>
                 <hr>
-                <!-- [第三方登录] -->
-                <div class="text-center mb-1">
-                    <button class="btn btn-light" onclick="TL.oauth.google_login()" id="google_login">
-                        <iconpark-icon name="google"></iconpark-icon> <span id="google_login_msg" i18n="oauth_btn_google_login">Login with Google</span>
-                    </button>
-                </div>
+               
                 <div class="text-center">
                     <a class="btn" onclick="dynamicView.reg()" i18n="login_reg"
                         data-dl-root="true">.</a>

@@ -817,6 +817,13 @@
     "connect_to_google_title": "连接到谷歌账号",
     "connect_to_google_disconnect": "解除连接",
 
+    "oauth_btn_google_login" : "使用谷歌账号登录",
+    "oauth_btn_google_connected" : "已绑定谷歌账号",
+    "oauth_btn_google_connect" : "绑定谷歌账号",
+    "oauth_btn_processing" : "正在处理...",
+    "oauth_btn_complete" : "完成",
+    "oauth_btn_google_disconnect" : "解除连接",
+    
     "chart_title_direct_uage": "直链使用情况",
     "download_run": "正在下载:",
     "download_add": "下载任务已添加:",

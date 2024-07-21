@@ -33,6 +33,8 @@ class oauth {
     }
 
     google_login_callback() {
+        //显示正在登录
+        $('#google_login_msg').html(app.languageData.oauth_btn_processing);
         //发送请求获取google登录的状态
         $.post(this.parent_op.api_user, {
             'action': 'oauth_google_status',
@@ -41,7 +43,7 @@ class oauth {
             //登录成功
             if (rsp.data == 'GOOGLE_LOGIN_SUCCESS' || rsp.data == 'GOOGLE_LOGIN_FAIL1') {
                 //如果请求成功，进入主页
-                $('#google_login_msg').html(app.languageData.login_ok);
+                $('#google_login_msg').html(app.languageData.oauth_btn_complete);
                 setTimeout(() => {
                     dynamicView.workspace();
                 }, 1000);
@@ -52,18 +54,18 @@ class oauth {
                 $('#google_login_msg').html(app.languageData.status_error_0);
                 //启用按钮
                 setTimeout(() => {
-                    $('#google_login_msg').html('Login with Google');
+                    $('#google_login_msg').html(app.languageData.oauth_google_btn_login);
                     $('#google_login').attr('disabled', false);
-                }, 3000);
+                }, 1000);
             }
 
             //登录中，重新监听
             if (rsp.data == 'GOOGLE_LOGIN_START') {
                 //显示正在登录
-                $('#google_login_msg').html(app.languageData.form_btn_processing);
+                $('#google_login_msg').html(app.languageData.oauth_btn_processing);
                 setTimeout(() => {
                     this.google_login_callback();
-                }, 2000);
+                }, 1000);
             }
         }, 'json');
     }
@@ -78,7 +80,7 @@ class oauth {
             //成功
             if (rsp.status == 1) {
                 //绑定完成，设定界面状态
-                $('#google_connect_msg').html('Google connected');
+                $('#google_connect_msg').html(app.languageData.oauth_btn_google_connected);
                 //禁用按钮
                 $('#google_connect').attr('disabled', true);
                 $('#google_disconnect').attr('disabled', false);
@@ -86,7 +88,7 @@ class oauth {
                 $('#google_disconnect').show();
             } else {
                 //失败，设定界面状态
-                $('#google_connect_msg').html('Connect with Google');
+                $('#google_connect_msg').html(app.languageData.oauth_btn_google_connect);
                 $('#google_connect').attr('disabled', false);
                 $('#google_disconnect').attr('disabled', true);
             }
@@ -112,6 +114,8 @@ class oauth {
     }
 
     google_connect_callback() {
+        //显示正在进行
+        $('#google_connect_msg').html(app.languageData.form_btn_processing);
         //发送请求获取google登录的状态
         $.post(this.parent_op.api_user, {
             'action': 'oauth_google_status',
@@ -120,7 +124,7 @@ class oauth {
             //成功
             if (rsp.data == 'GOOGLE_BIND_SUCCESS') {
                 //绑定完成
-                $('#google_connect_msg').html(app.languageData.login_ok);
+                $('#google_connect_msg').html(app.languageData.oauth_btn_complete);
                 setTimeout(() => {
                     this.google_connect_status();
                 }, 2000);
@@ -131,7 +135,7 @@ class oauth {
                 $('#google_connect_msg').html(app.languageData.status_error_0);
                 //启用按钮
                 setTimeout(() => {
-                    $('#google_connect_msg').html('Connect with Google');
+                    $('#google_connect_msg').html(app.languageData.oauth_btn_google_connect);
                     $('#google_connect').attr('disabled', false);
                 }, 3000);
             }
@@ -139,7 +143,7 @@ class oauth {
             //进行中，重新监听
             if (rsp.data == 'GOOGLE_BIND_START') {
                 //显示正在进行
-                $('#google_connect_msg').html(app.languageData.form_btn_processing);
+                $('#google_connect_msg').html(app.languageData.oauth_btn_processing);
                 setTimeout(() => {
                     this.google_connect_callback();
                 }, 2000);

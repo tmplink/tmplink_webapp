@@ -2447,6 +2447,12 @@ class tmplink {
 
     cc_send() {
         var email = $('#email_new').val();
+
+        if(email === ''){
+            $('#msg_notice').html(app.languageData.direct_brand_logo_set_unknow);
+            return false;
+        }
+
         $('#msg_notice').show();
         $('#msg_notice').html(app.languageData.form_btn_processing);
         $('#button-reg-checkcode').html(app.languageData.form_btn_processing);

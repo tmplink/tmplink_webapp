@@ -14,6 +14,7 @@ class dynamic {
         let url = location.href;
         let url_params = app.getUrlVars(window.location.href);
         let listview = url_params.listview;
+        
         switch (listview) {
             case 'index':
                 this.index();
@@ -199,7 +200,11 @@ class dynamic {
 
     login() {
         TL.ga('Login');
-        $('#home_view').html(app.getFile('/tpl/listview/login.html'));
+        if (isMobileScreen()) {
+            $('#home_view').html(app.getFile('/tpl/listview/mobile_login.html'));
+        } else {
+            $('#home_view').html(app.getFile('/tpl/listview/login.html'));
+        }
         app.dynOpen('/app&listview=login');
         app.linkRebind();
         TL.navbar.disabled();
@@ -208,7 +213,11 @@ class dynamic {
 
     reg() {
         TL.ga('Register');
-        $('#home_view').html(app.getFile('/tpl/listview/reg.html'));
+        if (isMobileScreen()) {
+            $('#home_view').html(app.getFile('/tpl/listview/mobile_reg.html'));
+        } else {
+            $('#home_view').html(app.getFile('/tpl/listview/reg.html'));
+        }
         app.dynOpen('/app&listview=reg');
         app.linkRebind();
         TL.navbar.disabled();

@@ -1,4 +1,10 @@
 {
+    "oauth_btn_google_login" : "使用 Google 登錄",
+    "oauth_btn_google_connected" : "已連接",
+    "oauth_btn_google_connect" : "連接 Google",
+    "oauth_btn_processing" : "處理中...",
+    "oauth_btn_complete" : "完成",
+    "oauth_btn_google_disconnect" : "解除连接",
     "modal_performance_direct_des2": "針對此資料夾的更改（添加或刪除檔案，設定排序等）也會對應到直鏈資料夾中，最快 10 分鐘內生效。",
     "i2023_new_index_title": "小檔案，大檔案，輕鬆傳遞。",
     "i2023_new_index_title2": "無限空間、無速度限制、免費使用。",
