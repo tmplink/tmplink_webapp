@@ -47,6 +47,7 @@ class oauth {
                 setTimeout(() => {
                     dynamicView.workspace();
                 }, 1000);
+                return false;
             }
 
             //登录失败
@@ -57,6 +58,7 @@ class oauth {
                     $('#google_login_msg').html(app.languageData.oauth_google_btn_login);
                     $('#google_login').attr('disabled', false);
                 }, 1000);
+                return false;
             }
 
             //登录中，重新监听
@@ -66,7 +68,13 @@ class oauth {
                 setTimeout(() => {
                     this.google_login_callback();
                 }, 1000);
+                return false;
             }
+
+            //如果没有返回信息，继续监听
+            setTimeout(() => {
+                this.google_login_callback();
+            }, 1000);
         }, 'json');
     }
 
