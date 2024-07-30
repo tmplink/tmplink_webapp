@@ -82,7 +82,7 @@
                             <span class="room_title"></span>
                         </div>
                         <div class="room_subinfo">
-                            <iconpark-icon name="folder-open" class="fa-fw text-yellow"></iconpark-icon>
+                            <iconpark-icon id="dir_status" name="folder-open-e1ad2j7l" class="fa-fw text-yellow" style="font-size: 24px;"></iconpark-icon>
                             <span id="room_total"></span>
                         </div>
                     </div>
@@ -443,15 +443,7 @@
                     <div class="row mobile-list-bar-dir dir_<% obj[x].mr_id %>" id="meetingroom_id_<% obj[x].mr_id %>" name="items_box"
                         tlunit="dir" tldata="<% obj[x].mr_id %>" tldid="0" tltitle="<% obj[x].name %>" onclick="TL.Selecter.onclickByList(this);">
                         <div class="col-2 mobile-list-icon-center">
-                            <% if (obj[x].fav == 0) { %>
-                                <% if (obj[x].model == 'public') { %>
-                                    <iconpark-icon name="folder" class="fa-fw text-azure fa-2x"></iconpark-icon>
-                                <% }else{ %>   
-                                    <iconpark-icon name="lock" class="fa-fw text-azure fa-2x"></iconpark-icon>
-                                <% } %>  
-                            <% }else{ %> 
-                                <iconpark-icon name="link" class="fa-fw text-cyan fa-2x"></iconpark-icon>
-                            <% } %> 
+                            <iconpark-icon name="<% TL.dir.getIcons(obj[x]) %>" class="fa-fw fa-2x text-yellow"></iconpark-icon>
                         </div>
                         <div class="col-7 p-0 mobile-list-filename">
                             <a href="/app&listview=room&mrid=<% obj[x].mr_id %>" class="mobile-list-filename filelist_link" tmpui-action="TL.dir.open()">
@@ -627,6 +619,16 @@
                     </select>
                 </div>
                 <hr>
+                <div class="in-private-dir">
+                    <h5 i18n="modal_performance_publish">允许被搜索</h5>
+                    <label class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="pf_publish"
+                            onclick="TL.dir.performancePost()">
+                        <span class="form-check-label" i18n="modal_performance_publish_des">
+                            启用后，其他用户可以通过搜索引擎找到此目录内的文件。
+                        </span>
+                    </label>
+                </div>
                 <h5 i18n="modal_performance_share">.</h5>
                 <label class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="pf_allow_upload"

@@ -257,6 +257,7 @@ class dir {
             this.room.ui_nickname = rsp.data.ui_nickname;
             this.room.ui_intro = rsp.data.ui_intro;
             this.room.ui_pro = rsp.data.ui_pro;
+            this.room.publish = rsp.data.publish;
 
             this.performanceInit(this.room.display, this.room.sort_by, this.room.sort_type);
 
@@ -312,26 +313,39 @@ class dir {
                     $('.room_img').attr('src', this.room.img_link);
                 }
                 $('.room_img').show();
+                //调整 UI
+                $('#dir_title').attr('class','col-8');
+                $('#dir_img').show();
             } else {
                 $('.room_img').hide();
                 //调整 UI
-                $('#dir_title').removeClass('col-8').addClass('col-12');
-                $('#dir_img').removeClass('col-4');
+                $('#dir_title').attr('class','col-12');
+                $('#dir_img').hide();
             }
 
             //如果是私有文件夹
             if (this.room.model == 'private') {
                 $('.in-private-dir').hide();
+                this.setDirIcon('private');
             } else {
                 $('.in-private-dir').show();
+                this.setDirIcon('public');
             }
 
             //如果文件夹允许其他人上传文件
             if (this.room.allow_upload == 'yes') {
                 $('#pf_allow_upload').prop('checked', true);
-
             } else {
                 $('#pf_allow_upload').prop('checked', false);
+            }
+
+            //如果是公开文件夹，启用搜索
+            if (this.room.publish === 'yes') {
+                $('#pf_publish').prop('checked', true);
+                this.setDirIcon('publish');
+            } else {
+                $('#pf_publish').prop('checked', false);
+                this.setDirIcon('public');
             }
 
             //如果有设定个性化设置
@@ -390,6 +404,30 @@ class dir {
             document.title = rsp.data.name;
             app.linkRebind();
         });
+    }
+
+    setDirIcon(status){
+        //默认
+        $('#dir_status').attr('name', 'folder-open-e1ad2j7l');
+        if(status==='publish'){
+            $('#dir_status').attr('name', 'folder-conversion-one');
+        }
+        if(status==='private'){
+            $('#dir_status').attr('name', 'folder-lock-one');
+        }
+    }
+
+    getIcons(room){
+        if(room.model === 'private'){
+            return 'folder-lock-one';
+        }
+        if(room.publish === 'yes'){
+            return 'folder-conversion-one';
+        }
+        if(room.fav !== 0){
+            return 'folder-focus-one';
+        }
+        return 'folder-open-e1ad2j7l';
     }
 
     mobilePrepare() {
@@ -564,6 +602,7 @@ class dir {
         let pf_display = $('#pf_display').val();
         let pf_sort_by = $('#pf_sort_by').val();
         let pf_sort_type = $('#pf_sort_type').val();
+        let pf_publish   = $('#pf_publish').is(':checked') ? 'yes' : 'no';
         let pf_allow_upload = $('#pf_allow_upload').is(':checked') ? 'yes' : 'no';
         let mrid = this.room.mr_id;
         $.post(this.parent_op.api_mr, {
@@ -573,6 +612,7 @@ class dir {
             sort_by: pf_sort_by,
             sort_type: pf_sort_type,
             pf_upload: pf_allow_upload,
+            pf_publish: pf_publish,
             mr_id: mrid
         });
     }

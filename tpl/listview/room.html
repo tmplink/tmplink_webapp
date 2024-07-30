@@ -49,7 +49,7 @@
                             <div id="title_of_sub">
                                 <span class="room_title display-4"></span>
                                 <div class="mt-2 room_subinfo">
-                                    <iconpark-icon name="folder-open" class="fa-fw text-yellow"></iconpark-icon>
+                                    <iconpark-icon id="dir_status" name="folder-open-e1ad2j7l" class="fa-fw text-yellow" style="font-size: 24px;"></iconpark-icon>
                                     <span id="room_total"></span>
                                 </div>
                             </div>
@@ -515,15 +515,7 @@
                         <div class="row line mx-0 my-0 py-1 list-bar dir_<% obj[x].mr_id %>" id="meetingroom_id_<% obj[x].mr_id %>" name="items_box"
                             tlunit="dir" tldata="<% obj[x].mr_id %>" tldid="0" tltitle="<% obj[x].name %>" onclick="TL.Selecter.onclickByList(this);">
                             <div class="col-7 my-1 d-flex align-items-center listfontweight filename">
-                                <% if (obj[x].fav == 0) { %>
-                                    <% if (obj[x].model == 'public') { %>
-                                        <iconpark-icon name="folder" class="fa-fw text-cyan"></iconpark-icon>
-                                    <% }else{ %>   
-                                        <iconpark-icon name="lock" class="fa-fw text-cyan"></iconpark-icon>
-                                    <% } %>  
-                                <% }else{ %> 
-                                    <iconpark-icon name="link" class="fa-fw text-cyan"></iconpark-icon>
-                                <% } %> 
+                                <iconpark-icon name="<% TL.dir.getIcons(obj[x]) %>" class="fa-fw text-yellow"></iconpark-icon>
                                 &nbsp
                                 <a href="/app&listview=room&mrid=<% obj[x].mr_id %>" class="filelist_link" tmpui-action="TL.dir.open()">
                                     <% obj[x].name %>
@@ -685,6 +677,16 @@
                     </select>
                 </div>
                 <hr>
+                <div class="in-private-dir">
+                    <h5 i18n="modal_performance_publish">允许被搜索</h5>
+                    <label class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="pf_publish"
+                            onclick="TL.dir.performancePost()">
+                        <span class="form-check-label" i18n="modal_performance_publish_des">
+                            启用后，其他用户可以通过搜索引擎找到此目录内的文件。
+                        </span>
+                    </label>
+                </div>
                 <h5 i18n="modal_performance_share">.</h5>
                 <label class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="pf_allow_upload"

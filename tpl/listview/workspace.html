@@ -229,8 +229,8 @@
                                         <span class="text-pink"><% obj[x].like %><span>
                                     <% } %>
                                     <% if(obj[x].dir_name!=null){ %>
-                                        <span onclick="event.stopPropagation();">
-                                            <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
+                                        <span onclick="event.stopPropagation();">\
+                                            <iconpark-icon name="folder-open" class="fa-fw text-yellow"></iconpark-icon>
                                             <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
                                         </span>
                                     <% } %>
