@@ -29,7 +29,7 @@
     "connect_to_google_disconnect": "Disconnect",
     "direct_notice_usage": "Insufficient remaining priority quota of 5GB.",
     "direct_intro_modal_body_3": "When you have priority quota, download bandwidth is allocated preferentially.",
-    "direct_quota": "Purchased Priority Quota",
+    "direct_quota": "Priority Quota",
     "direct_btn_buy_quota": "Buy Priority Quota",
     "direct_quota_free": "Free Priority Quota",
     "direct_intro_free2": "When your account has priority quota, the download speed of direct links will be faster. When the priority quota is depleted, the priority is lowered.",

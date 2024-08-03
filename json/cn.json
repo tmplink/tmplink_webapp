@@ -614,7 +614,7 @@
     "direct_unbind_notice": "请先绑定域名，然后才能使用直链分享功能。",
     "direct_total_downloads": "下载次数",
     "direct_total_transfer": "传输",
-    "direct_quota": "已购优先配额",
+    "direct_quota": "优先配额",
     "direct_quota_free": "免费优先配额",
     "direct_btn_buy_quota": "购买优先配额",
     "direct_btn_bind_domain": "绑定域名",
