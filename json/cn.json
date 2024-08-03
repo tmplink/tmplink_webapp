@@ -361,7 +361,7 @@
     "media_type": "库容量",
     "media_times": "购买时长",
     "model_title_buy_direct_quota": "优先配额（直链）",
-    "direct_quota_content": "当您通过直链为其它人提供文件下载服务时，可以使用优先配额获得最大下载速度。",
+    "direct_quota_content": "当您通过直链为其他人提供文件下载服务时，可以使用优先配额获得最大下载速度。",
     "direct_quota_content2": "优先配额不会过期。多次购买会叠加此配额。",
     "direct_quota_type": "配额",
     "model_title_buy_storage": "私有空间",
@@ -607,7 +607,7 @@
     "direct_notice_usage": "剩余的优先配额不足 5GB。",
     "direct_modal_bind_domain_2": "在绑定之前，请为想要绑定的域名添加一个 CNAME 记录，指向 <span class=\"text-red\">cdn.5t-cdn.com</span>，您需要到购买域名的地方完成此操作。",
 
-    "direct_intro_modal_body_1": "直链是最快捷的文件分享方式，您可以从 “仓库” 选择任意文件加入到直链，然后分享给其它人下载。并且，您可以为同一个文件创建多份分享链接，您可以随时撤销文件的分享。",
+    "direct_intro_modal_body_1": "直链是最快捷的文件分享方式，您可以从 “仓库” 选择任意文件加入到直链，然后分享给其他人下载。并且，您可以为同一个文件创建多份分享链接，您可以随时撤销文件的分享。",
     "direct_intro_modal_body_2": "若要使用本功能，您需要有自己的域名，请点击 “绑定域名” 绑定您自己的域名，然后将该域名通过 CNAME 解析到 cdn.5t-cdn.com。",
     "direct_intro_modal_body_3": "持有优先配额时，优先分配下载带宽。",
     "direct_unbind_domain": "尚未绑定域名",
