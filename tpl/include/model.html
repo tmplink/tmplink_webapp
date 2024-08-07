@@ -82,7 +82,6 @@
             <div class="modal-header">
                 <h4 class="modal-title">
                     <span i18n="model_title_upload">.</span>
-                    <small class="upload_speed_show_inner"></small>
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -98,7 +97,7 @@
                 </div>
                 <div id="select_model_list">
 
-                    <div class="select-box-all p-2">
+                    <div>
                         <div class="text-left mb-3">
                             <div class="display-4" i18n="modal_settings_upload_model_unlimited">.</div>
                         </div>
@@ -152,7 +151,7 @@
                         </div>
                     </div>
 
-                    <div class="select-box-all p-2">
+                    <div>
                         <div class="text-left mb-3">
                             <div class="display-4" i18n="model_title_buy_storage">.</div>
                             <div id="upload_storage_status"></div>
@@ -399,6 +398,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="select-box p-2 btn-point" id="upload_speed_chart_box" style="display: none;">
+                        <div id="upload_speed_chart"></div>
+                        <div class="text-center mt-2">
+                            <small class="upload_speed_show_inner"></small>
+                        </div>
+                    </div>
                 </div>
 
                 <input type="hidden" id="upload_model" value="0" />
@@ -411,7 +416,7 @@
                     </div>
                 </script>
 
-                <div id="upload_model_box_finish" class="mt-2" style="max-height: 500px;overflow:scroll;">
+                <div id="upload_model_box_finish" style="max-height: 500px;overflow:scroll;">
 
                 </div>
 
