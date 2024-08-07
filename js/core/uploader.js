@@ -15,6 +15,10 @@ class uploader {
     upload_queue = 0;
     upload_queue_max = 5;
 
+    active_uploads = 0;
+    upload_speeds = {};
+    speed_update_interval = null;
+
     // 单个文件的上传线程数
     upload_worker_queue = [];
     upload_worker_queue_max = 5;
@@ -23,13 +27,9 @@ class uploader {
     upload_slice_total = [] //文件上传线程计数器
     upload_slice_process = [] //当前处理进度
 
-    worker_speed = 0
-    upload_speed = 0
-
     init(parent_op) {
         this.parent_op = parent_op;
         this.quickUploadInit();
-        this.speed_updater();
     }
 
     init_upload_pf(){
@@ -708,17 +708,21 @@ class uploader {
 
         //上传发生错误，重启
         xhr.addEventListener("error", (evt) => {
+            this.handleUploadError(id);
+            cb();
+        });
+
+        //上传被中断，重启
+        xhr.addEventListener("abort", (evt) => {
+            this.handleUploadError(id);
             cb();
         });
 
         //分块上传进度上报
         xhr.upload.onprogress = (evt) => {
             if (evt.lengthComputable) {
-                //计算出本次上传量
-                let loaded = evt.loaded - this.upload_slice_chunk[id][index];
-                //记录到已上传总量中
-                this.upload_speed += parseInt(loaded);
-                //更新数据
+                let loaded = evt.loaded - (this.upload_slice_chunk[id][index] || 0);
+                this.updateUploadSpeed(id, loaded);
                 this.upload_slice_chunk[id][index] = evt.loaded;
             }
         };
@@ -733,23 +737,64 @@ class uploader {
         });
     }
 
-    speed_updater() {
-        if (this.worker_speed === 0) {
-            //尚未初始化，开始初始化
-            this.worker_speed = setInterval(() => {
-                if (this.upload_speed > 0) {
-                    //计算速度
-                    let speed_text = bytetoconver(this.upload_speed, true) + '/s';
-                    //更新到界面
-                    $('.upload_speed_show_inner').show();
-                    $('.upload_speed_show_inner').html(speed_text);
-                    //重置为 0
-                    this.upload_speed = 0;
-                } else {
-                    $('.upload_speed_show_inner').hide();
-                }
-            }, 1000);
+    handleUploadError(id) {
+        delete this.upload_speeds[id];
+        this.active_uploads = Math.max(0, this.active_uploads - 1);
+        if (this.active_uploads === 0) {
+            this.stopSpeedUpdater();
         }
+    }
+
+    startSpeedUpdater() {
+        if (!this.speed_update_interval) {
+            this.speed_update_interval = setInterval(() => this.updateSpeedDisplay(), 1000);
+        }
+    }
+
+    stopSpeedUpdater() {
+        if (this.speed_update_interval) {
+            clearInterval(this.speed_update_interval);
+            this.speed_update_interval = null;
+        }
+        $('.upload_speed_show_inner').hide();
+    }
+
+    updateSpeedDisplay() {
+        let totalSpeed = Object.values(this.upload_speeds).reduce((a, b) => a + b, 0);
+        if (totalSpeed > 0) {
+            let speed_text = bytetoconver(totalSpeed, true) + '/s';
+            $('.upload_speed_show_inner').show().html(speed_text);
+            this.upload_speeds = {};  // 重置速度计数器
+        } else {
+            $('.upload_speed_show_inner').hide();
+            if (this.active_uploads === 0) {
+                this.stopSpeedUpdater();
+            }
+        }
+    }
+
+    updateUploadSpeed(id, bytes) {
+        if (!this.upload_speeds[id]) {
+            this.upload_speeds[id] = 0;
+            this.active_uploads++;
+            this.startSpeedUpdater();
+        }
+        this.upload_speeds[id] += bytes;
+    }
+
+    handleUploadCompletion(id) {
+        delete this.upload_speeds[id];
+        this.active_uploads = Math.max(0, this.active_uploads - 1);
+        if (this.active_uploads === 0) {
+            this.stopSpeedUpdater();
+        }
+    }
+
+    // 添加一个方法来重置所有上传状态
+    resetUploadStatus() {
+        this.active_uploads = 0;
+        this.upload_speeds = {};
+        this.stopSpeedUpdater();
     }
 
     selected(dom) {
@@ -892,6 +937,7 @@ class uploader {
     }
 
     upload_final(rsp, file, id, skip) {
+        this.handleUploadCompletion(id);
         this.upload_queue--;
         if (skip === undefined) {
             skip = false;
