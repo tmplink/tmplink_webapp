@@ -1,4 +1,5 @@
 {
+    "upload_speed": "上傳速度",
     "modal_performance_publish": "發布",
     "modal_performance_publish_des": "啟用後，其他使用者可以透過搜尋引擎找到此目錄內的檔案",
     "oauth_btn_google_login" : "使用 Google 登錄",

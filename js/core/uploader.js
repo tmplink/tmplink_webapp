@@ -63,11 +63,7 @@ class uploader {
     }
 
     initSpeedChart() {
-        const now = new Date().getTime();
-        this.speed_data = Array.from({length: 60}, (_, i) => ({
-            x: now - (59 - i) * 1000,
-            y: 0
-        }));
+        this.speed_data = Array(60).fill(0);
     
         var options = {
             series: [{
@@ -79,84 +75,56 @@ class uploader {
                 height: 200,
                 type: 'area',
                 animations: {
-                    enabled: true,
-                    easing: 'linear',
-                    dynamicAnimation: {
-                        speed: 1000
-                    }
+                    enabled: false,
                 },
                 toolbar: {
                     show: false
                 },
                 zoom: {
                     enabled: false
-                }
+                },
+                sparkline: {
+                    enabled: true
+                  },
             },
             dataLabels: {
                 enabled: false
             },
             stroke: {
-                curve: 'smooth'
+                width: 1,
+                curve: 'straight'
             },
             title: {
-                text: 'Upload Speed (Last 60 seconds)',
+                text: app.languageData.upload_speed,
                 align: 'left'
             },
             xaxis: {
-                type: 'datetime',
-                range: 60 * 1000, // 60 seconds
+                categories: Array.from({ length: 60 }, (_, i) => `${60 - i}s`), // 生成 60 至 1 s 的数组
+                //不显示底部
                 labels: {
-                    datetimeUTC: false // 使用本地时间
+                    show: false
                 }
             },
             yaxis: {
                 labels: {
                     formatter: function (value) {
                         return bytetoconver(value, true) + '/s';
-                    }
+                    },
+                    show: true
                 }
             }
         };
     
         this.speed_chart = new ApexCharts(document.querySelector("#upload_speed_chart"), options);
         this.speed_chart.render();
-    
-        // 每秒更新一次图表
-        setInterval(() => this.updateSpeedDisplay(), 1000);
     }
     
     updateSpeedDisplay() {
         let totalSpeed = Object.values(this.upload_speeds).reduce((a, b) => a + b, 0);
-        let currentTime = new Date().getTime();
-        
-        // 确保我们始终有60个数据点
-        while (this.speed_data.length < 60) {
-            this.speed_data.unshift({
-                x: currentTime - (60 - this.speed_data.length) * 1000,
-                y: 0
-            });
-        }
-    
-        // 添加新的数据点
-        this.speed_data.push({
-            x: currentTime,
-            y: totalSpeed
-        });
-    
-        // 如果数据点超过60个，移除最旧的
-        if (this.speed_data.length > 60) {
-            this.speed_data = this.speed_data.slice(-60);
-        }
-    
-        // 更新图表，强制使用固定的时间范围
-        this.speed_chart.updateOptions({
-            xaxis: {
-                min: currentTime - 60 * 1000,
-                max: currentTime
-            }
-        });
-    
+        this.speed_data.shift();
+        this.speed_data.push(totalSpeed);
         this.speed_chart.updateSeries([{
+            name: 'Upload Speed',
             data: this.speed_data
         }]);
     
@@ -763,13 +731,7 @@ class uploader {
         let uqpid = "#uqp_" + id;
         let main_t = thread === 0 ? '主线程' : '子线程';
 
-        //如果是最后一个分片，只有主线程才执行这项工作，其他线程直接退出
-        // if(index>=(this.upload_slice_total[id]-2)&&thread===false){
-        //     debug(`任务 ${id} ${main_t} 已退出。`);
-        //     return false;
-        // }
-
-        debug(`任务 ${id} ${main_t} ${thread} 正在上传分片 ${index}。`);
+        debug(`任务 ${id} ${main_t} ${thread} 正在上传分片 ${index+1}。`);
 
         //初始化上传任务的已上传数据计数器
         if (this.upload_slice_chunk[id][index] === undefined) {

@@ -1,4 +1,5 @@
 {
+    "upload_speed": "Upload speed",
     "modal_performance_publish": "Publish",
     "modal_performance_publish_des": "Other users can find files within this directory through Google search.",
     "oauth_btn_google_login" : "Sign in with Google",

@@ -807,6 +807,7 @@
     "upload_files": "上传文件",
     "upload_dirs": "上传文件夹",
     "upload_dirs_des": "点击选择一个文件夹进行上传。",
+    "upload_speed": "上传速度",
 
     "model_title_upload_slice": "效率设定",
     "model_title_upload_slice_des": "更改分片大小，增加线程数，赞助者专用功能",
