@@ -19,6 +19,12 @@ class uploader {
     upload_speeds = {};
     speed_update_interval = null;
 
+    speed_chart = null;
+    speed_data = [];
+    speed_labels = [];
+    chart_update_interval = null;
+    chart_visible = false;
+
     // 单个文件的上传线程数
     upload_worker_queue = [];
     upload_worker_queue_max = 5;
@@ -30,6 +36,7 @@ class uploader {
     init(parent_op) {
         this.parent_op = parent_op;
         this.quickUploadInit();
+        this.initSpeedChart();
     }
 
     init_upload_pf(){
@@ -52,6 +59,120 @@ class uploader {
             $('#upload_slice_size').attr('disabled','disabled');
             $('#upload_slice_queue_max').attr('disabled','disabled');
             $('#upload_slice_thread_max').attr('disabled','disabled');
+        }
+    }
+
+    initSpeedChart() {
+        const now = new Date().getTime();
+        this.speed_data = Array.from({length: 60}, (_, i) => ({
+            x: now - (59 - i) * 1000,
+            y: 0
+        }));
+    
+        var options = {
+            series: [{
+                name: 'Upload Speed',
+                data: this.speed_data
+            }],
+            chart: {
+                id: 'realtime',
+                height: 200,
+                type: 'area',
+                animations: {
+                    enabled: true,
+                    easing: 'linear',
+                    dynamicAnimation: {
+                        speed: 1000
+                    }
+                },
+                toolbar: {
+                    show: false
+                },
+                zoom: {
+                    enabled: false
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            title: {
+                text: 'Upload Speed (Last 60 seconds)',
+                align: 'left'
+            },
+            xaxis: {
+                type: 'datetime',
+                range: 60 * 1000, // 60 seconds
+                labels: {
+                    datetimeUTC: false // 使用本地时间
+                }
+            },
+            yaxis: {
+                labels: {
+                    formatter: function (value) {
+                        return bytetoconver(value, true) + '/s';
+                    }
+                }
+            }
+        };
+    
+        this.speed_chart = new ApexCharts(document.querySelector("#upload_speed_chart"), options);
+        this.speed_chart.render();
+    
+        // 每秒更新一次图表
+        setInterval(() => this.updateSpeedDisplay(), 1000);
+    }
+    
+    updateSpeedDisplay() {
+        let totalSpeed = Object.values(this.upload_speeds).reduce((a, b) => a + b, 0);
+        let currentTime = new Date().getTime();
+        
+        // 确保我们始终有60个数据点
+        while (this.speed_data.length < 60) {
+            this.speed_data.unshift({
+                x: currentTime - (60 - this.speed_data.length) * 1000,
+                y: 0
+            });
+        }
+    
+        // 添加新的数据点
+        this.speed_data.push({
+            x: currentTime,
+            y: totalSpeed
+        });
+    
+        // 如果数据点超过60个，移除最旧的
+        if (this.speed_data.length > 60) {
+            this.speed_data = this.speed_data.slice(-60);
+        }
+    
+        // 更新图表，强制使用固定的时间范围
+        this.speed_chart.updateOptions({
+            xaxis: {
+                min: currentTime - 60 * 1000,
+                max: currentTime
+            }
+        });
+    
+        this.speed_chart.updateSeries([{
+            data: this.speed_data
+        }]);
+    
+        if (totalSpeed > 0) {
+            let speed_text = bytetoconver(totalSpeed, true) + '/s';
+            $('.upload_speed_show_inner').show().html(speed_text);
+        } else {
+            $('.upload_speed_show_inner').hide();
+        }
+    
+        this.upload_speeds = {};  // Reset speed counter
+    
+        // 如果图表还没显示，则显示它
+        if (!this.chart_visible) {
+            $('#upload_speed_chart_box').show();
+            this.chart_visible = true;
         }
     }
 
@@ -746,6 +867,10 @@ class uploader {
     }
 
     startSpeedUpdater() {
+        if (!this.chart_visible) {
+            $('#upload_speed_chart_box').show();
+            this.chart_visible = true;
+        }
         if (!this.speed_update_interval) {
             this.speed_update_interval = setInterval(() => this.updateSpeedDisplay(), 1000);
         }
@@ -756,21 +881,7 @@ class uploader {
             clearInterval(this.speed_update_interval);
             this.speed_update_interval = null;
         }
-        $('.upload_speed_show_inner').hide();
-    }
-
-    updateSpeedDisplay() {
-        let totalSpeed = Object.values(this.upload_speeds).reduce((a, b) => a + b, 0);
-        if (totalSpeed > 0) {
-            let speed_text = bytetoconver(totalSpeed, true) + '/s';
-            $('.upload_speed_show_inner').show().html(speed_text);
-            this.upload_speeds = {};  // 重置速度计数器
-        } else {
-            $('.upload_speed_show_inner').hide();
-            if (this.active_uploads === 0) {
-                this.stopSpeedUpdater();
-            }
-        }
+        // We don't hide the chart anymore
     }
 
     updateUploadSpeed(id, bytes) {
@@ -794,7 +905,9 @@ class uploader {
     resetUploadStatus() {
         this.active_uploads = 0;
         this.upload_speeds = {};
+        this.speed_data = [];
         this.stopSpeedUpdater();
+        // We don't hide the chart here, it will remain visible
     }
 
     selected(dom) {
