@@ -84,6 +84,8 @@ class uploader {
                 zoom: {
                     enabled: false
                 },
+                offsetX: 0, // 取消x轴偏移
+                offsetY: 0, // 取消y轴偏移
                 sparkline: {
                     enabled: true
                 },
@@ -104,6 +106,12 @@ class uploader {
                 //不显示底部
                 labels: {
                     show: false
+                },
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
                 }
             },
             yaxis: {
@@ -112,8 +120,13 @@ class uploader {
                         return bytetoconver(value, true) + '/s';
                     },
                     show: true
-                }
-            }
+                },
+                show: true,
+                tickAmount: 3,
+            },
+            grid: {
+                show: true, // 显示网格线
+            },
         };
 
         this.speed_chart = new ApexCharts(document.querySelector("#upload_speed_chart"), options);
@@ -567,7 +580,7 @@ class uploader {
                 if (rsp.status == 1) {
                     //文件小于 32 MB，直接上传
                     debug('upload::slice::' + filename);
-                    let api_sync = rsp.data.uploader + '/app/upload_slice';
+                    let api_sync = rsp.data.uploader + '/app/upload_slice2';
                     this.worker_slice(api_sync, rsp.data.utoken, sha1, file, id, filename, 0);
                 } else {
                     //无法获得可用的上传服务器
@@ -585,6 +598,7 @@ class uploader {
      * @param {*} id 
      * @param {*} filename 
      */
+    lastPrepareTimes = {};
     worker_slice(server, utoken, sha1, file, id, filename, thread = 0) {
 
         //如果上传队列中存在正在上传的文件，隐藏出了上传按钮之外的其他选项
@@ -598,6 +612,25 @@ class uploader {
         let uptoken = CryptoJS.SHA1(this.parent_op.uid + file.name + file.size + this.slice_size).toString();
         let upload_queue_max = this.upload_worker_queue_max;
         let numbers_of_slice = 1;
+
+        // 获取当前时间
+        const now = Date.now();
+
+        // 如果这个任务之前没有 prepare，初始化它的时间
+        if (this.lastPrepareTimes[uptoken] === undefined) {
+            this.lastPrepareTimes[uptoken] = 0;
+        }
+
+        // 如果距离这个任务上次 prepare 请求不足1秒，则等待
+        if (now - this.lastPrepareTimes[uptoken] < 1000) {
+            setTimeout(() => {
+                this.worker_slice(server, utoken, sha1, file, id, filename, thread);
+            }, 1000 - (now - this.lastPrepareTimes[uptoken]));
+            return;
+        }
+
+        // 更新这个任务的上次 prepare 时间
+        this.lastPrepareTimes[uptoken] = now;
 
         //根据当前分片限制，以及文件的总大小，计算出是否启动多线程上传
         if (file.size > this.slice_size) {
