@@ -24,6 +24,7 @@ class uploader {
     speed_labels = [];
     chart_update_interval = null;
     chart_visible = false;
+    total_uploaded_data = 0;
 
     // 单个文件的上传线程数
     upload_worker_queue = [];
@@ -39,7 +40,7 @@ class uploader {
         this.initSpeedChart();
     }
 
-    init_upload_pf(){
+    init_upload_pf() {
         $.post(this.parent_op.api_user, {
             'action': 'pf_upload_get',
             'token': this.parent_op.api_token
@@ -47,7 +48,7 @@ class uploader {
             if (rsp.status === 1) {
                 this.upload_worker_queue_max = rsp.data.upload_slice_thread_max;
                 this.upload_queue_max = rsp.data.upload_slice_queue_max;
-                this.slice_size = rsp.data.upload_slice_size * (1024*1024);
+                this.slice_size = rsp.data.upload_slice_size * (1024 * 1024);
                 //更新到界面
                 $('#upload_slice_size').val(rsp.data.upload_slice_size);
                 $('#upload_slice_queue_max').val(rsp.data.upload_slice_queue_max);
@@ -55,16 +56,16 @@ class uploader {
             }
         }, 'json');
         //如果用户还不是赞助者，将不支持修改上传参数
-        if(this.parent_op.isSponsor===false){
-            $('#upload_slice_size').attr('disabled','disabled');
-            $('#upload_slice_queue_max').attr('disabled','disabled');
-            $('#upload_slice_thread_max').attr('disabled','disabled');
+        if (this.parent_op.isSponsor === false) {
+            $('#upload_slice_size').attr('disabled', 'disabled');
+            $('#upload_slice_queue_max').attr('disabled', 'disabled');
+            $('#upload_slice_thread_max').attr('disabled', 'disabled');
         }
     }
 
     initSpeedChart() {
         this.speed_data = Array(60).fill(0);
-    
+
         var options = {
             series: [{
                 name: 'Upload Speed',
@@ -85,7 +86,7 @@ class uploader {
                 },
                 sparkline: {
                     enabled: true
-                  },
+                },
             },
             dataLabels: {
                 enabled: false
@@ -114,11 +115,11 @@ class uploader {
                 }
             }
         };
-    
+
         this.speed_chart = new ApexCharts(document.querySelector("#upload_speed_chart"), options);
         this.speed_chart.render();
     }
-    
+
     updateSpeedDisplay() {
         let totalSpeed = Object.values(this.upload_speeds).reduce((a, b) => a + b, 0);
         this.speed_data.shift();
@@ -127,16 +128,14 @@ class uploader {
             name: 'Upload Speed',
             data: this.speed_data
         }]);
-    
-        if (totalSpeed > 0) {
-            let speed_text = bytetoconver(totalSpeed, true) + '/s';
-            $('.upload_speed_show_inner').show().html(speed_text);
-        } else {
-            $('.upload_speed_show_inner').hide();
-        }
-    
+
+        let speed_text = bytetoconver(totalSpeed, true) + '/s';
+        let total_text = bytetoconver(this.total_uploaded_data, true);
+        $('.upload_speed_show_inner').show().html(`<iconpark-icon name="wifi"></iconpark-icon> ${speed_text} <span class="mx-2"></span> <iconpark-icon name="cloud-arrow-up"></iconpark-icon> ${total_text}`);
+
+
         this.upload_speeds = {};  // Reset speed counter
-    
+
         // 如果图表还没显示，则显示它
         if (!this.chart_visible) {
             $('#upload_speed_chart_box').show();
@@ -144,14 +143,14 @@ class uploader {
         }
     }
 
-    auto_set_upload_pf(dom){
+    auto_set_upload_pf(dom) {
         //获取当前值
         let val = $(dom).val();
         //输入的值不能大于 100，不能小于 1
-        if(val>100){
+        if (val > 100) {
             val = 100;
         }
-        if(val<1){
+        if (val < 1) {
             val = 1;
         }
         //获取当前的 ID
@@ -174,9 +173,9 @@ class uploader {
                     $(dom).removeClass('text-success');
                 }, 1000);
                 //更新本地配置的对应值
-                switch(id){
+                switch (id) {
                     case 'upload_slice_size':
-                        this.slice_size = val * (1024*1024);
+                        this.slice_size = val * (1024 * 1024);
                         break;
                     case 'upload_slice_queue_max':
                         this.upload_queue_max = val;
@@ -589,9 +588,9 @@ class uploader {
     worker_slice(server, utoken, sha1, file, id, filename, thread = 0) {
 
         //如果上传队列中存在正在上传的文件，隐藏出了上传按钮之外的其他选项
-        if(this.upload_queue>0){
+        if (this.upload_queue > 0) {
             $('.uploader_opt').hide();
-        }else{
+        } else {
             $('.uploader_opt').show();
         }
 
@@ -606,12 +605,12 @@ class uploader {
         }
 
         //如果没有初始化，则初始化，并将当前任务设置为主线程，只有主线程才能更新界面
-        if(thread === 0){
+        if (thread === 0) {
             if (this.upload_slice_chunk[id] === undefined) {
                 this.upload_slice_chunk[id] = [];
                 debug(`文件名 ${filename} 的分片数量 ${numbers_of_slice} 任务已初始化。`);
             }
-            if(this.upload_slice_process[id] === undefined){
+            if (this.upload_slice_process[id] === undefined) {
                 this.upload_slice_process[id] = 0;
             }
         }
@@ -642,7 +641,7 @@ class uploader {
         } else {
             //是否超出上传线程数？没有超出的话，启动新的上传任务
             if (this.upload_worker_queue[id] < upload_queue_max) {
-                let thread_id = this.upload_worker_queue[id]+1;
+                let thread_id = this.upload_worker_queue[id] + 1;
                 this.upload_worker_queue[id] = thread_id;
                 this.worker_slice(server, utoken, sha1, file, id, filename, thread_id);
                 debug(`任务 ${id} 子线程 ${thread_id} 已启动。`);
@@ -731,7 +730,7 @@ class uploader {
         let uqpid = "#uqp_" + id;
         let main_t = thread === 0 ? '主线程' : '子线程';
 
-        debug(`任务 ${id} ${main_t} ${thread} 正在上传分片 ${index+1}。`);
+        debug(`任务 ${id} ${main_t} ${thread} 正在上传分片 ${index + 1}。`);
 
         //初始化上传任务的已上传数据计数器
         if (this.upload_slice_chunk[id][index] === undefined) {
@@ -853,6 +852,7 @@ class uploader {
             this.startSpeedUpdater();
         }
         this.upload_speeds[id] += bytes;
+        this.total_uploaded_data += bytes;  // Update total uploaded data
     }
 
     handleUploadCompletion(id) {
@@ -1019,12 +1019,12 @@ class uploader {
         }
 
         //如果上传队列中存在正在上传的文件，隐藏出了上传按钮之外的其他选项
-        if(this.upload_queue>0){
+        if (this.upload_queue > 0) {
             $('.uploader_opt').hide();
-        }else{
+        } else {
             $('.uploader_opt').show();
         }
-        
+
         //$('#nav_upload_btn').html(app.languageData.nav_upload);
         if (rsp.status === 1) {
             $('#uqnn_' + id).html(app.languageData.upload_ok);
