@@ -580,7 +580,7 @@ class uploader {
                 if (rsp.status == 1) {
                     //文件小于 32 MB，直接上传
                     debug('upload::slice::' + filename);
-                    let api_sync = rsp.data.uploader + '/app/upload_slice2';
+                    let api_sync = rsp.data.uploader + '/app/upload_slice';
                     this.worker_slice(api_sync, rsp.data.utoken, sha1, file, id, filename, 0);
                 } else {
                     //无法获得可用的上传服务器
