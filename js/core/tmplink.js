@@ -1526,7 +1526,7 @@ class tmplink {
     }
 
     openInMenubarXofIndex() {
-        this.openInMenubarX('https://' + this.site_domain);
+        this.openInMenubarX('https://' + this.site_domain + '/?s=mx');
     }
 
     openInMenubarXofFile() {
