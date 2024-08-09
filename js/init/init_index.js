@@ -8,6 +8,19 @@ app.ready(
         document.querySelector('meta[name=description]').setAttribute('content', app.languageData.des_index);
         autoLogin();
 
+        //检查URL参数，如果 s=mx ，则是从 menubarX 中跳转过来的，在 storage 中保存一个标记
+        //如果 from_menubarx 已经存在，则不再设置
+        if (localStorage.getItem('from_menubarx') === null) {
+            let url = new URL(location.href);
+            let s = url.searchParams.get('s');
+            if (s === 'mx') {
+                localStorage.setItem('from_menubarx', '1');
+            } else {
+                localStorage.setItem('from_menubarx', '0');
+            }
+        }
+
+
         //添加监听，页面向下滚动超过 300px 时，隐藏 #translater-btn
         window.addEventListener('scroll', function () {
             let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -41,7 +54,7 @@ function langset(lang) {
     app.languageSet(lang);
 }
 
-function Login(){
+function Login() {
     let url = '/?tmpui_page=/app&listview=preload';
     location.href = url;
 }
@@ -58,7 +71,7 @@ async function autoLogin() {
         const form = new FormData();
         form.append('action', 'get_detail');
         form.append('token', api_token);
-        
+
         try {
             const response = await fetch(api_url, {
                 method: 'POST',
@@ -82,12 +95,12 @@ async function autoLogin() {
             console.error('请求出错：', error);
             showBtn();
         }
-    }else{
+    } else {
         showBtn();
     }
 }
 
-function showBtn(){
+function showBtn() {
     document.querySelector('#index_start').innerHTML = `<a href="javascript:;" class="btn-get-started scrollto" onclick="Login()">${app.languageData.i2023_new_index_getting_start}</a>`;
 }
 
