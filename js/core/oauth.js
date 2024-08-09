@@ -14,9 +14,10 @@ class oauth {
     }
 
     google_login() {
+        //先检查是否是从 menubarX 中进入的
+        let mx = localStorage.getItem('from_menubarx');
         //禁用按钮
         $('#google_login').attr('disabled', true);
-        let oauth = window.open('', '_blank');
         //发送请求获取google登录的url
         $.post(this.parent_op.api_user, {
             'action': 'oauth_google_login',
@@ -25,7 +26,14 @@ class oauth {
             'token': this.parent_op.api_token,
         }, (rsp) => {
             if (rsp.status == 1) {
-                oauth.location = rsp.data;
+                //如果请求成功，通过另外的小窗口打开google登录的url，然后启动监听进程
+                if(mx == '1'){
+                    localStorage.removeItem('from_menubarx');
+                    window.open(rsp.data, '_blank');
+                }else{
+                    let oauth = window.open('', '_blank');
+                    oauth.location = rsp.data;
+                }
                 // 处理令牌
                 this.google_login_callback();
             }
