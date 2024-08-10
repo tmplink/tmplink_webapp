@@ -2,7 +2,7 @@
     "upload_speed": "アップロード速度",
     "modal_performance_publish": "公開",
     "modal_performance_publish_des": "Google検索でこのフォルダの内容を検索できるように許可します",
-    "oauth_btn_google_login": "Googleアカウントでログイン",
+    "oauth_btn_google_login": "Googleでログイン",
     "oauth_btn_google_connected": "Googleアカウントが接続されました",
     "oauth_btn_google_connect": "Googleアカウントを接続",
     "oauth_btn_processing": "処理中...",
