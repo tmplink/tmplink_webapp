@@ -1211,6 +1211,12 @@ class tmplink {
                             $('.btn_copy_downloadurl_for_curl').attr('data-clipboard-text', `curl -Lo "${rsp.data.name}" ${download_cmdurl}`);
                             $('.btn_copy_downloadurl_for_wget').attr('data-clipboard-text', `wget -O  "${rsp.data.name}" ${download_cmdurl}`);
 
+                            //如果是用户本人的文件，隐藏 id="downloadAlert"
+                            console.log(rsp.data.owner != this.uid);
+                            if (rsp.data.owner != this.uid) {
+                                $('#downloadAlert').fadeIn();
+                            }
+
                             //开始处理绑定的事件
 
                             //下载按钮绑定事件，触发下载

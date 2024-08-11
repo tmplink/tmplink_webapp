@@ -274,8 +274,10 @@ class dir {
             if (this.room.owner == 1) {
                 this.parent_op.direct.dirRoomInit();
                 $('.room_direct_model').show();
+                $('#downloadAlert').hide();
             } else {
                 $('.room_direct_model').hide();
+                $('#downloadAlert').show();
             }
 
             //如果用户不是文件夹的拥有者，则显示出加入收藏夹的按钮
