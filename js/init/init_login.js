@@ -6,7 +6,7 @@ function INIT_login() {
 
         //如果是从 menubarx 过来的应用，隐藏第三方登录
         let mx = localStorage.getItem('from_menubarx');
-        if (mx) {
+        if (mx==='1') {
             $('#google_login').hide();
         }
 
