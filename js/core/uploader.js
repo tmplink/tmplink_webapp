@@ -64,7 +64,7 @@ class uploader {
     }
 
     initSpeedChart() {
-        this.speed_data = Array(60).fill(0);
+        this.speed_data = Array(20).fill(0);  // 改为 20 个数据点，对应 60 秒
 
         var options = {
             series: [{
@@ -102,7 +102,7 @@ class uploader {
                 align: 'left'
             },
             xaxis: {
-                categories: Array.from({ length: 60 }, (_, i) => `${60 - i}s`), // 生成 60 至 1 s 的数组
+                categories: Array.from({ length: 60 }, (_, i) => `${60 - i * 3}s`), // 生成 60 至 1 s 的数组
                 //不显示底部
                 labels: {
                     show: false
@@ -135,6 +135,7 @@ class uploader {
 
     updateSpeedDisplay() {
         let totalSpeed = Object.values(this.upload_speeds).reduce((a, b) => a + b, 0);
+        totalSpeed = totalSpeed / 3;
         this.speed_data.shift();
         this.speed_data.push(totalSpeed);
         this.speed_chart.updateSeries([{
@@ -866,7 +867,7 @@ class uploader {
             this.chart_visible = true;
         }
         if (!this.speed_update_interval) {
-            this.speed_update_interval = setInterval(() => this.updateSpeedDisplay(), 1000);
+            this.speed_update_interval = setInterval(() => this.updateSpeedDisplay(), 3000);
         }
     }
 
@@ -891,7 +892,8 @@ class uploader {
     handleUploadCompletion(id) {
         delete this.upload_speeds[id];
         this.active_uploads = Math.max(0, this.active_uploads - 1);
-        if (this.active_uploads === 0) {
+        // 添加这个检查
+        if (this.active_uploads === 0 && this.upload_queue_file.length === 0) {
             this.stopSpeedUpdater();
         }
     }
@@ -900,9 +902,10 @@ class uploader {
     resetUploadStatus() {
         this.active_uploads = 0;
         this.upload_speeds = {};
-        this.speed_data = [];
         this.stopSpeedUpdater();
         // We don't hide the chart here, it will remain visible
+        $('#upload_speed_chart_box').hide();
+        this.chart_visible = false;
     }
 
     selected(dom) {
@@ -1052,10 +1055,12 @@ class uploader {
         }
 
         //如果上传队列中存在正在上传的文件，隐藏出了上传按钮之外的其他选项
-        if (this.upload_queue > 0) {
+        if (this.upload_queue > 0 || this.upload_queue_file.length > 0) {
             $('.uploader_opt').hide();
         } else {
             $('.uploader_opt').show();
+            // 只有当所有文件都处理完毕时才隐藏速度图表
+            this.resetUploadStatus();
         }
 
         //$('#nav_upload_btn').html(app.languageData.nav_upload);
