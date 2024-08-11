@@ -1150,7 +1150,7 @@ class tmplink {
                         $('.user-login').hide();
                     }
 
-                    $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ');
+                    // $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ');
                     //现在按钮显示准备中
                     $('#file_download_btn').addClass('btn-dark');
                     $('#file_download_btn').html(app.languageData.status_file_1);
@@ -1169,7 +1169,7 @@ class tmplink {
                             $('#file_download_btn').html(app.languageData.file_btn_download);
                             this.ga('D-' + rsp.data.name);
                             if (req.status != 1) {
-                                $('#download_msg').html('<iconpark-icon name="circle-exclamation" class="fa-fw"></iconpark-icon> ');
+                                // $('#download_msg').html('<iconpark-icon name="circle-exclamation" class="fa-fw"></iconpark-icon> ');
                                 $('#file_download_btn_1').hide();
                                 $('#file_download_btn_2').hide();
                                 $('#file_download_by_qrcode').hide();
@@ -1186,7 +1186,7 @@ class tmplink {
                             // $('#download_msg').attr('class', 'badge badge-pill badge-success');
                             // $('#download_msg').fadeOut();
 
-                            opacityHide('#download_msg');
+                            // opacityHide('#download_msg');
 
                             //分享链接
                             let share_url = 'https://' + this.site_domain + '/f/' + params.ukey;
@@ -1222,8 +1222,8 @@ class tmplink {
                                 //触发下载
                                 window.location.href = download_url;
                                 //添加按钮按下反馈
-                                opacityShow('#download_msg');
-                                $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ');
+                                // opacityShow('#download_msg');
+                                // $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ');
                                 //修改按钮颜色
                                 $('#file_download_btn').removeClass('btn-success');
                                 $('#file_download_btn').addClass('btn-azure');
@@ -1233,7 +1233,7 @@ class tmplink {
                                 //3秒后解除
                                 setTimeout(() => {
                                     // $('#download_msg').fadeOut();
-                                    opacityHide('#download_msg');
+                                    // opacityHide('#download_msg');
                                     $('#file_download_btn').removeClass('btn-azure');
                                     $('#file_download_btn').addClass('btn-success');
                                     $('#file_download_btn').html(app.languageData.file_btn_download);
@@ -1245,13 +1245,13 @@ class tmplink {
                             // 移动设备上的按钮反馈
                             $('#file_download_url').on('click', () => {
                                 //添加按钮按下反馈
-                                opacityShow('#download_msg');
+                                // opacityShow('#download_msg');
                                 // $('#download_msg').fadeIn();
-                                $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ');
+                                // $('#download_msg').html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon> ');
                                 //3秒后解除
                                 setTimeout(() => {
                                     // $('#download_msg').fadeOut();
-                                    opacityHide('#download_msg');
+                                    // opacityHide('#download_msg');
                                 }, 3000);
                                 return true;
                             });
