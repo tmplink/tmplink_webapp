@@ -76,9 +76,10 @@
 
 <div class="modal" id="uploadModal">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content shadow-lg" ondrop="TL.uploader.drop(event)"
-            ondragover="$(this).addClass('shadow-lg');$('#tmp_upload_btn2').removeClass('bg-blue').addClass('bg-success');"
-            ondragleave="$(this).removeClass('shadow-lg');$('#tmp_upload_btn2').removeClass('bg-success').addClass('bg-blue');">
+        <div class="modal-content" style="transition: all 0.3s ease;"
+            ondragover="event.preventDefault(); document.getElementById('upload_select_box').style.borderColor='rgba(0,123,255,0.5)'; document.getElementById('upload_select_box').style.backgroundColor='rgba(0,123,255,0.1)'; document.getElementById('upload_select_box').style.boxShadow='0 0 20px rgba(0,123,255,0.3)';"
+            ondragleave="document.getElementById('upload_select_box').style.borderColor=''; document.getElementById('upload_select_box').style.backgroundColor=''; document.getElementById('upload_select_box').style.boxShadow='';"
+            ondrop="event.preventDefault(); TL.uploader.drop(event); document.getElementById('upload_select_box').style.borderColor=''; document.getElementById('upload_select_box').style.backgroundColor=''; document.getElementById('upload_select_box').style.boxShadow='';">
             <div class="modal-header">
                 <h4 class="modal-title">
                     <span i18n="model_title_upload">.</span>
@@ -190,7 +191,7 @@
                 </div>
 
                 <div id="upload_select_file" style="display: none;">
-                    <div class="select-box p-2 btn-point">
+                    <div class="select-box p-2 btn-point" id="upload_select_box">
                         <input type="file" multiple="multiple" id="fileToUpload" style="display: none;"
                             onchange="TL.uploader.selected(this);" />
                         <label for="fileToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
@@ -418,11 +419,11 @@
                 <div class="upload-box-wrapper">
                     <div id="upload_model_box_finish" class="upload-box-content"></div>
                 </div>
-                
+
                 <div class="upload-box-wrapper">
                     <div id="upload_model_box" class="upload-box-content"></div>
                 </div>
-                
+
 
                 <script type="text/template" id="upload_list_wait_tpl">
                     <div class="row p-2 mb-2 mx-0 select-box" id="uq_<% obj.id %>">
