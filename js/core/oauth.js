@@ -14,8 +14,8 @@ class oauth {
     }
 
     google_login() {
-        //先检查是否是从 menubarX 中进入的
-        let mx = localStorage.getItem('from_menubarx');
+        //创建空白窗口
+        let oauth = window.open('', '_blank');
         //禁用按钮
         $('#google_login').attr('disabled', true);
         //发送请求获取google登录的url
@@ -27,13 +27,7 @@ class oauth {
         }, (rsp) => {
             if (rsp.status == 1) {
                 //如果请求成功，通过另外的小窗口打开google登录的url，然后启动监听进程
-                if(mx == '1'){
-                    localStorage.removeItem('from_menubarx');
-                    window.open(rsp.data, '_blank');
-                }else{
-                    let oauth = window.open('', '_blank');
-                    oauth.location = rsp.data;
-                }
+                oauth.location = rsp.data;
                 // 处理令牌
                 this.google_login_callback();
             }
@@ -113,7 +107,7 @@ class oauth {
 
     google_connect() {
         //先检查是否是从 menubarX 中进入的
-        let mx = localStorage.getItem('from_menubarx');
+        let oauth = window.open('', '_blank');
         //禁用按钮
         $('#google_connect').attr('disabled', true);
         //发送请求获取google登录的url
@@ -124,13 +118,7 @@ class oauth {
         }, (rsp) => {
             if (rsp.status == 1) {
                 //如果请求成功，通过另外的小窗口打开google登录的url，然后启动监听进程
-                if(mx == '1'){
-                    localStorage.removeItem('from_menubarx');
-                    window.open(rsp.data, '_blank');
-                }else{
-                    let oauth = window.open('', '_blank');
-                    oauth.location = rsp.data;
-                }
+                oauth.location = rsp.data;
                 this.google_connect_callback();
             }
         }, 'json');
