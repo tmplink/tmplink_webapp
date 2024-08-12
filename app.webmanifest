@@ -5,7 +5,7 @@
   "start_url": "/",
   "orientation":"any",
   "scope": "/",
-  "categories": "standalone",
+  "categories": ["productivity", "utilities"],
   "download": "true",
   "display": "fullscreen",
   "background_color": "#fff",
