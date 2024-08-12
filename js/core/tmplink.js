@@ -1212,7 +1212,6 @@ class tmplink {
                             $('.btn_copy_downloadurl_for_wget').attr('data-clipboard-text', `wget -O  "${rsp.data.name}" ${download_cmdurl}`);
 
                             //如果是用户本人的文件，隐藏 id="downloadAlert"
-                            console.log(rsp.data.owner != this.uid);
                             if (rsp.data.owner != this.uid) {
                                 $('#downloadAlert').fadeIn();
                             }

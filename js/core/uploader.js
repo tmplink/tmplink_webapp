@@ -36,8 +36,12 @@ class uploader {
 
     init(parent_op) {
         this.parent_op = parent_op;
-        this.quickUploadInit();
-        this.initSpeedChart();
+        let url = get_url_params();
+        //只有在 listview 等于 workspace 或 room 中时，才会初始化上传功能
+        if (url.listview === 'workspace' || url.listview === 'room') {
+            this.quickUploadInit();
+            this.initSpeedChart();
+        }
     }
 
     init_upload_pf() {
