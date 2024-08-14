@@ -4684,7 +4684,7 @@ input[type="button"].btn-block {
   background-clip: border-box;
   border: 1px solid rgb(244, 245, 247);
   border: 0px;
-  border-radius: 8px;
+  border-radius: 16px;
 }
 
 .card-photo {
@@ -5968,7 +5968,7 @@ a.close.disabled {
   background-color: #fff;
   background-clip: padding-box;
   border: 0px solid rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  border-radius: 16px;
   outline: 0;
 }
 
