@@ -12,6 +12,9 @@ function INIT_login() {
 
         if (TL.isLogin()) {
             dynamicView.workspace();
+        }else{
+            //初始化谷歌登陆按钮
+            TL.oauth.google_login();
         }
     });
 }   

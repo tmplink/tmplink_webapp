@@ -13,11 +13,22 @@ class oauth {
         this.google_connect_status();
     }
 
-    google_login() {
-        //创建空白窗口
-        let oauth = window.open('', '_blank');
+    google_login_click() {
         //禁用按钮
-        $('#google_login').attr('disabled', true);
+        $('#google_login').addClass('disabled');
+        this.google_login_callback();
+    }
+
+    google_login_btn_reset(){
+        $('#google_login').addClass('disabled');
+        $('#google_login').removeAttr('onclick');
+        $('#google_login').removeAttr('href');
+        $('#google_login').removeAttr('target');
+    }
+
+    google_login() {
+        //禁用按钮
+        this.google_login_btn_reset();
         //发送请求获取google登录的url
         $.post(this.parent_op.api_user, {
             'action': 'oauth_google_login',
@@ -26,10 +37,10 @@ class oauth {
             'token': this.parent_op.api_token,
         }, (rsp) => {
             if (rsp.status == 1) {
-                //如果请求成功，通过另外的小窗口打开google登录的url，然后启动监听进程
-                oauth.location = rsp.data;
-                // 处理令牌
-                this.google_login_callback();
+                $('#google_login').attr('href', rsp.data);
+                $('#google_login').attr('target', '_blank');
+                $('#google_login').attr('onclick', 'TL.oauth.google_login_click()');
+                $('#google_login').removeClass('disabled');
             }
         }, 'json');
     }
@@ -92,24 +103,34 @@ class oauth {
                 //绑定完成，设定界面状态
                 $('#google_connect_msg').html(app.languageData.oauth_btn_google_connected);
                 //禁用按钮
-                $('#google_connect').attr('disabled', true);
+                this.google_connect_btn_reset();
                 $('#google_disconnect').attr('disabled', false);
                 //显示解除绑定的连接
                 $('#google_disconnect').show();
             } else {
                 //失败，设定界面状态
                 $('#google_connect_msg').html(app.languageData.oauth_btn_google_connect);
-                $('#google_connect').attr('disabled', false);
                 $('#google_disconnect').attr('disabled', true);
+                this.google_connect();
             }
         }, 'json');
     }
 
-    google_connect() {
-        //先检查是否是从 menubarX 中进入的
-        let oauth = window.open('', '_blank');
+    google_connect_click() {
         //禁用按钮
-        $('#google_connect').attr('disabled', true);
+        $('#google_connect').addClass('disabled');
+        this.google_connect_callback();
+    }
+
+    google_connect_btn_reset(){
+        $('#google_connect').addClass('disabled');
+        $('#google_connect').removeAttr('onclick');
+        $('#google_connect').removeAttr('href');
+        $('#google_connect').removeAttr('target');
+    }
+
+    google_connect() {
+        this.google_connect_btn_reset();
         //发送请求获取google登录的url
         $.post(this.parent_op.api_user, {
             'action': 'oauth_google_login',
@@ -118,8 +139,10 @@ class oauth {
         }, (rsp) => {
             if (rsp.status == 1) {
                 //如果请求成功，通过另外的小窗口打开google登录的url，然后启动监听进程
-                oauth.location = rsp.data;
-                this.google_connect_callback();
+                $('#google_connect').attr('onclick', 'TL.oauth.google_connect_click()');
+                $('#google_connect').attr('href', rsp.data);
+                $('#google_connect').attr('target', '_blank');
+                $('#google_connect').removeClass('disabled');
             }
         }, 'json');
     }
@@ -147,7 +170,7 @@ class oauth {
                 //启用按钮
                 setTimeout(() => {
                     $('#google_connect_msg').html(app.languageData.oauth_btn_google_connect);
-                    $('#google_connect').attr('disabled', false);
+                    $('#google_connect').removeClass('disabled');
                 }, 3000);
             }
 

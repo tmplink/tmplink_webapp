@@ -17,9 +17,9 @@
 
             <button id="submit" class="btn btn-lg btn-primary btn-block mt-4" i18n="form_btn_login"
                 onclick="TL.login();">.</button>
-            <button class="btn btn-lg btn-light btn-block mt-4" onclick="TL.oauth.google_login()" id="google_login">
+            <a class="btn btn-lg btn-light btn-block mt-4 disabled" onclick="TL.oauth.google_login_click()" id="google_login" href="#" target="_blank">
                 <iconpark-icon name="google"></iconpark-icon> <span id="google_login_msg" i18n="oauth_btn_google_login">Login with Google</span>
-            </button>
+            </a>
             <div class="mt-2">
                 
                 <div class="text-right">
