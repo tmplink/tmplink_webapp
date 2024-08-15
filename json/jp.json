@@ -1,4 +1,11 @@
 {
+    "navbar_analytics": "データ分析",
+    "dl_modal_title": "データ分析",
+    "dl_c_1": "ダウンロード数",
+    "dl_c_2": "人気のダウンロード",
+    "dl_hot_download_nodata": "データがございません",
+    "dl_hot_download_filename": "ファイル名",
+    "dl_hot_download_times": "ダウンロード回数",
     "da_file": "このファイルは第三者によって公開されています<br>ダウンロードする前に出所を確認してください",
     "da_dir": "このフォルダは第三者によって公開されています，ダウンロードする前に出所を確認してください",
     "da_modal_title": "ダウンロード前の注意事項",

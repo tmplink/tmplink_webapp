@@ -1,4 +1,11 @@
 {
+    "navbar_analytics": "資料分析",
+    "dl_modal_title": "資料分析",
+    "dl_c_1": "下載次數",
+    "dl_c_2": "熱門下載",
+    "dl_hot_download_nodata": "暫無資料",
+    "dl_hot_download_filename": "檔案名稱",
+    "dl_hot_download_times": "下載次數",
     "da_file": "此檔案由第三方發布，請注意驗證來源後再下載",
     "da_dir": "此資料夾由第三方發布，請注意驗證來源後再下載",
     "da_modal_title": "下載前提醒",

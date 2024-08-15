@@ -1742,3 +1742,53 @@
         </div>
     </div>
 </div>
+
+<div class="modal" id="downloadLogModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span i18n="dl_modal_title">下载统计</span>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h2 i18n="dl_c_1">下载次数</h2>
+                <div class="text-center mt-2">
+                    <div id="dl_c_chart1"></div>
+                </div>
+                <hr>
+                <h2 i18n="dl_c_2">热门下载</h2>
+                <div id="download_hot_list"></div>
+                <script type="text/template" id="download_hot_list_tpl">
+                    <table class="table-bordered table" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th><% app.languageData.dl_hot_download_filename %></th>
+                                <th><% app.languageData.dl_hot_download_times %></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if(obj === false){ %>
+                                <tr>
+                                    <td colspan="2"><% app.languageData.dl_hot_download_nodata %></td>
+                                </tr>
+                            <% } else { %>
+                                <% for(let x in obj){ %>
+                                    <tr>
+                                        <td><% obj[x].fname %></td>
+                                        <td><% obj[x].download_count %></td>
+                                    </tr>
+                                <% } %>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </script>
+                </script>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>

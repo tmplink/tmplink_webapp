@@ -93,6 +93,7 @@ class tmplink {
         this.notes = new notes;
         this.oauth = new oauth;
         this.dir = new dir;
+        this.chart = new chart;
 
         this.stream.init(this);
         this.giftcard.init(this);
@@ -105,6 +106,7 @@ class tmplink {
         this.notes.init(this);
         this.oauth.init(this);
         this.dir.init(this);
+        this.chart.init(this);
 
         //
         $('.workspace-navbar').hide();

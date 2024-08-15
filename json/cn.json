@@ -838,6 +838,14 @@
     "da_modal_p_4": "文件可信度取决于您获取链接的渠道：",
     "da_modal_li_1": "若链接来自可信赖的朋友或知名发布者，一般可以安全下载。",
     "da_modal_li_2": "若链接来自非官方网站，请谨慎评估文件的可靠性。",
+
+    "navbar_analytics":"数据分析",
+    "dl_modal_title":"数据分析",
+    "dl_c_1":"下载次数",
+    "dl_c_2":"热门下载",
+    "dl_hot_download_nodata":"暂无数据",
+    "dl_hot_download_filename":"文件名",
+    "dl_hot_download_times":"下载次数",
     
     "chart_title_direct_uage": "直链使用情况",
     "download_run": "正在下载:",
