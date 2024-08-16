@@ -36,10 +36,9 @@ class uploader {
 
     init(parent_op) {
         this.parent_op = parent_op;
-        let url = get_url_params();
-        //只有在 listview 等于 workspace 或 room 中时，才会初始化上传功能
-        if (url.listview === 'workspace' || url.listview === 'room') {
-            this.quickUploadInit();
+        //如果已经渲染了 upload_speed_chart，那么初始化图表
+        let chart = document.getElementById('upload_speed_chart');
+        if (chart) {
             this.initSpeedChart();
         }
     }
@@ -68,6 +67,7 @@ class uploader {
     }
 
     initSpeedChart() {
+        console.log('initSpeedChart');
         this.speed_data = Array(20).fill(0);  // 改为 20 个数据点，对应 60 秒
 
         var options = {
