@@ -30,7 +30,7 @@
                 </span>
             </div>
         </span>
-        <span class="float-right text-center">
+        <h6话 class="float-right text-center">
             <div class="workspace-navbar nav-units">
                 <span>
                     <a class="btn p-0 topnav_workspace" href="/app&listview=workspace"
@@ -82,20 +82,6 @@
 
             <div class="workspace-navbar nav-units">
                 <span>
-                    <a class="btn p-0 topnav_notes" href="/app&listview=notes"
-                        tmpui-action="dynamicView.notes();">
-                        <div>
-                            <iconpark-icon name="lock" class="fa-fw"></iconpark-icon>
-                        </div>
-                        <div>
-                            <span i18n="navbar_notes">.</span>
-                        </div>
-                    </a>
-                </span>
-            </div>
-
-            <div class="workspace-navbar nav-units">
-                <span>
                     <a class="btn p-0 topnav_direct" href="/app&listview=direct" tmpui-action="dynamicView.direct();">
                         <div>
                             <iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon>
@@ -124,20 +110,6 @@
                         <iconpark-icon name="gift-card" class="fa-fw text-red"></iconpark-icon>
                         <span class="text-red" i18n="user_giftcard">.</span>
                     </a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.profile.openModal()">
-                        <iconpark-icon name="user-astronaut" class="fa-fw"></iconpark-icon>
-                        <span>
-                            <span i18n="user_modal_title">.</span>
-                            <!-- <span class="point-red"></span> -->
-                        </span>
-                    </a>
-                    <a class="dropdown-item" href="https://bbs.tmp.link" target="_blank">
-                        <iconpark-icon name="comments" class="fa-fw"></iconpark-icon>
-                        <span>
-                            <span i18n="navbar_discuz">.</span>
-                            <!-- <span class="point-red"></span> -->
-                        </span>
-                    </a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#shopModal').modal('show');">
                         <iconpark-icon name="bag-shopping" class="fa-fw"></iconpark-icon>
                         <span>
@@ -145,6 +117,36 @@
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
+                    <!-- 统计信息 -->
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.chart.openAnalytics()">
+                        <iconpark-icon name="chart-line" class="fa-fw"></iconpark-icon>
+                        <span i18n="navbar_analytics">.</span>
+                    </a>
+
+                    <a class="dropdown-item" href="https://bbs.tmp.link" target="_blank">
+                        <iconpark-icon name="comments" class="fa-fw"></iconpark-icon>
+                        <span>
+                            <span i18n="navbar_discuz">.</span>
+                            <!-- <span class="point-red"></span> -->
+                        </span>
+                    </a>
+
+                    <!-- 笔记功能 -->
+                    <a class="dropdown-item" href="/app&listview=notes" tmpui-action="dynamicView.notes();">
+                        <iconpark-icon name="lock" class="fa-fw"></iconpark-icon>
+                        <span i18n="navbar_notes">.</span>
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.profile.openModal()">
+                        <iconpark-icon name="user-astronaut" class="fa-fw"></iconpark-icon>
+                        <span>
+                            <span i18n="user_modal_title">.</span>
+                            <!-- <span class="point-red"></span> -->
+                        </span>
+                    </a>
+                    
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');">
                         <iconpark-icon name="key" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_reset_password">.</span>
@@ -160,11 +162,7 @@
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
-                    <!-- 统计信息 -->
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.chart.openAnalytics()">
-                        <iconpark-icon name="chart-line" class="fa-fw"></iconpark-icon>
-                        <span i18n="navbar_analytics">.</span>
-                    </a>
+                    
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#connectedModal').modal('show');">
                         <iconpark-icon name="google" class="fa-fw"></iconpark-icon>
                         <span>
@@ -261,10 +259,6 @@
                         <iconpark-icon name="cabinet-filing" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_meetingroom">.</span>
                     </a>
-                    <a class="dropdown-item" href="/app&listview=notes" tmpui-action="dynamicView.notes();">
-                        <iconpark-icon name="lock" class="fa-fw"></iconpark-icon>
-                        <span i18n="navbar_notes">.</span>
-                    </a>
                     <a class="dropdown-item" href="/app&listview=direct" tmpui-action="dynamicView.direct();">
                         <iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_direct">.</span>
@@ -299,11 +293,28 @@
                     </div>
                 </button>
                 <div class="dropdown-menu shadow">
+                    <!-- 数据分析 -->
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.chart.openAnalytics()">
+                        <iconpark-icon name="chart-line" class="fa-fw"></iconpark-icon>
+                        <span i18n="navbar_analytics">.</span>
+                    </a>
                     <!-- 兑换礼物 -->
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.giftcard.active();">
                         <iconpark-icon name="gift-card" class="fa-fw text-red"></iconpark-icon>
                         <span class="text-red" i18n="user_giftcard">.</span>
                     </a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#myModal').modal('show');">
+                        <iconpark-icon name="user" class="fa-fw"></iconpark-icon>
+                        <span i18n="navbar_my">.</span>
+                    </a>
+
+                    <!-- 笔记功能 -->
+                    <a class="dropdown-item" href="/app&listview=notes" tmpui-action="dynamicView.notes();">
+                        <iconpark-icon name="lock" class="fa-fw"></iconpark-icon>
+                        <span i18n="navbar_notes">.</span>
+                    </a>
+
+                    <div class="dropdown-divider"></div>
 
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.profile.openModal()">
                         <iconpark-icon name="user-astronaut" class="fa-fw"></iconpark-icon>
@@ -319,10 +330,7 @@
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#myModal').modal('show');">
-                        <iconpark-icon name="user" class="fa-fw"></iconpark-icon>
-                        <span i18n="navbar_my">.</span>
-                    </a>
+                    
                     <a class="dropdown-item" href="https://bbs.tmp.link" target="_blank">
                         <iconpark-icon name="comments" class="fa-fw"></iconpark-icon>
                         <span>
@@ -345,11 +353,7 @@
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
-                    <!-- 数据分析 -->
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.chart.openAnalytics()">
-                        <iconpark-icon name="chart-line" class="fa-fw"></iconpark-icon>
-                        <span i18n="navbar_analytics">.</span>
-                    </a>
+                    
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#connectedModal').modal('show');">
                         <iconpark-icon name="google" class="fa-fw"></iconpark-icon>
                         <span>
