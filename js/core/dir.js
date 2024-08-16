@@ -395,13 +395,15 @@ class dir {
                 $('#room_back_btn').html(app.tpl('room_back_btn_tpl', {}));
             }
 
+            //如果是赞助者，激活特定按钮的颜色
+            if (this.parent_op.sponsor) {
+                this.parent_op.isSponsor = true;
+                this.parent_op.setBtnForSponsor();
+            }
+
             $('#room_loading').hide();
             $('#room_loaded').show();
 
-            //如果用户是赞助者
-            if (this.isSponsor == true) {
-                this.setBtnForSponsor();
-            }
             //重新设定网页标题
             document.title = rsp.data.name;
             app.linkRebind();
