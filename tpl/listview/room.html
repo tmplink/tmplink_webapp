@@ -520,7 +520,7 @@
 
             <script type="text/template" id="dir_list_tpl">
                     <% for (var x in obj) { %>
-                        <div class="row line mx-0 my-0 py-1 list-bar dir_<% obj[x].mr_id %>" id="meetingroom_id_<% obj[x].mr_id %>" name="items_box"
+                        <div class="row line mx-0 mb-1 py-1 list-bar dir_<% obj[x].mr_id %>" id="meetingroom_id_<% obj[x].mr_id %>" name="items_box"
                             tlunit="dir" tldata="<% obj[x].mr_id %>" tldid="0" tltitle="<% obj[x].name %>" onclick="TL.Selecter.onclickByList(this,event);">
                             <div class="col-7 my-1 d-flex align-items-center listfontweight filename">
                                 <iconpark-icon name="<% TL.dir.getIcons(obj[x]) %>" class="fa-fw text-yellow"></iconpark-icon>

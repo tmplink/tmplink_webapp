@@ -519,7 +519,7 @@
     "file_size": "檔案大小",
     "file_downloads": "下載次數",
     "file_lefttime": "剩餘時間",
-    "file_btn_download": "下載資料",
+    "file_btn_download": "下載",
     "file_btn_download_opt": "下載選項",
     "file_btn_download_opt_link": "複製下載連結，到其軟體中下載（etc..迅雷）",
     "file_btn_download_opt_curl": "複製適用於 <span class=\"text-red\">curl</span> 的下載代碼",
