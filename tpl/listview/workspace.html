@@ -122,7 +122,7 @@
                 <% for (var x in obj) { %>
                     <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
                         <div class="col-lg-4 col-xl-3 col-md-6 col-12 file_unit_<% obj[x].ukey %> p-1 img-hover">
-                            <div class="card text-center m-0" name="items_box" tldata="<% obj[x].ukey %>" tlunit="file" tltype="photo_card" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                            <div class="card text-center m-0" name="items_box" tldata="<% obj[x].ukey %>" tlunit="file" tltype="photo_card" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
                                 <div class="card-body">
                                     <div style="height:220px;" class="mb-2">
                                         <% if(obj[x].sync=='1'){ %>
@@ -178,9 +178,9 @@
                     <% } %>
                 <% } %>
             </script>
-        <script type="text/template" id="workspace_filelist_list_tpl">
+            <script type="text/template" id="workspace_filelist_list_tpl">
                 <% for (var x in obj) { %>
-                    <div class="row mx-0 my-0 p-1 line list-bar file_unit_<% obj[x].ukey %>" name="items_box" tlunit="file" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                    <div class="row mx-0 mb-1 p-1 line list-bar file_unit_<% obj[x].ukey %>" name="items_box" tlunit="file" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
                         <div class="col-7 d-flex align-items-center listfontweight filename">
                             <div class="row">
                                 <div class="col-12 filename">
@@ -300,6 +300,6 @@
                         </div>
                     </div>
                 <% } %>
-        </script>
+            </script>
     </div>
 </div>

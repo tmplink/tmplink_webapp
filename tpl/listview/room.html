@@ -285,7 +285,7 @@
                     <% for (var x in obj) { %>
                         <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
                             <div class="col-lg-4 col-xl-3 col-md-6 col-12 file_unit_<% obj[x].ukey %>">
-                                <div class="card text-center img-hover" name="items_box" tldata="<% obj[x].ukey %>" tlunit="file" tltype="photo_card" tldid="<% obj[x].direct_id %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                                <div class="card text-center img-hover" name="items_box" tldata="<% obj[x].ukey %>" tlunit="file" tltype="photo_card" tldid="<% obj[x].direct_id %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
                                     
                                     <div class="card-body">
                                         <div style="height:220px;" class="mb-2">
@@ -360,7 +360,7 @@
 
             <script type="text/template" id="dir_filelist_tpl">
                     <% for (var x in obj) { %>
-                        <div class="row line mx-0 mb-1 py-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tlunit="file" tltype="list" tldata="<% obj[x].ukey %>" tldid="<% obj[x].direct_id %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                        <div class="row line mx-0 mb-1 py-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tlunit="file" tltype="list" tldata="<% obj[x].ukey %>" tldid="<% obj[x].direct_id %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
                             <div class="col-7 my-1 d-flex align-items-center listfontweight filename">
                                 <div>
                                     <iconpark-icon name="<% TL.fileicon(obj[x].ftype) %>" class="fa-fw text-azure"></iconpark-icon>
@@ -521,7 +521,7 @@
             <script type="text/template" id="dir_list_tpl">
                     <% for (var x in obj) { %>
                         <div class="row line mx-0 my-0 py-1 list-bar dir_<% obj[x].mr_id %>" id="meetingroom_id_<% obj[x].mr_id %>" name="items_box"
-                            tlunit="dir" tldata="<% obj[x].mr_id %>" tldid="0" tltitle="<% obj[x].name %>" onclick="TL.Selecter.onclickByList(this);">
+                            tlunit="dir" tldata="<% obj[x].mr_id %>" tldid="0" tltitle="<% obj[x].name %>" onclick="TL.Selecter.onclickByList(this,event);">
                             <div class="col-7 my-1 d-flex align-items-center listfontweight filename">
                                 <iconpark-icon name="<% TL.dir.getIcons(obj[x]) %>" class="fa-fw text-yellow"></iconpark-icon>
                                 &nbsp

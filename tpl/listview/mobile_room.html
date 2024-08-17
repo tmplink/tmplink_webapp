@@ -235,7 +235,7 @@
                 <% for (var x in obj) { %>
                     <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
                         <div class="col-lg-4 col-xl-3 col-md-6 col-12 file_unit_<% obj[x].ukey %>">
-                            <div class="card text-center" name="items_box" tlunit="file" tldata="<% obj[x].ukey %>" tltype="photo_card" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                            <div class="card text-center" name="items_box" tlunit="file" tldata="<% obj[x].ukey %>" tltype="photo_card" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
                                 
                                 <div class="card-body">
                                     <div style="height:220px;" class="mb-2">
@@ -313,7 +313,7 @@
             <script type="text/template" id="dir_filelist_tpl">
                 <% for (var x in obj) { %>
                     <div class="row mobile-list-bar file_unit_<% obj[x].ukey %>">
-                        <div class="col-2 mobile-list-icon-center text-center" tlunit="file" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                        <div class="col-2 mobile-list-icon-center text-center" tlunit="file" name="items_box" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
                             <iconpark-icon name="<% TL.fileicon(obj[x].ftype) %>" class="fa-fw text-azure fa-2x"></iconpark-icon>
                         </div>
                         <div class="col-7 p-0">
@@ -445,7 +445,7 @@
             <script type="text/template" id="dir_list_tpl">
                 <% for (var x in obj) { %>
                     <div class="row mobile-list-bar-dir dir_<% obj[x].mr_id %>" id="meetingroom_id_<% obj[x].mr_id %>" name="items_box"
-                        tlunit="dir" tldata="<% obj[x].mr_id %>" tldid="0" tltitle="<% obj[x].name %>" onclick="TL.Selecter.onclickByList(this);">
+                        tlunit="dir" tldata="<% obj[x].mr_id %>" tldid="0" tltitle="<% obj[x].name %>" onclick="TL.Selecter.onclickByList(this,event);">
                         <div class="col-2 mobile-list-icon-center">
                             <iconpark-icon name="<% TL.dir.getIcons(obj[x]) %>" class="fa-fw fa-2x text-yellow"></iconpark-icon>
                         </div>

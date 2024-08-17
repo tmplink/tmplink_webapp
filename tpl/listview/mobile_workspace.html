@@ -136,7 +136,7 @@
             <% for (var x in obj) { %>
                 <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
                     <div class="col-lg-4 col-xl-3 col-md-6 col-12 file_unit_<% obj[x].ukey %> p-1">
-                        <div class="card text-center m-0" name="items_box" tlunit="file" tldata="<% obj[x].ukey %>" tltype="photo_card" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                        <div class="card text-center m-0" name="items_box" tlunit="file" tldata="<% obj[x].ukey %>" tltype="photo_card" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
                             <div class="card-body">
                                 <div style="height:220px;" class="mb-2">
                                     <% if(obj[x].sync=='1'){ %>
@@ -197,7 +197,7 @@
         <script type="text/template" id="workspace_filelist_list_tpl">
             <% for (var x in obj) { %>
                 <div class="row mobile-list-bar file_unit_<% obj[x].ukey %>">
-                    <div class="col-2 mobile-list-icon-center" name="items_box" tlunit="file" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                    <div class="col-2 mobile-list-icon-center" name="items_box" tlunit="file" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
                         <iconpark-icon name="<% TL.fileicon(obj[x].ftype) %>" class="fa-fw fa-2x text-azure"></iconpark-icon>
                     </div>
                     <div class="col-7 p-0">

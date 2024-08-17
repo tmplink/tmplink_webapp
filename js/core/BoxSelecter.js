@@ -6,10 +6,53 @@ class BoxSelecter {
     move_place = 'workspace'
     dir_tree_init = false
     site_domain = null
+    lastSelectedNode = null;
 
     init(parent_op) {
         this.parent_op = parent_op;
         this.site_domain = this.parent_op.site_domain;
+        this.initEventListeners();
+    }
+
+    initEventListeners() {
+        document.addEventListener('mousedown', this.handleMouseDown.bind(this));
+        document.addEventListener('mousemove', this.handleMouseMove.bind(this));
+        document.addEventListener('mouseup', this.handleMouseUp.bind(this));
+        document.addEventListener('keydown', this.handleKeyDown.bind(this));
+        document.addEventListener('keyup', this.handleKeyUp.bind(this));
+    }
+
+    handleMouseDown(event) {
+        if (event.shiftKey) {
+            this.isShiftSelecting = true;
+            event.preventDefault();
+        }
+    }
+
+    handleMouseMove(event) {
+        if (this.isShiftSelecting) {
+            event.preventDefault();
+        }
+    }
+
+    handleMouseUp(event) {
+        if (this.isShiftSelecting) {
+            this.isShiftSelecting = false;
+            event.preventDefault();
+        }
+    }
+
+    handleKeyDown(event) {
+        if (event.key === 'Shift') {
+            document.body.style.userSelect = 'none';
+        }
+    }
+
+    handleKeyUp(event) {
+        if (event.key === 'Shift') {
+            document.body.style.userSelect = '';
+            this.isShiftSelecting = false;
+        }
     }
 
     mobileHeadShow() {
@@ -23,14 +66,64 @@ class BoxSelecter {
         }
     }
 
-    onclickByList(node) {
-        let n = node.getAttribute('data-check');
-        if (n !== 'true') {
-            this.setOn(node);
+    onclickByList(node, event) {
+
+        // 阻止默认的文本选择行为
+        if (event.shiftKey) {
+            event.preventDefault();
+        }
+
+
+        if (event.shiftKey) {
+            this.shiftSelect(node);
         } else {
-            this.selectOff(node);
+            let n = node.getAttribute('data-check');
+            if (n !== 'true') {
+                this.setOn(node);
+            } else {
+                this.selectOff(node);
+            }
+            this.lastSelectedNode = node;
         }
         this.mobileHeadShow();
+    }
+
+    shiftSelect(endNode) {
+        const allNodes = Array.from(document.getElementsByName(this.items_name));
+        const endIndex = allNodes.indexOf(endNode);
+
+        // 找到所有已选中的项
+        const selectedIndices = allNodes
+            .map((node, index) => node.getAttribute('data-check') === 'true' ? index : -1)
+            .filter(index => index !== -1);
+
+        if (selectedIndices.length === 0) {
+            // 如果没有选中项，从头开始选择到点击项
+            for (let i = 0; i <= endIndex; i++) {
+                this.setOn(allNodes[i]);
+            }
+        } else {
+            const lastSelectedIndex = selectedIndices[selectedIndices.length - 1];
+            
+            if (endIndex < lastSelectedIndex) {
+                // 反向选择：取消之前的选择，选择新范围
+                allNodes.forEach((node, index) => {
+                    if (index >= endIndex && index <= lastSelectedIndex) {
+                        this.setOn(node);
+                    } else {
+                        this.selectOff(node);
+                    }
+                });
+            } else {
+                // 正向选择：扩展选择范围
+                const startIndex = selectedIndices[0];
+                for (let i = startIndex; i <= endIndex; i++) {
+                    this.setOn(allNodes[i]);
+                }
+            }
+        }
+
+        this.lastSelectedNode = endNode;
     }
 
     boxOnclick(node) {
@@ -101,6 +194,8 @@ class BoxSelecter {
         for (let i = 0; i < node.length; i++) {
             this.selectOff(node[i]);
         }
+        // 重置最后选中的节点
+        this.lastSelectedNode = null;
     }
 
     fileOnCheck() {

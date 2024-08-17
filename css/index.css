@@ -306,6 +306,7 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
 
 .line{
     border-bottom: 1px solid #e9ecef;
+    border-radius: 8px;
 }
 
 /**

@@ -1,7 +1,7 @@
 class tmplink {
 
-    // api_url = 'https://tmp-api.vx-cdn.com/api_v2'
-    api_url = 'https://tmplink-sec.vxtrans.com/api_v2'
+    api_url = 'https://tmp-api.vx-cdn.com/api_v2'
+    // api_url = 'https://tmplink-sec.vxtrans.com/api_v2'
     api_url_sec = 'https://tmplink-sec.vxtrans.com/api_v2'
     api_url_upload = this.api_url + '/file'
     api_file = this.api_url + '/file'
