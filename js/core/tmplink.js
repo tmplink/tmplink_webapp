@@ -1128,6 +1128,7 @@ class tmplink {
 
                     //更新title
                     document.title = rsp.data.name;
+                    let filename = rsp.data.name;
 
                     //更新喜欢
                     $('#likes').on('click', () => {
@@ -1158,6 +1159,7 @@ class tmplink {
                     $('#file_download_btn').html(app.languageData.status_file_1);
                     //请求下载地址
                     this.recaptcha_do('download_req', (recaptcha) => {
+                        this.ga('DL-' + filename);
                         $.post(this.api_file, {
                             action: 'download_req',
                             ukey: params.ukey,
@@ -1169,7 +1171,6 @@ class tmplink {
                             $('#file_download_btn').removeClass('btn-dark');
                             $('#file_download_btn').addClass('btn-success');
                             $('#file_download_btn').html(app.languageData.file_btn_download);
-                            this.ga('D-' + rsp.data.name);
                             if (req.status != 1) {
                                 // $('#download_msg').html('<iconpark-icon name="circle-exclamation" class="fa-fw"></iconpark-icon> ');
                                 $('#file_download_btn_1').hide();
@@ -1695,11 +1696,11 @@ class tmplink {
     }
 
     download_direct(i) {
-        console.log(i);
         let ukey = this.list_data[i].ukey;
         let title = this.list_data[i].fname;
         let size = this.list_data[i].fsize_formated;
         let type = this.list_data[i].ftype;
+        this.ga('DL-' + title);
 
         this.recaptcha_do('download_req', (recaptcha) => {
             $.post(this.api_file, {
@@ -1711,7 +1712,6 @@ class tmplink {
                 if (req.status == 1) {
                     $.notifi(`${app.languageData.on_select_download} : ${title}`, "success");
                     window.location.href = req.data;
-                    this.ga('Download-' + title);
                     return true;
                 }
                 if (req.status == 3) {
@@ -1729,6 +1729,7 @@ class tmplink {
         let type = this.list_data[i].ftype;
 
         //新的方案
+        this.ga('DL-' + title);
         $('.btn_download_' + ukey).attr('disabled', 'true');
         $('.btn_download_' + ukey).html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon>');
 
@@ -1740,7 +1741,7 @@ class tmplink {
                 captcha: recaptcha
             }, (req) => {
                 if (req.status == 1) {
-
+                    
                     //如果不是在 ipad 或者 iphone 上
                     if (is_iphone_or_ipad() == false) {
                         //开始下载
@@ -1750,7 +1751,6 @@ class tmplink {
                         //使用 href 提供下载
                         location.href = req.data;
                     }
-                    this.ga('Download-' + title);
 
                     //使用 href 提供下载
                     // location.href = req.data;
@@ -1772,6 +1772,7 @@ class tmplink {
     download_file_url(i, cb) {
         let ukey = this.list_data[i].ukey;
         let title = this.list_data[i].fname;
+        this.ga('DL-' + title);
 
         this.recaptcha_do('download_req', (recaptcha) => {
             $.post(this.api_file, {
@@ -1781,7 +1782,6 @@ class tmplink {
                 captcha: recaptcha
             }, (req) => {
                 if (req.status == 1) {
-                    this.ga('Download-' + title);
                     cb(req.data);
                     return true;
                 }
