@@ -52,7 +52,7 @@ class tmplink {
     upload_model_selected_val = 0
     download_retry = 0
     download_retry_max = 10
-    recaptcha_op = false
+    recaptcha_op = true
     recaptcha = '6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5'
     recaptchaToken = '0'
 
@@ -1166,6 +1166,17 @@ class tmplink {
                             token: this.api_token,
                             captcha: recaptcha
                         }, (req) => {
+                            //如果无法请求到数据，显示错误信息
+                            if (req.status === 0) {
+                                // $('#download_msg').html('<iconpark-icon name="circle-exclamation" class="fa-fw"></iconpark-icon> ');
+                                // $('#file_download_btn').removeClass('btn-dark');
+                                $('#file_download_area').fadeOut();
+                                $('#file_info').css('min-height', '230px');
+                                $('#file_download_btn').html(app.languageData.status_file_2);
+                                $('#file_download_btn').attr('disabled', true);
+                                return false;
+                            }
+
                             //修改按钮状态
                             this.ui_hs_change('ready');
                             $('#file_download_btn').removeClass('btn-dark');
@@ -1718,6 +1729,7 @@ class tmplink {
                     this.alert(app.languageData.status_need_login);
                     return false;
                 }
+                this.alert(app.languageData.status_error_0);
             });
         });
     }
@@ -1762,7 +1774,7 @@ class tmplink {
                     this.alert(app.languageData.status_need_login);
                     return false;
                 }
-                this.alert('发生了错误，请重试。');
+                this.alert(app.languageData.status_error_0);
                 $('.btn_download_' + ukey).removeAttr('disabled');
                 $('.btn_download_' + ukey).html('<iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>');
             });
@@ -1785,6 +1797,7 @@ class tmplink {
                     cb(req.data);
                     return true;
                 }
+                this.alert(app.languageData.status_error_0);
             });
         });
     }
