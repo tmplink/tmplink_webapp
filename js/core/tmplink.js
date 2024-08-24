@@ -1053,7 +1053,7 @@ class tmplink {
         }
     }
 
-    details_file() {
+    file_details() {
         if (this.isWeixin()) {
             $('#file_messenger_icon').html('<iconpark-icon name="cloud-arrow-down" class="fa-fw fa-4x"></iconpark-icon>');
             $('#file_messenger_msg').removeClass('display-4');
@@ -1398,7 +1398,7 @@ class tmplink {
                     $('#file_messenger').show();
                     this.ga(`Sync-[${params.ukey}]`);
                     setTimeout(() => {
-                        this.details_file();
+                        this.file_details();
                     }, 60000);
                     return false;
                 }

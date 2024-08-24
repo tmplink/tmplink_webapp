@@ -13,7 +13,7 @@ app.ready(() => {
     $('meta[name=description]').html(app.languageData.des_file);
 
     TL.ready(() => {
-        TL.details_file();
+        TL.file_details();
         TL.head_set();
     })
 });

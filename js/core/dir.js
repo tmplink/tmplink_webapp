@@ -218,7 +218,7 @@ class dir {
                 this.room.ownner = 0;
                 this.room.mr_id = 0;
                 app.open('/404');
-                this.parent_op.ga('Room-Unavailable');
+                this.parent_op.ga('Dir-Unavailable');
                 return false;
             }
             //会议室不可用
@@ -228,16 +228,18 @@ class dir {
                 this.room.ownner = 0;
                 this.room.mr_id = 0;
                 app.open('/404');
-                this.parent_op.ga('Room-Reported');
+                this.parent_op.ga('Dir-Reported');
                 return false;
             }
 
             //room need to login
             if (rsp.status === 3) {
+                //设定登录后跳转的页面
+                localStorage.setItem('return_page', getCurrentURL());
                 app.open('/app&listview=login');
                 return false;
             }
-            this.parent_op.ga('Room-' + rsp.data.name);
+            this.parent_op.ga('Dir-' + rsp.data.name);
             //更新统计信息
             this.total(rsp.data.mr_id);
             this.room.parent = rsp.data.parent;
