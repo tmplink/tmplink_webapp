@@ -281,175 +281,46 @@
             
 
             <script type="text/template" id="dir_photolist_tpl">
-                    <div class="row" id="room_file_content">
-                    <% for (var x in obj) { %>
-                        <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
-                            <div class="col-lg-4 col-xl-3 col-md-6 col-12 file_unit_<% obj[x].ukey %>">
-                                <div class="card text-center img-hover" name="items_box" tldata="<% obj[x].ukey %>" tlunit="file" tltype="photo_card" tldid="<% obj[x].direct_id %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
-                                    
-                                    <div class="card-body">
-                                        <div style="height:220px;" class="mb-2">
-                                            <% if(obj[x].sync=='1'){ %>
-                                                <img src="/img/loading.png" style="height:220px;" />
-                                            <% }else{ %>
-                                                <a href="javascript:;" onclick="TL.previewModel('<% obj[x].ukey %>','<% obj[x].fname %>',<% x %>)">
-                                                    <img class='lazyload' src="/img/loading.svg" data-src="https://tmp-static.vx-cdn.com/img-<% obj[x].ukey %>-360x220.jpg" style="height:220px;border-radius: 10px;" />
-                                                </a>
-                                            <% } %>
-                                        </div>
-                                        <div class="text-right file_ok_<% obj[x].ukey %>">
-                                            <div>
-                                                <button href="javascript:void(0)" onclick="TL.download_direct('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
-                                                    <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
-                                                </button>
-                                                <% if(TL.dir.room.model=='public'){ %>
-                                                <button onclick="TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/f/${obj[x].ukey}`) %>',true)" class="in-private-dir text-azure btn btn-sm btn-light mr-1">
-                                                    <iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon>
-                                                </button>
-                                                <% } %>
-                                                <% if (TL.dir.room.owner == 1) { %>
-                                                    <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1">
-                                                        <iconpark-icon name="pen-to-square" class="fa-fw"></iconpark-icon>
-                                                    </button>
-                                                    <button class="text-red btn btn-sm btn-light" onclick="TL.dir.deleteFile('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
-                                                        <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
-                                                    </button>
-                                                <% } %>
-                                                <!--[按钮组：设置为壁纸]-->
-                                                <span class="dropdown">
-                                                    <button role="button" type="button" class="text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown">
-                                                        <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right shadow">
-                                                    <button onclick="TL.pf_mybg_set('light','<% obj[x].ukey %>')" class="dropdown-item">
-                                                        <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
-                                                        <span i18n="mybg_set_light"><% app.languageData.mybg_set_light %></span>
-                                                    </button>
-                                                    <button onclick="TL.pf_mybg_set('dark','<% obj[x].ukey %>')" class="dropdown-item">
-                                                        <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
-                                                        <span i18n="mybg_set_dark"><% app.languageData.mybg_set_dark %></span>
-                                                    </button>
-                                                </div>
-                                            </span>
-                                            </div>
-                                            <div class="mt-1">
-                                                <span class="mr-1">
-                                                    <% obj[x].fsize_formated %>
-                                                </span>
-                                                <% if(obj[x].like>0){ %>
-                                                    <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
-                                                    <span class="text-pink"><% obj[x].like %><span>
-                                                <% } %>
-                                            </div>
-                                        </div>
-                                        <div class="progress file_relay_<% obj[x].ukey %>">
-                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
-                                                <% app.languageData.upload_sync_onprogress %>
-                                            </div>
-                                        </div>
-                                        <div class="progress mt-2 download_progress_bar_<% obj[x].ukey %>" style="height: 5px;display:none;">
-                                            <div class="progress-bar bg-success download_progress_bar_set_<% obj[x].ukey %>" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
+                <div class="row" id="room_file_content">
+                <% for (var x in obj) { %>
+                    <% if(obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'||obj[x].ftype=='png'||obj[x].ftype=='gif'){ %>
+                        <div class="col-lg-4 col-xl-3 col-md-6 col-12 file_unit_<% obj[x].ukey %>">
+                            <div class="card text-center img-hover" name="items_box" tldata="<% obj[x].ukey %>" tlunit="file" tltype="photo_card" tldid="<% obj[x].direct_id %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
+                                
+                                <div class="card-body">
+                                    <div style="height:220px;" class="mb-2">
+                                        <% if(obj[x].sync=='1'){ %>
+                                            <img src="/img/loading.png" style="height:220px;" />
+                                        <% }else{ %>
+                                            <a href="javascript:;" onclick="TL.previewModel('<% obj[x].ukey %>','<% obj[x].fname %>',<% x %>)">
+                                                <img class='lazyload' src="/img/loading.svg" data-src="https://tmp-static.vx-cdn.com/img-<% obj[x].ukey %>-360x220.jpg" style="height:220px;border-radius: 10px;" />
+                                            </a>
+                                        <% } %>
                                     </div>
-                                </div>
-                            </div>
-                        <% } %>
-                    <% } %>
-                    </div>
-                </script>
-
-            <script type="text/template" id="dir_filelist_tpl">
-                    <% for (var x in obj) { %>
-                        <div class="row line mx-0 mb-1 py-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tlunit="file" tltype="list" tldata="<% obj[x].ukey %>" tldid="<% obj[x].direct_id %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
-                            <div class="col-7 my-1 d-flex align-items-center listfontweight filename">
-                                <div>
-                                    <iconpark-icon name="<% TL.fileicon(obj[x].ftype) %>" class="fa-fw text-azure"></iconpark-icon>
-                                    <a href="/file?ukey=<% obj[x].ukey %>" class="filelist_link mr-1" tmpui-app="true" target="_blank" onclick="event.stopPropagation();">
-                                        <% obj[x].fname %>
-                                    </a>
-
-                                    <% if(TL.stream.allow(obj[x].fname,obj[x].owner)||TL.stream.checkForOpenOnApps(obj[x].fname,obj[x].owner)){ %>
-                                        <span class="dropdown">
-                                            <span role="button" type="button" class="btn-point" data-toggle="dropdown">
-                                                <iconpark-icon name="circle-play" class="fa-fw text-blue"></iconpark-icon>
-                                            </span>
-                                            <div class="dropdown-menu shadow">
-                                                <% if(TL.stream.allow(obj[x].fname,obj[x].owner)){ %>
-                                                    <button onclick="TL.stream.request('<% obj[x].ukey %>','web')" class="dropdown-item">
-                                                        <iconpark-icon name="browser" class="fa-fw"></iconpark-icon>
-                                                        <span >Browser</span>
-                                                    </button>
-                                                <% } %> 
-                                                <% if(TL.stream.checkForOpenOnApps(obj[x].fname,obj[x].owner)){ %>
-                                                    <button onclick="TL.stream.request('<% obj[x].ukey %>','potplayer')" class="dropdown-item">
-                                                        <iconpark-icon name="send-backward" class="fa-fw"></iconpark-icon>
-                                                        <span >potplayer</span>
-                                                    </button>
-                                                    <button onclick="TL.stream.request('<% obj[x].ukey %>','iina')" class="dropdown-item">
-                                                        <iconpark-icon name="send-backward" class="fa-fw"></iconpark-icon>
-                                                        <span >IINA</span>
-                                                    </button>
-                                                    <button onclick="TL.stream.request('<% obj[x].ukey %>','nplayer')" class="dropdown-item">
-                                                        <iconpark-icon name="send-backward" class="fa-fw"></iconpark-icon>
-                                                        <span >nplayer</span>
-                                                    </button>
-                                                    <button onclick="TL.stream.request('<% obj[x].ukey %>','copy')" class="dropdown-item">
-                                                        <iconpark-icon name="send-backward" class="fa-fw"></iconpark-icon>
-                                                        <span>Stream URL</span>
-                                                    </button>
-                                                <% } %> 
-                                            </div>
-                                        </span>
-                                    <% } %> 
-
-                                    <% if(obj[x].like>0){ %>
-                                        <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
-                                        <span class="text-pink"><% obj[x].like %><span>
-                                    <% } %>
-                                    <% if(obj[x].model!=99){ %>
-                                        <!--[这里处理剩余时间]-->
-                                        <span>
-                                            <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
-                                            <span class="lefttime-remainder" id="r_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
-                                        </span>
-                                    <% } %>  
-                                </div>
-                            </div>
-                            <div class="col-5 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].ukey %>">
-                                <span alt="<% obj[x].ctime %>" class="mr-2 d-none d-lg-block"><% obj[x].cctime %></span>
-                                <span class="mr-2">
-                                    <% obj[x].fsize_formated %>
-                                </span>
-                                <button href="javascript:void(0)" onclick="event.stopPropagation();TL.download_direct('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
-                                    <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
-                                </button>
-                                <% if(TL.dir.room.model=='public'){ %>
-                                    <% if(TL.dir.room.owner == 1&&TL.direct.dir_btn_status===true){ %>
-                                        <button onclick="TL.direct.genLinkDirectForRoomV2('<% encodeURIComponent(obj[x].fname) %>')" class="text-azure btn btn-sm btn-light mr-1">
-                                            <iconpark-icon name="link" class="fa-fw"></iconpark-icon>
-                                        </button>
-                                    <% }else{ %>
-                                        <button href="javascript:void(0)" onclick="event.stopPropagation();TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/f/${obj[x].ukey}`) %>',true )" class="in-private-dir text-azure btn btn-sm btn-light mr-1">
-                                            <iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon>
-                                        </button>
-                                    <% } %>
-                                <% } %>
-                                <% if (TL.dir.room.owner == 1) { %>
-                                    <span class="dropdown">
-                                        <button role="button" type="button" class="text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown">
-                                            <iconpark-icon name="ellipsis" class="fa-fw"></iconpark-icon>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right shadow">
-                                            <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="dropdown-item">
-                                                <iconpark-icon name="pen-to-square" class="fa-fw"></iconpark-icon>
-                                                <span i18n="menu_rename"><% app.languageData.menu_rename %></span>
+                                    <div class="text-right file_ok_<% obj[x].ukey %>">
+                                        <div>
+                                            <button href="javascript:void(0)" onclick="TL.download_direct('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
+                                                <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
                                             </button>
-                                            <button class="dropdown-item" onclick="TL.dir.deleteFile('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
-                                                <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
-                                                <span i18n="menu_delete"><% app.languageData.menu_delete %></span>
-                                            </button> 
-                                            <!--[如果是图片，则可以被设置为背景]-->
-                                            <% if(obj[x].ftype=='png'||obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'){ %>
+                                            <% if(TL.dir.room.model=='public'){ %>
+                                            <button onclick="TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/f/${obj[x].ukey}`) %>',true)" class="in-private-dir text-azure btn btn-sm btn-light mr-1">
+                                                <iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon>
+                                            </button>
+                                            <% } %>
+                                            <% if (TL.dir.room.owner == 1) { %>
+                                                <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="text-azure btn btn-sm btn-light mr-1">
+                                                    <iconpark-icon name="pen-to-square" class="fa-fw"></iconpark-icon>
+                                                </button>
+                                                <button class="text-red btn btn-sm btn-light" onclick="TL.dir.deleteFile('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
+                                                    <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
+                                                </button>
+                                            <% } %>
+                                            <!--[按钮组：设置为壁纸]-->
+                                            <span class="dropdown">
+                                                <button role="button" type="button" class="text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown">
+                                                    <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right shadow">
                                                 <button onclick="TL.pf_mybg_set('light','<% obj[x].ukey %>')" class="dropdown-item">
                                                     <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
                                                     <span i18n="mybg_set_light"><% app.languageData.mybg_set_light %></span>
@@ -458,37 +329,166 @@
                                                     <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
                                                     <span i18n="mybg_set_dark"><% app.languageData.mybg_set_dark %></span>
                                                 </button>
-                                            <% } %> 
-                                            <!--[检查此目录是否是直链目录]-->
-                                            <% if(TL.direct.is_allow()){ %>
-                                                <% if(TL.direct.dir_btn_status===false){ %>
-                                                    <button onclick="TL.direct.addLink('<% obj[x].ukey %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item">
-                                                        <iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon>
-                                                        <span i18n="menu_addlink"><% app.languageData.menu_addlink %></span>
-                                                    </button>
-                                                <% } %>
-                                            <% } %>   
+                                            </div>
+                                        </span>
                                         </div>
-                                    </span>
-                                <% } %>
-                            </div>
-                            <div class="col-5 my-1 d-flex flex-row align-items-center justify-content-center file_relay_<% obj[x].ukey %>">
-                                <div class="d-block w-100">
-                                    <div class="progress">
+                                        <div class="mt-1">
+                                            <span class="mr-1">
+                                                <% obj[x].fsize_formated %>
+                                            </span>
+                                            <% if(obj[x].like>0){ %>
+                                                <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
+                                                <span class="text-pink"><% obj[x].like %><span>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                    <div class="progress file_relay_<% obj[x].ukey %>">
                                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
                                             <% app.languageData.upload_sync_onprogress %>
                                         </div>
                                     </div>
-                                </div> 
-                            </div>
-                            <div class="col-12 mt-2 download_progress_bar_<% obj[x].ukey %> mb-1" style="display:none">
-                                <div class="progress" style="height: 5px;">
-                                    <div class="progress-bar bg-success download_progress_bar_set_<% obj[x].ukey %>" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress mt-2 download_progress_bar_<% obj[x].ukey %>" style="height: 5px;display:none;">
+                                        <div class="progress-bar bg-success download_progress_bar_set_<% obj[x].ukey %>" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     <% } %>
-                </script>
+                <% } %>
+                </div>
+            </script>
+
+            <script type="text/template" id="dir_filelist_tpl">
+                <% for (var x in obj) { %>
+                    <div class="row line mx-0 mb-1 py-1 list-bar file_unit_<% obj[x].ukey %>" name="items_box" tlunit="file" tltype="list" tldata="<% obj[x].ukey %>" tldid="<% obj[x].direct_id %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
+                        <div class="col-7 my-1 d-flex align-items-center listfontweight filename">
+                            <div>
+                                <iconpark-icon name="<% TL.fileicon(obj[x].ftype) %>" class="fa-fw text-azure"></iconpark-icon>
+                                <a href="/file?ukey=<% obj[x].ukey %>" class="filelist_link mr-1" tmpui-app="true" target="_blank" onclick="event.stopPropagation();">
+                                    <% obj[x].fname %>
+                                </a>
+
+                                <% if(TL.stream.allow(obj[x].fname,obj[x].owner)||TL.stream.checkForOpenOnApps(obj[x].fname,obj[x].owner)){ %>
+                                    <span class="dropdown">
+                                        <span role="button" type="button" class="btn-point" data-toggle="dropdown">
+                                            <iconpark-icon name="circle-play" class="fa-fw text-blue"></iconpark-icon>
+                                        </span>
+                                        <div class="dropdown-menu shadow">
+                                            <% if(TL.stream.allow(obj[x].fname,obj[x].owner)){ %>
+                                                <button onclick="TL.stream.request('<% obj[x].ukey %>','web')" class="dropdown-item">
+                                                    <iconpark-icon name="browser" class="fa-fw"></iconpark-icon>
+                                                    <span >Browser</span>
+                                                </button>
+                                            <% } %> 
+                                            <% if(TL.stream.checkForOpenOnApps(obj[x].fname,obj[x].owner)){ %>
+                                                <button onclick="TL.stream.request('<% obj[x].ukey %>','potplayer')" class="dropdown-item">
+                                                    <iconpark-icon name="send-backward" class="fa-fw"></iconpark-icon>
+                                                    <span >potplayer</span>
+                                                </button>
+                                                <button onclick="TL.stream.request('<% obj[x].ukey %>','iina')" class="dropdown-item">
+                                                    <iconpark-icon name="send-backward" class="fa-fw"></iconpark-icon>
+                                                    <span >IINA</span>
+                                                </button>
+                                                <button onclick="TL.stream.request('<% obj[x].ukey %>','nplayer')" class="dropdown-item">
+                                                    <iconpark-icon name="send-backward" class="fa-fw"></iconpark-icon>
+                                                    <span >nplayer</span>
+                                                </button>
+                                                <button onclick="TL.stream.request('<% obj[x].ukey %>','copy')" class="dropdown-item">
+                                                    <iconpark-icon name="send-backward" class="fa-fw"></iconpark-icon>
+                                                    <span>Stream URL</span>
+                                                </button>
+                                            <% } %> 
+                                        </div>
+                                    </span>
+                                <% } %> 
+
+                                <% if(obj[x].like>0){ %>
+                                    <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
+                                    <span class="text-pink"><% obj[x].like %><span>
+                                <% } %>
+                                <% if(obj[x].model!=99){ %>
+                                    <!--[这里处理剩余时间]-->
+                                    <span>
+                                        <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
+                                        <span class="lefttime-remainder" id="r_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
+                                    </span>
+                                <% } %>  
+                            </div>
+                        </div>
+                        <div class="col-5 my-1 d-flex align-items-center justify-content-end file_ok_<% obj[x].ukey %>">
+                            <span alt="<% obj[x].ctime %>" class="mr-2 d-none d-lg-block"><% obj[x].cctime %></span>
+                            <span class="mr-2">
+                                <% obj[x].fsize_formated %>
+                            </span>
+                            <button href="javascript:void(0)" onclick="event.stopPropagation();TL.download_direct('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mr-1 btn_download_<% obj[x].ukey %>">
+                                <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
+                            </button>
+                            <% if(TL.dir.room.model=='public'){ %>
+                                <% if(TL.dir.room.owner == 1&&TL.direct.dir_btn_status===true){ %>
+                                    <button onclick="TL.direct.genLinkDirectForRoomV2('<% encodeURIComponent(obj[x].fname) %>')" class="text-azure btn btn-sm btn-light mr-1">
+                                        <iconpark-icon name="link" class="fa-fw"></iconpark-icon>
+                                    </button>
+                                <% }else{ %>
+                                    <button href="javascript:void(0)" onclick="event.stopPropagation();TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/f/${obj[x].ukey}`) %>',true )" class="in-private-dir text-azure btn btn-sm btn-light mr-1">
+                                        <iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon>
+                                    </button>
+                                <% } %>
+                            <% } %>
+                            <% if (TL.dir.room.owner == 1) { %>
+                                <span class="dropdown">
+                                    <button role="button" type="button" class="text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown">
+                                        <iconpark-icon name="ellipsis" class="fa-fw"></iconpark-icon>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right shadow">
+                                        <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="dropdown-item">
+                                            <iconpark-icon name="pen-to-square" class="fa-fw"></iconpark-icon>
+                                            <span i18n="menu_rename"><% app.languageData.menu_rename %></span>
+                                        </button>
+                                        <button class="dropdown-item" onclick="TL.dir.deleteFile('<% obj[x].ukey %>')" id="btn-mrdel-<% obj[x].ukey %>">
+                                            <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
+                                            <span i18n="menu_delete"><% app.languageData.menu_delete %></span>
+                                        </button> 
+                                        <!--[如果是图片，则可以被设置为背景]-->
+                                        <% if(obj[x].ftype=='png'||obj[x].ftype=='jpg'||obj[x].ftype=='jpeg'){ %>
+                                            <button onclick="TL.pf_mybg_set('light','<% obj[x].ukey %>')" class="dropdown-item">
+                                                <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
+                                                <span i18n="mybg_set_light"><% app.languageData.mybg_set_light %></span>
+                                            </button>
+                                            <button onclick="TL.pf_mybg_set('dark','<% obj[x].ukey %>')" class="dropdown-item">
+                                                <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
+                                                <span i18n="mybg_set_dark"><% app.languageData.mybg_set_dark %></span>
+                                            </button>
+                                        <% } %> 
+                                        <!--[检查此目录是否是直链目录]-->
+                                        <% if(TL.direct.is_allow()){ %>
+                                            <% if(TL.direct.dir_btn_status===false){ %>
+                                                <button onclick="TL.direct.addLink('<% obj[x].ukey %>','<% encodeURIComponent(obj[x].fname) %>')" class="dropdown-item">
+                                                    <iconpark-icon name="share-nodes" class="fa-fw"></iconpark-icon>
+                                                    <span i18n="menu_addlink"><% app.languageData.menu_addlink %></span>
+                                                </button>
+                                            <% } %>
+                                        <% } %>   
+                                    </div>
+                                </span>
+                            <% } %>
+                        </div>
+                        <div class="col-5 my-1 d-flex flex-row align-items-center justify-content-center file_relay_<% obj[x].ukey %>">
+                            <div class="d-block w-100">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
+                                        <% app.languageData.upload_sync_onprogress %>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="col-12 mt-2 download_progress_bar_<% obj[x].ukey %> mb-1" style="display:none">
+                            <div class="progress" style="height: 5px;">
+                                <div class="progress-bar bg-success download_progress_bar_set_<% obj[x].ukey %>" role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </script>
 
             <script type="text/template" id="meetroom_grid_tpl">
                 <% for (var x in obj) { %>
@@ -519,36 +519,36 @@
             </script>
 
             <script type="text/template" id="dir_list_tpl">
-                    <% for (var x in obj) { %>
-                        <div class="row line mx-0 mb-1 py-1 list-bar dir_<% obj[x].mr_id %>" id="meetingroom_id_<% obj[x].mr_id %>" name="items_box"
-                            tlunit="dir" tldata="<% obj[x].mr_id %>" tldid="0" tltitle="<% obj[x].name %>" onclick="TL.Selecter.onclickByList(this,event);">
-                            <div class="col-7 my-1 d-flex align-items-center listfontweight filename">
-                                <iconpark-icon name="<% TL.dir.getIcons(obj[x]) %>" class="fa-fw text-yellow"></iconpark-icon>
-                                &nbsp
-                                <a href="/app&listview=room&mrid=<% obj[x].mr_id %>" class="filelist_link" tmpui-action="TL.dir.open()">
-                                    <% obj[x].name %>
-                                </a>
-                            </div>
-                            <div  class="col-5 my-1 d-flex align-items-center justify-content-end">
-                                <span class="mr-2">
-                                    <% app.languageData.filelist_dir %>
-                                </span>
-                                <% if(TL.dir.room.model=='public'){ %>
-                                    <button onclick="TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/room/${obj[x].mr_id}`) %>',true)" class="in-public-dir text-azure btn btn-sm btn-light mr-1">
-                                        <iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon>
-                                    </button>
-                                <% }%>
-                                <% if (obj[x].type === 'owner') { %>
-                                    <button  onclick="TL.dir.reName('<% obj[x].mr_id %>')" class="text-azure btn btn-sm btn-light mr-1"><iconpark-icon name="pen-to-square" class="fa-fw"></iconpark-icon></button>
-                                    <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.dir.delete('<% obj[x].mr_id %>')"><iconpark-icon name="trash" class="fa-fw"></iconpark-icon></button>
-                                <% } %>
-                                <% if (obj[x].fav == 1) { %>
-                                    <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light" onclick="TL.dir.favoriteDel('<% obj[x].mr_id %>')"><iconpark-icon name="trash" class="fa-fw"></iconpark-icon></button>
-                                <% } %>
-                            </div>
+                <% for (var x in obj) { %>
+                    <div class="row line mx-0 mb-1 py-1 list-bar dir_<% obj[x].mr_id %>" id="meetingroom_id_<% obj[x].mr_id %>" name="items_box"
+                        tlunit="dir" tldata="<% obj[x].mr_id %>" tldid="0" tltitle="<% obj[x].name %>" onclick="TL.Selecter.onclickByList(this,event);">
+                        <div class="col-7 my-1 d-flex align-items-center listfontweight filename">
+                            <iconpark-icon name="<% TL.dir.getIcons(obj[x]).icon %>" class="fa-fw <% TL.dir.getIcons(obj[x]).color %>"></iconpark-icon>
+                            &nbsp
+                            <a href="/app&listview=room&mrid=<% obj[x].mr_id %>" class="filelist_link" tmpui-action="TL.dir.open()">
+                                <% obj[x].name %>
+                            </a>
                         </div>
-                    <% } %>
-                </script>
+                        <div  class="col-5 my-1 d-flex align-items-center justify-content-end">
+                            <span class="mr-2">
+                                <% app.languageData.filelist_dir %>
+                            </span>
+                            <% if(TL.dir.room.model=='public'){ %>
+                                <button onclick="TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/room/${obj[x].mr_id}`) %>',true)" class="in-public-dir text-azure btn btn-sm btn-light mr-1">
+                                    <iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon>
+                                </button>
+                            <% }%>
+                            <% if (obj[x].type === 'owner') { %>
+                                <button  onclick="TL.dir.reName('<% obj[x].mr_id %>')" class="text-azure btn btn-sm btn-light mr-1"><iconpark-icon name="pen-to-square" class="fa-fw"></iconpark-icon></button>
+                                <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light mx-1" onclick="TL.dir.delete('<% obj[x].mr_id %>')"><iconpark-icon name="trash" class="fa-fw"></iconpark-icon></button>
+                            <% } %>
+                            <% if (obj[x].fav == 1) { %>
+                                <button  id="btn-rm-file_<% obj[x].mr_id %>" class="text-red btn btn-sm btn-light" onclick="TL.dir.favoriteDel('<% obj[x].mr_id %>')"><iconpark-icon name="trash" class="fa-fw"></iconpark-icon></button>
+                            <% } %>
+                        </div>
+                    </div>
+                <% } %>
+            </script>
         </div>
     </div>
 </div>

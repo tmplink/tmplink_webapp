@@ -424,16 +424,25 @@ class dir {
     }
 
     getIcons(room){
+        let re = {icon:'',color:''};
         if(room.model === 'private'){
-            return 'folder-lock-one';
+            re.icon = 'folder-lock-one';
+            re.color = 'text-success';
+            return re;
         }
         if(room.publish === 'yes'){
-            return 'folder-conversion-one';
+            re.icon = 'folder-conversion-one';
+            re.color = 'text-yellow';
+            return re;
         }
         if(room.fav !== 0){
-            return 'folder-focus-one';
+            re.icon = 'folder-focus-one';
+            re.color = 'text-pink';
+            return re;
         }
-        return 'folder-open-e1ad2j7l';
+        re.icon = 'folder-open-e1ad2j7l';
+        re.color = 'text-yellow';
+        return re;
     }
 
     mobilePrepare() {
