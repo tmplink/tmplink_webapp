@@ -1209,7 +1209,7 @@ class tmplink {
                             $('.file_download_url').attr('href', download_url);
 
                             //QR Download
-                            $('#qr_code_url').attr('src', this.api_url + '/qr?code=' + Base64.encode(download_link));
+                            $('#qr_code_url').attr('src', 'https://' + this.site_domain + '/f/' + params.ukey);
 
                             $('#btn_download').attr('x-href', download_url);
                             $('#btn_highdownload').attr('x-href', download_url);
