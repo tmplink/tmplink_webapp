@@ -225,6 +225,7 @@ class tmplink {
     setBtnForSponsor() {
         $('.btn-upload').removeClass('btn-primary');
         $('.btn-upload').addClass('btn-red');
+        $('.not-vip').hide();
     }
 
     setArea(cb) {
