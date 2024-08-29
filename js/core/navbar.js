@@ -101,6 +101,7 @@ class navbar {
     model_workspace(act) {
         $('#navbar_model_icon').attr('name', 'inbox-success');
         $('#navbar_model_text').html(app.languageData.navbar_workspace);
+        $('#navbar_model_text').attr('i18n', 'navbar_workspace');
         if (act === true) {
             dynamicView.workspace();
         }
@@ -110,6 +111,7 @@ class navbar {
     model_notes(act){
         $('#navbar_model_icon').attr('name', 'lock');
         $('#navbar_model_text').html(app.languageData.navbar_notes);
+        $('#navbar_model_text').attr('i18n', 'navbar_notes');
         if (act === true) {
             dynamicView.notes();
         }
@@ -119,6 +121,7 @@ class navbar {
     model_desktop(act) {
         $('#navbar_model_icon').attr('name', 'folder-open-e1ad2j7l');
         $('#navbar_model_text').html(app.languageData.navbar_meetingroom);
+        $('#navbar_model_text').attr('i18n', 'navbar_meetingroom');
         if (act === true) {
             app.open('/room&mrid=0');
         }
@@ -128,6 +131,7 @@ class navbar {
     model_direct(act) {
         $('#navbar_model_icon').attr('name', 'share-nodes');
         $('#navbar_model_text').html(app.languageData.navbar_direct);
+        $('#navbar_model_text').attr('i18n', 'navbar_direct');
         if (act === true) {
             app.open('/app&listview=direct');
         }
