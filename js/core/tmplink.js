@@ -556,6 +556,11 @@ class tmplink {
             $('.to_be_sponsor').show();
         }
 
+        //如果语言不是中文，隐藏中文按钮
+        if (app.languageSetting !== 'cn') {
+            $('.lang-not-cn').hide();
+        }
+
         //如果是赞助者，激活特定按钮的颜色
         if (this.sponsor) {
             this.isSponsor = true;
