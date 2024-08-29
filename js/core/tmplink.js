@@ -2452,6 +2452,10 @@ class tmplink {
                 if (rsp.status === 1) {
                     $('#msg_notice').html(app.languageData.reg_finish);
                     $('#submit').html(app.languageData.reg_finish);
+                    //转化
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-977119233/7Pa-CNH4qbkBEIHQ9tED',
+                    });
                     this.get_details(() => {
                         setTimeout(() => {
                             dynamicView.workspace();

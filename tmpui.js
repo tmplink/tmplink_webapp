@@ -788,7 +788,6 @@ class tmpUI {
         }
 
         //根据选定的语言设置网页的语言
-        console.log(this.languageSetting);
         this.languageSetHead(this.languageSetting);
 
         //如果设定的语言不存在与配置文件中，则给定一个默认的语言配置
