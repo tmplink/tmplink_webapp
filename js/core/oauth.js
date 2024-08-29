@@ -140,6 +140,7 @@ class oauth {
             'action': 'oauth_google_login',
             'type': 'connect', //连接google
             'token': this.parent_op.api_token,
+            'lang': this.parent_op.currentLanguage, //语言
         }, (rsp) => {
             if (rsp.status == 1) {
                 //如果请求成功，通过另外的小窗口打开google登录的url，然后启动监听进程
