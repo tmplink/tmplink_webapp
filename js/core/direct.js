@@ -135,7 +135,6 @@ class direct {
             $('#direct_progress').hide();
         }else{
             //尚未完成部署，计算进度条，进度计算方式，300 秒为 100% 进度， hp_time 是剩余的秒数
-            console.log(this.hp_time);
             let percent = 100;
             if(this.hp_time>1){
                 percent = 100 - (this.hp_time / 300 * 100);
