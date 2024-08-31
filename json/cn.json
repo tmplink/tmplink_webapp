@@ -176,7 +176,7 @@
     "navbar_login": "登录",
     "navbar_reg": "注册",
     "navbar_orders": "已购项目",
-    "navbar_my": "我的",
+    "navbar_my": "会员信息",
     "model_profile_title": "偏好设定",
     "model_profile_confirm_delete": "是否启用删除前确认？",
     "model_profile_bulk_copy": "是否启用连续复制？<br>启用后您可以连续点击复制按钮以复制多个文件链接。",
