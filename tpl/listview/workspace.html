@@ -5,21 +5,21 @@
     </div>
 </div>
 <div id="filelist" class="card mt-5 shadow glass" style="display: none;">
-    <div class="card-header pt-3 card-radius">
-        <div class="mx-auto text-center mt-3">
-            <iconpark-icon name="inbox-success" class="fa-fw fa-2x"></iconpark-icon>
-            <span i18n="navbar_workspace" style="font-size: 25px;vertical-align: bottom;">.</span>
-            <div class="lead mt-2" id="workspace_total"></div>
-            <div class="mt-1">
-                <span class="upload_queue" style="display: none;">
-                    <iconpark-icon name="circle-arrow-up" class="fa-fw"></iconpark-icon>
-                    <span class="upload_queue_counter"></span>
-                    <span class="upload_speed"></span>
-                </span>
+    <div id="filelist_model" class="card-body">
+        <div class="pt-3">
+            <div class="mx-auto text-center mt-3">
+                <iconpark-icon name="inbox-success" class="fa-fw fa-2x"></iconpark-icon>
+                <span i18n="navbar_workspace" style="font-size: 25px;vertical-align: bottom;">.</span>
+                <div class="lead mt-2" id="workspace_total"></div>
+                <div class="mt-1">
+                    <span class="upload_queue" style="display: none;">
+                        <iconpark-icon name="circle-arrow-up" class="fa-fw"></iconpark-icon>
+                        <span class="upload_queue_counter"></span>
+                        <span class="upload_speed"></span>
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="filelist_model" class="card-body">
         <div class="p-3">
             <!--[搜索栏]-->
             <form autocomplete="off">
