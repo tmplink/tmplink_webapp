@@ -2390,6 +2390,8 @@ class tmplink {
         //重新初始化导航，目前有一个小问题，无法刷新导航，暂时不管。
         this.navbar.init(this);
         //debug('navbar reinit');
+        //如果当前语言不是中文，则覆盖一些支付系统的设置
+        this.buy.setAvaliablePayment();
     }
 
     languageBtnSet() {
