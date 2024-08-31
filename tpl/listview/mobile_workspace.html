@@ -197,17 +197,24 @@
         <script type="text/template" id="workspace_filelist_list_tpl">
             <% for (var x in obj) { %>
                 <div class="row mobile-list-bar file_unit_<% obj[x].ukey %>">
-                    <div class="col-2 mobile-list-icon-center" name="items_box" tlunit="file" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
+                    <div class="col-2 mobile-list-icon-center d-flex align-items-center" name="items_box" tlunit="file" tldata="<% obj[x].ukey %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
                         <iconpark-icon name="<% TL.fileicon(obj[x].ftype) %>" class="fa-fw fa-2x text-azure"></iconpark-icon>
                     </div>
-                    <div class="col-7 p-0">
-                        <div>
-                            <div class="mobile-list-filename">
-                                <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" class="filelist_link mr-1" target="_blank" onclick="event.stopPropagation();">
-                                    <% obj[x].fname %>
-                                </a>
-                            </div>
-                            
+                    <div class="col-8 p-0">
+                        <div class="text-truncate">
+                            <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" class="filelist_link mr-1" target="_blank" onclick="event.stopPropagation();">
+                                <% obj[x].fname %>
+                            </a>
+                        </div>
+                        <div class="text-muted">
+                            <% if(obj[x].model!=99){ %>
+                                <div class="text-muted">
+                                    <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
+                                    <span class="lefttime-remainder" id="wm_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
+                                </div>
+                            <% }else{ %>
+                                <span><% obj[x].cctime %></span>
+                            <% } %>
                             <% if(obj[x].dir_name!=null){ %>
                                 <div class="d-none d-lg-block" onclick="event.stopPropagation();">
                                     <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
@@ -219,32 +226,18 @@
                                 </span>
                             <% } %>
                         </div>
-                        <div class="text-muted">
-                            <span><% obj[x].cctime %></span>
-                            <span><% obj[x].fsize_formated %></span>
-                            <% if(obj[x].like>0){ %>
-                                <span>
-                                    <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
-                                    <% obj[x].like %>
-                                </span>
-                            <% } %>
-                        </div>
-                        <% if(obj[x].model!=99){ %>
-                            <div class="text-muted">
-                                <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
-                                <span class="lefttime-remainder" id="wm_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
-                            </div>
-                        <% } %>
                     </div>
-                    <div class="col-3 p-0 mobile-list-icon-center">
-                        <button onclick="event.stopPropagation();TL.download_direct('<% obj[x].ukey %>')" class="text-azure btn btn-sm btn-light mx-1 btn_download_<% obj[x].ukey %>">
-                            <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
-                        </button>
+                    <div class="col-2 mobile-list-icon-center">
                         <span class="dropdown">
-                            <button role="button" type="button" class="text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown">
+                            <button role="button" type="button" class="text-azure btn btn-sm mx-1" data-toggle="dropdown">
                                 <iconpark-icon name="ellipsis" class="fa-fw"></iconpark-icon>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right shadow">
+                                <!-- 下载按钮 -->
+                                <button onclick="TL.download_direct('<% obj[x].ukey %>')" class="dropdown-item">
+                                    <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
+                                    <span i18n="file_btn_download"><% app.languageData.file_btn_download %></span>
+                                </button>
                                 <button onclick="event.stopPropagation();TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/f/${obj[x].ukey}`) %>',true)" class="dropdown-item">
                                     <iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon>
                                     <span i18n="file_btn_copy"><% app.languageData.file_btn_copy %></span>
