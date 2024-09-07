@@ -58,7 +58,7 @@ class tmplink {
 
     //下面这段代码不适用
     recaptcha_actions = [
-        "token", "download_req", "stream_req",
+        "download_req", "stream_req",
     ]
 
     bulkCopyStatus = false
