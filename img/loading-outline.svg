@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; display: block;" width="auto" height="auto" viewBox="0 0 100 100" preserveAspectRatio="xMinYMin meet">
+  <!-- Animated rounded rectangles -->
+  <rect x="10" y="15" width="20" height="30" rx="3" ry="3" fill="#93dbe9">
+    <animate attributeName="y" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="25;35;35" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.2s"></animate>
+    <animate attributeName="height" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="50;30;30" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.2s"></animate>
+  </rect>
+  <rect x="40" y="15" width="20" height="30" rx="3" ry="3" fill="#689cc5">
+    <animate attributeName="y" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="25;35;35" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.1s"></animate>
+    <animate attributeName="height" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="50;30;30" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.1s"></animate>
+  </rect>
+  <rect x="70" y="15" width="20" height="30" rx="3" ry="3" fill="#5e6fa3">
+    <animate attributeName="y" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="25;35;35" keySplines="0 0.5 0.5 1;0 0.5 0.5 1"></animate>
+    <animate attributeName="height" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="50;30;30" keySplines="0 0.5 0.5 1;0 0.5 0.5 1"></animate>
+  </rect>
+</svg>

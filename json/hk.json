@@ -736,7 +736,7 @@
     "upload_limit_size": "目前只能上傳小於 50 GB 的檔案。",
     "upload_cancel": "上傳被用戶取消或者瀏覽器斷開連接。",
     "upload_ok": "上傳完成",
-    "upload_sync_onprogress": "正在傳送, 請稍後...",
+    "upload_sync_onprogress": "正在傳送",
     "upload_upload_prepare": "正在預處理...",
     "upload_upload_processing": "正在上傳：",
     "upload_ready": "等待上傳",

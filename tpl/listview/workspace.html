@@ -290,14 +290,31 @@
                             </div>
                         </span>
                     </div>
-                    <div class="col-5 my-1 d-flex flex-row align-items-center justify-content-center file_relay_<% obj[x].ukey %>">
-                        <div class="d-block w-100">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
-                                    <% app.languageData.upload_sync_onprogress %>
-                                </div>
+                    <div class="col-5 my-1 d-flex flex-row align-items-center justify-content-end file_relay_<% obj[x].ukey %>">
+                        <!-- [新方案] -->
+                        <span alt="<% obj[x].ctime %>" class="mr-2 d-none d-lg-block"><% obj[x].cctime %></span>
+                        <span class="mr-2"><% obj[x].fsize_formated %></span>
+                        <button class="text-azure btn btn-sm btn-light mx-1 disabled">
+                            <img class="fa-fw" src="/img/loading-outline.svg" style="width: 20px;"/>
+                        </button>
+                        <button class="text-azure  btn btn-sm btn-light mx-1" onclick="event.stopPropagation();TL.bulkCopy(this,'<% Base64Encode(`https://${TL.site_domain}/f/${obj[x].ukey}`) %>',true)">
+                            <iconpark-icon name="share-from-square" class="fa-fw"></iconpark-icon>
+                        </button>
+                        <span class="dropdown">
+                            <button role="button" type="button" class="text-azure btn btn-sm btn-light mx-1" data-toggle="dropdown">
+                                <iconpark-icon name="ellipsis" class="fa-fw"></iconpark-icon>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right shadow">
+                                <button onclick="TL.file_rename('<% obj[x].ukey %>','<% obj[x].fname_ex %>')" class="dropdown-item">
+                                    <iconpark-icon name="pen-to-square" class="fa-fw"></iconpark-icon>
+                                    <span i18n="menu_rename"><% app.languageData.menu_rename %></span>
+                                </button>
+                                <button id="btn-rm-file_<% obj[x].ukey %>" class="dropdown-item" onclick="TL.workspace_del('<% obj[x].ukey %>')">
+                                    <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
+                                    <span i18n="menu_delete"><% app.languageData.menu_delete %></span>
+                                </button> 
                             </div>
-                        </div>
+                        </span>
                     </div>
                     <div class="col-12 mt-2 download_progress_bar_<% obj[x].ukey %> mb-1" style="display:none">
                         <div class="progress" style="height: 5px;">

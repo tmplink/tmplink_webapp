@@ -35,14 +35,13 @@
                     </div>
                     <div class="col-2 text-right px-0">
                         <div class="dropdown btn_for_sub">
-                            <span class="text-azure" id="dropdownMenuButton" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                            <span class="text-azure" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
                                 <iconpark-icon name="gear" class="fa-fw fa-2x"></iconpark-icon>
                             </span>
                             <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
-                                
-                                <button class="dropdown-item room_btn_performance"
-                                    onclick="TL.dir.performanceOpen();">
+
+                                <button class="dropdown-item room_btn_performance" onclick="TL.dir.performanceOpen();">
                                     <iconpark-icon name="gear" class="fa-fw"></iconpark-icon>
                                     <span i18n="btn_performance">.</span>
                                 </button>
@@ -82,7 +81,8 @@
                             <span class="room_title"></span>
                         </div>
                         <div class="room_subinfo">
-                            <iconpark-icon id="dir_status" name="folder-open-e1ad2j7l" class="fa-fw text-yellow" style="font-size: 24px;"></iconpark-icon>
+                            <iconpark-icon id="dir_status" name="folder-open-e1ad2j7l" class="fa-fw text-yellow"
+                                style="font-size: 24px;"></iconpark-icon>
                             <span id="room_total"></span>
                         </div>
                     </div>
@@ -102,8 +102,8 @@
                                 <button class="btn btn-outline-secondary" type="button" onclick="TL.dir.filelist(0);"
                                     i18n="search_btn">.</button>
                             </div>
-                            <input type="search" id="room_search" class="form-control" placeholder="."
-                                i18n="search_plh" onkeyup="if(event.keyCode==13)TL.dir.filelist(0);"
+                            <input type="search" id="room_search" class="form-control" placeholder="." i18n="search_plh"
+                                onkeyup="if(event.keyCode==13)TL.dir.filelist(0);"
                                 style="border-top-right-radius: 8px;border-bottom-right-radius: 8px;">
                         </div>
                         <input style="display:none;">
@@ -122,7 +122,8 @@
                             <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
                                 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
-                                <iconpark-icon name="list-check" class="fa-fw"></iconpark-icon> <span i18n="on_select">.</span>
+                                <iconpark-icon name="list-check" class="fa-fw"></iconpark-icon> <span
+                                    i18n="on_select">.</span>
                             </button>
                             <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
                                 <button class="dropdown-item not_owner" onclick="TL.Selecter.delete()">
@@ -133,7 +134,8 @@
                                     <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
                                     <span i18n="on_select_download">.</span>
                                 </button>
-                                <button class="dropdown-item btn_for_copy_in_dir" onclick="TL.Selecter.directCopy('staticDirLink')">
+                                <button class="dropdown-item btn_for_copy_in_dir"
+                                    onclick="TL.Selecter.directCopy('staticDirLink')">
                                     <iconpark-icon name="link-horizontal" class="fa-fw text-azure"></iconpark-icon>
                                     <span i18n="menu_addlink">.</span>
                                 </button>
@@ -217,16 +219,18 @@
             </div>
 
             <div class="text-right userinfo text-muted mt-3" style="display: none;font-size: 14px;">
-                <span i18n="filepage_publicby_0">.</span> 
+                <span i18n="filepage_publicby_0">.</span>
                 <span class="userinfo_sd" style="display: none;"></span>
                 <span class="userinfo_pro text-azure" style="display: none;">
                     <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
                 </span>
-                <span class="userinfo_nickname"></span> 
+                <span class="userinfo_nickname"></span>
                 <span i18n="filepage_publicby_2">.</span>
             </div>
-            <div class="text-right btn-pointer" style="font-size: 14px;" id="downloadAlert" onclick="$('#downloadAlertModal').modal('show')">
-                <span><iconpark-icon name="triangle-exclamation-solid" style="font-size: 13px;color: #e9858e;"></iconpark-icon></span>
+            <div class="text-right btn-pointer" style="font-size: 14px;" id="downloadAlert"
+                onclick="$('#downloadAlertModal').modal('show')">
+                <span><iconpark-icon name="triangle-exclamation-solid"
+                        style="font-size: 13px;color: #e9858e;"></iconpark-icon></span>
                 <span i18n="da_dir" class="text-muted">此文件由第三方发布，请注意验证来源后再下载。</span>
             </div>
 
@@ -318,21 +322,20 @@
                         </div>
                         <div class="col-8 p-0">
                             <div class="text-truncate">
-                                <% if(obj[x].model!=99){ %>
-                                    <!--[这里处理剩余时间]-->
-                                    <span>
-                                        <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
-                                        <span class="lefttime-remainder ml-1" id="r_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
-                                    </span>
-                                <% }else{ %>  
-                                    <a href="/file?ukey=<% obj[x].ukey %>" class="filelist_link mr-1" tmpui-app="true" target="_blank" onclick="event.stopPropagation();">
-                                        <% obj[x].fname %>
-                                    </a>
-                                <% } %>  
+                                <a href="/file?ukey=<% obj[x].ukey %>" class="filelist_link mr-1" tmpui-app="true" target="_blank" onclick="event.stopPropagation();">
+                                    <% obj[x].fname %>
+                                </a>
                             </div>
                             <div class="text-muted">
+                                
+                            <% if(obj[x].sync===1){ %>
+                                <span class="fa-fw">
+                                    <img src="/img/loading-outline.svg" style="width:22px"/>
+                                </span>
+                                <span i18n="file_btn_download"><% app.languageData.upload_sync_onprogress %></span>
+                            <% }else{ %>
                                 <span>
-                                    <% obj[x].cctime %> <% obj[x].fsize_formated %>
+                                    <% obj[x].fsize_formated %>
                                 </span>
                                 <% if(obj[x].like>0){ %>
                                     <span>
@@ -340,6 +343,17 @@
                                         <span class="text-pink"><% obj[x].like %><span>
                                     </span>
                                 <% } %>
+                                <% if(obj[x].model!=99){ %>
+                                    <span>
+                                        <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
+                                        <span class="lefttime-remainder ml-1" id="r_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
+                                    </span>
+                                <% }else{ %>
+                                    <span>
+                                        <% obj[x].cctime %> <% obj[x].fsize_formated %>
+                                    </span>
+                                <% } %> 
+                            <% } %> 
                             </div>
                         </div>
                         <div class="col-2 mobile-list-icon-center">
@@ -423,15 +437,6 @@
                                     </div>
                                 </span>
                             <% } %>
-                        </div>
-                        <div class="col-12 my-1 d-flex flex-row align-items-center justify-content-center file_relay_<% obj[x].ukey %>">
-                            <div class="d-block w-100">
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
-                                        <% app.languageData.upload_sync_onprogress %>
-                                    </div>
-                                </div>
-                            </div> 
                         </div>
                         <div class="col-12 mt-2 download_progress_bar_<% obj[x].ukey %> mb-1" style="display:none">
                             <div class="progress" style="height: 5px;">

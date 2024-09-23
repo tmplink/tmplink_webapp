@@ -441,7 +441,7 @@
     "status_media_resolution": "The minimum supported video resolution is 640x480 and the maximum supported video is 4k.",
     "status_media_duration": "Minimum support for 5 seconds, maximum support for 5 hours video.",
     "status_media_usage": "Media library capacity is insufficient, please consider purchasing a larger capacity.",
-    "upload_sync_onprogress": "Uploading, please wait...",
+    "upload_sync_onprogress": "Synchronizing",
     "model_profile_title": "Preferences",
     "model_profile_bulk_copy": "Do you want to enable continuous copying?<br>After enabling you can click the copy button continuously to copy multiple file links.",
     "model_profile_confirm_delete": "Do you want to enable confirm again before deleting?",
