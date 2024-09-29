@@ -188,6 +188,21 @@ class dir {
         this.parent_op.is_file_ok_check(data);
     }
 
+    report() {
+        var mr_id = this.room.mr_id;
+        var reason = $('#room_report_model').val();
+        $('#room_reportbtn').attr('disabled', true);
+        $('#room_reportbtn').html(`<span class="text-red">${app.languageData.form_btn_processed}</span>`);
+        $.post(this.api_mr, {
+            'action': 'report',
+            'token': this.api_token,
+            'reason': reason,
+            'mr_id': mr_id
+        }, (rsp) => {
+            $('#room_reportbtn').html(app.languageData.form_btn_processed);
+        }, 'json');
+    }
+
     total(mrid) {
         $('.room_subinfo').hide();
         $('#room_total').html('');
