@@ -1809,7 +1809,7 @@ class tmplink {
             return false;
         }
         //在移动设备上无法使用全部下载功能
-        let room_key = 'app_room_view_' + this.room.mr_id;
+        let room_key = 'app_room_view_' + this.dir.room.mr_id;
         // if (isMobileScreen()) {
         //     this.alert(app.languageData.alert_no_support);
         //     return false;
@@ -2269,21 +2269,6 @@ class tmplink {
         } else {
             return false;
         }
-    }
-
-    dir_list_model(type) {
-        let room_key = 'app_room_view_' + this.room.mr_id;
-        switch (type) {
-            case 'photo':
-                localStorage.setItem(room_key, 'photo');
-                break;
-            case 'list':
-                localStorage.setItem(room_key, 'list');
-                break;
-            default:
-                localStorage.setItem(room_key, 'list');
-        }
-        this.dir.filelist(0);
     }
 
     dir_list_autoload_enabled() {

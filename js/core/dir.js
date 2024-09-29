@@ -157,8 +157,24 @@ class dir {
         });
     }
 
+    setModel(type) {
+        let room_key = 'app_room_view_' + this.room.mr_id;
+        switch (type) {
+            case 'photo':
+                localStorage.setItem(room_key, 'photo');
+                break;
+            case 'list':
+                localStorage.setItem(room_key, 'list');
+                break;
+            default:
+                localStorage.setItem(room_key, 'list');
+        }
+        this.filelist(0);
+    }
+
     listModel(data, page, room_id) {
         let room_key = 'app_room_view_' + room_id;
+        console.log(localStorage.getItem(room_key));
         switch (localStorage.getItem(room_key)) {
             case 'photo':
                 this.viewByPhoto(data, page);
