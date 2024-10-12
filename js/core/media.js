@@ -161,10 +161,6 @@ class media {
         $('#video_player_src').on('canplay', function () {
             $('#video_player_src').get(0).play();
         });
-
-        gtag('config', 'UA-96864664-3', {
-            'page_title': 'Play-' + title,
-        });
     }
 
     video_pause() {

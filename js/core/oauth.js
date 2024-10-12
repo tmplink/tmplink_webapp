@@ -58,9 +58,9 @@ class oauth {
                 //如果请求成功，进入主页
                 $('#google_login_msg').html(app.languageData.oauth_btn_complete);
                 //转化
-                gtag('event', 'conversion', {
-                    'send_to': 'AW-977119233/7Pa-CNH4qbkBEIHQ9tED',
-                });
+                // gtag('event', 'conversion', {
+                //     'send_to': 'AW-977119233/7Pa-CNH4qbkBEIHQ9tED',
+                // });
                 setTimeout(() => {
                     dynamicView.workspace();
                 }, 1000);
