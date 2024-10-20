@@ -1202,6 +1202,14 @@ class tmplink {
                             this.ui_hs_change('enhanced');
                         }
 
+                        // 修改按钮颜色
+                        $('#file_download_btn').removeClass('btn-success');
+                        $('#file_download_btn').addClass('btn-azure');
+
+                        // 修改文本为开始下载
+                        $('#file_download_btn').html(app.languageData.status_file_3);
+                        $('#file_download_btn').attr('disabled', true);
+
                         this.recaptcha_do('download_req', (recaptcha) => {
                             // 创建 XHR 对象
                             const xhr = new XMLHttpRequest();
@@ -1220,13 +1228,7 @@ class tmplink {
 
                             // 定义响应处理函数
                             xhr.onload =  (rsp) => {
-                                // 修改按钮颜色
-                                $('#file_download_btn').removeClass('btn-success');
-                                $('#file_download_btn').addClass('btn-azure');
-
-                                // 修改文本为开始下载
-                                $('#file_download_btn').html(app.languageData.status_file_3);
-                                $('#file_download_btn').attr('disabled', true);
+                                
 
                                 // 3秒后解除
                                 setTimeout(() => {
