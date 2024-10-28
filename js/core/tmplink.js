@@ -1172,7 +1172,9 @@ class tmplink {
                     let share_url = 'https://' + this.site_domain + '/f/' + params.ukey;
 
                     //QR Download
-                    $('#qr_code_url').attr('src', 'https://' + this.site_domain + '/f/' + params.ukey);
+                    new QRCode(document.getElementById("qr_code_url"), share_url);
+                    //让 qr_code_url 下的 img 居中
+                    $('#qr_code_url img').css('margin', 'auto');
                     $('.btn_copy_fileurl').attr('data-clipboard-text', share_url);
                     $('.file_ukey').attr('data-clipboard-text', params.ukey);
 
