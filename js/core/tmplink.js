@@ -1209,7 +1209,7 @@ class tmplink {
                         $('#file_download_btn').addClass('btn-azure');
 
                         // 修改文本为开始下载
-                        $('#file_download_btn').html(app.languageData.status_file_3);
+                        $('#file_download_btn').html('<img id="top_loggo" src="/img/loading.svg" style="width: 24px;">');
                         $('#file_download_btn').attr('disabled', true);
 
                         this.recaptcha_do('download_req', (recaptcha) => {
