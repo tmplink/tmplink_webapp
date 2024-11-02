@@ -418,11 +418,11 @@ class uploader {
                                 this.upload_worker(f, sha1, id, filename);
                                 break;
                             //文件已被上传，并且已经在文件夹中
-                            case '1':
+                            case 1:
                                 this.upload_final(rsp, file, id, true);
                                 break;
                             //文件已被上传,但是不在文件中，调用 prepare 处理
-                            case '2':
+                            case 2:
                                 $.post(this.parent_op.api_file, {
                                     'sha1': sha1,
                                     'filename': filename,
