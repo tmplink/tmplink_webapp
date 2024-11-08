@@ -162,7 +162,7 @@ class profile {
         setTimeout(() => {
             $('#userGroupsModal').modal('show');
         }
-        , 500);
+        , 100);
     }
 
     avatarSet(logo) {

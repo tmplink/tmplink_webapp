@@ -36,7 +36,7 @@ class buy {
         $('#shopModal').modal('hide');
         setTimeout(() => {
             $('#directQuotaModal').modal('show');
-        }, 300);
+        }, 100);
     }
 
     openStorage() {
@@ -49,7 +49,7 @@ class buy {
         $('#myModal').modal('hide');
         setTimeout(() => {
             $('#storageModal').modal('show');
-        }, 300);
+        }, 100);
     }
 
     openSponsor() {
@@ -62,7 +62,7 @@ class buy {
         $('#myModal').modal('hide');
         setTimeout(() => {
             $('#sponsorModal').modal('show');
-        }, 300);
+        }, 100);
     }
 
     selectCode(dom, code, price) {

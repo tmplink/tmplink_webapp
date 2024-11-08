@@ -1943,7 +1943,7 @@ class tmplink {
         $('#shopModal').modal('hide');
         setTimeout(() => {
             $('#buySelectModal').modal('show');
-        }, 500);
+        }, 100);
 
     }
 
@@ -1963,7 +1963,7 @@ class tmplink {
             if (this.buy_type == 'direct') {
                 this.direct_buy_modal(type);
             }
-        }, 500);
+        }, 100);
 
     }
 
