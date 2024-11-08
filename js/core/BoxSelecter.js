@@ -59,7 +59,6 @@ class BoxSelecter {
         //获取当前的mrid
         let url = get_url_params();
         let mrid = url.mrid;
-        console.log(mrid);
         //如果是移动设备，并且mrid不等于0
         if (isMobileScreen()&&mrid != 0) {
             //如果有被选中的项目，则显示
@@ -90,6 +89,22 @@ class BoxSelecter {
             }
             this.lastSelectedNode = node;
         }
+
+        //检查所有已选中的选项，如果没有 file，则隐 .btn_for_copy_in_dir
+        let file_hit = false;
+        for (let i = 0; i < node.length; i++) {
+            let inode = node[i];
+            let check = inode.getAttribute('data-check');
+            if (check === 'true'&&inode.getAttribute('tlunit')==='file') {
+                file_hit = true;
+            }
+        }
+        if (file_hit) {
+            $('.btn_for_copy_in_dir').show();
+        } else {
+            $('.btn_for_copy_in_dir').hide();
+        }
+
         this.mobileHeadShow();
     }
 
@@ -370,10 +385,11 @@ class BoxSelecter {
     directCopy(type) {
         var node = document.getElementsByName(this.items_name);
         let copyText = '';
+        console.log(node);
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
             let check = inode.getAttribute('data-check');
-            if (check === 'true') {
+            if (check === 'true'&&inode.getAttribute('tlunit')==='file') {
                 //do something
                 let dkey = inode.getAttribute('tldata');
                 let fname = inode.getAttribute('tltitle');
