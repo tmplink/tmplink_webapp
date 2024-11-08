@@ -385,7 +385,6 @@ class BoxSelecter {
     directCopy(type) {
         var node = document.getElementsByName(this.items_name);
         let copyText = '';
-        console.log(node);
         for (let i = 0; i < node.length; i++) {
             var inode = node[i];
             let check = inode.getAttribute('data-check');
