@@ -56,7 +56,12 @@ class BoxSelecter {
     }
 
     mobileHeadShow() {
-        if (isMobileScreen()) {
+        //获取当前的mrid
+        let url = get_url_params();
+        let mrid = url.mrid;
+        console.log(mrid);
+        //如果是移动设备，并且mrid不等于0
+        if (isMobileScreen()&&mrid != 0) {
             //如果有被选中的项目，则显示
             if ($(`[data-check="true"]`).length > 0) {
                 $('.mobile-head-selector').show();
