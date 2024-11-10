@@ -76,6 +76,11 @@ class direct {
                 $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
             }
 
+            //如果尚未初始化，隐藏 ready_to_buy_quato
+            if (this.domain == 0) {
+                $('.ready_to_buy_quato').hide();
+            }
+
             //如果 ssl_acme 是 true，标记为自动申请证书
             if (this.ssl_acme) {
                 this.protocol = 'https://';
