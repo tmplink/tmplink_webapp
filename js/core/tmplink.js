@@ -1117,6 +1117,11 @@ class tmplink {
                         }
                     }
 
+                    //如果包含了 NSFW 内容
+                    if (rsp.data.nsfw === true) {
+                        $('#nsfw_alert').show();
+                    }
+
                     //设定分享者信息
                     if (rsp.data.ui_publish === 'yes' && rsp.data.ui_publish_status === 'ok') {
                         if (rsp.data.ui_pro === 'yes') {

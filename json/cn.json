@@ -847,6 +847,8 @@
     "dl_hot_download_nodata":"暂无数据",
     "dl_hot_download_filename":"文件名",
     "dl_hot_download_times":"下载次数",
+
+    "filepage_nsfw_alert":"注意：此文件包含 NSFW 内容",
     
     "chart_title_direct_uage": "直链使用情况",
     "download_run": "正在下载:",
