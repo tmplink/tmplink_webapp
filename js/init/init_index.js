@@ -1,7 +1,9 @@
 setThemeColor();
+var TMPLINK_API_USER = 'https://tmp-api.vx-cdn.com/api_v2/user';
+var TMPLINK_API_TOKEN = 'https://tmp-api.vx-cdn.com/api_v2/token';
 
 let xhr = new XMLHttpRequest();
-xhr.open('POST', this.api_tokx, true);
+xhr.open('POST', TMPLINK_API_TOKEN, true);
 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
 xhr.onreadystatechange = () => {
@@ -90,7 +92,7 @@ function Login() {
 
 
 async function autoLogin() {
-    const api_url = 'https://tmp-api.vx-cdn.com/api_v2/user';
+    const api_url = TMPLINK_API_USER;
     const api_token = localStorage.getItem('app_token');
 
     //show loading spinner
