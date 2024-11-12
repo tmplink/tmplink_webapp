@@ -234,15 +234,15 @@ class tmplink {
         }, (rsp) => {
             if (rsp.data === 1) {
                 this.area_cn = true;
-                //当为中国大陆地区时，检查主机名是否为ttttt.link，如果不是则跳转到ttttt.link
-                // if (window.location.hostname !== 'ttttt.link' && window.location.hostname !== '127.0.0.1') {
-                //     //如果有参数
-                //     let params = '';
-                //     if (window.location.search !== '') {
-                //         params = window.location.search;
-                //     }
-                //     window.location.href = 'https://ttttt.link' + params;
-                // }
+                //当为中国大陆地区时，检查主域名是否为www.ttttt.link，如果不是则跳转到ttttt.link
+                if (window.location.hostname !== 'www.ttttt.link' && window.location.hostname !== '127.0.0.1') {
+                    //如果有参数
+                    let params = '';
+                    if (window.location.search !== '') {
+                        params = window.location.search;
+                    }
+                    window.location.href = 'https://www.ttttt.link' + params;
+                }
                 // $('.btn_play').hide();
             } else {
                 this.area_cn = false;
