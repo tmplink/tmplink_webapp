@@ -1,4 +1,33 @@
 setThemeColor();
+
+let xhr = new XMLHttpRequest();
+xhr.open('POST', this.api_tokx, true);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+xhr.onreadystatechange = () => {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+            let rsp = JSON.parse(xhr.responseText);
+            if (rsp.data === 1) {
+                this.area_cn = true;
+                //当为中国大陆地区时，检查主域名是否为www.ttttt.link，如果不是则跳转到www.ttttt.link
+                if (window.location.hostname !== 'www.ttttt.link' && window.location.hostname !== '127.0.0.1') {
+                    //如果有参数
+                    let params = '';
+                    if (window.location.search !== '') {
+                        params = window.location.search;
+                    }
+                    window.location.href = 'https://www.ttttt.link' + params;
+                }
+            }
+        }
+    }
+};
+
+let params = new URLSearchParams();
+params.append('action', 'set_area');
+xhr.send(params.toString());
+
 app.ready(
     () => {
         let lang = app.languageSetting;
