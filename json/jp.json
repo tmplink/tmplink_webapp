@@ -1,4 +1,5 @@
 {
+    "privacy_nsfw": "Your uploaded files will not be used for AI training, but we will use AI to label your files - for example, files containing NSFW content will be tagged with an NSFW label.",
     "filepage_nsfw_alert": "注意：このファイルは NSFW コンテンツを含んでいます",
     "navbar_analytics": "データ分析",
     "dl_modal_title": "データ分析",
@@ -782,7 +783,7 @@
     "privacy_10": "We use cookie to understand user behavior, so that we could continuously improve our service to fit your needs.",
     "privacy_11": "Data usage and protection",
     "privacy_12": "As the service runs, we collect a lot of your information, which is encrypted and archived using industry-standard standards.",
-    "privacy_13": "Last updated: 15 September2022, TMP.link reserves all rights.",
+    "privacy_13": "Last updated: November 14, 2024, TMP.link reserves all rights.",
     "footer_tos": "利用規約",
     "footer_privacy": "プライバシー",
     "footer_contact": "お問い合わせ",
