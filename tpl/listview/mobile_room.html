@@ -244,7 +244,10 @@
                                 <div class="card-body">
                                     <div style="height:220px;" class="mb-2">
                                         <% if(obj[x].sync=='1'){ %>
-                                            <img src="/img/loading.png" style="height:220px;" />
+                                            <img src="/img/loading.png" style="height:220px;border-radius: 10px;" />
+                                        <% } %>
+                                        <% if(obj[x].nsfw==='yes'){ %>
+                                            <img src="/img/nsfw.jpg" style="height:220px;border-radius: 10px;" />
                                         <% }else{ %>
                                             <a href="javascript:;" onclick="TL.previewModel('<% obj[x].ukey %>','<% obj[x].fname %>',<% x %>)">
                                                 <img class='lazyload' src="/img/loading.svg" data-src="https://tmp-static.vx-cdn.com/img-<% obj[x].ukey %>-360x220.jpg" style="height:220px;border-radius: 10px;" />
