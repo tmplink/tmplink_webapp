@@ -1,3 +1,79 @@
+/**
+ * Adds dark mode styles to chart options with transparent background
+ * @param {Object} options - Original chart options
+ * @returns {Object} The modified options with theme styles
+ */
+function getChartThemeOptions(options) {
+    // Detect dark mode
+    const isDarkMode = 
+        document.documentElement.classList.contains('dark') || 
+        document.body.classList.contains('dark') ||
+        window.matchMedia('(prefers-color-scheme: dark)').matches || 
+        localStorage.getItem('theme') === 'dark';
+
+    // Override styles
+    return {
+        ...options,
+        chart: {
+            ...options.chart,
+            background: 'transparent',
+            foreColor: isDarkMode ? '#e1e1e1' : '#304758',
+            toolbar: {
+                show: true
+            }
+        },
+        grid: {
+            ...options.grid,
+            show: false
+        },
+        tooltip: {
+            ...options.tooltip,
+            theme: isDarkMode ? 'dark' : 'light'
+        },
+        dataLabels: {
+            ...options.dataLabels,
+            offsetY: -20,  // 恢复向上偏移
+            style: {
+                ...options.dataLabels?.style,
+                colors: [isDarkMode ? '#e1e1e1' : '#304758']
+            }
+        },
+        plotOptions: {
+            ...options.plotOptions,
+            bar: {
+                ...options.plotOptions?.bar,
+                columnWidth: '60%',
+                borderRadius: 4
+            }
+        },
+        yaxis: {
+            ...options.yaxis,
+            labels: {
+                ...options.yaxis?.labels,
+                style: {
+                    colors: isDarkMode ? '#e1e1e1' : '#304758'
+                }
+            }
+        },
+        xaxis: {
+            ...options.xaxis,
+            labels: {
+                ...options.xaxis?.labels,
+                style: {
+                    colors: isDarkMode ? '#e1e1e1' : '#304758'
+                },
+                offsetY: -10  // 保持 X 轴标签的上方偏移
+            },
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false
+            }
+        }
+    };
+}
+
 function getSortKeys() {
     let key = get_page_mrid();
 

@@ -944,6 +944,9 @@ class direct {
                         },
                     }
                 },
+                tooltip: {
+                    enabled: false // 全局禁用 tooltip
+                },
                 dataLabels: {
                     enabled: true,
                     formatter: function (val) {
@@ -978,7 +981,7 @@ class direct {
                         }
                     },
                     tooltip: {
-                        enabled: true,
+                        enabled: false,
                     }
                 },
                 yaxis: {
@@ -1002,6 +1005,9 @@ class direct {
                     }
                 }
             };
+
+            options = getChartThemeOptions(options);
+
             if(this.traffic_chart!==null){
                 this.traffic_chart.destroy();
             }

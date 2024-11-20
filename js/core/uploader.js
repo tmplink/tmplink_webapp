@@ -94,6 +94,9 @@ class uploader {
                     enabled: true
                 },
             },
+            tooltip: {
+                enabled: false // 全局禁用 tooltip
+            },
             dataLabels: {
                 enabled: false
             },
@@ -132,6 +135,8 @@ class uploader {
                 show: true, // 显示网格线
             },
         };
+
+        options = getChartThemeOptions(options);
 
         this.speed_chart = new ApexCharts(document.querySelector("#upload_speed_chart"), options);
         this.speed_chart.render();

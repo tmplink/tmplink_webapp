@@ -44,6 +44,9 @@ class chart {
                         enabled: true
                     },
                 },
+                tooltip: {
+                    enabled: false // 全局禁用 tooltip
+                },
                 dataLabels: {
                     enabled: false
                 },
@@ -73,6 +76,8 @@ class chart {
                     show: true,
                 },
             };
+
+            options = getChartThemeOptions(options);
     
             this.speed_chart = new ApexCharts(document.querySelector("#dl_c_chart1"), options);
             this.speed_chart.render();
