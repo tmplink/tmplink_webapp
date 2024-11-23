@@ -65,6 +65,15 @@ class buy {
         }, 100);
     }
 
+    openBlackFriday() {
+        this.selected_type = 'addon';
+        this.selected_price = 36;
+        this.selectTime('a');
+        this.setAvaliablePayment();
+        this.selected_code = 'BF';
+        $('#blackfridayModal').modal('show');
+    }
+
     selectCode(dom, code, price) {
         this.selected_code = code;
         this.selected_price = price;

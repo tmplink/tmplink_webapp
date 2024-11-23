@@ -2199,6 +2199,10 @@ class tmplink {
                     r[i].des = app.languageData.service_code_media_des;
                     r[i].icon = 'circle-video';
                     break;
+                    //找不到对应的 code ，丢弃该单元
+                default:
+                    delete r[i];
+                    break;
             }
         }
         return r;

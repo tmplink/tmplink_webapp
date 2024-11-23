@@ -1803,24 +1803,58 @@
         <div class="modal-content shadow-lg">
             <div class="modal-header">
                 <h4 class="modal-title">
-                    <iconpark-icon name="triangle-exclamation-solid"></iconpark-icon>
-                    <span i18n="da_modal_title">黑五特别活动</span>
+                    <iconpark-icon name="gift-bag"></iconpark-icon>
+                    <span i18n="bf_modal_title">黑五特别活动</span>
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h2 i18n="da_modal_title_2">赞助者会员，50% 折扣</h2>
-                <p i18n="da_modal_p_1">感谢您对钛盘的支持！在黑五期间，赞助者会员享受 50% 折扣，即 36 元/年。</p>
+                <h2 i18n="bf_modal_title_2">成为赞助者，50% 折扣</h2>
+                <p i18n="bf_modal_p_1">感谢您对钛盘的支持！在黑五期间，赞助者会员享受 50% 折扣，即 36 元/年。</p>
+                <ul>
+                    <li i18n="sponsor_right_1">.</li>
+                    <li i18n="sponsor_right_2">.</li>
+                    <li i18n="sponsor_right_3">.</li>
+                    <li i18n="sponsor_right_4">.</li>
+                    <li i18n="sponsor_right_5">.</li>
+                    <li i18n="sponsor_right_6">.</li>
+                </ul>
                 <!-- 购买按钮，直接提供支付宝或者 PayPal -->
-                <div class="text-center">
-                    <button type="button" class="btn btn-primary" i18n="user_save"
-                        onclick="TL.buy.openSponsor()">支付宝</button>
-                    <button type="button" class="btn btn-primary" i18n="user_save"
-                        onclick="TL.buy.openSponsor()">PayPal</button>
+                <h3 i18n="model_title_buy_select">.</h3>
+                <div class="row">
+                    <div class="col-6 buy_payment_cny" onclick="TL.buy.selectPayment('cny')">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h4>
+                                    <iconpark-icon name="alipay" class="fa-fw"></iconpark-icon>
+                                    AliPay
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 buy_payment_usd" onclick="TL.buy.selectPayment('usd')">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h4>
+                                    <iconpark-icon name="cc-paypal" class="fa-fw"></iconpark-icon>
+                                    PayPal
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <h3 i18n="payment_total">.</h3>
+                    <h3>
+                        <span class="payment_units"></span>
+                        <span class="payment_total"></span>
+                    </h3>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+                <button type="button" class="btn btn-success" i18n="model_buy_btn"
+                    onclick="TL.buy.makeOrder();">.</button>
             </div>
         </div>
     </div>

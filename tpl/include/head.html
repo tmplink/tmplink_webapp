@@ -18,19 +18,37 @@
                         <span class="user_saved_nickname">.</span>
                         <span>
                             <img class="user_level_icon" src="/img/level/1.svg" width="22" />
-                            <img class="show_for_sponsor" src="/img/level/like.svg" width="22" style="display: none;margin-top: -2px;" />
-                            <img class="show_for_sponsor" src="/img/level/play.svg" width="22" style="display: none;margin-top: -1px;" />
-                            <img class="show_for_sponsor" src="/img/level/check.svg" width="22" style="display: none;margin-top: -1px;" />
+                            <img class="show_for_sponsor" src="/img/level/like.svg" width="22"
+                                style="display: none;margin-top: -2px;" />
+                            <img class="show_for_sponsor" src="/img/level/play.svg" width="22"
+                                style="display: none;margin-top: -1px;" />
+                            <img class="show_for_sponsor" src="/img/level/check.svg" width="22"
+                                style="display: none;margin-top: -1px;" />
                         </span>
                     </div>
                     <div class="text-muted" style="font-size:13px;">
-                        <span class="user_storage_used">.</span> / 
+                        <span class="user_storage_used">.</span> /
                         <span class="user_storage_total">.</span>
                     </div>
                 </span>
             </div>
         </span>
         <h6话 class="float-right text-center">
+
+            <!-- 特别优惠活动 -->
+            <div class="workspace-navbar nav-units">
+                <span>
+                    <button class="btn p-0 topnav_events" onclick="TL.buy.openBlackFriday();">
+                        <div>
+                            <iconpark-icon name="gift-bag" class="fa-fw text-red"></iconpark-icon>
+                        </div>
+                        <div>
+                            <span i18n="navbar_special_events">.</span>
+                        </div>
+                    </button>
+                </span>
+            </div>
+
             <div class="workspace-navbar nav-units">
                 <span>
                     <a class="btn p-0 topnav_workspace" href="/app&listview=workspace"
@@ -73,7 +91,8 @@
 
             <div class="workspace-navbar nav-units">
                 <span>
-                    <a class="btn p-0 topnav_desktop" href="/app&listview=room&mrid=0" tmpui-action="dynamicView.room();">
+                    <a class="btn p-0 topnav_desktop" href="/app&listview=room&mrid=0"
+                        tmpui-action="dynamicView.room();">
                         <div><iconpark-icon name="folder-open-e1ad2j7l" class="fa-fw"></iconpark-icon></div>
                         <div><span i18n="navbar_meetingroom">.</span></div>
                     </a>
@@ -141,7 +160,7 @@
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
-                    
+
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#passwordModal').modal('show');">
                         <iconpark-icon name="key" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_reset_password">.</span>
@@ -157,7 +176,7 @@
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
-                    
+
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#connectedModal').modal('show');">
                         <iconpark-icon name="google" class="fa-fw"></iconpark-icon>
                         <span>
@@ -197,7 +216,7 @@
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
                 </div>
             </div>
-        </span>
+            </span>
     </div>
 </nav>
 
@@ -329,7 +348,7 @@
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
-                    
+
                     <a class="dropdown-item lang-not-cn" href="https://bbs.tmp.link" target="_blank">
                         <iconpark-icon name="comments" class="fa-fw"></iconpark-icon>
                         <span>
@@ -352,7 +371,7 @@
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
-                    
+
                     <a class="dropdown-item" href="javascript:void(0)" onclick="$('#connectedModal').modal('show');">
                         <iconpark-icon name="google" class="fa-fw"></iconpark-icon>
                         <span>
