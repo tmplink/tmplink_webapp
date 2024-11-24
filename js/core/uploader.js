@@ -51,6 +51,10 @@ class uploader {
             if (rsp.status === 1) {
                 this.upload_worker_queue_max = rsp.data.upload_slice_thread_max;
                 this.upload_queue_max = rsp.data.upload_slice_queue_max;
+                //upload_slice_size不能大于80
+                if (rsp.data.upload_slice_size > 80) {
+                    rsp.data.upload_slice_size = 80;
+                }
                 this.slice_size = rsp.data.upload_slice_size * (1024 * 1024);
                 //更新到界面
                 $('#upload_slice_size').val(rsp.data.upload_slice_size);
@@ -169,9 +173,9 @@ class uploader {
     auto_set_upload_pf(dom) {
         //获取当前值
         let val = $(dom).val();
-        //输入的值不能大于 100，不能小于 1
-        if (val > 100) {
-            val = 100;
+        //输入的值不能大于 80，不能小于 1
+        if (val > 80) {
+            val = 80;
         }
         if (val < 1) {
             val = 1;
