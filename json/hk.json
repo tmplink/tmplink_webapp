@@ -1,4 +1,9 @@
 {
+    "special_event":"黑色星期五優惠：高速下載與線上播放，僅需 $6/年",
+    "navbar_special_events": "特賣",
+    "bf_modal_title": "黑色星期五",
+    "bf_modal_title_2": "成為贊助者，50% 折扣",
+    "bf_modal_p_1": "感謝您對鈦盤的支持！在黑五期間，成為贊助者可享有 50% 折扣。",
     "privacy_nsfw": "您上傳的檔案不會被用於 AI 訓練，但是我們會針對您上傳的檔案進行 AI 標記，例如包含了 NSFW 內容的檔案，會被打上 NSFW 標籤。",
     "filepage_nsfw_alert": "注意：此檔案包含成人內容",
     "navbar_analytics": "檔案分析",
