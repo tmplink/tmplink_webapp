@@ -76,10 +76,7 @@
 
 <div class="modal" id="uploadModal">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content" style="transition: all 0.3s ease;"
-            ondragover="event.preventDefault(); document.getElementById('upload_select_box').style.borderColor='rgba(0,123,255,0.5)'; document.getElementById('upload_select_box').style.backgroundColor='rgba(0,123,255,0.1)'; document.getElementById('upload_select_box').style.boxShadow='0 0 20px rgba(0,123,255,0.3)';"
-            ondragleave="document.getElementById('upload_select_box').style.borderColor=''; document.getElementById('upload_select_box').style.backgroundColor=''; document.getElementById('upload_select_box').style.boxShadow='';"
-            ondrop="event.preventDefault(); TL.uploader.drop(event); document.getElementById('upload_select_box').style.borderColor=''; document.getElementById('upload_select_box').style.backgroundColor=''; document.getElementById('upload_select_box').style.boxShadow='';">
+        <div class="modal-content" style="transition: all 0.3s ease;">
             <div class="modal-header">
                 <h4 class="modal-title">
                     <span i18n="model_title_upload">.</span>
@@ -91,16 +88,11 @@
                     系统维护中，暂停提供上传服务。    
                 </div> -->
                 <!--[新设计]-->
-                <div class="select-box-all p-2" id="selected_model_box" style="display: none;">
-                    <button type="button" class="btn btn-primary btn-sm text-right" onclick="TL.uploader.model_reset()"
-                        i18n="modal_settings_upload_model_reset">.</button>
-                    <span id="seleted_model"></span>
-                </div>
                 <div id="select_model_list">
-
                     <div>
                         <div class="text-center mb-3">
-                            <div class="font-weight-light" style="font-size: 30px;" i18n="modal_settings_upload_model_unlimited">.</div>
+                            <div class="font-weight-light" style="font-size: 30px;"
+                                i18n="modal_settings_upload_model_unlimited">.</div>
                         </div>
                         <div class="select-box p-2 btn-point" onclick="TL.uploader.model_selected(0)">
                             <div class="d-flex align-items-center">
@@ -154,7 +146,8 @@
                     <hr>
                     <div>
                         <div class="text-center mb-3">
-                            <div class="font-weight-light" style="font-size: 30px;" i18n="model_title_buy_storage">.</div>
+                            <div class="font-weight-light" style="font-size: 30px;" i18n="model_title_buy_storage">.
+                            </div>
                             <div id="upload_storage_status"></div>
                         </div>
                         <div class="select-box p-2 btn-point storage_needs" onclick="TL.uploader.model_selected(99)">
@@ -188,46 +181,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div id="upload_select_file" style="display: none;">
-                    <div class="select-box p-2 btn-point" id="upload_select_box">
-                        <input type="file" multiple="multiple" id="fileToUpload" style="display: none;"
-                            onchange="TL.uploader.selected(this);" />
-                        <label for="fileToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
-                            <div class="d-flex align-items-center">
-                                <span class="stamp-md mr-3" id="tmp_upload_btn2">
-                                    <iconpark-icon name="cloud-arrow-up" class="fa-fw fa-2x text-blue"></iconpark-icon>
-                                </span>
-                                <div>
-                                    <h4 class="m-0" i18n="model_title_upload">
-                                        .
-                                    </h4>
-                                    <small class="text-muted" i18n="model_title_upload_des">
-                                        .
-                                    </small>
-                                </div>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="select-box p-2 btn-point dirsToUpload_label">
-                        <input type="file" id="dirsToUpload" style="display: none;" multiple directory webkitdirectory
-                            mozdirectory onchange="TL.uploader.dir_selected(this);" />
-                        <label for="dirsToUpload" style="width: 100%;height: 100%;margin-bottom: 0px;">
-                            <div class="d-flex align-items-center">
-                                <span class="stamp-md mr-3">
-                                    <iconpark-icon name="folder-arrow-up" class="fa-fw fa-2x text-blue"></iconpark-icon>
-                                </span>
-                                <div>
-                                    <h4 class="m-0" i18n="upload_dirs">
-                                        .
-                                    </h4>
-                                    <small class="text-muted" i18n="upload_dirs_des">
-                                        .
-                                    </small>
-                                </div>
-                            </div>
-                        </label>
+                    <hr>
+                    <div class="text-center mb-3">
+                        <div class="font-weight-light" style="font-size: 30px;" i18n="navbar_profile">.</div>
                     </div>
                     <div class="select-box p-2 btn-point uploader_opt">
                         <div class="d-flex align-items-center" onclick="$('#upload_slice_settings').toggle();">
@@ -310,6 +266,10 @@
                                 </small>
                             </span>
                         </div>
+                    </div>
+                    <hr>
+                    <div class="text-center mb-3">
+                        <div class="font-weight-light" style="font-size: 30px;" i18n="model_btn_upload_cli">.</div>
                     </div>
                     <div class="select-box p-2 btn-point uploader_opt" onclick="TL.cli_uploader_generator2();">
                         <div class="d-flex align-items-center">
@@ -399,6 +359,120 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+
+                <div id="upload_select_file" style="display: none;">
+                    <div class="select-box-all p-2" id="selected_model_box" style="display: none;">
+                        <button type="button" class="btn btn-primary btn-sm text-right"
+                            onclick="TL.uploader.model_reset()" i18n="modal_settings_upload_model_reset">.</button>
+                        <span id="seleted_model"></span>
+                    </div>
+
+                    <div class="mb-2">
+                        <style>
+                            .upload-area {
+                                border: 2px dashed #ddd;
+                                border-radius: 8px;
+                                padding: 20px 20px;
+                                text-align: center;
+                                background: #f8f9fa;
+                                transition: all 0.3s ease;
+                                cursor: pointer;
+                            }
+
+                            .upload-area:hover {
+                                border-color: #007bff;
+                                background: #f1f3f5;
+                            }
+
+                            .upload-icon {
+                                font-size: 48px;
+                                color: #6c757d;
+                                margin-bottom: 15px;
+                            }
+
+                            .upload-text {
+                                color: #6c757d;
+                                margin-bottom: 20px;
+                            }
+
+                            #fileInput {
+                                display: none;
+                            }
+
+                            .upload-area {
+                                border: 2px dashed #ddd;
+                                border-radius: 8px;
+                                padding: 20px 20px;
+                                text-align: center;
+                                background: #f8f9fa;
+                                transition: all 0.3s ease;
+                                cursor: pointer;
+                            }
+
+                            /* 悬停效果 */
+                            .upload-area:hover {
+                                border-color: #0056b3;
+                                background: #e7f1ff;
+                            }
+
+                            /* 拖拽时的效果 */
+                            .upload-area.dragging {
+                                border-color: #0056b3;
+                                background: linear-gradient(rgba(0, 86, 179, 0.03), rgba(0, 86, 179, 0.06));
+                                transform: scale(1.02);
+                                box-shadow: 0 4px 12px rgba(0, 86, 179, 0.15);
+                            }
+
+                            /* 图标颜色随状态变化 */
+                            .upload-area .upload-icon {
+                                color: #6c757d;
+                                transition: all 0.3s ease;
+                            }
+
+                            .upload-area.dragging .upload-icon {
+                                color: #0056b3;
+                                transform: translateY(-5px);
+                            }
+
+                            /* 文字颜色随状态变化 */
+                            .upload-area.dragging .upload-text h5 {
+                                color: #0056b3;
+                            }
+                        </style>
+                        <div class="row justify-content-center"
+                            ondragover="event.preventDefault(); document.querySelector('.upload-area').classList.add('dragging');"
+                            ondragleave="document.querySelector('.upload-area').classList.remove('dragging');"
+                            ondrop="event.preventDefault(); TL.uploader.drop(event); document.querySelector('.upload-area').classList.remove('dragging');">
+                            <div class="col-12">
+                                <input type="file" multiple="multiple" id="fileToUpload" style="display: none;"
+                                    onchange="TL.uploader.selected(this);" />
+                                <label for="fileToUpload" style="display: block; cursor: pointer;">
+                                    <div class="upload-area">
+                                        <div class="upload-icon">
+                                            <iconpark-icon name="cloud-arrow-up" class="fa-fw fa-2x"></iconpark-icon>
+                                        </div>
+                                        <div class="upload-text">
+                                            <h5 i18n="upload_or_drag">拖拽文件到这里</h5>
+                                        </div>
+                                        <span class="btn btn-primary dirsToUpload_label" style="position: relative;">
+                                            <input type="file" id="dirsToUpload" style="display: none;" multiple
+                                                directory webkitdirectory mozdirectory
+                                                onchange="TL.uploader.dir_selected(this);" />
+                                            <label for="dirsToUpload"
+                                                style="margin: 0; padding: 0; cursor: pointer; display: inline-flex; align-items: center;">
+                                                <iconpark-icon name="folder-arrow-up" class="fa-fw"
+                                                    style="margin-right: 0.5rem;"></iconpark-icon>
+                                                <span i18n="upload_dirs">选择文件夹</span>
+                                            </label>
+                                        </span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="select-box p-2 btn-point" id="upload_speed_chart_box" style="display: none;">
                         <div id="upload_speed_chart"></div>
                         <div class="text-center mt-2">
@@ -416,7 +490,14 @@
                         </div>
                     </div>
                 </script>
+
                 <div class="upload-box-wrapper">
+                    <!-- 清除已完成的上传队列按钮 -->
+                    <span class="btn btn-danger upload_model_box_finish_clean mb-2"
+                        onclick="TL.uploader.clean_upload_finish_list()">
+                        <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
+                        <span i18n="model_btn_upload_clean">清空已完成的上传</span>
+                    </span>
                     <div id="upload_model_box_finish" class="upload-box-content"></div>
                 </div>
 
@@ -1318,7 +1399,8 @@
                     </div>
                 </div>
                 <!-- 直链 -->
-                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point ready_to_buy_quato" onclick="TL.buy.openQuato();">
+                <div class="row p-4 filelist-card shadow-sm mb-2 mx-1 btn-point ready_to_buy_quato"
+                    onclick="TL.buy.openQuato();">
                     <div class="col-12">
                         <div class="card-p3">
                             <div class="d-flex align-items-center">

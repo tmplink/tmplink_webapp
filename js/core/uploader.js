@@ -35,11 +35,26 @@ class uploader {
     upload_slice_process = [] //当前处理进度
 
     init(parent_op) {
+        this.check_upload_clean_btn_status();
         this.parent_op = parent_op;
         //如果已经渲染了 upload_speed_chart，那么初始化图表
         let chart = document.getElementById('upload_speed_chart');
         if (chart) {
             this.initSpeedChart();
+        }
+    }
+
+    clean_upload_finish_list(){
+        $('#upload_model_box_finish').html('');
+        $('.upload_model_box_finish_clean').hide();
+    }
+
+    check_upload_clean_btn_status(){
+        let content = $('#upload_model_box_finish').html();
+        if (content.length > 0) {
+            $('.upload_model_box_finish_clean').show();
+        } else {
+            $('.upload_model_box_finish_clean').hide();
         }
     }
 
@@ -60,6 +75,9 @@ class uploader {
                 $('#upload_slice_size').val(rsp.data.upload_slice_size);
                 $('#upload_slice_queue_max').val(rsp.data.upload_slice_queue_max);
                 $('#upload_slice_thread_max').val(rsp.data.upload_slice_thread_max);
+                //更新设定
+                this.quickUploadInit();
+                this.model_selected(0);
             }
         }, 'json');
         //如果用户还不是赞助者，将不支持修改上传参数
@@ -81,7 +99,7 @@ class uploader {
             }],
             chart: {
                 id: 'realtime',
-                height: 200,
+                height: 100,
                 type: 'area',
                 animations: {
                     enabled: false,
@@ -334,7 +352,6 @@ class uploader {
         }
 
         $('#uploadModal').modal('show');
-
         this.tmpupGeneratorView();
     }
 
@@ -484,31 +501,50 @@ class uploader {
             }
         }
 
+        //构建说明文本
+        let model_text = '';
+
         switch (model) {
             case 0:
-                $('#seleted_model').html(app.languageData.modal_settings_upload_model1);
+                model_text = app.languageData.modal_settings_upload_model1;
                 $('#upload_model').val(0);
                 break;
             case 1:
-                $('#seleted_model').html(app.languageData.modal_settings_upload_model2);
+                model_text = app.languageData.modal_settings_upload_model2;
                 $('#upload_model').val(1);
                 break;
             case 2:
-                $('#seleted_model').html(app.languageData.modal_settings_upload_model3);
+                model_text = app.languageData.modal_settings_upload_model3;
                 $('#upload_model').val(2);
                 break;
             case 3:
-                $('#seleted_model').html(app.languageData.modal_settings_upload_model4);
+                model_text = app.languageData.modal_settings_upload_model4;
                 $('#upload_model').val(3);
                 break;
             case 99:
-                $('#seleted_model').html(app.languageData.modal_settings_upload_model99);
+                model_text = app.languageData.modal_settings_upload_model99;
                 $('#upload_model').val(99);
                 break;
         }
+
+        //获取设置：是否启用秒传
+        let quick = localStorage.getItem('app_upload_quick');
+        if (quick !== undefined) {
+            if (quick === '1') {
+                model_text += '，' + app.languageData.model_title_quick_upload + '：' + app.languageData.btn_enable;
+            }
+        }
+
+        //获取设置: 是否跳过上传
+        let skip = this.skip_upload;
+        if (skip === true) {
+            model_text += '，' + app.languageData.model_title_skip + '：' + app.languageData.btn_enable;
+        }
+
         $('#select_model_list').hide();
         $('#upload_select_file').show();
         $('#selected_model_box').show();
+        $('#seleted_model').html(model_text);
         localStorage.setItem('app_upload_model', model);
     }
 
@@ -1075,6 +1111,7 @@ class uploader {
             // 只有当所有文件都处理完毕时才隐藏速度图表
             this.resetUploadStatus();
         }
+        this.check_upload_clean_btn_status();
 
         //$('#nav_upload_btn').html(app.languageData.nav_upload);
         if (rsp.status === 1) {
@@ -1098,6 +1135,7 @@ class uploader {
                     this.parent_op.btn_copy_bind();
                 }
                 this.upload_btn_status_update();
+                this.check_upload_clean_btn_status();
             } else {
                 $('#uq_' + id).remove();
                 $('#upload_index_box_finish').show();
