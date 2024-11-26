@@ -1063,8 +1063,10 @@ class tmplink {
         if (this.isWeixin()) {
             $('#file_messenger_icon').html('<iconpark-icon name="cloud-arrow-down" class="fa-fw fa-4x"></iconpark-icon>');
             $('#file_messenger_msg').removeClass('display-4');
+            $('#file_messenger > div').removeClass('shadow').removeClass('card');
             $('#file_messenger_msg').html('请复制链接后，在外部浏览器打开进行下载。');
             $('#file_messenger').show();
+            $('#top_loggo').hide();
             this.ga('weixinUnavailable');
             return false;
             $('#wechat_notice').show();
