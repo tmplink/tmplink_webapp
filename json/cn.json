@@ -663,6 +663,7 @@
     "direct_msg_complete": "已启用",
     "direct_msg_ssl_invalid": "无效的证书",
     "direct_msg_ssl_disable": "停用此功能后，大约需要 5 分钟生效。确定吗？",
+    "direct_dir_disable": "一旦停用此设定，原本的链接将会失效，重新启用会生成不一样的链接。确定吗？",
     "direct_box_ssl_title": "增强项：安全传输",
     "direct_box_ssl_des1": "启用 HTTPS 支持",
     "direct_box_ssl_des2": "设置 SSL 证书以启用 HTTPS 安全传输数据，所有 HTTP 流量也会重定向至 HTTPS。",

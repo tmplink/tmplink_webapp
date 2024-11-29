@@ -88,14 +88,14 @@ class direct {
             } else {
                 $('#direct_bind_ssl').html(app.languageData.direct_ssl_disabled);
             }
-            
+
             //如果 API key 是 0，说明没有设置 API key，显示提示
             if (this.key == 0) {
                 $('#api_key').html(app.languageData.direct_api_key_not_set);
             } else {
                 $('#api_key').html(this.key);
             }
-            
+
             //如果有设定限制单个 IP 的日流量
             if (this.traffic_limit > 0) {
                 $('#direct_traffic_limit').val(this.traffic_limit);
@@ -132,25 +132,25 @@ class direct {
         }, 'json');
     }
 
-    isReady(){
+    isReady() {
         this.hp_time--;
-        if(this.hp_time<1){
+        if (this.hp_time < 1) {
             //已完成部署
             $('#direct_ready').show();
             $('#direct_progress').hide();
-        }else{
+        } else {
             //尚未完成部署，计算进度条，进度计算方式，300 秒为 100% 进度， hp_time 是剩余的秒数
             let percent = 100;
-            if(this.hp_time>1){
+            if (this.hp_time > 1) {
                 percent = 100 - (this.hp_time / 300 * 100);
             }
             $('#direct_progress').show();
             $('#direct_progress_bar').css('width', percent + '%');
             $('#direct_ready').hide();
             //一秒后再次检查
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.isReady();
-            },1000);
+            }, 1000);
         }
     }
 
@@ -372,7 +372,7 @@ class direct {
             return false;
         }
 
-        if (this.autoload===false) {
+        if (this.autoload === false) {
             return false;
         }
 
@@ -438,7 +438,7 @@ class direct {
         });
     }
 
-    open(){
+    open() {
         if (this.parent_op.logined != 1) {
             app.open('/app&listview=login');
         }
@@ -459,7 +459,7 @@ class direct {
             this.logout();
             return false;
         }
-        
+
         $.post(this.parent_op.api_direct, {
             action: 'room_list',
             token: this.parent_op.api_token,
@@ -528,6 +528,10 @@ class direct {
             post_params.action = 'add_dir';
             post_params.mrid = get_page_mrid();
         } else {
+            //询问是否确认
+            if (!confirm(app.languageData.direct_dir_disable)) {
+                return false;
+            }
             post_params.action = 'del_dir';
             post_params.direct_key = this.dir_key;
         }
@@ -925,7 +929,7 @@ class direct {
             rt: rt,
             action: 'chart_get_usage'
         };
-        
+
         $.post(this.parent_op.api_direct, post, (rsp) => {
             var options = {
                 series: [{
@@ -950,7 +954,7 @@ class direct {
                 dataLabels: {
                     enabled: true,
                     formatter: function (val) {
-                        return bytetoconver(val,true);
+                        return bytetoconver(val, true);
                     },
                     offsetY: -20,
                     style: {
@@ -1008,7 +1012,7 @@ class direct {
 
             options = getChartThemeOptions(options);
 
-            if(this.traffic_chart!==null){
+            if (this.traffic_chart !== null) {
                 this.traffic_chart.destroy();
             }
             this.traffic_chart = new ApexCharts(document.querySelector("#x2_chart_usage"), options);
@@ -1016,7 +1020,7 @@ class direct {
         }, 'json');
     }
 
-    checkInput(){
+    checkInput() {
         let domain = $('#direct-domain').val();
 
         //如果域名是 *.5t-cdn.com 作为子域名(但不是三级域名，比如 app.app.5t-cdn.com) ，则不执行任何检查
@@ -1037,7 +1041,7 @@ class direct {
         let enable_ssl = $('input[name="enable_ssl"]:checked').val();
         let reg = /^([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
         $('.req_new_acme_domain').text(`_acme-challenge.` + domain + ' -> ');
-        $('.req_new_cname_domain').text(domain+ ' -> ');
+        $('.req_new_cname_domain').text(domain + ' -> ');
         $('#enable_ssl_box').show();
 
         //如果有设定启用 SSL，显示对应的提示
@@ -1055,7 +1059,7 @@ class direct {
             $('#domainHelpError').show();
             return false;
         }
-        
+
         //没有问题，显示提示
         $('#domainHelpError').hide();
         $('#domainHelpCNAME').show();

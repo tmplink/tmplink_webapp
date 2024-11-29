@@ -1,4 +1,5 @@
 {
+    "direct_dir_disable": "Once this setting is disabled, the original link will be invalid. Re-enabling will generate a different link. Are you sure?",
     "special_event":"Black Friday: Fast Download & Streaming - $6/year",
     "navbar_special_events": "BF deals",
     "bf_modal_title": "Black Friday Deals",
