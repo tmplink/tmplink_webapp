@@ -34,8 +34,6 @@ class tmplink {
     list_data = []
     dir_tree = {}
     subroom_data = []
-    download_queue = []
-    download_queue_processing = false
     download_index = 0
     get_details_do = false
     countDownID = [];
@@ -50,8 +48,6 @@ class tmplink {
     sort_type = 0
     Selecter = null
     upload_model_selected_val = 0
-    download_retry = 0
-    download_retry_max = 10
     recaptcha_op = true
     recaptcha = '6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5'
     recaptchaToken = '0'
@@ -94,6 +90,7 @@ class tmplink {
         this.oauth = new oauth;
         this.dir = new dir;
         this.chart = new chart;
+        this.download = new download;
 
         this.stream.init(this);
         this.giftcard.init(this);
@@ -107,6 +104,7 @@ class tmplink {
         this.oauth.init(this);
         this.dir.init(this);
         this.chart.init(this);
+        this.download.init(this);
 
         //
         $('.workspace-navbar').hide();
@@ -1458,87 +1456,6 @@ class tmplink {
         });
     }
 
-    single_download_start(url, filename) {
-        var xhr = new XMLHttpRequest();
-        xhr.addEventListener("progress", (evt) => {
-            this.single_download_progress_on(evt, filename);
-        }, false);
-        xhr.addEventListener("error", (evt) => {
-            if (this.download_retry < this.download_retry_max) {
-                this.download_retry++;
-                setTimeout(() => {
-                    this.single_download_start(url, filename);
-                }, 3000);
-            } else {
-                this.alert('下载发生错误，请重试。');
-                this.single_download_reset();
-                //reset download retry
-                this.download_retry = 0;
-            }
-        }, false);
-        xhr.addEventListener("timeout", (evt) => {
-            if (this.download_retry < this.download_retry_max) {
-                this.download_retry++;
-                setTimeout(() => {
-                    this.single_download_start(url, filename);
-                }, 3000);
-            } else {
-                this.alert('下载发生错误，请重试。');
-                this.single_download_reset();
-                //reset download retry
-                this.download_retry = 0;
-            }
-        }, false);
-        xhr.addEventListener("abort", (evt) => {
-            this.alert('下载中断，请重试。');
-            this.single_download_reset();
-        }, false);
-        xhr.open("GET", url);
-        xhr.onload = () => {
-            this.single_download_complete(xhr, filename);
-        };
-        xhr.responseType = 'blob';
-        xhr.send();
-        $('.single_download_msg').html('准备中，正在开始下载...');
-        $('.single_download_progress_bar').show();
-        $('#btn_quick_download').attr('disabled', true);
-    }
-
-    single_download_complete(evt, filename) {
-        this.download_retry = 0;
-        let blob = new Blob([evt.response], {
-            type: evt.response.type
-        });
-        //ie的下载
-        if (window.navigator.msSaveOrOpenBlob) {
-            navigator.msSaveBlob(blob, filename);
-        } else {
-            //非ie的下载
-            let link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.download = filename;
-            link.click();
-            window.URL.revokeObjectURL(link.href);
-        }
-        //恢复进度条样式
-        $('.single_download_msg').html('下载完成.');
-        $('.single_download_progress_bar_set').removeClass('progress-bar-animated');
-        $('.single_download_progress_bar_set').removeClass('progress-bar-striped');
-        this.single_download_reset();
-        this.download_queue_run();
-    }
-
-    single_download_progress_on(evt) {
-        $('.single_download_msg').html('已下载... ' + bytetoconver(evt.loaded, true));
-        $('.single_download_progress_bar_set').css('width', (evt.loaded / evt.total) * 100 + '%');
-        $('.single_download_progress_bar_set').addClass('progress-bar-animated');
-        $('.single_download_progress_bar_set').addClass('progress-bar-striped');
-    }
-
-    single_download_reset() {
-        $('#btn_quick_download').removeAttr('disabled');
-    }
-
     isWeixin() {
         var ua = navigator.userAgent.toLowerCase();
         return ua.match(/MicroMessenger/i) == "micromessenger";
@@ -1577,122 +1494,6 @@ class tmplink {
         // }
     }
 
-    download_queue_add(url, filename, ukey, filesize, filetype) {
-        this.download_queue[ukey] = [url, filename, ukey, ukey];
-    }
-
-    download_queue_del(index) {
-        //$('#download_task_' + index).fadeOut();
-        //移除下载，todo
-        delete this.download_queue[index];
-        this.download_queue_run();
-    }
-
-    download_queue_start() {
-        this.download_queue_run();
-    }
-
-    download_queue_run() {
-        if (this.download_queue_processing) {
-            return false;
-        }
-        for (let x in this.download_queue) {
-            let data = this.download_queue[x];
-            if (data !== undefined) {
-                debug("Downloading:" + data[0]);
-                this.download_queue_processing = true;
-                this.download_queue_progress_start(data[0], data[1], data[2], data[3]);
-                return true;
-            } else {
-                debug('Queue out.');
-            }
-        }
-        $('#download_queue').fadeOut();
-    }
-
-    download_queue_progress_start(url, filename, id, index) {
-        $('.download_progress_bar_' + index).show();
-        var xhr = new XMLHttpRequest();
-        xhr.addEventListener("progress", (evt) => {
-            this.download_progress_on(evt, id, filename, index);
-        }, false);
-        xhr.addEventListener("load", (evt) => {
-            delete this.download_queue[index];
-            this.download_queue_start();
-        }, false);
-        xhr.addEventListener("timeout", (evt) => {
-            if (this.download_retry < this.download_retry_max) {
-                this.download_retry++;
-                setTimeout(() => {
-                    this.download_queue_progress_start(url, filename, id, index);
-                }, 3000);
-            } else {
-                delete this.download_queue[index];
-                this.download_queue_start();
-                //reset download retry
-                this.download_retry = 0;
-            }
-        }, false);
-        xhr.addEventListener("error", (evt) => {
-            if (this.download_retry < this.download_retry_max) {
-                this.download_retry++;
-                setTimeout(() => {
-                    this.download_queue_progress_start(url, filename, id, index);
-                }, 3000);
-            } else {
-                delete this.download_queue[index];
-                this.download_queue_start();
-                //reset download retry
-                this.download_retry = 0;
-            }
-        }, false);
-        xhr.addEventListener("abort", (evt) => {
-            delete this.download_queue[index];
-            this.download_queue_start();
-        }, false);
-        xhr.open("GET", url);
-        xhr.onload = () => {
-            this.download_queue_complete(xhr, filename, id, index);
-        };
-        xhr.responseType = 'blob';
-        xhr.send();
-    }
-
-    download_queue_complete(evt, filename, id, index) {
-        this.download_retry = 0;
-        let blob = new Blob([evt.response], {
-            type: evt.response.type
-        });
-        //ie的下载
-        if (window.navigator.msSaveOrOpenBlob) {
-            navigator.msSaveBlob(blob, filename);
-        } else {
-            //非ie的下载
-            let link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.download = filename;
-            link.click();
-            window.URL.revokeObjectURL(link.href);
-        }
-        this.download_queue_processing = false;
-        //关闭进度条
-        //$('.download_progress_bar_' + index).hide();
-        //恢复进度条样式
-        $('.btn_download_' + index).removeAttr('disabled');
-        $('.btn_download_' + index).html('<iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>');
-
-        delete this.download_queue[index];
-        this.download_queue_run();
-    }
-
-    download_progress_on(evt, id, filename, index) {
-        //$('#download_queue_' + id).html(app.languageData.download_run + filename + ' (' + bytetoconver(evt.loaded, true) + ' / ' + bytetoconver(evt.total, true) + ')');
-        $('.download_progress_bar_set_' + index).css('width', (evt.loaded / evt.total) * 100 + '%');
-        if (evt.loaded == evt.total) {
-            $('.download_progress_bar_' + index).fadeOut();
-        }
-    }
-
     download_file() {
         this.loading_box_on();
         // $('#btn_download').addClass('disabled');
@@ -1704,7 +1505,7 @@ class tmplink {
             if (rsp.status == 1) {
                 // location.href = $('#btn_download').attr('x-href');
                 // $('#btn_download').html(app.languageData.file_btn_download_status2);
-                this.single_download_start($('.single_download_progress_bar').attr('data-href'), $('.single_download_progress_bar').attr('data-filename'));
+                this.download.single_start($('.single_download_progress_bar').attr('data-href'), $('.single_download_progress_bar').attr('data-filename'));
             } else {
                 $('#btn_download').html(app.languageData.file_btn_download_status1);
             }
@@ -1768,8 +1569,8 @@ class tmplink {
                     //如果不是在 ipad 或者 iphone 上
                     if (is_iphone_or_ipad() == false) {
                         //开始下载
-                        this.download_queue_add(req.data, title, ukey, size, type);
-                        this.download_queue_start();
+                        this.download.queue_add(req.data, title, ukey, size, type);
+                        this.download.queue_start();
                     } else {
                         //使用 href 提供下载
                         location.href = req.data;
@@ -2025,7 +1826,7 @@ class tmplink {
                     if (rsp.status == 1) {
                         // location.href = $('#btn_download').attr('x-href');
                         // $('#btn_highdownload').html(app.languageData.file_btn_download_status2);
-                        this.single_download_start($('.single_download_progress_bar').attr('data-href'), $('.single_download_progress_bar').attr('data-filename'));
+                        this.download.single_start($('.single_download_progress_bar').attr('data-href'), $('.single_download_progress_bar').attr('data-filename'));
                     } else {
                         $('#btn_highdownload').html(app.languageData.file_btn_download_status1);
                     }
