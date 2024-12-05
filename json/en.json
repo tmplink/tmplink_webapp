@@ -1,4 +1,11 @@
 {
+    "multi_download_modal_title": "Download Manager",
+    "multi_download_start": "Start Download",
+    "multi_download_finish": "Finish Download",
+    "multi_download_complete": "All files downloaded",
+    "multi_download_error": "Error",
+    "multi_download_files": "files",
+    "multi_download_count": "Total",
     "direct_dir_disable": "Once this setting is disabled, the original link will be invalid. Re-enabling will generate a different link. Are you sure?",
     "special_event":"Black Friday: Fast Download & Streaming - $6/year",
     "navbar_special_events": "BF deals",

@@ -2,6 +2,7 @@ class dir {
     parent_op = null
     room = {}
     subroom_data = {}
+    file_list = []
 
     init(parent_op) {
         this.parent_op = parent_op;
@@ -174,7 +175,6 @@ class dir {
 
     listModel(data, page, room_id) {
         let room_key = 'app_room_view_' + room_id;
-        console.log(localStorage.getItem(room_key));
         switch (localStorage.getItem(room_key)) {
             case 'photo':
                 this.viewByPhoto(data, page);
@@ -601,6 +601,7 @@ class dir {
                 this.listModel(rsp.data, page, params.mrid);
                 this.parent_op.dir_list_autoload_disabled();
                 this.parent_op.autoload = false;
+                this.file_list = rsp.data;
                 this.loadingOFF();
             });
         });

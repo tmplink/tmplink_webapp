@@ -292,9 +292,9 @@ class BoxSelecter {
         }
     }
 
-    download() {
+    async download() {
         var node = document.getElementsByName(this.items_name);
-        let dir_hit = false;
+        let data = [];
         for (let i = 0; i < node.length; i++) {
             let inode = node[i];
             let check = inode.getAttribute('data-check');
@@ -302,17 +302,22 @@ class BoxSelecter {
             if (check === 'true'&&unit_type==='file') {
                 //do something
                 let ukey = inode.getAttribute('tldata');
-                this.parent_op.download_file_btn(ukey);
+                let type = 'file';
+                data.push({'id':ukey,'type':type});
             }
             if (check === 'true'&&unit_type==='dir') {
-                dir_hit = true;
+                let ukey = inode.getAttribute('tldata');
+                let type = 'dir';
+                data.push({'id':ukey,'type':type});
             }
         }
 
-        //如果下载的选中项中包含了文件夹，则提示可以使用打包下载
-        if (dir_hit) {
-            alert(app.languageData.status_error_16);
+        if (data.length === 0) {
+            this.parent_op.alert(app.languageData.status_error_12);
+            return false;
         }
+
+        await this.parent_op.download.folder_download(data);
     }
 
     downloadURL() {

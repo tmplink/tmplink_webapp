@@ -497,6 +497,31 @@ class tmplink {
         }
     }
 
+    async recaptcha_do_async(type) {
+        return new Promise((resolve, reject) => {
+            if (this.recaptcha_op && this.recaptchaCheckAction(type)) {
+                // Google reCAPTCHA 路径
+                grecaptcha.ready(async () => {
+                    try {
+                        const token = await grecaptcha.execute(this.recaptcha, {
+                            action: type
+                        });
+                        resolve(token);
+                    } catch (error) {
+                        reject(error);
+                    }
+                });
+            } else {
+                // 后备方案路径
+                $.post(this.api_tokx, {
+                    action: 'challenge',
+                })
+                .then(rsp => resolve(rsp.data))
+                .fail(error => reject(error));
+            }
+        });
+    }
+
     recaptchaCheckAction(action) {
         for (let i in this.recaptcha_actions) {
             if (this.recaptcha_actions[i] == action) {
@@ -901,6 +926,8 @@ class tmplink {
                 for (let i in rsp.data) {
                     this.list_data[rsp.data[i].ukey] = rsp.data[i];
                 }
+                //数据加入到 dir.file_list 以保持批量下载的兼容性
+                this.dir.file_list = rsp.data;
             }
             $('#filelist').show();
             this.loading_box_off();

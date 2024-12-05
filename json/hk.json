@@ -1,4 +1,11 @@
 {
+    "multi_download_modal_title":"下載管理器",
+    "multi_download_start":"開始下載",
+    "multi_download_finish":"完成下載",
+    "multi_download_complete":"所有檔案下載完成",
+    "multi_download_error":"錯誤",
+    "multi_download_files":"個檔案",
+    "multi_download_count":"總計",
     "direct_dir_disable": "一旦停用此設定，原本的連結將會失效，重新啟用會產生不一樣的連結。確定嗎？",
     "special_event":"黑色星期五優惠：高速下載與線上播放，僅需 $6/年",
     "navbar_special_events": "特賣",

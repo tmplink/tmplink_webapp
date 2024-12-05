@@ -856,6 +856,14 @@
     "dl_hot_download_times":"下载次数",
 
     "filepage_nsfw_alert":"注意：此文件包含 NSFW 内容",
+
+    "multi_download_modal_title":"下载管理器",
+    "multi_download_start":"开始下载",
+    "multi_download_finish":"完成下载",
+    "multi_download_complete":"所有文件下载完成",
+    "multi_download_error":"错误",
+    "multi_download_files":"个文件",
+    "multi_download_count":"总计",
     
     "chart_title_direct_uage": "直链使用情况",
     "download_run": "正在下载:",

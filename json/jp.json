@@ -1,4 +1,11 @@
 {
+    "multi_download_modal_title":"ダウンロードマネージャー",
+    "multi_download_start":"ダウンロードを開始",
+    "multi_download_finish":"ダウンロード完了",
+    "multi_download_complete":"全てのファイルのダウンロードが完了しました",
+    "multi_download_error":"エラー",
+    "multi_download_files":"件のファイル",
+    "multi_download_count":"合計",
     "direct_dir_disable": "この設定を無効にすると、既存のリンクが無効になり、再度有効にすると異なるリンクが生成されます。よろしいでしょうか。",
     "special_event":"ブラックフライデー：高速ダウンロード・ストリーミング機能が年額$6",
     "navbar_special_events": "特価",
