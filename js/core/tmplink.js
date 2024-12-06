@@ -1572,54 +1572,6 @@ class tmplink {
         });
     }
 
-    download_file_btn(i) {
-
-        let ukey = this.list_data[i].ukey;
-        let title = this.list_data[i].fname;
-        let size = this.list_data[i].fsize_formated;
-        let type = this.list_data[i].ftype;
-
-        //新的方案
-        this.ga('DL-' + title);
-        $('.btn_download_' + ukey).attr('disabled', 'true');
-        $('.btn_download_' + ukey).html('<iconpark-icon name="loader" class="fa-fw fa-spin"></iconpark-icon>');
-
-        this.recaptcha_do('download_req', (recaptcha) => {
-            $.post(this.api_file, {
-                action: 'download_req',
-                ukey: ukey,
-                token: this.api_token,
-                captcha: recaptcha
-            }, (req) => {
-                if (req.status == 1) {
-
-                    //如果不是在 ipad 或者 iphone 上
-                    if (is_iphone_or_ipad() == false) {
-                        //开始下载
-                        this.download.queue_add(req.data, title, ukey, size, type);
-                        this.download.queue_start();
-                    } else {
-                        //使用 href 提供下载
-                        location.href = req.data;
-                    }
-
-                    //使用 href 提供下载
-                    // location.href = req.data;
-                    // $('.btn_download_' + ukey).removeAttr('disabled');
-                    // $('.btn_download_' + ukey).html('<iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>');
-                    return true;
-                }
-                if (req.status == 3) {
-                    this.alert(app.languageData.status_need_login);
-                    return false;
-                }
-                this.alert(app.languageData.status_error_0);
-                $('.btn_download_' + ukey).removeAttr('disabled');
-                $('.btn_download_' + ukey).html('<iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>');
-            });
-        });
-    }
-
     download_file_url(i, cb) {
         let ukey = this.list_data[i].ukey;
         let title = this.list_data[i].fname;
@@ -1639,83 +1591,6 @@ class tmplink {
                 this.alert(app.languageData.status_error_0);
             });
         });
-    }
-
-    download_allfile_btn() {
-        //未登录的用户暂时不支持全部下载功能
-        if (!this.isLogin()) {
-            this.alert(app.languageData.status_need_login);
-            return false;
-        }
-        //在移动设备上无法使用全部下载功能
-        let room_key = 'app_room_view_' + this.dir.room.mr_id;
-        // if (isMobileScreen()) {
-        //     this.alert(app.languageData.alert_no_support);
-        //     return false;
-        // }
-        this.loading_box_on();
-        let search = $('#room_search').val();
-        var params = get_url_params();
-        this.recaptcha_do('mr_addlist', (recaptcha) => {
-            let photo = 0;
-            if (localStorage.getItem(room_key) == 'photo') {
-                photo = 1;
-            }
-            $.post(this.api_mr, {
-                action: 'file_list_page',
-                token: this.api_token,
-                //captcha: recaptcha,
-                page: 'all',
-                photo: photo,
-                mr_id: params.mrid,
-                search: search
-            }, (rsp) => {
-                if (rsp.status != 0) {
-                    this.autoload = true;
-                    this.list_data = rsp.data;
-                    //在下载全部文件之前，需要先刷新列表
-                    this.dir.listModel(rsp.data, 0, params.mrid);
-                    //关闭自动载入功能
-                    this.dir_list_autoload_disabled();
-                    //启动下载
-                    for (let i in rsp.data) {
-                        this.download_allfile_queue_add(() => {
-                            this.download_file_btn(i);
-                        });
-                    }
-                    this.download_allfile_queue_core();
-                } else {
-                    this.autoload = false;
-                }
-                this.loading_box_off();
-            });
-        });
-    }
-
-    download_allfile_queue = []
-    download_allfile_queue_status = false
-
-    download_allfile_queue_add(fn) {
-        this.download_allfile_queue.push(fn);
-        return true;
-    }
-
-    download_allfile_queue_core() {
-        if (this.download_allfile_queue_status) {
-            return true;
-        }
-
-        this.download_allfile_queue_status = true;
-        if (this.download_allfile_queue.length > 0) {
-            let fn = this.download_allfile_queue.shift();
-            fn();
-            setTimeout(() => {
-                this.download_allfile_queue_status = false;
-                this.download_allfile_queue_core();
-            }, 1000);
-        } else {
-            this.download_allfile_queue_status = false;
-        }
     }
 
     cli_uploader_generator2() {

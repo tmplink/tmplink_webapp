@@ -214,13 +214,6 @@
                             <span i18n="nav_upload" class="d-none d-sm-inline"><% app.languageData.nav_upload %></span>
                         </button>
                     <% } %>
-                    
-                    <% if(is_iphone_or_ipad() == false){ %>
-                    <!-- <button class="btn btn-primary btn-sm mr-1  mt-1" onclick="TL.download_allfile_btn();">
-                        <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
-                        <span i18n="file_btn_downloadall" class="d-none d-sm-inline"><% app.languageData.file_btn_downloadall %></span>
-                    </button> -->
-                    <% } %>
 
                     <% if(TL.dir.room.top != 99){ %>
                         <a href="/app&listview=room&mrid=<% TL.dir.room.parent %>" tmpui-action="TL.dir.open()" class="btn btn-sm btn-light text-azure mr-1  mt-1">

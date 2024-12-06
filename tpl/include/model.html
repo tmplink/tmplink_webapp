@@ -1942,7 +1942,7 @@
     </div>
 </div>
 
-<!-- 批量下载端口 -->
+<!-- 批量下载 -->
 <div class="modal" id="multipleDownloadModel">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-lg">
@@ -1954,14 +1954,19 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- 总进度条 -->
-                <div class="progress" style="height: 10px;">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                        style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                <div id="multiple_download_prepare" class="text-center">
+                    <img src="/img/loading-outline.svg" style="height:120px;" />
                 </div>
-                <!-- 下载信息区域 -->
-                <div id="multiple_download_info" class="mt-3 font-monospace" 
-                     style="max-height: 80vh; overflow-y: auto;">
+                <div id="multiple_download_processing" style="display: none;">
+                    <!-- 总进度条 -->
+                    <div class="progress" style="height: 10px;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" id="multiple_download_process-bar" role="progressbar"
+                            style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <!-- 下载信息区域 -->
+                    <div id="multiple_download_info" class="mt-3 font-monospace" 
+                        style="max-height: 80vh; overflow-y: auto;">
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

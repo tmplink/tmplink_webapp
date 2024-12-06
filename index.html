@@ -39,7 +39,7 @@
         }
 
         // 检查，如果域名开头不是 www. 跳转到 www. 127.0.0.1 时跳过
-        if (window.location.host.indexOf('www.') != 0 && window.location.host !== '127.0.0.1') {
+        if (window.location.host.indexOf('www.') != 0 && window.location.host !== '127.0.0.1' && window.location.host !== 'localhost') {
             window.location.href = 'https://www.' + window.location.host + window.location.pathname + window.location.search;
         }
 
@@ -48,7 +48,7 @@
     <script type="text/javascript" src="./tmpui.js?v=52"></script>
     <script type="text/javascript">
         var app = new tmpUI({
-            "version": 1393,
+            "version": 1395,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "loadingText": "TMP.LINK",
