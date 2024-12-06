@@ -125,6 +125,9 @@ class download {
             
             // 获取文件列表
             const file_list = await this.folder_download_prepare(select_data);
+
+            // 检查是否包含文件夹结构
+            const hasFolder = file_list.some(file => file.path.includes('/'));
             
             // 计算总文件大小
             const totalSize = file_list.reduce((acc, file) => acc + parseInt(file.size), 0);
@@ -134,80 +137,180 @@ class download {
             
             $('#multiple_download_prepare').hide();
             $('#multiple_download_processing').show();
-
+    
+            // 尝试使用现代File System Access API
             try {
-                // 请求用户选择下载目录
                 const dirHandle = await window.showDirectoryPicker();
-                
-                // 验证并获取目录权限
                 const hasPermission = await this.verifyDirectoryPermissions(dirHandle);
-                if (!hasPermission) {
-                    throw new Error(app.languageData.folder_permission_denied || '无法获取文件夹权限');
-                }
-
-                // 显示开始下载的消息
-                this.append_download_info(app.languageData.multi_download_start);
                 
-                // 开始处理文件
-                for (let i = 0; i < file_list.length; i++) {
-                    const file = file_list[i];
-                    try {
-                        // 获取下载链接
-                        const downloadUrl = await this.get_download_url(file.ukey);
-                        
-                        // 创建目录结构并下载文件
-                        const dirPath = file.path.split('/').slice(0, -1).join('/');
-                        const fileName = file.path.split('/').pop();
-                        
-                        // 获取或创建目标目录
-                        const targetDirHandle = dirPath ?
-                            await this.ensureDirectoryExists(dirHandle, dirPath) :
-                            dirHandle;
-                        
-                        // 下载文件并更新进度
-                        await this.download_and_save_file(
-                            downloadUrl, 
-                            targetDirHandle, 
-                            fileName, 
-                            file.path,
-                            (receivedBytes) => {
-                                const previousFilesBytes = file_list
-                                    .slice(0, i)
-                                    .reduce((acc, f) => acc + parseInt(f.size), 0);
-                                
-                                const totalProgress = ((previousFilesBytes + receivedBytes) / totalSize) * 100;
-                                
-                                $('#multiple_download_process-bar')
-                                    .css('width', `${totalProgress}%`)
-                                    .attr('aria-valuenow', totalProgress);
-                            }
-                        );
-                        
-                        downloadedBytes += parseInt(file.size);
-                        
-                    } catch (error) {
-                        console.error(`Error downloading file ${file.path}:`, error);
-                        this.append_download_info(`${app.languageData.multi_download_error}: ${file.path} (${error.message})`);
+                if (hasPermission) {
+                    // 验证并获取目录权限成功，使用原有的文件夹下载逻辑
+                    this.append_download_info(app.languageData.multi_download_start);
+                    
+                    // 开始处理文件
+                    for (let i = 0; i < file_list.length; i++) {
+                        const file = file_list[i];
+                        try {
+                            // 获取下载链接
+                            const downloadUrl = await this.get_download_url(file.ukey);
+                            
+                            // 创建目录结构并下载文件
+                            const dirPath = file.path.split('/').slice(0, -1).join('/');
+                            const fileName = file.path.split('/').pop();
+                            
+                            // 获取或创建目标目录
+                            const targetDirHandle = dirPath ?
+                                await this.ensureDirectoryExists(dirHandle, dirPath) :
+                                dirHandle;
+                            
+                            // 下载文件并更新进度
+                            await this.download_and_save_file(
+                                downloadUrl, 
+                                targetDirHandle, 
+                                fileName, 
+                                file.path,
+                                (receivedBytes) => {
+                                    const previousFilesBytes = file_list
+                                        .slice(0, i)
+                                        .reduce((acc, f) => acc + parseInt(f.size), 0);
+                                    
+                                    const totalProgress = ((previousFilesBytes + receivedBytes) / totalSize) * 100;
+                                    
+                                    $('#multiple_download_process-bar')
+                                        .css('width', `${totalProgress}%`)
+                                        .attr('aria-valuenow', totalProgress);
+                                }
+                            );
+                            
+                            downloadedBytes += parseInt(file.size);
+                            
+                        } catch (error) {
+                            console.error(`Error downloading file ${file.path}:`, error);
+                            this.append_download_info(`${app.languageData.multi_download_error}: ${file.path} (${error.message})`);
+                        }
                     }
+                    
+                    // 完成所有下载
+                    const progressBar = $('#multiple_download_process-bar');
+                    progressBar.css('width', '100%')
+                              .removeClass('progress-bar-animated progress-bar-striped')
+                              .addClass('bg-success')
+                              .attr('aria-valuenow', 100);
+                    
+                    this.append_download_info(app.languageData.multi_download_complete);
+                    return;
                 }
-                
-                // 完成所有下载
-                const progressBar = $('#multiple_download_process-bar');
-                progressBar.css('width', '100%')
-                          .removeClass('progress-bar-animated progress-bar-striped')
-                          .addClass('bg-success')
-                          .attr('aria-valuenow', 100);
-                
-                this.append_download_info(app.languageData.multi_download_complete);
-                
             } catch (error) {
-                console.error('Folder download error:', error);
-                this.append_download_info(`${app.languageData.multi_download_error}: ${error.message}`);
-                throw error;
+                console.log("File System Access API not supported or permission denied, falling back to legacy download");
+                if (hasFolder) {
+                    this.append_download_info(app.languageData.multi_download_legacy);
+                }
             }
+    
+            // 如果现代API不可用，回退到传统下载方式
+            for (let i = 0; i < file_list.length; i++) {
+                const file = file_list[i];
+                try {
+                    const downloadUrl = await this.get_download_url(file.ukey);
+                    
+                    // 转换文件夹路径为文件名
+                    const parts = file.path.split('/');
+                    const fileName = parts.pop(); // 获取实际文件名
+                    const folderPath = parts.length > 0 ? `[${parts.join('][')}]` : ''; // 将文件夹路径转换为 [folder1][folder2] 格式
+                    const convertedFilename = folderPath + fileName; // 组合成最终文件名
+                    
+                    await this.legacyDownloadFile(
+                        downloadUrl, 
+                        convertedFilename,
+                        file.path,
+                        (receivedBytes) => {
+                            const previousFilesBytes = file_list
+                                .slice(0, i)
+                                .reduce((acc, f) => acc + parseInt(f.size), 0);
+                            
+                            const totalProgress = ((previousFilesBytes + receivedBytes) / totalSize) * 100;
+                            $('#multiple_download_process-bar')
+                                .css('width', `${totalProgress}%`)
+                                .attr('aria-valuenow', totalProgress);
+                        }
+                    );
+                    
+                    downloadedBytes += parseInt(file.size);
+                    
+                } catch (error) {
+                    this.append_download_info(`${app.languageData.multi_download_error}: ${file.path} (${error.message})`);
+                }
+            }
+            
+            const progressBar = $('#multiple_download_process-bar');
+            progressBar.css('width', '100%')
+                      .removeClass('progress-bar-animated progress-bar-striped')
+                      .addClass('bg-success')
+                      .attr('aria-valuenow', 100);
+            
+            this.append_download_info(app.languageData.multi_download_complete);
+    
         } catch (error) {
             this.append_download_info(`${app.languageData.multi_download_error}: ${error.message}`);
             this.parent_op.alert(app.languageData.download_error_abort);
+        }
+    }
+
+    async legacyDownloadFile(url, fileName, originalPath, onProgress) {
+        const msgElement = this.appendProgressLine();
+        
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    
+            const contentLength = parseInt(response.headers.get('content-length') || '0');
+            const reader = response.body.getReader();
+            const chunks = [];
+            let receivedLength = 0;
+    
+            this.updateProgressText(
+                msgElement,
+                `${app.languageData.multi_download_start}: ${originalPath} (0/${bytetoconver(contentLength, true)}) ...`
+            );
+    
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                chunks.push(value);
+                receivedLength += value.length;
+    
+                if (onProgress) {
+                    onProgress(receivedLength);
+                }
+    
+                if (contentLength && msgElement) {
+                    this.updateProgressText(
+                        msgElement,
+                        `${app.languageData.multi_download_start}: ${originalPath} (${bytetoconver(receivedLength, true)}/${bytetoconver(contentLength, true)}) ...`
+                    );
+                }
+            }
+    
+            const blob = new Blob(chunks);
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = fileName;
+            link.click();
+            window.URL.revokeObjectURL(link.href);
+    
+            this.updateProgressText(
+                msgElement,
+                `${app.languageData.multi_download_finish}: ${originalPath} (${bytetoconver(receivedLength, true)})`,
+                'text-success'
+            );
+    
+        } catch (error) {
+            this.updateProgressText(
+                msgElement,
+                `${app.languageData.multi_download_error}:${originalPath} (${error.message})`,
+                'text-danger'
+            );
+            throw error;
         }
     }
     
