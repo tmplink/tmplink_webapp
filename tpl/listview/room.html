@@ -156,12 +156,17 @@
 
                 <div class="btn_for_sub mt-2">
                     <span id="room_back_btn"></span>
+                    <!-- 下载全部按钮 -->
+                    <button class="btn btn-light text-azure btn-sm mr-1 mt-1" onclick="TL.Selecter.downloadAll();">
+                        <iconpark-icon name="cloud-arrow-down" class="fa-fw"></iconpark-icon>
+                        <span i18n="file_btn_downloadall">.</span>
+                    </button>
                     <button onclick="TL.Selecter.setAll();" class="btn btn-light text-azure btn-sm mr-1  mt-1">
-                        <iconpark-icon name="square-check" class="fa-fw"></iconpark-icon>
+                        <iconpark-icon name="check-square" class="fa-fw"></iconpark-icon>
                         <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
                     </button>
                     <button onclick="TL.Selecter.setNone();" class="btn btn-light text-azure btn-sm mr-1 mt-1 btn-gui-on-selected">
-                        <iconpark-icon name="square-check" class="fa-fw"></iconpark-icon>
+                        <iconpark-icon name="x-square" class="fa-fw"></iconpark-icon>
                         <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
                     </button>
                     <div class="dropdown btn-gui-on-selected">

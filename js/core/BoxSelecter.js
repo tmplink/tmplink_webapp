@@ -311,6 +311,33 @@ class BoxSelecter {
         }
     }
 
+    async downloadAll() {
+        var node = document.getElementsByName(this.items_name);
+        let data = [];
+        for (let i = 0; i < node.length; i++) {
+            let inode = node[i];
+            let unit_type = inode.getAttribute('tlunit');//是否是文件夹又或者是文件
+            if (unit_type === 'file') {
+                //do something
+                let ukey = inode.getAttribute('tldata');
+                let type = 'file';
+                data.push({'id':ukey,'type':type});
+            }
+            if (unit_type === 'dir') {
+                let ukey = inode.getAttribute('tldata');
+                let type = 'dir';
+                data.push({'id':ukey,'type':type});
+            }
+        }
+
+        if (data.length === 0) {
+            this.parent_op.alert(app.languageData.status_error_12);
+            return false;
+        }
+
+        await this.parent_op.download.folder_download(data);
+    }
+
     async download() {
         var node = document.getElementsByName(this.items_name);
         let data = [];

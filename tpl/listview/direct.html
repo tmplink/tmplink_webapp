@@ -206,14 +206,14 @@
                     <!--[选择器]-->
                     <div>
                         <button onclick="TL.Selecter.setAll();" class="btn btn-light text-azure btn-sm mr-1 mt-1">
-                            <iconpark-icon name="square-check" class="fa-fw"></iconpark-icon>
+                            <iconpark-icon name="check-square" class="fa-fw"></iconpark-icon>
                             <span class="d-none d-sm-inline" i18n="on_select_all">.</span>
                         </button>
-                        <button onclick="TL.Selecter.setNone();" class="btn btn-light text-azure btn-sm mr-1 mt-1">
-                            <iconpark-icon name="square-check" class="fa-fw"></iconpark-icon>
+                        <button onclick="TL.Selecter.setNone();" class="btn btn-light text-azure btn-sm mr-1 mt-1 btn-gui-on-selected">
+                            <iconpark-icon name="x-square" class="fa-fw"></iconpark-icon>
                             <span class="d-none d-sm-inline" i18n="on_select_cancel">.</span>
                         </button>
-                        <div class="dropdown">
+                        <div class="dropdown btn-gui-on-selected">
                             <button class="btn btn-light text-azure dropdown-toggle btn-sm mt-1" type="button"
                                 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
@@ -258,7 +258,7 @@
 
                 <script type="text/template" id="direct_filelist_list_tpl">
                     <% for (var x in obj) { %>
-                        <div class="row mx-0 mb-1 p-1 line list-bar file_unit_<% obj[x].direct_key %>" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                        <div class="row mx-0 mb-1 p-1 line list-bar file_unit_<% obj[x].direct_key %>" name="items_box" tlunit="file" tltype="list"" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
                             <div class="col-12 col-md-8 col-lg-7 d-flex align-items-center listfontweight filename">
                                 <div class="row">
                                     <div class="col-12 filename">

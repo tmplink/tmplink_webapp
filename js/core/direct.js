@@ -33,6 +33,9 @@ class direct {
             return false;
         }
 
+        //启动监听
+        this.parent_op.Selecter.initEventListeners();
+
         //获取当前
         let url = get_url_params('tmpui_page');
         let page = url.tmpui_page;
@@ -363,6 +366,9 @@ class direct {
      * 初始化页面
      */
     filelist(page) {
+
+        //初始化选择器
+        this.parent_op.Selecter.pageInit();
 
         if (this.parent_op.logined != 1) {
             app.open('/app&listview=login');

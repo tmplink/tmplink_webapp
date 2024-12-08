@@ -873,6 +873,8 @@ class tmplink {
         $('.no_files').fadeOut();
         $('.no_dir').fadeOut();
         $('.no_photos').fadeOut();
+        //初始化选择器
+        this.Selecter.pageInit();
         //when page is 0,page will be init
         if (page == 0) {
             this.page_number = 0;
