@@ -302,7 +302,7 @@
                 <script type="text/template" id="direct_filelist_list_tpl">
                     <% for (var x in obj) { %>
                         <div class="row mobile-list-bar file_unit_<% obj[x].direct_key %>">
-                            <div class="col-2 mobile-list-icon-center text-center" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this);">
+                            <div class="col-2 mobile-list-icon-center text-center" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].fname %>" onclick="TL.Selecter.onclickByList(this,event);">
                                 <iconpark-icon name="<% TL.fileicon(obj[x].ftype) %>" class="fa-fw text-azure fa-2x"></iconpark-icon>
                             </div>
                             <div class="col-7 p-0">
@@ -355,7 +355,7 @@
             <script type="text/template" id="direct_room_list_tpl">
                 <% for (var x in obj) { %>
                     <div class="row mobile-list-bar room_unit_<% obj[x].direct_key %>">
-                        <div class="col-2 mobile-list-icon-center text-center" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].name %>" onclick="TL.Selecter.onclickByList(this);">
+                        <div class="col-2 mobile-list-icon-center text-center" name="items_box" tldata="<% obj[x].direct_key %>" tltitle="<% obj[x].name %>" onclick="TL.Selecter.onclickByList(this,event);">
                             <iconpark-icon name="folder-open" class="fa-fw text-azure fa-2x"></iconpark-icon>
                         </div>
                         <div class="col-7 p-0">
