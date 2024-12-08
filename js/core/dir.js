@@ -227,6 +227,8 @@ class dir {
         $('.permission-room-file').hide();
         $('.permission-room-user').hide();
         $('.data_loading').show();
+        //初始化选择器
+        this.parent_op.Selecter.pageInit();
         //清理数据
         $('#dir_list').html('');
         $('#room_direct_model').hide();

@@ -14,6 +14,24 @@ class BoxSelecter {
         this.initEventListeners();
     }
 
+    pageInit() {
+        //重置所有选中的项目
+        this.setNone();
+        //隐藏未选择时的可用按钮
+        this.setGUIOnSelected();
+    }
+
+    setGUIOnSelected() {
+        //假如没有已选中的项目
+        if ($(`[data-check="true"]`).length === 0) {
+            //隐藏未选择时的可用按钮
+            $('.btn-gui-on-selected').hide();
+        } else {
+            //显示未选择时的可用按钮
+            $('.btn-gui-on-selected').fadeIn(100);
+        }
+    }
+
     initEventListeners() {
         document.addEventListener('mousedown', this.handleMouseDown.bind(this));
         document.addEventListener('mousemove', this.handleMouseMove.bind(this));
@@ -77,7 +95,6 @@ class BoxSelecter {
             event.preventDefault();
         }
 
-
         if (event.shiftKey) {
             this.shiftSelect(node);
         } else {
@@ -104,7 +121,7 @@ class BoxSelecter {
         } else {
             $('.btn_for_copy_in_dir').hide();
         }
-
+        this.setGUIOnSelected();
         this.mobileHeadShow();
     }
 
@@ -207,6 +224,7 @@ class BoxSelecter {
         for (let i = 0; i < node.length; i++) {
             this.setOn(node[i]);
         }
+        this.setGUIOnSelected();
     }
 
     setNone() {
@@ -216,6 +234,7 @@ class BoxSelecter {
         }
         // 重置最后选中的节点
         this.lastSelectedNode = null;
+        this.setGUIOnSelected();
     }
 
     fileOnCheck() {
