@@ -186,6 +186,33 @@
                         <div class="font-weight-light" style="font-size: 30px;" i18n="navbar_profile">.</div>
                     </div>
                     <div class="select-box p-2 btn-point uploader_opt">
+                        <div class="d-flex align-items-center">
+                            <span class="stamp-md mr-3">
+                                <iconpark-icon name="server" class="fa-fw fa-2x text-blue"></iconpark-icon>
+                            </span>
+                            <div>
+                                <h4 class="m-0" i18n="model_title_upload_servers">
+                                    选择上传服务器
+                                </h4>
+                                <small class="text-muted" i18n="model_title_upload_servers_des">
+                                    赞助者专用功能
+                                </small>
+                            </div>
+                        </div>
+                        <div>
+                            <!-- 设定项目：上传服务器 -->
+                            <div class="form-group" id="upload_servers_opt"></div>
+                        </div>
+                        <!-- 服务器列表模板 -->
+                        <script type="text/template" id="upload_servers_opt_tpl">
+                            <select class="form-control mt-2" id="upload_servers" onchange="TL.uploader.auto_set_upload_server(this)">
+                                <% for (var i = 0; i < obj.length; i++) { %>
+                                    <option value="<% obj[i].url %>"><% obj[i].title %></option>
+                                <% } %>
+                            </select>
+                        </script>
+                    </div>
+                    <div class="select-box p-2 btn-point uploader_opt">
                         <div class="d-flex align-items-center" onclick="$('#upload_slice_settings').toggle();">
                             <span class="stamp-md mr-3">
                                 <iconpark-icon name="gauge-circle-bolt" class="fa-fw fa-2x text-blue"></iconpark-icon>
@@ -367,6 +394,7 @@
                         <button type="button" class="btn btn-primary btn-sm text-right"
                             onclick="TL.uploader.model_reset()" i18n="modal_settings_upload_model_reset">.</button>
                         <span id="seleted_model"></span>
+                        <span id="seleted_server"></span>
                     </div>
 
                     <div class="mb-2">

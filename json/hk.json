@@ -1,4 +1,7 @@
 {
+    "seleted_server":"伺服器",
+    "model_title_upload_servers": "選擇上傳伺服器",
+    "model_title_upload_servers_des": "贊助者專用功能",
     "multi_download_modal_title":"下載管理器",
     "multi_download_start":"開始下載",
     "multi_download_finish":"完成下載",

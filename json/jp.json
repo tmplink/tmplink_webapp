@@ -1,4 +1,7 @@
 {
+    "seleted_server":"サーバー",
+    "model_title_upload_servers": "アップロードサーバーの選択",
+    "model_title_upload_servers_des": "スポンサー専用機能",
     "multi_download_modal_title":"ダウンロードマネージャー",
     "multi_download_start":"ダウンロードを開始",
     "multi_download_finish":"ダウンロード完了",

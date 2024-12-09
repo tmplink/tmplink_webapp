@@ -823,6 +823,10 @@
     "model_title_upload_slice_thread": "最大线程数（每个文件）",
     "model_title_upload_slice_task": "同时上传的文件数量",
 
+    "model_title_upload_servers": "选择上传服务器",
+    "model_title_upload_servers_des": "赞助者专用功能",
+    "seleted_server":"服务器",
+
     "navbar_connected": "账号互联",
     "model_title_connected": "便捷登录设定",
     "connect_to_google_title": "连接到谷歌账号",

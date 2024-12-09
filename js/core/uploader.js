@@ -80,6 +80,42 @@ class uploader {
                 this.model_selected(0);
             }
         }, 'json');
+        //初始化上传服务器列表
+        this.parent_op.recaptcha_do('upload_request_select2', (captcha) => {
+            let server_list = [];
+            $.post(this.parent_op.api_url_upload, {
+                'token': this.parent_op.api_token,
+                'action': 'upload_request_select2',
+                'captcha': captcha
+            }, (rsp) => {
+                if (rsp.status === 1) {
+                    server_list = rsp.data.servers;
+                    $('#upload_servers_opt').html(app.tpl('upload_servers_opt_tpl',server_list));
+
+                    //检查是否有本地存储的上传服务器
+                    let server = localStorage.getItem('app_upload_server');
+                    if (server !== null) {
+                        //如果这个 server 的值是有效的，调整 select 的选中值（需要检查 server_list.url）
+                        for (let x in server_list) {
+                            if (server_list[x].url === server) {
+                                $('#upload_servers').val(server);
+                            }
+                        }
+                    }else{
+                        //如果没有本地存储的上传服务器，选择第一个
+                        $('#upload_servers').val(server_list[0].url);
+                    }
+
+                    let server_text = $('#upload_servers option:selected').text();
+                    $('#seleted_server').html(', ' + app.languageData.seleted_server + ' : ' + server_text);
+
+                    //是否是赞助者？
+                    if (this.parent_op.isSponsor === false) {
+                        $('#upload_servers').attr('disabled', 'disabled');
+                    }
+                }
+            }, 'json');
+        });
         //如果用户还不是赞助者，将不支持修改上传参数
         if (this.parent_op.isSponsor === false) {
             $('#upload_slice_size').attr('disabled', 'disabled');
@@ -186,6 +222,14 @@ class uploader {
             $('#upload_speed_chart_box').show();
             this.chart_visible = true;
         }
+    }
+
+    auto_set_upload_server(dom){
+        let val = $(dom).val();
+        localStorage.setItem('app_upload_server',val);
+
+        let server_text = $('#upload_servers option:selected').text();
+        $('#seleted_server').html(', ' + app.languageData.seleted_server + ' : ' + server_text);
     }
 
     auto_set_upload_pf(dom) {
@@ -628,9 +672,10 @@ class uploader {
                 'captcha': captcha,
             }, (rsp) => {
                 if (rsp.status == 1) {
+                    let api = $('#upload_servers').val();
                     //文件小于 32 MB，直接上传
                     debug('upload::slice::' + filename);
-                    let api_sync = rsp.data.uploader + '/app/upload_slice';
+                    let api_sync = api + '/app/upload_slice';
                     this.worker_slice(api_sync, rsp.data.utoken, sha1, file, id, filename, 0);
                 } else {
                     //无法获得可用的上传服务器

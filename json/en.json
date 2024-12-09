@@ -1,4 +1,7 @@
 {
+    "seleted_server":"Server",
+    "model_title_upload_servers": "Select Upload Server",
+    "model_title_upload_servers_des": "Exclusive feature for sponsors",
     "multi_download_modal_title": "Download Manager",
     "multi_download_start": "Start Download",
     "multi_download_finish": "Finish Download",
