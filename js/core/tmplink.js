@@ -1422,6 +1422,12 @@ class tmplink {
                 $('#file_messenger_msg').html(app.languageData.file_unavailable);
                 $('#file_messenger').show();
                 this.ga(`Unavailable-[${params.ukey}]`);
+
+                //如果在移动设备下，并且 status 不是 1 ，则隐藏 logo
+                if (isMobileScreen()) {
+                    $('#top_loggo').hide();
+                }
+
             }, 'json');
         } else {
             $('#file_unavailable').show();
