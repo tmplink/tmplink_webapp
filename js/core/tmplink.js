@@ -1243,7 +1243,7 @@ class tmplink {
                         $('#file_download_btn').addClass('btn-azure');
 
                         // 修改文本为开始下载
-                        $('#file_download_btn').html('<img id="top_loggo" src="/img/loading.svg" style="width: 24px;">');
+                        $('#file_download_btn').html('<img src="/img/loading-outline.svg" style="width: 24px;">');
                         $('#file_download_btn').attr('disabled', true);
 
                         this.recaptcha_do('download_req', (recaptcha) => {
@@ -1437,7 +1437,7 @@ class tmplink {
 
     file_page_btn_copy(ukey,filename,type){
         //显示载入动画
-        $('#file_btn_download_opt').html(app.languageData.direct_brand_logo_set_process);
+        $('#file_btn_download_opt').html('<img src="/img/loading-outline.svg" class="fa-fw"/>');
         this.recaptcha_do('download_req', (recaptcha) => {
             const xhr = new XMLHttpRequest();
             xhr.open('POST', this.api_file, true);
@@ -1460,7 +1460,11 @@ class tmplink {
                                 this.copyToClip(`wget -O  "${filename}" ${req.data}`);
                                 break;
                         }
-                        this.alert(app.languageData.direct_brand_logo_set_complete);
+                        //显示 OK
+                        $('#file_btn_download_opt').html('<iconpark-icon name="circle-check" class="fa-fw text-green"></iconpark-icon>');
+                        setTimeout(() => {
+                            $('#file_btn_download_opt').html(app.languageData.file_btn_download_opt);
+                        }, 3000);
                     } else {
                         // 发生未知错误，需要刷新页面
                         this.alert(app.languageData.status_file_2);
@@ -1469,7 +1473,6 @@ class tmplink {
                     //请求失败，网络异常
                     this.alert(app.languageData.direct_brand_logo_set_unknow);
                 }
-                $('#file_btn_download_opt').html(app.languageData.file_btn_download_opt);
             };
             // 发送请求
             xhr.send(data);
