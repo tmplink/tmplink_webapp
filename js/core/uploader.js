@@ -1172,29 +1172,37 @@ class uploader {
         if (skip === undefined) {
             skip = false;
         }
-
-        //如果上传队列中存在正在上传的文件，隐藏出了上传按钮之外的其他选项
+    
+        //如果上传队列中存在正在上传的文件，隐藏除了上传按钮之外的其他选项
         if (this.upload_queue > 0 || this.upload_queue_file.length > 0) {
             $('.uploader_opt').hide();
         } else {
             $('.uploader_opt').show();
-            // 只有当所有文件都处理完毕时才隐藏速度图表
             this.resetUploadStatus();
         }
         this.check_upload_clean_btn_status();
-
-        //$('#nav_upload_btn').html(app.languageData.nav_upload);
+    
         if (rsp.status === 1) {
             $('#uqnn_' + id).html(app.languageData.upload_ok);
-
+    
             //如果未登录状态下上传，则不隐藏上传完成后的信息
             if (this.parent_op.isLogin()) {
-                if (get_page_mrid() != undefined && this.upload_queue_file.length == 0) {
-                    this.parent_op.dir.open();
+                // 清除之前的定时器
+                if (this.refreshTimeout) {
+                    clearTimeout(this.refreshTimeout);
                 }
-                if (get_page_mrid() == undefined && this.upload_queue_file.length == 0) {
-                    this.parent_op.workspace_filelist(0);
+                
+                // 只在所有文件都上传完成时才刷新列表
+                if (this.upload_queue === 0 && this.upload_queue_file.length === 0) {
+                    this.refreshTimeout = setTimeout(() => {
+                        if (get_page_mrid() !== undefined) {
+                            this.parent_op.dir.open();
+                        } else {
+                            this.parent_op.workspace_filelist(0);
+                        }
+                    }, 1000);
                 }
+    
                 $('#uq_' + id).hide();
                 if (skip === false) {
                     $('#upload_model_box_finish').append(app.tpl('upload_list_ok_tpl', {
@@ -1265,7 +1273,7 @@ class uploader {
             //清除上传进度条
             $('.uqinfo_' + id).remove();
         }
-
+    
         //更新上传统计
         this.upload_count++;
     }
