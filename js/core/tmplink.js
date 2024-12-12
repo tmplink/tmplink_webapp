@@ -91,6 +91,7 @@ class tmplink {
         this.dir = new dir;
         this.chart = new chart;
         this.download = new download;
+        this.notification = new notification;
 
         this.stream.init(this);
         this.giftcard.init(this);
@@ -105,6 +106,7 @@ class tmplink {
         this.dir.init(this);
         this.chart.init(this);
         this.download.init(this);
+        this.notification.init(this);
 
         //
         $('.workspace-navbar').hide();
@@ -257,7 +259,8 @@ class tmplink {
         } else {
             this.readyFunction.push(cb);
         }
-
+        this.notification.loadConfirmations();
+        this.notification.showUnconfirmed();
     }
 
     readyExec() {
