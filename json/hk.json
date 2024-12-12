@@ -850,7 +850,7 @@
     "status_media_usage": "媒體庫容量不足，請考慮購買更大容量。",
     "status_media_not_added": "此影片尚未添加到媒體庫，無法線上播放。請先加入媒體庫。\n媒體庫可以將影片轉換為瀏覽器可支持線上播放的影片。",
     "status_media_not_ready": "此影片正在轉換成支持線上播放的影片，請稍等。\n您可以在媒體庫查看轉換進度。",
-    "upload_or_drag": "拖動檔案到此位置，或者選擇檔案上傳",
+    "upload_or_drag": "拖曳檔案到此位置，或者選擇檔案上傳，或者按下快速鍵貼上檔案",
     "upload_files": "上傳檔案",
     "upload_dirs": "上傳檔案夾",
     "upload_dirs_des": "點擊選擇一個檔案夾進行上傳。",

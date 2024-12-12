@@ -598,7 +598,7 @@
     "upload_buy_storage": "If you want to set a file validity period to a long-term one, please purchase a Premium Storage.",
     "upload_fail_storage": "Upload failed, the size of the file exceeds the available Premium Storage.",
     "upload_model99_needs_login": "If you want to set a file validity period to a long-term one, please log in first.",
-    "upload_or_drag": "Drag files here, or select files to upload",
+    "upload_or_drag": "Drop files here, select files to upload, or press shortcut keys to paste files.",
     "model_upload_cli_path": "File path",
     "model_upload_cli_copy": "Generate command",
     "model_upload_cli_note1": "Uploading files via the command line requires cURL support.",

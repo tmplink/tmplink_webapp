@@ -44,12 +44,12 @@ class uploader {
         }
     }
 
-    clean_upload_finish_list(){
+    clean_upload_finish_list() {
         $('#upload_model_box_finish').html('');
         $('.upload_model_box_finish_clean').hide();
     }
 
-    check_upload_clean_btn_status(){
+    check_upload_clean_btn_status() {
         let content = $('#upload_model_box_finish').html();
         if (content.length > 0) {
             $('.upload_model_box_finish_clean').show();
@@ -90,7 +90,7 @@ class uploader {
             }, (rsp) => {
                 if (rsp.status === 1) {
                     server_list = rsp.data.servers;
-                    $('#upload_servers_opt').html(app.tpl('upload_servers_opt_tpl',server_list));
+                    $('#upload_servers_opt').html(app.tpl('upload_servers_opt_tpl', server_list));
 
                     //检查是否有本地存储的上传服务器
                     let server = localStorage.getItem('app_upload_server');
@@ -101,7 +101,7 @@ class uploader {
                                 $('#upload_servers').val(server);
                             }
                         }
-                    }else{
+                    } else {
                         //如果没有本地存储的上传服务器，选择第一个
                         $('#upload_servers').val(server_list[0].url);
                     }
@@ -224,9 +224,9 @@ class uploader {
         }
     }
 
-    auto_set_upload_server(dom){
+    auto_set_upload_server(dom) {
         let val = $(dom).val();
-        localStorage.setItem('app_upload_server',val);
+        localStorage.setItem('app_upload_server', val);
 
         let server_text = $('#upload_servers option:selected').text();
         $('#seleted_server').html(', ' + app.languageData.seleted_server + ' : ' + server_text);
@@ -397,7 +397,32 @@ class uploader {
 
         $('#uploadModal').modal('show');
         this.tmpupGeneratorView();
+
+        document.addEventListener('paste', this.handlePaste.bind(this));
+
+        $('#uploadModal').on('hidden.bs.modal', () => {
+            document.removeEventListener('paste', this.handlePaste.bind(this));
+        });
     }
+
+    handlePaste(e) {
+        const items = e.clipboardData.items;
+
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+
+            if (item.kind === 'file') {
+                const file = item.getAsFile();
+                if (file) {
+                    this.upload_queue_add({
+                        file: file,
+                        is_dir: false
+                    });
+                }
+            }
+        }
+    }
+
 
     /**
      * 开始上传，如果没有超过最大上传数，启动新的上传任务

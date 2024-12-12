@@ -811,7 +811,7 @@
     "copied": "已复制",
     "notify_bulk_copy_start": "已开始连续复制",
     "notify_bulk_copy_finish": "连续复制结束",
-    "upload_or_drag": "拖动文件到此位置，或者选择文件上传",
+    "upload_or_drag": "拖动文件到此位置，或者选择文件上传，或者按下 Ctrl + V 粘贴文件。",
     "upload_files": "上传文件",
     "upload_dirs": "上传文件夹",
     "upload_dirs_des": "点击选择一个文件夹进行上传。",
