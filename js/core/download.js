@@ -125,7 +125,7 @@ class download {
             
             // 获取文件列表
             const file_list = await this.folder_download_prepare(select_data);
-
+    
             // 检查是否包含文件夹结构
             const hasFolder = file_list.some(file => file.path.includes('/'));
             
@@ -138,86 +138,74 @@ class download {
             $('#multiple_download_prepare').hide();
             $('#multiple_download_processing').show();
     
-            // 尝试使用现代File System Access API
-            try {
-                const dirHandle = await window.showDirectoryPicker();
-                const hasPermission = await this.verifyDirectoryPermissions(dirHandle);
-                
-                if (hasPermission) {
-                    // 验证并获取目录权限成功，使用原有的文件夹下载逻辑
-                    this.append_download_info(app.languageData.multi_download_start);
+            // 如果包含文件夹结构，尝试使用 File System Access API
+            if (hasFolder) {
+                try {
+                    const dirHandle = await window.showDirectoryPicker();
+                    const hasPermission = await this.verifyDirectoryPermissions(dirHandle);
                     
-                    // 开始处理文件
-                    for (let i = 0; i < file_list.length; i++) {
-                        const file = file_list[i];
-                        try {
-                            // 获取下载链接
-                            const downloadUrl = await this.get_download_url(file.ukey);
-                            
-                            // 创建目录结构并下载文件
-                            const dirPath = file.path.split('/').slice(0, -1).join('/');
-                            const fileName = file.path.split('/').pop();
-                            
-                            // 获取或创建目标目录
-                            const targetDirHandle = dirPath ?
-                                await this.ensureDirectoryExists(dirHandle, dirPath) :
-                                dirHandle;
-                            
-                            // 下载文件并更新进度
-                            await this.download_and_save_file(
-                                downloadUrl, 
-                                targetDirHandle, 
-                                fileName, 
-                                file.path,
-                                (receivedBytes) => {
-                                    const previousFilesBytes = file_list
-                                        .slice(0, i)
-                                        .reduce((acc, f) => acc + parseInt(f.size), 0);
-                                    
-                                    const totalProgress = ((previousFilesBytes + receivedBytes) / totalSize) * 100;
-                                    
-                                    $('#multiple_download_process-bar')
-                                        .css('width', `${totalProgress}%`)
-                                        .attr('aria-valuenow', totalProgress);
-                                }
-                            );
-                            
-                            downloadedBytes += parseInt(file.size);
-                            
-                        } catch (error) {
-                            console.error(`Error downloading file ${file.path}:`, error);
-                            this.append_download_info(`${app.languageData.multi_download_error}: ${file.path} (${error.message})`);
+                    if (hasPermission) {
+                        this.append_download_info(app.languageData.multi_download_start);
+                        
+                        // 使用现代API下载文件夹结构
+                        for (let i = 0; i < file_list.length; i++) {
+                            const file = file_list[i];
+                            try {
+                                const downloadUrl = await this.get_download_url(file.ukey);
+                                const dirPath = file.path.split('/').slice(0, -1).join('/');
+                                const fileName = file.path.split('/').pop();
+                                const targetDirHandle = dirPath ?
+                                    await this.ensureDirectoryExists(dirHandle, dirPath) :
+                                    dirHandle;
+                                
+                                await this.download_and_save_file(
+                                    downloadUrl, 
+                                    targetDirHandle, 
+                                    fileName, 
+                                    file.path,
+                                    (receivedBytes) => {
+                                        const previousFilesBytes = file_list
+                                            .slice(0, i)
+                                            .reduce((acc, f) => acc + parseInt(f.size), 0);
+                                        const totalProgress = ((previousFilesBytes + receivedBytes) / totalSize) * 100;
+                                        $('#multiple_download_process-bar')
+                                            .css('width', `${totalProgress}%`)
+                                            .attr('aria-valuenow', totalProgress);
+                                    }
+                                );
+                                downloadedBytes += parseInt(file.size);
+                            } catch (error) {
+                                console.error(`Error downloading file ${file.path}:`, error);
+                                this.append_download_info(`${app.languageData.multi_download_error}: ${file.path} (${error.message})`);
+                            }
                         }
+                        
+                        const progressBar = $('#multiple_download_process-bar');
+                        progressBar.css('width', '100%')
+                                  .removeClass('progress-bar-animated progress-bar-striped')
+                                  .addClass('bg-success')
+                                  .attr('aria-valuenow', 100);
+                        
+                        this.append_download_info(app.languageData.multi_download_complete);
+                        return;
                     }
-                    
-                    // 完成所有下载
-                    const progressBar = $('#multiple_download_process-bar');
-                    progressBar.css('width', '100%')
-                              .removeClass('progress-bar-animated progress-bar-striped')
-                              .addClass('bg-success')
-                              .attr('aria-valuenow', 100);
-                    
-                    this.append_download_info(app.languageData.multi_download_complete);
-                    return;
-                }
-            } catch (error) {
-                console.log("File System Access API not supported or permission denied, falling back to legacy download");
-                if (hasFolder) {
+                } catch (error) {
+                    console.log("File System Access API not supported or permission denied, falling back to legacy download");
                     this.append_download_info(app.languageData.multi_download_legacy);
                 }
             }
     
-            // 如果现代API不可用，回退到传统下载方式
+            // 使用传统下载方式（无文件夹或现代API不可用时）
             for (let i = 0; i < file_list.length; i++) {
                 const file = file_list[i];
                 try {
                     const downloadUrl = await this.get_download_url(file.ukey);
                     
-                    // 转换文件夹路径为文件名
+                    // 转换文件夹路径为文件名（如果有文件夹）
                     const parts = file.path.split('/');
-                    const fileName = parts.pop(); // 获取实际文件名
-                    const folderPath = parts.length > 0 ? `[${parts.join('][')}]` : ''; // 将文件夹路径转换为 [folder1][folder2] 格式
-                    const convertedFilename = folderPath + fileName; // 组合成最终文件名
+                    const fileName = parts.pop();
+                    const folderPath = parts.length > 0 ? `[${parts.join('][')}]` : '';
+                    const convertedFilename = folderPath + fileName;
                     
                     await this.legacyDownloadFile(
                         downloadUrl, 
@@ -227,7 +215,6 @@ class download {
                             const previousFilesBytes = file_list
                                 .slice(0, i)
                                 .reduce((acc, f) => acc + parseInt(f.size), 0);
-                            
                             const totalProgress = ((previousFilesBytes + receivedBytes) / totalSize) * 100;
                             $('#multiple_download_process-bar')
                                 .css('width', `${totalProgress}%`)
@@ -236,7 +223,6 @@ class download {
                     );
                     
                     downloadedBytes += parseInt(file.size);
-                    
                 } catch (error) {
                     this.append_download_info(`${app.languageData.multi_download_error}: ${file.path} (${error.message})`);
                 }
