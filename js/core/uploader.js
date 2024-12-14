@@ -51,6 +51,9 @@ class uploader {
 
     check_upload_clean_btn_status() {
         let content = $('#upload_model_box_finish').html();
+        if(content===undefined){
+            return false;
+        }
         if (content.length > 0) {
             $('.upload_model_box_finish_clean').show();
         } else {
