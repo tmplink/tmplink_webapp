@@ -1301,26 +1301,34 @@ class tmplink {
 
                     //复制链接按钮绑定
                     $('#file_download_url_copy').on('click', () => {
-                        //复制内容到剪贴板
-                        navigator.clipboard.writeText(share_url);
-                        $('#file_download_url_copy_icon').html('<iconpark-icon name="circle-check" class="fa-fw mx-auto my-auto mb-2text-green fa-3x"></iconpark-icon>');
-                        setTimeout(() => {
-                            $('#file_download_url_copy_icon').html('<iconpark-icon name="share-all" class="fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></iconpark-icon>');
-                        }, 3000);
-                        return true;
+                        const clipboard = new Clipboard('#file_download_url_copy', {
+                            text: () => share_url
+                        });
+                        
+                        clipboard.on('success', () => {
+                            $('#file_download_url_copy_icon').html('<iconpark-icon name="circle-check" class="fa-fw mx-auto my-auto mb-2text-green fa-3x"></iconpark-icon>');
+                            setTimeout(() => {
+                                $('#file_download_url_copy_icon').html('<iconpark-icon name="share-all" class="fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></iconpark-icon>');
+                            }, 3000);
+                            clipboard.destroy();
+                        });
                     });
 
                     //复制提取码按钮绑定
                     $('#file_download_ukey_copy').on('click', () => {
-                        //复制内容到剪贴板
-                        navigator.clipboard.writeText(params.ukey);
-                        $('#file_download_ukey_copy_icon').removeClass('text-cyan');
-                        $('#file_download_ukey_copy_icon').addClass('text-success');
-                        setTimeout(() => {
-                            $('#file_download_ukey_copy_icon').addClass('text-cyan');
-                            $('#file_download_ukey_copy_icon').removeClass('text-success');
-                        }, 3000);
-                        return true;
+                        const clipboard = new Clipboard('#file_download_ukey_copy', {
+                            text: () => params.ukey
+                        });
+                        
+                        clipboard.on('success', () => {
+                            $('#file_download_ukey_copy_icon').removeClass('text-cyan');
+                            $('#file_download_ukey_copy_icon').addClass('text-success');
+                            setTimeout(() => {
+                                $('#file_download_ukey_copy_icon').addClass('text-cyan');
+                                $('#file_download_ukey_copy_icon').removeClass('text-success');
+                            }, 3000);
+                            clipboard.destroy();
+                        });
                     });
 
                     //添加到收藏按钮绑定
@@ -2576,12 +2584,18 @@ class tmplink {
     }
 
     copyToClip(content) {
-        var aux = document.createElement("textarea");
-        aux.value = content;
-        document.body.appendChild(aux);
-        aux.select();
-        document.execCommand("copy");
-        document.body.removeChild(aux);
+        // 创建一个临时的按钮元素用于 Clipboard.js
+        const tempButton = document.createElement('button');
+        tempButton.setAttribute('data-clipboard-text', content);
+        document.body.appendChild(tempButton);
+        
+        const clipboard = new Clipboard(tempButton);
+        clipboard.on('success', () => {
+            document.body.removeChild(tempButton);
+            clipboard.destroy();
+        });
+        
+        tempButton.click();
     }
 
     randomString(len) {

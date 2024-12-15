@@ -488,20 +488,20 @@ class BoxSelecter {
     }
 
     copyModelCP() {
-        let copyText = $('#copy-modal-body').text();
-        var aux = document.createElement("textarea");
-        aux.value = copyText;
-        document.body.appendChild(aux);
-        aux.select();
-        document.execCommand("copy");
-        document.body.removeChild(aux);
-
-        let tmp = $('#copy-modal-btn').html();
-        $('#copy-modal-btn').html(app.languageData.copied);
-        setTimeout(() => {
-            $('#copy-modal-btn').html(tmp);
-        }
-            , 2000);
+        const clipboard = new Clipboard('#copy-modal-btn', {
+            text: () => $('#copy-modal-body').text()
+        });
+        
+        clipboard.on('success', () => {
+            let tmp = $('#copy-modal-btn').html();
+            $('#copy-modal-btn').html(app.languageData.copied);
+            setTimeout(() => {
+                $('#copy-modal-btn').html(tmp);
+            }, 2000);
+            clipboard.destroy();
+        });
+        
+        $('#copy-modal-btn').click();
     }
 
     directAddlinks() {
