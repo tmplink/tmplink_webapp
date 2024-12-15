@@ -1,4 +1,17 @@
 /**
+ * 复制内容到剪贴板的现代化实现
+ * @param {string} content 要复制的文本内容
+ * @returns {Promise<void>} 返回一个 Promise，复制成功时 resolve，失败时 reject
+ */
+async function copyToClipboard(content) {
+    try {
+        await navigator.clipboard.writeText(content);
+    } catch (err) {
+        throw new Error("Clipboard API not supported");
+    }
+}
+
+/**
  * Adds dark mode styles to chart options with transparent background
  * @param {Object} options - Original chart options
  * @returns {Object} The modified options with theme styles
