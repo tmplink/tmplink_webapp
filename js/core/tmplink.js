@@ -519,8 +519,8 @@ class tmplink {
                 $.post(this.api_tokx, {
                     action: 'challenge',
                 })
-                .then(rsp => resolve(rsp.data))
-                .fail(error => reject(error));
+                    .then(rsp => resolve(rsp.data))
+                    .fail(error => reject(error));
             }
         });
     }
@@ -1225,76 +1225,51 @@ class tmplink {
                     $('.btn_copy_downloadurl_for_curl').on('click', () => {
                         this.file_page_btn_copy(params.ukey, filename, 'curl');
                     });
-                    
+
 
                     //如果是用户本人的文件，隐藏 id="downloadAlert"
                     if (rsp.data.owner != this.uid) {
                         $('#downloadAlert').fadeIn();
                     }
 
-                    //开始处理绑定的事件
-
                     //下载按钮绑定事件，触发下载
-                    $('#file_download_btn').on('click', () => {
-                        //更新 UI
+                    $('#file_download_btn_fast').on('click', () => {
                         if (this.sponsor) {
                             this.ui_hs_change('enhanced');
                         }
 
-                        // 修改按钮颜色
-                        $('#file_download_btn').removeClass('btn-success');
-                        $('#file_download_btn').addClass('btn-azure');
+                        const uiCallbacks = {
+                            updateButtonText: (text) => $('#file_download_btn_fast').html(text),
+                            updateButtonState: (disabled) => $('#file_download_btn_fast').attr('disabled', disabled),
+                            updateButtonClass: (removeClass, addClass) => {
+                                $('#file_download_btn_fast').removeClass(removeClass).addClass(addClass);
+                            },
+                            showError: (message) => this.alert(message)
+                        };
 
-                        // 修改文本为开始下载
-                        $('#file_download_btn').html('<img src="/img/loading-outline.svg" style="width: 24px;">');
-                        $('#file_download_btn').attr('disabled', true);
+                        this.download.handleFileDownload({
+                            ukey: params.ukey,
+                            filename: fileinfo.name,
+                            mode: 'fast'
+                        }, uiCallbacks);
+                    });
 
-                        this.recaptcha_do('download_req', (recaptcha) => {
-                            // 创建 XHR 对象
-                            const xhr = new XMLHttpRequest();
+                    $('#file_download_btn_normal').on('click', () => {
+                        // 原有的普通下载逻辑
+                        const uiCallbacks = {
+                            updateButtonText: (text) => $('#file_download_btn_normal').html(text),
+                            updateButtonState: (disabled) => $('#file_download_btn_normal').attr('disabled', disabled),
+                            updateButtonClass: (removeClass, addClass) => {
+                                $('#file_download_btn_normal').removeClass(removeClass).addClass(addClass);
+                            },
+                            showError: (message) => this.alert(message)
+                        };
 
-                            // 设置请求方法和 URL
-                            xhr.open('POST', this.api_file, true);
-
-                            // 设置请求头
-                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-                            // 准备请求数据
-                            const data = `action=download_req&ukey=${encodeURIComponent(params.ukey)}&token=${encodeURIComponent(this.api_token)}&captcha=${encodeURIComponent(recaptcha)}`;
-
-                            // 设置响应类型
-                            xhr.responseType = 'json';
-
-                            // 定义响应处理函数
-                            xhr.onload =  (rsp) => {
-                                
-
-                                // 3秒后解除
-                                setTimeout(() => {
-                                    $('#file_download_btn').removeClass('btn-azure');
-                                    $('#file_download_btn').addClass('btn-success');
-                                    $('#file_download_btn').html(app.languageData.file_btn_download);
-                                    $('#file_download_btn').attr('disabled', false);
-                                }, 3000);
-
-                                if (xhr.status === 200) {
-                                    const req = xhr.response;
-                                    if (req.status === 1) {
-                                        window.location.href = req.data;
-                                        return true;
-                                    } else {
-                                        // 发生未知错误，需要刷新页面
-                                        this.alert(app.languageData.status_file_2);
-                                        return false;
-                                    }
-                                } else {
-                                    //请求失败，网络异常
-                                    this.alert(app.languageData.direct_brand_logo_set_unknow);
-                                }
-                            };
-                            // 发送请求
-                            xhr.send(data);
-                        });
+                        this.download.handleFileDownload({
+                            ukey: params.ukey,
+                            filename: fileinfo.name,
+                            mode: 'normal'
+                        }, uiCallbacks);
                     });
 
                     //扫码下载按钮绑定
@@ -1438,7 +1413,7 @@ class tmplink {
         this.loading_box_off();
     }
 
-    file_page_btn_copy(ukey,filename,type){
+    file_page_btn_copy(ukey, filename, type) {
         //显示载入动画
         $('#file_btn_download_opt').html('<img src="/img/loading-outline.svg" class="fa-fw"/>');
         this.recaptcha_do('download_req', (recaptcha) => {
@@ -1448,7 +1423,7 @@ class tmplink {
             const data = `action=download_req&ukey=${encodeURIComponent(ukey)}&token=${encodeURIComponent(this.api_token)}&captcha=${encodeURIComponent(recaptcha)}`;
             xhr.responseType = 'json';
             // 定义响应处理函数
-            xhr.onload =  () => {
+            xhr.onload = () => {
                 if (xhr.status === 200) {
                     const req = xhr.response;
                     if (req.status === 1) {
@@ -1918,7 +1893,7 @@ class tmplink {
                     r[i].des = app.languageData.service_code_media_des;
                     r[i].icon = 'circle-video';
                     break;
-                    //找不到对应的 code ，丢弃该单元
+                //找不到对应的 code ，丢弃该单元
                 default:
                     delete r[i];
                     break;

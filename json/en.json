@@ -660,6 +660,7 @@
     "file_downloads": "Number of downloads",
     "file_lefttime": "Remaining time",
     "file_btn_download": "Download",
+    "file_btn_download_fast": "Download(High Speed)",
     "file_btn_download_opt": "Options",
     "file_btn_download_opt_link": "Copy the download link to its software (etc. IDM)",
     "file_btn_download_opt_curl": "Copy the download code that applies to <span class=\"text-red\">curl</span>",

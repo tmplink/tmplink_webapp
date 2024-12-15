@@ -666,6 +666,7 @@
     "file_downloads": "ダウンロード数",
     "file_lefttime": "残り時間",
     "file_btn_download": "ダウンロード",
+    "file_btn_download_fast": "高速ダウンロード",
     "file_btn_download_opt": "オプション",
     "file_btn_download_opt_link": "ダウンロードリンクをコピーして、そのソフトウェア（IDMなど）にダウンロードします",
     "file_btn_download_opt_curl": "<span class=\"text-red\"> curl </span>に適用可能なダウンロードコードをコピーします",

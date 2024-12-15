@@ -101,10 +101,41 @@
                         <span class="userinfo_nickname"></span>
                         <span i18n="filepage_publicby_2">.</span>
                     </div>
+
                     <div class="d-none d-sm-flex">
-                        <!-- 下载按钮 -->
-                        <button type="button" class="btn btn-lg btn-success mx-auto mt-5 mb-2" style="min-width: 400px;"
-                            id="file_download_btn" i18n="file_btn_download">.</button>
+                        <div class="btn-group mx-auto mt-5 mb-2" style="min-width: 400px;">
+                            <button type="button" class="btn btn-lg btn-success" style="width: calc(100% - 46px)" id="file_download_btn_fast" i18n="file_btn_download_fast">
+                                Download
+                            </button>
+                            <div class="btn-group" style="width: 46px">
+                                <button type="button" class="btn btn-lg btn-success dropdown-toggle h-100" data-toggle="dropdown" style="width: 100%; border-left: 1px solid rgba(255,255,255,0.2);">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" style="min-width: 400px">
+                                    <button class="dropdown-item" id="file_download_btn_normal">
+                                        <iconpark-icon name="download" class="fa-fw"></iconpark-icon> 
+                                        <span i18n="file_btn_download">Normal Download</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr id="download_progress_container_hr" style="display: none;"/>
+                    <!-- 进度条组件 -->
+                    <div id="download_progress_container" class="shadow-sm p-2 rounded" class="mx-auto" style="display: none; min-width: 400px">
+                        <div class="progress mb-2" style="height: 10px;">
+                            <div class="progress-bar bg-info" id="progress_thread_1" role="progressbar"
+                                style="width: 0%"></div>
+                            <div class="progress-bar bg-success" id="progress_thread_2" role="progressbar"
+                                style="width: 0%"></div>
+                            <div class="progress-bar bg-warning" id="progress_thread_3" role="progressbar"
+                                style="width: 0%"></div>
+                        </div>
+                        <div class="d-flex justify-content-between text-muted">
+                            <small id="download_speed">0 KB/s</small>
+                            <small id="download_progress">0 MB / 0 MB</small>
+                        </div>
                     </div>
 
                     <div id="file_download_area">
@@ -126,20 +157,17 @@
                                                     i18n="file_btn_download_opt" id="file_btn_download_opt">.</button>
                                                 <div class="dropdown-menu shadow"
                                                     aria-labelledby="dropdownMenuReference">
-                                                    <button
-                                                        class="dropdown-item btn_copy_downloadurl_for_other">
+                                                    <button class="dropdown-item btn_copy_downloadurl_for_other">
                                                         <iconpark-icon name="rectangle-terminal"
                                                             class="fa-fw"></iconpark-icon>
                                                         <span i18n="file_btn_download_opt_link">.</span>
                                                     </button>
-                                                    <button
-                                                        class="dropdown-item btn_copy_downloadurl_for_curl">
+                                                    <button class="dropdown-item btn_copy_downloadurl_for_curl">
                                                         <iconpark-icon name="rectangle-terminal"
                                                             class="fa-fw"></iconpark-icon>
                                                         <span i18n="file_btn_download_opt_curl">.</span>
                                                     </button>
-                                                    <button
-                                                        class="dropdown-item btn_copy_downloadurl_for_wget">
+                                                    <button class="dropdown-item btn_copy_downloadurl_for_wget">
                                                         <iconpark-icon name="rectangle-terminal"
                                                             class="fa-fw"></iconpark-icon>
                                                         <span i18n="file_btn_download_opt_wget">.</span>
@@ -238,7 +266,7 @@
                 </div>
             </div>
 
-            
+
             <div class="text-center mt-3" id="index_lang" style="display: none;">
 
                 <!-- <div class="text-center" id="index_publish">
