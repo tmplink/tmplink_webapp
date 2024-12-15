@@ -168,8 +168,8 @@ class direct {
         });
     }
 
-    copyAPIKey() {
-        this.parent_op.directCopy('#direct_api_key_copy_btn', this.key, false);
+    async copyAPIKey() {
+        await this.parent_op.directCopy('#direct_api_key_copy_btn', this.key, false);
     }
 
     setTrafficLimit() {
@@ -294,17 +294,17 @@ class direct {
         };
     }
 
-    addLink(ukey) {
+    async addLink(ukey) {
         $.post(this.parent_op.api_direct, {
             'action': 'add_link',
             'ukey': ukey,
             'token': this.parent_op.api_token
-        }, (rsp) => {
+        }, async (rsp) => {
             if (rsp.status == 1) {
                 //提示添加成功，并复制到剪贴板
                 let files = rsp.data;
                 $.notifi(app.languageData.direct_add_link_success, "success");
-                this.parent_op.bulkCopy(null, this.genLinkDirect(files[0].dkey, files[0].name).download, false);
+                await this.parent_op.bulkCopy(null, this.genLinkDirect(files[0].dkey, files[0].name).download, false);
             } else {
                 $.notifi(app.languageData.status_error_0, "success");
             }
@@ -316,13 +316,13 @@ class direct {
             'action': 'add_link',
             'ukey': ukeys,
             'token': this.parent_op.api_token
-        }, (rsp) => {
+        }, async (rsp) => {
             if (rsp.status == 1) {
                 //提示添加成功，并复制到剪贴板
                 let files = rsp.data;
                 $.notifi(app.languageData.direct_add_link_success, "success");
                 for (let i in files) {
-                    this.parent_op.bulkCopy(null, this.genLinkDirect(files[i].dkey, files[i].name).download, false);
+                    await this.parent_op.bulkCopy(null, this.genLinkDirect(files[i].dkey, files[i].name).download, false);
                 }
             } else {
                 $.notifi(app.languageData.status_error_0, "success");
@@ -514,16 +514,16 @@ class direct {
         }, 'json');
     }
 
-    genLinkDirectForRoom(direct_id, file_name) {
+    async genLinkDirectForRoom(direct_id, file_name) {
         let link = `${this.protocol}${this.domain}/dir-download/${this.dir_key}/${direct_id}/${file_name}`;
         //添加到剪贴板
-        this.parent_op.bulkCopy(null, link, false);
+        await this.parent_op.bulkCopy(null, link, false);
     }
 
-    genLinkDirectForRoomV2(file_name) {
+    async genLinkDirectForRoomV2(file_name) {
         let link = `${this.protocol}${this.domain}/share/${this.dir_key}/${file_name}`;
         //添加到剪贴板
-        this.parent_op.bulkCopy(null, link, false);
+        await this.parent_op.bulkCopy(null, link, false);
     }
 
     dirToggle() {

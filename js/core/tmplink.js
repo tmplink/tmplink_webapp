@@ -1300,35 +1300,23 @@ class tmplink {
                     }
 
                     //复制链接按钮绑定
-                    $('#file_download_url_copy').on('click', () => {
-                        const clipboard = new Clipboard('#file_download_url_copy', {
-                            text: () => share_url
-                        });
-                        
-                        clipboard.on('success', () => {
-                            $('#file_download_url_copy_icon').html('<iconpark-icon name="circle-check" class="fa-fw mx-auto my-auto mb-2text-green fa-3x"></iconpark-icon>');
-                            setTimeout(() => {
-                                $('#file_download_url_copy_icon').html('<iconpark-icon name="share-all" class="fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></iconpark-icon>');
-                            }, 3000);
-                            clipboard.destroy();
-                        });
+                    $('#file_download_url_copy').on('click', async () => {
+                        await copyToClip(share_url);
+                        $('#file_download_url_copy_icon').html('<iconpark-icon name="circle-check" class="fa-fw mx-auto my-auto mb-2text-green fa-3x"></iconpark-icon>');
+                        setTimeout(() => {
+                            $('#file_download_url_copy_icon').html('<iconpark-icon name="share-all" class="fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></iconpark-icon>');
+                        }, 3000);
                     });
 
                     //复制提取码按钮绑定
-                    $('#file_download_ukey_copy').on('click', () => {
-                        const clipboard = new Clipboard('#file_download_ukey_copy', {
-                            text: () => params.ukey
-                        });
-                        
-                        clipboard.on('success', () => {
-                            $('#file_download_ukey_copy_icon').removeClass('text-cyan');
-                            $('#file_download_ukey_copy_icon').addClass('text-success');
-                            setTimeout(() => {
-                                $('#file_download_ukey_copy_icon').addClass('text-cyan');
-                                $('#file_download_ukey_copy_icon').removeClass('text-success');
-                            }, 3000);
-                            clipboard.destroy();
-                        });
+                    $('#file_download_ukey_copy').on('click', async () => {
+                        await copyToClip(params.ukey);
+                        $('#file_download_ukey_copy_icon').removeClass('text-cyan');
+                        $('#file_download_ukey_copy_icon').addClass('text-success');
+                        setTimeout(() => {
+                            $('#file_download_ukey_copy_icon').addClass('text-cyan');
+                            $('#file_download_ukey_copy_icon').removeClass('text-success');
+                        }, 3000);
                     });
 
                     //添加到收藏按钮绑定
@@ -1431,19 +1419,19 @@ class tmplink {
             const data = `action=download_req&ukey=${encodeURIComponent(ukey)}&token=${encodeURIComponent(this.api_token)}&captcha=${encodeURIComponent(recaptcha)}`;
             xhr.responseType = 'json';
             // 定义响应处理函数
-            xhr.onload = () => {
+            xhr.onload = async() => {
                 if (xhr.status === 200) {
                     const req = xhr.response;
                     if (req.status === 1) {
                         switch (type) {
                             case 'other':
-                                this.copyToClip(req.data);
+                                await copyToClip(req.data);
                                 break;
                             case 'curl':
-                                this.copyToClip(`curl -Lo "${filename}" ${req.data}`);
+                                await copyToClip(`curl -Lo "${filename}" ${req.data}`);
                                 break;
                             case 'wget':
-                                this.copyToClip(`wget -O  "${filename}" ${req.data}`);
+                                await copyToClip(`wget -O  "${filename}" ${req.data}`);
                                 break;
                         }
                         //显示 OK
@@ -2520,7 +2508,7 @@ class tmplink {
         return r;
     }
 
-    bulkCopy(dom, content, base64) {
+    async bulkCopy(dom, content, base64) {
 
         //如果传递进来的内容是 base64 编码的内容，先解码
         if (base64 === true) {
@@ -2548,7 +2536,7 @@ class tmplink {
 
             //将内容写入到缓存并复制到剪贴板
             this.bulkCopyTmp += content + " \n";
-            this.copyToClip(this.bulkCopyTmp);
+            await copyToClip(this.bulkCopyTmp);
             //设置一个10秒缓存器
             this.bulkCopyTimer = setTimeout(() => {
                 this.bulkCopyTimer = 0;
@@ -2559,11 +2547,11 @@ class tmplink {
         } else {
             //直接复制
             $.notifi(app.languageData.copied, "success",);
-            this.copyToClip(content);
+            await copyToClip(content);
         }
     }
 
-    directCopy(dom, content, base64) {
+    async directCopy(dom, content, base64) {
 
         //如果传递进来的内容是 base64 编码的内容，先解码
         if (base64 === true) {
@@ -2580,22 +2568,7 @@ class tmplink {
 
         //直接复制
         $.notifi(app.languageData.copied, "success",);
-        this.copyToClip(content);
-    }
-
-    copyToClip(content) {
-        // 创建一个临时的按钮元素用于 Clipboard.js
-        const tempButton = document.createElement('button');
-        tempButton.setAttribute('data-clipboard-text', content);
-        document.body.appendChild(tempButton);
-        
-        const clipboard = new Clipboard(tempButton);
-        clipboard.on('success', () => {
-            document.body.removeChild(tempButton);
-            clipboard.destroy();
-        });
-        
-        tempButton.click();
+        await copyToClip(content);
     }
 
     randomString(len) {

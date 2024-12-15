@@ -3,7 +3,7 @@
  * @param {string} content 要复制的文本内容
  * @returns {Promise<void>} 返回一个 Promise，复制成功时 resolve，失败时 reject
  */
-async function copyToClipboard(content) {
+async function copyToClip(content) {
     try {
         await navigator.clipboard.writeText(content);
     } catch (err) {

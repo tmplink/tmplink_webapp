@@ -106,7 +106,7 @@ class stream {
         });
     }
 
-    playWith(url,apps){
+    async playWith(url,apps){
         switch(apps){
             case 'vlc':
                 this.openWithVLC(url);
@@ -125,7 +125,7 @@ class stream {
                 break;
             case 'copy':
                 $.notifi(app.languageData.copied, "success");
-                this.parent.copyToClip(url);
+                await copyToClip(url);
                 break;
             default:
                 this.play(url);

@@ -248,7 +248,7 @@ class BoxSelecter {
         //do something
     }
 
-    share() {
+    async share() {
         var node = document.getElementsByName(this.items_name);
         let ukeys = [];
         for (let i = 0; i < node.length; i++) {
@@ -263,10 +263,10 @@ class BoxSelecter {
                 });
             }
         }
-        this.toClicpboard(ukeys);
+        await this.toClicpboard(ukeys);
     }
 
-    toClicpboard(data) {
+    async toClicpboard(data) {
         let ctext = '';
         for (let x in data) {
             if(data[x].type==='dir'){
@@ -275,7 +275,7 @@ class BoxSelecter {
                 ctext = ctext + '📃' + data[x].title + ' https://' + this.site_domain + '/f/' + data[x].ukey + "\r";
             }
         }
-        this.parent_op.copyToClip(ctext);
+        await copyToClip(ctext);
     }
 
     delete() {
@@ -487,21 +487,17 @@ class BoxSelecter {
         }
     }
 
-    copyModelCP() {
-        const clipboard = new Clipboard('#copy-modal-btn', {
-            text: () => $('#copy-modal-body').text()
-        });
-        
-        clipboard.on('success', () => {
+    async copyModelCP() {
+        try {
+            await copyToClip($('#copy-modal-body').text());
             let tmp = $('#copy-modal-btn').html();
             $('#copy-modal-btn').html(app.languageData.copied);
             setTimeout(() => {
                 $('#copy-modal-btn').html(tmp);
             }, 2000);
-            clipboard.destroy();
-        });
-        
-        $('#copy-modal-btn').click();
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        }
     }
 
     directAddlinks() {
