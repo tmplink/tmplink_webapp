@@ -61,6 +61,23 @@ app.ready(
                 document.getElementById('translater-btn').style.display = 'block';
             }
         }, false);
+
+        //发送统计信息
+        let token = localStorage.getItem('app_token');
+        if (token !== null) {
+            fetch(TMPLINK_API_USER, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    action: 'event_ui',
+                    token: token,
+                    title: 'TMPLINK - index',
+                    path: location.pathname + location.search
+                })
+            });
+        }
     }
 );
 
