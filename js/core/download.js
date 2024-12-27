@@ -511,6 +511,8 @@ class download {
             showError
         } = uiCallbacks;
 
+        let downloadBtnText = app.languageData.file_btn_download;
+
         try {
             updateButtonClass('btn-success', 'btn-azure');
             updateButtonText('<img src="/img/loading-outline.svg" style="width: 24px;">');
@@ -520,6 +522,7 @@ class download {
 
             if (downloadUrl) {
                 if (params.mode === 'fast') {
+                    downloadBtnText = app.languageData.file_btn_download_fast;
                     try {
                         await this.startMultiThreadDownload(downloadUrl, params.filename);
                     } catch (error) {
@@ -532,7 +535,7 @@ class download {
 
                 setTimeout(() => {
                     updateButtonClass('btn-azure', 'btn-success');
-                    updateButtonText(app.languageData.file_btn_download);
+                    updateButtonText(downloadBtnText);
                     updateButtonState(false);
                 }, 3000);
 
@@ -549,47 +552,89 @@ class download {
         try {
             const headResponse = await fetch(url, { method: 'HEAD' });
             if (!headResponse.ok) throw new Error('Failed to get file info');
-
+    
             this.totalSize = parseInt(headResponse.headers.get('content-length'));
-
+            if (!this.totalSize) throw new Error('Invalid file size');
+    
             // 初始化多线程下载
             this.initMultiThreadDownload();
-
-            // 确保最后一个块的大小正确
+    
             const numberOfChunks = 3;
             this.chunkSize = Math.ceil(this.totalSize / numberOfChunks);
-
+    
             // 显示进度条
             $('#download_progress_container').show();
             $('#download_progress_container_hr').show();
-
+    
             // 清空进度条初始状态
             for (let i = 1; i <= 3; i++) {
                 $(`#progress_thread_${i}`).css('width', '0%');
             }
-
-            // 启动三个下载线程
-            const downloadPromises = [];
-            for (let i = 0; i < numberOfChunks; i++) {
+    
+            // 创建下载任务数组，包含每个块的详细信息
+            const downloadTasks = Array.from({ length: numberOfChunks }, (_, i) => {
                 const start = i * this.chunkSize;
-                // 确保最后一块不会超出文件大小
-                const end = i === numberOfChunks - 1 ?
-                    this.totalSize - 1 :
+                const end = i === numberOfChunks - 1 ? 
+                    this.totalSize - 1 : 
                     Math.min(start + this.chunkSize - 1, this.totalSize - 1);
-
-                downloadPromises.push(this.downloadChunk(url, i, start, end, filename));
-            }
-
+                const expectedSize = end - start + 1;
+                
+                return {
+                    index: i,
+                    start,
+                    end,
+                    expectedSize
+                };
+            });
+    
             // 启动速度计算
             this.startSpeedCalculator();
-
+    
+            // 并行下载所有块
+            const downloadPromises = downloadTasks.map(task => 
+                this.downloadChunk(url, task.index, task.start, task.end, task.expectedSize)
+            );
+    
             // 等待所有下载完成
-            await Promise.all(downloadPromises);
+            const chunks = await Promise.all(downloadPromises);
+    
+            // 验证所有块的完整性
+            let totalBytesReceived = 0;
+            chunks.forEach((chunk, index) => {
+                const task = downloadTasks[index];
+                if (chunk.byteLength !== task.expectedSize) {
+                    throw new Error(`Chunk ${index} size mismatch: expected ${task.expectedSize}, got ${chunk.byteLength}`);
+                }
+                totalBytesReceived += chunk.byteLength;
+            });
+    
+            // 验证总大小
+            if (totalBytesReceived !== this.totalSize) {
+                throw new Error(`Total size mismatch: expected ${this.totalSize}, got ${totalBytesReceived}`);
+            }
+    
+            // 按正确顺序合并块
+            const blob = new Blob(chunks, { type: headResponse.headers.get('content-type') || 'application/octet-stream' });
+            
+            // 触发下载
+            const downloadUrl = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = downloadUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(downloadUrl);
+    
+            this.cleanupMultiThreadDownload();
+            return true;
         } catch (error) {
+            console.error('Multi-thread download failed:', error);
             this.cleanupMultiThreadDownload();
             throw error;
         }
     }
+    
 
     // 获取下载链接的方法
     async getDownloadUrl(ukey) {
@@ -622,33 +667,36 @@ class download {
         this.multiThreadActive = true;
     }
 
-    downloadChunk(url, index, start, end, filename) {
+    downloadChunk(url, index, start, end, expectedSize) {
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
             this.threads[index] = xhr;
             this.threads[index].loaded = 0;
-
+    
             xhr.open('GET', url);
             xhr.responseType = 'arraybuffer';
             xhr.setRequestHeader('Range', `bytes=${start}-${end}`);
-
+    
             xhr.onprogress = (event) => {
                 if (this.multiThreadActive) {
                     this.updateChunkProgress(index, event.loaded, end - start + 1);
                 }
             };
-
+    
             xhr.onload = () => {
                 if (xhr.status === 206) {
-                    this.chunks[index] = xhr.response;
-                    this.checkDownloadCompletion(filename);
-                    resolve();
+                    const chunk = xhr.response;
+                    if (chunk.byteLength !== expectedSize) {
+                        reject(new Error(`Chunk ${index} size mismatch: expected ${expectedSize}, got ${chunk.byteLength}`));
+                        return;
+                    }
+                    resolve(chunk);
                 } else {
-                    reject(new Error('Chunk download failed'));
+                    reject(new Error(`Chunk ${index} download failed with status ${xhr.status}`));
                 }
             };
-
-            xhr.onerror = () => reject(new Error('Chunk download failed'));
+    
+            xhr.onerror = () => reject(new Error(`Chunk ${index} download failed`));
             xhr.send();
         });
     }
@@ -720,7 +768,7 @@ class download {
         $('#file_download_btn_fast')
             .removeClass('btn-azure')
             .addClass('btn-success')
-            .html(app.languageData.file_btn_download)
+            .html(app.languageData.file_btn_download_fast)
             .prop('disabled', false);
 
         this.cleanupMultiThreadDownload();
