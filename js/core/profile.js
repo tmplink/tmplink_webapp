@@ -116,9 +116,9 @@ class profile {
         if(this.parent_op.user_group.level===undefined){
             this.parent_op.user_group.level = 1;
         }
-        let badge = '/img/level/'+this.parent_op.user_group.level+'.svg';
-        $('.user_badge').attr('src',badge);
-        $('.user_level_icon').attr('src',badge);
+        // let badge = '/img/level/'+this.parent_op.user_group.level+'.svg';
+        // $('.user_badge').attr('src',badge);
+        // $('.user_level_icon').attr('src',badge);
         
         //设定其它信息
         if(this.parent_op.user_group.storage === undefined){
