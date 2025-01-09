@@ -16,5 +16,15 @@ function INIT_login() {
             //初始化谷歌登陆按钮
             TL.oauth.google_login();
         }
+
+        // $('.area_global').remove();
+
+        //如果在国内，则对界面进行调整
+        if(TL.area_cn){
+            //将谷歌登录移动到最下面
+            $('.area_global').remove();
+        }else{
+            $('.area_cn').remove();
+        }
     });
 }   

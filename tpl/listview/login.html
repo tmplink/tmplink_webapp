@@ -17,22 +17,39 @@
             <button id="submit" class="btn btn-lg btn-primary btn-block mt-4" i18n="form_btn_login"
                 onclick="TL.login();">.</button>
             <div class="mt-2">
-                
+
                 <div class="text-right">
-                    <a class="btn text-muted" onclick="dynamicView.reset()" i18n="login_found"
-                        data-dl-root="true">.</a>
+                    <a class="btn text-muted" onclick="dynamicView.reset()" i18n="login_found" data-dl-root="true">.</a>
                 </div>
+
                 <hr>
-                <!-- [第三方登录] -->
-                <div class="text-center mb-1">
-                    <a class="btn btn-light" id="google_login">
-                        <iconpark-icon name="google"></iconpark-icon> <span id="google_login_msg" i18n="oauth_btn_google_login">Login with Google</span>
-                    </a>
+
+                <div class="area_global">
+                    <!-- [第三方登录] -->
+                    <div class="text-center mb-1">
+                        <a class="btn btn-lg btn-light btn-block" id="google_login">
+                            <iconpark-icon name="google"></iconpark-icon> <span id="google_login_msg"
+                                i18n="oauth_btn_google_login">Login with Google</span>
+                        </a>
+                    </div>
+                    <div class="text-center m-2">
+                        <a class="btn" onclick="dynamicView.reg()" i18n="login_reg" data-dl-root="true">.</a>
+                    </div>
                 </div>
-                <div class="text-center">
-                    <a class="btn" onclick="dynamicView.reg()" i18n="login_reg"
-                        data-dl-root="true">.</a>
+
+                <div class="area_cn">
+                    <div class="text-center">
+                        <a class="btn btn-lg btn-light btn-block" onclick="dynamicView.reg()" data-dl-root="true">
+                            <iconpark-icon name="mail"></iconpark-icon> <span i18n="login_reg">.</span>
+                        </a>
+                    </div>
+                    <div class="text-center mt-2">
+                        <a class="btn" id="google_login">
+                            <span id="google_login_msg" i18n="oauth_btn_google_login">Login with Google</span>
+                        </a>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>

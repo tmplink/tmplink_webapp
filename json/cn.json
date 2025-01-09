@@ -389,7 +389,7 @@
     "notice_meetingroom_status_mrcreat_fail": "文件夹创建失败",
     "login_title": "登录",
     "login_ok": "登录成功",
-    "login_reg": "还没有账号？来这里注册",
+    "login_reg": "还没有账号？点这里注册",
     "login_found": "忘记密码？来这里找回",
     "login_fail": "登录失败，密码错误。",
     "reg_title": "注册",
