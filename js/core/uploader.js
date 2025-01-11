@@ -86,7 +86,15 @@ class uploader {
                 this.quickUploadInit();
                 this.model_selected(0);
             }
-        }, 'json');
+        }, 'json').fail((xhr, textStatus, errorThrown) => {
+            let errorMessage = '获取上传配置失败';
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+                errorMessage = xhr.responseJSON.message;
+            } else if (textStatus) {
+                errorMessage = `配置获取失败: ${textStatus}`;
+            }
+            this.parent_op.alert(errorMessage);
+        });
         //初始化上传服务器列表
         this.parent_op.recaptcha_do('upload_request_select2', (captcha) => {
             let server_list = [];
@@ -874,7 +882,23 @@ class uploader {
                     break;
 
             }
-        }, 'json');
+        }, 'json').fail((xhr, textStatus, errorThrown) => {
+            // 添加错误处理
+            let errorMessage = '网络请求失败';
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+                errorMessage = xhr.responseJSON.message;
+            } else if (textStatus) {
+                errorMessage = `请求失败: ${textStatus}`;
+            }
+            
+            this.parent_op.alert(errorMessage);
+            $('#uqnn_' + id).html(`<span class="text-red">${errorMessage}</span>`);
+            
+            // 重试逻辑
+            setTimeout(() => {
+                this.worker_slice(server, utoken, sha1, file, id, filename, thread);
+            }, 3000);
+        });
     }
 
     /**
