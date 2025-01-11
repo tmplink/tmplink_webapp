@@ -15,6 +15,10 @@ class uploader {
     upload_queue = 0;
     upload_queue_max = 5;
 
+    // 新增：实际运行时使用的变量
+    _internal_queue_max = 1;
+    _internal_worker_max = 1;
+
     active_uploads = 0;
     upload_speeds = {};
     speed_update_interval = null;
@@ -733,7 +737,7 @@ class uploader {
 
         //创建分片任务的ID，算法 uid+文件路径+文件大小+分片设定 的 sha1 值
         let uptoken = CryptoJS.SHA1(this.parent_op.uid + file.name + file.size + this.slice_size).toString();
-        let upload_queue_max = this.upload_worker_queue_max;
+        let upload_queue_max = this._internal_queue_max;
         let numbers_of_slice = 1;
 
         // 获取当前时间
