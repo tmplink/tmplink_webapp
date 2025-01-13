@@ -273,29 +273,36 @@
                                             </a>
                                         <% } %>
 
-                                        <% if(obj[x].link_etime!=='0000-00-00 00:00:00'){ %>
-                                            <!--[在大屏幕上显示]-->
-                                            <span>
-                                                <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
-                                                <span><% obj[x].link_etime %></span>
-                                            </span>
-                                        <% } %>
-
                                         <% if(obj[x].like>0){ %>
                                             <iconpark-icon name="like" class="fa-fw text-pink"></iconpark-icon>
                                             <span class="text-pink"><% obj[x].like %><span>
                                         <% } %>
 
                                         <% if(obj[x].dir_name!=null){ %>
-                                            <div class="d-none d-lg-block" onclick="event.stopPropagation();">
+                                            <!-- <div class="d-none d-lg-block" onclick="event.stopPropagation();">
                                                 <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
                                                 <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
                                             </div>
                                             <span class="d-inline d-lg-none" onclick="event.stopPropagation();">
                                                 <iconpark-icon name="folder-open" class="fa-fw text-cyan"></iconpark-icon>
                                                 <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
+                                            </span> -->
+                                        <% } %>
+
+                                        <% if(obj[x].download_limit!==0){ %>
+                                            <span>
+                                                <iconpark-icon name="circle-plus" class="fa-fw"></iconpark-icon>
+                                                <span><% (obj[x].download_limit - obj[x].download_count) %></span>
                                             </span>
                                         <% } %>
+
+                                        <% if(obj[x].link_etime!=='0000-00-00 00:00:00'){ %>
+                                            <span>
+                                                <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
+                                                <span><% obj[x].link_etime %></span>
+                                            </span>
+                                        <% } %>
+
                                     </div>
 
                                 </div>
@@ -601,9 +608,14 @@
                                         <li><code>action</code> link_add</li>
                                         <li><code>key</code> API Key</li>
                                         <li><code>ukey</code> <span i18n="direct_api_params_ukey">文件 UKEY</span< /li>
-                                        <li><code>vaild_time</code> <span
-                                                i18n="direct_api_params_vaild_time">（可选参数）链接有效期，单位为分钟，默认为 0 ，一直有效</span<
-                                                    /li>
+                                        <li>
+                                            <code>valid_time</code> 
+                                            <span i18n="direct_api_params_valid_time">（可选参数）链接有效期，单位为分钟，默认为 0 ，一直有效</span>
+                                        </li>
+                                        <li>
+                                            <code>download_limit</code> 
+                                            <span i18n="direct_api_params_download_limit">（可选参数）限制下载次数，默认为不限制。</span>
+                                        </li>
                                     </ul>
                                 </td>
                                 <td>

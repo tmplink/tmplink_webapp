@@ -313,7 +313,7 @@
                                 </div>
                                 <div class="text-muted">
                                     <span>
-                                        <% app.languageData.direct_total_downloads %> <% obj[x].downloads %> · <% obj[x].fsize_formated %> 
+                                        <iconpark-icon name="download-one" class="fa-fw text-pink"></iconpark-icon> <% obj[x].downloads %> <iconpark-icon name="compact-disc" class="fa-fw text-pink"></iconpark-icon> <% obj[x].fsize_formated %> 
                                     </span>
                                     <% if(obj[x].like>0){ %>
                                         <span>
@@ -330,6 +330,22 @@
                                             <span class="lefttime-remainder ml-1" id="r_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
                                         </span>
                                     <% } %>  
+                                </div>
+                                <div class="text-muted">
+                                    <% if(obj[x].download_limit!==0){ %>
+                                        <span>
+                                            <iconpark-icon name="circle-plus" class="fa-fw"></iconpark-icon>
+                                            <span><% (obj[x].download_limit - obj[x].download_count) %></span>
+                                        </span>
+                                    <% } %>
+                                    
+                                    <% if(obj[x].link_etime!=='0000-00-00 00:00:00'){ %>
+                                        <span>
+                                            <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
+                                            <span><% obj[x].link_etime %></span>
+                                        </span>
+                                    <% } %>
+
                                 </div>
                             </div>
                             <div class="col-3 p-0 mobile-list-icon-center">
@@ -573,8 +589,14 @@
                         <li><code>action</code> link_add</li>
                         <li><code>key</code> API Key</li>
                         <li><code>ukey</code> <span i18n="direct_api_params_ukey">文件 UKEY</span></li>
-                        <li><code>vaild_time</code> <span i18n="direct_api_params_vaild_time">（可选参数）链接有效期，单位为分钟，默认为 0
-                                ，一直有效</span></li>
+                        <li>
+                            <code>valid_time</code> 
+                            <span i18n="direct_api_params_valid_time">（可选参数）链接有效期，单位为分钟，默认为 0 ，一直有效</span>
+                        </li>
+                        <li>
+                            <code>download_limit</code> 
+                            <span i18n="direct_api_params_download_limit">（可选参数）限制下载次数，默认为不限制。</span>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-12 pb-2">

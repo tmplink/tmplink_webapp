@@ -734,7 +734,8 @@
     "direct_api_upload_status_6": "6 : 上传失败，API Key 已失效。",
     "direct_api_data_upload": "上传成功时，返回的数据为文件的 UKEY。上传失败时，返回数据是错误信息。",
     
-    "direct_api_params_vaild_time": "（可选参数）链接有效期，单位为分钟，默认为 0 ，一直有效",
+    "direct_api_params_valid_time": "（可选参数）链接有效期，单位为分钟，默认为 0 ，一直有效",
+    "direct_api_params_download_limit": "（可选参数）限制下载次数，默认为不限制",
     "direct_api_data_etime" :"链接有效期",
 
     "direct_stop_btn":"停用",

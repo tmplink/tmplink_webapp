@@ -1,4 +1,5 @@
 {
+    "direct_api_params_download_limit": "（可選參數）限制下載次數，預設為不限制",
     "seleted_server":"伺服器",
     "model_title_upload_servers": "選擇上傳伺服器",
     "model_title_upload_servers_des": "贊助者專用功能",
@@ -105,7 +106,7 @@
     "direct_cf_modal_body_2": "比如，如果您的域名是 abc.com ，那麼您應該使用 download.abc.com 來作為直鏈域名。並且，不要啟用對應域名的 HTTP 代理，這會降低下載速度。",
     "direct_stop_btn": "停用",
     "direct_stop": "確定要停用服務嗎？停用服務會解除綁定的域名，並移除所有已建立的直鏈。",
-    "direct_api_params_vaild_time": "（可選參數）連結有效期，單位為分鐘，預設為 0 ，永久有效",
+    "direct_api_params_valid_time": "（可選參數）連結有效期，單位為分鐘，預設為 0 ，永久有效",
     "direct_api_data_etime": "連結有效期",
     "direct_api_title_7": "上傳檔案",
     "direct_api_params_model": "檔案有效期限，預設參數為0。",

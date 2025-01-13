@@ -1,4 +1,5 @@
 {
+    "direct_api_params_download_limit": "（オプション）ダウンロード回数を制限する、デフォルトは無制限です",
     "seleted_server":"サーバー",
     "model_title_upload_servers": "アップロードサーバーの選択",
     "model_title_upload_servers_des": "スポンサー専用機能",
@@ -95,7 +96,7 @@
     "direct_cf_modal_body_1": "ドメインをCloudFlareで管理している場合は、サブドメインをダイレクトリンクのドメインとして使用してください。",
     "direct_stop_btn": "停止",
     "direct_stop": "サービスを停止しますか？サービスの停止により、ドメインのバインドが解除され、作成されたすべてのダイレクトリンクが削除されます。",
-    "direct_api_params_vaild_time": "（オプション）リンクの有効期間（分単位）、デフォルトは0で、常に有効です",
+    "direct_api_params_valid_time": "（オプション）リンクの有効期間（分単位）、デフォルトは0で、常に有効です",
     "direct_api_data_etime": "リンクの有効期間",
     "direct_api_title_7": "ファイルのアップロード",
     "direct_api_params_model": "ファイルの有効期限。デフォルトのパラメータは0です。",
