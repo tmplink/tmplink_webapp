@@ -311,6 +311,30 @@ class BoxSelecter {
         }
     }
 
+    changeModelOpen(){
+        $('#changeModelModal').modal('show');
+    }
+
+    changeModel() {
+        let ukeys = [];
+
+        var node = document.getElementsByName(this.items_name);
+        for (let i = 0; i < node.length; i++) {
+            var inode = node[i];
+            let check = inode.getAttribute('data-check');
+            if (check === 'true') {
+                //do something
+                ukeys.push(inode.getAttribute('tldata'));
+            }
+        }
+        if (ukeys.length === 0) {
+            this.parent_op.alert(app.languageData.status_error_12);
+            return false;
+        }
+        console.log(ukeys);
+        this.parent_op.file.changeModel(ukeys);
+    }
+
     async downloadAll() {
         var node = document.getElementsByName(this.items_name);
         let data = [];

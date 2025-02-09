@@ -1,4 +1,8 @@
 {
+    "changemodel_msg_1": "Completed",
+    "changemodel_msg_2": "Setting failed, insufficient storage space",
+    "changemodel_msg_3": "Setting failed",
+    "changemodel_msg_4": "Setting failed, system error",
     "direct_api_params_download_limit": "(Optional) Download limit count, defaults to unlimited.",
     "seleted_server":"Server",
     "model_title_upload_servers": "Select Upload Server",
@@ -513,6 +517,7 @@
     "index_get_file2": "Please enter the access code",
     "file_key_copy": "Copy Access Code",
     "on_select_move": "Move to folder",
+    "on_select_change_model": "Change expiration time",
     "model_title_move_to": "Move to folder",
     "status_error_12": "Please select a file.",
     "status_error_13": "Please select the destination folder.",

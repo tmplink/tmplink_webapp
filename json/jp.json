@@ -1,4 +1,8 @@
 {
+    "changemodel_msg_1": "完了しました",
+    "changemodel_msg_2": "設定に失敗しました。十分なストレージがありません",
+    "changemodel_msg_3": "設定に失敗しました",
+    "changemodel_msg_4": "設定に失敗しました。システムエラーが発生しました",
     "direct_api_params_download_limit": "（オプション）ダウンロード回数を制限する、デフォルトは無制限です",
     "seleted_server":"サーバー",
     "model_title_upload_servers": "アップロードサーバーの選択",
@@ -507,6 +511,7 @@
     "index_get_file2": "ファイルキーを入力してください",
     "file_key_copy": "ファイルキーのコピー",
     "on_select_move": "フォルダに移動",
+    "on_select_change_model": "有効期限を変更",
     "index_dd1": "単一ファイルは最大 50 GB をサポートします",
     "index_dd2": "クライアントは必要ありません",
     "index_dd3": "5GB のストレージスペースを楽しむために登録してください",

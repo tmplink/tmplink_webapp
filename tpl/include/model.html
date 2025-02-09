@@ -2007,3 +2007,72 @@
         </div>
     </div>
 </div>
+
+<div class="modal" id="changeModelModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <iconpark-icon name="rectangle-vertical-history" class="fa-fw"></iconpark-icon>
+                    <span i18n="on_select_change_model">.</span>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>1
+            </div>
+            <div class="modal-body">
+                <div class="select-box p-2 btn-point filemodel filemodel-99" onclick="TL.file.changeModelSet(99)">
+                    <div class="d-flex align-items-center">
+                        <span class="stamp-md mr-3">
+                            <iconpark-icon name="infinity" class="fa-fw fa-2x text-blue"></iconpark-icon>
+                        </span>
+                        <div>
+                            <h4 class="m-0" i18n="modal_settings_upload_model99">.</h4>
+                            <small class="text-muted" i18n="modal_settings_upload_model99_des">.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="select-box p-2 btn-point filemodel filemodel-0" onclick="TL.file.changeModelSet(0)">
+                    <div class="d-flex align-items-center">
+                        <span class="stamp-md mr-3">
+                            <iconpark-icon name="rectangle-vertical-history" class="fa-fw fa-2x text-blue"></iconpark-icon>
+                        </span>
+                        <div>
+                            <h4 class="m-0" i18n="modal_settings_upload_model1">.</h4>
+                            <small class="text-muted" i18n="modal_settings_upload_model1_des">.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="select-box p-2 btn-point filemodel filemodel-1" onclick="TL.file.changeModelSet(1)">
+                    <div class="d-flex align-items-center">
+                        <span class="stamp-md mr-3">
+                            <iconpark-icon name="rectangle-vertical-history" class="fa-fw fa-2x text-blue"></iconpark-icon>
+                        </span>
+                        <div>
+                            <h4 class="m-0" i18n="modal_settings_upload_model2">.</h4>
+                            <small class="text-muted" i18n="modal_settings_upload_model2_des">.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="select-box p-2 btn-point filemodel filemodel-2" onclick="TL.file.changeModelSet(2)">
+                    <div class="d-flex align-items-center">
+                        <span class="stamp-md mr-3">
+                            <iconpark-icon name="rectangle-vertical-history" class="fa-fw fa-2x text-blue"></iconpark-icon>
+                        </span>
+                        <div>
+                            <h4 class="m-0" i18n="modal_settings_upload_model3">.</h4>
+                            <small class="text-muted" i18n="modal_settings_upload_model3_des">.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!-- 确定按钮 -->
+                <button type="button" class="btn btn-primary" i18n="model_btn_ok" onclick="TL.Selecter.changeModel();">.</button>
+                <!-- 取消按钮 -->
+                <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
+            </div>
+        </div>
+    </div>
+</div>

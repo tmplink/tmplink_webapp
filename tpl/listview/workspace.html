@@ -101,6 +101,10 @@
                             <iconpark-icon name="folder-plus" class="fa-fw"></iconpark-icon>
                             <span i18n="on_select_move">.</span>
                         </button>
+                        <button class="dropdown-item" onclick="TL.Selecter.changeModelOpen()">
+                            <iconpark-icon name="rectangle-vertical-history" class="fa-fw"></iconpark-icon>
+                            <span i18n="on_select_change_model">.</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -294,6 +298,33 @@
                                         <span i18n="menu_addlink"><% app.languageData.menu_addlink %></span>
                                     </button>
                                 <% } %>  
+                                <!-- 修改有效期 -->
+                                <div class="dropdown-divider"></div>
+                                <h4 class="dropdown-header" i18n="on_select_change_model"><% app.languageData.on_select_change_model %></h4>
+                                <% if(obj[x].model!==99){ %>
+                                    <button onclick="TL.file.changeModelSet(99);TL.file.changeModel('<% obj[x].ukey%>');" class="dropdown-item">
+                                        <iconpark-icon name="infinity" class="fa-fw"></iconpark-icon>
+                                        <span i18n="modal_settings_upload_model99"><% app.languageData.modal_settings_upload_model99 %></span>
+                                    </button>
+                                <% } %>
+                                <% if(obj[x].model!==0){ %>
+                                    <button onclick="TL.file.changeModelSet(0);TL.file.changeModel('<% obj[x].ukey%>');" class="dropdown-item">
+                                        <iconpark-icon name="rectangle-vertical-history" class="fa-fw"></iconpark-icon>
+                                        <span i18n="modal_settings_upload_model1"><% app.languageData.modal_settings_upload_model1 %></span>
+                                    </button>
+                                <% } %>
+                                <% if(obj[x].model!==1){ %>
+                                    <button onclick="TL.file.changeModelSet(1);TL.file.changeModel('<% obj[x].ukey%>');" class="dropdown-item">
+                                        <iconpark-icon name="rectangle-vertical-history" class="fa-fw"></iconpark-icon>
+                                        <span i18n="modal_settings_upload_model2"><% app.languageData.modal_settings_upload_model2 %></span>
+                                    </button>
+                                <% } %>
+                                <% if(obj[x].model!==2){ %>
+                                    <button onclick="TL.file.changeModelSet(2);TL.file.changeModel('<% obj[x].ukey%>');" class="dropdown-item">
+                                        <iconpark-icon name="rectangle-vertical-history" class="fa-fw"></iconpark-icon>
+                                        <span i18n="modal_settings_upload_model3"><% app.languageData.modal_settings_upload_model3 %></span>
+                                    </button>
+                                <% } %>
                             </div>
                         </span>
                     </div>
