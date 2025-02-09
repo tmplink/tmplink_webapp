@@ -2626,7 +2626,10 @@ class tmplink {
             return false;
         }
 
-        if (now > 86400) {
+        // Check if time is more than 1 day
+        const moreThanOneDay = now > 86400;
+
+        if (moreThanOneDay) {
             d = Math.floor(now / 86400);
             d = d + ':';
             left_time = left_time % 86400;
@@ -2648,13 +2651,21 @@ class tmplink {
             left_time = left_time % 60;
         }
 
-        if (left_time > 0) {
-            s = left_time;
-            s = s < 10 ? "0" + s : s;
-            s = s === "0" ? "00" : s;
-        }
-        if (left_time === 0 && m !== '') {
-            s = "00";
+        // Only show seconds if less than 1 day
+        if (!moreThanOneDay) {
+            if (left_time > 0) {
+                s = left_time;
+                s = s < 10 ? "0" + s : s;
+                s = s === "0" ? "00" : s;
+            }
+            if (left_time === 0 && m !== '') {
+                s = "00";
+            }
+        } else {
+            // Remove trailing colon when more than 1 day
+            if (m !== '') {
+                m = m.slice(0, -1);
+            }
         }
 
         return d + h + m + s;
