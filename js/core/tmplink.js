@@ -92,6 +92,7 @@ class tmplink {
         this.chart = new chart;
         this.download = new download;
         this.notification = new notification;
+        this.file = new file;
 
         this.stream.init(this);
         this.giftcard.init(this);
@@ -107,6 +108,7 @@ class tmplink {
         this.chart.init(this);
         this.download.init(this);
         this.notification.init(this);
+        this.file.init(this);
 
         //
         $('.workspace-navbar').hide();
@@ -1419,7 +1421,7 @@ class tmplink {
             const data = `action=download_req&ukey=${encodeURIComponent(ukey)}&token=${encodeURIComponent(this.api_token)}&captcha=${encodeURIComponent(recaptcha)}`;
             xhr.responseType = 'json';
             // 定义响应处理函数
-            xhr.onload = async() => {
+            xhr.onload = async () => {
                 if (xhr.status === 200) {
                     const req = xhr.response;
                     if (req.status === 1) {
@@ -2583,29 +2585,31 @@ class tmplink {
     }
 
     countTimeDown(id, time) {
-        if (this.countDownID[id] === undefined) {
-            //update dom
-            let dom = document.getElementById(id);
-            if (dom === null) {
-                return false;
-            } else {
-                dom.innerHTML = this.leftTimeString(time);
-                this.countDownID[id] = setInterval(() => {
-                    if (time > 0) {
-                        time--;
-                        //update dom
-                        let dom = document.getElementById(id);
-                        if (dom === null) {
-                            //todo
-                            //this.countDownTime[id] = null;
-                            //clearInterval(this.countDownID[id]);
-                            return false;
-                        } else {
-                            dom.innerHTML = this.leftTimeString(time);
-                        }
+        //如果已经存在定时器，则先清除
+        if (this.countDownID[id] !== undefined) {
+            clearInterval(this.countDownID[id]);
+        }
+        //update dom
+        let dom = document.getElementById(id);
+        if (dom === null) {
+            return false;
+        } else {
+            dom.innerHTML = this.leftTimeString(time);
+            this.countDownID[id] = setInterval(() => {
+                if (time > 0) {
+                    time--;
+                    //update dom
+                    let dom = document.getElementById(id);
+                    if (dom === null) {
+                        //todo
+                        //this.countDownTime[id] = null;
+                        //clearInterval(this.countDownID[id]);
+                        return false;
+                    } else {
+                        dom.innerHTML = this.leftTimeString(time);
                     }
-                }, 1000);
-            }
+                }
+            }, 1000);
         }
     }
 
