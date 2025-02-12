@@ -307,6 +307,7 @@ class dir {
             }
 
             //如果用户是拥有者，显示直链相关的信息，并初始化
+            // console.log('Show:'.this.room.owner);
             if (this.room.owner == 1) {
                 this.parent_op.direct.dirRoomInit();
                 $('.room_direct_model').show();
@@ -338,6 +339,8 @@ class dir {
             //如果文件夹不是用户的，则隐藏偏好设定
             if (this.room.owner == 0) {
                 $('.room_btn_performance').hide();
+            }else{
+                $('.room_btn_performance').show();
             }
 
             //如果文件夹有设置图片
