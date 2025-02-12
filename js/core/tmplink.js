@@ -65,8 +65,8 @@ class tmplink {
     mybg_light_key = 0
     mybg_dark_key = 0
     system_background = {
-        'light': ['/img/bg/light.jpg'],
-        'dark': ['/img/bg/dark.jpg']
+        'light': ['/img/bg/light.svg'],
+        'dark': ['/img/bg/dark.svg']
     }
 
     constructor() {
