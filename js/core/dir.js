@@ -317,6 +317,22 @@ class dir {
                 $('#downloadAlert').show();
             }
 
+            //如果用户是拥有者，并且文件夹是公开的，则显示公开类型的图标
+            if (this.room.owner == 1) {
+                $('.room_protection').show();
+                $('.room_protection_lock').hide();
+                $('.room_protection_unlock').hide();
+                console.log('Publish:',this.room.model);
+                if (this.room.model === 'public') {
+                    $('.room_protection_unlock').show();
+                } else {
+                    $('.room_protection_lock').show();
+                }
+            }else{
+                $('.room_protection').hide();
+            }
+
+
             //如果用户不是文件夹的拥有者，则显示出加入收藏夹的按钮
             if (this.room.owner == 0) {
                 $('#room_btn_favorate').on('click', () => {
@@ -460,6 +476,29 @@ class dir {
         if(status==='private'){
             $('#dir_status').attr('name', 'folder-lock-one');
         }
+    }
+
+    setModel(type) {
+        if (type !== 'private') {
+            type = 'public';
+        }else{
+            type = 'private';
+        }
+
+        $.post(this.parent_op.api_mr, {
+            action: 'set_model',
+            token: this.parent_op.api_token,
+            mr_id: this.room.mr_id,
+            model: type
+        }, (rsp) => {
+            if (type === 'private') {
+                $('.room_protection_unlock').hide();
+                $('.room_protection_lock').show();
+            }else{
+                $('.room_protection_unlock').show();
+                $('.room_protection_lock').hide();
+            }
+        });
     }
 
     getIcons(room){

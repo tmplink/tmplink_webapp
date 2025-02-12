@@ -42,6 +42,12 @@
                         <div>
                             <div id="title_of_sub">
                                 <span class="room_title display-4"></span>
+                                <span class="room_protection" style="display: none;">
+                                    <!-- 文件夹类型：私有 -->
+                                    <iconpark-icon name="lock" onclick="TL.dir.setModel('public');" class="room_protection_lock fa-fw text-green btn-pointer" style="display: none;"></iconpark-icon>
+                                    <!-- 文件夹类型：公开 -->
+                                    <iconpark-icon name="unlock" onclick="TL.dir.setModel('private');" class="room_protection_unlock fa-fw text-warning btn-pointer" style="display: none;"></iconpark-icon>
+                                </span>
                                 <div class="mt-2 room_subinfo">
                                     <iconpark-icon id="dir_status" name="folder-open-e1ad2j7l" class="fa-fw text-yellow" style="font-size: 24px;"></iconpark-icon>
                                     <span id="room_total"></span>
