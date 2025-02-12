@@ -233,6 +233,7 @@ class dir {
         $('#dir_list').html('');
         $('#room_direct_model').hide();
         $('.room_subinfo').hide();
+        $('.fav-enabled').hide();
         //this.loadingON();
         //获取基本信息
         $.post(this.parent_op.api_mr, {
