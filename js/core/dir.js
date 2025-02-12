@@ -318,7 +318,7 @@ class dir {
             }
 
             //如果用户是拥有者，并且文件夹是公开的，则显示公开类型的图标
-            if (this.room.owner == 1) {
+            if (this.room.owner == 1 && this.room.parent !== 0) {
                 $('.room_protection').show();
                 $('.room_protection_lock').hide();
                 $('.room_protection_unlock').hide();
