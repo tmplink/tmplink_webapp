@@ -398,6 +398,8 @@ class dir {
                 }
                 $('.userinfo').show();
                 $('.userinfo_nickname').html(`${this.room.ui_nickname}`);
+            }else{
+                $('.userinfo').hide();
             }
 
 
