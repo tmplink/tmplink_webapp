@@ -69,6 +69,11 @@ class tmplink {
         'dark': ['/img/bg/dark.svg']
     }
 
+    //GA title
+    ga_title = 'Init'
+    ga_keeper = null
+    ga_processing = false
+
     constructor() {
         this.setArea();
         this.setDomain();
@@ -204,12 +209,26 @@ class tmplink {
             }, 3000);
             return false;
         }
+        this.ga_processing = true;
+        this.ga_title = title;
         $.post(this.api_user, {
             action: 'event_ui',
             token: this.api_token,
             title: title,
             path: location.pathname + location.search,
+        }, (rsp) => {
+            this.ga_processing = false;
         });
+    }
+
+    keep_alive() {
+        if(this.ga_keeper === null) {
+            this.ga_keeper = setInterval(() => {
+                if (this.ga_processing === false) {
+                    this.ga(this.ga_title);
+                }
+            }, 60000);
+        }
     }
 
     setDomain() {
@@ -450,6 +469,8 @@ class tmplink {
             this.profile.init_details();
             //初始化账号互联状态
             this.oauth.init_details();
+            //初始换回话保持
+            this.keep_alive();
         });
     }
 
