@@ -205,6 +205,7 @@
                                 <a href="/file?ukey=<% obj[x].ukey %>" tmpui-app="true" class="filelist_link mr-1" target="_blank" onclick="event.stopPropagation();">
                                     <% obj[x].fname %>
                                 </a>
+                                
 
                                 <% if(TL.stream.allow(obj[x].fname,obj[x].owner)||TL.stream.checkForOpenOnApps(obj[x].fname,obj[x].owner)){ %>
                                     <span class="dropdown">
@@ -252,6 +253,10 @@
                                         <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
                                         <span class="lefttime-remainder" id="wd_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
                                     </span>
+                                <% } %>
+
+                                <% if(obj[x].hot!=0){ %>
+                                    <iconpark-icon name="fire" class="fa-fw text-red"></iconpark-icon>
                                 <% } %>
                             </div>
 

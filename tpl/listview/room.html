@@ -417,6 +417,9 @@
                                         <span class="lefttime-remainder" id="r_<% obj[x].ukey %>" data-tmplink-lefttime="<% obj[x].lefttime %>"></span>
                                     </span>
                                 <% } %>  
+                                <% if(obj[x].hot!=0){ %>
+                                    <iconpark-icon name="fire" class="fa-fw text-red"></iconpark-icon>
+                                <% } %>
                             </div>
                         </div>
 

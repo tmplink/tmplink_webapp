@@ -1202,6 +1202,11 @@ class tmplink {
                     });
                     $('#likes_count').html(rsp.data.like);
 
+                    //如果这个文件很火
+                    if (rsp.data.hot == 1) {
+                        $('.hot-flag').show();
+                    }
+
                     //剩余时间
                     if (rsp.data.model !== '99') {
                         $('#lefttime_show').show();

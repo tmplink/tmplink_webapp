@@ -229,6 +229,9 @@
                                     <a href="/app&listview=room&mrid=<% obj[x].mrid %>" tmpui-action="dynamicView.room();"> <% obj[x].dir_name %></a>
                                 </span>
                             <% } %>
+                            <% if(obj[x].hot!=0){ %>
+                                <iconpark-icon name="fire" class="fa-fw text-red"></iconpark-icon>
+                            <% } %>
                         </div>
                     </div>
                     <div class="col-2 mobile-list-icon-center">

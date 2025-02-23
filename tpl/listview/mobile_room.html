@@ -338,6 +338,9 @@
                         </div>
                         <div class="col-8 p-0">
                             <div class="text-truncate">
+                                <% if(obj[x].hot!=0){ %>
+                                    <iconpark-icon name="fire" class="fa-fw text-red"></iconpark-icon>
+                                <% } %>
                                 <a href="/file?ukey=<% obj[x].ukey %>" class="filelist_link mr-1" tmpui-app="true" target="_blank" onclick="event.stopPropagation();">
                                     <% obj[x].fname %>
                                 </a>
@@ -366,9 +369,10 @@
                                     </span>
                                 <% }else{ %>
                                     <span>
-                                        <% obj[x].cctime %> <% obj[x].fsize_formated %>
+                                        <% obj[x].cctime %>
                                     </span>
                                 <% } %> 
+                                
                             <% } %> 
                             </div>
                         </div>
