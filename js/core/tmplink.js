@@ -1061,7 +1061,7 @@ class tmplink {
         $('.lefttime-remainder').each((i, e) => {
             let id = $(e).attr('id');
             let time = $(e).attr('data-tmplink-lefttime');
-            this.countTimeDown(id, time);
+            countDown(id, time,this.currentLanguage);
         });
         this.btn_copy_bind();
         this.is_file_ok_check(data);
@@ -1210,7 +1210,7 @@ class tmplink {
                     //剩余时间
                     if (rsp.data.model !== '99') {
                         $('#lefttime_show').show();
-                        this.countTimeDown('lefttime', rsp.data.lefttime_s);
+                        countDown('lefttime', rsp.data.lefttime_s, this.currentLanguage);
                     } else {
                         $('#lefttime_show').hide();
                     }
@@ -2608,35 +2608,6 @@ class tmplink {
             pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
         }
         return pwd;
-    }
-
-    countTimeDown(id, time) {
-        //如果已经存在定时器，则先清除
-        if (this.countDownID[id] !== undefined) {
-            clearInterval(this.countDownID[id]);
-        }
-        //update dom
-        let dom = document.getElementById(id);
-        if (dom === null) {
-            return false;
-        } else {
-            dom.innerHTML = this.leftTimeString(time);
-            this.countDownID[id] = setInterval(() => {
-                if (time > 0) {
-                    time--;
-                    //update dom
-                    let dom = document.getElementById(id);
-                    if (dom === null) {
-                        //todo
-                        //this.countDownTime[id] = null;
-                        //clearInterval(this.countDownID[id]);
-                        return false;
-                    } else {
-                        dom.innerHTML = this.leftTimeString(time);
-                    }
-                }
-            }, 1000);
-        }
     }
 
     leftTimeString(time) {

@@ -31,7 +31,7 @@ class dir {
         $('.lefttime-remainder').each((i, e) => {
             let id = $(e).attr('id');
             let time = $(e).attr('data-tmplink-lefttime');
-            this.parent_op.countTimeDown(id, time);
+            countDown(id, time,this.parent_op.currentLanguage);
         });
         this.parent_op.btn_copy_bind();
         app.linkRebind();

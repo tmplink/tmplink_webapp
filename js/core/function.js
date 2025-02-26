@@ -177,62 +177,140 @@ function getCurrentURL() {
 }
 
 //倒计时函数，将剩余的时间格式化成时分秒并写入到指定的 html 中
-function countDown(id, time) {
-    let now = time - 1;
-    let left_time = now;
-
-    let d = '';
-    let h = '';
-    let m = '';
-    let s = '';
-
-    if (now == 0) {
-        return false;
+//支持四种语言：zh(简体中文), tw(繁體中文), jp(日本語), en(English)
+function countDown(id, time, lang = 'en') {
+    console.log('countDown', id, time, lang);
+    // 确保语言是支持的选项，否则默认为英语
+    lang = ['en', 'cn', 'hk', 'jp'].includes(lang) ? lang : 'en';
+    
+    // 语言特定的文本配置
+    const langConfig = {
+        'en': {
+            day: ' day',
+            days: ' days',
+            hour: ' hour',
+            hours: ' hours',
+            minute: ' minute',
+            minutes: ' minutes',
+            second: ' second',
+            seconds: ' seconds',
+            separator: ', ',
+            and: ' and '
+        },
+        'cn': {
+            day: '天',
+            days: '天',
+            hour: '小时',
+            hours: '小时',
+            minute: '分钟',
+            minutes: '分钟',
+            second: '秒',
+            seconds: '秒',
+            separator: '',
+            and: ''
+        },
+        'hk': {
+            day: '天',
+            days: '天',
+            hour: '小時',
+            hours: '小時',
+            minute: '分鐘',
+            minutes: '分鐘',
+            second: '秒',
+            seconds: '秒',
+            separator: '',
+            and: ''
+        },
+        'jp': {
+            day: '日',
+            days: '日',
+            hour: '時間',
+            hours: '時間',
+            minute: '分',
+            minutes: '分',
+            second: '秒',
+            seconds: '秒',
+            separator: '',
+            and: ''
+        }
+    };
+    
+    const config = langConfig[lang];
+    
+    // 如果时间为0或负数，则相应处理
+    if (time <= 0) {
+        let dom = document.getElementById(id);
+        if (dom === null) {
+            return false;
+        } else {
+            dom.innerHTML = "0" + config.seconds;
+            return false;
+        }
     }
-
-    if (now > 86400) {
-        d = Math.floor(now / 86400);
-        d = d + ':';
-        left_time = left_time % 86400;
+    
+    // 计算时间组件
+    let d = Math.floor(time / 86400);
+    let left_time = time % 86400;
+    
+    let h = Math.floor(left_time / 3600);
+    left_time = left_time % 3600;
+    
+    let m = Math.floor(left_time / 60);
+    let s = left_time % 60;
+    
+    // 确定是否处于天级别
+    const isDayLevel = d > 0;
+    
+    // 以自然语言格式化输出
+    let parts = [];
+    
+    if (d > 0) {
+        parts.push(d + (d === 1 && lang === 'en' ? config.day : config.days));
     }
-
-    if (left_time > 3600) {
-        h = Math.floor(left_time / 3600);
-        h = h < 10 ? "0" + h : h;
-        h = h === "0" ? "00" : h;
-        h = h + ':';
-        left_time = left_time % 3600;
+    
+    if (h > 0) {
+        parts.push(h + (h === 1 && lang === 'en' ? config.hour : config.hours));
     }
-
-    if (left_time > 60) {
-        m = Math.floor(left_time / 60);
-        m = m < 10 ? "0" + m : m;
-        m = m === "0" ? "00" : m;
-        m = m + ':';
-        left_time = left_time % 60;
+    
+    if (m > 0) {
+        parts.push(m + (m === 1 && lang === 'en' ? config.minute : config.minutes));
     }
-
-    if (left_time > 0) {
-        s = left_time;
-        s = s < 10 ? "0" + s : s;
-        s = s === "0" ? "00" : s;
+    
+    // 只有在非天级别时才包含秒
+    if (!isDayLevel && s > 0) {
+        parts.push(s + (s === 1 && lang === 'en' ? config.second : config.seconds));
     }
-    if (left_time === 0 && m !== '') {
-        s = "00";
+    
+    let output = '';
+    
+    if (parts.length === 0) {
+        // 如果所有组件都为零
+        output = "0" + (isDayLevel ? config.days : config.seconds);
+    } else if (lang === 'en' && parts.length > 1) {
+        // 英语格式：X, Y, and Z
+        const lastPart = parts.pop();
+        output = parts.join(config.separator) + config.and + lastPart;
+    } else {
+        // 其他语言：XYZ（无分隔符）或单个值
+        output = parts.join(config.separator);
     }
-
+    
+    // 更新DOM
     let dom = document.getElementById(id);
     if (dom === null) {
         return false;
     } else {
-        dom.innerHTML = d + h + m + s;
+        dom.innerHTML = output;
     }
-
-    if (now > 0) {
-        setTimeout(() => {
-            countDown(id, now);
-        }, 1000);
-    }
+    
+    // 确定更新间隔和下一个时间值
+    const updateInterval = isDayLevel ? 60000 : 1000;  // 天级别为1分钟，否则为1秒
+    const decreaseAmount = isDayLevel ? 60 : 1;        // 天级别减少60秒，否则减少1秒
+    
+    // 安排下一次更新
+    setTimeout(() => {
+        countDown(id, time - decreaseAmount, lang);
+    }, updateInterval);
 }
 
 function bytetoconver(val, label) {
