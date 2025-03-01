@@ -38,6 +38,8 @@ class uploader {
     upload_slice_total = [] //文件上传线程计数器
     upload_slice_process = [] //当前处理进度
 
+    upload_file_progress = {}; // 格式: { id: { total: 文件总大小, uploaded: 已上传字节数 } }
+
     init(parent_op) {
         this.check_upload_clean_btn_status();
         this.parent_op = parent_op;
@@ -781,6 +783,21 @@ class uploader {
             if (this.upload_slice_process[id] === undefined) {
                 this.upload_slice_process[id] = 0;
             }
+            
+            // 初始化文件上传进度跟踪
+            if (this.upload_file_progress[id] === undefined) {
+                this.upload_file_progress[id] = {
+                    total: file.size,
+                    uploaded: 0,
+                    isUpdating: false, // 添加一个标志，表示当前是否正在更新进度
+                    lastUpdateTime: 0  // 添加一个时间戳，控制更新频率
+                };
+                
+                // 初始化时设置一次进度显示
+                $('#uqnn_' + id).html(
+                    `${app.languageData.upload_sync} (0/${bytetoconver(file.size, true)}) 0%`
+                );
+            }
         }
 
         //如果分片数量大于上传线程数量，则线程数量设定为 upload_queue_max,否则设定为 numbers_of_slice
@@ -948,7 +965,7 @@ class uploader {
         //主线程工作
         if (thread === 0) {
             //如果是主线程，则更新上传信息到界面上
-            $('#uqnn_' + id).html(app.languageData.upload_sync);
+            // $('#uqnn_' + id).html(app.languageData.upload_sync);
 
             //获取进度信息
             let total = slice_status.total;
@@ -960,14 +977,14 @@ class uploader {
 
             //绘制进度信息
             $(uqmid).html(`${app.languageData.upload_upload_processing} ${file.name}`);
-            $(uqpid).css('width', pp_percent + '%');
+            // $(uqpid).css('width', pp_percent + '%');
         }
 
         //上传完成后，关闭计时器
         xhr.addEventListener("loadend", (evt) => {
             //如果已上传的总数等于总数，则表示上传完成，显示已完成
             if (index === (this.upload_slice_total[id] - 1)) {
-                $('#uqnn_' + id).html(app.languageData.upload_sync_onprogress);
+                // $('#uqnn_' + id).html(app.languageData.upload_sync_onprogress);
                 $(uqpid).css('width', '100%');
             }
         });
@@ -987,9 +1004,29 @@ class uploader {
         //分块上传进度上报
         xhr.upload.onprogress = (evt) => {
             if (evt.lengthComputable) {
-                let loaded = evt.loaded - (this.upload_slice_chunk[id][index] || 0);
-                this.updateUploadSpeed(id, loaded);
-                this.upload_slice_chunk[id][index] = evt.loaded;
+                let previousLoaded = this.upload_slice_chunk[id][index] || 0;
+                let newLoaded = evt.loaded;
+                let loadedDiff = newLoaded - previousLoaded;
+                
+                if (loadedDiff > 0) {
+                    this.updateUploadSpeed(id, loadedDiff);
+                    this.upload_slice_chunk[id][index] = newLoaded;
+                    this.total_uploaded_data += loadedDiff;
+                    
+                    // 更新文件总体上传进度
+                    if (this.upload_file_progress[id]) {
+                        this.upload_file_progress[id].uploaded += loadedDiff;
+                        // 限制最大值不超过文件总大小，防止进度超过100%
+                        this.upload_file_progress[id].uploaded = Math.min(
+                            this.upload_file_progress[id].uploaded, 
+                            this.upload_file_progress[id].total
+                        );
+                        // 只有主线程才更新界面显示
+                        if (thread === 0) {
+                            this.updateFileProgress(id, filename);
+                        }
+                    }
+                }
             }
         };
 
@@ -1001,6 +1038,41 @@ class uploader {
             fd.append('captcha', recaptcha);
             xhr.send(fd);
         });
+    }
+
+    /**
+     * 更新文件上传进度显示
+     * @param {*} id 文件ID
+     * @param {*} filename 文件名
+     */
+    updateFileProgress(id, filename) {
+        if (!this.upload_file_progress[id]) return;
+        
+        let progress = this.upload_file_progress[id];
+        let percentComplete = Math.min(100, Math.floor((progress.uploaded / progress.total) * 100));
+        
+        let uqmid = "#uqm_" + id;
+        let uqpid = "#uqp_" + id;
+        
+        // 标记这个文件是否正在更新进度，防止更新冲突
+        if (this.upload_file_progress[id].isUpdating) return;
+        this.upload_file_progress[id].isUpdating = true;
+        
+        // 更新进度文本和进度条
+        $(uqmid).html(`${app.languageData.upload_upload_processing} ${filename}`);
+        $(uqpid).css('width', percentComplete + '%');
+        
+        // 更新状态文本，显示已上传/总大小
+        $('#uqnn_' + id).html(
+            `${app.languageData.upload_sync} (${bytetoconver(progress.uploaded, true)}/${bytetoconver(progress.total, true)}) ${percentComplete}%`
+        );
+        
+        // 用setTimeout确保DOM更新完成后再释放锁
+        setTimeout(() => {
+            if (this.upload_file_progress[id]) {
+                this.upload_file_progress[id].isUpdating = false;
+            }
+        }, 50);
     }
 
     handleUploadError(id) {
@@ -1198,6 +1270,11 @@ class uploader {
     }
 
     upload_final(rsp, file, id, skip) {
+        // 在完成或失败时清理进度跟踪数据
+        if (this.upload_file_progress[id]) {
+            delete this.upload_file_progress[id];
+        }
+
         this.handleUploadCompletion(id);
         this.upload_queue--;
         if (skip === undefined) {
