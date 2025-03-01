@@ -179,7 +179,7 @@ function getCurrentURL() {
 //倒计时函数，将剩余的时间格式化成时分秒并写入到指定的 html 中
 //支持四种语言：zh(简体中文), tw(繁體中文), jp(日本語), en(English)
 function countDown(id, time, lang = 'en') {
-    console.log('countDown', id, time, lang);
+    // console.log('countDown', id, time, lang);
     // 确保语言是支持的选项，否则默认为英语
     lang = ['en', 'cn', 'hk', 'jp'].includes(lang) ? lang : 'en';
     
