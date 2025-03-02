@@ -57,7 +57,7 @@ class uploader {
 
     check_upload_clean_btn_status() {
         let content = $('#upload_model_box_finish').html();
-        if(content===undefined){
+        if (content === undefined) {
             return false;
         }
         if (content.length > 0) {
@@ -783,16 +783,17 @@ class uploader {
             if (this.upload_slice_process[id] === undefined) {
                 this.upload_slice_process[id] = 0;
             }
-            
+
             // 初始化文件上传进度跟踪
             if (this.upload_file_progress[id] === undefined) {
                 this.upload_file_progress[id] = {
                     total: file.size,
                     uploaded: 0,
                     isUpdating: false, // 添加一个标志，表示当前是否正在更新进度
-                    lastUpdateTime: 0  // 添加一个时间戳，控制更新频率
+                    lastUpdateTime: 0, // 添加一个时间戳，控制更新频率
+                    resumeInitialized: false  // 添加标记，用于跟踪是否已执行断点续传进度初始化
                 };
-                
+
                 // 初始化时设置一次进度显示
                 $('#uqnn_' + id).html(
                     `${app.languageData.upload_sync} (0/${bytetoconver(file.size, true)}) 0%`
@@ -879,13 +880,52 @@ class uploader {
                         this.worker_slice(server, utoken, sha1, file, id, filename, thread);
                     }, 5000);
                     break;
+                // 在 worker_slice 函数中收到服务器响应后，添加下面的代码
+                // 在 case 3 分支中，添加一次性进度绘制代码：
+
                 case 3:
-                    //获得一个需要上传的分片编号,开始处理上传
+                    // 获得一个需要上传的分片编号,开始处理上传
+
+                    // 检查是否已经为此文件执行过断点续传进度更新
+                    if (thread === 0 && this.upload_file_progress[id] &&
+                        !this.upload_file_progress[id].resumeInitialized &&
+                        rsp.data && rsp.data.total > 0) {
+
+                        // 标记已执行断点续传进度更新
+                        this.upload_file_progress[id].resumeInitialized = true;
+
+                        // 计算已上传分片数
+                        const totalSlices = rsp.data.total;
+                        const waitingSlices = rsp.data.wait;
+                        const uploadedSlices = totalSlices - waitingSlices;
+
+                        // 只有当有已上传分片时才更新进度
+                        if (uploadedSlices > 0) {
+                            // 计算进度百分比
+                            const progressPercent = Math.floor((uploadedSlices / totalSlices) * 100);
+
+                            // 估算已上传字节数
+                            const estimatedBytes = Math.min(uploadedSlices * this.slice_size, file.size);
+
+                            // 更新进度条
+                            $(`#uqp_${id}`).css('width', `${progressPercent}%`);
+
+                            // 更新进度文本
+                            $(`#uqnn_${id}`).html(
+                                `${app.languageData.upload_sync} (${bytetoconver(estimatedBytes, true)}/${bytetoconver(file.size, true)}) ${progressPercent}%`
+                            );
+
+                            console.log(`断点续传初始化: 文件 ${filename} 已上传 ${uploadedSlices}/${totalSlices} 分片 (${progressPercent}%)`);
+
+                            // 更新已上传字节数
+                            this.upload_file_progress[id].uploaded = estimatedBytes;
+                        }
+                    }
+
                     this.worker_slice_uploader(server, id, uptoken, file, rsp.data, filename, thread, () => {
-                        //回归
+                        // 回归
                         this.worker_slice(server, utoken, sha1, file, id, filename, thread);
                     });
-
                     break;
                 case 7:
                     //上传失败
@@ -907,10 +947,10 @@ class uploader {
             } else if (textStatus) {
                 errorMessage = `请求失败: ${textStatus}`;
             }
-            
+
             this.parent_op.alert(errorMessage);
             $('#uqnn_' + id).html(`<span class="text-red">${errorMessage}</span>`);
-            
+
             // 重试逻辑
             setTimeout(() => {
                 this.worker_slice(server, utoken, sha1, file, id, filename, thread);
@@ -1007,18 +1047,18 @@ class uploader {
                 let previousLoaded = this.upload_slice_chunk[id][index] || 0;
                 let newLoaded = evt.loaded;
                 let loadedDiff = newLoaded - previousLoaded;
-                
+
                 if (loadedDiff > 0) {
                     this.updateUploadSpeed(id, loadedDiff);
                     this.upload_slice_chunk[id][index] = newLoaded;
                     this.total_uploaded_data += loadedDiff;
-                    
+
                     // 更新文件总体上传进度
                     if (this.upload_file_progress[id]) {
                         this.upload_file_progress[id].uploaded += loadedDiff;
                         // 限制最大值不超过文件总大小，防止进度超过100%
                         this.upload_file_progress[id].uploaded = Math.min(
-                            this.upload_file_progress[id].uploaded, 
+                            this.upload_file_progress[id].uploaded,
                             this.upload_file_progress[id].total
                         );
                         // 只有主线程才更新界面显示
@@ -1047,26 +1087,26 @@ class uploader {
      */
     updateFileProgress(id, filename) {
         if (!this.upload_file_progress[id]) return;
-        
+
         let progress = this.upload_file_progress[id];
         let percentComplete = Math.min(100, Math.floor((progress.uploaded / progress.total) * 100));
-        
+
         let uqmid = "#uqm_" + id;
         let uqpid = "#uqp_" + id;
-        
+
         // 标记这个文件是否正在更新进度，防止更新冲突
         if (this.upload_file_progress[id].isUpdating) return;
         this.upload_file_progress[id].isUpdating = true;
-        
+
         // 更新进度文本和进度条
         $(uqmid).html(`${app.languageData.upload_upload_processing} ${filename}`);
         $(uqpid).css('width', percentComplete + '%');
-        
+
         // 更新状态文本，显示已上传/总大小
         $('#uqnn_' + id).html(
             `${app.languageData.upload_sync} (${bytetoconver(progress.uploaded, true)}/${bytetoconver(progress.total, true)}) ${percentComplete}%`
         );
-        
+
         // 用setTimeout确保DOM更新完成后再释放锁
         setTimeout(() => {
             if (this.upload_file_progress[id]) {
@@ -1280,7 +1320,7 @@ class uploader {
         if (skip === undefined) {
             skip = false;
         }
-    
+
         //如果上传队列中存在正在上传的文件，隐藏除了上传按钮之外的其他选项
         if (this.upload_queue > 0 || this.upload_queue_file.length > 0) {
             $('.uploader_opt').hide();
@@ -1289,17 +1329,17 @@ class uploader {
             this.resetUploadStatus();
         }
         this.check_upload_clean_btn_status();
-    
+
         if (rsp.status === 1) {
             $('#uqnn_' + id).html(app.languageData.upload_ok);
-    
+
             //如果未登录状态下上传，则不隐藏上传完成后的信息
             if (this.parent_op.isLogin()) {
                 // 清除之前的定时器
                 if (this.refreshTimeout) {
                     clearTimeout(this.refreshTimeout);
                 }
-                
+
                 // 只在所有文件都上传完成时才刷新列表
                 if (this.upload_queue === 0 && this.upload_queue_file.length === 0) {
                     this.refreshTimeout = setTimeout(() => {
@@ -1310,7 +1350,7 @@ class uploader {
                         }
                     }, 1000);
                 }
-    
+
                 $('#uq_' + id).hide();
                 if (skip === false) {
                     $('#upload_model_box_finish').append(app.tpl('upload_list_ok_tpl', {
@@ -1381,7 +1421,7 @@ class uploader {
             //清除上传进度条
             $('.uqinfo_' + id).remove();
         }
-    
+
         //更新上传统计
         this.upload_count++;
     }
