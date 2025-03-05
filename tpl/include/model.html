@@ -1143,23 +1143,76 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="mv_box_0" class="form-check"></div>
+                <div id="mv_box_0" class="form-check pl-0"></div>
 
                 <script type="text/template" id="mv_box_tpl">
                     <li class="list-unstyled">
-                        <input type="radio" id="target_dir_<% obj.id %>"  name="dir_tree" value="<% obj.id %>">
-                        <% if(obj.children){ %>
-                            <label for="mv_select_box_<% obj.id %>" id="mv_select_box_<% obj.id %>" onclick="TL.dir.treeShow('<% obj.id %>')" style="margin-bottom: 0px">
-                                <iconpark-icon name="folder-plus" class="fa-fw"></iconpark-icon> <% obj.name %>
-                            </label>
-                        <% }else{ %>
-                            <label for="mv_select_box_<% obj.id %>" style="margin-bottom: 0px">
-                                <iconpark-icon name="folder" class="fa-fw"></iconpark-icon> <% obj.name %>
-                            </label>
-                        <% } %>
-                        <ul id="mv_box_<% obj.id %>" style="display: none;margin-bottom: 0px"></ul>
+                        <div id="dir_item_<% obj.id %>" class="folder-item d-flex align-items-center p-2" 
+                             data-id="<% obj.id %>" data-expanded="false" onclick="TL.dir.folderClick('<% obj.id %>')">
+                            <span class="icon-wrapper mr-2">
+                                <% if(obj.children){ %>
+                                    <iconpark-icon id="folder_icon_<% obj.id %>" name="folder-plus" class="fa-fw"></iconpark-icon>
+                                <% }else{ %>
+                                    <iconpark-icon id="folder_icon_<% obj.id %>" name="folder" class="fa-fw"></iconpark-icon>
+                                <% } %>
+                            </span>
+                            <span class="folder-name"><% obj.name %></span>
+                        </div>
+                        <ul id="mv_box_<% obj.id %>" style="display: none; margin-bottom: 0px;"></ul>
                     </li>
                 </script>
+
+                <style>
+                    /* 为模态框主体添加滚动条 */
+                    #movefileModal .modal-body {
+                        max-height: 90vh;
+                        /* 视窗高度的90% */
+                        overflow-y: auto;
+                        /* 垂直方向内容溢出时显示滚动条 */
+                        padding: 16px;
+                    }
+
+                    /* 确保内容不会因为滚动条而显示异常 */
+                    #movefileModal .modal-content {
+                        height: auto;
+                        max-height: 95vh;
+                        /* 整个模态框不超过视窗高度的85% */
+                    }
+
+                    .folder-item {
+                        cursor: pointer;
+                        border-radius: 4px;
+                        transition: background-color 0.2s;
+                        padding: 8px 12px !important;
+                        margin: 0;
+                    }
+
+                    .folder-item:hover {
+                        background-color: rgba(0, 123, 255, 0.1);
+                    }
+
+                    .folder-item.selected {
+                        background-color: rgba(0, 123, 255, 0.2);
+                        font-weight: 500;
+                    }
+
+                    /* 统一图标容器宽度 */
+                    .icon-wrapper {
+                        display: inline-block;
+                        width: 24px;
+                        text-align: center;
+                    }
+
+                    /* 统一子文件夹缩进 */
+                    ul[id^="mv_box_"] {
+                        padding-left: 24px;
+                    }
+
+                    /* 修复模态框内边距 */
+                    #movefileModal .modal-body {
+                        padding: 16px;
+                    }
+                </style>
 
             </div>
             <div class="modal-footer">
@@ -1997,11 +2050,12 @@
                 <div id="multiple_download_processing" style="display: none;">
                     <!-- 总进度条 -->
                     <div class="progress" style="height: 10px;">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" id="multiple_download_process-bar" role="progressbar"
-                            style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar progress-bar-striped progress-bar-animated"
+                            id="multiple_download_process-bar" role="progressbar" style="width: 0%;" aria-valuenow="0"
+                            aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <!-- 下载信息区域 -->
-                    <div id="multiple_download_info" class="mt-3 font-monospace" 
+                    <div id="multiple_download_info" class="mt-3 font-monospace"
                         style="max-height: 50vh; overflow-y: auto;">
                     </div>
                 </div>
@@ -2039,7 +2093,8 @@
                 <div class="select-box p-2 btn-point filemodel filemodel-0" onclick="TL.file.changeModelSet(0)">
                     <div class="d-flex align-items-center">
                         <span class="stamp-md mr-3">
-                            <iconpark-icon name="rectangle-vertical-history" class="fa-fw fa-2x text-blue"></iconpark-icon>
+                            <iconpark-icon name="rectangle-vertical-history"
+                                class="fa-fw fa-2x text-blue"></iconpark-icon>
                         </span>
                         <div>
                             <h4 class="m-0" i18n="modal_settings_upload_model1">.</h4>
@@ -2051,7 +2106,8 @@
                 <div class="select-box p-2 btn-point filemodel filemodel-1" onclick="TL.file.changeModelSet(1)">
                     <div class="d-flex align-items-center">
                         <span class="stamp-md mr-3">
-                            <iconpark-icon name="rectangle-vertical-history" class="fa-fw fa-2x text-blue"></iconpark-icon>
+                            <iconpark-icon name="rectangle-vertical-history"
+                                class="fa-fw fa-2x text-blue"></iconpark-icon>
                         </span>
                         <div>
                             <h4 class="m-0" i18n="modal_settings_upload_model2">.</h4>
@@ -2063,7 +2119,8 @@
                 <div class="select-box p-2 btn-point filemodel filemodel-2" onclick="TL.file.changeModelSet(2)">
                     <div class="d-flex align-items-center">
                         <span class="stamp-md mr-3">
-                            <iconpark-icon name="rectangle-vertical-history" class="fa-fw fa-2x text-blue"></iconpark-icon>
+                            <iconpark-icon name="rectangle-vertical-history"
+                                class="fa-fw fa-2x text-blue"></iconpark-icon>
                         </span>
                         <div>
                             <h4 class="m-0" i18n="modal_settings_upload_model3">.</h4>
@@ -2074,7 +2131,8 @@
             </div>
             <div class="modal-footer">
                 <!-- 确定按钮 -->
-                <button type="button" class="btn btn-primary" i18n="model_btn_ok" onclick="TL.Selecter.changeModel();">.</button>
+                <button type="button" class="btn btn-primary" i18n="model_btn_ok"
+                    onclick="TL.Selecter.changeModel();">.</button>
                 <!-- 取消按钮 -->
                 <button type="button" class="btn btn-default" data-dismiss="modal" i18n="model_btn_cancel">.</button>
             </div>

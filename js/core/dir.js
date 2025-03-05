@@ -755,9 +755,9 @@ class dir {
     }
 
     moveTo(data, place) {
-        let target = $("input[name='dir_tree']:checked").val();
+        let target = $('.folder-item.selected').data('id');
         if (target === undefined) {
-            alert(this.language_get.status_error_13);
+            alert(app.languageData.status_error_13 || '请选择目标文件夹');
             return false;
         }
         $.post(this.parent_op.api_mr, {
@@ -774,6 +774,52 @@ class dir {
             }
         });
     }
+
+    // 新增函数：处理文件夹点击事件
+    folderClick(id) {
+        const $folderItem = $(`#dir_item_${id}`);
+        const $folderContent = $(`#mv_box_${id}`);
+        const isExpanded = $folderItem.attr('data-expanded') === 'true';
+        
+        // 处理选中状态
+        $('.folder-item').removeClass('selected');
+        $folderItem.addClass('selected');
+        
+        // 检查是否有子文件夹
+        if (this.treeHaveChildren(id)) {
+            const $icon = $(`#folder_icon_${id}`);
+            
+            if (isExpanded) {
+                // 收起
+                $folderContent.slideUp();
+                $folderItem.attr('data-expanded', 'false');
+                $icon.attr('name', 'folder-plus');
+            } else {
+                // 展开
+                if ($folderContent.children().length === 0) {
+                    this.treeShowNew(id);
+                }
+                $folderContent.slideDown();
+                $folderItem.attr('data-expanded', 'true');
+                $icon.attr('name', 'folder-open');
+            }
+        }
+    }
+
+// 新增函数：显示子文件夹（替代原来的 treeShow 函数）
+treeShowNew(parent) {
+    for (let i in this.dir_tree) {
+        if (this.dir_tree[i].parent == parent) {
+            if (this.treeHaveChildren(this.dir_tree[i].id)) {
+                this.dir_tree[i].children = true;
+            } else {
+                this.dir_tree[i].children = false;
+            }
+            $('#mv_box_' + parent).append(app.tpl('mv_box_tpl', this.dir_tree[i]));
+        }
+    }
+}
+
 
     loadingON() {
         $('#loading_box').show();
