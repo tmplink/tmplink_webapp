@@ -1,5 +1,6 @@
 class direct {
 
+    isInit = false
     parent_op = null
     domain = 0
     total_transfer = 0
@@ -53,22 +54,7 @@ class direct {
             }
         }
 
-        $.post(this.parent_op.api_direct, {
-            'action': 'details',
-            'token': this.parent_op.api_token
-        }, (rsp) => {
-            this.key = rsp.data.key;
-            this.domain = rsp.data.domain;
-            this.quota = rsp.data.quota;
-            this.quota_free = rsp.data.quota_free;
-            this.total_downloads = rsp.data.total_downloads;
-            this.total_transfer = rsp.data.total_transfer;
-            this.hp_time = parseInt(rsp.data.hp_time);
-            this.set = 1;
-            this.ssl_auto = rsp.data.ssl_auto === 'yes' ? true : false;
-            this.traffic_limit = rsp.data.traffic_limit;
-            this.ssl = rsp.data.ssl_status === 'yes' ? true : false;
-            this.ssl_acme = rsp.data.ssl_acme === 'disable' ? false : true;
+        this.getDetails((rsp) => {
 
             if (this.ssl) {
                 $('#direct_bind_ssl').html(app.languageData.direct_ssl_enbaled);
@@ -132,6 +118,30 @@ class direct {
             if (typeof cb == 'function') {
                 cb();
             }
+        });
+    }
+
+    getDetails(cb) {
+        $.post(this.parent_op.api_direct, {
+            'action': 'details',
+            'token': this.parent_op.api_token
+        }, (rsp) => {
+            
+            this.isInit = true;
+            this.key = rsp.data.key;
+            this.domain = rsp.data.domain;
+            this.quota = rsp.data.quota;
+            this.quota_free = rsp.data.quota_free;
+            this.total_downloads = rsp.data.total_downloads;
+            this.total_transfer = rsp.data.total_transfer;
+            this.hp_time = parseInt(rsp.data.hp_time);
+            this.set = 1;
+            this.ssl_auto = rsp.data.ssl_auto === 'yes' ? true : false;
+            this.traffic_limit = rsp.data.traffic_limit;
+            this.ssl = rsp.data.ssl_status === 'yes' ? true : false;
+            this.ssl_acme = rsp.data.ssl_acme === 'disable' ? false : true;
+
+            cb(rsp);
         }, 'json');
     }
 
@@ -482,9 +492,18 @@ class direct {
 
     dirRoomInit() {
         if (this.parent_op.isLogin() === false) {
+            console.log('Not login');
             return false;
         }
 
+        if(this.isInit === false){
+            this.init_details(() => {
+                this.dirRoomInit();
+            });
+            return false;
+        }
+
+        // console.log('dirRoomInit: ' + this.domain);
         if (this.domain == 0) {
             $('#pf_allow_direct').attr('disabled', true);
             $('#pf_allow_direct_notice').show();

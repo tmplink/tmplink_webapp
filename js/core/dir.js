@@ -307,7 +307,7 @@ class dir {
             }
 
             //如果用户是拥有者，显示直链相关的信息，并初始化
-            // console.log('Show:'.this.room.owner);
+            // console.log('Dir Room owner:' + this.room.owner);
             if (this.room.owner == 1) {
                 this.parent_op.direct.dirRoomInit();
                 $('.room_direct_model').show();
