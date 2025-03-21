@@ -709,6 +709,7 @@
     "direct_api_status_1001": "1001 : 失败，文件不存在",
     "direct_api_status_1002": "1002 : 失败，内部错误",
     "direct_api_status_1003": "1003 : 失败，没有找到对应的直链",
+    "direct_api_status_1005": "1005 : 失败，文件尚未就绪，请稍后再添加",
     "direct_api_params_delete" :"是否同时删除文件，如果设定为 true，将删除对应的文件，其它设定为此文件的直链也会一同删除。默认为 false。",
     "direct_api_params_dkey" :"直链 DKEY",
     "direct_api_params_ukey" :"文件 UKEY",

@@ -123,6 +123,7 @@
     "direct_api_status_1001": "1001: Failed, file does not exist",
     "direct_api_status_1002": "1002: Failed, internal error",
     "direct_api_status_1003": "1003: Failed, corresponding direct link not found",
+    "direct_api_status_1005": "1005: Failed, file is not ready yet, please add it later",
     "direct_api_params_delete": "Whether to delete the file at the same time. If set to true, the corresponding file will be deleted, and other settings for direct links to this file will also be deleted. Default is false.",
     "direct_api_params_dkey": "Direct Link DKEY",
     "direct_api_params_ukey": "File UKEY",

@@ -126,6 +126,7 @@
     "direct_api_status_1001": "1001 : 失敗、ファイルが存在しません",
     "direct_api_status_1002": "1002 : 失敗、内部エラー",
     "direct_api_status_1003": "1003 : 失敗、対応するダイレクトリンクが見つかりません",
+    "direct_api_status_1005": "1005 : 失敗、ファイルがまだ準備できていません。後でもう一度追加してください",
     "direct_api_params_delete": "ファイルを削除するかどうか。trueに設定すると、対応するファイルが削除され、その他のダイレクトリンクも削除されます。デフォルトはfalseです。",
     "direct_api_params_dkey": "ダイレクトリンクのDKEY",
     "direct_api_params_ukey": "ファイルのUKEY",
