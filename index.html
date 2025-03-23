@@ -12,7 +12,6 @@
     <link rel="manifest" href="/app.webmanifest" />
     <link rel="icon" href="/img/ico/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/img/ico/logo-new.svg" />
-    <script defer src="/plugin/icon/lib.js"></script>
     <script type="text/javascript">
         'use strict';
 
@@ -45,10 +44,15 @@
 
     </script>
 
+</head>
+
+<body>
+    <div id="tmpui"></div>
+    <div id="tmpui_body" class="d-flex flex-column"></div>
     <script type="text/javascript" src="./tmpui.js?v=52"></script>
     <script type="text/javascript">
-        var app = new tmpUI({
-            "version": 1551,
+        let config = {
+            "version": 1552,
             "siteroot": "/",
             "loadingIcon": "/img/ico/logo-new.svg",
             "loadingText": "TMP.LINK",
@@ -237,16 +241,14 @@
                     }
                 }
             }
-        });
+        };
+        if (window.location.host === 'www.ttttt.link') {
+            config.extendStaticHost = 'https://res.cntmp.link';
+        }
+        var app = new tmpUI(config);
     </script>
-
-</head>
-
-<body>
-    <div id="tmpui"></div>
-    <div id="tmpui_body" class="d-flex flex-column"></div>
-
-    <script src="https://www.recaptcha.net/recaptcha/api.js?render=6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5"></script>
+    <script type="text/javascript" src="/plugin/icon/lib.js"></script>
+    <script async type="text/javascript" src="https://www.recaptcha.net/recaptcha/api.js?render=6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5"></script>
 </body>
 
 </html>
