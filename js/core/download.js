@@ -15,6 +15,7 @@ class download {
     totalSize = 0
     multiThreadActive = false
     lastTotalBytes = 0;
+    numberOfChunks = 3;     // <— NEW: dynamic chunk count (1 or 3)
 
     init(parent_op) {
         this.parent_op = parent_op;
@@ -556,19 +557,26 @@ class download {
             this.totalSize = parseInt(headResponse.headers.get('content-length'));
             if (!this.totalSize) throw new Error('Invalid file size');
     
-            // 初始化多线程下载
-            this.initMultiThreadDownload();
+            // 新增：小于512MB直接单线程下载
+            const MAX_SINGLE_THREAD = 512 * 1024 * 1024;
     
-            const numberOfChunks = 3;
+            // 1 chunk for small files, 3 chunks otherwise
+            const numberOfChunks = this.totalSize < MAX_SINGLE_THREAD ? 1 : 3;
             this.chunkSize = Math.ceil(this.totalSize / numberOfChunks);
     
-            // 显示进度条
+            // 初始化多线程/单线程下载
+            this.initMultiThreadDownload(numberOfChunks);   // <— updated call
+    
+            // 进度条初始化与可见性
             $('#download_progress_container').show();
             $('#download_progress_container_hr').show();
-    
-            // 清空进度条初始状态
             for (let i = 1; i <= 3; i++) {
-                $(`#progress_thread_${i}`).css('width', '0%');
+                const bar = $(`#progress_thread_${i}`);
+                if (i <= numberOfChunks) {
+                    bar.show().css('width', '0%');
+                } else {
+                    bar.hide();                          // hide unused bars
+                }
             }
     
             // 创建下载任务数组，包含每个块的详细信息
@@ -656,14 +664,13 @@ class download {
         }
     }
 
-    initMultiThreadDownload() {
+    initMultiThreadDownload(numChunks = 3) {           // <— allow dynamic chunk count
+        this.numberOfChunks = numChunks;
         this.chunks = [];
         this.downloadSpeed = 0;
         this.lastSpeedUpdate = Date.now();
         this.downloadedBytes = 0;
-        this.threads = new Array(3).fill(null).map(() => ({
-            loaded: 0
-        }));
+        this.threads = new Array(numChunks).fill(null).map(() => ({ loaded: 0 }));
         this.multiThreadActive = true;
     }
 
@@ -711,7 +718,7 @@ class download {
         ).reduce((a, b) => a + b, 0);
 
         // 计算每个线程的进度占总进度的比例
-        const threadProgress = (loaded / this.chunkSize) * (100 / 3); // 每个线程占33.33%
+        const threadProgress = (loaded / this.chunkSize) * (100 / this.numberOfChunks); // <— use dynamic chunk count
         $(`#progress_thread_${index + 1}`).css('width', `${threadProgress}%`);
 
         // 计算总体下载进度
