@@ -88,14 +88,47 @@
                     </div>
                 </div>
 
-                <div class="text-right userinfo text-muted" style="display: none;font-size: 14px;">
-                    <span i18n="filepage_publicby_1">.</span>
-                    <span class="userinfo_sd" style="display: none;"></span>
-                    <span class="userinfo_pro text-azure" style="display: none;">
-                        <iconpark-icon name="badge-check" class="fa-fw"></iconpark-icon>
+                <div class="text-right userinfo text-muted position-relative" style="display: none;font-size: 14px;">
+                    <span class="publisher-info-wrapper">
+                        <span i18n="filepage_publicby_1">.</span>
+                        <span class="publisher-name-wrapper">
+                            <span class="userinfo_nickname"></span>
+                            <span class="userinfo_sd" style="display: none;"></span>
+                            <span class="userinfo_pro text-azure" style="display: none;">
+                                <iconpark-icon name="circle-check" class="fa-fw"></iconpark-icon>
+                            </span>
+                        </span>
+                        <span i18n="filepage_publicby_2">.</span>
                     </span>
-                    <span class="userinfo_nickname"></span>
-                    <span i18n="filepage_publicby_2">.</span>
+                    <button class="btn btn-sm btn-light btn-user-info ml-2" aria-label="查看用户信息">
+                        <iconpark-icon name="user" class="fa-fw"></iconpark-icon>
+                    </button>
+                    
+                    <!-- 用户信息浮动层 - 现代化设计 -->
+                    <div class="user-info-card shadow" style="display: none;">
+                        <div class="d-flex align-items-center">
+                            <!-- 头像 -->
+                            <div class="user-info-avatar mr-3">
+                                <img class="userinfo_avatar_card_img" src="/img/loading.svg" alt="用户头像">
+                            </div>
+                            
+                            <!-- 用户信息区域 -->
+                            <div class="user-info-content">
+                                <!-- 名称和认证标识在同一行 -->
+                                <div class="d-flex align-items-center user-info-name-row">
+                                    <span class="userinfo_card_nickname"></span>
+                                    <span class="userinfo_card_pro ml-1" style="display: none;">
+                                        <iconpark-icon name="circle-check" class="fa-fw"></iconpark-icon>
+                                    </span>
+                                </div>
+                                
+                                <!-- 用户介绍 -->
+                                <div class="user-info-intro-row">
+                                    <span class="userinfo_card_intro">个人介绍信息</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="d-none d-sm-flex">

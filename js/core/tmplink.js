@@ -14,6 +14,7 @@ class tmplink {
     api_toks = this.api_url_sec + '/token'
     api_tokx = this.api_url + '/token'
     api_token = null
+    current_file_details = null // 当前文件详情
     site_domain = null
     isSponsor = false
 
@@ -1146,6 +1147,8 @@ class tmplink {
                     //
                     this.ga('D-' + rsp.data.name);
                     fileinfo = rsp.data;
+                    // 保存文件详情信息便于其他组件使用
+                    this.current_file_details = rsp.data;
                     $('#file_box').show();
                     $('#filename').html(rsp.data.name);
                     $('#filesize').html(rsp.data.size);
@@ -1169,7 +1172,14 @@ class tmplink {
                         img.src = avatarURL;
                         img.onload = () => {
                             $('.userinfo_avatar_img').attr('src', avatarURL);
+                            // 确保卡片中的用户头像也一致
+                            $('.userinfo_avatar_card_img').attr('src', avatarURL);
                         }
+                    }
+                    
+                    // 如果API返回了用户介绍信息，保存它
+                    if (rsp.data.ui_intro) {
+                        this.current_file_details.ui_intro = rsp.data.ui_intro;
                     }
 
                     //如果包含了 NSFW 内容

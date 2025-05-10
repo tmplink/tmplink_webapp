@@ -1,0 +1,223 @@
+/* 用户信息卡片样式 - 现代化设计 */
+.userinfo {
+    position: relative;
+}
+
+.user-info-hover {
+    cursor: pointer;
+    position: relative;
+    padding: 5px 0;
+    margin: -5px 0;
+}
+
+/* 发布者信息包装器 */
+.publisher-info-wrapper {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.publisher-name-wrapper {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* 认证图标样式调整 - 更精确的垂直居中 */
+.userinfo_pro,
+.userinfo_sd,
+.userinfo_card_pro {
+    display: inline-flex;
+    align-items: center; /* 确保内部图标垂直居中 */
+}
+
+.userinfo_pro iconpark-icon,
+.userinfo_sd iconpark-icon {
+    font-size: 14px; /* 与文字大小保持一致 */
+    line-height: 1; /* 重置行高 */
+}
+
+.user-info-name-row .userinfo_card_pro iconpark-icon {
+    font-size: 14px;
+    line-height: 1;
+}
+
+/* 全局图标垂直居中修复 */
+iconpark-icon.fa-fw {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 用户信息按钮样式 */
+.btn-user-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    font-size: 14px;
+    border: none;
+    background-color: rgba(87, 144, 231, 0.1);
+    color: #5790e7;
+    transition: all 0.2s ease;
+    box-shadow: none;
+    outline: none;
+    vertical-align: middle;
+}
+
+.btn-user-info:hover,
+.btn-user-info:focus {
+    background-color: rgba(87, 144, 231, 0.2);
+    color: #5790e7;
+    transform: scale(1.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-user-info:active {
+    background-color: rgba(87, 144, 231, 0.3);
+    transform: scale(0.95);
+}
+
+.dark .btn-user-info {
+    background-color: rgba(104, 166, 255, 0.15);
+    color: #68a6ff;
+}
+
+.dark .btn-user-info:hover,
+.dark .btn-user-info:focus {
+    background-color: rgba(104, 166, 255, 0.25);
+    color: #68a6ff;
+}
+
+.dark .btn-user-info:active {
+    background-color: rgba(104, 166, 255, 0.35);
+}
+
+/* 触摸设备优化 */
+@media (hover: none) {
+    .btn-user-info {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+}
+
+/* 卡片主容器 */
+.user-info-card {
+    position: absolute;
+    right: 0;
+    top: 25px;
+    width: 280px;
+    background-color: #fff;
+    border-radius: 14px;
+    padding: 14px;
+    z-index: 1001;
+    text-align: left;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.dark .user-info-card {
+    background-color: #2a2a2a;
+    color: #eee;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 用户信息内容区 */
+.user-info-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0; /* 防止内容溢出 */
+}
+
+/* 用户名行 */
+.user-info-name-row {
+    margin-bottom: 4px;
+}
+
+/* 用户介绍行 */
+.user-info-intro-row {
+    margin-top: 2px;
+}
+
+/* 头像样式 */
+.user-info-avatar {
+    flex-shrink: 0;
+}
+
+.userinfo_avatar_card_img {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px !important;
+    object-fit: cover;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.dark .userinfo_avatar_card_img {
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+/* 用户名称样式 */
+.userinfo_card_nickname {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    margin-right: 4px;
+    display: inline-block;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dark .userinfo_card_nickname {
+    color: #fff;
+}
+
+/* 赞助者名字样式 */
+.userinfo_card_nickname.is-pro {
+    color: #e83e8c; /* 粉色 */
+    font-weight: 600;
+}
+
+/* 认证图标样式 */
+.userinfo_card_pro {
+    color: #5790e7;
+    display: inline-flex;
+    align-items: center;
+    height: 15px; /* 与文字高度匹配 */
+}
+
+.dark .userinfo_card_pro {
+    color: #68a6ff;
+}
+
+/* 确保用户名和认证图标对齐 */
+.user-info-name-row {
+    display: flex;
+    align-items: center;
+    line-height: 1.2;
+}
+
+/* 用户介绍内容 */
+.userinfo_card_intro {
+    color: #666;
+    font-size: 13px;
+    line-height: 1.4;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 210px;
+}
+
+.dark .userinfo_card_intro {
+    color: #bbb;
+}
