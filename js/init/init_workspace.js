@@ -6,7 +6,7 @@ function INIT_workspace() {
             app.open('/app&listview=login');
             return;
         }
-        TL.workspace_filelist_autoload_enabled();
+        // 直接调用filelist(0)，AutoLoader会自动处理启用和加载
         TL.workspace_filelist(0);
         TL.workspace_navbar();
         app.languageBuild();

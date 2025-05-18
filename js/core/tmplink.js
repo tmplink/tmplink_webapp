@@ -52,6 +52,7 @@ class tmplink {
     recaptcha_op = true
     recaptcha = '6LfqxcsUAAAAABAABxf4sIs8CnHLWZO4XDvRJyN5'
     recaptchaToken = '0'
+    workspaceAutoLoader = null
 
     //下面这段代码不适用
     recaptcha_actions = [
@@ -115,6 +116,12 @@ class tmplink {
         this.download.init(this);
         this.notification.init(this);
         this.file.init(this);
+        
+        // 初始化workspace自动加载器
+        this.workspaceAutoLoader = new AutoLoader({
+            loadFunction: (page) => this.workspaceLoadData(page),
+            minItemsForDisable: 50
+        });
 
         //
         $('.workspace-navbar').hide();
@@ -868,16 +875,12 @@ class tmplink {
         }, 'json');
     }
 
+    /**
+     * 启用自动加载
+     */
     workspace_filelist_autoload_enabled() {
-        this.autoload = true;
-        $(window).on("scroll", (event) => {
-            if ($(event.currentTarget).scrollTop() + $(window).height() + 100 >= $(document).height() && $(event.currentTarget).scrollTop() > 100) {
-                if (this.autoload == true) {
-                    this.autoload = false;
-                    this.workspace_filelist(1);
-                }
-            }
-        });
+        // 使用AutoLoader模块替代原有实现
+        this.workspaceAutoLoader.enable();
     }
 
     workspace_total() {
@@ -892,16 +895,34 @@ class tmplink {
         }, 'json');
     }
 
+    /**
+     * 禁用自动加载
+     */
     workspace_filelist_autoload_disabled() {
-        $(window).off("scroll");
+        // 使用AutoLoader模块替代原有实现
+        this.workspaceAutoLoader.disable();
     }
 
+    /**
+     * 使用AutoLoader加载workspace文件列表
+     * @param {Number} page - 页码，0表示初始加载，1表示加载更多
+     */
     workspace_filelist(page) {
+        // 使用AutoLoader加载数据
+        this.workspaceAutoLoader.load(page);
+    }
+    
+    /**
+     * 实际加载workspace数据的函数，供AutoLoader调用
+     * @param {Number} page - 页码，0表示初始加载，1表示加载更多
+     */
+    workspaceLoadData(page) {
         $('.no_files').fadeOut();
         $('.no_dir').fadeOut();
         $('.no_photos').fadeOut();
         //初始化选择器
         this.Selecter.pageInit();
+        
         //when page is 0,page will be init
         if (page == 0) {
             this.page_number = 0;
@@ -910,10 +931,12 @@ class tmplink {
         } else {
             this.page_number++;
         }
+        
         if (localStorage.getItem('app_login') != 1) {
             this.logout();
             return false;
         }
+        
         //if search
         let search = $('#workspace_search').val();
         let total_size_text = bytetoconver(this.total_size);
@@ -929,10 +952,12 @@ class tmplink {
         $('#filelist_refresh_icon').addClass('fa-spin');
         $('#filelist_refresh_icon').attr('disabled', true);
         this.loading_box_on();
+        
         let photo = 0;
         if (localStorage.getItem('app_workspace_view') == 'photo') {
             photo = 1;
         }
+        
         $.post(this.api_file, {
             action: 'workspace_filelist_page',
             page: this.page_number,
@@ -944,26 +969,25 @@ class tmplink {
         }, (rsp) => {
             $('#filelist_refresh_icon').removeClass('fa-spin');
             $('#filelist_refresh_icon').removeAttr('disabled');
+            
             if (rsp.status === 0) {
                 if (page == 0) {
                     $('#workspace_filelist').html('<div class="text-center"><iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon></div>');
                 }
-                this.autoload = false;
             } else {
                 this.workspace_view(rsp.data, page);
-                this.autoload = true;
                 for (let i in rsp.data) {
                     this.list_data[rsp.data[i].ukey] = rsp.data[i];
                 }
                 //数据加入到 dir.file_list 以保持批量下载的兼容性
                 this.dir.file_list = rsp.data;
             }
+            
             $('#filelist').show();
             this.loading_box_off();
-            //cancel
-            if (rsp.status == 0 || rsp.data.length < 50) {
-                this.dir_list_autoload_disabled();
-            }
+            
+            // 让AutoLoader处理响应
+            return this.workspaceAutoLoader.handleResponse(rsp);
         });
     }
 
@@ -2012,20 +2036,20 @@ class tmplink {
         }
     }
 
+    /**
+     * 启用目录列表自动加载
+     */
     dir_list_autoload_enabled() {
-        this.autoload = true;
-        $(window).on("scroll", (event) => {
-            if ($(event.currentTarget).scrollTop() + $(window).height() + 100 >= $(document).height() && $(event.currentTarget).scrollTop() > 100) {
-                if (this.autoload == true) {
-                    this.autoload = false;
-                    this.dir.filelist(1);
-                }
-            }
-        });
+        // 使用workspace的AutoLoader
+        this.workspaceAutoLoader.enable();
     }
 
+    /**
+     * 禁用目录列表自动加载
+     */
     dir_list_autoload_disabled() {
-        $(window).off("scroll");
+        // 使用workspace的AutoLoader
+        this.workspaceAutoLoader.disable();
     }
 
     file_rename(ukey, default_name) {

@@ -20,11 +20,17 @@ class direct {
 
     page_number = 0
     list_Data = []
-    autoload = true
+    autoLoader = null
 
     init(parent_op) {
         this.parent_op = parent_op;
         this.sortSettingsInit();
+        
+        // 初始化自动加载器
+        this.autoLoader = new AutoLoader({
+            loadFunction: (page) => this.loadData(page),
+            minItemsForDisable: 50
+        });
     }
 
     init_details(cb) {
@@ -376,19 +382,23 @@ class direct {
      * 初始化页面
      */
     filelist(page) {
-
+        // 使用AutoLoader加载数据
+        this.autoLoader.load(page);
+    }
+    
+    /**
+     * 实际加载数据的函数，供AutoLoader调用
+     */
+    loadData(page) {
         //初始化选择器
         this.parent_op.Selecter.pageInit();
 
         if (this.parent_op.logined != 1) {
             app.open('/app&listview=login');
-        }
-
-        if (this.domain == 0) {
             return false;
         }
 
-        if (this.autoload === false) {
+        if (this.domain == 0) {
             return false;
         }
 
@@ -438,19 +448,16 @@ class direct {
                 if (page == 0) {
                     $('#direct_filelist').html('<div class="text-center"><iconpark-icon name="folder-open" class="fa-fw fa-4x"></iconpark-icon></div>');
                 }
-                this.autoload = false;
             } else {
                 this.direct_view(rsp.data, page);
-                this.autoload = true;
                 for (let i in rsp.data) {
                     this.list_data[rsp.data[i].ukey] = rsp.data[i];
                 }
             }
             this.loading_box_off();
-            //cancel
-            if (rsp.status == 0 || rsp.data.length < 50) {
-                this.list_autoload_disabled();
-            }
+            
+            // 让AutoLoader处理响应
+            this.autoLoader.handleResponse(rsp);
         });
     }
 
@@ -698,19 +705,13 @@ class direct {
     }
 
     list_autoload_enabled() {
-        this.autoload = true;
-        $(window).on("scroll", (event) => {
-            if ($(event.currentTarget).scrollTop() + $(window).height() + 100 >= $(document).height() && $(event.currentTarget).scrollTop() > 100) {
-                if (this.autoload == true) {
-                    this.autoload = false;
-                    this.filelist(1);
-                }
-            }
-        });
+        // 使用AutoLoader模块替代原有实现
+        this.autoLoader.enable();
     }
 
     list_autoload_disabled() {
-        $(window).off("scroll");
+        // 使用AutoLoader模块替代原有实现
+        this.autoLoader.disable();
     }
 
     /**

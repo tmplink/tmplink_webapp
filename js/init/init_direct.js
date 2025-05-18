@@ -7,7 +7,7 @@ function INIT_direct() {
             return;
         }
         TL.direct.init_details(()=>{
-            TL.direct.list_autoload_enabled();
+            // 使用autoLoader，不需要单独调用list_autoload_enabled
             TL.direct.filelist(0);
             TL.direct.open();
             TL.direct.prepare();
