@@ -76,21 +76,52 @@ class dir {
         });
     }
 
+    showCreateFolderModal() {
+        // 确保模态框中的字段使用当前目录信息
+        const mr_id = this.room.mr_id === undefined ? 0 : this.room.mr_id;
+        const parent = this.room.parent === undefined ? 0 : this.room.parent;
+        const top = this.room.top === undefined ? 0 : this.room.top;
+        
+        // 处理特殊情况 - 当 top=99 时，它表示桌面文件夹
+        let parent_id = parent;
+        if (top == 99) {
+            // 确保桌面文件夹有正确的父ID
+            parent_id = 0; // 桌面顶级文件夹应使用0作为父级
+        }
+        
+        $('#mr_id').val(mr_id);
+        $('#mr_parent_id').val(parent_id);
+        $('#mr_top_id').val(top);
+        $('#mrCreaterModal').modal('show');
+        console.log(`Setting values - mr_id: ${mr_id}, parent: ${parent_id} (original parent: ${parent}), top: ${top}`);
+    }
+
     create() {
         var name = $('#modal_meetingroom_create_name').val();
         var model = $('#modal_meetingroom_create_type').val();
         var mr_id = $('#mr_id').val();
         var parent = $('#mr_parent_id').val();
         var top = $('#mr_top_id').val();
+        
         if (model == '' && name == '') {
             $('#notice_meetingroom_create').html(app.languageData.notice_meetingroom_status_mrcreat_fail);
             return false;
         }
+        
+        // 在 top=99 (桌面) 的情况下确保 parent=0
+        if (top == 99) {
+            parent = 0;
+        }
+        
+        // 子文件夹的 model 应该是 0
         if (parent > 0) {
             model = 0;
         }
+        
         $('#modal_meetingroom_create_btn').attr('disabled', true);
         $('#notice_meetingroom_create').html(app.languageData.notice_meetingroom_status_proccessing);
+        console.log(`Creating folder - name: ${name}, mr_id: ${mr_id}, parent: ${parent}, top: ${top}, model: ${model}`);
+        
         this.parent_op.recaptcha_do('mr_add', (recaptcha) => {
             $.post(this.parent_op.api_mr, {
                 action: 'create',

@@ -105,7 +105,7 @@
 
                 <div class="btn_for_desktop">
                     <button class="btn btn-light text-azure btn-sm mr-1 mt-1 not_owner"
-                        onclick="$('#mrCreaterModal').modal('show');$('#mr_id').val('0');$('#mr_parent_id').val('0');$('#mr_top_id').val('0');">
+                        onclick="TL.dir.showCreateFolderModal();">
                         <iconpark-icon name="folder-plus" class="fa-fw"></iconpark-icon>
                         <span i18n="model_title_folder_title" class="d-none d-sm-inline">.</span>
                     </button>
@@ -231,7 +231,7 @@
                         </a>
                     <% } %>
                     <% if(TL.dir.room.owner==1){ %>
-                        <button class="btn btn-light text-azure btn-sm mr-1  mt-1" onclick="$('#mrCreaterModal').modal('show');$('#mr_id').val('<% TL.dir.room.mr_id %>');$('#mr_parent_id').val('<% TL.dir.room.parent %>');$('#mr_top_id').val('<% TL.dir.room.top %>');">
+                        <button class="btn btn-light text-azure btn-sm mr-1  mt-1" onclick="TL.dir.showCreateFolderModal();">
                             <iconpark-icon name="folder-plus" class="fa-fw"></iconpark-icon>
                             <span i18n="model_title_folder_title" class="d-none d-sm-inline"><% app.languageData.model_title_folder_title %></span>
                         </button>
