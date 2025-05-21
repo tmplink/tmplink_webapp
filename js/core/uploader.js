@@ -301,7 +301,28 @@ class uploader {
     }
 
     tmpupGenerator() {
+        // Show the CLI uploader interface
         $('#tmpup').show();
+        
+        // Get model information
+        let model = localStorage.getItem('app_upload_model');
+        let mrid = get_page_mrid();
+        let text_mr = mrid ? `-F "mr_id=${mrid}"` : '';
+        
+        // Build the command with proper parameters
+        let text_path = '-F "file=@ your file path (etc.. @/root/test.bin)"';
+        let text_model = `-F "model=${model}"`;
+        let text_token = `-F "token=${this.parent_op.api_token}"`;
+        
+        // Complete command text
+        let text = `curl -k ${text_path} ${text_token} ${text_model} ${text_mr} -X POST "https://tmp-cli.vx-cdn.com/app/upload_cli"`;
+        
+        // Update the CLI command display
+        $('#cliuploader').show();
+        $('#cliuploader_show').html(text);
+        $('#cliuploader_copy').attr('data-clipboard-text', text);
+        
+        // Re-initialize clipboard functionality
         this.parent_op.btn_copy_bind();
     }
 
