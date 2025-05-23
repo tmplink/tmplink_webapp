@@ -320,10 +320,9 @@ class uploader {
         // Update the CLI command display
         $('#cliuploader').show();
         $('#cliuploader_show').html(text);
-        $('#cliuploader_copy').attr('data-clipboard-text', text);
         
-        // Re-initialize clipboard functionality
-        this.parent_op.btn_copy_bind();
+        // Use TL.directCopy instead of the clipboard.js approach
+        $('#cliuploader_copy').attr('onclick', `TL.directCopy(this, '${text.replace(/'/g, "\\'")}', false)`);
     }
 
     tmpupGeneratorView() {

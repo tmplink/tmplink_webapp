@@ -1657,8 +1657,9 @@ class tmplink {
 
         $('#cliuploader').show();
         $('#cliuploader_show').html(text);
-        $('#cliuploader_copy').attr('data-clipboard-text', text);
-        this.btn_copy_bind();
+        
+        // Use TL.directCopy instead of the clipboard.js approach
+        $('#cliuploader_copy').attr('onclick', `TL.directCopy(this, '${text.replace(/'/g, "\\'")}', false)`);
     }
 
     media_buy_modal(type) {
