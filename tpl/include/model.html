@@ -298,52 +298,31 @@
                     <div class="text-center mb-3">
                         <div class="font-weight-light" style="font-size: 30px;" i18n="model_btn_upload_cli">.</div>
                     </div>
-                    <div class="select-box p-2 btn-point uploader_opt" onclick="TL.cli_uploader_generator2();">
+                    <div class="select-box p-2 btn-point uploader_opt" onclick="TL.uploader.tmpupGenerator();">
                         <div class="d-flex align-items-center">
                             <span class="stamp-md mr-3">
                                 <iconpark-icon name="rectangle-terminal" class="fa-fw fa-2x text-blue"></iconpark-icon>
                             </span>
                             <div>
                                 <h4 class="m-0" i18n="model_title_upload_cli">
-                                    .
+                                    使用 CLI 上传
                                 </h4>
                                 <small class="text-muted" i18n="model_title_upload_cli_des">
                                     .
                                 </small>
                             </div>
                         </div>
-                        <div id="cliuploader" style="display: none;">
-                            <div class="row p-2 select-box shadow-sm mt-2 mx-0">
-                                <div id="cliuploader_show"
-                                    class="col-10 my-1 d-flex align-items-center listfontweight filename text-truncate">
-                                </div>
-                                <div class="col-2 my-1 d-flex align-items-center justify-content-end">
-                                    <a id="cliuploader_copy" href="javascript:void(0)"
-                                        class="text-azure btn btn-sm btn-light mx-1">
-                                        <iconpark-icon name="copy" class="fa-fw"></iconpark-icon>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="select-box p-2 btn-point uploader_opt" onclick="TL.uploader.tmpupGenerator();">
-                        <div class="d-flex align-items-center">
-                            <span class="stamp-md mr-3">
-                                <iconpark-icon name="square-code" class="fa-fw fa-2x text-blue"></iconpark-icon>
-                            </span>
-                            <div>
-                                <h4 class="m-0" i18n="model_title_upload_tmpup">
-                                    .
-                                </h4>
-                                <small class="text-muted" i18n="model_title_upload_tmpup_des">
-                                    .
-                                </small>
-                            </div>
-                        </div>
                         <div id="tmpup" style="display: none;">
                             <hr>
+                            <!-- Security Warning -->
+                            <div class="alert alert-warning mt-2 mb-3" role="alert">
+                                <iconpark-icon name="circle-exclamation" class="fa-fw"></iconpark-icon>
+                                <strong i18n="model_cli_security_title">安全提醒：</strong><br>
+                                <span i18n="model_cli_security_warning1">• Token 与此浏览器关联，在此浏览器退出账号登录后，Token 上的用户信息也会被清除</span><br>
+                                <span i18n="model_cli_security_warning2">• 不要将 Token 告诉任何第三方，或用于任何第三方软件</span>
+                            </div>
                             <div class="mb-2 text-center">
-                                <a href="https://github.com/tmplink/tmplink_cli" target="_blank"
+                                <a href="https://github.com/tmplink/tmplink_uploader" target="_blank"
                                     i18n="model_title_upload_tmpup_des2">.</a>
                             </div>
                             <div class="text-center mb-2">
@@ -351,13 +330,6 @@
                                     <button type="button" class="btn btn-primary" id="tmpup_copy_token"
                                         data-clipboard-text="#">
                                         Token <span class="badge badge-success" id="tmpup_token"></span>
-                                        <iconpark-icon name="copy" class="fa-fw"></iconpark-icon>
-                                    </button>
-                                </span>
-                                <span>
-                                    <button type="button" class="btn btn-primary" id="tmpup_copy_model"
-                                        data-clipboard-text="#">
-                                        Model <span class="badge badge-success" id="tmpup_model"></span>
                                         <iconpark-icon name="copy" class="fa-fw"></iconpark-icon>
                                     </button>
                                 </span>
