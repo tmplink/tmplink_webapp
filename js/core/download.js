@@ -1,11 +1,17 @@
 class download {
+    // 分块下载常量设置
+    CHUNK_SIZE = 32 * 1024 * 1024; // 默认块大小为32MB
+    SMALL_FILE_THRESHOLD = this.CHUNK_SIZE * 3; // 小于3个块大小时使用直接下载
+    MAX_CHUNK_RETRY = 3; // 单个块下载最大重试次数
+    MAX_CONCURRENT_DOWNLOADS = 3; // 最大并行下载数
+    
     parent_op = null
     download_queue = []
     download_queue_processing = false
     download_retry = 0
     download_retry_max = 10
 
-    // 新增多线程下载相关属性
+    // 多线程下载相关属性
     chunks = []
     downloadSpeed = 0
     lastSpeedUpdate = 0
@@ -15,7 +21,7 @@ class download {
     totalSize = 0
     multiThreadActive = false
     lastTotalBytes = 0;
-    numberOfChunks = 3;     // <— NEW: dynamic chunk count (1 or 3)
+    numberOfChunks = 3;
 
     init(parent_op) {
         this.parent_op = parent_op;
@@ -525,12 +531,35 @@ class download {
                 if (params.mode === 'fast') {
                     downloadBtnText = app.languageData.file_btn_download_fast;
                     try {
-                        await this.startMultiThreadDownload(downloadUrl, params.filename);
+                        // 获取文件大小以决定使用哪种下载方式
+                        const headResponse = await fetch(downloadUrl, { method: 'HEAD' });
+                        if (headResponse.ok) {
+                            const fileSize = parseInt(headResponse.headers.get('content-length'));
+                            
+                            // 小文件使用浏览器直接下载
+                            if (fileSize > 0 && fileSize < this.SMALL_FILE_THRESHOLD) {
+                                console.log(`Small file detected (${this.formatBytes(fileSize)}), using direct download`);
+                                window.location.href = downloadUrl;
+                            } else {
+                                // 大文件使用分块下载
+                                await this.startMultiThreadDownload(downloadUrl, params.filename);
+                            }
+                        } else {
+                            // 如果无法获取文件大小，则使用分块下载
+                            await this.startMultiThreadDownload(downloadUrl, params.filename);
+                        }
                     } catch (error) {
                         console.error('Multi-thread download failed, fallback to normal download:', error);
-                        window.location.href = downloadUrl;
+                        // 显示用户友好的错误消息
+                        showError(app.languageData.download_error_retry || '网络不稳定，下载失败，请重试');
+                        // 还原按钮状态
+                        updateButtonClass('btn-azure', 'btn-success');
+                        updateButtonText(downloadBtnText);
+                        updateButtonState(false);
+                        return false;
                     }
                 } else {
+                    // 普通下载模式
                     window.location.href = downloadUrl;
                 }
 
@@ -543,7 +572,11 @@ class download {
                 return true;
             }
         } catch (error) {
-            showError(app.languageData.status_file_2);
+            showError(app.languageData.status_file_2 || '下载请求失败');
+            // 还原按钮状态
+            updateButtonClass('btn-azure', 'btn-success');
+            updateButtonText(downloadBtnText);
+            updateButtonState(false);
             return false;
         }
     }
@@ -557,27 +590,26 @@ class download {
             this.totalSize = parseInt(headResponse.headers.get('content-length'));
             if (!this.totalSize) throw new Error('Invalid file size');
     
-            // 新增：小于512MB直接单线程下载
-            const MAX_SINGLE_THREAD = 512 * 1024 * 1024;
+            // 小文件使用浏览器直接下载
+            if (this.totalSize < this.SMALL_FILE_THRESHOLD) {
+                console.log(`Small file detected (${this.formatBytes(this.totalSize)}), using direct download`);
+                window.location.href = url;
+                return true;
+            }
     
-            // 1 chunk for small files, 3 chunks otherwise
-            const numberOfChunks = this.totalSize < MAX_SINGLE_THREAD ? 1 : 3;
-            this.chunkSize = Math.ceil(this.totalSize / numberOfChunks);
-    
-            // 初始化多线程/单线程下载
-            this.initMultiThreadDownload(numberOfChunks);   // <— updated call
+            // 使用固定块大小计算需要的块数
+            this.chunkSize = this.CHUNK_SIZE; // 使用固定的32MB块大小
+            const numberOfChunks = Math.ceil(this.totalSize / this.chunkSize);
+            
+            // 初始化多线程下载，最多显示3个进度条
+            this.initMultiThreadDownload(numberOfChunks);
     
             // 进度条初始化与可见性
             $('#download_progress_container').show();
             $('#download_progress_container_hr').show();
-            for (let i = 1; i <= 3; i++) {
-                const bar = $(`#progress_thread_${i}`);
-                if (i <= numberOfChunks) {
-                    bar.show().css('width', '0%');
-                } else {
-                    bar.hide();                          // hide unused bars
-                }
-            }
+            
+            // 重置进度条
+            $('#progress_thread_1').css('width', '0%').removeClass('bg-warning');
     
             // 创建下载任务数组，包含每个块的详细信息
             const downloadTasks = Array.from({ length: numberOfChunks }, (_, i) => {
@@ -598,13 +630,38 @@ class download {
             // 启动速度计算
             this.startSpeedCalculator();
     
-            // 并行下载所有块
-            const downloadPromises = downloadTasks.map(task => 
-                this.downloadChunk(url, task.index, task.start, task.end, task.expectedSize)
-            );
-    
-            // 等待所有下载完成
-            const chunks = await Promise.all(downloadPromises);
+            // 创建结果数组，用于存储下载的块
+            const chunks = new Array(numberOfChunks);
+            
+            // 创建下载队列
+            const queue = [...downloadTasks];
+            const activeDownloads = [];
+            
+            // 处理队列，确保同时只有指定数量的下载任务
+            while (queue.length > 0 || activeDownloads.length > 0) {
+                // 填充活跃下载任务，直到达到最大并行数或队列为空
+                while (activeDownloads.length < this.MAX_CONCURRENT_DOWNLOADS && queue.length > 0) {
+                    const task = queue.shift();
+                    const downloadPromise = this.downloadChunk(url, task.index, task.start, task.end, task.expectedSize)
+                        .then(chunk => {
+                            // 保存下载完成的块
+                            chunks[task.index] = chunk;
+                            // 从活跃下载列表中移除
+                            const index = activeDownloads.indexOf(downloadPromise);
+                            if (index !== -1) {
+                                activeDownloads.splice(index, 1);
+                            }
+                            return chunk;
+                        });
+                    
+                    activeDownloads.push(downloadPromise);
+                }
+                
+                // 如果活跃下载任务达到最大数量，等待其中一个完成
+                if (activeDownloads.length > 0) {
+                    await Promise.race(activeDownloads);
+                }
+            }
     
             // 验证所有块的完整性
             let totalBytesReceived = 0;
@@ -639,6 +696,10 @@ class download {
         } catch (error) {
             console.error('Multi-thread download failed:', error);
             this.cleanupMultiThreadDownload();
+            
+            // 显示用户友好的错误消息
+            this.parent_op.alert(app.languageData.download_error_retry || '网络不稳定，下载失败，请重试');
+            
             throw error;
         }
     }
@@ -674,36 +735,93 @@ class download {
         this.multiThreadActive = true;
     }
 
-    downloadChunk(url, index, start, end, expectedSize) {
+    downloadChunk(url, index, start, end, expectedSize, retryCount = 0) {
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
             this.threads[index] = xhr;
             this.threads[index].loaded = 0;
-    
+            
             xhr.open('GET', url);
             xhr.responseType = 'arraybuffer';
             xhr.setRequestHeader('Range', `bytes=${start}-${end}`);
-    
+            
             xhr.onprogress = (event) => {
                 if (this.multiThreadActive) {
                     this.updateChunkProgress(index, event.loaded, end - start + 1);
                 }
             };
-    
+            
             xhr.onload = () => {
                 if (xhr.status === 206) {
                     const chunk = xhr.response;
                     if (chunk.byteLength !== expectedSize) {
-                        reject(new Error(`Chunk ${index} size mismatch: expected ${expectedSize}, got ${chunk.byteLength}`));
+                        // 块大小不匹配，尝试重试
+                        if (retryCount < this.MAX_CHUNK_RETRY) {
+                            console.warn(`Chunk ${index} size mismatch, retrying (${retryCount+1}/${this.MAX_CHUNK_RETRY})...`);
+                            // 更新UI显示重试信息
+                            this.setChunkWarningStatus(index, true);
+                            setTimeout(() => {
+                                this.downloadChunk(url, index, start, end, expectedSize, retryCount + 1)
+                                    .then(resolve)
+                                    .catch(reject);
+                            }, 1000); // 延迟1秒重试
+                        } else {
+                            reject(new Error(`Chunk ${index} size mismatch after ${this.MAX_CHUNK_RETRY} retries: expected ${expectedSize}, got ${chunk.byteLength}`));
+                        }
                         return;
                     }
+                    // 下载成功，恢复正常UI
+                    this.setChunkWarningStatus(index, false);
                     resolve(chunk);
                 } else {
-                    reject(new Error(`Chunk ${index} download failed with status ${xhr.status}`));
+                    // HTTP错误，尝试重试
+                    if (retryCount < this.MAX_CHUNK_RETRY) {
+                        console.warn(`Chunk ${index} failed with status ${xhr.status}, retrying (${retryCount+1}/${this.MAX_CHUNK_RETRY})...`);
+                        // 更新UI显示重试信息
+                        this.setChunkWarningStatus(index, true);
+                        setTimeout(() => {
+                            this.downloadChunk(url, index, start, end, expectedSize, retryCount + 1)
+                                .then(resolve)
+                                .catch(reject);
+                        }, 1000); // 延迟1秒重试
+                    } else {
+                        reject(new Error(`Chunk ${index} download failed with status ${xhr.status} after ${this.MAX_CHUNK_RETRY} retries`));
+                    }
                 }
             };
-    
-            xhr.onerror = () => reject(new Error(`Chunk ${index} download failed`));
+            
+            xhr.onerror = () => {
+                // 网络错误，尝试重试
+                if (retryCount < this.MAX_CHUNK_RETRY) {
+                    console.warn(`Chunk ${index} network error, retrying (${retryCount+1}/${this.MAX_CHUNK_RETRY})...`);
+                    // 更新UI显示重试信息
+                    this.setChunkWarningStatus(index, true);
+                    setTimeout(() => {
+                        this.downloadChunk(url, index, start, end, expectedSize, retryCount + 1)
+                            .then(resolve)
+                            .catch(reject);
+                    }, 1000); // 延迟1秒重试
+                } else {
+                    reject(new Error(`Chunk ${index} download failed after ${this.MAX_CHUNK_RETRY} retries due to network errors`));
+                }
+            };
+            
+            xhr.ontimeout = () => {
+                // 超时错误，尝试重试
+                if (retryCount < this.MAX_CHUNK_RETRY) {
+                    console.warn(`Chunk ${index} timeout, retrying (${retryCount+1}/${this.MAX_CHUNK_RETRY})...`);
+                    // 更新UI显示重试信息
+                    this.setChunkWarningStatus(index, true);
+                    setTimeout(() => {
+                        this.downloadChunk(url, index, start, end, expectedSize, retryCount + 1)
+                            .then(resolve)
+                            .catch(reject);
+                    }, 1000); // 延迟1秒重试
+                } else {
+                    reject(new Error(`Chunk ${index} download timed out after ${this.MAX_CHUNK_RETRY} retries`));
+                }
+            };
+            
             xhr.send();
         });
     }
@@ -717,14 +835,24 @@ class download {
             thread ? thread.loaded || 0 : 0
         ).reduce((a, b) => a + b, 0);
 
-        // 计算每个线程的进度占总进度的比例
-        const threadProgress = (loaded / this.chunkSize) * (100 / this.numberOfChunks); // <— use dynamic chunk count
-        $(`#progress_thread_${index + 1}`).css('width', `${threadProgress}%`);
-
-        // 计算总体下载进度
+        // 计算总体下载进度百分比
         const totalProgress = (this.downloadedBytes / this.totalSize) * 100;
+        
+        // 更新单一进度条
+        $('#progress_thread_1').css('width', `${totalProgress}%`);
+        
+        // 如果当前块有错误，设置进度条为警告状态
+        if (this.threads[index].hasWarning) {
+            $('#progress_thread_1').addClass('bg-warning');
+        } else {
+            // 检查是否所有块都没有警告状态
+            const hasAnyWarning = this.threads.some(thread => thread && thread.hasWarning);
+            if (!hasAnyWarning) {
+                $('#progress_thread_1').removeClass('bg-warning');
+            }
+        }
 
-        // 更新进度显示
+        // 更新总进度显示
         $('#download_progress').text(
             `${this.formatBytes(this.downloadedBytes)} / ${this.formatBytes(this.totalSize)}`
         );
@@ -783,11 +911,27 @@ class download {
 
     cleanupMultiThreadDownload() {
         this.multiThreadActive = false;
-        this.threads.forEach(xhr => xhr && xhr.abort());
+        this.threads.forEach(xhr => xhr && xhr.abort && xhr.abort());
         $('#download_progress_container').hide();
         $('#download_progress_container_hr').hide();
+        
+        // 重置进度条
+        $('#progress_thread_1')
+            .removeClass('bg-warning')
+            .css('width', '0%');
+        
+        // 清空数据
         this.chunks = [];
         this.threads = [];
+        this.downloadedBytes = 0;
+        this.lastTotalBytes = 0;
+        
+        // 重置下载按钮状态
+        $('#file_download_btn_fast')
+            .removeClass('btn-azure')
+            .addClass('btn-success')
+            .html(app.languageData.file_btn_download_fast || '快速下载')
+            .prop('disabled', false);
     }
 
     formatBytes(bytes) {
@@ -798,6 +942,26 @@ class download {
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     }
 
+    // 辅助方法：设置块的警告状态
+    setChunkWarningStatus(index, isWarning) {
+        // 记录警告状态
+        if (this.threads[index]) {
+            this.threads[index].hasWarning = isWarning;
+        }
+        
+        // 使用单一进度条，根据所有块的警告状态决定是否显示警告
+        if (isWarning) {
+            // 有任何一个块出错，都显示警告状态
+            $('#progress_thread_1').addClass('bg-warning');
+        } else {
+            // 检查是否所有块都没有警告状态
+            const hasAnyWarning = this.threads.some(thread => thread && thread.hasWarning);
+            if (!hasAnyWarning) {
+                $('#progress_thread_1').removeClass('bg-warning');
+            }
+        }
+    }
+    
     abortMultiThreadDownload() {
         this.cleanupMultiThreadDownload();
     }
