@@ -48,6 +48,8 @@ class uploader {
         if (chart) {
             this.initSpeedChart();
         }
+        // 初始化累计上传数据计数器
+        this.total_uploaded_data = 0;
     }
 
     clean_upload_finish_list() {
@@ -1071,7 +1073,6 @@ class uploader {
                 if (loadedDiff > 0) {
                     this.updateUploadSpeed(id, loadedDiff);
                     this.upload_slice_chunk[id][index] = newLoaded;
-                    this.total_uploaded_data += loadedDiff;
 
                     // 更新文件总体上传进度
                     if (this.upload_file_progress[id]) {
@@ -1168,7 +1169,7 @@ class uploader {
             this.startSpeedUpdater();
         }
         this.upload_speeds[id] += bytes;
-        this.total_uploaded_data += bytes;  // Update total uploaded data
+        this.total_uploaded_data += bytes;  // 在这里更新总上传数据量
     }
 
     handleUploadCompletion(id) {
@@ -1184,6 +1185,7 @@ class uploader {
     resetUploadStatus() {
         this.active_uploads = 0;
         this.upload_speeds = {};
+        // 不重置 total_uploaded_data，因为这是累计值
         this.stopSpeedUpdater();
         // We don't hide the chart here, it will remain visible
         $('#upload_speed_chart_box').hide();
