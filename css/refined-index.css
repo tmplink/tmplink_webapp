@@ -1439,33 +1439,33 @@ body.dark-mode .dropdown-item:hover {
     color: #10b981;
 }
 
-/* Hero Title & Subtitle */
-#hero .hero-title {
+/* Hero Title & Subtitle - Light colors for visibility against dark background */
+#hero .hero-content .hero-title {
     font-size: 3.5rem;
     font-weight: 800;
-    color: #ffffff;
+    color: #ffffff !important;
     margin-bottom: 16px;
     line-height: 1.1;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
     animation: titleSlideUp 1s ease-out 0.3s both;
 }
 
-#hero .hero-subtitle {
+#hero .hero-content .hero-subtitle {
     font-size: 1.5rem;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.9) !important;
     margin-bottom: 16px;
     line-height: 1.3;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
     animation: titleSlideUp 1s ease-out 0.5s both;
 }
 
-#hero .hero-description {
+#hero .hero-content .hero-description {
     font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.85) !important;
     margin-bottom: 40px;
     line-height: 1.6;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
     animation: titleSlideUp 1s ease-out 0.7s both;
 }
 
@@ -1587,24 +1587,36 @@ body.dark-mode .dropdown-item:hover {
     display: none !important;
 }
 
-/* Ensure text is visible on white background in light mode */
-body:not(.dark-mode) #hero .hero-content {
-    color: #1f2937 !important;
-}
-
-body:not(.dark-mode) #hero .hero-title {
+/* Mobile no video text colors - Dark text on light background */
+#hero .hero-video-background.mobile-no-video ~ .container .hero-content .hero-title {
     color: #1f2937 !important;
     text-shadow: none !important;
 }
 
-body:not(.dark-mode) #hero .hero-subtitle {
+#hero .hero-video-background.mobile-no-video ~ .container .hero-content .hero-subtitle {
     color: #4b5563 !important;
     text-shadow: none !important;
 }
 
-body:not(.dark-mode) #hero .hero-description {
+#hero .hero-video-background.mobile-no-video ~ .container .hero-content .hero-description {
     color: #6b7280 !important;
     text-shadow: none !important;
+}
+
+/* Dark mode overrides for hero text */
+body.dark-mode #hero .hero-content .hero-title {
+    color: #ffffff !important;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode #hero .hero-content .hero-subtitle {
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode #hero .hero-content .hero-description {
+    color: rgba(255, 255, 255, 0.85) !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Mobile Video Disable Styles - Dark Mode */
@@ -1618,6 +1630,22 @@ body.dark-mode .mobile-no-video .video-overlay {
         radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%) !important;
 }
 
+/* Dark mode mobile no video text colors - Keep light text on dark background */
+body.dark-mode #hero .hero-video-background.mobile-no-video ~ .container .hero-content .hero-title {
+    color: #ffffff !important;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode #hero .hero-video-background.mobile-no-video ~ .container .hero-content .hero-subtitle {
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode #hero .hero-video-background.mobile-no-video ~ .container .hero-content .hero-description {
+    color: rgba(255, 255, 255, 0.85) !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
 /* Auto dark mode support for mobile video disable */
 @media (prefers-color-scheme: dark) {
     body:not(.theme-manual) .mobile-no-video {
@@ -1628,6 +1656,38 @@ body.dark-mode .mobile-no-video .video-overlay {
         background: 
             linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(16, 185, 129, 0.15) 100%),
             radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%) !important;
+    }
+    
+    /* Auto dark mode hero text colors */
+    body:not(.theme-manual) #hero .hero-content .hero-title {
+        color: #ffffff !important;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    body:not(.theme-manual) #hero .hero-content .hero-subtitle {
+        color: rgba(255, 255, 255, 0.9) !important;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    body:not(.theme-manual) #hero .hero-content .hero-description {
+        color: rgba(255, 255, 255, 0.85) !important;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    /* Auto dark mode mobile no video text colors - Keep light text on dark background */
+    body:not(.theme-manual) #hero .hero-video-background.mobile-no-video ~ .container .hero-content .hero-title {
+        color: #ffffff !important;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    body:not(.theme-manual) #hero .hero-video-background.mobile-no-video ~ .container .hero-content .hero-subtitle {
+        color: rgba(255, 255, 255, 0.9) !important;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    body:not(.theme-manual) #hero .hero-video-background.mobile-no-video ~ .container .hero-content .hero-description {
+        color: rgba(255, 255, 255, 0.85) !important;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
     }
 }
 
