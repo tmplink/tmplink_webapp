@@ -17,7 +17,122 @@
     background-image: url(/static/img/logo_bar_dark.svg) !important;
 }
 
+/* 手动深色模式 - 通过JavaScript切换 */
+body.dark-mode {
+    /* 重新定义CSS变量以适应深色模式 - 仅针对图标 */
+    --icon-color: #ffffff !important;
+    --text-primary: #ffffff !important;
+    --text-secondary: #b3b2b2 !important;
+}
+
+/* SVG图标在深色模式下的颜色修复 */
+body.dark-mode .icon-svg,
+body.dark-mode .icon-svg-sm,
+body.dark-mode .icon-svg-lg,
+body.dark-mode .icon-svg-xl,
+body.dark-mode .icon-svg-2xl {
+    fill: currentColor !important;
+    color: #fff !important;
+}
+
+/* IconPark图标修复 */
+body.dark-mode iconpark-icon,
+body.dark-mode .iconpark-icon {
+    color: #fff !important;
+    fill: #fff !important;
+}
+
+/* 特定情况下的图标颜色 */
+body.dark-mode .theme-icon,
+body.dark-mode .feature-icon {
+    fill: #fff !important;
+    color: #fff !important;
+}
+
+/* 文件和文件夹图标 */
+body.dark-mode .file-icon,
+body.dark-mode .folder-icon,
+body.dark-mode [class*="file-"],
+body.dark-mode [class*="folder-"] {
+    color: #fff !important;
+    fill: #fff !important;
+}
+
+/* 功能图标修复 */
+body.dark-mode .fa,
+body.dark-mode .fas,
+body.dark-mode .far,
+body.dark-mode .fab,
+body.dark-mode [class^="fa-"],
+body.dark-mode [class*=" fa-"] {
+    color: #fff !important;
+}
+
+/* 任何SVG元素的通用修复 */
+body.dark-mode svg {
+    fill: currentColor;
+    color: #fff;
+}
+
+body.dark-mode svg path,
+body.dark-mode svg circle,
+body.dark-mode svg rect,
+body.dark-mode svg polygon,
+body.dark-mode svg line,
+body.dark-mode svg polyline {
+    fill: #fff !important;
+    stroke: #fff !important;
+}
+
+/* 特定路径元素修复 */
+body.dark-mode path[d*="M14 2H6C4.9"],
+body.dark-mode path[d*="M8.5 13.5L9.5"] {
+    fill: #fff !important;
+}
+
+/* 覆盖使用CSS变量的SVG图标 - 仅在深色模式下 */
+body.dark-mode .icon-svg-2xl[style*="color: var(--primary-color)"] {
+    color: #fff !important;
+}
+
+body.dark-mode .icon-svg-2xl[style*="color: var(--primary-color)"] path {
+    fill: #fff !important;
+}
+
+/* 通用的内联样式覆盖 - 仅在深色模式下 */
+body.dark-mode svg[style*="color: var(--primary-color)"] {
+    color: #fff !important;
+}
+
+body.dark-mode svg[style*="color: var(--primary-color)"] path {
+    fill: #fff !important;
+}
+
+/* 确保按钮在深色模式下可见且可读 */
+body.dark-mode .btn-get-started {
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%) !important;
+    color: white !important;
+}
+
+body.dark-mode .btn-get-started:hover {
+    background: linear-gradient(135deg, #3730a3 0%, #4f46e5 100%) !important;
+    color: white !important;
+}
+
+/* 保持有意义的颜色，但确保可见性 */
+body.dark-mode .text-muted svg,
+body.dark-mode .text-secondary svg {
+    fill: #b3b2b2 !important;
+}
+
 @media (prefers-color-scheme: dark) {
+
+    /* 自动深色模式 - 仅在未手动设置时生效 */
+    body:not(.theme-manual) {
+        --icon-color: #ffffff !important;
+        --text-primary: #ffffff !important;
+        --text-secondary: #b3b2b2 !important;
+    }
 
     .logo_bar_img {
         background-image: url(/static/img/logo_bar_light.svg) !important;
@@ -299,6 +414,7 @@
         background-color: #3e3e3e !important;
         color: #fff !important;
     }
+
 }
 
 /* 适用于移动设备的特别配置 */

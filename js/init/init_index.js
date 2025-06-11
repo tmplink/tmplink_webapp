@@ -38,6 +38,7 @@ function initializeHomepage() {
     initScrollEffects();
     initIntersectionObserver();
     initMenubarXTracking();
+    initMobileVideoDisable();
     autoLogin();
     sendAnalytics();
     
@@ -309,6 +310,7 @@ function initMenubarXTracking() {
     }
 }
 
+
 /**
  * Set language and update UI
  */
@@ -566,4 +568,37 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', addAnimationClasses);
 } else {
     addAnimationClasses();
+}
+
+/**
+ * Disable video loading and playback on mobile devices
+ * Saves bandwidth and improves performance on mobile
+ */
+function initMobileVideoDisable() {
+    // Check if device is mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                     window.innerWidth <= 768 ||
+                     ('ontouchstart' in window);
+    
+    if (isMobile) {
+        const videoElement = document.querySelector('.hero-video');
+        const videoBackground = document.querySelector('.hero-video-background');
+        
+        if (videoElement && videoBackground) {
+            // Remove the video element
+            videoElement.remove();
+            
+            // Add mobile-specific class for styling
+            videoBackground.classList.add('mobile-no-video');
+            
+            // Ensure fallback background is visible
+            const fallback = videoBackground.querySelector('.video-fallback');
+            if (fallback) {
+                fallback.style.display = 'block';
+                fallback.style.opacity = '1';
+            }
+            
+            console.log('Video disabled for mobile device');
+        }
+    }
 }
