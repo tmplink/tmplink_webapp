@@ -406,3 +406,8 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
 .upload-box-content {
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
+
+.iconpark-icon-title {
+    font-size: 30px;
+    vertical-align: baseline;
+}

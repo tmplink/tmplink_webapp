@@ -349,10 +349,10 @@ class dir {
             }
 
             //如果用户是拥有者，并且文件夹是公开的，则显示公开类型的图标
+            $('.room_protection_lock').hide();
+            $('.room_protection_unlock').hide();
             if (this.room.owner == 1 && this.room.parent !== 0) {
                 $('.room_protection').show();
-                $('.room_protection_lock').hide();
-                $('.room_protection_unlock').hide();
                 console.log('Publish:',this.room.model);
                 if (this.room.model === 'public') {
                     $('.room_protection_unlock').show();
@@ -362,7 +362,6 @@ class dir {
             }else{
                 $('.room_protection').hide();
             }
-
 
             //如果用户不是文件夹的拥有者，则显示出加入收藏夹的按钮
             if (this.room.owner == 0) {

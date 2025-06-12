@@ -43,7 +43,6 @@
 
 /* 全局图标垂直居中修复 */
 iconpark-icon.fa-fw {
-    display: inline-flex;
     align-items: center;
     justify-content: center;
 }

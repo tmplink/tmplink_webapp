@@ -14313,8 +14313,8 @@ a.icon:hover {
 }
 
 .btn-sm, .btn-group-sm > .btn, .dataTables_wrapper .dataTables_paginate .btn-group-sm > .paginate_button {
-  font-size: 0.75rem;
-  min-width: 1.625rem;
+  font-size: 1rem;
+  min-width: 2rem;
 }
 
 .btn-lg, .btn-group-lg > .btn, .dataTables_wrapper .dataTables_paginate .btn-group-lg > .paginate_button {

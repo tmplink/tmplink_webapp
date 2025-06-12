@@ -20,8 +20,10 @@
             <form autocomplete="off">
                 <div class="input-group mb-1">
                     <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary" type="button" onclick="TL.workspace_filelist(0);"
-                            i18n="search_btn">.</button>
+                        <button class="btn btn-outline-secondary" type="button" onclick="TL.workspace_filelist(0);">
+                            <iconpark-icon name="search" class="fa-fw"></iconpark-icon>
+                            <span i18n="search_btn">.</span>
+                        </button>
                     </div>
                     <input type="search" id="workspace_search" class="form-control" placeholder="." i18n="search_plh"
                         onkeyup="if(event.keyCode==13)TL.workspace_filelist(0);"
@@ -32,9 +34,6 @@
 
             <!--[主要控制器]-->
             <div class="mb-2 mt-2">
-                <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.workspace_filelist(0);">
-                    <iconpark-icon name="rotate" class="fa-fw" id="filelist_refresh_icon"></iconpark-icon>
-                </button>
                 <button class="btn btn-light btn-sm  text-azure mr-1 mt-1" onclick="TL.sort_show();"
                     id="filelist_filter">
                     <iconpark-icon name="list" class="fa-fw"></iconpark-icon>
@@ -49,6 +48,9 @@
                     onclick="TL.workspace_filelist_model('photo');">
                     <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
                     <span i18n="model_photo" class="d-none d-sm-inline">.</span>
+                </button>
+                <button class="btn btn-light btn-sm text-azure mr-1 mt-1" onclick="TL.workspace_filelist(0);">
+                    <iconpark-icon name="rotate" class="fa-fw" id="filelist_refresh_icon"></iconpark-icon>
                 </button>
             </div>
 
