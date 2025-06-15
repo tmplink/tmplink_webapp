@@ -76,6 +76,9 @@ class tmpUI {
 
         //初始化CSS
         this.cssInit();
+        
+        //设置template方法别名
+        this.template = this.tpl.bind(this);
 
         //Checking
         window.onload = () => {

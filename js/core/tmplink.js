@@ -100,6 +100,7 @@ class tmplink {
         this.download = new download;
         this.notification = new notification;
         this.file = new file;
+        this.ai = new ai;
 
         this.stream.init(this);
         this.giftcard.init(this);
@@ -116,6 +117,7 @@ class tmplink {
         this.download.init(this);
         this.notification.init(this);
         this.file.init(this);
+        this.ai.init(this);
         
         // 初始化workspace自动加载器
         this.workspaceAutoLoader = new AutoLoader({
