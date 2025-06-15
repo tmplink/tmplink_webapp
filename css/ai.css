@@ -213,6 +213,11 @@ body.dark-mode .btn-icon.btn-delete:hover {
     color: #ff6b6b;
 }
 
+/* 深色模式下的导航按钮激活样式 */
+body.dark-mode .text-azure {
+    color: #7aa5df !important;
+}
+
 /* 第一个对话项目的特殊间距 */
 .conversation-item:first-child {
     margin-top: 8px;

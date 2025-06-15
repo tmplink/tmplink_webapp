@@ -125,6 +125,13 @@ body.dark-mode .text-secondary svg {
     fill: #b3b2b2 !important;
 }
 
+/* 导航按钮激活状态 - 覆盖通用图标颜色规则 */
+body.dark-mode .text-azure iconpark-icon,
+body.dark-mode .text-azure .iconpark-icon {
+    color: #7aa5df !important;
+    fill: #7aa5df !important;
+}
+
 @media (prefers-color-scheme: dark) {
 
     /* 自动深色模式 - 仅在未手动设置时生效 */
@@ -340,6 +347,11 @@ body.dark-mode .text-secondary svg {
 
     .btn {
         color: #d9d8d8 !important;
+    }
+
+    /* 允许text-azure按钮在深色模式下保持高亮颜色 */
+    .btn.text-azure {
+        color: #7aa5df !important;
     }
 
     .btn-light {
