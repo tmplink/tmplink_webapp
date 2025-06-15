@@ -158,6 +158,11 @@
     transition: all 0.2s ease;
 }
 
+.conversation-item .d-flex {
+    width: 100%;
+    align-items: center !important;
+}
+
 .conversation-item:hover {
     border-color: var(--border-hover);
     background: var(--bg-hover);
@@ -183,8 +188,9 @@
     gap: 4px;
     opacity: 0;
     transition: opacity 0.2s ease;
-    margin-left: auto;
-    flex-shrink: 0;
+    margin-left: auto !important;
+    flex-shrink: 0 !important;
+    align-items: center;
 }
 
 .conversation-item:hover .conversation-actions {

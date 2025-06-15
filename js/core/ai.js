@@ -142,7 +142,7 @@ class ai {
                                 </div>
                             </div>
                             <div class="conversation-actions" style="opacity: 0; transition: opacity 0.2s;">
-                                <button onclick="TL.ai.deleteConversation('${conv.conversation_id}'); event.stopPropagation();" 
+                                <button onclick="TL.ai.deleteConversationUI('${conv.conversation_id}'); event.stopPropagation();" 
                                         class="btn btn-sm btn-link text-danger p-1" 
                                         title="删除对话"
                                         style="font-size: 12px; color: #dc3545 !important;">
@@ -367,64 +367,37 @@ class ai {
         
         // 设置模态框标题
         $('#aiChatModalMobileTitle').text('智能小薇 - 新对话')
+        
+        // 聚焦到输入框
+        setTimeout(() => {
+            $('#ai_input_mobile').focus()
+        }, 100)
     }
 
     /**
      * 新建对话
      */
     newConversation() {
-        // 先发送一个初始消息来创建新的对话历史
-        this.chat('你好，我想开始新的对话',
-            (response) => {
-                // 创建新对话成功
-                this.currentConversationId = response.conversation_id
-                this.currentMessages = response.messages || []
-                
-                // 清除所有对话的激活状态
-                $('.conversation-item').removeClass('active')
-                
-                // 清空消息区域
-                $('#ai_messages').empty()
-                
-                // 渲染消息（包括用户的问候和AI的回复）
-                if (this.currentMessages.length > 0) {
-                    this.currentMessages.forEach(msg => {
-                        this.addMessageToChat(msg.role, msg.content, false)
-                    })
-                }
-                
-                // 刷新对话列表，新对话将会出现并自动选中
-                this.loadConversationHistory()
-                
-                // 延迟选中新创建的对话
-                setTimeout(() => {
-                    $(`.conversation_unit_${this.currentConversationId}`).addClass('active')
-                    $('#ai_input').focus()
-                }, 500)
-                
-                this.scrollToBottom(false)
-            },
-            (error) => {
-                console.error('创建新对话失败:', error)
-                // 如果创建失败，回退到原来的显示方式
-                this.currentConversationId = null
-                this.currentMessages = []
-                
-                $('.conversation-item').removeClass('active')
-                
-                $('#ai_messages').html(`
-                    <div class="text-center text-muted py-5">
-                        <iconpark-icon name="star-one" class="fa-fw fa-3x mb-3 text-primary"></iconpark-icon>
-                        <h5 class="text-muted">开始新对话</h5>
-                        <p class="text-muted small">输入您的问题，智能小薇将为您解答</p>
-                    </div>
-                `)
-                
-                setTimeout(() => {
-                    $('#ai_input').focus()
-                }, 100)
-            }
-        )
+        // 清空当前对话状态，准备新对话
+        this.currentConversationId = null
+        this.currentMessages = []
+        
+        // 清除所有对话的激活状态
+        $('.conversation-item').removeClass('active')
+        
+        // 清空消息区域，显示欢迎界面
+        $('#ai_messages').html(`
+            <div class="text-center text-muted py-5">
+                <iconpark-icon name="star-one" class="fa-fw fa-3x mb-3 text-primary"></iconpark-icon>
+                <h5 class="text-muted">开始新对话</h5>
+                <p class="text-muted small">输入您的问题，智能小薇将为您解答</p>
+            </div>
+        `)
+        
+        // 聚焦到输入框
+        setTimeout(() => {
+            $('#ai_input').focus()
+        }, 100)
     }
 
     /**
@@ -544,6 +517,9 @@ class ai {
         
         this[apiMethod](...apiParams,
             (response) => {
+                // 检查是否是新对话的第一条消息
+                const isNewConversation = !this.currentConversationId
+                
                 // 更新对话ID
                 if (!this.currentConversationId) {
                     this.currentConversationId = response.conversation_id
@@ -561,8 +537,15 @@ class ai {
                     }
                 }
                 
-                // 刷新对话列表
-                this.loadConversationHistory()
+                // 如果是新对话的第一条消息，刷新对话列表并选中新对话
+                if (isNewConversation) {
+                    this.loadConversationHistory()
+                    
+                    // 延迟选中新创建的对话
+                    setTimeout(() => {
+                        $(`.conversation_unit_${this.currentConversationId}`).addClass('active')
+                    }, 500)
+                }
                 
                 this.setLoadingState(false, isMobile)
             },
@@ -802,7 +785,6 @@ class ai {
         
         if (loading) {
             sendBtn.prop('disabled', true).html('<div class="spinner-border spinner-border-sm"></div>')
-            statusElement.text('小薇正在思考...')
             
             // 添加思考中的提示
             if (messagesContainer.find('.thinking-indicator').length === 0) {
