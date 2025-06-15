@@ -59,7 +59,7 @@
         <% for (var x in obj) { %>
             <div class="card mb-2 conversation_unit_mobile_<% obj[x].conversation_id %>" 
                  data-conversation-id="<% obj[x].conversation_id %>"
-                 onclick="$('#aiChatModalMobile').modal('show'); TL.ai.loadConversation('<% obj[x].conversation_id %>');" 
+                 onclick="$('#aiChatModalMobile').modal('show'); TL.ai.openConversation('<% obj[x].conversation_id %>');" 
                  style="cursor: pointer;">
                 <div class="card-body py-3">
                     <div class="d-flex align-items-center">

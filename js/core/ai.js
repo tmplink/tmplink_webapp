@@ -350,6 +350,26 @@ class ai {
     }
     
     /**
+     * 开始新对话（移动端使用）
+     */
+    startNewConversation() {
+        // 清空当前对话状态
+        this.currentConversationId = null
+        this.currentMessages = []
+        
+        // 清空消息区域，显示欢迎界面
+        $('#ai_messages_mobile').empty()
+        $('#ai_welcome_mobile').show()
+        
+        // 清空输入框
+        $('#ai_input_mobile').val('')
+        this.updateCharCount(true)
+        
+        // 设置模态框标题
+        $('#aiChatModalMobileTitle').text('智能小薇 - 新对话')
+    }
+
+    /**
      * 新建对话
      */
     newConversation() {
@@ -423,29 +443,54 @@ class ai {
      * 打开对话
      */
     openConversation(conversationId) {
+        // 检测是否为移动端
+        const isMobile = isMobileScreen()
+        const messagesContainer = isMobile ? '#ai_messages_mobile' : '#ai_messages'
+        
         // 显示加载状态
-        $('#ai_messages').html(`
+        $(messagesContainer).html(`
             <div class="text-center text-muted py-5">
                 <div class="spinner-border text-primary mb-3"></div>
                 <div>加载对话中...</div>
             </div>
         `)
         
+        // 隐藏移动端欢迎界面
+        if (isMobile) {
+            $('#ai_welcome_mobile').hide()
+        }
+        
         this.getConversationDetail(conversationId,
             (conversation) => {
                 this.currentConversationId = conversationId
                 this.currentMessages = conversation.messages || []
                 
+                // 更新模态框标题
+                if (isMobile) {
+                    $('#aiChatModalMobileTitle').text(conversation.title || '智能小薇')
+                }
+                
                 // 渲染消息历史
-                $('#ai_messages').empty()
+                $(messagesContainer).empty()
                 if (this.currentMessages.length > 0) {
                     this.currentMessages.forEach(msg => {
-                        this.addMessageToChat(msg.role, msg.content, false)
+                        if (isMobile) {
+                            this.addMobileMessageToChat(msg.role, msg.content, false)
+                        } else {
+                            this.addMessageToChat(msg.role, msg.content, false)
+                        }
                     })
                     // 滚动到底部
-                    this.scrollToBottom(false)
+                    if (isMobile) {
+                        const container = $(messagesContainer)
+                        if (container.length > 0 && container[0]) {
+                            container.scrollTop(container[0].scrollHeight)
+                        }
+                    } else {
+                        this.scrollToBottom(false)
+                    }
                 } else {
-                    $('#ai_messages').html(`
+                    $(messagesContainer).html(`
                         <div class="text-center text-muted py-5">
                             <iconpark-icon name="star-one" class="fa-fw fa-3x mb-3 text-primary"></iconpark-icon>
                             <h5 class="text-muted">继续与智能小薇对话吧！</h5>
@@ -456,7 +501,7 @@ class ai {
             },
             (error) => {
                 console.error('加载对话失败:', error)
-                $('#ai_messages').html(`
+                $(messagesContainer).html(`
                     <div class="text-center text-muted py-5">
                         <iconpark-icon name="error-view" class="fa-fw fa-3x mb-3 text-danger"></iconpark-icon>
                         <h5 class="text-muted">加载失败</h5>
@@ -841,7 +886,7 @@ class ai {
         }
     }
 
-    addMobileMessageToChat(role, content) {
+    addMobileMessageToChat(role, content, showTimestamp = true) {
         const messagesContainer = $('#ai_messages_mobile')
         
         // 隐藏欢迎界面
@@ -851,7 +896,7 @@ class ai {
         const messageHtml = this.createMobileMessageHTML({
             role: role,
             content: content,
-            timestamp: new Date().toLocaleTimeString()
+            timestamp: showTimestamp ? new Date().toLocaleTimeString() : null
         })
         
         messagesContainer.append(messageHtml)
