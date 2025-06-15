@@ -57,6 +57,10 @@ class dynamic {
                 this.notes();
                 break;
 
+            case 'ai':
+                this.ai();
+                break;
+
             default:
                 listview = 'index';
                 this.index();
@@ -245,6 +249,19 @@ class dynamic {
         $('#home_view').html(app.getFile('/tpl/listview/privacy.html'));
         app.dynOpen('/app&listview=privacy');
         INIT_privacy();
+    }
+
+    ai() {
+        if (isMobileScreen()) {
+            $('#home_view').html(app.getFile('/tpl/listview/mobile_ai.html'));
+        } else {
+            $('#home_view').html(app.getFile('/tpl/listview/ai.html'));
+        }
+        TL.ga('AI Chat');
+        app.dynOpen('/app&listview=ai');
+        this.active('ai');
+        INIT_ai();
+        TL.navbar.model_ai();
     }
 
 }

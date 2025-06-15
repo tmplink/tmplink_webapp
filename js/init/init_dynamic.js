@@ -43,6 +43,9 @@ app.ready(() => {
         case 'notes':
             dynamicView.notes();
             break;
+        case 'ai':
+            dynamicView.ai();
+            break;
         default:
             dynamicView.index();
     }

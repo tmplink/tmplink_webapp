@@ -51,6 +51,19 @@
 
             <div class="workspace-navbar nav-units">
                 <span>
+                    <a class="btn p-0 topnav_ai" href="/app&listview=ai" tmpui-action="dynamicView.ai();">
+                        <div>
+                            <iconpark-icon name="star-one" class="fa-fw"></iconpark-icon>
+                        </div>
+                        <div>
+                            <span i18n="navbar_ai">智能</span>
+                        </div>
+                    </a>
+                </span>
+            </div>
+
+            <div class="workspace-navbar nav-units">
+                <span>
                     <a class="btn p-0 topnav_workspace" href="/app&listview=workspace"
                         tmpui-action="dynamicView.workspace();">
                         <div>
@@ -151,6 +164,7 @@
                         <span i18n="navbar_notes">.</span>
                     </a>
 
+
                     <div class="dropdown-divider"></div>
 
                     <a class="dropdown-item" href="javascript:void(0)" onclick="TL.profile.openModal()">
@@ -248,7 +262,19 @@
                 </button>
             </div>
         </div> -->
-        <div class="col-4">
+        <div class="col-3">
+            <div class="workspace-navbar">
+                <a class="btn p-0" href="/app&listview=ai" tmpui-action="dynamicView.ai();">
+                    <div class="d-flex flex-column">
+                        <span class="mx-auto">
+                            <iconpark-icon name="star-one" class="fa-fw"></iconpark-icon>
+                        </span>
+                        <span i18n="navbar_ai">智能</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-3">
             <div class="btn-group dropup">
                 <button type="button" class="btn" data-toggle="dropdown">
                     <div class="d-flex flex-column">
@@ -266,7 +292,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <!--[login]-->
             <div class="workspace-nologin">
                 <div class="d-flex flex-column">
@@ -301,7 +327,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <!--[reg]-->
             <div class="workspace-nologin">
                 <div class="d-flex flex-column">
@@ -356,6 +382,7 @@
                         <iconpark-icon name="lock" class="fa-fw"></iconpark-icon>
                         <span i18n="navbar_notes">.</span>
                     </a>
+
 
                     <div class="dropdown-divider"></div>
 

@@ -88,6 +88,9 @@ class navbar {
             case '/notes':
                 this.model_notes(act);
                 break;
+            case '/ai':
+                this.model_ai(act);
+                break;
 
         }
     }
@@ -136,5 +139,15 @@ class navbar {
             app.open('/app&listview=direct');
         }
         this.navbar_lightup('direct');
+    }
+
+    model_ai(act) {
+        $('#navbar_model_icon').attr('name', 'robot');
+        $('#navbar_model_text').html('智能');
+        $('#navbar_model_text').attr('i18n', 'navbar_ai');
+        if (act === true) {
+            dynamicView.ai();
+        }
+        this.navbar_lightup('ai');
     }
 }
