@@ -27,6 +27,9 @@ class ai {
         $('title').html('智能小薇 - TMP.LINK')
         $('meta[name=description]').attr('content', '智能小薇，智能对话体验')
 
+        // 发送页面访问统计
+        this.parent_op.ga('AI_Page')
+
         // 初始化界面
         this.initListView()
         
@@ -381,6 +384,9 @@ class ai {
      * 新建对话
      */
     newConversation() {
+        // 发送新建对话统计
+        this.parent_op.ga('AI_StartNewConversation')
+        
         // 清空当前对话状态，准备新对话
         this.currentConversationId = null
         this.currentMessages = []
@@ -407,6 +413,9 @@ class ai {
      * 切换对话
      */
     switchConversation(conversationId) {
+        // 发送切换对话统计
+        this.parent_op.ga('AI_SwitchConversation')
+        
         // 更新UI状态
         $('.conversation-item').removeClass('active')
         $(`.conversation_unit_${conversationId}`).addClass('active')
@@ -523,6 +532,13 @@ class ai {
                 // 检查是否是新对话的第一条消息
                 const isNewConversation = !this.currentConversationId
                 
+                // 发送AI交互统计
+                if (isNewConversation) {
+                    this.parent_op.ga('AI_NewChat')
+                } else {
+                    this.parent_op.ga('AI_Continue')
+                }
+                
                 // 更新对话ID
                 if (!this.currentConversationId) {
                     this.currentConversationId = response.conversation_id
@@ -596,6 +612,8 @@ class ai {
             
             this.deleteConversation(conversationId,
                 () => {
+                    // 发送删除对话统计
+                    this.parent_op.ga('AI_DeleteConversation')
                     // 直接刷新历史列表，用户看到对话消失就知道删除成功了
                     this.loadConversationHistory()
                 },
@@ -615,6 +633,8 @@ class ai {
         if (confirm('确定要删除这个对话吗？此操作无法撤销。')) {
             this.deleteConversation(conversationId,
                 () => {
+                    // 发送删除对话统计
+                    this.parent_op.ga('AI_DeleteConversation')
                     // 直接刷新历史列表，用户看到对话消失就知道删除成功了
                     this.loadConversationHistory()
                 },
@@ -638,6 +658,9 @@ class ai {
                     TL.alert('没有对话内容可以导出')
                     return
                 }
+                
+                // 发送导出对话统计
+                this.parent_op.ga('AI_ExportConversation')
                 
                 const exportContent = messages.map(msg => 
                     `${msg.role === 'user' ? '用户' : '小薇'}: ${msg.content}`
