@@ -596,20 +596,48 @@ class ai {
      * 删除对话（UI方法）
      */
     deleteConversationUI(conversationId) {
-        if (!confirm('确定要删除这个对话吗？此操作无法撤销。')) {
-            return
-        }
+        // 检测是否为移动端
+        const isMobile = isMobileScreen()
         
-        this.deleteConversation(conversationId,
-            () => {
-                this.loadConversationHistory()
-                TL.alert('对话已删除')
-            },
-            (error) => {
-                console.error('删除对话失败:', error)
-                TL.alert('删除对话失败: ' + error)
+        if (isMobile) {
+            // 移动端使用更友好的确认方式
+            this.confirmDeleteConversationMobile(conversationId)
+        } else {
+            // 桌面端使用原有方式
+            if (!confirm('确定要删除这个对话吗？此操作无法撤销。')) {
+                return
             }
-        )
+            
+            this.deleteConversation(conversationId,
+                () => {
+                    // 直接刷新历史列表，用户看到对话消失就知道删除成功了
+                    this.loadConversationHistory()
+                },
+                (error) => {
+                    console.error('删除对话失败:', error)
+                    TL.alert('删除对话失败: ' + error)
+                }
+            )
+        }
+    }
+
+    /**
+     * 移动端删除对话确认
+     */
+    confirmDeleteConversationMobile(conversationId) {
+        // 使用浏览器原生的确认对话框，在移动端体验更好
+        if (confirm('确定要删除这个对话吗？此操作无法撤销。')) {
+            this.deleteConversation(conversationId,
+                () => {
+                    // 直接刷新历史列表，用户看到对话消失就知道删除成功了
+                    this.loadConversationHistory()
+                },
+                (error) => {
+                    console.error('删除对话失败:', error)
+                    TL.alert('删除对话失败: ' + error)
+                }
+            )
+        }
     }
 
     /**
