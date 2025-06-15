@@ -48,6 +48,9 @@ class ai {
     initListView() {
         // 设置navbar
         TL.workspace_navbar()
+        
+        // 移动端UI调整
+        $('.mobile-head-padding-large').css('padding-top', '14vh')
     }
     
     /**
@@ -686,43 +689,55 @@ class ai {
         const isUser = role === 'user'
         const isAssistant = role === 'assistant'
         const isSystem = role === 'system'
-        const messageClass = isUser ? 'justify-content-end' : 'justify-content-start'
-        const bgClass = isUser ? 'bg-msg-user' : (isAssistant ? 'bg-msg-ai' : 'bg-msg-system')
-        const icon = isUser ? 'user' : (isAssistant ? 'star-one' : 'info-circle')
-        const senderName = isUser ? '用户' : (isAssistant ? '小薇' : '系统')
+        
+        // 获取用户信息
+        const userAvatar = $('.user_saved_logo img').first().attr('src') || '/img/ico/logo-256x256.png'
+        const userNickname = $('.user_saved_nickname').first().text() || '用户'
         
         let messageHtml
         
         if (isUser) {
-            // 用户消息：简化设计，只在右下角显示时间
+            // 用户消息：微信风格，头像在右侧
             messageHtml = `
-                <div class="d-flex ${messageClass} mb-3 ai-message">
-                    <div class="message-bubble ${bgClass} p-3 position-relative" style="max-width: 75%; min-width: 120px;">
-                        <div class="text-white" style="line-height: 1.5; padding-bottom: 15px;">
-                            ${this.formatMessageContent(content)}
+                <div class="d-flex justify-content-end align-items-start mb-3 ai-message">
+                    <div class="d-flex flex-column align-items-end mr-2 wechat-message-container">
+                        <small class="text-muted wechat-nickname">${userNickname}</small>
+                        <div class="bg-msg-user p-3 wechat-bubble-user">
+                            <div class="text-white" style="line-height: 1.4; word-wrap: break-word;">
+                                ${this.formatMessageContent(content)}
+                            </div>
                         </div>
-                        <small class="message-time position-absolute" style="font-size: 10px; bottom: 8px; right: 12px;">
-                            ${new Date().toLocaleTimeString()}
-                        </small>
+                    </div>
+                    <div class="wechat-avatar">
+                        <img src="${userAvatar}" class="rounded-circle w-100 h-100" style="object-fit: cover;" alt="用户头像">
+                    </div>
+                </div>
+            `
+        } else if (isAssistant) {
+            // AI消息：微信风格，头像在左侧
+            messageHtml = `
+                <div class="d-flex justify-content-start align-items-start mb-3 ai-message">
+                    <div class="wechat-avatar mr-2">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center w-100 h-100 wechat-ai-avatar">
+                            <iconpark-icon name="star-one" class="text-white" style="font-size: 20px;"></iconpark-icon>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column align-items-start wechat-message-container">
+                        <small class="text-muted wechat-nickname">小薇</small>
+                        <div class="bg-msg-ai p-3 wechat-bubble-ai">
+                            <div class="text-white" style="line-height: 1.4; word-wrap: break-word;">
+                                ${this.formatMessageContent(content)}
+                            </div>
+                        </div>
                     </div>
                 </div>
             `
         } else {
-            // AI/系统消息：保持原有设计但使用新的背景类
-            const textColor = isAssistant ? 'text-white' : (isSystem ? 'text-dark' : 'text-dark')
-            const iconColor = isAssistant ? 'text-white' : (isSystem ? 'text-warning' : 'text-primary')
-            
+            // 系统消息：居中显示
             messageHtml = `
-                <div class="d-flex ${messageClass} mb-3 ai-message">
-                    <div class="message-bubble ${bgClass} p-3" style="max-width: 75%; min-width: 120px;">
-                        <div class="d-flex align-items-center mb-2">
-                            <iconpark-icon name="${icon}" class="fa-fw mr-2 ${iconColor}"></iconpark-icon>
-                            <small class="font-weight-bold ${textColor}">${senderName}</small>
-                            <small class="message-time ml-auto" style="font-size: 11px;">
-                                ${new Date().toLocaleTimeString()}
-                            </small>
-                        </div>
-                        <div class="${textColor}" style="line-height: 1.5;">
+                <div class="d-flex justify-content-center mb-3 ai-message">
+                    <div class="bg-msg-system px-3 py-2 wechat-bubble-system wechat-message-container system">
+                        <div class="text-center text-dark" style="font-size: 13px; line-height: 1.4;">
                             ${this.formatMessageContent(content)}
                         </div>
                     </div>
@@ -830,17 +845,20 @@ class ai {
      */
     createDesktopThinkingIndicator() {
         return `
-            <div class="d-flex justify-content-start mb-3 thinking-indicator">
-                <div class="bg-msg-ai p-3" style="max-width: 75%;">
-                    <div class="d-flex align-items-center">
-                        <iconpark-icon name="star-one" class="fa-fw mr-2 text-white"></iconpark-icon>
-                        <small class="font-weight-bold text-white">小薇</small>
+            <div class="d-flex justify-content-start align-items-start mb-3 thinking-indicator">
+                <div class="wechat-avatar mr-2">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center w-100 h-100 wechat-ai-avatar">
+                        <iconpark-icon name="star-one" class="text-white" style="font-size: 20px;"></iconpark-icon>
                     </div>
-                    <div class="mt-2 text-white" style="opacity: 0.8;">
-                        <div class="typing-dots">
-                            <span></span><span></span><span></span>
+                </div>
+                <div class="d-flex flex-column align-items-start wechat-message-container">
+                    <small class="text-muted wechat-nickname">小薇</small>
+                    <div class="bg-msg-ai p-3 wechat-bubble-ai">
+                        <div class="text-white" style="opacity: 0.8;">
+                            <div class="typing-dots">
+                                <span></span><span></span><span></span>
+                            </div>
                         </div>
-                        正在思考中...
                     </div>
                 </div>
             </div>
@@ -852,18 +870,19 @@ class ai {
      */
     createMobileThinkingIndicator() {
         return `
-            <div class="d-flex justify-content-start mb-3 thinking-indicator">
-                <div class="max-width-80">
-                    <div class="bg-msg-ai p-3 message-bubble">
-                        <div class="d-flex align-items-center mb-2">
-                            <iconpark-icon name="star-one" class="fa-fw text-white mr-2"></iconpark-icon>
-                            <small class="font-weight-bold text-white">小薇</small>
-                        </div>
+            <div class="d-flex justify-content-start align-items-start mb-3 thinking-indicator">
+                <div class="wechat-avatar mr-2">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center w-100 h-100 wechat-ai-avatar">
+                        <iconpark-icon name="star-one" class="text-white" style="font-size: 20px;"></iconpark-icon>
+                    </div>
+                </div>
+                <div class="d-flex flex-column align-items-start wechat-message-container">
+                    <small class="text-muted wechat-nickname">小薇</small>
+                    <div class="bg-msg-ai p-3 wechat-bubble-ai">
                         <div class="text-white" style="opacity: 0.8;">
                             <div class="typing-dots">
                                 <span></span><span></span><span></span>
                             </div>
-                            正在思考中...
                         </div>
                     </div>
                 </div>
@@ -926,48 +945,57 @@ class ai {
         const isSystem = message.role === 'system'
         const isAssistant = message.role === 'assistant'
         
-        let alignClass, bgClass, avatarIcon, avatarColor, nameText
+        // 获取用户信息
+        const userAvatar = $('.user_saved_logo img').first().attr('src') || '/img/ico/logo-256x256.png'
+        const userNickname = $('.user_saved_nickname').first().text() || '用户'
         
-        if (isSystem) {
-            // 系统消息样式
-            alignClass = 'justify-content-center'
-            bgClass = 'bg-msg-system'
-            avatarIcon = 'info-circle'
-            avatarColor = 'text-warning'
-            nameText = '系统'
-        } else if (isUser) {
-            // 用户消息样式
-            alignClass = 'justify-content-end'
-            bgClass = 'bg-msg-user'
-            avatarIcon = 'user'
-            avatarColor = 'text-white'
-            nameText = '我'
-        } else {
-            // AI消息样式
-            alignClass = 'justify-content-start'
-            bgClass = 'bg-msg-ai'
-            avatarIcon = 'star-one'
-            avatarColor = 'text-primary'
-            nameText = '小薇'
-        }
-        
-        const textColor = isUser ? 'text-white' : (isAssistant ? 'text-white' : 'text-dark')
-        
-        return `
-            <div class="d-flex ${alignClass} mb-3">
-                <div class="max-width-80">
-                    <div class="${bgClass} p-3 message-bubble" ${isSystem ? 'style="max-width: 90%; margin: 0 auto;"' : ''}>
-                        <div class="d-flex align-items-center mb-2">
-                            <iconpark-icon name="${avatarIcon}" class="fa-fw ${avatarColor} mr-2"></iconpark-icon>
-                            <small class="font-weight-bold ${textColor}">${nameText}</small>
+        if (isUser) {
+            // 用户消息：微信风格，头像在右侧
+            return `
+                <div class="d-flex justify-content-end align-items-start mb-3">
+                    <div class="d-flex flex-column align-items-end mr-2 wechat-message-container">
+                        <small class="text-muted wechat-nickname">${userNickname}</small>
+                        <div class="bg-msg-user p-3 wechat-bubble-user">
+                            <div class="text-white" style="line-height: 1.4; word-wrap: break-word;">
+                                ${this.formatMessageContent(message.content)}
+                            </div>
                         </div>
-                        <div class="message-content ${textColor}">
-                            ${this.formatMessageContent(message.content)}
-                        </div>
-                        ${message.timestamp ? `<small class="message-time d-block mt-2" style="font-size: 11px;">${message.timestamp}</small>` : ''}
+                    </div>
+                    <div class="wechat-avatar">
+                        <img src="${userAvatar}" class="rounded-circle w-100 h-100" style="object-fit: cover;" alt="用户头像">
                     </div>
                 </div>
-            </div>
-        `
+            `
+        } else if (isAssistant) {
+            // AI消息：微信风格，头像在左侧
+            return `
+                <div class="d-flex justify-content-start align-items-start mb-3">
+                    <div class="wechat-avatar mr-2">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center w-100 h-100 wechat-ai-avatar">
+                            <iconpark-icon name="star-one" class="text-white" style="font-size: 20px;"></iconpark-icon>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column align-items-start wechat-message-container">
+                        <small class="text-muted wechat-nickname">小薇</small>
+                        <div class="bg-msg-ai p-3 wechat-bubble-ai">
+                            <div class="text-white" style="line-height: 1.4; word-wrap: break-word;">
+                                ${this.formatMessageContent(message.content)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `
+        } else {
+            // 系统消息：居中显示
+            return `
+                <div class="d-flex justify-content-center mb-3">
+                    <div class="bg-msg-system px-3 py-2 wechat-bubble-system wechat-message-container system">
+                        <div class="text-center text-dark" style="font-size: 13px; line-height: 1.4;">
+                            ${this.formatMessageContent(message.content)}
+                        </div>
+                    </div>
+                </div>
+            `
+        }
     }
 }

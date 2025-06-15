@@ -208,7 +208,7 @@
                         <span i18n="navbar_exit">.</span>
                     </a>
                     <!-- 隐私权政策和服务条款 -->
-                    <div class="dropdown-divider"></div>
+                    <!-- <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="app.open('/app&listview=privacy',true);">
                         <iconpark-icon name="circle-info" class="fa-fw"></iconpark-icon>
                         <span i18n="des_privacy">.</span>
@@ -216,7 +216,7 @@
                     <a class="dropdown-item" href="javascript:void(0)" onclick="app.open('/app&listview=tos',true);">
                         <iconpark-icon name="circle-info" class="fa-fw"></iconpark-icon>
                         <span i18n="des_tos">.</span>
-                    </a>
+                    </a> -->
                 </div>
             </div>
 
@@ -264,7 +264,7 @@
         </div> -->
         <div class="col-3">
             <div class="workspace-navbar">
-                <a class="btn p-0" href="/app&listview=ai" tmpui-action="dynamicView.ai();">
+                <a class="btn topnav_ai" href="/app&listview=ai" tmpui-action="dynamicView.ai();">
                     <div class="d-flex flex-column">
                         <span class="mx-auto">
                             <iconpark-icon name="star-one" class="fa-fw"></iconpark-icon>
@@ -272,24 +272,6 @@
                         <span i18n="navbar_ai">智能</span>
                     </div>
                 </a>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="btn-group dropup">
-                <button type="button" class="btn" data-toggle="dropdown">
-                    <div class="d-flex flex-column">
-                        <span class="mx-auto">
-                            <iconpark-icon name="language" class="fa-fw"></iconpark-icon>
-                        </span>
-                        <span class="selected_lang">.</span>
-                    </div>
-                </button>
-                <div class="dropdown-menu shadow">
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('cn');">简体中文</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('hk');">繁体中文</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('en');">English</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
-                </div>
             </div>
         </div>
         <div class="col-3">
@@ -307,12 +289,12 @@
                 </div>
             </div>
             <div class="btn-group dropup workspace-navbar">
-                <button type="button" class="btn" data-toggle="dropdown">
+                <button type="button" class="btn topnav_desktop" data-toggle="dropdown">
                     <div class="d-flex flex-column">
                         <span class="mx-auto">
-                            <iconpark-icon name="sliders-up" class="fa-fw" id="navbar_model_icon"></iconpark-icon>
+                            <iconpark-icon name="inbox-success" class="fa-fw" id="navbar_model_icon"></iconpark-icon>
                         </span>
-                        <span id="navbar_model_text" data-menu="workspace">.</span>
+                        <span id="navbar_model_text" data-menu="workspace" i18n="navbar_workspace">仓库</span>
                     </div>
                 </button>
                 <div class="dropdown-menu dropdown-menu-center shadow">
@@ -451,6 +433,24 @@
                         <span i18n="des_tos">.</span>
                     </a>
 
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="btn-group dropup">
+                <button type="button" class="btn" data-toggle="dropdown">
+                    <div class="d-flex flex-column">
+                        <span class="mx-auto">
+                            <iconpark-icon name="language" class="fa-fw"></iconpark-icon>
+                        </span>
+                        <span class="selected_lang">.</span>
+                    </div>
+                </button>
+                <div class="dropdown-menu shadow">
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('cn');">简体中文</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('hk');">繁体中文</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('en');">English</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="TL.language('jp');">日本語</a>
                 </div>
             </div>
         </div>

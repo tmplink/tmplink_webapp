@@ -2,48 +2,23 @@
 <nav class="mx-auto container fixed-top p-2 glass shadow-sm">
     <div class="container text-center">
         <div class="row px-2">
-            <div class="col-3 px-0 text-left">
-                <span class="text-azure" onclick="TL.ai.refreshList();">
-                    <iconpark-icon name="rotate" class="fa-fw fa-2x" id="ai_refresh_icon_mobile"></iconpark-icon>
-                </span>
-            </div>
-            <div class="col-6">
+            <div class="col-12">
                 <div class="mobile-head-top-title">
                     <div class="mobile_h3">智能小薇</div>
                 </div>
             </div>
-            <div class="col-3 px-0 text-right">
-                <div class="dropdown">
-                    <span class="text-azure" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <iconpark-icon name="gear" class="fa-fw fa-2x"></iconpark-icon>
-                    </span>
-                    <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
-                        <button class="dropdown-item" onclick="$('#aiChatModalMobile').modal('show'); TL.ai.startNewConversation();">
-                            <iconpark-icon name="circle-plus" class="fa-fw"></iconpark-icon>
-                            <span>新建对话</span>
-                        </button>
-                        <button class="dropdown-item" onclick="TL.ai.refreshList();">
-                            <iconpark-icon name="rotate" class="fa-fw"></iconpark-icon>
-                            <span>刷新列表</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
             <div class="mobile-head-large-title text-left">
                 <div class="mobile_h2">智能小薇</div>
-                <div class="lead" id="ai_total">AI 聊天助手</div>
+                <button onclick="$('#aiChatModalMobile').modal('show'); TL.ai.startNewConversation();" class="btn btn-primary btn-sm mt-2">
+                    <iconpark-icon name="circle-plus" class="fa-fw"></iconpark-icon>
+                    <span>开始聊天</span>
+                </button>
             </div>
         </div>
     </div>
 </nav>
 
 <div class="mobile-head-padding-large"></div>
-
-<button onclick="$('#aiChatModalMobile').modal('show'); TL.ai.startNewConversation();" class="btn btn-lg btn-primary btn-block btn-upload mr-1 mt-1">
-    <iconpark-icon name="circle-plus" class="fa-fw"></iconpark-icon>
-    <span>新建对话</span>
-</button>
 
 <div id="ai_chat_mobile" class="mt-5" style="display: none;">
     <div id="ai_conversation_list_mobile_new"></div>
@@ -153,4 +128,3 @@
         </div>
     </div>
 </div>
-
