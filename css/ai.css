@@ -1095,6 +1095,11 @@ body.dark-mode #ai_messages::-webkit-scrollbar-thumb:hover {
     animation: typing 1.4s infinite both;
 }
 
+/* AI消息中的typing-dots使用白色 */
+.bg-msg-ai .typing-dots span {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
 .typing-dots span:nth-child(2) {
     animation-delay: 0.2s;
 }
@@ -1463,4 +1468,191 @@ body.dark-mode #ai_messages::-webkit-scrollbar-thumb:hover {
         border-color: #929191 !important;
         color: #e4e4e4 !important;
     }
+}
+
+/* ====== AI消息专用背景样式 ====== */
+
+/* AI消息背景 - 渐变紫色，浅色文字 */
+.bg-msg-ai {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: #ffffff !important;
+    border-radius: 16px !important;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3) !important;
+    border: none !important;
+}
+
+/* 用户消息背景 - 蓝色 */
+.bg-msg-user {
+    background-color: #007bff !important;
+    color: #ffffff !important;
+    border-radius: 16px !important;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3) !important;
+    border: none !important;
+}
+
+/* 系统消息背景 */
+.bg-msg-system {
+    background-color: #fff3cd !important;
+    border: 1px solid #ffeaa7 !important;
+    color: #856404 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 1px 4px rgba(255, 193, 7, 0.2) !important;
+}
+
+/* 深色模式适配 */
+body.dark-mode .bg-msg-ai {
+    background: linear-gradient(135deg, #5a67d8 0%, #553c9a 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(90, 103, 216, 0.4) !important;
+}
+
+body.dark-mode .bg-msg-user {
+    background-color: #4299e1 !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(66, 153, 225, 0.4) !important;
+}
+
+body.dark-mode .bg-msg-system {
+    background-color: #5a4f00 !important;
+    border-color: #8a7500 !important;
+    color: #ffd93d !important;
+    box-shadow: 0 1px 4px rgba(255, 217, 61, 0.3) !important;
+}
+
+/* 消息内容样式优化 */
+.bg-msg-ai,
+.bg-msg-user,
+.bg-msg-system {
+    line-height: 1.5 !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+}
+
+/* AI消息文字颜色 - 渐变紫色背景用白色文字 */
+.bg-msg-ai,
+.bg-msg-ai * {
+    color: #ffffff !important;
+}
+
+/* 用户消息文字颜色 */
+.bg-msg-user,
+.bg-msg-user * {
+    color: #ffffff !important;
+}
+
+/* 系统消息文字颜色 */
+.bg-msg-system,
+.bg-msg-system * {
+    color: #856404 !important;
+}
+
+/* 深色模式下的文字颜色 */
+body.dark-mode .bg-msg-ai,
+body.dark-mode .bg-msg-ai * {
+    color: #ffffff !important;
+}
+
+body.dark-mode .bg-msg-user,
+body.dark-mode .bg-msg-user * {
+    color: #ffffff !important;
+}
+
+body.dark-mode .bg-msg-system,
+body.dark-mode .bg-msg-system * {
+    color: #ffd93d !important;
+}
+
+/* 消息时间戳样式 */
+.bg-msg-ai .message-time,
+.bg-msg-user .message-time,
+.bg-msg-system .message-time {
+    font-size: 11px !important;
+    opacity: 0.8 !important;
+    margin-top: 4px !important;
+}
+
+.bg-msg-ai .message-time {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.bg-msg-user .message-time {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.bg-msg-system .message-time {
+    color: rgba(133, 100, 4, 0.8) !important;
+}
+
+body.dark-mode .bg-msg-system .message-time {
+    color: rgba(255, 217, 61, 0.8) !important;
+}
+
+/* 移动端消息样式优化 */
+@media (max-width: 768px) {
+    .bg-msg-ai,
+    .bg-msg-user,
+    .bg-msg-system {
+        max-width: 85% !important;
+        padding: 12px 16px !important;
+        margin-bottom: 12px !important;
+    }
+    
+    /* 移动端消息内容 */
+    .bg-msg-ai .message-content,
+    .bg-msg-user .message-content,
+    .bg-msg-system .message-content {
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+    }
+}
+
+/* 消息动画效果 */
+.bg-msg-ai,
+.bg-msg-user,
+.bg-msg-system {
+    animation: messageSlideIn 0.3s ease-out;
+    transform-origin: bottom;
+}
+
+@keyframes messageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 悬停效果 */
+.bg-msg-ai:hover,
+.bg-msg-user:hover,
+.bg-msg-system:hover {
+    transform: translateY(-1px);
+    transition: transform 0.2s ease;
+}
+
+.bg-msg-ai:hover {
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
+}
+
+.bg-msg-user:hover {
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4) !important;
+}
+
+.bg-msg-system:hover {
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3) !important;
+}
+
+body.dark-mode .bg-msg-ai:hover {
+    box-shadow: 0 4px 12px rgba(90, 103, 216, 0.5) !important;
+}
+
+body.dark-mode .bg-msg-user:hover {
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.5) !important;
+}
+
+body.dark-mode .bg-msg-system:hover {
+    box-shadow: 0 4px 12px rgba(255, 217, 61, 0.3) !important;
 }

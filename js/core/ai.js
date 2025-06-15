@@ -674,8 +674,9 @@ class ai {
         
         const isUser = role === 'user'
         const isAssistant = role === 'assistant'
+        const isSystem = role === 'system'
         const messageClass = isUser ? 'justify-content-end' : 'justify-content-start'
-        const bgClass = isUser ? 'bg-primary text-white' : (isAssistant ? 'bg-light border' : 'bg-warning')
+        const bgClass = isUser ? 'bg-msg-user' : (isAssistant ? 'bg-msg-ai' : 'bg-msg-system')
         const icon = isUser ? 'user' : (isAssistant ? 'star-one' : 'info-circle')
         const senderName = isUser ? '用户' : (isAssistant ? '小薇' : '系统')
         
@@ -685,29 +686,32 @@ class ai {
             // 用户消息：简化设计，只在右下角显示时间
             messageHtml = `
                 <div class="d-flex ${messageClass} mb-3 ai-message">
-                    <div class="message-bubble ${bgClass} rounded p-3 position-relative" style="max-width: 75%; min-width: 120px;">
-                        <div style="line-height: 1.5; padding-bottom: 15px; color: white;">
+                    <div class="message-bubble ${bgClass} p-3 position-relative" style="max-width: 75%; min-width: 120px;">
+                        <div class="text-white" style="line-height: 1.5; padding-bottom: 15px;">
                             ${this.formatMessageContent(content)}
                         </div>
-                        <small class="position-absolute" style="font-size: 10px; bottom: 8px; right: 12px; color: rgba(255,255,255,0.7);">
+                        <small class="message-time position-absolute" style="font-size: 10px; bottom: 8px; right: 12px;">
                             ${new Date().toLocaleTimeString()}
                         </small>
                     </div>
                 </div>
             `
         } else {
-            // AI/系统消息：保持原有设计
+            // AI/系统消息：保持原有设计但使用新的背景类
+            const textColor = isAssistant ? 'text-white' : (isSystem ? 'text-dark' : 'text-dark')
+            const iconColor = isAssistant ? 'text-white' : (isSystem ? 'text-warning' : 'text-primary')
+            
             messageHtml = `
                 <div class="d-flex ${messageClass} mb-3 ai-message">
-                    <div class="message-bubble ${bgClass} rounded p-3" style="max-width: 75%; min-width: 120px;">
+                    <div class="message-bubble ${bgClass} p-3" style="max-width: 75%; min-width: 120px;">
                         <div class="d-flex align-items-center mb-2">
-                            <iconpark-icon name="${icon}" class="fa-fw mr-2 ${isUser ? 'text-white' : 'text-primary'}"></iconpark-icon>
-                            <small class="font-weight-bold ${isUser ? 'text-white' : 'text-dark'}">${senderName}</small>
-                            <small class="ml-auto ${isUser ? 'text-white-50' : 'text-muted'}" style="font-size: 11px;">
+                            <iconpark-icon name="${icon}" class="fa-fw mr-2 ${iconColor}"></iconpark-icon>
+                            <small class="font-weight-bold ${textColor}">${senderName}</small>
+                            <small class="message-time ml-auto" style="font-size: 11px;">
                                 ${new Date().toLocaleTimeString()}
                             </small>
                         </div>
-                        <div class="${isUser ? 'text-white' : 'text-dark'}" style="line-height: 1.5;">
+                        <div class="${textColor}" style="line-height: 1.5;">
                             ${this.formatMessageContent(content)}
                         </div>
                     </div>
@@ -817,12 +821,12 @@ class ai {
     createDesktopThinkingIndicator() {
         return `
             <div class="d-flex justify-content-start mb-3 thinking-indicator">
-                <div class="bg-light border rounded p-3" style="max-width: 75%;">
+                <div class="bg-msg-ai p-3" style="max-width: 75%;">
                     <div class="d-flex align-items-center">
-                        <iconpark-icon name="star-one" class="fa-fw mr-2 text-primary"></iconpark-icon>
-                        <small class="font-weight-bold text-dark">小薇</small>
+                        <iconpark-icon name="star-one" class="fa-fw mr-2 text-white"></iconpark-icon>
+                        <small class="font-weight-bold text-white">小薇</small>
                     </div>
-                    <div class="mt-2 text-muted">
+                    <div class="mt-2 text-white" style="opacity: 0.8;">
                         <div class="typing-dots">
                             <span></span><span></span><span></span>
                         </div>
@@ -840,12 +844,12 @@ class ai {
         return `
             <div class="d-flex justify-content-start mb-3 thinking-indicator">
                 <div class="max-width-80">
-                    <div class="rounded p-3 message-bubble">
+                    <div class="bg-msg-ai p-3 message-bubble">
                         <div class="d-flex align-items-center mb-2">
-                            <iconpark-icon name="star-one" class="fa-fw text-primary mr-2"></iconpark-icon>
-                            <small class="font-weight-bold">小薇</small>
+                            <iconpark-icon name="star-one" class="fa-fw text-white mr-2"></iconpark-icon>
+                            <small class="font-weight-bold text-white">小薇</small>
                         </div>
-                        <div class="text-muted">
+                        <div class="text-white" style="opacity: 0.8;">
                             <div class="typing-dots">
                                 <span></span><span></span><span></span>
                             </div>
@@ -910,44 +914,47 @@ class ai {
     createMobileMessageHTML(message) {
         const isUser = message.role === 'user'
         const isSystem = message.role === 'system'
+        const isAssistant = message.role === 'assistant'
         
         let alignClass, bgClass, avatarIcon, avatarColor, nameText
         
         if (isSystem) {
             // 系统消息样式
             alignClass = 'justify-content-center'
-            bgClass = 'bg-warning text-dark'
-            avatarIcon = 'exclamation-triangle'
+            bgClass = 'bg-msg-system'
+            avatarIcon = 'info-circle'
             avatarColor = 'text-warning'
             nameText = '系统'
         } else if (isUser) {
             // 用户消息样式
             alignClass = 'justify-content-end'
-            bgClass = 'bg-primary text-white'
+            bgClass = 'bg-msg-user'
             avatarIcon = 'user'
             avatarColor = 'text-white'
             nameText = '我'
         } else {
             // AI消息样式
             alignClass = 'justify-content-start'
-            bgClass = 'bg-light text-dark'
+            bgClass = 'bg-msg-ai'
             avatarIcon = 'star-one'
             avatarColor = 'text-primary'
             nameText = '小薇'
         }
         
+        const textColor = isUser ? 'text-white' : (isAssistant ? 'text-white' : 'text-dark')
+        
         return `
             <div class="d-flex ${alignClass} mb-3">
                 <div class="max-width-80">
-                    <div class="${bgClass} rounded p-3 message-bubble" ${isSystem ? 'style="max-width: 90%; margin: 0 auto;"' : ''}>
+                    <div class="${bgClass} p-3 message-bubble" ${isSystem ? 'style="max-width: 90%; margin: 0 auto;"' : ''}>
                         <div class="d-flex align-items-center mb-2">
                             <iconpark-icon name="${avatarIcon}" class="fa-fw ${avatarColor} mr-2"></iconpark-icon>
-                            <small class="font-weight-bold">${nameText}</small>
+                            <small class="font-weight-bold ${textColor}">${nameText}</small>
                         </div>
-                        <div class="message-content">
-                            ${message.content.replace(/\n/g, '<br>')}
+                        <div class="message-content ${textColor}">
+                            ${this.formatMessageContent(message.content)}
                         </div>
-                        ${message.timestamp ? `<small class="message-time d-block mt-2" style="font-size: 11px; opacity: 0.7;">${message.timestamp}</small>` : ''}
+                        ${message.timestamp ? `<small class="message-time d-block mt-2" style="font-size: 11px;">${message.timestamp}</small>` : ''}
                     </div>
                 </div>
             </div>
