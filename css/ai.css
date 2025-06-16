@@ -994,12 +994,13 @@ body.dark-mode .btn-icon::before {
 
 #ai_input {
     transition: all 0.2s;
+    background-color: #676768 !important;
 }
 
 #ai_input:focus {
     box-shadow: none;
     border-color: transparent;
-    background-color: rgb(112, 112, 112) !important;
+    background-color: #979797 !important;
 }
 
 .ai-message {
@@ -1069,13 +1070,13 @@ body.dark-mode .conversation-title {
 }
 
 body.dark-mode #ai_input {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: #404040 !important;
     color: white !important;
-    border-color: rgba(255, 255, 255, 0.2) !important;
+    border-color: transparent !important;
 }
 
 body.dark-mode #ai_input:focus {
-    background-color: rgba(255, 255, 255, 0.15) !important;
+    background-color: #2d2d2d !important;
     color: white !important;
 }
 
