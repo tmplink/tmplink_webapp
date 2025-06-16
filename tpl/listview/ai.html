@@ -20,11 +20,11 @@
                 </button>
             </div>
             
-            <div class="p-2">
-                <div class="d-flex justify-content-between align-items-center mb-2">
+            <div class="p-2" id="ai_sidebar_content">
+                <div class="d-flex justify-content-between align-items-center mb-2" id="ai_history_header">
                     <small class="text-muted font-weight-bold" i18n="ai_conversation_history">对话历史</small>
-                    <button class="btn btn-sm btn-link p-0 text-muted" onclick="TL.ai.refreshList();" title="刷新">
-                        <iconpark-icon name="rotate" class="fa-fw" id="ai_refresh_icon"></iconpark-icon>
+                    <button class="btn btn-sm btn-link p-0 text-danger ai-delete-all-btn" id="ai_delete_all_btn" onclick="TL.ai.deleteAllConversations();" title="删除所有对话" style="opacity: 0; transition: opacity 0.2s;">
+                        <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
                     </button>
                 </div>
                 

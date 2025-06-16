@@ -47,6 +47,9 @@ class ai {
         
         // 初始化配额显示
         this.initQuotaDisplay()
+        
+        // 绑定删除按钮悬停事件
+        this.bindDeleteButtonHover()
     }
     
     /**
@@ -76,6 +79,23 @@ class ai {
                 this.sendMessage()
             }
         })
+    }
+    
+    /**
+     * 绑定删除按钮悬停事件
+     */
+    bindDeleteButtonHover() {
+        // 悬停在对话历史区域时显示删除按钮
+        $('#ai_sidebar_content').hover(
+            function() {
+                // 鼠标进入
+                $('#ai_delete_all_btn').css('opacity', '1')
+            },
+            function() {
+                // 鼠标离开
+                $('#ai_delete_all_btn').css('opacity', '0')
+            }
+        )
     }
     
     /**
@@ -120,9 +140,15 @@ class ai {
         
         if (!conversations || conversations.length === 0) {
             noConvElement.show()
+            // 隐藏删除按钮（没有对话可删除）
+            $('#ai_delete_all_btn').hide()
+            $('#ai_delete_all_btn_mobile').hide()
             return
         } else {
             noConvElement.hide()
+            // 显示删除按钮
+            $('#ai_delete_all_btn').show()
+            $('#ai_delete_all_btn_mobile').show()
         }
         
         // 使用模板渲染对话列表
@@ -135,33 +161,69 @@ class ai {
             // 如果模板渲染失败，手动生成HTML作为备选方案
             let fallbackHtml = ''
             conversations.forEach(conv => {
-                fallbackHtml += `
-                    <div class="conversation-item mb-1 p-2 rounded conversation_unit_${conv.conversation_id}" 
-                         data-conversation-id="${conv.conversation_id}" 
-                         onclick="TL.ai.switchConversation('${conv.conversation_id}');"
-                         style="cursor: pointer; transition: all 0.2s;">
-                        
-                        <div class="d-flex align-items-start">
-                            <iconpark-icon name="message-circle" class="fa-fw text-muted mr-2 mt-1" style="font-size: 12px;"></iconpark-icon>
-                            <div class="flex-fill" style="min-width: 0;">
-                                <div class="conversation-title text-truncate" style="font-size: 13px; line-height: 1.3;">
-                                    ${conv.title || '新对话'}
+                if (isMobile) {
+                    // 移动端备选HTML，支持深色模式
+                    fallbackHtml += `
+                        <div class="card mb-2 conversation_unit_mobile_${conv.conversation_id} shadow-sm" 
+                             data-conversation-id="${conv.conversation_id}"
+                             onclick="$('#aiChatModalMobile').modal('show'); TL.ai.openConversation('${conv.conversation_id}');" 
+                             style="cursor: pointer; border: 1px solid var(--bs-border-color, #dee2e6);">
+                            <div class="card-body py-3" style="background-color: var(--bs-card-bg, #fff); color: var(--bs-body-color, #212529);">
+                                <div class="d-flex align-items-center">
+                                    <div class="mr-3">
+                                        <iconpark-icon name="message" class="fa-fw fa-2x" style="color: var(--bs-primary, #007bff);"></iconpark-icon>
+                                    </div>
+                                    <div class="flex-fill">
+                                        <div class="font-weight-medium text-truncate" style="color: var(--bs-body-color, #212529);">
+                                            ${conv.title || '新对话'}
+                                        </div>
+                                        <div class="small mt-1" style="color: var(--bs-text-muted, #6c757d);">
+                                            <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
+                                            ${conv.time}
+                                        </div>
+                                    </div>
+                                    <div class="ml-2">
+                                        <button class="btn btn-sm text-danger mr-1" 
+                                                onclick="event.stopPropagation(); TL.ai.deleteConversationUI('${conv.conversation_id}');"
+                                                title="删除对话"
+                                                style="background-color: var(--bs-light, #f8f9fa); border: 1px solid var(--bs-border-color, #dee2e6);">
+                                            <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="small text-muted" style="font-size: 11px;">
-                                    ${conv.time}
-                                </div>
-                            </div>
-                            <div class="conversation-actions" style="opacity: 0; transition: opacity 0.2s;">
-                                <button onclick="TL.ai.deleteConversationUI('${conv.conversation_id}'); event.stopPropagation();" 
-                                        class="btn btn-sm btn-link text-danger p-1" 
-                                        title="删除对话"
-                                        style="font-size: 12px; color: #dc3545 !important;">
-                                    <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
-                                </button>
                             </div>
                         </div>
-                    </div>
-                `
+                    `
+                } else {
+                    // 桌面端备选HTML
+                    fallbackHtml += `
+                        <div class="conversation-item mb-1 p-2 rounded conversation_unit_${conv.conversation_id}" 
+                             data-conversation-id="${conv.conversation_id}" 
+                             onclick="TL.ai.switchConversation('${conv.conversation_id}');"
+                             style="cursor: pointer; transition: all 0.2s;">
+                            
+                            <div class="d-flex align-items-start">
+                                <iconpark-icon name="message-circle" class="fa-fw text-muted mr-2 mt-1" style="font-size: 12px;"></iconpark-icon>
+                                <div class="flex-fill" style="min-width: 0;">
+                                    <div class="conversation-title text-truncate" style="font-size: 13px; line-height: 1.3;">
+                                        ${conv.title || '新对话'}
+                                    </div>
+                                    <div class="small text-muted" style="font-size: 11px;">
+                                        ${conv.time}
+                                    </div>
+                                </div>
+                                <div class="conversation-actions" style="opacity: 0; transition: opacity 0.2s;">
+                                    <button onclick="TL.ai.deleteConversationUI('${conv.conversation_id}'); event.stopPropagation();" 
+                                            class="btn btn-sm btn-link text-danger p-1" 
+                                            title="删除对话"
+                                            style="font-size: 12px; color: #dc3545 !important;">
+                                        <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                }
             })
             
             listContainer.html(fallbackHtml)
@@ -717,6 +779,81 @@ class ai {
         if (this.currentConversationId) {
             this.openConversation(this.currentConversationId)
         }
+    }
+
+    /**
+     * 删除所有对话
+     */
+    deleteAllConversations() {
+        // 使用浏览器确认框
+        if (!confirm(app.languageData.ai_confirm_delete_all || '确定要删除所有对话吗？此操作无法撤销，将清空您的所有对话历史。')) {
+            return
+        }
+
+        // 如果没有对话，直接返回
+        if (!this.conversations || this.conversations.length === 0) {
+            TL.alert(app.languageData.ai_no_conversations_to_delete || '没有对话可以删除')
+            return
+        }
+
+        // 显示删除进度
+        const deleteCount = this.conversations.length
+        let deletedCount = 0
+        let failedCount = 0
+
+        // 逐个删除对话
+        const deletePromises = this.conversations.map(conversation => {
+            return new Promise((resolve) => {
+                this.deleteConversation(conversation.conversation_id,
+                    () => {
+                        deletedCount++
+                        resolve()
+                    },
+                    (error) => {
+                        console.error(`删除对话 ${conversation.conversation_id} 失败:`, error)
+                        failedCount++
+                        resolve()
+                    }
+                )
+            })
+        })
+
+        // 等待所有删除操作完成
+        Promise.all(deletePromises).then(() => {
+            // 发送删除所有对话统计
+            this.parent_op.ga('AI_DeleteAllConversations')
+            
+            // 清空本地对话列表
+            this.conversations = []
+            this.currentConversationId = null
+            this.currentMessages = []
+            
+            // 刷新界面
+            this.updateConversationListUI([])
+            
+            // 隐藏删除按钮
+            $('#ai_delete_all_btn').hide()
+            $('#ai_delete_all_btn_mobile').hide()
+            
+            // 清空消息区域，显示欢迎界面
+            const isMobile = isMobileScreen()
+            const messagesContainer = isMobile ? '#ai_messages_mobile' : '#ai_messages'
+            
+            $(messagesContainer).html(`
+                <div class="text-center text-muted py-5">
+                    <iconpark-icon name="star-one" class="fa-fw fa-3x mb-3 text-primary"></iconpark-icon>
+                    <h5 class="text-muted">${app.languageData.ai_start_chat_greeting || '开始与智能小薇对话吧！'}</h5>
+                    <p class="text-muted small">${app.languageData.ai_choose_conversation || '选择左侧的对话历史或创建新对话'}</p>
+                </div>
+            `)
+            
+            // 显示删除结果
+            if (failedCount === 0) {
+                TL.alert(`${app.languageData.ai_delete_all_success || '成功删除所有对话'} (${deletedCount}/${deleteCount})`)
+            } else {
+                TL.alert(`${app.languageData.ai_delete_partial_success || '部分删除成功'}: ${deletedCount}/${deleteCount}，${failedCount} 个对话删除失败`)
+            }
+        })
     }
 
     /**

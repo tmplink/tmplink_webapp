@@ -481,11 +481,23 @@
     }
 }
 
+/* 移动端对话卡片圆角样式（通用） */
+@media (max-width: 768px) {
+    #ai_conversation_list_mobile_new .card {
+        border-radius: 12px !important;
+        overflow: hidden !important;
+    }
+    
+    #ai_conversation_list_mobile_new .card-body {
+        border-radius: 12px !important;
+    }
+}
+
 /* 移动端深色模式适配 */
 @media (max-width: 768px) and (prefers-color-scheme: dark) {
     /* 主容器深色模式 */
     #ai_chat_mobile {
-        background-color: #1a1a1a !important;
+        background-color: transparent !important;
         color: white !important;
     }
     
@@ -600,9 +612,72 @@
         --primary-color: #7aa5df;
     }
     
+    /* 移动端对话列表深色模式 */
+    #ai_conversation_list_mobile_new {
+        background-color: transparent !important;
+    }
+    
+    /* 移动端对话列表卡片深色模式适配 */
+    #ai_conversation_list_mobile_new .card {
+        background-color: #2d2d2d !important;
+        border-color: rgba(255, 255, 255, 0.15) !important;
+        color: #e4e4e4 !important;
+        border-radius: 12px !important;
+    }
+    
+    #ai_conversation_list_mobile_new .card-body {
+        background-color: #2d2d2d !important;
+        color: #e4e4e4 !important;
+        border-radius: 12px !important;
+    }
+    
+    #ai_conversation_list_mobile_new .font-weight-medium {
+        color: #e4e4e4 !important;
+    }
+    
+    #ai_conversation_list_mobile_new .small {
+        color: #b3b2b2 !important;
+    }
+    
+    #ai_conversation_list_mobile_new .text-muted {
+        color: #b3b2b2 !important;
+    }
+    
+    /* 移动端对话卡片悬停效果深色模式 */
+    #ai_conversation_list_mobile_new .card:hover {
+        background-color: #404040 !important;
+        border-color: #7aa5df !important;
+        box-shadow: 0 2px 8px rgba(122, 165, 223, 0.2) !important;
+    }
+    
+    /* 移动端对话卡片图标深色模式 */
+    #ai_conversation_list_mobile_new iconpark-icon {
+        color: #7aa5df !important;
+    }
+    
+    /* 移动端删除按钮深色模式 */
+    #ai_conversation_list_mobile_new .btn {
+        background-color: #404040 !important;
+        border-color: rgba(255, 255, 255, 0.2) !important;
+        color: #e4e4e4 !important;
+    }
+    
+    #ai_conversation_list_mobile_new .btn:hover {
+        background-color: #4a4a4a !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
+    }
+    
+    #ai_conversation_list_mobile_new .btn.text-danger {
+        color: #ff6b6b !important;
+    }
+    
+    #ai_conversation_list_mobile_new .btn.text-danger:hover {
+        background-color: rgba(255, 107, 107, 0.1) !important;
+        color: #ff6b6b !important;
+    }
+    
     /* 移动端消息区域深色模式 - 遵循项目颜色系统 */
     #ai_messages_mobile {
-        background-color: #363434 !important;
         color: #e4e4e4 !important;
     }
     
