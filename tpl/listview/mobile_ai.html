@@ -4,14 +4,14 @@
         <div class="row px-2">
             <div class="col-12">
                 <div class="mobile-head-top-title">
-                    <div class="mobile_h3">智能小薇</div>
+                    <div class="mobile_h3" i18n="ai_name">智能小薇</div>
                 </div>
             </div>
             <div class="mobile-head-large-title text-left">
-                <div class="mobile_h2">智能小薇</div>
+                <div class="mobile_h2" i18n="ai_name">智能小薇</div>
                 <button onclick="$('#aiChatModalMobile').modal('show'); TL.ai.startNewConversation();" class="btn btn-primary btn-sm mt-2">
                     <iconpark-icon name="circle-plus" class="fa-fw"></iconpark-icon>
-                    <span>开始聊天</span>
+                    <span i18n="ai_start_chat">开始聊天</span>
                 </button>
             </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="text-center mb-4">
             <iconpark-icon name="star-one" class="fa-fw fa-4x"></iconpark-icon>
         </div>
-        <div class="text-center">暂无对话历史</div>
+        <div class="text-center" i18n="ai_no_conversations">暂无对话历史</div>
     </div>
     
     <script type="text/template" id="ai_conversation_list_mobile_new_tpl">
@@ -43,7 +43,7 @@
                         </div>
                         <div class="flex-fill">
                             <div class="font-weight-medium text-truncate">
-                                <% obj[x].title || '新对话' %>
+                                <% obj[x].title || (app.languageData.ai_new_conversation || '新对话') %>
                             </div>
                             <div class="small text-muted mt-1">
                                 <iconpark-icon name="timer" class="fa-fw"></iconpark-icon>
@@ -53,7 +53,7 @@
                         <div class="ml-2">
                             <button class="btn btn-sm btn-light text-danger mr-1" 
                                     onclick="event.stopPropagation(); TL.ai.deleteConversationUI('<% obj[x].conversation_id %>');"
-                                    title="删除对话">
+                                    i18n="ai_delete_conversation" i18nOnly="title" title=".">
                                 <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
                             </button>
                         </div>
@@ -69,7 +69,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content shadow-lg" style="height: 80vh; display: flex; flex-direction: column;">
             <div class="modal-header">
-                <h4 class="modal-title" id="aiChatModalMobileTitle">智能小薇</h4>
+                <h4 class="modal-title" id="aiChatModalMobileTitle" i18n="ai_name">智能小薇</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" style="flex: 1; overflow-y: auto; padding-bottom: 0;">
@@ -77,27 +77,27 @@
                     <!-- 欢迎信息 -->
                     <div class="text-center text-muted py-5" id="ai_welcome_mobile">
                         <iconpark-icon name="star-one" class="fa-fw fa-3x mb-3 text-primary"></iconpark-icon>
-                        <h5 class="mb-3">开始与智能小薇对话吧！</h5>
-                        <p class="small">我是您的AI助手，有什么可以帮助您的吗？</p>
+                        <h5 class="mb-3" i18n="ai_mobile_greeting">开始与智能小薇对话吧！</h5>
+                        <p class="small" i18n="ai_mobile_intro">我是您的AI助手，有什么可以帮助您的吗？</p>
                         
                         <!-- 快速开始问题 -->
                         <div class="mx-3 mt-4">
                             <div class="text-left">
                                 <button class="btn btn-outline-primary btn-sm mb-2 mr-2" 
                                         onclick="TL.ai.sendQuickMessage('你好')">
-                                    你好
+                                    <span i18n="ai_hello">你好</span>
                                 </button>
                                 <button class="btn btn-outline-primary btn-sm mb-2 mr-2" 
                                         onclick="TL.ai.sendQuickMessage('介绍一下你自己')">
-                                    介绍一下你自己
+                                    <span i18n="ai_introduce_yourself">介绍一下你自己</span>
                                 </button>
                                 <button class="btn btn-outline-primary btn-sm mb-2 mr-2" 
                                         onclick="TL.ai.sendQuickMessage('今天天气怎么样？')">
-                                    今天天气怎么样？
+                                    <span i18n="ai_weather_today">今天天气怎么样？</span>
                                 </button>
                                 <button class="btn btn-outline-primary btn-sm mb-2" 
                                         onclick="TL.ai.sendQuickMessage('帮我写一首诗')">
-                                    帮我写一首诗
+                                    <span i18n="ai_write_poem">帮我写一首诗</span>
                                 </button>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                 <div class="w-100">
                     <div class="input-group">
                         <textarea id="ai_input_mobile" class="form-control" 
-                                 placeholder="输入您的消息..." 
+                                 i18n="ai_input_placeholder" i18nOnly="placeholder" placeholder="."
                                  rows="1" maxlength="2000"
                                  style="resize: none; max-height: 120px; font-size: 16px;"
                                  onkeypress="if(event.keyCode==13&&!event.shiftKey){event.preventDefault();TL.ai.sendMessage(true);}"

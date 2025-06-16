@@ -24,8 +24,8 @@ class ai {
     initUI() {
         // 设置页面标题和描述
         app.languageBuild()
-        $('title').html('智能小薇 - TMP.LINK')
-        $('meta[name=description]').attr('content', '智能小薇，智能对话体验')
+        $('title').html(app.languageData.ai_page_title || '智能小薇 - TMP.LINK')
+        $('meta[name=description]').attr('content', app.languageData.ai_page_description || '智能小薇，智能对话体验')
 
         // 发送页面访问统计
         this.parent_op.ga('AI_Page')
@@ -180,16 +180,16 @@ class ai {
                 if (callback) callback(rsp.data)
             } else if (rsp.status === 5) {
                 // API暂时不可用，建议重试
-                if (errorCallback) errorCallback('AI服务暂时不可用，请稍后再试')
+                if (errorCallback) errorCallback(app.languageData.ai_service_unavailable || 'AI服务暂时不可用，请稍后再试')
             } else {
                 if (errorCallback) errorCallback(rsp.data)
             }
         }, 'json').fail((xhr, textStatus, errorThrown) => {
-            let errorMessage = '发送消息失败'
+            let errorMessage = app.languageData.ai_send_message_failed || '发送消息失败'
             if (xhr.responseJSON && xhr.responseJSON.message) {
                 errorMessage = xhr.responseJSON.message
             } else if (textStatus) {
-                errorMessage = `请求失败: ${textStatus}`
+                errorMessage = `${app.languageData.ai_request_failed || '请求失败'}: ${textStatus}`
             }
             if (errorCallback) errorCallback(errorMessage)
         })
@@ -213,16 +213,16 @@ class ai {
                 if (callback) callback(rsp.data)
             } else if (rsp.status === 5) {
                 // API暂时不可用，建议重试
-                if (errorCallback) errorCallback('AI服务暂时不可用，请稍后再试')
+                if (errorCallback) errorCallback(app.languageData.ai_service_unavailable || 'AI服务暂时不可用，请稍后再试')
             } else {
                 if (errorCallback) errorCallback(rsp.data)
             }
         }, 'json').fail((xhr, textStatus, errorThrown) => {
-            let errorMessage = '发送消息失败'
+            let errorMessage = app.languageData.ai_send_message_failed || '发送消息失败'
             if (xhr.responseJSON && xhr.responseJSON.message) {
                 errorMessage = xhr.responseJSON.message
             } else if (textStatus) {
-                errorMessage = `请求失败: ${textStatus}`
+                errorMessage = `${app.languageData.ai_request_failed || '请求失败'}: ${textStatus}`
             }
             if (errorCallback) errorCallback(errorMessage)
         })
@@ -242,16 +242,16 @@ class ai {
                 if (callback) callback(rsp.data)
             } else if (rsp.status === 5) {
                 // API暂时不可用，建议重试
-                if (errorCallback) errorCallback('AI服务暂时不可用，请稍后再试')
+                if (errorCallback) errorCallback(app.languageData.ai_service_unavailable || 'AI服务暂时不可用，请稍后再试')
             } else {
                 if (errorCallback) errorCallback(rsp.data)
             }
         }, 'json').fail((xhr, textStatus, errorThrown) => {
-            let errorMessage = '获取状态失败'
+            let errorMessage = app.languageData.ai_get_status_failed || '获取状态失败'
             if (xhr.responseJSON && xhr.responseJSON.message) {
                 errorMessage = xhr.responseJSON.message
             } else if (textStatus) {
-                errorMessage = `请求失败: ${textStatus}`
+                errorMessage = `${app.languageData.ai_request_failed || '请求失败'}: ${textStatus}`
             }
             if (errorCallback) errorCallback(errorMessage)
         })
@@ -274,16 +274,16 @@ class ai {
                 if (callback) callback(rsp.data)
             } else if (rsp.status === 5) {
                 // API暂时不可用，建议重试
-                if (errorCallback) errorCallback('AI服务暂时不可用，请稍后再试')
+                if (errorCallback) errorCallback(app.languageData.ai_service_unavailable || 'AI服务暂时不可用，请稍后再试')
             } else {
                 if (errorCallback) errorCallback(rsp.data)
             }
         }, 'json').fail((xhr, textStatus, errorThrown) => {
-            let errorMessage = '获取对话历史失败'
+            let errorMessage = app.languageData.ai_get_history_failed || '获取对话历史失败'
             if (xhr.responseJSON && xhr.responseJSON.message) {
                 errorMessage = xhr.responseJSON.message
             } else if (textStatus) {
-                errorMessage = `请求失败: ${textStatus}`
+                errorMessage = `${app.languageData.ai_request_failed || '请求失败'}: ${textStatus}`
             }
             if (errorCallback) errorCallback(errorMessage)
         })
@@ -305,16 +305,16 @@ class ai {
                 if (callback) callback(rsp.data)
             } else if (rsp.status === 5) {
                 // API暂时不可用，建议重试
-                if (errorCallback) errorCallback('AI服务暂时不可用，请稍后再试')
+                if (errorCallback) errorCallback(app.languageData.ai_service_unavailable || 'AI服务暂时不可用，请稍后再试')
             } else {
                 if (errorCallback) errorCallback(rsp.data)
             }
         }, 'json').fail((xhr, textStatus, errorThrown) => {
-            let errorMessage = '获取对话详情失败'
+            let errorMessage = app.languageData.ai_get_detail_failed || '获取对话详情失败'
             if (xhr.responseJSON && xhr.responseJSON.message) {
                 errorMessage = xhr.responseJSON.message
             } else if (textStatus) {
-                errorMessage = `请求失败: ${textStatus}`
+                errorMessage = `${app.languageData.ai_request_failed || '请求失败'}: ${textStatus}`
             }
             if (errorCallback) errorCallback(errorMessage)
         })
@@ -340,16 +340,16 @@ class ai {
                 if (callback) callback(true)
             } else if (rsp.status === 5) {
                 // API暂时不可用，建议重试
-                if (errorCallback) errorCallback('AI服务暂时不可用，请稍后再试')
+                if (errorCallback) errorCallback(app.languageData.ai_service_unavailable || 'AI服务暂时不可用，请稍后再试')
             } else {
                 if (errorCallback) errorCallback(rsp.data)
             }
         }, 'json').fail((xhr, textStatus, errorThrown) => {
-            let errorMessage = '删除对话失败'
+            let errorMessage = app.languageData.ai_delete_failed || '删除对话失败'
             if (xhr.responseJSON && xhr.responseJSON.message) {
                 errorMessage = xhr.responseJSON.message
             } else if (textStatus) {
-                errorMessage = `请求失败: ${textStatus}`
+                errorMessage = `${app.languageData.ai_request_failed || '请求失败'}: ${textStatus}`
             }
             if (errorCallback) errorCallback(errorMessage)
         })
@@ -372,7 +372,7 @@ class ai {
         this.updateCharCount(true)
         
         // 设置模态框标题
-        $('#aiChatModalMobileTitle').text('智能小薇 - 新对话')
+        $('#aiChatModalMobileTitle').text((app.languageData.ai_name || '智能小薇') + ' - ' + (app.languageData.ai_new_conversation || '新对话'))
         
         // 聚焦到输入框
         setTimeout(() => {
@@ -398,8 +398,8 @@ class ai {
         $('#ai_messages').html(`
             <div class="text-center text-muted py-5">
                 <iconpark-icon name="star-one" class="fa-fw fa-3x mb-3 text-primary"></iconpark-icon>
-                <h5 class="text-muted">开始新对话</h5>
-                <p class="text-muted small">输入您的问题，智能小薇将为您解答</p>
+                <h5 class="text-muted">${app.languageData.ai_start_new_chat || '开始新对话'}</h5>
+                <p class="text-muted small">${app.languageData.ai_ask_question_hint || '输入您的问题，智能小薇将为您解答'}</p>
             </div>
         `)
         
@@ -436,7 +436,7 @@ class ai {
         $(messagesContainer).html(`
             <div class="text-center text-muted py-5">
                 <div class="spinner-border text-primary mb-3"></div>
-                <div>加载对话中...</div>
+                <div>${app.languageData.ai_loading_conversation || '加载对话中...'}</div>
             </div>
         `)
         
@@ -452,7 +452,7 @@ class ai {
                 
                 // 更新模态框标题
                 if (isMobile) {
-                    $('#aiChatModalMobileTitle').text(conversation.title || '智能小薇')
+                    $('#aiChatModalMobileTitle').text(conversation.title || (app.languageData.ai_name || '智能小薇'))
                 }
                 
                 // 渲染消息历史
@@ -478,8 +478,8 @@ class ai {
                     $(messagesContainer).html(`
                         <div class="text-center text-muted py-5">
                             <iconpark-icon name="star-one" class="fa-fw fa-3x mb-3 text-primary"></iconpark-icon>
-                            <h5 class="text-muted">继续与智能小薇对话吧！</h5>
-                            <p class="text-muted small">这是您之前的对话，可以继续提问</p>
+                            <h5 class="text-muted">${app.languageData.ai_continue_chat || '继续与智能小薇对话吧！'}</h5>
+                            <p class="text-muted small">${app.languageData.ai_previous_conversation || '这是您之前的对话，可以继续提问'}</p>
                         </div>
                     `)
                 }
@@ -489,8 +489,8 @@ class ai {
                 $(messagesContainer).html(`
                     <div class="text-center text-muted py-5">
                         <iconpark-icon name="error-view" class="fa-fw fa-3x mb-3 text-danger"></iconpark-icon>
-                        <h5 class="text-muted">加载失败</h5>
-                        <p class="text-muted small">无法加载对话内容: ${error}</p>
+                        <h5 class="text-muted">${app.languageData.ai_load_failed || '加载失败'}</h5>
+                        <p class="text-muted small">${app.languageData.ai_load_error_msg || '无法加载对话内容'}: ${error}</p>
                     </div>
                 `)
             }
@@ -573,13 +573,13 @@ class ai {
                 
                 let errorMessage = ''
                 if (error.includes('Failed to fetch') || error.includes('网络')) {
-                    errorMessage = '抱歉，AI服务暂时不可用，请稍后再试。'
-                    TL.alert('AI服务连接失败，请检查网络或稍后再试')
+                    errorMessage = app.languageData.ai_network_error || '抱歉，AI服务暂时不可用，请稍后再试。'
+                    TL.alert(app.languageData.ai_connection_failed || 'AI服务连接失败，请检查网络或稍后再试')
                 } else if (error.includes('令牌不足') || error.includes('配额耗尽')) {
-                    errorMessage = '抱歉，您的对话配额已耗尽，请等待重置后继续使用。'
-                    TL.alert('您的AI对话配额已耗尽，请等待重置或升级账户')
+                    errorMessage = app.languageData.ai_quota_exceeded || '抱歉，您的对话配额已耗尽，请等待重置后继续使用。'
+                    TL.alert(app.languageData.ai_quota_alert || '您的AI对话配额已耗尽，请等待重置或升级账户')
                 } else {
-                    errorMessage = '抱歉，发送消息时发生错误: ' + error
+                    errorMessage = (app.languageData.ai_send_error || '抱歉，发送消息时发生错误') + ': ' + error
                     TL.alert(error)
                 }
                 
@@ -606,7 +606,7 @@ class ai {
             this.confirmDeleteConversationMobile(conversationId)
         } else {
             // 桌面端使用原有方式
-            if (!confirm('确定要删除这个对话吗？此操作无法撤销。')) {
+            if (!confirm(app.languageData.ai_confirm_delete || '确定要删除这个对话吗？此操作无法撤销。')) {
                 return
             }
             
@@ -619,7 +619,7 @@ class ai {
                 },
                 (error) => {
                     console.error('删除对话失败:', error)
-                    TL.alert('删除对话失败: ' + error)
+                    TL.alert((app.languageData.ai_delete_failed || '删除对话失败') + ': ' + error)
                 }
             )
         }
@@ -630,7 +630,7 @@ class ai {
      */
     confirmDeleteConversationMobile(conversationId) {
         // 使用浏览器原生的确认对话框，在移动端体验更好
-        if (confirm('确定要删除这个对话吗？此操作无法撤销。')) {
+        if (confirm(app.languageData.ai_confirm_delete || '确定要删除这个对话吗？此操作无法撤销。')) {
             this.deleteConversation(conversationId,
                 () => {
                     // 发送删除对话统计
@@ -640,7 +640,7 @@ class ai {
                 },
                 (error) => {
                     console.error('删除对话失败:', error)
-                    TL.alert('删除对话失败: ' + error)
+                    TL.alert((app.languageData.ai_delete_failed || '删除对话失败') + ': ' + error)
                 }
             )
         }
@@ -655,7 +655,7 @@ class ai {
                 const messages = conversation.messages || []
                 
                 if (messages.length === 0) {
-                    TL.alert('没有对话内容可以导出')
+                    TL.alert(app.languageData.ai_no_content_export || '没有对话内容可以导出')
                     return
                 }
                 
@@ -663,7 +663,7 @@ class ai {
                 this.parent_op.ga('AI_ExportConversation')
                 
                 const exportContent = messages.map(msg => 
-                    `${msg.role === 'user' ? '用户' : '小薇'}: ${msg.content}`
+                    `${msg.role === 'user' ? (app.languageData.ai_user || '用户') : (app.languageData.ai_name || '小薇')}: ${msg.content}`
                 ).join('\n\n')
                 
                 const blob = new Blob([exportContent], { type: 'text/plain;charset=utf-8' })
@@ -671,7 +671,7 @@ class ai {
                 
                 const a = document.createElement('a')
                 a.href = url
-                a.download = `${conversation.title || '对话'}_${new Date().toLocaleDateString()}.txt`
+                a.download = `${conversation.title || (app.languageData.ai_conversation || '对话')}_${new Date().toLocaleDateString()}.txt`
                 document.body.appendChild(a)
                 a.click()
                 document.body.removeChild(a)
@@ -680,7 +680,7 @@ class ai {
             },
             (error) => {
                 console.error('导出对话失败:', error)
-                TL.alert('导出对话失败: ' + error)
+                TL.alert((app.languageData.ai_export_failed || '导出对话失败') + ': ' + error)
             }
         )
     }
@@ -715,7 +715,7 @@ class ai {
         
         // 获取用户信息
         const userAvatar = $('.user_saved_logo img').first().attr('src') || '/img/ico/logo-256x256.png'
-        const userNickname = $('.user_saved_nickname').first().text() || '用户'
+        const userNickname = $('.user_saved_nickname').first().text() || (app.languageData.ai_user || '用户')
         
         let messageHtml
         
@@ -732,7 +732,7 @@ class ai {
                         </div>
                     </div>
                     <div class="wechat-avatar">
-                        <img src="${userAvatar}" class="rounded-circle w-100 h-100" style="object-fit: cover;" alt="用户头像">
+                        <img src="${userAvatar}" class="rounded-circle w-100 h-100" style="object-fit: cover;" alt="${app.languageData.ai_user_avatar || '用户头像'}">
                     </div>
                 </div>
             `
@@ -746,7 +746,7 @@ class ai {
                         </div>
                     </div>
                     <div class="d-flex flex-column align-items-start wechat-message-container">
-                        <small class="text-muted wechat-nickname">小薇</small>
+                        <small class="text-muted wechat-nickname">${app.languageData.ai_name || '小薇'}</small>
                         <div class="bg-msg-ai p-3 wechat-bubble-ai">
                             <div class="text-white" style="line-height: 1.4; word-wrap: break-word;">
                                 ${this.formatMessageContent(content)}
@@ -840,7 +840,7 @@ class ai {
         } else {
             const inputElement = isMobile ? $('#ai_input_mobile') : $('#ai_input')
             sendBtn.prop('disabled', inputElement.val().trim() === '').html('<iconpark-icon name="arrow-turn-down-left" class="fa-fw"></iconpark-icon>')
-            statusElement.text('就绪')
+            statusElement.text(app.languageData.ai_status_ready || '就绪')
             
             // 移除思考中的提示
             messagesContainer.find('.thinking-indicator').remove()
@@ -970,7 +970,7 @@ class ai {
         
         // 获取用户信息
         const userAvatar = $('.user_saved_logo img').first().attr('src') || '/img/ico/logo-256x256.png'
-        const userNickname = $('.user_saved_nickname').first().text() || '用户'
+        const userNickname = $('.user_saved_nickname').first().text() || (app.languageData.ai_user || '用户')
         
         if (isUser) {
             // 用户消息：微信风格，头像在右侧
@@ -985,7 +985,7 @@ class ai {
                         </div>
                     </div>
                     <div class="wechat-avatar">
-                        <img src="${userAvatar}" class="rounded-circle w-100 h-100" style="object-fit: cover;" alt="用户头像">
+                        <img src="${userAvatar}" class="rounded-circle w-100 h-100" style="object-fit: cover;" alt="${app.languageData.ai_user_avatar || '用户头像'}">
                     </div>
                 </div>
             `
@@ -999,7 +999,7 @@ class ai {
                         </div>
                     </div>
                     <div class="d-flex flex-column align-items-start wechat-message-container">
-                        <small class="text-muted wechat-nickname">小薇</small>
+                        <small class="text-muted wechat-nickname">${app.languageData.ai_name || '小薇'}</small>
                         <div class="bg-msg-ai p-3 wechat-bubble-ai">
                             <div class="text-white" style="line-height: 1.4; word-wrap: break-word;">
                                 ${this.formatMessageContent(message.content)}

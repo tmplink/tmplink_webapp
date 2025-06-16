@@ -2,7 +2,7 @@
     <div class="card-header" style="border-top-left-radius: 16px;border-top-right-radius: 16px;">
         <div class="d-flex align-items-center">
             <iconpark-icon name="star-one" class="fa-fw fa-lg text-primary mr-2"></iconpark-icon>
-            <h5 class="mb-0 ai-title">智能小薇</h5>
+            <h5 class="mb-0 ai-title" i18n="ai_name">智能小薇</h5>
         </div>
     </div>
     
@@ -12,13 +12,13 @@
             <div class="p-3 border-bottom ai-sidebar-header">
                 <button class="btn btn-primary btn-block" onclick="TL.ai.newConversation();" id="ai_new_chat_btn">
                     <iconpark-icon name="circle-plus" class="fa-fw mr-1"></iconpark-icon>
-                    新建对话
+                    <span i18n="ai_new_conversation">新建对话</span>
                 </button>
             </div>
             
             <div class="p-2">
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <small class="text-muted font-weight-bold">对话历史</small>
+                    <small class="text-muted font-weight-bold" i18n="ai_conversation_history">对话历史</small>
                     <button class="btn btn-sm btn-link p-0 text-muted" onclick="TL.ai.refreshList();" title="刷新">
                         <iconpark-icon name="rotate" class="fa-fw" id="ai_refresh_icon"></iconpark-icon>
                     </button>
@@ -30,8 +30,8 @@
                 <!-- 无对话提示 -->
                 <div class="no_conversations text-center py-4" style="display: none;">
                     <iconpark-icon name="message-circle" class="fa-fw fa-2x text-muted mb-2"></iconpark-icon>
-                    <div class="text-muted small">暂无对话历史</div>
-                    <div class="text-muted small">点击对话可切换，悬停显示删除按钮</div>
+                    <div class="text-muted small" i18n="ai_no_conversations">暂无对话历史</div>
+                    <div class="text-muted small" i18n="ai_conversation_hint">点击对话可切换，悬停显示删除按钮</div>
                 </div>
             </div>
         </div>
@@ -42,8 +42,8 @@
             <div class="flex-fill p-3" id="ai_messages" style="min-height: 0; overflow-y: auto; overflow-x: hidden;">
                 <div class="text-center text-muted py-5">
                     <iconpark-icon name="star-one" class="fa-fw fa-3x mb-3 text-primary"></iconpark-icon>
-                    <h5 class="text-muted">开始与智能小薇对话吧！</h5>
-                    <p class="text-muted small">选择左侧的对话历史或创建新对话</p>
+                    <h5 class="text-muted" i18n="ai_start_chat_greeting">开始与智能小薇对话吧！</h5>
+                    <p class="text-muted small" i18n="ai_choose_conversation">选择左侧的对话历史或创建新对话</p>
                 </div>
             </div>
             
@@ -51,7 +51,7 @@
             <div class="border-top bg-white p-3" id="ai_input_area">
                 <div class="input-group">
                     <textarea id="ai_input" class="form-control border-0 bg-light" 
-                             placeholder="输入您的消息..." 
+                             i18n="ai_input_placeholder" i18nOnly="placeholder" placeholder="."
                              rows="1" maxlength="2000" 
                              style="resize: none; max-height: 120px;"
                              onkeypress="if(event.keyCode==13&&!event.shiftKey){event.preventDefault();TL.ai.sendMessage();}"
@@ -64,10 +64,10 @@
                 </div>
                 <div class="d-flex justify-content-between mt-2">
                     <small class="text-muted" id="ai_char_count">0/2000</small>
-                    <small class="text-muted" id="ai_chat_status">就绪</small>
+                    <small class="text-muted" id="ai_chat_status" i18n="ai_status_ready">就绪</small>
                 </div>
                 <div class="mt-1">
-                    <small class="text-muted">按 Enter 发送，Shift+Enter 换行</small>
+                    <small class="text-muted" i18n="ai_input_hint">按 Enter 发送，Shift+Enter 换行</small>
                 </div>
             </div>
         </div>
@@ -85,7 +85,7 @@
                         <iconpark-icon name="message-circle" class="fa-fw text-muted mr-2 mt-1" style="font-size: 12px;"></iconpark-icon>
                         <div class="flex-fill" style="min-width: 0;">
                             <div class="conversation-title text-truncate" style="font-size: 13px; line-height: 1.3;">
-                                <% obj[x].title || '新对话' %>
+                                <% obj[x].title || (app.languageData.ai_new_conversation || '新对话') %>
                             </div>
                             <div class="small text-muted" style="font-size: 11px;">
                                 <% obj[x].time %>
@@ -94,7 +94,7 @@
                         <div class="conversation-actions" style="opacity: 0; transition: opacity 0.2s;">
                             <button onclick="TL.ai.deleteConversationUI('<% obj[x].conversation_id %>'); event.stopPropagation();" 
                                     class="btn btn-sm btn-link text-danger p-1" 
-                                    title="删除对话"
+                                    i18n="ai_delete_conversation" i18nOnly="title" title="."
                                     style="font-size: 12px; color: #dc3545 !important;">
                                 <iconpark-icon name="trash" class="fa-fw"></iconpark-icon>
                             </button>

@@ -2,13 +2,6 @@
  * AI 聊天界面样式
  */
 
-/* 主容器 */
-.ai-container {
-    display: flex;
-    height: calc(100vh - 70px);
-    margin-top: 70px;
-    background: var(--bg-primary);
-}
 
 /* AI聊天卡片 */
 #ai_chat {
@@ -29,121 +22,8 @@
     overflow: hidden;
 }
 
-.sidebar-header {
-    padding: 20px;
-    border-bottom: 1px solid var(--border-color);
-}
 
-.sidebar-header h3 {
-    margin: 0 0 15px 0;
-    color: var(--text-primary);
-    font-size: 18px;
-    font-weight: 600;
-}
 
-.btn-new-chat {
-    width: 100%;
-    padding: 12px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-new-chat:hover {
-    background: var(--primary-hover);
-    transform: translateY(-1px);
-}
-
-.btn-new-chat i {
-    margin-right: 8px;
-}
-
-/* 用户状态卡片 */
-.user-status {
-    padding: 20px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.status-card {
-    background: var(--bg-primary);
-    padding: 16px;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-}
-
-.status-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.status-label {
-    color: var(--text-secondary);
-    font-size: 13px;
-}
-
-.status-value {
-    color: var(--text-primary);
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 6px;
-    background: var(--bg-tertiary);
-    border-radius: 3px;
-    overflow: hidden;
-    margin: 12px 0;
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--success-color), var(--warning-color));
-    transition: width 0.3s ease;
-}
-
-.status-reset {
-    color: var(--text-secondary);
-    font-size: 12px;
-    text-align: center;
-    margin-top: 8px;
-}
-
-.user-status.low-tokens .progress-fill {
-    background: var(--danger-color);
-}
-
-.user-status.low-tokens .status-value {
-    color: var(--danger-color);
-}
-
-/* 对话历史 */
-.conversation-history {
-    flex: 1;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.conversation-history h4 {
-    padding: 20px 20px 10px 20px;
-    margin: 0;
-    color: var(--text-primary);
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.conversation-list {
-    flex: 1;
-    overflow-y: auto;
-    padding: 12px 20px 20px 20px;
-}
 
 .conversation-item {
     display: flex;
@@ -153,7 +33,7 @@
     margin: 4px 0 6px 0;
     background: #ffffff;
     border: 1px solid #e0e0e0;
-    border-radius: 12px;
+    border-radius: 8px !important;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
@@ -172,61 +52,12 @@
     pointer-events: none;
 }
 
-/* 深色模式下的光效 */
-body.dark-mode .conversation-item::before {
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
-}
-
-/* 深色模式下的样式覆盖 */
-body.dark-mode .conversation-item {
-    background: #2d2d2d;
-    border-color: #404040;
-}
-
-body.dark-mode .conversation-item:hover {
-    background: #3a3a3a;
-    border-color: #007bff;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-body.dark-mode .conversation-item.active {
-    background: #404040;
-    border-color: #007bff;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.25);
-}
-
-body.dark-mode .conversation-title {
-    color: #ffffff;
-}
-
-body.dark-mode .btn-icon {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-body.dark-mode .btn-icon:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-}
-
-body.dark-mode .btn-icon.btn-delete:hover {
-    background: rgba(220, 53, 69, 0.2);
-    color: #ff6b6b;
-}
-
-/* 深色模式下的导航按钮激活样式 */
-body.dark-mode .text-azure {
-    color: #7aa5df !important;
-}
 
 /* 第一个对话项目的特殊间距 */
 .conversation-item:first-child {
     margin-top: 8px;
 }
 
-/* 加载时的淡入动画 */
-.conversation-item {
-    animation: fadeInUp 0.3s ease-out;
-}
 
 @keyframes fadeInUp {
     from {
@@ -293,11 +124,12 @@ body.dark-mode .text-azure {
     flex-shrink: 0 !important;
     align-items: center;
     transform: translateX(8px);
+    z-index: 10 !important;
 }
 
 .conversation-item:hover .conversation-actions {
-    opacity: 1;
-    transform: translateX(0);
+    opacity: 1 !important;
+    transform: translateX(0) !important;
 }
 
 .btn-icon {
@@ -329,10 +161,6 @@ body.dark-mode .text-azure {
     transition: all 0.3s ease;
 }
 
-/* 深色模式下的按钮波纹效果 */
-body.dark-mode .btn-icon::before {
-    background: rgba(255, 255, 255, 0.2);
-}
 
 .btn-icon:hover {
     background: rgba(0, 0, 0, 0.05);
@@ -345,9 +173,14 @@ body.dark-mode .btn-icon::before {
     height: 100%;
 }
 
+.btn-icon.btn-delete {
+    color: #dc3545 !important;
+    background: rgba(220, 53, 69, 0.15) !important;
+}
+
 .btn-icon.btn-delete:hover {
-    background: rgba(220, 53, 69, 0.1);
-    color: #dc3545;
+    background: rgba(220, 53, 69, 0.25) !important;
+    color: #dc3545 !important;
     transform: scale(1.1);
 }
 
@@ -371,385 +204,10 @@ body.dark-mode .btn-icon::before {
     position: relative;
 }
 
-/* 欢迎屏幕 */
-.welcome-screen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    padding: 40px;
-}
 
-.welcome-content {
-    text-align: center;
-    max-width: 600px;
-}
 
-.ai-logo {
-    font-size: 80px;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-}
 
-.welcome-content h2 {
-    color: var(--text-primary);
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 16px;
-}
 
-.welcome-content p {
-    color: var(--text-secondary);
-    font-size: 16px;
-    margin-bottom: 40px;
-    line-height: 1.6;
-}
-
-.feature-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-bottom: 40px;
-}
-
-.feature-card {
-    background: var(--bg-secondary);
-    padding: 24px;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    transition: all 0.2s ease;
-}
-
-.feature-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.feature-card i {
-    font-size: 36px;
-    color: var(--primary-color);
-    margin-bottom: 16px;
-}
-
-.feature-card h4 {
-    color: var(--text-primary);
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.feature-card p {
-    color: var(--text-secondary);
-    font-size: 14px;
-    margin: 0;
-}
-
-.quick-start h4 {
-    color: var(--text-primary);
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-
-.example-questions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.example-btn {
-    padding: 12px 20px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    color: var(--text-primary);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-align: left;
-    font-size: 14px;
-}
-
-.example-btn:hover {
-    background: var(--bg-hover);
-    border-color: var(--primary-color);
-    transform: translateX(4px);
-}
-
-/* 聊天界面 */
-.chat-interface {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.chat-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    border-bottom: 1px solid var(--border-color);
-    background: var(--bg-secondary);
-}
-
-.chat-title h3 {
-    color: var(--text-primary);
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0;
-}
-
-.chat-status {
-    color: var(--text-secondary);
-    font-size: 12px;
-    margin-top: 4px;
-}
-
-.chat-actions {
-    display: flex;
-    gap: 8px;
-}
-
-.btn-outline {
-    padding: 8px 12px;
-    background: transparent;
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-outline:hover {
-    background: var(--bg-hover);
-    color: var(--text-primary);
-}
-
-/* 消息列表 */
-.chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.message {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    max-width: 80%;
-}
-
-.message.user {
-    align-self: flex-end;
-    flex-direction: row-reverse;
-}
-
-.message.system {
-    align-self: center;
-    max-width: 100%;
-    opacity: 0.7;
-}
-
-.message-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 16px;
-}
-
-.message.user .message-avatar {
-    background: var(--primary-color);
-    color: white;
-}
-
-.message.assistant .message-avatar {
-    background: var(--success-color);
-    color: white;
-}
-
-.message.system .message-avatar {
-    background: var(--warning-color);
-    color: white;
-}
-
-.message-content {
-    flex: 1;
-    min-width: 0;
-}
-
-.message-text {
-    background: var(--bg-secondary);
-    padding: 12px 16px;
-    border-radius: 16px;
-    color: var(--text-primary);
-    font-size: 14px;
-    line-height: 1.5;
-    word-wrap: break-word;
-}
-
-.message.user .message-text {
-    background: var(--primary-color);
-    color: white;
-}
-
-.message.system .message-text {
-    background: var(--warning-bg);
-    color: var(--warning-color);
-    text-align: center;
-    font-style: italic;
-}
-
-.message-text code {
-    background: rgba(0, 0, 0, 0.1);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-}
-
-.message-text strong {
-    font-weight: 600;
-}
-
-.message-text em {
-    font-style: italic;
-}
-
-.message-time {
-    font-size: 11px;
-    color: var(--text-tertiary);
-    margin-top: 4px;
-    text-align: right;
-}
-
-.message.user .message-time {
-    text-align: left;
-}
-
-/* 输入区域 */
-.chat-input-area {
-    padding: 20px;
-    border-top: 1px solid var(--border-color);
-    background: var(--bg-secondary);
-}
-
-.input-container {
-    position: relative;
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: border-color 0.2s ease;
-}
-
-.input-container:focus-within {
-    border-color: var(--primary-color);
-}
-
-#chat-input {
-    width: 100%;
-    padding: 16px;
-    padding-right: 120px;
-    border: none;
-    background: transparent;
-    color: var(--text-primary);
-    font-size: 14px;
-    line-height: 1.5;
-    resize: none;
-    outline: none;
-    min-height: 24px;
-    max-height: 120px;
-}
-
-#chat-input::placeholder {
-    color: var(--text-tertiary);
-}
-
-.input-actions {
-    position: absolute;
-    right: 12px;
-    bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.char-count {
-    font-size: 12px;
-    color: var(--text-tertiary);
-}
-
-#send-btn {
-    width: 36px;
-    height: 36px;
-    border: none;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-}
-
-#send-btn:hover:not(:disabled) {
-    background: var(--primary-hover);
-    transform: scale(1.05);
-}
-
-#send-btn:disabled {
-    background: var(--bg-tertiary);
-    color: var(--text-tertiary);
-    cursor: not-allowed;
-}
-
-/* 加载覆盖层 */
-.loading-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-.loading-spinner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    padding: 40px;
-    background: var(--bg-primary);
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.loading-spinner i {
-    font-size: 36px;
-    color: var(--primary-color);
-    animation: spin 1s linear infinite;
-}
-
-.loading-spinner span {
-    color: var(--text-secondary);
-    font-size: 14px;
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
 
 /* 响应式设计 */
 @media (max-width: 768px) {
@@ -783,63 +241,6 @@ body.dark-mode .btn-icon::before {
         font-size: 16px; /* 防止iOS缩放 */
     }
     
-    /* 旧的响应式样式保持兼容 */
-    .ai-container {
-        flex-direction: column;
-        height: calc(100vh - 60px);
-        margin-top: 60px;
-    }
-    
-    .ai-sidebar {
-        width: 100%;
-        height: 200px;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-    }
-    
-    .sidebar-header {
-        padding: 15px;
-    }
-    
-    .user-status {
-        padding: 15px;
-    }
-    
-    .conversation-history {
-        display: none;
-    }
-    
-    .ai-main {
-        height: calc(100% - 200px);
-    }
-    
-    .feature-cards {
-        grid-template-columns: 1fr;
-    }
-    
-    .message {
-        max-width: 90%;
-    }
-    
-    .chat-messages {
-        padding: 15px;
-    }
-    
-    .chat-input-area {
-        padding: 15px;
-    }
-    
-    .welcome-content {
-        padding: 20px;
-    }
-    
-    .ai-logo {
-        font-size: 60px;
-    }
-    
-    .welcome-content h2 {
-        font-size: 24px;
-    }
 }
 
 @media (max-width: 480px) {
@@ -887,294 +288,24 @@ body.dark-mode .btn-icon::before {
         margin-bottom: 15px !important;
     }
     
-    /* 兼容旧样式 */
-    .ai-sidebar {
-        height: 150px;
-    }
-    
-    .ai-main {
-        height: calc(100% - 150px);
-    }
-    
-    .sidebar-header h3 {
-        font-size: 16px;
-    }
-    
-    .user-status {
-        padding: 10px;
-    }
-    
-    .status-card {
-        padding: 12px;
-    }
-    
-    .chat-header {
-        padding: 15px;
-    }
-    
-    .chat-messages {
-        padding: 10px;
-    }
-    
-    .chat-input-area {
-        padding: 10px;
-    }
-    
-    #chat-input {
-        padding: 12px;
-        padding-right: 100px;
-    }
-    
-    .input-actions {
-        right: 8px;
-        bottom: 8px;
-    }
-    
-    #send-btn {
-        width: 32px;
-        height: 32px;
-    }
 }
 
-/* 深色主题 */
-.theme-dark {
-    --bg-primary: #1a1a1a;
-    --bg-secondary: #2d2d2d;
-    --bg-tertiary: #404040;
-    --bg-hover: #3a3a3a;
-    --text-primary: #ffffff;
-    --text-secondary: #b3b3b3;
-    --text-tertiary: #808080;
-    --border-color: #404040;
-    --border-hover: #606060;
-    --primary-color: #007bff;
-    --primary-hover: #0056b3;
-    --primary-bg: rgba(0, 123, 255, 0.1);
-    --success-color: #28a745;
-    --warning-color: #ffc107;
-    --warning-bg: rgba(255, 193, 7, 0.1);
-    --danger-color: #dc3545;
-    --danger-bg: rgba(220, 53, 69, 0.1);
-}
 
-/* 浅色主题 */
-.theme-light {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8f9fa;
-    --bg-tertiary: #e9ecef;
-    --bg-hover: #f1f3f4;
-    --text-primary: #212529;
-    --text-secondary: #6c757d;
-    --text-tertiary: #adb5bd;
-    --border-color: #dee2e6;
-    --border-hover: #adb5bd;
-    --primary-color: #007bff;
-    --primary-hover: #0056b3;
-    --primary-bg: rgba(0, 123, 255, 0.1);
-    --success-color: #28a745;
-    --warning-color: #ffc107;
-    --warning-bg: rgba(255, 193, 7, 0.1);
-    --danger-color: #dc3545;
-    --danger-bg: rgba(220, 53, 69, 0.1);
-}
-
-/* AI界面样式 v2.0 - 深色模式修复 - 从 ai.html 提取 */
-.conversation-item:hover .conversation-actions {
-    opacity: 1 !important;
-}
-
-.conversation-item:hover {
-    background-color: #91d1ff !important;
-}
-
-.conversation-item.active {
-    background-color: #91d1ff !important;
-    border-left: 3px solid #2196f3;
-}
+/* AI界面样式 v2.0 - 基础样式 */
 
 #ai_input {
     transition: all 0.2s;
-    background-color: #676768 !important;
+    background-color: #f2f2f3 !important;
 }
 
 #ai_input:focus {
     box-shadow: none;
     border-color: transparent;
-    background-color: #979797 !important;
+    background-color: #ebe8e8 !important;
 }
 
 .ai-message {
     animation: fadeInUp 0.3s ease-out;
-}
-
-/* 深色模式适配 */
-body.dark-mode .ai-header {
-    background-color: #363434 !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-body.dark-mode .ai-title {
-    color: white !important;
-}
-
-body.dark-mode #ai_chat {
-    background-color: #363434 !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-body.dark-mode .border-right {
-    border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-body.dark-mode .ai-sidebar.bg-light {
-    background-color: rgba(255, 255, 255, 0.03) !important;
-}
-
-body.dark-mode .conversation-item:hover {
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    color: #000000 !important;
-}
-
-body.dark-mode .conversation-item:hover * {
-    color: #000000 !important;
-}
-
-body.dark-mode .conversation-item:hover .text-muted {
-    color: rgba(0, 0, 0, 0.7) !important;
-}
-
-body.dark-mode .conversation-item.active {
-    background-color: rgba(33, 150, 243, 0.15) !important;
-    border-left: 3px solid #2196f3;
-    color: #ffffff !important;
-}
-
-body.dark-mode .conversation-item.active * {
-    color: #ffffff !important;
-}
-
-body.dark-mode .conversation-item.active .text-muted {
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-body.dark-mode .conversation-item {
-    color: rgba(255, 255, 255, 0.9) !important;
-}
-
-body.dark-mode .conversation-item * {
-    color: rgba(255, 255, 255, 0.9) !important;
-}
-
-body.dark-mode .conversation-title {
-    color: rgba(255, 255, 255, 0.9) !important;
-}
-
-body.dark-mode #ai_input {
-    background-color: #404040 !important;
-    color: white !important;
-    border-color: transparent !important;
-}
-
-body.dark-mode #ai_input:focus {
-    background-color: #2d2d2d !important;
-    color: white !important;
-}
-
-body.dark-mode #ai_input::placeholder {
-    color: rgba(255, 255, 255, 0.6) !important;
-}
-
-body.dark-mode #ai_input_area {
-    background-color: #363434 !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-body.dark-mode .message-bubble.bg-light {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    border-color: rgba(255, 255, 255, 0.2) !important;
-    color: white !important;
-}
-
-body.dark-mode .message-bubble .text-dark {
-    color: white !important;
-}
-
-body.dark-mode .text-muted {
-    color: rgba(255, 255, 255, 0.6) !important;
-}
-
-body.dark-mode .ai-sidebar-header {
-    background-color: rgba(255, 255, 255, 0.05) !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-body.dark-mode .card-body {
-    background-color: #363434 !important;
-}
-
-body.dark-mode #ai_messages {
-    background-color: transparent !important;
-}
-
-/* 强制深色模式样式 - 最高优先级 */
-body.dark-mode .conversation-item {
-    background-color: transparent !important;
-    color: #ffffff !important;
-}
-
-body.dark-mode .conversation-item .text-muted {
-    color: rgba(255, 255, 255, 0.6) !important;
-}
-
-body.dark-mode .conversation-item:not(.active) {
-    background-color: transparent !important;
-}
-
-body.dark-mode .conversation-item:not(.active):hover {
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    color: #000000 !important;
-}
-
-body.dark-mode .conversation-item:not(.active):hover * {
-    color: #000000 !important;
-}
-
-body.dark-mode .conversation-item:not(.active):hover .text-muted {
-    color: rgba(0, 0, 0, 0.7) !important;
-}
-
-/* 让删除按钮在深色模式下更可见 */
-body.dark-mode .conversation-item:hover .conversation-actions {
-    opacity: 1 !important;
-}
-
-body.dark-mode .dropdown-menu {
-    background-color: #2c2c2c !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-body.dark-mode .dropdown-item {
-    color: rgba(255, 255, 255, 0.9) !important;
-}
-
-body.dark-mode .conversation-actions .btn:hover {
-    background-color: rgba(220, 53, 69, 0.1) !important;
-    color: #dc3545 !important;
-}
-
-/* 修复焦点状态的可见性 */
-body.dark-mode .conversation-item:focus {
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    color: #000000 !important;
-    outline: 1px solid rgba(33, 150, 243, 0.5);
-}
-
-body.dark-mode .conversation-item:focus * {
-    color: #000000 !important;
-}
-
-body.dark-mode .conversation-item:focus .text-muted {
-    color: rgba(0, 0, 0, 0.7) !important;
 }
 
 /* 修复滚动问题 */
@@ -1202,13 +333,6 @@ body.dark-mode .conversation-item:focus .text-muted {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-body.dark-mode #ai_messages::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-body.dark-mode #ai_messages::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-}
 
 @keyframes fadeInUp {
     from {
@@ -1238,7 +362,7 @@ body.dark-mode #ai_messages::-webkit-scrollbar-thumb:hover {
 
 /* AI消息中的typing-dots使用白色 */
 .bg-msg-ai .typing-dots span {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .typing-dots span:nth-child(2) {
@@ -1347,113 +471,113 @@ body.dark-mode #ai_messages::-webkit-scrollbar-thumb:hover {
 }
 
 /* 移动端深色模式适配 */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
     /* 主容器深色模式 */
-    body.dark-mode #ai_chat_mobile {
+    #ai_chat_mobile {
         background-color: #1a1a1a !important;
         color: white !important;
     }
     
-    body.dark-mode #ai_chat {
+    #ai_chat {
         background-color: #1a1a1a !important;
         border-color: rgba(255, 255, 255, 0.1) !important;
     }
     
     /* 顶部导航栏深色模式 */
-    body.dark-mode nav.glass {
+    nav.glass {
         background-color: rgba(26, 26, 26, 0.95) !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     }
     
-    body.dark-mode .mobile-head-large-title {
+    .mobile-head-large-title {
         color: white !important;
     }
     
-    body.dark-mode .mobile-head-large-title .mobile_h2 {
+    .mobile-head-large-title .mobile_h2 {
         color: white !important;
     }
     
-    body.dark-mode .mobile-head-large-title .lead {
+    .mobile-head-large-title .lead {
         color: rgba(255, 255, 255, 0.7) !important;
     }
     
-    body.dark-mode .mobile_h3 {
+    .mobile_h3 {
         color: white !important;
     }
     
     /* 对话卡片深色模式 */
-    body.dark-mode .card {
+    .card {
         background-color: #2d2d2d !important;
         border-color: rgba(255, 255, 255, 0.15) !important;
         color: white !important;
     }
     
-    body.dark-mode .card-body {
+    .card-body {
         background-color: #2d2d2d !important;
         color: white !important;
     }
     
-    body.dark-mode .conversation-title {
+    .conversation-title {
         color: white !important;
     }
     
-    body.dark-mode .text-muted {
+    .text-muted {
         color: rgba(255, 255, 255, 0.6) !important;
     }
     
-    body.dark-mode .small.text-muted {
+    .small.text-muted {
         color: rgba(255, 255, 255, 0.5) !important;
     }
     
     /* 卡片悬停效果 */
-    body.dark-mode .card:hover {
+    .card:hover {
         background-color: #404040 !important;
         border-color: #007bff !important;
         box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2) !important;
     }
     
     /* 按钮深色模式 */
-    body.dark-mode .btn-light {
+    .btn-light {
         background-color: #404040 !important;
         border-color: rgba(255, 255, 255, 0.2) !important;
         color: white !important;
     }
     
-    body.dark-mode .btn-light:hover {
+    .btn-light:hover {
         background-color: #4a4a4a !important;
         border-color: rgba(255, 255, 255, 0.3) !important;
         color: white !important;
     }
     
     /* 下拉菜单深色模式 */
-    body.dark-mode .dropdown-menu {
+    .dropdown-menu {
         background-color: #2d2d2d !important;
         border-color: rgba(255, 255, 255, 0.15) !important;
     }
     
-    body.dark-mode .dropdown-item {
+    .dropdown-item {
         color: white !important;
         background-color: transparent !important;
     }
     
-    body.dark-mode .dropdown-item:hover,
-    body.dark-mode .dropdown-item:focus {
+    .dropdown-item:hover,
+    .dropdown-item:focus {
         background-color: #404040 !important;
         color: white !important;
     }
     
-    body.dark-mode .dropdown-item.text-danger {
+    .dropdown-item.text-danger {
         color: #ff6b6b !important;
     }
     
-    body.dark-mode .dropdown-item.text-danger:hover {
+    .dropdown-item.text-danger:hover {
         background-color: rgba(255, 107, 107, 0.1) !important;
         color: #ff6b6b !important;
     }
     
     
     /* 深色模式CSS变量重定义 */
-    body.dark-mode {
+    :root {
         --bg-primary: #363434;
         --bg-secondary: #444343;
         --bg-tertiary: #3e3e3e;
@@ -1466,242 +590,207 @@ body.dark-mode #ai_messages::-webkit-scrollbar-thumb:hover {
     }
     
     /* 移动端消息区域深色模式 - 遵循项目颜色系统 */
-    body.dark-mode #ai_messages_mobile {
+    #ai_messages_mobile {
         background-color: #363434 !important;
         color: #e4e4e4 !important;
     }
     
-    body.dark-mode #ai_welcome_mobile {
+    #ai_welcome_mobile {
         color: #b3b2b2 !important;
     }
     
-    body.dark-mode #ai_welcome_mobile h5 {
+    #ai_welcome_mobile h5 {
         color: #e4e4e4 !important;
     }
     
-    body.dark-mode #ai_welcome_mobile p {
+    #ai_welcome_mobile p {
         color: #b3b2b2 !important;
     }
     
     /* 移动端输入区域深色模式 */
-    body.dark-mode #aiChatModalMobile .border-top {
+    #aiChatModalMobile .border-top {
         background-color: #444343 !important;
         border-top: 1px solid #929191 !important;
     }
     
-    body.dark-mode #ai_input_mobile {
+    #ai_input_mobile {
         background-color: #3e3e3e !important;
         color: #e4e4e4 !important;
         border-color: #929191 !important;
     }
     
-    body.dark-mode #ai_input_mobile::placeholder {
+    #ai_input_mobile::placeholder {
         color: #b3b2b2 !important;
     }
     
-    body.dark-mode #ai_input_mobile:focus {
+    #ai_input_mobile:focus {
         background-color: #6d6c6c !important;
         border-color: #7aa5df !important;
         box-shadow: 0 0 0 0.2rem rgba(122, 165, 223, 0.25) !important;
         color: #e4e4e4 !important;
     }
+
     
     /* 无对话提示深色模式 */
-    body.dark-mode .no_conversations_mobile {
+    .no_conversations_mobile {
         color: #b3b2b2 !important;
     }
     
-    body.dark-mode .no_conversations_mobile .text-center {
+    .no_conversations_mobile .text-center {
         color: #b3b2b2 !important;
     }
     
-    /* 移动端消息气泡深色模式 - 遵循现代设计原则 */
-    body.dark-mode .message-bubble.bg-light {
-        background-color: #3e3e3e !important;
-        border-color: #929191 !important;
-        color: #e4e4e4 !important;
-    }
-    
-    body.dark-mode .message-bubble.bg-primary {
-        background-color: #7aa5df !important;
-        color: #ffffff !important;
-    }
-    
-    body.dark-mode .message-bubble.bg-warning {
-        background-color: #6d6c6c !important;
-        color: #e4e4e4 !important;
-    }
-    
-    body.dark-mode .message-bubble .text-dark {
-        color: #e4e4e4 !important;
-    }
-    
-    body.dark-mode .message-time {
-        color: #b3b2b2 !important;
-    }
-    
-    body.dark-mode .message-bubble.bg-light .message-time {
-        color: #b3b2b2 !important;
-    }
-    
-    body.dark-mode .message-bubble.bg-primary .message-time {
-        color: rgba(255, 255, 255, 0.8) !important;
-    }
+    /* 注意：移除了message-bubble样式以避免与bg-msg-*冲突 */
     
     /* 字符计数和状态文本深色模式 */
-    body.dark-mode #ai_char_count_mobile {
+    #ai_char_count_mobile {
         color: #b3b2b2 !important;
     }
     
-    body.dark-mode #ai_chat_status_mobile {
+    #ai_chat_status_mobile {
         color: #b3b2b2 !important;
     }
     
     /* 思考指示器深色模式 */
-    body.dark-mode .thinking-indicator .message-bubble.bg-light {
+    .thinking-indicator .message-bubble.bg-light {
         background-color: #3e3e3e !important;
         color: #e4e4e4 !important;
     }
     
-    body.dark-mode .thinking-indicator .text-muted {
+    .thinking-indicator .text-muted {
         color: #b3b2b2 !important;
     }
     
     /* 图标颜色深色模式 - 使用项目颜色系统 */
-    body.dark-mode iconpark-icon.text-primary {
+    iconpark-icon.text-primary {
         color: #7aa5df !important;
     }
     
-    body.dark-mode iconpark-icon.text-azure {
+    iconpark-icon.text-azure {
         color: #7aa5df !important;
     }
     
     /* 确保所有文本在深色模式下可见 */
-    body.dark-mode #ai_chat_mobile * {
+    #ai_chat_mobile * {
         color: inherit;
     }
     
-    body.dark-mode #ai_chat_mobile .text-muted:not(.message-time) {
+    #ai_chat_mobile .text-muted:not(.message-time) {
         color: rgba(255, 255, 255, 0.6) !important;
     }
     
     /* 按钮深色模式 - 遵循项目设计系统 */
-    body.dark-mode .btn-primary {
+    .btn-primary {
         background-color: #7aa5df !important;
         border-color: #7aa5df !important;
         color: #ffffff !important;
     }
     
-    body.dark-mode .btn-primary:hover {
+    .btn-primary:hover {
         background-color: #6d9bd8 !important;
         border-color: #6d9bd8 !important;
         color: #ffffff !important;
     }
     
-    body.dark-mode .btn-light {
+    .btn-light {
         background-color: #3e3e3e !important;
         border-color: #929191 !important;
         color: #e4e4e4 !important;
     }
     
-    body.dark-mode .btn-light:hover {
+    .btn-light:hover {
         background-color: #6d6c6c !important;
         border-color: #929191 !important;
         color: #e4e4e4 !important;
     }
 }
 
-/* ====== AI消息专用背景样式 ====== */
+/* ====== 对话消息样式 - 基于原版设计 ====== */
 
-/* AI消息背景 - 渐变紫色，浅色文字 */
+/* AI助手消息 - 蓝紫色渐变（精确复制原版设计） */
 .bg-msg-ai {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    background-color: #667eea !important;
     color: #ffffff !important;
-    border-radius: 16px !important;
+    border: none !important;
+    border-radius: 18px 18px 18px 5px !important;
     box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3) !important;
-    border: none !important;
-}
-
-/* 用户消息背景 - 蓝色渐变 */
-.bg-msg-user {
-    background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%) !important;
-    color: #ffffff !important;
-    border-radius: 16px !important;
-    box-shadow: 0 2px 8px rgba(30, 136, 229, 0.3) !important;
-    border: none !important;
-}
-
-/* 系统消息背景 */
-.bg-msg-system {
-    background-color: #fff3cd !important;
-    border: 1px solid #ffeaa7 !important;
-    color: #856404 !important;
-    border-radius: 12px !important;
-    box-shadow: 0 1px 4px rgba(255, 193, 7, 0.2) !important;
-}
-
-/* 深色模式适配 */
-body.dark-mode .bg-msg-ai {
-    background: linear-gradient(135deg, #5a67d8 0%, #553c9a 100%) !important;
-    color: #ffffff !important;
-    box-shadow: 0 2px 8px rgba(90, 103, 216, 0.4) !important;
-}
-
-body.dark-mode .bg-msg-user {
-    background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%) !important;
-    color: #ffffff !important;
-    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.4) !important;
-}
-
-body.dark-mode .bg-msg-system {
-    background-color: #5a4f00 !important;
-    border-color: #8a7500 !important;
-    color: #ffd93d !important;
-    box-shadow: 0 1px 4px rgba(255, 217, 61, 0.3) !important;
-}
-
-/* 消息内容样式优化 */
-.bg-msg-ai,
-.bg-msg-user,
-.bg-msg-system {
+    max-width: 70% !important;
+    padding: 12px 16px !important;
+    font-size: 14px !important;
     line-height: 1.5 !important;
     word-wrap: break-word !important;
     word-break: break-word !important;
+    display: inline-block !important;
+    position: relative !important;
 }
 
-/* AI消息文字颜色 - 渐变紫色背景用白色文字 */
-.bg-msg-ai,
-.bg-msg-ai * {
+/* 用户消息 - 蓝色渐变（精确复制原版设计） */
+.bg-msg-user {
+    background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%) !important;
+    background-color: #1e88e5 !important;
     color: #ffffff !important;
+    border: none !important;
+    border-radius: 18px 18px 5px 18px !important;
+    box-shadow: 0 2px 8px rgba(30, 136, 229, 0.3) !important;
+    max-width: 70% !important;
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    display: inline-block !important;
+    position: relative !important;
 }
 
-/* 用户消息文字颜色 */
-.bg-msg-user,
-.bg-msg-user * {
-    color: #ffffff !important;
-}
-
-/* 系统消息文字颜色 */
-.bg-msg-system,
-.bg-msg-system * {
+/* 系统消息 - 黄色背景 */
+.bg-msg-system {
+    background: #fff3cd !important;
     color: #856404 !important;
+    border: 1px solid #ffeaa7 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 1px 4px rgba(255, 193, 7, 0.2) !important;
+    max-width: 80% !important;
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    display: inline-block !important;
+    position: relative !important;
 }
 
-/* 深色模式下的文字颜色 */
-body.dark-mode .bg-msg-ai,
-body.dark-mode .bg-msg-ai * {
+
+/* 强制覆盖所有文字颜色 */
+.bg-msg-ai,
+.bg-msg-ai *,
+.bg-msg-ai .text-white,
+.bg-msg-ai div,
+.bg-msg-ai span,
+.bg-msg-ai p {
     color: #ffffff !important;
+    text-decoration: none !important;
 }
 
-body.dark-mode .bg-msg-user,
-body.dark-mode .bg-msg-user * {
+.bg-msg-user,
+.bg-msg-user *,
+.bg-msg-user .text-white,
+.bg-msg-user div,
+.bg-msg-user span,
+.bg-msg-user p {
     color: #ffffff !important;
+    text-decoration: none !important;
 }
 
-body.dark-mode .bg-msg-system,
-body.dark-mode .bg-msg-system * {
-    color: #ffd93d !important;
+.bg-msg-system,
+.bg-msg-system *,
+.bg-msg-system div,
+.bg-msg-system span,
+.bg-msg-system p {
+    color: #92400e !important;
+    text-decoration: none !important;
 }
+
 
 /* 消息时间戳样式 */
 .bg-msg-ai .message-time,
@@ -1721,79 +810,42 @@ body.dark-mode .bg-msg-system * {
 }
 
 .bg-msg-system .message-time {
-    color: rgba(133, 100, 4, 0.8) !important;
+    color: rgba(146, 64, 14, 0.8) !important;
 }
 
-body.dark-mode .bg-msg-system .message-time {
-    color: rgba(255, 217, 61, 0.8) !important;
-}
 
-/* 微信风格消息容器样式 */
-.wechat-message-container {
-    max-width: 65%;
-}
 
-.wechat-message-container.system {
-    max-width: 80%;
-}
-
-.wechat-avatar {
-    width: 40px;
-    height: 40px;
-    flex-shrink: 0;
-}
-
-.wechat-nickname {
-    font-size: 12px;
-    margin-bottom: 4px;
-}
-
-.wechat-bubble-user {
-    border-radius: 18px 4px 18px 18px;
-}
-
-.wechat-bubble-ai {
-    border-radius: 4px 18px 18px 18px;
-}
-
-.wechat-bubble-system {
-    border-radius: 12px;
-}
-
-.wechat-ai-avatar {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-/* 移动端消息样式优化 */
+/* 移动端优化 */
 @media (max-width: 768px) {
     .bg-msg-ai,
     .bg-msg-user,
     .bg-msg-system {
+        max-width: 85% !important;
+        font-size: 14px !important;
         padding: 12px 16px !important;
-        margin-bottom: 12px !important;
     }
     
-    /* 移动端消息内容 */
-    .bg-msg-ai .message-content,
-    .bg-msg-user .message-content,
-    .bg-msg-system .message-content {
-        font-size: 14px !important;
-        line-height: 1.4 !important;
+    /* 移动端保持原版设计的圆角 */
+    .bg-msg-ai {
+        border-radius: 16px 16px 16px 4px !important;
+    }
+    
+    .bg-msg-user {
+        border-radius: 16px 16px 4px 16px !important;
     }
 }
 
-/* 消息动画效果 */
+/* 消息动画 */
 .bg-msg-ai,
 .bg-msg-user,
 .bg-msg-system {
-    animation: messageSlideIn 0.3s ease-out;
-    transform-origin: bottom;
+    animation: messageAppear 0.3s ease-out !important;
 }
 
-@keyframes messageSlideIn {
+@keyframes messageAppear {
     from {
         opacity: 0;
-        transform: translateY(10px) scale(0.95);
+        transform: translateY(10px) scale(0.98);
     }
     to {
         opacity: 1;
@@ -1801,34 +853,250 @@ body.dark-mode .bg-msg-system .message-time {
     }
 }
 
-/* 悬停效果 */
-.bg-msg-ai:hover,
-.bg-msg-user:hover,
-.bg-msg-system:hover {
-    transform: translateY(-1px);
-    transition: transform 0.2s ease;
-}
-
+/* 悬停效果 - 匹配原版设计颜色 */
 .bg-msg-ai:hover {
+    transform: translateY(-1px) !important;
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
+    transition: all 0.2s ease !important;
 }
 
 .bg-msg-user:hover {
+    transform: translateY(-1px) !important;
     box-shadow: 0 4px 12px rgba(30, 136, 229, 0.4) !important;
+    transition: all 0.2s ease !important;
 }
 
 .bg-msg-system:hover {
-    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.2s ease !important;
 }
 
-body.dark-mode .bg-msg-ai:hover {
-    box-shadow: 0 4px 12px rgba(90, 103, 216, 0.5) !important;
+
+/* ====== 头像样式 ====== */
+.wechat-avatar {
+    width: 40px !important;
+    height: 40px !important;
+    flex-shrink: 0 !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-body.dark-mode .bg-msg-user:hover {
-    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.5) !important;
+.wechat-ai-avatar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
 }
 
-body.dark-mode .bg-msg-system:hover {
-    box-shadow: 0 4px 12px rgba(255, 217, 61, 0.3) !important;
+.wechat-user-avatar {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+}
+
+/* 移动端头像样式 */
+@media (max-width: 768px) {
+    .wechat-avatar {
+        width: 36px !important;
+        height: 36px !important;
+    }
+}
+
+/* ====== 通用深色模式样式 ====== */
+@media (prefers-color-scheme: dark) {
+    #ai_messages::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    #ai_messages::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+
+}
+
+/* ====== 深色模式样式 - 桌面端 ====== */
+@media (min-width: 769px) and (prefers-color-scheme: dark) {
+    /* 深色模式下的光效 */
+    .conversation-item::before {
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+    }
+
+    /* 深色模式下的样式覆盖 */
+    .conversation-item {
+        background: #2d2d2d;
+        border-color: #404040;
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    .conversation-item * {
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    .conversation-item .text-muted {
+        color: rgba(255, 255, 255, 0.6) !important;
+    }
+
+    .conversation-item:hover {
+        background: rgba(255, 255, 255, 0.15) !important;
+        border-color: #007bff;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        color: #ffffff !important;
+    }
+
+    .conversation-item:hover * {
+        color: #ffffff !important;
+    }
+
+    .conversation-item:hover .text-muted {
+        color: rgba(255, 255, 255, 0.7) !important;
+    }
+
+    .conversation-item:hover .btn-icon.btn-delete,
+    .conversation-item:hover .btn-icon.btn-delete:hover {
+        color: #dc3545 !important;
+        background: rgba(220, 53, 69, 0.25) !important;
+    }
+
+    .conversation-item.active {
+        background: rgba(33, 150, 243, 0.15) !important;
+        border-color: #007bff;
+        border-left: 3px solid #2196f3;
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.25);
+        color: #ffffff !important;
+    }
+
+    .conversation-item.active * {
+        color: #ffffff !important;
+    }
+
+    .conversation-item.active .text-muted {
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .conversation-title {
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    .btn-icon {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .btn-icon::before {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-icon:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+    }
+
+
+    /* 深色模式下的导航按钮激活样式 */
+    .text-azure {
+        color: #7aa5df !important;
+    }
+
+    /* AI聊天相关深色模式样式 */
+    .ai-header {
+        background-color: #363434 !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .ai-title {
+        color: white !important;
+    }
+
+    #ai_chat {
+        background-color: #363434 !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .border-right {
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .ai-sidebar.bg-light {
+        background-color: rgba(255, 255, 255, 0.03) !important;
+    }
+
+    #ai_input {
+        background-color: #404040 !important;
+        color: white !important;
+        border-color: transparent !important;
+    }
+
+    #ai_input:focus {
+        background-color: #2d2d2d !important;
+        color: white !important;
+    }
+
+    #ai_input::placeholder {
+        color: rgba(255, 255, 255, 0.6) !important;
+    }
+
+    #ai_input_area {
+        background-color: #363434 !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* 注意：移除了message-bubble样式以避免与bg-msg-*冲突 */
+
+    .text-muted {
+        color: rgba(255, 255, 255, 0.6) !important;
+    }
+
+    .ai-sidebar-header {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .card-body {
+        background-color: #363434 !important;
+    }
+
+    #ai_messages {
+        background-color: transparent !important;
+    }
+
+    /* 让删除按钮在深色模式下更可见 */
+    .conversation-item:hover .conversation-actions {
+        opacity: 1 !important;
+    }
+
+    .dropdown-menu {
+        background-color: #2c2c2c !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .dropdown-item {
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    .conversation-actions .btn:hover {
+        background-color: rgba(220, 53, 69, 0.1) !important;
+        color: #dc3545 !important;
+    }
+
+    /* 修复焦点状态的可见性 */
+    .conversation-item:focus {
+        background-color: rgba(255, 255, 255, 0.15) !important;
+        color: #000000 !important;
+        outline: 1px solid rgba(33, 150, 243, 0.5);
+    }
+
+    .conversation-item:focus * {
+        color: #000000 !important;
+    }
+
+    .conversation-item:focus .text-muted {
+        color: rgba(0, 0, 0, 0.7) !important;
+    }
 }
