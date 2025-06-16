@@ -68,8 +68,14 @@
 <div class="modal fade" id="aiChatModalMobile" tabindex="-1" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content shadow-lg" style="height: 80vh; display: flex; flex-direction: column;">
-            <div class="modal-header">
-                <h4 class="modal-title" id="aiChatModalMobileTitle" i18n="ai_name">智能小薇</h4>
+            <div class="modal-header d-flex align-items-center">
+                <h4 class="modal-title mb-0 flex-fill" id="aiChatModalMobileTitle" i18n="ai_name">智能小薇</h4>
+                <!-- 移动端AI配额进度条 -->
+                <div class="ai-quota-indicator-mobile mr-3" id="ai_quota_indicator_mobile" style="display: none;">
+                    <div class="progress" style="width: 60px; height: 4px;">
+                        <div class="progress-bar bg-success" id="ai_quota_progress_mobile" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" style="flex: 1; overflow-y: auto; padding-bottom: 0;">

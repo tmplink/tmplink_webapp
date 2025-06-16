@@ -1,8 +1,12 @@
 <div id="ai_chat" class="card mt-5 shadow glass" style="display: none; height: calc(100vh - 100px);">
-    <div class="card-header" style="border-top-left-radius: 16px;border-top-right-radius: 16px;">
-        <div class="d-flex align-items-center">
-            <iconpark-icon name="star-one" class="fa-fw fa-lg text-primary mr-2"></iconpark-icon>
-            <h5 class="mb-0 ai-title" i18n="ai_name">智能小薇</h5>
+    <div class="card-header d-flex align-items-center" style="border-top-left-radius: 16px;border-top-right-radius: 16px;">
+        <iconpark-icon name="star-one" class="fa-fw fa-lg text-primary mr-2"></iconpark-icon>
+        <h5 class="mb-0 ai-title flex-fill" i18n="ai_name">智能小薇</h5>
+        <!-- AI配额进度条 -->
+        <div class="ai-quota-indicator" id="ai_quota_indicator" style="display: none;">
+            <div class="progress" style="width: 100px; height: 6px;">
+                <div class="progress-bar bg-success" id="ai_quota_progress" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
         </div>
     </div>
     

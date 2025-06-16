@@ -9,6 +9,7 @@ class ai {
     currentConversationId = null
     isLoading = false
     currentMessages = []
+    userStats = null
     
     /**
      * 初始化AI服务
@@ -43,6 +44,9 @@ class ai {
 
         // 绑定事件
         this.bindEvents()
+        
+        // 初始化配额显示
+        this.initQuotaDisplay()
     }
     
     /**
@@ -180,9 +184,9 @@ class ai {
                 if (callback) callback(rsp.data)
             } else if (rsp.status === 5) {
                 // API暂时不可用，建议重试
-                if (errorCallback) errorCallback(app.languageData.ai_service_unavailable || 'AI服务暂时不可用，请稍后再试')
+                if (errorCallback) errorCallback(app.languageData.ai_service_unavailable || 'AI服务暂时不可用，请稍后再试', rsp.data)
             } else {
-                if (errorCallback) errorCallback(rsp.data)
+                if (errorCallback) errorCallback(rsp.data, rsp.data)
             }
         }, 'json').fail((xhr, textStatus, errorThrown) => {
             let errorMessage = app.languageData.ai_send_message_failed || '发送消息失败'
@@ -213,9 +217,9 @@ class ai {
                 if (callback) callback(rsp.data)
             } else if (rsp.status === 5) {
                 // API暂时不可用，建议重试
-                if (errorCallback) errorCallback(app.languageData.ai_service_unavailable || 'AI服务暂时不可用，请稍后再试')
+                if (errorCallback) errorCallback(app.languageData.ai_service_unavailable || 'AI服务暂时不可用，请稍后再试', rsp.data)
             } else {
-                if (errorCallback) errorCallback(rsp.data)
+                if (errorCallback) errorCallback(rsp.data, rsp.data)
             }
         }, 'json').fail((xhr, textStatus, errorThrown) => {
             let errorMessage = app.languageData.ai_send_message_failed || '发送消息失败'
@@ -506,6 +510,13 @@ class ai {
         
         if (!message || this.isLoading) return
         
+        // 检查配额状态
+        if (!this.canSendMessage()) {
+            const quotaMessage = app.languageData.ai_quota_exhausted_message || '您的对话配额已耗尽，请等待重置后继续使用。'
+            TL.alert(quotaMessage)
+            return
+        }
+        
         // 添加用户消息
         if (isMobile) {
             this.addMobileMessageToChat('user', message)
@@ -539,6 +550,11 @@ class ai {
                     this.parent_op.ga('AI_Continue')
                 }
                 
+                // 更新用户配额统计
+                if (response.user_stats) {
+                    this.updateUserStats(response.user_stats)
+                }
+                
                 // 更新对话ID
                 if (!this.currentConversationId) {
                     this.currentConversationId = response.conversation_id
@@ -568,14 +584,19 @@ class ai {
                 
                 this.setLoadingState(false, isMobile)
             },
-            (error) => {
+            (error, errorData) => {
                 console.error('发送消息失败:', error)
+                
+                // 如果错误响应包含用户配额信息，更新显示
+                if (errorData && errorData.user_stats) {
+                    this.updateUserStats(errorData.user_stats)
+                }
                 
                 let errorMessage = ''
                 if (error.includes('Failed to fetch') || error.includes('网络')) {
                     errorMessage = app.languageData.ai_network_error || '抱歉，AI服务暂时不可用，请稍后再试。'
                     TL.alert(app.languageData.ai_connection_failed || 'AI服务连接失败，请检查网络或稍后再试')
-                } else if (error.includes('令牌不足') || error.includes('配额耗尽')) {
+                } else if (error.includes('令牌不足') || error.includes('配额耗尽') || error.includes('Token limit exceeded')) {
                     errorMessage = app.languageData.ai_quota_exceeded || '抱歉，您的对话配额已耗尽，请等待重置后继续使用。'
                     TL.alert(app.languageData.ai_quota_alert || '您的AI对话配额已耗尽，请等待重置或升级账户')
                 } else {
@@ -1020,5 +1041,138 @@ class ai {
                 </div>
             `
         }
+    }
+
+    /**
+     * 初始化配额显示
+     */
+    initQuotaDisplay() {
+        // 获取用户状态并显示配额
+        this.getStatus(
+            (stats) => {
+                this.updateUserStats(stats)
+            },
+            (error) => {
+                console.error('获取AI配额状态失败:', error)
+            }
+        )
+    }
+
+    /**
+     * 更新用户配额统计
+     */
+    updateUserStats(stats) {
+        this.userStats = stats
+        this.updateQuotaProgressBar()
+        this.checkQuotaStatus()
+    }
+
+    /**
+     * 更新配额进度条
+     */
+    updateQuotaProgressBar() {
+        if (!this.userStats) return
+
+        const remaining = this.userStats.token_remaining || 0
+        const limit = this.userStats.token_limit || 4000
+        const percentage = Math.max(0, Math.min(100, (remaining / limit) * 100))
+
+        // 桌面端进度条
+        const desktopIndicator = $('#ai_quota_indicator')
+        const desktopProgress = $('#ai_quota_progress')
+
+        // 移动端进度条
+        const mobileIndicator = $('#ai_quota_indicator_mobile')
+        const mobileProgress = $('#ai_quota_progress_mobile')
+
+        // 显示进度条（如果元素存在）
+        if (desktopIndicator.length > 0) {
+            desktopIndicator.show()
+            desktopProgress.css('width', percentage + '%').attr('aria-valuenow', percentage)
+        }
+        
+        if (mobileIndicator.length > 0) {
+            mobileIndicator.show()
+            mobileProgress.css('width', percentage + '%').attr('aria-valuenow', percentage)
+        }
+
+        // 根据剩余配额调整颜色
+        let progressClass = 'bg-success'
+        if (percentage < 10) {
+            progressClass = 'bg-danger'
+        } else if (percentage < 30) {
+            progressClass = 'bg-warning'
+        }
+
+        // 更新进度条颜色
+        if (desktopProgress.length > 0) {
+            desktopProgress.removeClass('bg-success bg-warning bg-danger').addClass(progressClass)
+        }
+        if (mobileProgress.length > 0) {
+            mobileProgress.removeClass('bg-success bg-warning bg-danger').addClass(progressClass)
+        }
+    }
+
+    /**
+     * 检查配额状态
+     */
+    checkQuotaStatus() {
+        if (!this.userStats) return
+
+        const remaining = this.userStats.token_remaining || 0
+
+        // 如果没有剩余配额，禁用发送功能并显示提示
+        if (remaining <= 0) {
+            this.disableAIFeatures()
+        } else {
+            this.enableAIFeatures()
+        }
+    }
+
+    /**
+     * 禁用AI功能（配额耗尽时）
+     */
+    disableAIFeatures() {
+        // 禁用发送按钮
+        $('#ai_send_btn, #ai_send_btn_mobile').prop('disabled', true)
+        
+        // 禁用输入框
+        $('#ai_input, #ai_input_mobile').prop('disabled', true).attr('placeholder', app.languageData.ai_quota_exhausted || '配额已耗尽，请等待重置')
+        
+        // 显示配额耗尽提示
+        const quotaMessage = app.languageData.ai_quota_exhausted_message || '您的对话配额已耗尽，请等待重置后继续使用。'
+        
+        // 在聊天界面显示系统消息
+        const isMobile = isMobileScreen()
+        if (isMobile) {
+            this.addMobileMessageToChat('system', quotaMessage)
+        } else {
+            this.addMessageToChat('system', quotaMessage, false)
+        }
+    }
+
+    /**
+     * 启用AI功能（有配额时）
+     */
+    enableAIFeatures() {
+        // 启用输入框
+        $('#ai_input, #ai_input_mobile').prop('disabled', false).attr('placeholder', app.languageData.ai_input_placeholder || '输入您的问题...')
+        
+        // 更新发送按钮状态（基于输入内容）
+        const desktopInput = $('#ai_input').val() || ''
+        const mobileInput = $('#ai_input_mobile').val() || ''
+        
+        $('#ai_send_btn').prop('disabled', desktopInput.trim() === '' || this.isLoading)
+        $('#ai_send_btn_mobile').prop('disabled', mobileInput.trim() === '' || this.isLoading)
+    }
+
+    /**
+     * 检查是否可以发送消息
+     */
+    canSendMessage() {
+        if (!this.userStats) return true // 如果没有配额数据，允许发送（让服务器处理）
+        
+        const remaining = this.userStats.token_remaining || 0
+        return remaining > 0
     }
 }
