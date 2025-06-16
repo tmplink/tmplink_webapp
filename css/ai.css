@@ -384,6 +384,17 @@
     }
 }
 
+/* 思考指示器样式 */
+.thinking-indicator {
+    max-width: 80% !important;
+}
+
+.thinking-indicator .message-bubble {
+    min-width: 120px !important;
+    max-width: none !important;
+    padding: 12px 16px !important;
+}
+
 /* 移动端新设计样式 */
 @media (max-width: 768px) {
     /* 移动端对话列表卡片样式 */
@@ -707,15 +718,21 @@
 
 /* ====== 对话消息样式 - 基于原版设计 ====== */
 
+/* 消息容器样式 */
+.wechat-message-container {
+    max-width: 80% !important;
+}
+
 /* AI助手消息 - 蓝紫色渐变（精确复制原版设计） */
-.bg-msg-ai {
+.bg-msg-ai,
+.wechat-bubble-ai.bg-msg-ai {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     background-color: #667eea !important;
     color: #ffffff !important;
     border: none !important;
     border-radius: 18px 18px 18px 5px !important;
     box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3) !important;
-    max-width: 70% !important;
+    max-width: none !important;
     padding: 12px 16px !important;
     font-size: 14px !important;
     line-height: 1.5 !important;
@@ -726,14 +743,15 @@
 }
 
 /* 用户消息 - 蓝色渐变（精确复制原版设计） */
-.bg-msg-user {
+.bg-msg-user,
+.wechat-bubble-user.bg-msg-user {
     background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%) !important;
     background-color: #1e88e5 !important;
     color: #ffffff !important;
     border: none !important;
     border-radius: 18px 18px 5px 18px !important;
     box-shadow: 0 2px 8px rgba(30, 136, 229, 0.3) !important;
-    max-width: 70% !important;
+    max-width: none !important;
     padding: 12px 16px !important;
     font-size: 14px !important;
     line-height: 1.5 !important;
