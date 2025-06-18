@@ -898,6 +898,13 @@ class uploader {
                 case 2:
                     //没有可上传分片，等待所有分片完成
                     //只有主线程才执行这项工作，其他线程直接退出
+                    if (thread === 0) {
+                        console.log(`Case 2: 等待分片完成，隐藏进度条 for file ${id}`);
+                        // 主线程显示同步状态并隐藏进度条
+                        $('#uqp_' + id).hide();
+                        $('#uqp_' + id).parent('.progress').hide();
+                        $('#uqnn_' + id).html(app.languageData.upload_sync_to_storage);
+                    }
                     setTimeout(() => {
                         this.worker_slice(server, utoken, sha1, file, id, filename, thread);
                     }, 5000);
@@ -955,6 +962,14 @@ class uploader {
                     this.upload_final({ status: rsp.data, data: { ukey: rsp.data } }, file, id, thread);
                     break;
                 case 9:
+                    //文件合并进程正在进行中，处于锁定状态
+                    if (thread === 0) {
+                        console.log(`Case 9: 文件合并锁定，隐藏进度条 for file ${id}`);
+                        // 主线程显示同步状态并隐藏进度条
+                        $('#uqp_' + id).hide();
+                        $('#uqp_' + id).parent('.progress').hide();
+                        $('#uqnn_' + id).html(app.languageData.upload_sync_to_storage);
+                    }
                     //重置 rsp.stustus = 1
                     rsp.status = 1;
                     this.upload_final({ status: rsp.status, data: { ukey: rsp.data } }, file, id,);
@@ -1046,8 +1061,12 @@ class uploader {
         xhr.addEventListener("loadend", (evt) => {
             //如果已上传的总数等于总数，则表示上传完成，显示已完成
             if (index === (this.upload_slice_total[id] - 1)) {
-                // $('#uqnn_' + id).html(app.languageData.upload_sync_onprogress);
-                $(uqpid).css('width', '100%');
+                console.log(`最后一个分片上传完成，隐藏进度条 for file ${id}`);
+                // 隐藏进度条和容器
+                $(uqpid).hide();
+                $(uqpid).parent('.progress').hide();
+                // 显示同步到存储节点的状态
+                $('#uqnn_' + id).html(app.languageData.upload_sync_to_storage);
             }
         });
 
@@ -1119,14 +1138,23 @@ class uploader {
         if (this.upload_file_progress[id].isUpdating) return;
         this.upload_file_progress[id].isUpdating = true;
 
-        // 更新进度文本和进度条
-        $(uqmid).html(`${app.languageData.upload_upload_processing} ${filename}`);
-        $(uqpid).css('width', percentComplete + '%');
+        // 如果达到100%，隐藏进度条并显示同步状态
+        if (percentComplete >= 100) {
+            console.log(`隐藏进度条 for file ${id}: ${filename}`);
+            $(uqpid).hide();
+            $(uqpid).parent('.progress').hide(); // 同时隐藏进度条容器
+            $(uqmid).html(`${app.languageData.upload_upload_processing} ${filename}`);
+            $('#uqnn_' + id).html(app.languageData.upload_sync_to_storage);
+        } else {
+            // 更新进度文本和进度条
+            $(uqmid).html(`${app.languageData.upload_upload_processing} ${filename}`);
+            $(uqpid).css('width', percentComplete + '%');
 
-        // 更新状态文本，显示已上传/总大小
-        $('#uqnn_' + id).html(
-            `${app.languageData.upload_sync} (${bytetoconver(progress.uploaded, true)}/${bytetoconver(progress.total, true)}) ${percentComplete}%`
-        );
+            // 更新状态文本，显示已上传/总大小
+            $('#uqnn_' + id).html(
+                `${app.languageData.upload_sync} (${bytetoconver(progress.uploaded, true)}/${bytetoconver(progress.total, true)}) ${percentComplete}%`
+            );
+        }
 
         // 用setTimeout确保DOM更新完成后再释放锁
         setTimeout(() => {
@@ -1353,7 +1381,15 @@ class uploader {
         this.check_upload_clean_btn_status();
 
         if (rsp.status === 1) {
-            $('#uqnn_' + id).html(app.languageData.upload_ok);
+            console.log(`upload_final: 上传成功，隐藏进度条 for file ${id}`);
+            // 确保进度条被隐藏
+            $('#uqp_' + id).hide();
+            $('#uqp_' + id).parent('.progress').hide();
+            // 先显示同步状态，然后显示完成状态
+            $('#uqnn_' + id).html(app.languageData.upload_sync_to_storage);
+            setTimeout(() => {
+                $('#uqnn_' + id).html(app.languageData.upload_ok);
+            }, 1000);
 
             //如果未登录状态下上传，则不隐藏上传完成后的信息
             if (this.parent_op.isLogin()) {

@@ -506,6 +506,7 @@
     "upload_cancel": "上传被用户取消或者浏览器断开连接。",
     "upload_ok": "上传完成",
     "upload_sync_onprogress": "正在同步",
+    "upload_sync_to_storage": "正在同步文件到存储节点",
     "upload_upload_prepare": "正在优化传输过程...",
     "upload_upload_processing": "正在上传：",
     "upload_ready": "等待上传",

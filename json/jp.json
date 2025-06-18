@@ -507,6 +507,7 @@
     "status_media_duration": "最小5秒、最大5時間のビデオをサポートします。",
     "status_media_usage": "メディアライブラリの容量が不足しています。より大きな容量の購入を検討してください。",
     "upload_sync_onprogress": "同期化中",
+    "upload_sync_to_storage": "ストレージノードにファイルを同期中",
     "model_profile_title": "設定",
     "model_profile_confirm_delete": "削除する前にもう一度確認しますか？",
     "model_profile_bulk_copy": "連続コピーを有効にしますか?<br>有効にした後、コピー ボタンを連続してクリックして、複数のファイル リンクをコピーできます。",
