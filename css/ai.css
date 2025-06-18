@@ -1193,3 +1193,169 @@
         color: rgba(0, 0, 0, 0.7) !important;
     }
 }
+
+/* Markdown 样式支持 */
+.message-content {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* 标题样式 */
+.message-content h1 {
+    font-size: 1.8em;
+    font-weight: 600;
+    margin: 0.8em 0 0.5em 0;
+    border-bottom: 1px solid #e1e4e8;
+    padding-bottom: 0.3em;
+}
+
+.message-content h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin: 0.8em 0 0.5em 0;
+    border-bottom: 1px solid #e1e4e8;
+    padding-bottom: 0.3em;
+}
+
+.message-content h3 {
+    font-size: 1.25em;
+    font-weight: 600;
+    margin: 0.8em 0 0.5em 0;
+}
+
+.message-content h4 {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 0.8em 0 0.5em 0;
+}
+
+.message-content h5,
+.message-content h6 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 0.8em 0 0.5em 0;
+}
+
+/* 段落和列表 */
+.message-content p {
+    margin: 0.5em 0;
+}
+
+.message-content ul,
+.message-content ol {
+    margin: 0.5em 0;
+    padding-left: 2em;
+}
+
+.message-content li {
+    margin: 0.25em 0;
+}
+
+/* 代码样式 */
+.message-content code {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+    padding: 0.2em 0.4em;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.9em;
+}
+
+.message-content pre {
+    background-color: #f6f8fa;
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 0.5em 0;
+}
+
+.message-content pre code {
+    background-color: transparent;
+    padding: 0;
+    font-size: 0.875em;
+    line-height: 1.45;
+}
+
+/* 引用样式 */
+.message-content blockquote {
+    border-left: 4px solid #d1d5db;
+    padding-left: 16px;
+    margin: 0.5em 0;
+    color: #6b7280;
+}
+
+/* 表格样式 */
+.message-content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5em 0;
+}
+
+.message-content table th,
+.message-content table td {
+    border: 1px solid #d1d5db;
+    padding: 8px 12px;
+}
+
+.message-content table th {
+    background-color: #f3f4f6;
+    font-weight: 600;
+}
+
+/* 链接样式 */
+.message-content a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.message-content a:hover {
+    text-decoration: underline;
+}
+
+/* 图片样式 */
+.message-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 0.5em 0;
+}
+
+/* 水平线 */
+.message-content hr {
+    border: none;
+    border-top: 1px solid #e1e4e8;
+    margin: 1em 0;
+}
+
+/* 深色模式下的代码块样式 */
+.dark-mode .message-content code {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #e1e4e8;
+}
+
+.dark-mode .message-content pre {
+    background-color: #2d2d2d;
+    color: #e1e4e8;
+}
+
+.dark-mode .message-content blockquote {
+    border-left-color: #4b5563;
+    color: #9ca3af;
+}
+
+.dark-mode .message-content table th {
+    background-color: #374151;
+}
+
+.dark-mode .message-content table th,
+.dark-mode .message-content table td {
+    border-color: #4b5563;
+}
+
+.dark-mode .message-content hr {
+    border-top-color: #4b5563;
+}
+
+.dark-mode .message-content h1,
+.dark-mode .message-content h2 {
+    border-bottom-color: #4b5563;
+}

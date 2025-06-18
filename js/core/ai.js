@@ -934,11 +934,45 @@ class ai {
      * 格式化消息内容
      */
     formatMessageContent(content) {
-        return content
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            .replace(/`(.*?)`/g, '<code>$1</code>')
-            .replace(/\n/g, '<br>')
+        // 使用 marked.js 解析 markdown
+        if (typeof marked !== 'undefined') {
+            // 配置 marked 选项
+            marked.setOptions({
+                breaks: true, // 支持 GFM 换行
+                gfm: true, // 启用 GitHub Flavored Markdown
+                tables: true, // 支持表格
+                sanitize: false, // 不过滤 HTML（如果需要安全性，设为 true）
+                smartLists: true, // 智能列表
+                smartypants: true, // 智能标点
+                highlight: function(code, lang) {
+                    // 简单的代码高亮处理
+                    return `<pre class="language-${lang || 'plaintext'}"><code>${this.escapeHtml(code)}</code></pre>`
+                }.bind(this)
+            })
+            
+            return marked.parse(content)
+        } else {
+            // 降级处理：如果 marked.js 未加载，使用原有的简单替换
+            return content
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/`(.*?)`/g, '<code>$1</code>')
+                .replace(/\n/g, '<br>')
+        }
+    }
+    
+    /**
+     * HTML 转义
+     */
+    escapeHtml(text) {
+        const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        }
+        return text.replace(/[&<>"']/g, m => map[m])
     }
 
     /**
