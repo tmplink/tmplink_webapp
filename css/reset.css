@@ -7920,7 +7920,7 @@ button.bg-dark:focus {
   top: 0;
   right: 0;
   left: 0;
-  z-index: 1030;
+  z-index: 999;
 }
 
 .fixed-bottom {
@@ -7936,7 +7936,7 @@ button.bg-dark:focus {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    z-index: 1020;
+    z-index: 999;
   }
 }
 
