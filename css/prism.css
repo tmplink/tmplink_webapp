@@ -1,0 +1,348 @@
+/* PrismJS 1.29.0
+https://prismjs.com/download.html#themes=prism */
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Override for AI chat context */
+.bg-msg-ai :not(pre) > code[class*="language-"],
+.bg-msg-ai pre[class*="language-"] {
+	background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #9a6e3a;
+	/* This background color was intended by the author of this theme. */
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function,
+.token.class-name {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+/* Dark theme adaptation for AI chat - Override all code blocks */
+.bg-msg-ai pre,
+.bg-msg-ai pre[class*="language-"] {
+    background: rgba(40, 44, 52, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    margin: 0.5em 0 !important;
+    padding: 1em !important;
+}
+
+.bg-msg-ai code,
+.bg-msg-ai code[class*="language-"] {
+    background: transparent !important;
+    color: #abb2bf !important;
+    text-shadow: none !important;
+}
+
+/* Inline code styling */
+.bg-msg-ai :not(pre) > code {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #f8f8f2 !important;
+    padding: 0.2em 0.4em !important;
+    border-radius: 3px !important;
+}
+
+/* Syntax highlighting colors for dark theme in AI chat */
+.bg-msg-ai .token.comment,
+.bg-msg-ai .token.prolog,
+.bg-msg-ai .token.doctype,
+.bg-msg-ai .token.cdata {
+    color: #5c6370 !important;
+    font-style: italic;
+}
+
+.bg-msg-ai .token.punctuation {
+    color: #abb2bf !important;
+}
+
+.bg-msg-ai .token.property,
+.bg-msg-ai .token.tag,
+.bg-msg-ai .token.constant,
+.bg-msg-ai .token.symbol,
+.bg-msg-ai .token.deleted {
+    color: #e06c75 !important;
+}
+
+.bg-msg-ai .token.boolean,
+.bg-msg-ai .token.number {
+    color: #d19a66 !important;
+}
+
+.bg-msg-ai .token.selector,
+.bg-msg-ai .token.attr-name,
+.bg-msg-ai .token.string,
+.bg-msg-ai .token.char,
+.bg-msg-ai .token.builtin,
+.bg-msg-ai .token.inserted {
+    color: #98c379 !important;
+}
+
+.bg-msg-ai .token.operator,
+.bg-msg-ai .token.entity,
+.bg-msg-ai .token.url {
+    color: #56b6c2 !important;
+    background: transparent !important;
+}
+
+.bg-msg-ai .token.atrule,
+.bg-msg-ai .token.attr-value,
+.bg-msg-ai .token.keyword {
+    color: #c678dd !important;
+    font-weight: bold;
+}
+
+.bg-msg-ai .token.function,
+.bg-msg-ai .token.class-name {
+    color: #61afef !important;
+}
+
+.bg-msg-ai .token.regex,
+.bg-msg-ai .token.important,
+.bg-msg-ai .token.variable {
+    color: #e5c07b !important;
+}
+
+/* Token styles for fallback highlighting */
+.bg-msg-ai .token.keyword {
+    color: #c678dd !important;
+    font-weight: bold;
+}
+
+.bg-msg-ai .token.string {
+    color: #98c379 !important;
+}
+
+.bg-msg-ai .token.comment {
+    color: #5c6370 !important;
+    font-style: italic;
+}
+
+.bg-msg-ai .token.number {
+    color: #d19a66 !important;
+}
+
+.bg-msg-ai .token.boolean {
+    color: #e06c75 !important;
+}
+
+.bg-msg-ai .token.function {
+    color: #61afef !important;
+}
+
+.bg-msg-ai .token.variable {
+    color: #e5c07b !important;
+}
+
+.bg-msg-ai .token.operator {
+    color: #56b6c2 !important;
+}
+
+/* Code copy button styles */
+.code-copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.code-copy-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    color: rgba(255, 255, 255, 0.95);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.code-copy-btn:active {
+    transform: scale(0.95);
+}
+
+.code-copy-btn.success {
+    background: rgba(34, 197, 94, 0.8) !important;
+    color: #ffffff !important;
+    transform: scale(1.1);
+}
+
+.code-copy-btn.error {
+    background: rgba(239, 68, 68, 0.8) !important;
+    color: #ffffff !important;
+    transform: scale(1.1);
+}
+
+/* Show copy button on hover */
+.bg-msg-ai pre:hover .code-copy-btn {
+    opacity: 1;
+}
+
+/* Always show when focused or active */
+.code-copy-btn:focus,
+.code-copy-btn:active,
+.code-copy-btn.success,
+.code-copy-btn.error {
+    opacity: 1 !important;
+}
+
+/* Icon styling */
+.code-copy-btn iconpark-icon {
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .code-copy-btn {
+        opacity: 0.8; /* Slightly visible on mobile */
+        top: 8px;
+        right: 8px;
+        width: 32px;
+        height: 32px;
+        padding: 6px;
+    }
+    
+    .code-copy-btn iconpark-icon {
+        font-size: 16px;
+    }
+    
+    .code-copy-btn:hover {
+        opacity: 1;
+    }
+}
