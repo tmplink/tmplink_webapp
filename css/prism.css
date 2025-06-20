@@ -226,6 +226,41 @@ pre[class*="language-"] {
     color: #e5c07b !important;
 }
 
+/* Token styles for fallback highlighting */
+.bg-msg-ai .token.keyword {
+    color: #c678dd !important;
+    font-weight: bold;
+}
+
+.bg-msg-ai .token.string {
+    color: #98c379 !important;
+}
+
+.bg-msg-ai .token.comment {
+    color: #5c6370 !important;
+    font-style: italic;
+}
+
+.bg-msg-ai .token.number {
+    color: #d19a66 !important;
+}
+
+.bg-msg-ai .token.boolean {
+    color: #e06c75 !important;
+}
+
+.bg-msg-ai .token.function {
+    color: #61afef !important;
+}
+
+.bg-msg-ai .token.variable {
+    color: #e5c07b !important;
+}
+
+.bg-msg-ai .token.operator {
+    color: #56b6c2 !important;
+}
+
 /* Code copy button styles */
 .code-copy-btn {
     position: absolute;

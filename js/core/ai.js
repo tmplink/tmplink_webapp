@@ -531,6 +531,13 @@ class ai {
                             this.addMessageToChat(msg.role, msg.content, false)
                         }
                     })
+                    
+                    // 对所有代码块应用高亮
+                    setTimeout(() => {
+                        this.applyCodeHighlighting()
+                        this.addCopyButtonsToCodeBlocks($(messagesContainer))
+                    }, 100)
+                    
                     // 滚动到底部
                     if (isMobile) {
                         const container = $(messagesContainer)
@@ -928,13 +935,11 @@ class ai {
         
         messagesElement.append(messageHtml)
         
-        // 对新添加的代码块应用 Prism 高亮和复制按钮
+        // 对新添加的代码块应用高亮和复制按钮
         setTimeout(() => {
-            if (typeof Prism !== 'undefined') {
-                Prism.highlightAll()
-            }
+            this.applyCodeHighlighting()
             this.addCopyButtonsToCodeBlocks(messagesElement)
-        }, 10)
+        }, 50)
         
         this.scrollToBottom(false)
     }
@@ -953,24 +958,9 @@ class ai {
                 sanitize: false, // 不过滤 HTML（如果需要安全性，设为 true）
                 smartLists: true, // 智能列表
                 smartypants: true, // 智能标点
-                highlight: function(code, lang) {
-                    // 支持常见的语言别名映射
-                    const languageMap = {
-                        'js': 'javascript',
-                        'ts': 'typescript', 
-                        'py': 'python',
-                        'sh': 'bash',
-                        'shell': 'bash',
-                        'yml': 'yaml',
-                        'json': 'javascript'
-                    };
-                    
-                    const actualLang = languageMap[lang] || lang || 'plaintext';
-                    
-                    // 简单返回转义的代码，让 Prism.highlightAll() 后续处理
-                    return this.escapeHtml(code);
-                }.bind(this),
-                langPrefix: 'language-' // 确保 marked.js 添加正确的语言类名
+                langPrefix: 'language-', // 确保 marked.js 添加正确的语言类名
+                // 不使用 highlight 函数，让 marked.js 生成标准的 <pre><code> 结构
+                // 然后让 Prism.highlightAll() 处理高亮
             })
             
             return marked.parse(content)
@@ -1172,11 +1162,9 @@ class ai {
         
         messagesContainer.append(messageHtml)
         
-        // 对新添加的代码块应用 Prism 高亮和复制按钮
+        // 对新添加的代码块应用高亮和复制按钮
         setTimeout(() => {
-            if (typeof Prism !== 'undefined') {
-                Prism.highlightAll()
-            }
+            this.applyCodeHighlighting()
             this.addCopyButtonsToCodeBlocks(messagesContainer)
         }, 10)
         
@@ -1377,6 +1365,219 @@ class ai {
         const remaining = this.userStats.token_remaining || 0
         return remaining > 0
     }
+
+
+    /**
+     * 应用代码语法高亮
+     */
+    applyCodeHighlighting() {
+        const codeBlocks = document.querySelectorAll('.bg-msg-ai pre code')
+        
+        codeBlocks.forEach((codeBlock) => {
+            // 检查是否已经高亮过了
+            if (codeBlock.dataset.highlighted === 'true') {
+                return
+            }
+            
+            const code = codeBlock.textContent
+            const language = this.detectLanguage(codeBlock)
+            
+            let highlightedCode = this.escapeHtml(code)
+            
+            // 语言映射
+            const languageMap = {
+                'py': 'python',
+                'js': 'javascript', 
+                'ts': 'typescript',
+                'sh': 'bash',
+                'shell': 'bash',
+                'json': 'json',
+                'css': 'css',
+                'html': 'html',
+                'sql': 'sql'
+            }
+            
+            const actualLanguage = languageMap[language] || language
+            
+            switch (actualLanguage) {
+                case 'python':
+                    highlightedCode = this.highlightPython(highlightedCode)
+                    break
+                case 'javascript':
+                case 'typescript':
+                    highlightedCode = this.highlightJavaScript(highlightedCode)
+                    break
+                case 'bash':
+                    highlightedCode = this.highlightBash(highlightedCode)
+                    break
+                case 'json':
+                    highlightedCode = this.highlightJSON(highlightedCode)
+                    break
+                case 'css':
+                    highlightedCode = this.highlightCSS(highlightedCode)
+                    break
+                case 'html':
+                    highlightedCode = this.highlightHTML(highlightedCode)
+                    break
+                case 'sql':
+                    highlightedCode = this.highlightSQL(highlightedCode)
+                    break
+                default:
+                    highlightedCode = this.highlightGeneric(highlightedCode)
+            }
+            
+            codeBlock.innerHTML = highlightedCode
+            codeBlock.dataset.highlighted = 'true'
+        })
+    }
+
+    /**
+     * 检测代码语言
+     */
+    detectLanguage(codeBlock) {
+        const className = codeBlock.className || ''
+        const langMatch = className.match(/language-(\w+)/)
+        return langMatch ? langMatch[1] : 'plaintext'
+    }
+
+    /**
+     * Python 语法高亮
+     */
+    highlightPython(code) {
+        // 按顺序应用高亮，避免重复匹配
+        return code
+            // 先处理字符串（三重引号）
+            .replace(/("""[\s\S]*?""")/g, '<span class="token string">$1</span>')
+            .replace(/('''[\s\S]*?''')/g, '<span class="token string">$1</span>')
+            // 处理普通字符串
+            .replace(/(["'])((?:\\.|(?!\1)[^\\])*?)\1/g, '<span class="token string">$1$2$1</span>')
+            // 处理注释
+            .replace(/#[^<]*$/gm, '<span class="token comment">$&</span>')
+            // 处理关键字
+            .replace(/\b(import|from|def|class|if|else|elif|for|while|try|except|finally|return|print|with|as|lambda|yield|async|await|global|nonlocal|pass|break|continue|raise|assert|del)\b/g, '<span class="token keyword">$1</span>')
+            // 处理布尔值和None
+            .replace(/\b(True|False|None)\b/g, '<span class="token boolean">$1</span>')
+            // 处理数字
+            .replace(/\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b/g, '<span class="token number">$&</span>')
+            // 处理函数名
+            .replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)\s*(?=\()/g, '<span class="token function">$1</span>')
+    }
+
+    /**
+     * JavaScript 语法高亮
+     */
+    highlightJavaScript(code) {
+        return code
+            // 处理字符串
+            .replace(/(["'`])((?:\\.|(?!\1)[^\\])*?)\1/g, '<span class="token string">$1$2$1</span>')
+            // 处理注释
+            .replace(/\/\/[^<]*$/gm, '<span class="token comment">$&</span>')
+            .replace(/\/\*[\s\S]*?\*\//g, '<span class="token comment">$&</span>')
+            // 处理关键字
+            .replace(/\b(var|let|const|function|class|if|else|for|while|do|try|catch|finally|return|break|continue|switch|case|default|typeof|instanceof|new|this|super|extends|import|export|from|as|async|await)\b/g, '<span class="token keyword">$1</span>')
+            // 处理布尔值
+            .replace(/\b(true|false|null|undefined)\b/g, '<span class="token boolean">$1</span>')
+            // 处理数字
+            .replace(/\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b/g, '<span class="token number">$&</span>')
+            // 处理函数名
+            .replace(/\b([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(?=\()/g, '<span class="token function">$1</span>')
+    }
+
+    /**
+     * Bash 语法高亮
+     */
+    highlightBash(code) {
+        return code
+            // 处理字符串
+            .replace(/(["'])((?:\\.|(?!\1)[^\\])*?)\1/g, '<span class="token string">$1$2$1</span>')
+            // 处理注释
+            .replace(/#[^<]*$/gm, '<span class="token comment">$&</span>')
+            // 处理关键字
+            .replace(/\b(if|then|else|elif|fi|for|while|do|done|case|esac|function|return|exit|break|continue|echo|cd|ls|mkdir|rm|cp|mv|grep|sed|awk|sort|uniq|head|tail|cat|chmod|chown|pip|install)\b/g, '<span class="token keyword">$1</span>')
+            // 处理变量
+            .replace(/\$\w+/g, '<span class="token variable">$&</span>')
+            .replace(/\$\{[^}]+\}/g, '<span class="token variable">$&</span>')
+            // 处理选项参数
+            .replace(/--?\w+/g, '<span class="token operator">$&</span>')
+    }
+
+    /**
+     * JSON 语法高亮
+     */
+    highlightJSON(code) {
+        return code
+            // 处理字符串键和值
+            .replace(/"([^"\\]|\\.)*"/g, '<span class="token string">$&</span>')
+            // 处理数字
+            .replace(/:\s*(-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/g, ': <span class="token number">$1</span>')
+            // 处理布尔值和null
+            .replace(/:\s*(true|false|null)\b/g, ': <span class="token boolean">$1</span>')
+            // 处理操作符
+            .replace(/[{}[\],]/g, '<span class="token operator">$&</span>')
+    }
+
+    /**
+     * CSS 语法高亮
+     */
+    highlightCSS(code) {
+        return code
+            // 处理选择器
+            .replace(/^([^{]+)(?=\s*\{)/gm, '<span class="token selector">$1</span>')
+            // 处理属性名
+            .replace(/([a-zA-Z-]+)\s*:/g, '<span class="token property">$1</span>:')
+            // 处理字符串
+            .replace(/(["'])((?:\\.|(?!\1)[^\\])*?)\1/g, '<span class="token string">$1$2$1</span>')
+            // 处理注释
+            .replace(/\/\*[\s\S]*?\*\//g, '<span class="token comment">$&</span>')
+            // 处理数字和单位
+            .replace(/\b\d+(?:\.\d+)?(?:px|em|rem|%|vh|vw|pt|pc|in|cm|mm|ex|ch|fr)?\b/g, '<span class="token number">$&</span>')
+    }
+
+    /**
+     * HTML 语法高亮
+     */
+    highlightHTML(code) {
+        return code
+            // 处理标签
+            .replace(/<\/?([a-zA-Z][a-zA-Z0-9]*)\b[^>]*>/g, function(match, tagName) {
+                return match.replace(new RegExp(tagName, 'g'), `<span class="token keyword">${tagName}</span>`)
+            })
+            // 处理属性值
+            .replace(/="([^"]*)"/g, '="<span class="token string">$1</span>"')
+            // 处理注释
+            .replace(/<!--[\s\S]*?-->/g, '<span class="token comment">$&</span>')
+    }
+
+    /**
+     * SQL 语法高亮
+     */
+    highlightSQL(code) {
+        return code
+            // 处理关键字
+            .replace(/\b(SELECT|FROM|WHERE|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|TABLE|INDEX|INTO|VALUES|SET|JOIN|LEFT|RIGHT|INNER|OUTER|ON|GROUP|ORDER|BY|HAVING|LIMIT|DISTINCT|AS|AND|OR|NOT|NULL|TRUE|FALSE|IF|CASE|WHEN|THEN|ELSE|END)\b/gi, '<span class="token keyword">$1</span>')
+            // 处理字符串
+            .replace(/(["'])((?:\\.|(?!\1)[^\\])*?)\1/g, '<span class="token string">$1$2$1</span>')
+            // 处理注释
+            .replace(/--[^<]*$/gm, '<span class="token comment">$&</span>')
+            .replace(/\/\*[\s\S]*?\*\//g, '<span class="token comment">$&</span>')
+            // 处理数字
+            .replace(/\b\d+(?:\.\d+)?\b/g, '<span class="token number">$&</span>')
+    }
+
+    /**
+     * 通用语法高亮
+     */
+    highlightGeneric(code) {
+        return code
+            // 处理字符串
+            .replace(/(["'])((?:\\.|(?!\1)[^\\])*?)\1/g, '<span class="token string">$1$2$1</span>')
+            // 处理注释
+            .replace(/#[^<]*$/gm, '<span class="token comment">$&</span>')
+            .replace(/\/\/[^<]*$/gm, '<span class="token comment">$&</span>')
+            // 处理数字
+            .replace(/\b\d+(?:\.\d+)?\b/g, '<span class="token number">$&</span>')
+    }
+
 
     /**
      * 为代码块添加复制按钮
