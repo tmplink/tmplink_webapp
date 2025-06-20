@@ -927,6 +927,15 @@ class ai {
         }
         
         messagesElement.append(messageHtml)
+        
+        // 对新添加的代码块应用 Prism 高亮和复制按钮
+        setTimeout(() => {
+            if (typeof Prism !== 'undefined') {
+                Prism.highlightAll()
+            }
+            this.addCopyButtonsToCodeBlocks(messagesElement)
+        }, 10)
+        
         this.scrollToBottom(false)
     }
 
@@ -945,9 +954,23 @@ class ai {
                 smartLists: true, // 智能列表
                 smartypants: true, // 智能标点
                 highlight: function(code, lang) {
-                    // 简单的代码高亮处理
-                    return `<pre class="language-${lang || 'plaintext'}"><code>${this.escapeHtml(code)}</code></pre>`
-                }.bind(this)
+                    // 支持常见的语言别名映射
+                    const languageMap = {
+                        'js': 'javascript',
+                        'ts': 'typescript', 
+                        'py': 'python',
+                        'sh': 'bash',
+                        'shell': 'bash',
+                        'yml': 'yaml',
+                        'json': 'javascript'
+                    };
+                    
+                    const actualLang = languageMap[lang] || lang || 'plaintext';
+                    
+                    // 简单返回转义的代码，让 Prism.highlightAll() 后续处理
+                    return this.escapeHtml(code);
+                }.bind(this),
+                langPrefix: 'language-' // 确保 marked.js 添加正确的语言类名
             })
             
             return marked.parse(content)
@@ -1149,6 +1172,14 @@ class ai {
         
         messagesContainer.append(messageHtml)
         
+        // 对新添加的代码块应用 Prism 高亮和复制按钮
+        setTimeout(() => {
+            if (typeof Prism !== 'undefined') {
+                Prism.highlightAll()
+            }
+            this.addCopyButtonsToCodeBlocks(messagesContainer)
+        }, 10)
+        
         // 滚动到底部
         if (messagesContainer.length > 0 && messagesContainer[0]) {
             messagesContainer.scrollTop(messagesContainer[0].scrollHeight)
@@ -1345,5 +1376,158 @@ class ai {
         
         const remaining = this.userStats.token_remaining || 0
         return remaining > 0
+    }
+
+    /**
+     * 为代码块添加复制按钮
+     */
+    addCopyButtonsToCodeBlocks(container) {
+        const codeBlocks = container.find('pre:has(code)')
+        
+        codeBlocks.each((index, pre) => {
+            const $pre = $(pre)
+            
+            // 检查是否已经添加了复制按钮
+            if ($pre.find('.code-copy-btn').length > 0) {
+                return
+            }
+            
+            // 创建复制按钮
+            const copyBtn = $(`
+                <button class="code-copy-btn" title="${app.languageData.ai_copy_code || '复制代码'}">
+                    <iconpark-icon name="copy" class="copy-icon"></iconpark-icon>
+                    <iconpark-icon name="check" class="check-icon" style="display: none;"></iconpark-icon>
+                </button>
+            `)
+            
+            // 添加复制功能
+            copyBtn.on('click', () => {
+                const code = $pre.find('code').text()
+                this.copyToClipboard(code, copyBtn)
+            })
+            
+            // 设置相对定位并添加按钮
+            $pre.css('position', 'relative')
+            $pre.append(copyBtn)
+        })
+    }
+
+    /**
+     * 复制到剪贴板
+     */
+    copyToClipboard(text, button) {
+        // 检查是否有 clipboard.js 库（项目中已有）
+        if (typeof ClipboardJS !== 'undefined') {
+            // 使用 clipboard.js
+            try {
+                navigator.clipboard.writeText(text).then(() => {
+                    this.showCopySuccess(button)
+                }).catch(() => {
+                    // 降级到 clipboard.js
+                    this.fallbackCopy(text, button)
+                })
+            } catch (e) {
+                this.fallbackCopy(text, button)
+            }
+        } else {
+            // 使用现代 clipboard API
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    this.showCopySuccess(button)
+                }).catch(() => {
+                    this.fallbackCopy(text, button)
+                })
+            } else {
+                this.fallbackCopy(text, button)
+            }
+        }
+    }
+
+    /**
+     * 降级复制方法
+     */
+    fallbackCopy(text, button) {
+        // 创建临时文本区域
+        const textArea = document.createElement('textarea')
+        textArea.value = text
+        textArea.style.position = 'fixed'
+        textArea.style.opacity = '0'
+        document.body.appendChild(textArea)
+        textArea.select()
+        
+        try {
+            const successful = document.execCommand('copy')
+            if (successful) {
+                this.showCopySuccess(button)
+            } else {
+                this.showCopyError(button)
+            }
+        } catch (e) {
+            this.showCopyError(button)
+        } finally {
+            document.body.removeChild(textArea)
+        }
+    }
+
+    /**
+     * 显示复制成功状态
+     */
+    showCopySuccess(button) {
+        const $btn = $(button)
+        const copyIcon = $btn.find('.copy-icon')
+        const checkIcon = $btn.find('.check-icon')
+        
+        // 切换图标
+        copyIcon.hide()
+        checkIcon.show()
+        $btn.addClass('success')
+        $btn.attr('title', app.languageData.ai_copy_success || '复制成功')
+        
+        // 显示成功提示
+        if (typeof $.toast !== 'undefined') {
+            $.toast({
+                text: app.languageData.ai_copy_success || '复制成功',
+                icon: 'success',
+                showHideTransition: 'slide',
+                allowToastClose: false,
+                hideAfter: 2000,
+                position: 'top-center'
+            })
+        }
+        
+        // 2秒后恢复
+        setTimeout(() => {
+            copyIcon.show()
+            checkIcon.hide()
+            $btn.removeClass('success')
+            $btn.attr('title', app.languageData.ai_copy_code || '复制代码')
+        }, 2000)
+    }
+
+    /**
+     * 显示复制错误状态
+     */
+    showCopyError(button) {
+        const $btn = $(button)
+        $btn.addClass('error')
+        $btn.attr('title', app.languageData.ai_copy_failed || '复制失败')
+        
+        // 显示错误提示
+        if (typeof $.toast !== 'undefined') {
+            $.toast({
+                text: app.languageData.ai_copy_failed || '复制失败',
+                icon: 'error',
+                showHideTransition: 'slide',
+                allowToastClose: false,
+                hideAfter: 2000,
+                position: 'top-center'
+            })
+        }
+        
+        // 1秒后恢复
+        setTimeout(() => {
+            $btn.removeClass('error')
+            $btn.attr('title', app.languageData.ai_copy_code || '复制代码')
+        }, 1000)
     }
 }
