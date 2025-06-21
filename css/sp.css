@@ -72,6 +72,11 @@
   display: inline-block;
 }
 
+/* Larger touch area for mobile nav icons */
+.nav-mobile iconpark-icon.fa-1-5x {
+  padding: 4px;
+}
+
 .mobile_h2 {
   font-size: 2rem;
 }

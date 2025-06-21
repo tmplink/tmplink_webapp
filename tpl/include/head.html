@@ -248,77 +248,68 @@
     <!--[mobile]-->
     <div class="row text-center">
         <!-- 黑五活动特别 -->
-        <!-- <div class="col-3">
+        <!-- <div class="col-2">
             <div class="workspace-navbar">
                 <button class="btn" onclick="TL.buy.openBlackFriday();">
                     <div class="d-flex flex-column">
                         <span>
-                            <iconpark-icon name="gift-bag" class="fa-fw text-red"></iconpark-icon>
-                        </span>
-                        <span>
-                            <span i18n="navbar_special_events">.</span>
+                            <iconpark-icon name="gift-bag" class="fa-fw fa-1-5x text-red"></iconpark-icon>
                         </span>
                     </div>
                 </button>
             </div>
         </div> -->
-        <div class="col-3">
+        <div class="col-2">
             <div class="workspace-navbar">
                 <a class="btn topnav_ai" href="/app&listview=ai" tmpui-action="dynamicView.ai();">
                     <div class="d-flex flex-column">
                         <span class="mx-auto">
-                            <iconpark-icon name="star-one" class="fa-fw"></iconpark-icon>
+                            <iconpark-icon name="star-one" class="fa-fw fa-1-5x"></iconpark-icon>
                         </span>
-                        <span i18n="navbar_ai">智能</span>
                     </div>
                 </a>
             </div>
         </div>
-        <div class="col-3">
-            <!--[login]-->
-            <div class="workspace-nologin">
-                <div class="d-flex flex-column">
-                    <button class="btn p-0" onclick="dynamicView.login();">
-                        <div>
-                            <iconpark-icon name="user" class="fa-fw"></iconpark-icon>
-                        </div>
-                        <div>
-                            <span i18n="index_b3">.</span>
-                        </div>
-                    </button>
-                </div>
-            </div>
-            <div class="btn-group dropup workspace-navbar">
-                <button type="button" class="btn topnav_desktop" data-toggle="dropdown">
+        <div class="col-2">
+            <div class="workspace-navbar">
+                <a class="btn topnav_desktop" href="/app&listview=room&mrid=0" tmpui-action="dynamicView.room();">
                     <div class="d-flex flex-column">
                         <span class="mx-auto">
-                            <iconpark-icon name="inbox-success" class="fa-fw" id="navbar_model_icon"></iconpark-icon>
+                            <iconpark-icon name="folder-open-e1ad2j7l" class="fa-fw fa-1-5x"></iconpark-icon>
                         </span>
-                        <span id="navbar_model_text" data-menu="workspace" i18n="navbar_workspace">仓库</span>
                     </div>
-                </button>
-                <div class="dropdown-menu dropdown-menu-center shadow">
-                    <a class="dropdown-item" href="/app&listview=workspace" tmpui-action="dynamicView.workspace();">
-                        <iconpark-icon name="inbox-success" class="fa-fw"></iconpark-icon>
-                        <span i18n="navbar_workspace">.</span>
-                    </a>
-                    <a class="dropdown-item" href="/app&listview=room&mrid=0" tmpui-action="dynamicView.room();">
-                        <iconpark-icon name="folder-open-e1ad2j7l" class="fa-fw"></iconpark-icon>
-                        <span i18n="navbar_meetingroom">.</span>
-                    </a>
-                </div>
+                </a>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-2">
+            <div class="workspace-navbar">
+                <a class="btn topnav_workspace" href="/app&listview=workspace" tmpui-action="dynamicView.workspace();">
+                    <div class="d-flex flex-column">
+                        <span class="mx-auto">
+                            <iconpark-icon name="inbox-success" class="fa-fw fa-1-5x"></iconpark-icon>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="workspace-navbar">
+                <a class="btn topnav_notes" href="/app&listview=notes" tmpui-action="dynamicView.notes();">
+                    <div class="d-flex flex-column">
+                        <span class="mx-auto">
+                            <iconpark-icon name="lock" class="fa-fw fa-1-5x"></iconpark-icon>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-2">
             <!--[reg]-->
             <div class="workspace-nologin">
                 <div class="d-flex flex-column">
                     <button class="btn p-0" onclick="dynamicView.reg();">
                         <div>
-                            <iconpark-icon name="user-plus" class="fa-fw"></iconpark-icon>
-                        </div>
-                        <div>
-                            <span i18n="index_b2">.</span>
+                            <iconpark-icon name="user-plus" class="fa-fw fa-1-5x"></iconpark-icon>
                         </div>
                     </button>
                 </div>
@@ -327,11 +318,7 @@
                 <button type="button" class="btn" data-toggle="dropdown">
                     <div class="d-flex flex-column">
                         <span class="mx-auto">
-                            <iconpark-icon name="bars" class="fa-fw"></iconpark-icon>
-                        </span>
-                        <span>
-                            <span i18n="navbar_more">.</span>
-                            <!-- <span class="point-red"></span> -->
+                            <iconpark-icon name="bars" class="fa-fw fa-1-5x"></iconpark-icon>
                         </span>
                     </div>
                 </button>
@@ -436,14 +423,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-2">
             <div class="btn-group dropup">
                 <button type="button" class="btn" data-toggle="dropdown">
                     <div class="d-flex flex-column">
                         <span class="mx-auto">
-                            <iconpark-icon name="language" class="fa-fw"></iconpark-icon>
+                            <iconpark-icon name="language" class="fa-fw fa-1-5x"></iconpark-icon>
                         </span>
-                        <span class="selected_lang">.</span>
                     </div>
                 </button>
                 <div class="dropdown-menu shadow">

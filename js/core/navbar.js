@@ -45,14 +45,8 @@ class navbar {
     }
 
     ensureMobileThirdColumnDefault() {
-        // 确保第三列按钮有正确的默认工作区图标和文本
-        if ($('#navbar_model_icon').attr('name') === 'robot' || $('#navbar_model_icon').attr('name') === 'sliders-up' || !$('#navbar_model_icon').attr('name')) {
-            $('#navbar_model_icon').attr('name', 'inbox-success');
-            // 如果语言数据还没加载，使用默认文本
-            const workspaceText = (app && app.languageData && app.languageData.navbar_workspace) ? app.languageData.navbar_workspace : '仓库';
-            $('#navbar_model_text').html(workspaceText);
-            $('#navbar_model_text').attr('i18n', 'navbar_workspace');
-        }
+        // Mobile navigation no longer uses dropdown menu with dynamic icon/text
+        // This method is kept for backwards compatibility but is now empty
     }
 
     resetNavBar() {
@@ -120,9 +114,6 @@ class navbar {
     }
 
     model_workspace(act) {
-        $('#navbar_model_icon').attr('name', 'inbox-success');
-        $('#navbar_model_text').html(app.languageData.navbar_workspace);
-        $('#navbar_model_text').attr('i18n', 'navbar_workspace');
         if (act === true) {
             dynamicView.workspace();
         }
@@ -130,9 +121,6 @@ class navbar {
     }
 
     model_notes(act){
-        $('#navbar_model_icon').attr('name', 'lock');
-        $('#navbar_model_text').html(app.languageData.navbar_notes);
-        $('#navbar_model_text').attr('i18n', 'navbar_notes');
         if (act === true) {
             dynamicView.notes();
         }
@@ -140,9 +128,6 @@ class navbar {
     }
 
     model_desktop(act) {
-        $('#navbar_model_icon').attr('name', 'folder-open-e1ad2j7l');
-        $('#navbar_model_text').html(app.languageData.navbar_meetingroom);
-        $('#navbar_model_text').attr('i18n', 'navbar_meetingroom');
         if (act === true) {
             app.open('/room&mrid=0');
         }
@@ -150,9 +135,6 @@ class navbar {
     }
 
     model_direct(act) {
-        $('#navbar_model_icon').attr('name', 'share-nodes');
-        $('#navbar_model_text').html(app.languageData.navbar_direct);
-        $('#navbar_model_text').attr('i18n', 'navbar_direct');
         if (act === true) {
             app.open('/app&listview=direct');
         }
@@ -160,13 +142,6 @@ class navbar {
     }
 
     model_ai(act) {
-        // 在移动端，智能按钮不应该修改第三列的图标和文本
-        // 只有当前不是移动屏幕时才修改
-        if (!isMobileScreen()) {
-            $('#navbar_model_icon').attr('name', 'robot');
-            $('#navbar_model_text').html('智能');
-            $('#navbar_model_text').attr('i18n', 'navbar_ai');
-        }
         if (act === true) {
             dynamicView.ai();
         }
