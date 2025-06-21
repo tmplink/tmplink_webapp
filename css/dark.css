@@ -256,9 +256,9 @@ body.dark-mode .text-azure .iconpark-icon {
 
     .glass {
         /* background-color: #464343 !important; */
-        background-color: rgba(65, 64, 64, 0.9) !important;
-        -webkit-backdrop-filter: saturate(180%) blur(20px);
-        backdrop-filter: saturate(180%) blur(20px);
+        background-color: rgba(65, 64, 64, 0.8) !important;
+        -webkit-backdrop-filter: saturate(100%) blur(20px);
+        backdrop-filter: saturate(100%) blur(20px);
         background-clip: padding-box;
     }
 
