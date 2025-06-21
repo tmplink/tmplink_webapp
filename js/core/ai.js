@@ -1062,10 +1062,17 @@ class ai {
         
         // 更新字符计数
         const length = textarea.value.length
-        $('#ai_char_count').text(`${length}/2000`)
+        const isMobile = $(textarea).attr('id') === 'ai_input_mobile'
         
-        // 更新发送按钮状态
-        $('#ai_send_btn').prop('disabled', length === 0 || this.isLoading)
+        if (isMobile) {
+            $('#ai_char_count_mobile').text(`${length}/2000`)
+            // 更新移动端发送按钮状态
+            $('#ai_send_btn_mobile').prop('disabled', length === 0 || this.isLoading)
+        } else {
+            $('#ai_char_count').text(`${length}/2000`)
+            // 更新桌面端发送按钮状态
+            $('#ai_send_btn').prop('disabled', length === 0 || this.isLoading)
+        }
     }
 
     /**
@@ -1134,10 +1141,14 @@ class ai {
     updateCharCount(isMobile = false) {
         const inputElement = isMobile ? $('#ai_input_mobile') : $('#ai_input')
         const countElement = isMobile ? $('#ai_char_count_mobile') : $('#ai_char_count')
+        const sendBtn = isMobile ? $('#ai_send_btn_mobile') : $('#ai_send_btn')
         const currentLength = inputElement.val().length
         const maxLength = inputElement.attr('maxlength') || 2000
         
         countElement.text(`${currentLength}/${maxLength}`)
+        
+        // 更新发送按钮状态
+        sendBtn.prop('disabled', currentLength === 0 || this.isLoading)
         
         // 字符数接近限制时改变颜色
         if (currentLength > maxLength * 0.9) {

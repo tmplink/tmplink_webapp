@@ -431,10 +431,10 @@
         padding: 15px;
     }
     
-    /* 输入框样式 */
+    /* 输入框和发送按钮样式 */
     #ai_input_mobile {
         border: 1px solid #ddd;
-        border-radius: 8px;
+        border-radius: 8px 0 0 8px;
         font-size: 16px;
         transition: border-color 0.2s ease;
     }
@@ -442,6 +442,15 @@
     #ai_input_mobile:focus {
         border-color: var(--primary-color, #007bff);
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    
+    #ai_send_btn_mobile {
+        border-radius: 0 8px 8px 0;
+        min-width: 50px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     /* 快速问题按钮 */
@@ -504,6 +513,15 @@
     #ai_chat {
         background-color: #1a1a1a !important;
         border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    /* 修复深色模式下输入框和按钮 */
+    #ai_input_mobile {
+        border-radius: 8px 0 0 8px !important;
+    }
+    
+    #ai_send_btn_mobile {
+        border-radius: 0 8px 8px 0 !important;
     }
     
     /* 顶部导航栏深色模式 */
@@ -1421,4 +1439,34 @@
 .dark-mode .message-content h1,
 .dark-mode .message-content h2 {
     border-bottom-color: #4b5563;
+}
+
+/* 移动端固定输入框和顶部栏 */
+@media (max-width: 768px) {
+    /* 固定底部输入区域 */
+    #aiChatModalMobile .modal-footer.fixed-bottom {
+        background-color: var(--bs-body-bg, #ffffff) !important;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        padding: 10px 15px;
+    }
+    
+    /* 固定顶部标题栏 */
+    #aiChatModalMobile .modal-header.fixed-top {
+        background-color: var(--bs-body-bg, #ffffff) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 10px 15px;
+    }
+    
+    /* 深色模式适配 */
+    @media (prefers-color-scheme: dark) {
+        #aiChatModalMobile .modal-footer.fixed-bottom {
+            background-color: #2d2d2d !important;
+            border-top-color: rgba(255, 255, 255, 0.1) !important;
+        }
+        
+        #aiChatModalMobile .modal-header.fixed-top {
+            background-color: #2d2d2d !important;
+            border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+        }
+    }
 }

@@ -73,8 +73,8 @@
 <!-- AI 聊天界面模态框 -->
 <div class="modal fade" id="aiChatModalMobile" tabindex="-1" data-backdrop="static">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content shadow-lg" style="height: 80vh; display: flex; flex-direction: column;">
-            <div class="modal-header d-flex align-items-center">
+        <div class="modal-content shadow-lg" style="height: 100vh; display: flex; flex-direction: column;">
+            <div class="modal-header d-flex align-items-center fixed-top bg-white" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1050;">
                 <h4 class="modal-title mb-0 flex-fill" id="aiChatModalMobileTitle" i18n="ai_name">智能小薇</h4>
                 <!-- 移动端AI配额进度条 -->
                 <div class="ai-quota-indicator-mobile mr-3" id="ai_quota_indicator_mobile" style="display: none;">
@@ -84,7 +84,7 @@
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="flex: 1; overflow-y: auto; padding-bottom: 0;">
+            <div class="modal-body" style="flex: 1; overflow-y: auto; padding-bottom: 70px; padding-top: 60px;">
                 <div id="ai_messages_mobile">
                     <!-- 欢迎信息 -->
                     <div class="text-center text-muted py-5" id="ai_welcome_mobile">
@@ -116,7 +116,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer" style="flex-shrink: 0;">
+            <div class="modal-footer fixed-bottom bg-white border-top" style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 1050;">
                 <div class="w-100">
                     <div class="input-group">
                         <textarea id="ai_input_mobile" class="form-control" 
@@ -127,7 +127,7 @@
                                  oninput="TL.ai.autoResizeTextarea(this); TL.ai.updateCharCount(true);"></textarea>
                         <div class="input-group-append">
                             <button class="btn btn-primary" id="ai_send_btn_mobile" 
-                                    onclick="TL.ai.sendMessage(true);" style="min-width: 50px;">
+                                    onclick="TL.ai.sendMessage(true);">
                                 <iconpark-icon name="arrow-turn-down-left" class="fa-fw"></iconpark-icon>
                             </button>
                         </div>
