@@ -796,6 +796,27 @@
 /* 消息容器样式 */
 .wechat-message-container {
     max-width: 80% !important;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+}
+
+/* 新的消息布局样式 */
+.mobile-message .wechat-avatar {
+    flex-shrink: 0;
+}
+
+.mobile-message .wechat-nickname {
+    line-height: 1;
+    margin-bottom: 0;
+}
+
+.user-message .wechat-message-container {
+    margin-right: 0 !important;
+}
+
+.ai-message .wechat-message-container {
+    margin-left: 0 !important;
 }
 
 /* AI助手消息 - 蓝紫色渐变（精确复制原版设计） */
@@ -910,21 +931,57 @@
 
 /* 移动端优化 */
 @media (max-width: 768px) {
+    /* 优化新的消息布局 */
+    .mobile-message {
+        margin-bottom: 12px !important;
+    }
+    
+    .wechat-message-container {
+        max-width: 95% !important;
+        width: auto !important;
+    }
+    
     .bg-msg-ai,
     .bg-msg-user,
     .bg-msg-system {
-        max-width: 85% !important;
+        max-width: 100% !important;
         font-size: 14px !important;
         padding: 12px 16px !important;
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+        word-break: break-word !important;
     }
     
     /* 移动端保持原版设计的圆角 */
     .bg-msg-ai {
-        border-radius: 16px 16px 16px 4px !important;
+        border-radius: 16px !important;
     }
     
     .bg-msg-user {
-        border-radius: 16px 16px 4px 16px !important;
+        border-radius: 16px !important;
+    }
+    
+    /* 确保代码块不超出屏幕宽度 */
+    .bg-msg-ai pre,
+    .bg-msg-user pre,
+    .bg-msg-system pre {
+        max-width: 100% !important;
+        white-space: pre-wrap !important;
+    }
+    
+    .message-content code {
+        white-space: pre-wrap !important;
+        word-break: break-word !important;
+    }
+    
+    /* 用户信息和头像样式 */
+    .wechat-nickname {
+        font-size: 12px !important;
+    }
+    
+    /* 系统消息样式 */
+    .system-message .wechat-message-container {
+        max-width: 100% !important;
     }
 }
 
@@ -1258,6 +1315,8 @@
     padding: 0.2em 0.4em;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
     font-size: 0.9em;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .message-content pre {
@@ -1266,6 +1325,7 @@
     padding: 16px;
     overflow-x: auto;
     margin: 0.5em 0;
+    max-width: 100%;
 }
 
 .message-content pre code {
@@ -1273,6 +1333,9 @@
     padding: 0;
     font-size: 0.875em;
     line-height: 1.45;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 /* 引用样式 */

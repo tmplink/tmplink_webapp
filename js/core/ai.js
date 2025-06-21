@@ -891,7 +891,7 @@ class ai {
                     <div class="d-flex flex-column align-items-end mr-2 wechat-message-container">
                         <small class="text-muted wechat-nickname">${userNickname}</small>
                         <div class="bg-msg-user p-3 wechat-bubble-user">
-                            <div class="text-white" style="line-height: 1.4; word-wrap: break-word;">
+                            <div class="text-white message-content" style="line-height: 1.4; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                                 ${this.formatMessageContent(content)}
                             </div>
                         </div>
@@ -913,7 +913,7 @@ class ai {
                     <div class="d-flex flex-column align-items-start wechat-message-container">
                         <small class="text-muted wechat-nickname">${app.languageData.ai_name || '小薇'}</small>
                         <div class="bg-msg-ai p-3 wechat-bubble-ai">
-                            <div class="text-white" style="line-height: 1.4; word-wrap: break-word;">
+                            <div class="text-white message-content" style="line-height: 1.4; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                                 ${this.formatMessageContent(content)}
                             </div>
                         </div>
@@ -925,7 +925,7 @@ class ai {
             messageHtml = `
                 <div class="d-flex justify-content-center mb-3 ai-message">
                     <div class="bg-msg-system px-3 py-2 wechat-bubble-system wechat-message-container system">
-                        <div class="text-center text-dark" style="font-size: 13px; line-height: 1.4;">
+                        <div class="text-center text-dark message-content" style="font-size: 13px; line-height: 1.4; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                             ${this.formatMessageContent(content)}
                         </div>
                     </div>
@@ -1098,15 +1098,17 @@ class ai {
      */
     createMobileThinkingIndicator() {
         return `
-            <div class="d-flex justify-content-start align-items-start mb-3 thinking-indicator">
-                <div class="wechat-avatar mr-2">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center w-100 h-100 wechat-ai-avatar">
-                        <iconpark-icon name="star-one" class="text-white" style="font-size: 20px;"></iconpark-icon>
+            <div class="mb-3 mobile-message ai-message thinking-indicator">
+                <div class="d-flex justify-content-start align-items-center mb-1">
+                    <div class="wechat-avatar mr-2" style="width: 24px; height: 24px;">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center w-100 h-100 wechat-ai-avatar">
+                            <iconpark-icon name="star-one" class="text-white" style="font-size: 12px;"></iconpark-icon>
+                        </div>
                     </div>
-                </div>
-                <div class="d-flex flex-column align-items-start wechat-message-container">
                     <small class="text-muted wechat-nickname">小薇</small>
-                    <div class="bg-msg-ai p-3 wechat-bubble-ai">
+                </div>
+                <div class="d-flex justify-content-start">
+                    <div class="bg-msg-ai p-3 wechat-bubble-ai wechat-message-container">
                         <div class="text-white" style="opacity: 0.8;">
                             <div class="typing-dots">
                                 <span></span><span></span><span></span>
@@ -1184,35 +1186,39 @@ class ai {
         const userNickname = $('.user_saved_nickname').first().text() || (app.languageData.ai_user || '用户')
         
         if (isUser) {
-            // 用户消息：微信风格，头像在右侧
+            // 用户消息：新布局，头像和名字在上方一行，消息在下方
             return `
-                <div class="d-flex justify-content-end align-items-start mb-3">
-                    <div class="d-flex flex-column align-items-end mr-2 wechat-message-container">
-                        <small class="text-muted wechat-nickname">${userNickname}</small>
-                        <div class="bg-msg-user p-3 wechat-bubble-user">
-                            <div class="text-white" style="line-height: 1.4; word-wrap: break-word;">
+                <div class="mb-3 mobile-message user-message">
+                    <div class="d-flex justify-content-end align-items-center mb-1">
+                        <small class="text-muted wechat-nickname mr-2">${userNickname}</small>
+                        <div class="wechat-avatar" style="width: 24px; height: 24px;">
+                            <img src="${userAvatar}" class="rounded-circle w-100 h-100" style="object-fit: cover;" alt="${app.languageData.ai_user_avatar || '用户头像'}">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div class="bg-msg-user p-3 wechat-bubble-user wechat-message-container">
+                            <div class="text-white message-content" style="line-height: 1.4; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                                 ${this.formatMessageContent(message.content)}
                             </div>
                         </div>
                     </div>
-                    <div class="wechat-avatar">
-                        <img src="${userAvatar}" class="rounded-circle w-100 h-100" style="object-fit: cover;" alt="${app.languageData.ai_user_avatar || '用户头像'}">
-                    </div>
                 </div>
             `
         } else if (isAssistant) {
-            // AI消息：微信风格，头像在左侧
+            // AI消息：新布局，头像和名字在上方一行，消息在下方
             return `
-                <div class="d-flex justify-content-start align-items-start mb-3">
-                    <div class="wechat-avatar mr-2">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center w-100 h-100 wechat-ai-avatar">
-                            <iconpark-icon name="star-one" class="text-white" style="font-size: 20px;"></iconpark-icon>
+                <div class="mb-3 mobile-message ai-message">
+                    <div class="d-flex justify-content-start align-items-center mb-1">
+                        <div class="wechat-avatar mr-2" style="width: 24px; height: 24px;">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center w-100 h-100 wechat-ai-avatar">
+                                <iconpark-icon name="star-one" class="text-white" style="font-size: 12px;"></iconpark-icon>
+                            </div>
                         </div>
-                    </div>
-                    <div class="d-flex flex-column align-items-start wechat-message-container">
                         <small class="text-muted wechat-nickname">${app.languageData.ai_name || '小薇'}</small>
-                        <div class="bg-msg-ai p-3 wechat-bubble-ai">
-                            <div class="text-white" style="line-height: 1.4; word-wrap: break-word;">
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <div class="bg-msg-ai p-3 wechat-bubble-ai wechat-message-container">
+                            <div class="text-white message-content" style="line-height: 1.4; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                                 ${this.formatMessageContent(message.content)}
                             </div>
                         </div>
@@ -1220,11 +1226,11 @@ class ai {
                 </div>
             `
         } else {
-            // 系统消息：居中显示
+            // 系统消息：宽度占满，更好的空间利用
             return `
-                <div class="d-flex justify-content-center mb-3">
-                    <div class="bg-msg-system px-3 py-2 wechat-bubble-system wechat-message-container system">
-                        <div class="text-center text-dark" style="font-size: 13px; line-height: 1.4;">
+                <div class="mb-3 mobile-message system-message">
+                    <div class="bg-msg-system px-3 py-2 wechat-message-container system" style="width: 100%;">
+                        <div class="text-center text-dark message-content" style="font-size: 13px; line-height: 1.4; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word;">
                             ${this.formatMessageContent(message.content)}
                         </div>
                     </div>
