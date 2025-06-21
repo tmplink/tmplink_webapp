@@ -42,7 +42,7 @@ class notes {
         //     }, 10000);
         // }
         //修补UI，移动设备时，修正按钮高度
-        $('.mobile-head-padding-large').css('padding-top', '160px');
+        $('.mobile-head-padding-large').css('padding-top', '110px');
     }
 
     cleanKey() {

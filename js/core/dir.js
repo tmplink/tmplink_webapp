@@ -574,7 +574,7 @@ class dir {
 
     mobileTopabrFix(mrid) {
         if (mrid === 0) {
-            $('.mobile-head-padding-large').css('padding-top', '110px');
+            $('.mobile-head-padding-large').css('padding-top', '80px');
             $('.btn_mobile_top').hide();
             $('.btn_mobile_sub').show();
         } else {
@@ -582,9 +582,9 @@ class dir {
             $('.btn_mobile_sub').hide();
             //根据 room_subinfo 的显示状态来设定 padding-top 的值
             if ($('.room_subinfo').css('display') === 'none') {
-                $('.mobile-head-padding-large').css('padding-top', '200px');
+                $('.mobile-head-padding-large').css('padding-top', '150px');
             } else {
-                $('.mobile-head-padding-large').css('padding-top', '204px');
+                $('.mobile-head-padding-large').css('padding-top', '180px');
             }
         }
     }

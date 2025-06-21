@@ -60,7 +60,7 @@ class ai {
         TL.workspace_navbar()
         
         // 移动端UI调整
-        $('.mobile-head-padding-large').css('padding-top', '130px')
+        $('.mobile-head-padding-large').css('padding-top', '100px')
     }
     
     /**

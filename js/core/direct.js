@@ -53,8 +53,11 @@ class direct {
         }
 
         if (page === '/app' && listview === 'direct') {
-            //如果是移动设备，不执行
-            if (!isMobileScreen()) {
+            //如果是移动设备
+            if (isMobileScreen()) {
+                // 修正移动设备直链页面头部 padding
+                $('.mobile-head-padding-large').css('padding-top', '160px');
+            } else {
                 //更新下载统计图
                 this.refreshUsage(2, '24H');
             }
