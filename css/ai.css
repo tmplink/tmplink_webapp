@@ -524,12 +524,6 @@
         border-radius: 0 8px 8px 0 !important;
     }
     
-    /* 顶部导航栏深色模式 */
-    nav.glass {
-        background-color: rgba(26, 26, 26, 0.95) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-    }
-    
     .mobile-head-large-title {
         color: white !important;
     }
