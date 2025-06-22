@@ -1226,9 +1226,9 @@
         border-color: rgba(255, 255, 255, 0.1) !important;
     }
 
-    .card-body {
+    /* .card-body {
         background-color: #363434 !important;
-    }
+    } */
 
     #ai_messages {
         background-color: transparent !important;
