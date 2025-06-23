@@ -6,8 +6,10 @@ class BingWallpaperManager {
     constructor() {
         this.cacheKey = 'bing_wallpaper_cache';
         this.lastUpdateKey = 'bing_wallpaper_last_update';
-        this.updateInterval = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+        this.updateInterval = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
         this.apiBaseUrl = 'https://api.bimg.cc';
+        this.errorRetryDelay = 5000; // 5 seconds delay before retrying after 404
+        this.maxRetries = 3; // Maximum number of retry attempts
     }
 
     /**
@@ -28,7 +30,23 @@ class BingWallpaperManager {
         const cachedData = this.getCachedWallpaper();
         if (cachedData && cachedData.localUrl) {
             console.log('BingWallpaperManager: Applying cached wallpaper immediately');
-            this.applyWallpaper(cachedData.localUrl);
+            // Verify the cached image is still accessible
+            this.verifyImageUrl(cachedData.localUrl)
+                .then(isValid => {
+                    if (isValid) {
+                        this.applyWallpaper(cachedData.localUrl);
+                    } else {
+                        console.log('BingWallpaperManager: Cached image is no longer accessible, fetching new one');
+                        this.fetchAndUpdateWallpaper();
+                    }
+                })
+                .catch(() => {
+                    console.log('BingWallpaperManager: Error verifying cached image, fetching new one');
+                    this.fetchAndUpdateWallpaper();
+                });
+        } else {
+            // No cached wallpaper, fetch new one
+            this.fetchAndUpdateWallpaper();
         }
         
         // Then check if we should update the wallpaper
@@ -71,6 +89,38 @@ class BingWallpaperManager {
         
         const timeSinceUpdate = Date.now() - parseInt(lastUpdate);
         return timeSinceUpdate > this.updateInterval;
+    }
+    
+    /**
+     * Verify if an image URL is still accessible
+     * @param {string} url - The image URL to verify
+     * @returns {Promise<boolean>} - Whether the image is accessible
+     */
+    async verifyImageUrl(url) {
+        try {
+            const response = await fetch(url, { method: 'HEAD' });
+            return response.ok;
+        } catch (error) {
+            console.warn('BingWallpaperManager: Error verifying image URL:', error);
+            return false;
+        }
+    }
+    
+    /**
+     * Restore default backgrounds when all fetching attempts fail
+     */
+    restoreDefaultBackgrounds() {
+        console.log('BingWallpaperManager: Restoring default system backgrounds');
+        
+        if (window.TL && window.TL.system_background) {
+            // Restore default SVG backgrounds
+            window.TL.system_background.light = ['/img/bg/light.svg'];
+            window.TL.system_background.dark = ['/img/bg/dark.svg'];
+            
+            // Apply current theme's background
+            const night = window.TL.matchNightModel();
+            window.TL.bgLoadImg1(night);
+        }
     }
 
     /**
@@ -137,9 +187,10 @@ class BingWallpaperManager {
 
     /**
      * Fetch wallpaper data from Bing API
+     * @param {number} retryCount - Current retry attempt count
      * @returns {Promise<object>}
      */
-    async fetchBingWallpaper() {
+    async fetchBingWallpaper(retryCount = 0) {
         try {
             const resolution = this.getResolution();
             
@@ -157,8 +208,19 @@ class BingWallpaperManager {
             const imageUrl = `${this.apiBaseUrl}/today?${params}`;
             
             // Test if the image is accessible
+            console.log(`BingWallpaperManager: Fetching Bing wallpaper (attempt ${retryCount + 1}/${this.maxRetries + 1})`);
             const testResponse = await fetch(imageUrl, { method: 'HEAD' });
+            
             if (!testResponse.ok) {
+                console.warn(`BingWallpaperManager: Image fetch returned status ${testResponse.status}`);
+                
+                if ((testResponse.status === 404 || testResponse.status >= 500) && retryCount < this.maxRetries) {
+                    // For 404 and 5xx errors, retry after delay
+                    console.log(`BingWallpaperManager: Retrying in ${this.errorRetryDelay/1000} seconds...`);
+                    await new Promise(resolve => setTimeout(resolve, this.errorRetryDelay));
+                    return this.fetchBingWallpaper(retryCount + 1);
+                }
+                
                 throw new Error(`Image not accessible: ${testResponse.status}`);
             }
             
@@ -169,17 +231,28 @@ class BingWallpaperManager {
                 date: new Date().toISOString()
             };
         } catch (error) {
-            console.error('Failed to fetch Bing wallpaper:', error);
-            // Try random wallpaper as fallback
+            console.error(`BingWallpaperManager: Failed to fetch Bing wallpaper (attempt ${retryCount + 1}/${this.maxRetries + 1}):`, error);
+            
+            if (retryCount < this.maxRetries) {
+                // Try again with exponential backoff
+                const backoffDelay = this.errorRetryDelay * Math.pow(1.5, retryCount);
+                console.log(`BingWallpaperManager: Retrying in ${backoffDelay/1000} seconds...`);
+                await new Promise(resolve => setTimeout(resolve, backoffDelay));
+                return this.fetchBingWallpaper(retryCount + 1);
+            }
+            
+            // All retries failed, try random wallpaper as fallback
+            console.log('BingWallpaperManager: Max retries reached, switching to random wallpaper');
             return this.fetchRandomWallpaper();
         }
     }
 
     /**
      * Fetch random wallpaper as fallback
+     * @param {number} retryCount - Current retry attempt count
      * @returns {Promise<object>}
      */
-    async fetchRandomWallpaper() {
+    async fetchRandomWallpaper(retryCount = 0) {
         try {
             const resolution = this.getResolution();
             
@@ -195,6 +268,23 @@ class BingWallpaperManager {
             
             const imageUrl = `${this.apiBaseUrl}/random?${params}`;
             
+            // Verify the image is accessible
+            console.log(`BingWallpaperManager: Fetching random wallpaper (attempt ${retryCount + 1}/${this.maxRetries + 1})`);
+            const testResponse = await fetch(imageUrl, { method: 'HEAD' });
+            
+            if (!testResponse.ok) {
+                console.warn(`BingWallpaperManager: Random image fetch returned status ${testResponse.status}`);
+                
+                if ((testResponse.status === 404 || testResponse.status >= 500) && retryCount < this.maxRetries) {
+                    // For 404 and 5xx errors, retry after delay
+                    console.log(`BingWallpaperManager: Retrying random wallpaper in ${this.errorRetryDelay/1000} seconds...`);
+                    await new Promise(resolve => setTimeout(resolve, this.errorRetryDelay));
+                    return this.fetchRandomWallpaper(retryCount + 1);
+                }
+                
+                throw new Error(`Random image not accessible: ${testResponse.status}`);
+            }
+            
             return {
                 url: imageUrl,
                 title: 'Bing Random Wallpaper',
@@ -202,7 +292,18 @@ class BingWallpaperManager {
                 date: new Date().toISOString()
             };
         } catch (error) {
-            console.error('Random wallpaper fetch also failed:', error);
+            console.error(`BingWallpaperManager: Random wallpaper fetch failed (attempt ${retryCount + 1}/${this.maxRetries + 1}):`, error);
+            
+            if (retryCount < this.maxRetries) {
+                // Try again with exponential backoff
+                const backoffDelay = this.errorRetryDelay * Math.pow(1.5, retryCount);
+                console.log(`BingWallpaperManager: Retrying random wallpaper in ${backoffDelay/1000} seconds...`);
+                await new Promise(resolve => setTimeout(resolve, backoffDelay));
+                return this.fetchRandomWallpaper(retryCount + 1);
+            }
+            
+            // All retries failed
+            console.error('BingWallpaperManager: All random wallpaper fetch attempts failed');
             return null;
         }
     }
@@ -266,8 +367,9 @@ class BingWallpaperManager {
     /**
      * Preload image and apply with fadeIn effect
      * @param {string} imageUrl - URL of the image to preload and apply
+     * @param {number} retryCount - Current retry attempt count
      */
-    preloadAndApplyImage(imageUrl) {
+    preloadAndApplyImage(imageUrl, retryCount = 0) {
         console.log('BingWallpaperManager: Preloading image:', imageUrl);
         
         // Create a new image element to preload
@@ -284,18 +386,39 @@ class BingWallpaperManager {
                 
                 // Apply the wallpaper with fadeIn effect
                 this.applyWithFadeIn(imageUrl);
+                
+                // Cache the successfully loaded image data
+                const cachedData = this.getCachedWallpaper() || {};
+                cachedData.localUrl = imageUrl;
+                cachedData.date = new Date().toISOString();
+                this.cacheWallpaper(cachedData);
             }
         };
         
         img.onerror = () => {
-            console.error('BingWallpaperManager: Failed to load image:', imageUrl);
-            // Try to fetch a new wallpaper as fallback
-            this.fetchRandomWallpaper().then(fallbackData => {
-                if (fallbackData) {
-                    console.log('BingWallpaperManager: Trying fallback wallpaper');
-                    this.preloadAndApplyImage(fallbackData.url);
-                }
-            });
+            console.error(`BingWallpaperManager: Failed to load image (attempt ${retryCount + 1}/${this.maxRetries + 1}):`, imageUrl);
+            
+            if (retryCount < this.maxRetries) {
+                // Try another random wallpaper
+                console.log(`BingWallpaperManager: Retrying with a different image in ${this.errorRetryDelay/1000} seconds...`);
+                setTimeout(() => {
+                    this.fetchRandomWallpaper().then(fallbackData => {
+                        if (fallbackData && fallbackData.url !== imageUrl) {
+                            console.log('BingWallpaperManager: Trying fallback wallpaper');
+                            this.preloadAndApplyImage(fallbackData.url, retryCount + 1);
+                        } else {
+                            console.error('BingWallpaperManager: Failed to get a valid fallback image');
+                            this.restoreDefaultBackgrounds();
+                        }
+                    }).catch(() => {
+                        console.error('BingWallpaperManager: Error fetching fallback wallpaper');
+                        this.restoreDefaultBackgrounds();
+                    });
+                }, this.errorRetryDelay);
+            } else {
+                console.error('BingWallpaperManager: Maximum retry attempts reached, restoring default backgrounds');
+                this.restoreDefaultBackgrounds();
+            }
         };
         
         // Start loading the image
