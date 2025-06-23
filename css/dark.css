@@ -300,10 +300,7 @@ body.dark-mode .text-azure .iconpark-icon {
     }
 
     .card {
-        background-color: #181818e6 !important;
-        /* 添加毛玻璃效果 */
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        background-color: #363434 !important;
     }
 
     .table {
