@@ -1,13 +1,43 @@
 /**
- * 复制内容到剪贴板的现代化实现
+ * 复制内容到剪贴板的现代化实现，带有后备方案
  * @param {string} content 要复制的文本内容
  * @returns {Promise<void>} 返回一个 Promise，复制成功时 resolve，失败时 reject
  */
 async function copyToClip(content) {
     try {
-        await navigator.clipboard.writeText(content);
+        // 首先尝试使用现代的 Clipboard API
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+            await navigator.clipboard.writeText(content);
+            return;
+        }
+        
+        // 后备方案：使用传统的 document.execCommand 方法
+        const textArea = document.createElement('textarea');
+        textArea.value = content;
+        
+        // 设置样式使元素不可见
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        // 执行复制命令
+        const success = document.execCommand('copy');
+        
+        // 清理
+        document.body.removeChild(textArea);
+        
+        if (!success) {
+            throw new Error("Clipboard operation failed");
+        }
     } catch (err) {
-        throw new Error("Clipboard API not supported");
+        console.error("复制失败:", err);
+        // 尝试最后的方法：提示用户手动复制
+        alert("自动复制失败，请手动复制: " + content);
+        throw err;
     }
 }
 

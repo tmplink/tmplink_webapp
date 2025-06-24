@@ -15,6 +15,9 @@ class tmplink {
     api_tokx = this.api_url + '/token'
     api_token = null
     current_file_details = null // 当前文件详情
+    current_file_download_url = null // 当前文件下载链接
+    current_file_curl_command = null // 当前文件 curl 命令
+    current_file_wget_command = null // 当前文件 wget 命令
     site_domain = null
     isSponsor = false
 
@@ -1329,15 +1332,24 @@ class tmplink {
                             showError: (message) => this.alert(message)
                         };
 
-                        this.download.handleFileDownload({
-                            ukey: params.ukey,
-                            filename: fileinfo.name,
-                            mode: 'fast'
-                        }, uiCallbacks);
+                        // 如果已经预加载了下载链接，直接使用
+                        if (this.current_file_download_url) {
+                            this.download.startDirectDownload({
+                                url: this.current_file_download_url,
+                                filename: fileinfo.name,
+                                mode: 'fast'
+                            }, uiCallbacks);
+                        } else {
+                            // 否则走正常流程，通过 API 获取链接
+                            this.download.handleFileDownload({
+                                ukey: params.ukey,
+                                filename: fileinfo.name,
+                                mode: 'fast'
+                            }, uiCallbacks);
+                        }
                     });
 
                     $('#file_download_btn_normal').on('click', () => {
-                        // 原有的普通下载逻辑
                         const uiCallbacks = {
                             updateButtonText: (text) => $('#file_download_btn_normal').html(text),
                             updateButtonState: (disabled) => $('#file_download_btn_normal').attr('disabled', disabled),
@@ -1347,11 +1359,21 @@ class tmplink {
                             showError: (message) => this.alert(message)
                         };
 
-                        this.download.handleFileDownload({
-                            ukey: params.ukey,
-                            filename: fileinfo.name,
-                            mode: 'normal'
-                        }, uiCallbacks);
+                        // 如果已经预加载了下载链接，直接使用
+                        if (this.current_file_download_url) {
+                            this.download.startDirectDownload({
+                                url: this.current_file_download_url,
+                                filename: fileinfo.name,
+                                mode: 'normal'
+                            }, uiCallbacks);
+                        } else {
+                            // 否则走正常流程，通过 API 获取链接
+                            this.download.handleFileDownload({
+                                ukey: params.ukey,
+                                filename: fileinfo.name,
+                                mode: 'normal'
+                            }, uiCallbacks);
+                        }
                     });
 
                     //扫码下载按钮绑定
@@ -1381,24 +1403,12 @@ class tmplink {
                         $('#btn_highdownload').hide();
                     }
 
-                    //复制链接按钮绑定
-                    $('#file_download_url_copy').on('click', async () => {
-                        await copyToClip(share_url);
-                        $('#file_download_url_copy_icon').html('<iconpark-icon name="circle-check" class="fa-fw mx-auto my-auto mb-2text-green fa-3x"></iconpark-icon>');
-                        setTimeout(() => {
-                            $('#file_download_url_copy_icon').html('<iconpark-icon name="share-all" class="fa-fw mx-auto my-auto mb-2 fa-3x text-cyan"></iconpark-icon>');
-                        }, 3000);
-                    });
+                    // 复制链接按钮绑定已移动到HTML的onclick属性，使用copyFileUrl方法
 
                     //复制提取码按钮绑定
-                    $('#file_download_ukey_copy').on('click', async () => {
-                        await copyToClip(params.ukey);
-                        $('#file_download_ukey_copy_icon').removeClass('text-cyan');
-                        $('#file_download_ukey_copy_icon').addClass('text-success');
-                        setTimeout(() => {
-                            $('#file_download_ukey_copy_icon').addClass('text-cyan');
-                            $('#file_download_ukey_copy_icon').removeClass('text-success');
-                        }, 3000);
+                    $('#file_download_ukey_copy').on('click', () => {
+                        // 使用简洁版复制函数，不显示通知横幅，不使用批量复制功能
+                        this.simpleCopy($('#file_download_ukey_copy_icon')[0], params.ukey);
                     });
 
                     //添加到收藏按钮绑定
@@ -1425,6 +1435,9 @@ class tmplink {
                     $('#btn_report_file').on('click', () => {
                         $('#reportModal').modal('show');
                     });
+
+                    // 预先获取下载链接，这样用户点击复制按钮时可以立即使用
+                    this.preloadDownloadUrl(params.ukey, fileinfo.name);
 
                     $('#file_loading').fadeOut(100);
                     $('#file_op').fadeIn(300);
@@ -1491,47 +1504,101 @@ class tmplink {
         this.loading_box_off();
     }
 
+    // 预先获取下载链接，以便复制功能可以立即使用
+    preloadDownloadUrl(ukey, filename) {
+        // 如果已经有下载链接，不再重复获取
+        if (this.current_file_download_url) {
+            return;
+        }
+        
+        // 预先获取下载链接
+        this.recaptcha_do('download_req', (recaptcha) => {
+            $.post(this.api_file, {
+                action: 'download_req',
+                captcha: recaptcha,
+                token: this.api_token,
+                ukey: ukey
+            }, (rsp) => {
+                if (rsp.status === 1) {
+                    // 保存下载链接和命令以便后续使用
+                    this.current_file_download_url = rsp.data;
+                    this.current_file_curl_command = `curl -Lo "${filename}" ${rsp.data}`;
+                    this.current_file_wget_command = `wget -O "${filename}" ${rsp.data}`;
+                    console.log("Download URL preloaded successfully");
+                }
+            });
+        });
+    }
+    
     file_page_btn_copy(ukey, filename, type) {
         //显示载入动画
         $('#file_btn_download_opt').html('<img src="/img/loading-outline.svg" class="fa-fw"/>');
+
+        // 如果已经有预先获取的下载URL，直接使用而不再请求API
+        if (this.current_file_download_url) {
+            let content = '';
+            switch (type) {
+                case 'other':
+                    content = this.current_file_download_url;
+                    break;
+                case 'curl':
+                    content = this.current_file_curl_command || `curl -Lo "${filename}" ${this.current_file_download_url}`;
+                    break;
+                case 'wget':
+                    content = this.current_file_wget_command || `wget -O "${filename}" ${this.current_file_download_url}`;
+                    break;
+            }
+            
+            // 使用简洁版复制函数，不显示通知横幅，不使用批量复制功能
+            this.simpleCopy($('#file_btn_download_opt')[0], content);
+            
+            // 延时恢复原始文本
+            setTimeout(() => {
+                $('#file_btn_download_opt').html(app.languageData.file_btn_download_opt);
+            }, 3000);
+            
+            return;
+        }
+
+        // 没有预先获取的下载URL时，请求API
         this.recaptcha_do('download_req', (recaptcha) => {
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', this.api_file, true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            const data = `action=download_req&ukey=${encodeURIComponent(ukey)}&token=${encodeURIComponent(this.api_token)}&captcha=${encodeURIComponent(recaptcha)}`;
-            xhr.responseType = 'json';
-            // 定义响应处理函数
-            xhr.onload = async () => {
-                if (xhr.status === 200) {
-                    const req = xhr.response;
-                    if (req.status === 1) {
-                        switch (type) {
-                            case 'other':
-                                await copyToClip(req.data);
-                                break;
-                            case 'curl':
-                                await copyToClip(`curl -Lo "${filename}" ${req.data}`);
-                                break;
-                            case 'wget':
-                                await copyToClip(`wget -O  "${filename}" ${req.data}`);
-                                break;
-                        }
-                        //显示 OK
-                        $('#file_btn_download_opt').html('<iconpark-icon name="circle-check" class="fa-fw text-green"></iconpark-icon>');
-                        setTimeout(() => {
-                            $('#file_btn_download_opt').html(app.languageData.file_btn_download_opt);
-                        }, 3000);
-                    } else {
-                        // 发生未知错误，需要刷新页面
-                        this.alert(app.languageData.status_file_2);
+            $.post(this.api_file, {
+                action: 'download_req',
+                captcha: recaptcha,
+                token: this.api_token,
+                ukey: ukey
+            }, (rsp) => {
+                if (rsp.status === 1) {
+                    // 保存下载链接和命令以便后续使用
+                    this.current_file_download_url = rsp.data;
+                    this.current_file_curl_command = `curl -Lo "${filename}" ${rsp.data}`;
+                    this.current_file_wget_command = `wget -O "${filename}" ${rsp.data}`;
+                    
+                    let content = '';
+                    switch (type) {
+                        case 'other':
+                            content = rsp.data;
+                            break;
+                        case 'curl':
+                            content = this.current_file_curl_command;
+                            break;
+                        case 'wget':
+                            content = this.current_file_wget_command;
+                            break;
                     }
+                    
+                    // 使用简洁版复制函数，不显示通知横幅，不使用批量复制功能
+                    this.simpleCopy($('#file_btn_download_opt')[0], content);
+                    
+                    // 延时恢复原始文本
+                    setTimeout(() => {
+                        $('#file_btn_download_opt').html(app.languageData.file_btn_download_opt);
+                    }, 3000);
                 } else {
-                    //请求失败，网络异常
-                    this.alert(app.languageData.direct_brand_logo_set_unknow);
+                    // 发生未知错误，需要刷新页面
+                    this.alert(app.languageData.status_file_2);
                 }
-            };
-            // 发送请求
-            xhr.send(data);
+            });
         });
     }
 
@@ -2592,66 +2659,95 @@ class tmplink {
     }
 
     async bulkCopy(dom, content, base64) {
-
-        //如果传递进来的内容是 base64 编码的内容，先解码
-        if (base64 === true) {
-            content = Base64Decode(content);
-        }
-
-        if (dom !== null) {
-            let tmp = $(dom).html();
-            $(dom).html('<iconpark-icon name="circle-check" class="fa-fw"></iconpark-icon>');
-            setTimeout(() => {
-                $(dom).html(tmp);
-            }, 3000);
-        }
-
-
-        if (this.profile_bulk_copy_get()) {
-            //如果启用了批量复制，检查目前是否处于定时器状态
-            if (this.bulkCopyTimer !== 0) {
-                //处于定时器状态，先取消。
-                clearTimeout(this.bulkCopyTimer);
-                this.bulkCopyTimer = 0;
-            } else {
-                $.notifi(app.languageData.notify_bulk_copy_start, "success");
+        try {
+            //如果传递进来的内容是 base64 编码的内容，先解码
+            if (base64 === true) {
+                content = Base64Decode(content);
             }
 
-            //将内容写入到缓存并复制到剪贴板
-            this.bulkCopyTmp += content + " \n";
-            await copyToClip(this.bulkCopyTmp);
-            //设置一个10秒缓存器
-            this.bulkCopyTimer = setTimeout(() => {
-                this.bulkCopyTimer = 0;
-                this.bulkCopyTmp = '';
-                $.notifi(app.languageData.notify_bulk_copy_finish, "success");
-            }, 10000);
+            let tmp = null;
+            if (dom !== null) {
+                // 保存原始内容用于后续恢复
+                tmp = $(dom).html();
+                // 显示复制成功的图标
+                $(dom).html('<iconpark-icon name="circle-check" class="fa-fw"></iconpark-icon>');
+            }
 
-        } else {
-            //直接复制
-            $.notifi(app.languageData.copied, "success",);
-            await copyToClip(content);
+            if (this.profile_bulk_copy_get()) {
+                //如果启用了批量复制，检查目前是否处于定时器状态
+                if (this.bulkCopyTimer !== 0) {
+                    //处于定时器状态，先取消。
+                    clearTimeout(this.bulkCopyTimer);
+                    this.bulkCopyTimer = 0;
+                } else {
+                    $.notifi(app.languageData.notify_bulk_copy_start, "success");
+                }
+
+                //将内容写入到缓存并复制到剪贴板
+                this.bulkCopyTmp += content + " \n";
+                await copyToClip(this.bulkCopyTmp);
+                //设置一个10秒缓存器
+                this.bulkCopyTimer = setTimeout(() => {
+                    this.bulkCopyTimer = 0;
+                    this.bulkCopyTmp = '';
+                    $.notifi(app.languageData.notify_bulk_copy_finish, "success");
+                }, 10000);
+
+            } else {
+                //直接复制
+                $.notifi(app.languageData.copied, "success");
+                await copyToClip(content);
+            }
+            
+            // 复制成功后延时恢复原始内容
+            if (dom !== null && tmp !== null) {
+                setTimeout(() => {
+                    $(dom).html(tmp);
+                }, 3000);
+            }
+        } catch (error) {
+            console.error("复制失败:", error);
+            
+            // 复制失败时恢复原始内容
+            if (dom !== null && tmp !== null) {
+                $(dom).html(tmp);
+            }
         }
     }
 
     async directCopy(dom, content, base64) {
+        try {
+            //如果传递进来的内容是 base64 编码的内容，先解码
+            if (base64 === true) {
+                content = Base64Decode(content);
+            }
 
-        //如果传递进来的内容是 base64 编码的内容，先解码
-        if (base64 === true) {
-            content = Base64Decode(content);
-        }
+            let tmp = null;
+            if (dom !== null) {
+                // 保存原始内容用于后续恢复
+                tmp = $(dom).html();
+                // 显示复制成功的图标
+                $(dom).html('<iconpark-icon name="circle-check" class="fa-fw"></iconpark-icon>');
+            }
 
-        if (dom !== null) {
-            let tmp = $(dom).html();
-            $(dom).html('<iconpark-icon name="circle-check" class="fa-fw"></iconpark-icon>');
-            setTimeout(() => {
+            //直接复制
+            $.notifi(app.languageData.copied, "success");
+            await copyToClip(content);
+            
+            // 复制成功后延时恢复原始内容
+            if (dom !== null && tmp !== null) {
+                setTimeout(() => {
+                    $(dom).html(tmp);
+                }, 3000);
+            }
+        } catch (error) {
+            console.error("复制失败:", error);
+            
+            // 复制失败时恢复原始内容
+            if (dom !== null && tmp !== null) {
                 $(dom).html(tmp);
-            }, 3000);
+            }
         }
-
-        //直接复制
-        $.notifi(app.languageData.copied, "success",);
-        await copyToClip(content);
     }
 
     randomString(len) {
@@ -2663,6 +2759,64 @@ class tmplink {
             pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
         }
         return pwd;
+    }
+
+    // 提供简洁版的复制方法，不使用批量复制功能和通知横幅
+    copyFileUrl() {
+        // 获取当前URL参数
+        const params = this.get_url_params();
+        // 复制分享链接（不是下载链接）
+        const shareUrl = `https://${this.site_domain}/f/${params.ukey}`;
+        // 使用简单复制，不使用批量复制
+        this.simpleCopy(event.target, shareUrl);
+    }
+    
+    // 简洁版复制函数，不使用批量复制功能和通知横幅
+    async simpleCopy(dom, content) {
+        try {
+            // 复制内容到剪贴板
+            await copyToClip(content);
+            
+            // 如果提供了DOM元素，显示视觉反馈
+            if (dom) {
+                let icon = null;
+                
+                // 检查dom是否是按钮元素
+                if (dom.tagName === 'BUTTON') {
+                    // 如果是按钮，查找其中的图标元素
+                    icon = $(dom).closest('.btn-point').find('iconpark-icon')[0];
+                } else {
+                    // 否则假设dom已经是图标容器
+                    icon = $(dom).find('iconpark-icon')[0];
+                    if (!icon) {
+                        // 尝试获取父元素中的图标
+                        icon = $(dom).closest('.fileicon').find('iconpark-icon')[0];
+                    }
+                }
+                
+                // 如果找到图标元素，改变其为成功图标
+                if (icon) {
+                    const originalName = $(icon).attr('name');
+                    const originalClass = $(icon).attr('class');
+                    
+                    // 保存原始状态用于还原
+                    $(icon).data('original-name', originalName);
+                    $(icon).data('original-class', originalClass);
+                    
+                    // 更改为成功图标
+                    $(icon).attr('name', 'circle-check');
+                    $(icon).removeClass('text-cyan').addClass('text-green');
+                    
+                    // 3秒后恢复原状
+                    setTimeout(() => {
+                        $(icon).attr('name', $(icon).data('original-name'));
+                        $(icon).attr('class', $(icon).data('original-class'));
+                    }, 3000);
+                }
+            }
+        } catch (error) {
+            console.error('Copy failed:', error);
+        }
     }
 
     leftTimeString(time) {

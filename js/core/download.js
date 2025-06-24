@@ -965,4 +965,77 @@ class download {
     abortMultiThreadDownload() {
         this.cleanupMultiThreadDownload();
     }
+    
+    // 直接使用已知的下载链接开始下载，避免重复请求API
+    async startDirectDownload(params, uiCallbacks) {
+        const {
+            updateButtonText,
+            updateButtonState,
+            updateButtonClass,
+            showError
+        } = uiCallbacks;
+
+        let downloadBtnText = params.mode === 'fast' ? 
+            app.languageData.file_btn_download_fast : 
+            app.languageData.file_btn_download;
+
+        try {
+            updateButtonClass('btn-success', 'btn-azure');
+            updateButtonText('<img src="/img/loading-outline.svg" style="width: 24px;">');
+            updateButtonState(true);
+
+            if (params.url) {
+                if (params.mode === 'fast') {
+                    try {
+                        // 获取文件大小以决定使用哪种下载方式
+                        const headResponse = await fetch(params.url, { method: 'HEAD' });
+                        if (headResponse.ok) {
+                            const fileSize = parseInt(headResponse.headers.get('content-length'));
+                            
+                            // 小文件使用浏览器直接下载
+                            if (fileSize > 0 && fileSize < this.SMALL_FILE_THRESHOLD) {
+                                console.log(`Small file detected (${this.formatBytes(fileSize)}), using direct download`);
+                                window.location.href = params.url;
+                            } else {
+                                // 大文件使用分块下载
+                                await this.startMultiThreadDownload(params.url, params.filename);
+                            }
+                        } else {
+                            // 如果无法获取文件大小，则使用分块下载
+                            await this.startMultiThreadDownload(params.url, params.filename);
+                        }
+                    } catch (error) {
+                        console.error('Multi-thread download failed, fallback to normal download:', error);
+                        // 显示用户友好的错误消息
+                        showError(app.languageData.download_error_retry || '网络不稳定，下载失败，请重试');
+                        // 还原按钮状态
+                        updateButtonClass('btn-azure', 'btn-success');
+                        updateButtonText(downloadBtnText);
+                        updateButtonState(false);
+                        return false;
+                    }
+                } else {
+                    // 普通下载模式
+                    window.location.href = params.url;
+                }
+
+                setTimeout(() => {
+                    updateButtonClass('btn-azure', 'btn-success');
+                    updateButtonText(downloadBtnText);
+                    updateButtonState(false);
+                }, 3000);
+
+                return true;
+            } else {
+                throw new Error('No download URL provided');
+            }
+        } catch (error) {
+            showError(app.languageData.status_file_2 || '下载请求失败');
+            // 还原按钮状态
+            updateButtonClass('btn-azure', 'btn-success');
+            updateButtonText(downloadBtnText);
+            updateButtonState(false);
+            return false;
+        }
+    }
 }
