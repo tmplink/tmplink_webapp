@@ -209,11 +209,11 @@ iconpark-icon.fa-fw {
 .userinfo_card_intro {
     color: #666;
     font-size: 13px;
-    line-height: 1.4;
+    line-height: 1.5;
     display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
     max-width: 210px;
 }
 

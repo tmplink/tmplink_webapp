@@ -6,8 +6,18 @@ class BingWallpaperManager {
     constructor() {
         this.cacheKey = 'bing_wallpaper_cache';
         this.lastUpdateKey = 'bing_wallpaper_last_update';
-        this.updateInterval = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-        this.apiBaseUrl = 'https://api.bimg.cc';
+        this.updateInterval = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
+        this.localWallpapers = [
+            '/img/bimg/wallpaper_1.jpg',
+            '/img/bimg/wallpaper_2.jpg',
+            '/img/bimg/wallpaper_3.jpg',
+            '/img/bimg/wallpaper_4.jpg',
+            '/img/bimg/wallpaper_5.jpg',
+            '/img/bimg/wallpaper_6.jpg',
+            '/img/bimg/wallpaper_7.jpg',
+            '/img/bimg/wallpaper_8.jpg'
+        ];
+        this.currentWallpaperIndexKey = 'bing_wallpaper_current_index';
     }
 
     /**
@@ -103,118 +113,92 @@ class BingWallpaperManager {
     }
 
     /**
-     * Get appropriate resolution based on screen size
-     * @returns {object} {w: width, h: height}
+     * Get the current wallpaper index based on time
+     * @returns {number}
      */
-    getResolution() {
-        const width = window.screen.width * window.devicePixelRatio;
-        const height = window.screen.height * window.devicePixelRatio;
+    getCurrentWallpaperIndex() {
+        const lastUpdate = localStorage.getItem(this.lastUpdateKey);
+        const currentIndex = parseInt(localStorage.getItem(this.currentWallpaperIndexKey) || '-1');
         
-        // Common resolutions supported by the API
-        const resolutions = [
-            { w: 1920, h: 1200 },
-            { w: 1920, h: 1080 },
-            { w: 1366, h: 768 },
-            { w: 1280, h: 720 },
-            { w: 1024, h: 768 },
-            { w: 800, h: 600 }
-        ];
-        
-        // Find the best matching resolution
-        let bestMatch = resolutions[0];
-        for (const res of resolutions) {
-            if (width <= res.w && height <= res.h) {
-                bestMatch = res;
-                break;
-            }
+        // If this is the first time (no lastUpdate or currentIndex is -1)
+        if (!lastUpdate || currentIndex === -1) {
+            // Start with the first wallpaper
+            localStorage.setItem(this.currentWallpaperIndexKey, '0');
+            return 0;
         }
         
-        // Check if we should use UHD
-        const uhd = width > 1920 || height > 1200;
+        // If we should update (12 hours have passed)
+        if (this.shouldUpdate()) {
+            // Move to next wallpaper
+            const nextIndex = (currentIndex + 1) % this.localWallpapers.length;
+            localStorage.setItem(this.currentWallpaperIndexKey, nextIndex.toString());
+            return nextIndex;
+        }
         
-        return { w: bestMatch.w, h: bestMatch.h, uhd };
+        // Otherwise, return the current wallpaper
+        return currentIndex;
     }
 
     /**
-     * Fetch wallpaper data from Bing API
+     * Fetch wallpaper data from local files
      * @returns {Promise<object>}
      */
     async fetchBingWallpaper() {
         try {
-            const resolution = this.getResolution();
-            
-            // Build URL with parameters
-            const params = new URLSearchParams({
-                w: resolution.w,
-                h: resolution.h,
-                mkt: 'zh-CN'
-            });
-            
-            if (resolution.uhd) {
-                params.append('uhd', 'true');
-            }
-            
-            const imageUrl = `${this.apiBaseUrl}/today?${params}`;
-            
-            // Test if the image is accessible
-            const testResponse = await fetch(imageUrl, { method: 'HEAD' });
-            if (!testResponse.ok) {
-                throw new Error(`Image not accessible: ${testResponse.status}`);
-            }
+            // Get the current wallpaper based on time
+            const wallpaperIndex = this.getCurrentWallpaperIndex();
+            const imageUrl = this.localWallpapers[wallpaperIndex];
             
             return {
                 url: imageUrl,
-                title: 'Bing Daily Wallpaper',
+                title: `Local Wallpaper ${wallpaperIndex + 1}`,
                 copyright: '',
-                date: new Date().toISOString()
+                date: new Date().toISOString(),
+                index: wallpaperIndex
             };
         } catch (error) {
-            console.error('Failed to fetch Bing wallpaper:', error);
-            // Try random wallpaper as fallback
-            return this.fetchRandomWallpaper();
+            console.error('Failed to fetch local wallpaper:', error);
+            // Fallback to first wallpaper
+            return {
+                url: this.localWallpapers[0],
+                title: 'Local Wallpaper 1',
+                copyright: '',
+                date: new Date().toISOString(),
+                index: 0
+            };
         }
     }
 
     /**
-     * Fetch random wallpaper as fallback
+     * Fetch random wallpaper from local files
      * @returns {Promise<object>}
      */
     async fetchRandomWallpaper() {
         try {
-            const resolution = this.getResolution();
-            
-            // Build URL with parameters for random wallpaper
-            const params = new URLSearchParams({
-                w: resolution.w,
-                h: resolution.h
-            });
-            
-            if (resolution.uhd) {
-                params.append('uhd', 'true');
-            }
-            
-            const imageUrl = `${this.apiBaseUrl}/random?${params}`;
+            // Get a random wallpaper
+            const randomIndex = Math.floor(Math.random() * this.localWallpapers.length);
+            const imageUrl = this.localWallpapers[randomIndex];
             
             return {
                 url: imageUrl,
-                title: 'Bing Random Wallpaper',
+                title: `Local Wallpaper ${randomIndex + 1}`,
                 copyright: '',
-                date: new Date().toISOString()
+                date: new Date().toISOString(),
+                index: randomIndex
             };
         } catch (error) {
-            console.error('Random wallpaper fetch also failed:', error);
+            console.error('Random wallpaper fetch failed:', error);
             return null;
         }
     }
 
     /**
-     * Download and cache the wallpaper image
+     * Process local wallpaper URL
      * @param {string} url - Image URL
      * @returns {Promise<string>} - Image URL (direct use)
      */
     async downloadImage(url) {
-        // Since api.bimg.cc supports CORS, we can use the URL directly
-        // No need to download and create blob URLs
+        // Local files can be used directly
         return url;
     }
 
@@ -362,12 +346,12 @@ class BingWallpaperManager {
             return false;
         }
         
-        // Check if current background is from Bing (not original SVG)
+        // Check if current background is from local wallpapers (not original SVG)
         const currentLight = window.TL.system_background.light[0];
         const currentDark = window.TL.system_background.dark[0];
         
-        return currentLight && currentLight.includes('api.bimg.cc') && 
-               currentDark && currentDark.includes('api.bimg.cc');
+        return currentLight && currentLight.includes('/img/bimg/wallpaper_') && 
+               currentDark && currentDark.includes('/img/bimg/wallpaper_');
     }
 
     /**
