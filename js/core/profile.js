@@ -105,6 +105,15 @@ class profile {
         if (this.publish == 'yes') {
             $("#userinfo_set_publish").attr('checked', 'checked');
             $('.userinfo_set_publish_submit').show();
+            
+            // Show different notices based on sponsor status during initialization
+            if(this.parent_op.sponsor) {
+                $('.user_review_notice_regular').hide();
+                $('.user_review_notice_vip').show();
+            } else {
+                $('.user_review_notice_regular').show();
+                $('.user_review_notice_vip').hide();
+            }
         } else {
             $("#userinfo_set_publish").removeAttr('checked');
             $('.userinfo_set_publish_submit').hide();
@@ -243,7 +252,7 @@ class profile {
             $('.userinfo_set_publish_submit').show();
             
             // Show different notices based on sponsor status
-            if(this.parent_op.sponsor == 'yes') {
+            if(this.parent_op.sponsor) {
                 $('.user_review_notice_regular').hide();
                 $('.user_review_notice_vip').show();
             } else {
