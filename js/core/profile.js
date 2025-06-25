@@ -241,6 +241,15 @@ class profile {
 
         if(publish=='yes'){
             $('.userinfo_set_publish_submit').show();
+            
+            // Show different notices based on sponsor status
+            if(this.parent_op.sponsor == 'yes') {
+                $('.user_review_notice_regular').hide();
+                $('.user_review_notice_vip').show();
+            } else {
+                $('.user_review_notice_regular').show();
+                $('.user_review_notice_vip').hide();
+            }
         }else{
             $('.userinfo_set_publish_submit').hide();
         }

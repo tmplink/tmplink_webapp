@@ -282,6 +282,7 @@
     "user_review_tos_2": "頭像不應該包含不宜在公共區域展示的內容",
     "user_review_notice1": "在檔案下載頁面和檔案夾頁面，公開您的個人檔案可以讓您的粉絲更容易找到您。 <br>請注意，上傳新的頭像或者修改暱稱和介紹會導致個人檔案進入等待狀態，需要重新提交審核。",
     "user_review_notice2": "您每天可以提交一次審核。",
+    "user_review_notice_vip": "贊助者尊享無限制提交審核特權，10 分鐘內完成審核。",
     "mybg_performance_title": "桌布",
     "mybg_performance_des": "您可以將您喜愛的圖片上傳到鈦盤，然後設置為壁紙。系統會根據是否啟用了深色模式而自動切換。",
     "mybg_performance_reset": "使用預設的桌布",
