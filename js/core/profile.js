@@ -265,7 +265,7 @@ class profile {
                 $('#user_status').html('<iconpark-icon name="timer" class="fa-fw text-blue mr-1"></iconpark-icon>'+app.languageData.brand_status_wait);
                 break;
             case 'review':
-                $('#user_status').html('<iconpark-icon name="circle-user" class="fa-fw text-blue mr-1"></iconpark-icon>'+app.languageData.brand_status_review);
+                $('#user_status').html('<iconpark-icon name="loader" class="fa-fw text-blue mr-1"></iconpark-icon>'+app.languageData.brand_status_review);
                 break;
         }
     }

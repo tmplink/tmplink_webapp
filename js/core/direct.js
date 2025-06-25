@@ -947,7 +947,7 @@ class direct {
                 $('#brand_status').html('<iconpark-icon name="timer" class="fa-fw text-blue mr-1"></iconpark-icon>' + app.languageData.brand_status_wait);
                 break;
             case 'review':
-                $('#brand_status').html('<iconpark-icon name="circle-user" class="fa-fw text-blue mr-1"></iconpark-icon>' + app.languageData.brand_status_review);
+                $('#brand_status').html('<iconpark-icon name="loader" class="fa-fw text-blue mr-1"></iconpark-icon>' + app.languageData.brand_status_review);
                 break;
         }
     }
