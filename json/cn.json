@@ -173,7 +173,7 @@
 
     "navbar_hr_opt": "设置项",
     "navbar_hr_shop": "已购",
-    "navbar_buy": "购买服务",
+    "navbar_buy": "商店",
     "navbar_buy_hs": "高速通道",
     "navbar_buy_storage": "私有空间",
     "navbar_buy_media": "媒体库",
@@ -370,6 +370,7 @@
     "sponsor_right_4": "在文件下载页和文件夹中展示您的个性化头像和签名",
     "sponsor_right_5": "在线点播任意视频",
     "sponsor_right_6": "优先认证",
+    "sponsor_right_7": "更多的智能小薇对话机会",
     "model_title_buy_media": "媒体增强",
     "media_content": "媒体增强将提升您在钛盘的体验。",
     "media_content2": "选购了媒体增强后，您的在线播放请求将会优先排队，并拥有专用的播放服务器。",
