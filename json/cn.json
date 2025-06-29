@@ -470,6 +470,7 @@
     "mybg_set_dark": "设置为壁纸（夜间）",
     "mybg_set_ok": "壁纸设置完成。",
     "mybg_set_fail": "壁纸设置失败。",
+    "set_as_cover": "设置为封面",
     "mybg_performance_title": "壁纸",
     "mybg_performance_des": "您可以将您喜欢的图片上传到钛盘，然后设置为壁纸。系统会根据是否启用了深色模式而自动切换。",
     "mybg_performance_reset": "使用默认的壁纸",

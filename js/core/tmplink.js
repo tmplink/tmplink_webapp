@@ -2160,6 +2160,25 @@ class tmplink {
         });
     }
 
+    file_set_as_cover(ukey, ext) {
+        var newname = 'tmplink.preview.' + ext;
+        this.loading_box_on();
+        $.post(this.api_file, {
+            action: 'rename',
+            token: this.api_token,
+            name: newname,
+            ukey: ukey
+        }, (rsp) => {
+            this.loading_box_off();
+            if (rsp.status == 1) {
+                $.notifi(app.languageData.set_as_cover + ' - ' + app.languageData.status_ok, "success");
+                location.reload();
+            } else {
+                $.notifi(app.languageData.set_as_cover + ' - ' + app.languageData.mybg_set_fail, "error");
+            }
+        });
+    }
+
     login() {
         var email = $('#email').val();
         var password = $('#password').val();

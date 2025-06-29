@@ -336,6 +336,12 @@
                                                     <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
                                                     <span i18n="mybg_set_dark"><% app.languageData.mybg_set_dark %></span>
                                                 </button>
+                                                <% if(TL.dir.room.owner == 1){ %>
+                                                    <button onclick="TL.file_set_as_cover('<% obj[x].ukey %>','<% obj[x].ftype %>')" class="dropdown-item">
+                                                        <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
+                                                        <span i18n="set_as_cover"><% app.languageData.set_as_cover %></span>
+                                                    </button>
+                                                <% } %>
                                             </div>
                                         </span>
                                         </div>
@@ -470,6 +476,10 @@
                                             <button onclick="TL.pf_mybg_set('dark','<% obj[x].ukey %>')" class="dropdown-item">
                                                 <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
                                                 <span i18n="mybg_set_dark"><% app.languageData.mybg_set_dark %></span>
+                                            </button>
+                                            <button onclick="TL.file_set_as_cover('<% obj[x].ukey %>','<% obj[x].ftype %>')" class="dropdown-item">
+                                                <iconpark-icon name="images" class="fa-fw"></iconpark-icon>
+                                                <span i18n="set_as_cover"><% app.languageData.set_as_cover %></span>
                                             </button>
                                         <% } %> 
                                         <!--[检查此目录是否是直链目录]-->
