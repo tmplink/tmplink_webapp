@@ -346,16 +346,38 @@ _:-moz-tree-row(hover), .msie, .win { display:none; }
  提醒用小圆点
 */
 .point-red {
-    position: relative;
+    position: absolute;
+    top: -5px;
+    right: -5px;
     display: inline-block;
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: #f00;
-    color: #fff;
-    font-size: 12px;
-    line-height: 20px;
-    text-align: center;
+    background-color: #ff4444;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(255, 68, 68, 0.3);
+    z-index: 10;
+}
+
+/* 深色模式下的红色提示点 */
+body.dark-mode .point-red,
+[data-bs-theme="dark"] .point-red {
+    background-color: #ff6b6b;
+    border: 2px solid #1a1a1a;
+    box-shadow: 0 2px 6px rgba(255, 107, 107, 0.5), 
+                0 0 10px rgba(255, 107, 107, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* 系统深色模式偏好 */
+@media (prefers-color-scheme: dark) {
+    .point-red {
+        background-color: #ff6b6b;
+        border: 2px solid #1a1a1a;
+        box-shadow: 0 2px 6px rgba(255, 107, 107, 0.5), 
+                    0 0 10px rgba(255, 107, 107, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
 }
 
 /* 图片 hover 效果 */

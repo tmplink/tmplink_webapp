@@ -129,11 +129,11 @@
                         <iconpark-icon name="gift-card" class="fa-fw"></iconpark-icon>
                         <span i18n="user_giftcard">.</span>
                     </a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#shopModal').modal('show');">
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#shopModal').modal('show');" style="position: relative;">
                         <iconpark-icon name="bag-shopping" class="fa-fw"></iconpark-icon>
                         <span>
                             <span i18n="navbar_buy">.</span>
-                            <!-- <span class="point-red"></span> -->
+                            <span id="shopBadge" class="point-red" style="display: none;"></span>
                         </span>
                     </a>
                     <!-- 统计信息 -->
@@ -222,12 +222,13 @@
 
             <div class="workspace-navbar nav-units">
                 <span>
-                    <button class="btn p-0" onclick="$('#shopModal').modal('show');">
+                    <button class="btn p-0" onclick="$('#shopModal').modal('show');" style="position: relative;">
                         <div>
                             <iconpark-icon name="bag-shopping" class="fa-fw"></iconpark-icon>
                         </div>
                         <div>
                             <span i18n="navbar_buy">.</span>
+                            <span id="shopBadgeMobile" class="point-red" style="display: none;"></span>
                         </div>
                     </button>
                 </span>
@@ -375,11 +376,11 @@
                             <!-- <span class="point-red"></span> -->
                         </span>
                     </a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#shopModal').modal('show');">
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="$('#shopModal').modal('show');" style="position: relative;">
                         <iconpark-icon name="bag-shopping" class="fa-fw"></iconpark-icon>
                         <span>
                             <span i18n="navbar_buy">.</span>
-                            <!-- <span class="point-red"></span> -->
+                            <span id="shopBadge" class="point-red" style="display: none;"></span>
                         </span>
                     </a>
 
