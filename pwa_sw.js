@@ -37,6 +37,12 @@ self.addEventListener('fetch', event => {
   const cacheKey = domain + path; 
 
   if (isAllowDomain(domain)) {
+    // Skip caching for HTML, JS, CSS, and JSON files
+    if (shouldSkipCache(path)) {
+      event.respondWith(fetch(event.request));
+      return;
+    }
+
     event.respondWith(
       caches.match(cacheKey).then(response => {
         if (response) {
@@ -63,4 +69,9 @@ function isAllowDomain(domain){
     }
   }
   return false;
+}
+
+function shouldSkipCache(path) {
+  const noCacheExtensions = ['.html', '.js', '.css', '.json'];
+  return noCacheExtensions.some(ext => path.toLowerCase().endsWith(ext));
 }
